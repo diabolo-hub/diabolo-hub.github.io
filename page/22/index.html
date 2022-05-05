@@ -2083,7 +2083,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E6%90%AD%E5%BB%BA%E5%A4%9A%E4%BB%93%E5%BA%93%E5%9C%B0%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -2102,7 +2102,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/git-config-git%E6%90%AD%E5%BB%BA%E5%A4%9A%E4%BB%93%E5%BA%93%E5%9C%B0%E9%85%8D%E7%BD%AE/" itemprop="url">git搭建多仓库配置</a></h1>
+                <a class="post-title-link" href="/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/" itemprop="url">git环境搭建和密钥生成</a></h1>
         
 
         <div class="post-meta">
@@ -2174,7 +2174,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5k</span>
+                <span title="字数统计">513</span>
               
 
               
@@ -2188,7 +2188,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -2210,30 +2210,7 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>Windows配置多个git用户：<a href="https://www.cnblogs.com/zengming/p/7908171.html" target="_blank" rel="noopener">https://www.cnblogs.com/zengming/p/7908171.html</a></strong></li>
-<li><strong>Git之同一台电脑连接多个远程仓库：<a href="https://blog.csdn.net/ManyPeng/article/details/77012468r" target="_blank" rel="noopener">https://blog.csdn.net/ManyPeng/article/details/77012468r</a></strong></li>
-</ul>
-<hr>
-<p>#两个仓库地址分别为：<br>git@github.com:YaleZhangdy/spring-practing.git<br>ssh://git@gitlab.ch-ins.com.cn:13022/group/writeoff_grp/ch-writeoff.git</p>
-<p>1.检查本机是否有ssh key设置,切换到.ssh目录<br>$ cd ~/.ssh 或cd .ssh<br>如果有 id_rsa 和 id_rsa.pub，说明已存在一对密钥/公钥。</p>
-<p>2.创建新的 密钥/公钥，并指定密钥名称，比如id_rsa_x（x为任意名称）<br>注：生成id_rsa私钥公钥时需要命不同文件名，密码可设可不设。<br>ssh-keygen -t rsa -f ~/.ssh/id_rsa_x -C “zhangdaiyin.cool@163.com”<br>操作完成后，该目录会多出 id_rsa_x 和 id_rsa_x.pub 两个文件。</p>
-<p>3.添加ssh key到对应的GitHub,GitLab上面<br>登录GitHub系统；点击右上角账号头像的“▼”→Settings→SSH keys→Add SSH key。<br>复制id_rsa.pub的公钥内容到Key填写框内。</p>
-<p>4.在 ~/.ssh/ 文件夹下创建一个 config 文件<br>$ touch config<br>$ vim config</p>
-<p>5.在.ssh下面建立配置文件，文件名为config的文件且不需要添加文件后缀。<br>config文件配置内容：</p>
-<h1 id="第一个账号，默认使用的账号"><a href="#第一个账号，默认使用的账号" class="headerlink" title="第一个账号，默认使用的账号"></a>第一个账号，默认使用的账号</h1><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host gitlab.ch-ins.com.cn</span><br><span class="line">HostName gitlab.ch-ins.com.cn</span><br><span class="line">User git</span><br><span class="line">Port 13022</span><br><span class="line"><span class="meta">#</span><span class="bash">PreferredAuthentications　　　 配置登录时用什么权限认证--可设为publickey,password publickey,keyboard-interactive等</span></span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-<h1 id="第二个账号"><a href="#第二个账号" class="headerlink" title="第二个账号"></a>第二个账号</h1><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com  # second为前缀名，可以任意设置</span><br><span class="line">HostName github.com</span><br><span class="line">User YaleZhangdy</span><br><span class="line">Port 22</span><br><span class="line"><span class="meta">#</span><span class="bash">PreferredAuthentications　　　 配置登录时用什么权限认证--可设为publickey,password publickey,keyboard-interactive等</span></span><br><span class="line">IdentityFile ~/.ssh/id_rsa_x</span><br></pre></td></tr></table></figure>
-<p>参数描述：<br>HostName 　　　　　　　 　　真实的域名地址<br>IdentityFile 　　　　　　　 　　id_rsa的地址<br>PreferredAuthentications　　　 配置登录时用什么权限认证–可设为publickey,password publickey,keyboard-interactive等<br>User 　　　　　　　　　　　    配置使用用户名</p>
-<h1 id="可以通过-ssh-add-l-来确私钥列表-是L，不是1"><a href="#可以通过-ssh-add-l-来确私钥列表-是L，不是1" class="headerlink" title="可以通过 ssh-add -l 来确私钥列表 是L，不是1"></a>可以通过 ssh-add -l 来确私钥列表 是L，不是1</h1><p>$ ssh-add -l</p>
-<h1 id="可以通过-ssh-add-D-来清空私钥列表"><a href="#可以通过-ssh-add-D-来清空私钥列表" class="headerlink" title="可以通过 ssh-add -D 来清空私钥列表"></a>可以通过 ssh-add -D 来清空私钥列表</h1><p>$ ssh-add -D</p>
-<p>6.查看SSH 密钥的值（完全复制），分别添加到对应的 GitHub 账户中<br>$ cat id_rsa.pub<br>$ cat id_rsa_x.pub<br>把这两个值分别 copy 到 GitHub 账号中的 SSH keys 中保存。</p>
-<p>7.清空本地的 SSH 缓存，添加新的 SSH 密钥 到 SSH agent中<br>$ ssh-add -D<br>$ ssh-add id_rsa<br>$ ssh-add id_rsa_x<br>最后确认一下新密钥已经添加成功<br>ssh-add -l<br>$ ssh-add -l<br>2048 SHA256:md2u3nKLoLLB7vNWfeTDZzIZe1yCY4LjUibHQ3rquGE id_rsa (RSA)<br>2048 SHA256:SjHLErsOjuDEUpnZM9QRdKslCp1xsrE5vgkeFuRTGoQ id_rsa_x (RSA)</p>
-<p>8.测试 ssh 链接<br>$ ssh -T git@gitlab.ch-ins.com.cn<br>Welcome to GitLab, @blank113!<br>$ ssh -T git@github.com<br>Hi YaleZhangdy! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-<p>9.若执行ssh-add /path/to/xxx.pem是出现这个错误:Could not open a connection to your authentication agent，<br>则先执行如下命令即可：（来源：<a href="https://www.cnblogs.com/sheldonxu/archive/2012/09/17/2688281.html）" target="_blank" rel="noopener">https://www.cnblogs.com/sheldonxu/archive/2012/09/17/2688281.html）</a><br>ssh-agent bash</p>
-<p>10.取消 git 全局用户名/邮箱的设置，设置独立的 用户名/邮箱</p>
-<h1 id="取消全局-用户名-邮箱-配置"><a href="#取消全局-用户名-邮箱-配置" class="headerlink" title="取消全局 用户名/邮箱 配置"></a>取消全局 用户名/邮箱 配置</h1><p>$ git config –global –unset user.name<br>$ git config –global –unset user.email</p>
-<h1 id="进入项目文件夹（git-clone项目之后的文件夹），单独设置每个repo-用户名-邮箱"><a href="#进入项目文件夹（git-clone项目之后的文件夹），单独设置每个repo-用户名-邮箱" class="headerlink" title="进入项目文件夹（git clone项目之后的文件夹），单独设置每个repo 用户名/邮箱"></a>进入项目文件夹（git clone项目之后的文件夹），单独设置每个repo 用户名/邮箱</h1><p>$ git config user.email “xxxx@xx.com”<br>$ git config user.name “xxxx”</p>
+            <script src="\assets\js\APlayer.min.js"> </script><p>2、Git配置<br>（1）、环境变量配置 如git安装路径C:\Program Files\Git<br>GIT_HOME=C:\Program Files\Git<br>PATH=C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin<br>（2）、git配置用户名和邮箱<br>设置Git的user name和email：（如果需要配置多git仓库地址，则此处不能使用–global，在各项目中设置: git config user.name “）<br>$ git config –global user.name “xxx”<br>$ git config –global user.email “xxx@xxx.com”<br>（3）、生成SSH公钥过程：cmd:C:\Users\xxxxx<br>$ ssh-keygen -t rsa -C “xxx@xxx.com”<br> 过程如下：<br>img: img/git-genkey.jpg</p>
 
           
         
