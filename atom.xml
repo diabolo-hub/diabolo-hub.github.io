@@ -133,6 +133,35 @@
   </entry>
   
   <entry>
+    <title>静态变量与局部变量的对比</title>
+    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/"/>
+    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-51-静态变量与局部变量的对比/</id>
+    <published>2022-05-01T16:00:00.000Z</published>
+    <updated>2022-05-02T16:52:12.030Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h1><p>按照数据类型分：</p><ol><li>基本数据类型</li><li>引用数据类型<br>按照在类中申明的位置：</li><li>成员变量<br>在使用前，都经历过默认初始化值<br> a. 类变量（static）<pre><code>linking的prepare阶段：给类变量默认赋值 --&gt; initial阶段：给类变量显示赋值及静态代码块赋值</code></pre> b. 实例变量（非static）<pre><code>随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值</code></pre></li><li>局部变量<br>在使用前必须要进行显示赋值，否则编译不通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubulic void test() &#123;</span><br><span class="line">    int num;</span><br><span class="line">    System.out.println(num); &#x2F;&#x2F; 错误信息：变量num未进行初始化</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>局部变量表中的数据必须显示赋值，否则无法使用</p></blockquote></li></ol><h1 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h1><ol><li>在栈帧中，与性能调优关系最为密切的部分就是前面提到的局部变量表。<br>在方法执行时，虚拟机使用局部变量表完成方法的传递。</li><li>局部变量表中的变量也是重要的垃圾回收 根节点，只要被局部变量表中直接或间接引用的对象都不会被回收。</li><li>局部变量表越大，栈帧越大</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;变量的分类&quot;&gt;&lt;a href=&quot;#变量的分类&quot; class=&quot;headerlink&quot; title=&quot;变量的分类&quot;&gt;&lt;/a&gt;变量的分类&lt;/h1&gt;&lt;p&gt;按照数据类型分：
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
+    
+      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
+    
+    
+      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>栈顶缓存技术</title>
     <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/"/>
     <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-54-栈顶缓存技术/</id>
@@ -204,35 +233,6 @@
       
       
         &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;方法的绑定机制：静态绑定与动态绑定&quot;&gt;&lt;a href=&quot;#方法的绑定机制：静态绑定与动态绑定&quot; class=&quot;headerlink&quot; title=&quot;方法的绑定机制：
-      
-    
-    </summary>
-    
-      <category term="java" scheme="http://yoursite.com/categories/java/"/>
-    
-      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
-    
-      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
-    
-    
-      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>静态变量与局部变量的对比</title>
-    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/"/>
-    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-51-静态变量与局部变量的对比/</id>
-    <published>2022-05-01T16:00:00.000Z</published>
-    <updated>2022-05-02T16:52:12.030Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h1><p>按照数据类型分：</p><ol><li>基本数据类型</li><li>引用数据类型<br>按照在类中申明的位置：</li><li>成员变量<br>在使用前，都经历过默认初始化值<br> a. 类变量（static）<pre><code>linking的prepare阶段：给类变量默认赋值 --&gt; initial阶段：给类变量显示赋值及静态代码块赋值</code></pre> b. 实例变量（非static）<pre><code>随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值</code></pre></li><li>局部变量<br>在使用前必须要进行显示赋值，否则编译不通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubulic void test() &#123;</span><br><span class="line">    int num;</span><br><span class="line">    System.out.println(num); &#x2F;&#x2F; 错误信息：变量num未进行初始化</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>局部变量表中的数据必须显示赋值，否则无法使用</p></blockquote></li></ol><h1 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h1><ol><li>在栈帧中，与性能调优关系最为密切的部分就是前面提到的局部变量表。<br>在方法执行时，虚拟机使用局部变量表完成方法的传递。</li><li>局部变量表中的变量也是重要的垃圾回收 根节点，只要被局部变量表中直接或间接引用的对象都不会被回收。</li><li>局部变量表越大，栈帧越大</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;变量的分类&quot;&gt;&lt;a href=&quot;#变量的分类&quot; class=&quot;headerlink&quot; title=&quot;变量的分类&quot;&gt;&lt;/a&gt;变量的分类&lt;/h1&gt;&lt;p&gt;按照数据类型分：
       
     
     </summary>

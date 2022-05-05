@@ -373,6 +373,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/" itemprop="url">动态背景</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-15T00:00:00+08:00">2022-03-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><hr>
+<p>七牛云图床</p>
+<hr>
+<h1 id="layout-swig"><a href="#layout-swig" class="headerlink" title="_layout.swig"></a>_layout.swig</h1><p>找到themes\next\layout_layout.swig文件，添加内容：<br>在<body>里添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;bg_content&quot;&gt;</span><br><span class="line">  &lt;canvas id&#x3D;&quot;canvas&quot;&gt;&lt;&#x2F;canvas&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure><br>仍是该文件，在末尾添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;dynamic_bg.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="dynamic-bg-js"><a href="#dynamic-bg-js" class="headerlink" title="dynamic_bg.js"></a>dynamic_bg.js</h1><p>在themes\next\source\js\src中新建文件dynamic_bg.js，代码链接中可见：dynamic_bg.js</p>
+<h1 id="custom-styl"><a href="#custom-styl" class="headerlink" title="custom.styl"></a>custom.styl</h1><p>在themes\next\source\css_custom\custom.styl文件末尾添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.bg_content &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  top: 0;</span><br><span class="line">  z-index: -1;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2092,200 +2281,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/13/hexo-%E6%8F%92%E4%BB%B6-%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/13/hexo-%E6%8F%92%E4%BB%B6-%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/" itemprop="url">自动分类和生成文章标题</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-13T00:00:00+08:00">2022-03-13</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">4.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="自动分类和生成文章标题"><a href="#自动分类和生成文章标题" class="headerlink" title="自动分类和生成文章标题"></a>自动分类和生成文章标题</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install hexo-enhancer –save</p>
-<h2 id="自动生成时间和标题"><a href="#自动生成时间和标题" class="headerlink" title="自动生成时间和标题"></a>自动生成时间和标题</h2><ol>
-<li>将date和title放入在文件名中，通过正则解析生成文章的标题和时间  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;^.?(\d&#123;4&#125;)[-_]?(\d&#123;2&#125;)[-_]?(\d&#123;2&#125;).?[-_.@# ]*(.*)$&#x2F;</span><br></pre></td></tr></table></figure>
-以下格式均支持：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">20091010-Title.md</span><br><span class="line">2009-10-10_Title.md</span><br><span class="line">2009-10-10-Title.md</span><br><span class="line">2009&#x2F;10&#x2F;10#Title.md</span><br><span class="line">2009&#x2F;10&#x2F;10@Title.md</span><br><span class="line">[20091010]-Title.md</span><br><span class="line">【20091010】Title.md</span><br><span class="line">「20091010」-Title.md</span><br></pre></td></tr></table></figure></li>
-<li>hexo-enhancer 会将以上文件名全部解析为（最终结果不会回写入.md文件中）：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#---</span><br><span class="line">#title: Title</span><br><span class="line">#date: 2009-10-10</span><br><span class="line">#---</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="自动分类（categories）"><a href="#自动分类（categories）" class="headerlink" title="自动分类（categories）"></a>自动分类（categories）</h2><p>hexo-enhancer 会将.md文件所在目录及父目录的名称添加入categories属性中，<br>因此你应该按照文章分类放置.md文件</p>
-<p>比如 _posts/区块链/比特币/20091010-比特币简介.md 文章将自动获得下面的categories属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#---</span><br><span class="line">#title: 比特币简介</span><br><span class="line">#date: 2009-10-10</span><br><span class="line">#categories: [区块链, 比特币]</span><br><span class="line">#---</span><br></pre></td></tr></table></figure></p>
-<h2 id="自动标签（tags）"><a href="#自动标签（tags）" class="headerlink" title="自动标签（tags）"></a>自动标签（tags）</h2><p>hexo-enhancer的做法是这样，启动后扫描_config.yml中的keywords与tags属性收集全局标签候选词，然后给每一篇文章自动扫描tags。<br>例如，_config.yml配置的标签可以是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keywords: HTML, JavaScript, Hexo</span><br><span class="line">tags: Java, Golang, React, Vue</span><br></pre></td></tr></table></figure><br>hexo-enhancer会扫描您的.md文章，如果文章内出现以上关键词，则自动将其分配如文章的tags属性中。<br>需要特别指出的是，keywords是标准配置，它最终会出现在网页meta中，而tags是自定义的属性，只会被本插件使用。</p>
-<h2 id="abbrlink"><a href="#abbrlink" class="headerlink" title="abbrlink"></a>abbrlink</h2><p>hexo-enhancer使用 base32(crc32(title)) 算法为每一篇文章分配abbrlink属性，您可以在permlink中使用它们:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">permalink: :year&#x2F;:abbrlink.html</span><br><span class="line"># permalink: :year&#x2F;:abbrlink</span><br><span class="line"># permalink: posts&#x2F;:abbrlink.html</span><br><span class="line"># permalink: :year&#x2F;:month&#x2F;:day&#x2F;:abbrlink.html</span><br></pre></td></tr></table></figure><br>使用abbrlink之后，文章的url就会变得非常简洁，例如 <a href="https://sulin.me/2018/3055NXV.html" target="_blank" rel="noopener">https://sulin.me/2018/3055NXV.html</a></p>
-<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2337,7 +2332,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">224</span>
+                    <span class="site-state-item-count">225</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2602,7 +2597,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">246k</span>
+    <span title="站点总字数">248k</span>
   
 
   
@@ -2611,7 +2606,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:06</span>
+    <span title="站点总阅读时长">4:08</span>
   
 </div>
 
