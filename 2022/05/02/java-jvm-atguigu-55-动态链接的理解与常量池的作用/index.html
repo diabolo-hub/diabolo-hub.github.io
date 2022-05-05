@@ -146,14 +146,14 @@
 <meta property="og:site_name" content="diabolo随笔">
 <meta property="og:description" content="栈帧的内部结构附加信息： 帧数据区动态链接： 也叫做 指向运行时常量池的方法引用   描述 每一个栈帧内部都包含一个指向运行时常量池中该栈帧所属方法的引用。包含这个引用的目的就是为了支持当前方法的代码能够实现 动态链接（Dynamic Linking）。比如：invokedynamic指令 帧数据区中保存着访问常量池的指针   在Java源文件被编译到字节码文件中时，所有的变量和方法引用都作为符">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/images/%E6%A0%88%E5%B8%A7%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
-<meta property="og:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/images/%E6%96%B9%E6%B3%95%E5%8C%BA%E4%B8%8E%E6%A0%88%E7%9A%84%E5%85%B3%E8%81%94%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/%E6%A0%88%E5%B8%A7%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/%E6%96%B9%E6%B3%95%E5%8C%BA%E4%B8%8E%E6%A0%88%E7%9A%84%E5%85%B3%E8%81%94%E7%BB%93%E6%9E%84.png">
 <meta property="article:published_time" content="2022-05-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-02T17:19:20.520Z">
+<meta property="article:modified_time" content="2022-05-05T03:12:25.037Z">
 <meta property="article:author" content="diabolo">
 <meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/images/%E6%A0%88%E5%B8%A7%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
+<meta name="twitter:image" content="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/%E6%A0%88%E5%B8%A7%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png">
 
 
 
@@ -512,7 +512,7 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h1 id="栈帧的内部结构"><a href="#栈帧的内部结构" class="headerlink" title="栈帧的内部结构"></a>栈帧的内部结构</h1><p><img src="images/栈帧的内部结构.png" alt><br>附加信息： 帧数据区<br>动态链接： 也叫做 指向运行时常量池的方法引用  </p>
+        <script src="\assets\js\APlayer.min.js"> </script><h1 id="栈帧的内部结构"><a href="#栈帧的内部结构" class="headerlink" title="栈帧的内部结构"></a>栈帧的内部结构</h1><p><img src="栈帧的内部结构.png" alt=""><br>附加信息： 帧数据区<br>动态链接： 也叫做 指向运行时常量池的方法引用  </p>
 <h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><ol>
 <li>每一个栈帧内部都包含一个指向运行时常量池中该栈帧所属方法的引用。<br>包含这个引用的目的就是为了支持当前方法的代码能够实现 动态链接（Dynamic Linking）。比如：invokedynamic指令<blockquote>
 <p>帧数据区中保存着访问常量池的指针</p>
@@ -520,7 +520,7 @@
 </li>
 <li>在Java源文件被编译到字节码文件中时，所有的变量和方法引用都作为符号引用（Symbolic Reference）保存在class文件的常量池里。<br>比如：描述一个方法调用了另外的其他方法时，就是通过常量池中指向方法的符号引用来标识的，  <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2>那么 动态链接的作用 就是为了将这些符号引用转换为调用方法的直接引用。  </li>
 </ol>
-<h1 id="方法区与栈的关联结构"><a href="#方法区与栈的关联结构" class="headerlink" title="方法区与栈的关联结构"></a>方法区与栈的关联结构</h1><p><img src="images/方法区与栈的关联结构.png" alt></p>
+<h1 id="方法区与栈的关联结构"><a href="#方法区与栈的关联结构" class="headerlink" title="方法区与栈的关联结构"></a>方法区与栈的关联结构</h1><p><img src="方法区与栈的关联结构.png" alt=""></p>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicLinkingTest&#123;</span><br><span class="line">    </span><br><span class="line">    private static int num &#x3D; 1;</span><br><span class="line"></span><br><span class="line">    public void methodA() &#123;</span><br><span class="line">        打印(&quot;方法A...&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    public void methodB() &#123;</span><br><span class="line">        打印(&quot;方法B...&quot;)</span><br><span class="line"></span><br><span class="line">        methodA();</span><br><span class="line"></span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>javap -v DynamicLinkingTest.class 分析</p>
@@ -971,7 +971,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">245k</span>
+    <span title="站点总字数">246k</span>
   
 
   
@@ -980,7 +980,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:05</span>
+    <span title="站点总阅读时长">4:06</span>
   
 </div>
 

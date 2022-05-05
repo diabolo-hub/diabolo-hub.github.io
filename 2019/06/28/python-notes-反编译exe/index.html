@@ -532,13 +532,13 @@
 <p>通过手动安装build tool验证通过，知乎上已经有大神分享过具体的解决操作方法，工具<a href="https://pan.baidu.com/s/1ytKIVSBXLMQhrXleC_I4dA" target="_blank" rel="noopener">百度网盘地址https://pan.baidu.com/s/1ytK</a> 提取码： 8scp<br>若分享链接已失效，可联系我给予分享<br>具体操作可查看 <a href="source/_posts/python/excep/Microsoft%20Visual%20C++%2014.0%20or%20greater%20is%20required.md"></a></p>
 <h4 id="安装失败，提示如下：-1"><a href="#安装失败，提示如下：-1" class="headerlink" title="安装失败，提示如下："></a>安装失败，提示如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt\inttypes.h(95): error C2143: syntax error: missing &#39;&#123;&#39; before &#39;__cdecl&#39;</span><br><span class="line">  error: command &#39;C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\BIN\\x86_amd64\\cl.exe&#39; failed with exit code 2</span><br><span class="line">  [end of output]</span><br><span class="line"></span><br><span class="line"> note: This error originates from a subprocess, and is likely not a problem with pip.</span><br><span class="line">error: legacy-install-failure</span><br><span class="line"></span><br><span class="line">Encountered error while trying to install package.</span><br><span class="line"></span><br><span class="line">pycrypto</span><br><span class="line"></span><br><span class="line">note: This is an issue with the package mentioned above, not pip.</span><br><span class="line">hint: See above for output from the failure.</span><br></pre></td></tr></table></figure>
 <p>解决办法查看 <a href="../excep/This%20error%20originates%20from%20a%20subprocess,%20and%20is%20likely%20not%20a%20problem%20with%20pip.md"></a></p>
-<h2 id="分析exe文件属性"><a href="#分析exe文件属性" class="headerlink" title="分析exe文件属性"></a>分析exe文件属性</h2><p>看EXE是否为py2exe及pyinstaller工具打包出来的<br>通过010Edit工具打开EXE文件，找到最后位置的8个字节看看16进制显示的值<br><img src="images/010Edit工具查看exe文件16进制值.png" alt><br>通过搜索 “4D 45 49” 发现EXE文件是属于pyinstaller进行打包的</p>
+<h2 id="分析exe文件属性"><a href="#分析exe文件属性" class="headerlink" title="分析exe文件属性"></a>分析exe文件属性</h2><p>看EXE是否为py2exe及pyinstaller工具打包出来的<br>通过010Edit工具打开EXE文件，找到最后位置的8个字节看看16进制显示的值<br><img src="images/010Edit工具查看exe文件16进制值.png" alt=""><br>通过搜索 “4D 45 49” 发现EXE文件是属于pyinstaller进行打包的</p>
 <h2 id="执行解包操作"><a href="#执行解包操作" class="headerlink" title="执行解包操作"></a>执行解包操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd python-exe-unpacker</span><br><span class="line"></span><br><span class="line">python python_exe_unpack.py -i &#x2F;Users&#x2F;py-demo.exe</span><br></pre></td></tr></table></figure>
 <p>看到成功后，如果没有-o指定输出目录的话，默认会在当前目录输出unpacked/py-demo.exe/目录，此目录下便是解包后的代码，有一堆的文件和一个目录<br>此目录下有一个py-demo的文件（没有后缀），此外PYZ-00.pyz_extracted文件夹是程序依赖库  </p>
 <h2 id="执行反编译"><a href="#执行反编译" class="headerlink" title="执行反编译"></a>执行反编译</h2><p>pyc其实是python程序执行过程中产生的缓存文件，我们直接运行python代码时也会看到<br>使用uncompyle6工具来恢复py文件，uncompyle6普通安装，不做过多解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 将解压出来的主程序复制一份，后缀为.pyc</span><br><span class="line">cp &#x2F;python-exe-unpacker&#x2F;unpacked&#x2F;py-demo.exe&#x2F;py-demo &#x2F;python-exe-unpacker&#x2F;unpacked&#x2F;py-demo.exe&#x2F;py-demo.pyc</span><br><span class="line"># 执行反编译</span><br><span class="line">uncompyle6 &#x2F;python-exe-unpacker&#x2F;unpacked&#x2F;py-demo.exe&#x2F;py-demo.pyc &gt; &#x2F;python-exe-unpacker&#x2F;unpacked&#x2F;py-demo.exe&#x2F;py-demo.py</span><br></pre></td></tr></table></figure></p>
 <h3 id="反编译失败，提示如下："><a href="#反编译失败，提示如下：" class="headerlink" title="反编译失败，提示如下："></a>反编译失败，提示如下：</h3><p>– Unknown magic number 227 in py-demo.pyc<br>因为pyinstaller工具打包的时候，会将代码文件的magic number（python的版本及编译时间）给清除掉，所以反编译时候需要将magic number添加回去才能识别，magic number我们可以通过解压主目录下的struct结构体文件中提取出来（一般是前16个字节，可以对比打包前的源文件），将struct文件体中的前16个字节提取出来，然后在添加到文件中，然后再执行uncompyle6反编译试试</p>
 <h4 id="获取struct文件结构体magic-number"><a href="#获取struct文件结构体magic-number" class="headerlink" title="获取struct文件结构体magic number"></a>获取struct文件结构体magic number</h4><ol>
-<li>解压出来的文件夹中有一个 struct 文件，使用 010Edit工具打开，发现第二行是E3开通的十六进制代码，第一行即为 magic number<br><img src="images/010Edit查看文件magic number.png" alt>  <blockquote>
+<li>解压出来的文件夹中有一个 struct 文件，使用 010Edit工具打开，发现第二行是E3开通的十六进制代码，第一行即为 magic number<br><img src="images/010Edit查看文件magic number.png" alt="">  <blockquote>
 <p>当我们用010Edit查看解压出来的文件夹中的 py-demo（没有后缀）文件时，发现第一行即是E3开头，没有magic number</p>
 </blockquote>
 </li>
@@ -605,7 +605,7 @@ magic number添加错误</li>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/28/python-notes-py%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="py常用命令">
+              <a href="/2019/06/28/python-notes-%E6%9F%A5%E7%9C%8Bwindows%E4%B8%8Bpython%E5%BA%93%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" rel="next" title="py常用命令">
                 <i class="fa fa-chevron-left"></i> py常用命令
               </a>
             
@@ -615,8 +615,8 @@ magic number添加错误</li>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/28/python-excep-Microsoft-Visual-C-14-0-or-greater-is-required/" rel="prev" title="Microsoft Visual C++ 14.0 or greater is required.">
-                Microsoft Visual C++ 14.0 or greater is required. <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/28/python-notes-py%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="py常用命令">
+                py常用命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1007,7 +1007,7 @@ magic number添加错误</li>
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">245k</span>
+    <span title="站点总字数">246k</span>
   
 
   
@@ -1016,7 +1016,7 @@ magic number添加错误</li>
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:05</span>
+    <span title="站点总阅读时长">4:06</span>
   
 </div>
 

@@ -515,8 +515,8 @@
       
         <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/chendasheng/article/details/115222589" target="_blank" rel="noopener">使用雪花id或uuid作为Mysql主键，被老板怼了一顿！</a></p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>分别是user_auto_key，user_uuid，user_random_key，分别表示自动增长的主键，uuid作为主键，随机key作为主键，<br>其它我们完全保持不变。根据控制变量法，我们只把每个表的主键使用不同的策略生成，而其他的字段完全一样，然后测试一下表的插入速度和查询速度：</p>
-<h1 id="效率测试结果"><a href="#效率测试结果" class="headerlink" title="效率测试结果"></a>效率测试结果</h1><p><img src="images/自增id、uuid、雪花算法效率测试结果1.png" alt></p>
-<h2 id="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："><a href="#在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：" class="headerlink" title="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："></a>在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：</h2><p><img src="images/自增id、uuid、雪花算法效率测试结果2.png" alt>  </p>
+<h1 id="效率测试结果"><a href="#效率测试结果" class="headerlink" title="效率测试结果"></a>效率测试结果</h1><p><img src="images/自增id、uuid、雪花算法效率测试结果1.png" alt=""></p>
+<h2 id="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："><a href="#在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：" class="headerlink" title="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："></a>在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：</h2><p><img src="images/自增id、uuid、雪花算法效率测试结果2.png" alt="">  </p>
 <blockquote>
 <p>可以看出在数据量100W左右的时候,uuid的插入效率垫底，并且在后序增加了130W的数据，uudi的时间又直线下降。<br>时间占用量总体可以打出的效率排名为：auto_key&gt;random_key&gt;uuid,uuid的效率最低，<br>在数据量较大的情况下，效率直线下滑。那么为什么会出现这样的现象呢？带着疑问,我们来探讨一下这个问题： </p>
 </blockquote>
@@ -580,8 +580,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/03/19/database-mysql-notes-5-mysql%E4%B8%ADdelete%E5%92%8Ctruncate%E5%8C%BA%E5%88%AB/" rel="next" title="mysql中delete和truncate区别">
-                <i class="fa fa-chevron-left"></i> mysql中delete和truncate区别
+              <a href="/2022/03/19/database-mysql-notes-15-mysql%E6%94%AF%E6%8C%81hash%E7%B4%A2%E5%BC%95%E5%90%97/" rel="next" title="mysql支持hash索引吗">
+                <i class="fa fa-chevron-left"></i> mysql支持hash索引吗
               </a>
             
           </div>
@@ -590,8 +590,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/03/19/database-mysql-notes-8-MySQL%E7%9A%84binlog%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3/" rel="prev" title="MySQL的binlog日志详解">
-                MySQL的binlog日志详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/03/19/database-mysql-notes-14-mysql%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/" rel="prev" title="mysql前缀索引">
+                mysql前缀索引 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -982,7 +982,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">245k</span>
+    <span title="站点总字数">246k</span>
   
 
   
@@ -991,7 +991,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:05</span>
+    <span title="站点总阅读时长">4:06</span>
   
 </div>
 

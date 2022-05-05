@@ -516,8 +516,8 @@
 <h3 id="考虑异常安全性的解法"><a href="#考虑异常安全性的解法" class="headerlink" title="考虑异常安全性的解法"></a>考虑异常安全性的解法</h3><p>&emsp;&emsp;要想在赋值运算符函数中实现异常安全性，一般有两种方法。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CMyString&amp; CMyString::<span class="keyword">operator</span> = (<span class="keyword">const</span> CMyString &amp;str)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> != &amp;str)</span><br><span class="line">    &#123;</span><br><span class="line">        CMyString strTemp(str);</span><br><span class="line">        </span><br><span class="line">        cahr* pTemp = strTemp.m_pData;</span><br><span class="line">        strTemp.m_pData = m_pData;</span><br><span class="line">        m_pData = pTemp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;程序比较简单，值得注意的是，strTemp是一个局部变量，程序运行到if的外面的时候，也就出了该变量的作用域，就会自动调用其析构函数，把strTemp.m_pData所指向的内存释放掉。由于strTemp.m_pData指向的内存就是实例之前m_pData的内存，这就相当于自动调用析构函数释放实例的内存。</p>
-<p><strong><font color="red" size="3" face="仿宋">系列教程持续发布中，欢迎订阅、关注、收藏、评论、点赞哦～～(￣▽￣～)～</font></strong></p>
-<p><strong><font color="red" size="3" face="仿宋">完的汪(∪｡∪)｡｡｡zzz</font></strong></p>
+<p><strong><font color="red" size=3 face="仿宋">系列教程持续发布中，欢迎订阅、关注、收藏、评论、点赞哦～～(￣▽￣～)～</font></strong></p>
+<p><strong><font color="red" size=3 face="仿宋">完的汪(∪｡∪)｡｡｡zzz</font></strong></p>
 
       
     </div>
@@ -571,8 +571,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/13/git-config-git%E6%90%AD%E5%BB%BA%E5%A4%9A%E4%BB%93%E5%BA%93%E5%9C%B0%E9%85%8D%E7%BD%AE/" rel="prev" title="git搭建多仓库配置">
-                git搭建多仓库配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/" rel="prev" title="git生成SSH公钥">
+                git生成SSH公钥 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -963,7 +963,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">245k</span>
+    <span title="站点总字数">246k</span>
   
 
   
@@ -972,7 +972,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:05</span>
+    <span title="站点总阅读时长">4:06</span>
   
 </div>
 
