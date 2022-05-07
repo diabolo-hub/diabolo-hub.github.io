@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/06/git-%E7%AC%94%E8%AE%B0-git%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/06/git-%E7%AC%94%E8%AE%B0-git%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" itemprop="url">git初始化本地仓库并关联远程仓库</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">binlog常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T00:00:00+08:00">2022-04-06</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -429,14 +429,215 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">6.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 查看binlog是否开启( ON 表示开启）</span><br><span class="line">show variables like &#39;log_%&#39;;</span><br><span class="line">#只查看第一个binlog文件的内容</span><br><span class="line">show binlog events;  </span><br><span class="line">#查看指定binlog文件的内容</span><br><span class="line">show binlog events &#96;&#96;in &#39;mysql-bin.000002&#39;&#96;&#96;; </span><br><span class="line">#获取binlog文件列表</span><br><span class="line">show binary logs;  </span><br><span class="line">#查看当前正在写入的binlog文件</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令2"><a href="#常用命令2" class="headerlink" title="常用命令2"></a>常用命令2</h1><h2 id="查看-my-cnf-位置"><a href="#查看-my-cnf-位置" class="headerlink" title="查看 my.cnf 位置"></a>查看 my.cnf 位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令3"><a href="#常用命令3" class="headerlink" title="常用命令3"></a>常用命令3</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br><span class="line"># 查看日志模式</span><br><span class="line">show variables like &quot;%binlog_format%&quot;;</span><br><span class="line"># 设置日志模式</span><br><span class="line">set global binlog_format&#x3D;&#39;MIXED&#39;;</span><br><span class="line"># 查看二进制日志文件</span><br><span class="line">show binary logs;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令4"><a href="#常用命令4" class="headerlink" title="常用命令4"></a>常用命令4</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"># 是否启用binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog的目录</span><br><span class="line">show global variables like &quot;%log_bin%&quot;;</span><br><span class="line"></span><br><span class="line"># 查看当前服务器使用的biglog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看主服务器使用的biglog文件及大小</span><br><span class="line"></span><br><span class="line"># 查看最新一个binlog日志文件名称和Position</span><br><span class="line">show master status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 事件查询命令</span><br><span class="line"># IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="line"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="line"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="line"># row_count ：查询总条数(不指定就是所有行)</span><br><span class="line">show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-09 14:00:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000003&#39;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/" itemprop="url">binlog开启</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -500,539 +701,32 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="git初始化本地仓库并关联远程仓库"><a href="#git初始化本地仓库并关联远程仓库" class="headerlink" title="git初始化本地仓库并关联远程仓库"></a>git初始化本地仓库并关联远程仓库</h1><h2 id="本地仓库操作"><a href="#本地仓库操作" class="headerlink" title="本地仓库操作"></a>本地仓库操作</h2><ol>
-<li>初始化仓库并关联远程仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init  &#x2F;*初始化一个版本库*&#x2F;</span><br><span class="line">git remote add origin git@github.com:your_account&#x2F;repository.git &#x2F;*连接远程仓库your_account为远程仓库的账号，repository为远程仓库名*&#x2F;</span><br></pre></td></tr></table></figure></li>
-<li>推送到远程仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master &#x2F;*把本地库与远程库关联，并且把本地库的master分支推送到远程库中去*&#x2F;</span><br><span class="line"></span><br><span class="line"># 报错</span><br><span class="line">$ git push -u origin master</span><br><span class="line">error: src refspec master does not match any</span><br><span class="line">error: failed to push some refs to &#39;git@github.com:diabolo-hub&#x2F;py-practicing.git&#39;</span><br></pre></td></tr></table></figure></li>
-<li>git push –set-upstream origin master<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push --set-upstream origin master</span><br><span class="line">error: src refspec master does not match any</span><br><span class="line">error: failed to push some refs to &#39;git@github.com:diabolo-hub&#x2F;py-practicing.git&#39;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
-<li>本地仓库创建README.md（远程仓库没有README.md）<br>创建完README.md文件后，执行如下操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git add README.md</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git commit -m &quot;first commit&quot;</span><br><span class="line">[master (root-commit) 7f8065e] first commit</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 README.md</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git branch -M main    &#x2F;&#x2F; 分支重命名（本地和远程）</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (main)</span><br><span class="line">$ git push -u origin main</span><br><span class="line">Enumerating objects: 3, done.</span><br><span class="line">Counting objects: 100% (3&#x2F;3), done.</span><br><span class="line">Writing objects: 100% (3&#x2F;3), 218 bytes | 218.00 KiB&#x2F;s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To github.com:diabolo-hub&#x2F;py-practicing.git</span><br><span class="line"> * [new branch]      main -&gt; main</span><br><span class="line">Branch &#39;main&#39; set up to track remote branch &#39;main&#39; from &#39;origin&#39;.</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后可再使用git add . 添加并推送所有的文件<br>其中省略了 git remote add origin git@…..，因为之前已经添加了</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="github上的解决办法"><a href="#github上的解决办法" class="headerlink" title="github上的解决办法"></a>github上的解决办法</h1><ol>
-<li>在命令行上创建一个新的存储库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# ttt&quot; &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:diabolo-hub&#x2F;ttt.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure></li>
-<li>从命令行推送现有存储库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:diabolo-hub&#x2F;ttt.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T00:40:37+08:00">2022-04-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’"><a href="#node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’" class="headerlink" title="node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’"></a>node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-05 00:39:16,165] INFO Creating &#x2F;brokers&#x2F;ids&#x2F;0 (is it secure? false) (kafka.zk.KafkaZkClient)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR Error while creating ephemeral at &#x2F;brokers&#x2F;ids&#x2F;0, node already exists and owner &#39;72083030559031298&#39; does not match current session &#39;72083315371278336&#39; (kafka.zk.KafkaZkClient$CheckedEphemeral)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR [KafkaServer id&#x3D;0] Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)</span><br><span class="line">org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode &#x3D; NodeExists</span><br><span class="line">        at org.apache.zookeeper.KeeperException.create(KeeperException.java:126)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.getAfterNodeExists(KafkaZkClient.scala:1904)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.create(KafkaZkClient.scala:1842)</span><br><span class="line">        at kafka.zk.KafkaZkClient.checkedEphemeralCreate(KafkaZkClient.scala:1809)</span><br><span class="line">        at kafka.zk.KafkaZkClient.registerBroker(KafkaZkClient.scala:96)</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:324)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:109)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [KafkaServer id&#x3D;0] shutting down (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopping socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopped socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [ReplicaManager broker&#x3D;0] Shutting down (kafka.server.ReplicaManager)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [LogDirFailureHandler]: Shutting down (kafka.server.ReplicaManager$LogDirFailureHandler)</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>实例抢占 重新启动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动日志分析</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T00:20:21+08:00">2022-04-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="记录新的控制器，从现在开始将使用代理"><a href="#记录新的控制器，从现在开始将使用代理" class="headerlink" title="记录新的控制器，从现在开始将使用代理"></a>记录新的控制器，从现在开始将使用代理</h1><p>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)<br>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</p>
-<h1 id="For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition"><a href="#For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition" class="headerlink" title="For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition"></a>For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;0</span><br><span class="line">&gt;[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 4 on topic-partition test2-0, retrying (2 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,937] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 6 on topic-partition test2-0, retrying (1 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,938] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 8 on topic-partition test2-0, retrying (0 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,145] ERROR Error when sending message to topic test2 with key: null, value: 1 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.</span><br><span class="line">[2022-04-05 00:55:22,145] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原因是在集群环境下建立topic的时候，没有建立分区和副本，所以报了这个错。重新修改topic信息，然后就可以了。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka本地测试大全</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T23:37:07+08:00">2022-04-04</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h1><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
-<hr>
-<p>title: “随机查询数据”<br>date: 2022-03-18<br>comments: true<br>share: true<br>toc: true<br>categories:</p>
-<ul>
-<li>分布式</li>
-<li>MQ</li>
-<li>kafka</li>
-<li>notes<br>tags:</li>
-<li>kafka</li>
-</ul>
-<hr>
-<h1 id="创建主题，同一个主题创建一次即可。"><a href="#创建主题，同一个主题创建一次即可。" class="headerlink" title="创建主题，同一个主题创建一次即可。"></a>创建主题，同一个主题创建一次即可。</h1><p>.\bin\windows\kafka-topics.bat –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic test1<br>或<br>.\bin\windows\kafka-topics.bat –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic test1</p>
-<h1 id="启动生产者和消费者"><a href="#启动生产者和消费者" class="headerlink" title="启动生产者和消费者"></a>启动生产者和消费者</h1><p>.\bin\windows\kafka-console-producer.bat –broker-list localhost:9092 –topic test1</p>
-<p>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning</p>
-<h1 id="列出所有topic"><a href="#列出所有topic" class="headerlink" title="列出所有topic"></a>列出所有topic</h1><p>.\bin\windows\kafka-topics.bat –list –bootstrap-server localhost:9092</p>
-<h1 id="查看指定topic"><a href="#查看指定topic" class="headerlink" title="查看指定topic"></a>查看指定topic</h1><p>.\bin\windows\kafka-topics.bat –describe –bootstrap-server localhost:9092 –topic test1</p>
-<h1 id="增加topic的partition"><a href="#增加topic的partition" class="headerlink" title="增加topic的partition"></a>增加topic的partition</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –alter –topic test1 –partitions 5</p>
-<h1 id="查看-topic-指定分区-offset-的最大值或最小值"><a href="#查看-topic-指定分区-offset-的最大值或最小值" class="headerlink" title=".查看 topic 指定分区 offset 的最大值或最小值"></a>.查看 topic 指定分区 offset 的最大值或最小值</h1><p>.\bin\windows\kafka-run-class.bat kafka.tools.GetOffsetShell –topic test1 –time -1 –broker-list 127.0.0.1:9092 –partitions 0 </p>
-<h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
-<blockquote>
-<p> windows环境下删除topic需要关注brokder情况</p>
-</blockquote>
-<h1 id="消费消息"><a href="#消费消息" class="headerlink" title="消费消息"></a>消费消息</h1><p>1.从头开始<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning<br>2.从尾部开始<br>从尾部开始取数据，必需要指定分区：<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</p>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="查找my-ini或my-cnf"><a href="#查找my-ini或my-cnf" class="headerlink" title="查找my.ini或my.cnf"></a>查找my.ini或my.cnf</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --help | grep &#39;Default options&#39; -A 1</span><br></pre></td></tr></table></figure>
 <ol>
-<li>指定分区<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</li>
+<li>linux<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">&#x2F;etc&#x2F;my.cnf &#x2F;etc&#x2F;mysql&#x2F;my.cnf &#x2F;usr&#x2F;etc&#x2F;my.cnf ~&#x2F;.my.cnf</span><br></pre></td></tr></table></figure></li>
+<li>windows<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h1 id="消费者Group"><a href="#消费者Group" class="headerlink" title="消费者Group"></a>消费者Group</h1><ol>
-<li>指定Group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –topic test1 -group test_group –from-beginning</li>
-<li>消费者Group列表<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –list</li>
-<li>查看Group详情[用来判断是否有延迟数据]<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –describe<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Consumer group &#39;test_group&#39; has no active members.</span><br><span class="line"></span><br><span class="line">TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID</span><br><span class="line">test            0          5               5               0               -               -               -</span><br><span class="line"></span><br><span class="line"># CURRENT-OFFSET: 当前消费者群组最近提交的 offset，也就是消费者分区里读取的当前位置</span><br><span class="line"># LOG-END-OFFSET: 当前最高水位偏移量，也就是最近一个读取消息的偏移量，同时也是最近一个提交到集群的偏移量</span><br><span class="line"># LAG：消费者的 CURRENT-OFFSET 与 broker 的 LOG-END-OFFSET 之间的差距</span><br></pre></td></tr></table></figure></li>
-<li>删除group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –delete</li>
+<h1 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h1><p>一般来说开启binlog日志大概会有1%的性能损耗。<br>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 或mysql\bin\my.ini 配置文件的 log-bin 选项：<br>在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<blockquote>
+<p>也可以通过 SET SQL_LOG_BIN=1 命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+</blockquote>
+<ol>
+<li>windows<br>my.ini<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># Binary Logging</span><br><span class="line"># 开启Binlog 一般只需要修改这一行即可</span><br><span class="line">log-bin&#x3D;mysql-bin</span><br><span class="line"># 设置格式 此行可以不加 命令设置即可 详见下方拓展</span><br><span class="line">binlog-format&#x3D;ROW</span><br><span class="line"># 配置serverID  这一行本来就存在</span><br><span class="line">server_id&#x3D;1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>写在 [mysqld]  下</p>
+</blockquote>
+</li>
 </ol>
-<h1 id="平衡Leader"><a href="#平衡Leader" class="headerlink" title="平衡Leader"></a>平衡Leader</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kafka-preferred-replica-election.sh --bootstrap-server localhost:9092</span><br><span class="line">或</span><br><span class="line">kafka-leader-election.sh --bootstrap-server localhost:9092 --topic test --partition&#x3D;2 --election-type preferred</span><br><span class="line">--partition:指定需要重新分配leader的partition编号</span><br></pre></td></tr></table></figure>
-<h1 id="自带压测工具"><a href="#自带压测工具" class="headerlink" title="自带压测工具"></a>自带压测工具</h1><p>kafka-producer-perf-test.sh –topic test –num-records 100 –record-size 1 –throughput 100 –producer-props bootstrap.servers=localhost:9092 </p>
+<p>然后再重启mysql服务，使用命令验证是否开启成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>二进制日志文件在mysql根目录的Data目录下，如果根目录下没有Data文件夹和配置文件，查一下C盘的ProgramData文件夹</p>
+</blockquote>
+<ol>
+<li>linux<br>/etc/my.cnf中mysqld节添加开启binlog的配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#第一种方式:</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br><span class="line"> </span><br><span class="line">#第二种方式:</span><br><span class="line">#此一行等同于上面log_bin三行</span><br><span class="line">log-bin&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="binlog其他配置"><a href="#binlog其他配置" class="headerlink" title="binlog其他配置"></a>binlog其他配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">#设置日志三种格式：STATEMENT、ROW、MIXED 。</span><br><span class="line">binlog_format &#x3D; ROW</span><br><span class="line">#设置日志路径，注意路经需要mysql用户有权限写</span><br><span class="line">log-bin &#x3D; &#x2F;data&#x2F;mysql&#x2F;logs&#x2F;mysql-bin.log</span><br><span class="line">#设置binlog清理时间</span><br><span class="line">expire_logs_days &#x3D; 7</span><br><span class="line">#binlog每个日志文件大小</span><br><span class="line">max_binlog_size &#x3D; 100m</span><br><span class="line">#binlog缓存大小</span><br><span class="line">binlog_cache_size &#x3D; 4m</span><br><span class="line">#最大binlog缓存大小</span><br><span class="line">max_binlog_cache_size &#x3D; 512m</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1089,7 +783,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1108,7 +802,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/" itemprop="url">分布式-分布式消息队列-kafka-笔记-windows下删除topic</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" itemprop="url">binlog日志三种模式</a></h1>
         
 
         <div class="post-meta">
@@ -1124,7 +818,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T23:29:21+08:00">2022-04-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -1133,6 +827,38 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1155,7 +881,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">1.4k</span>
               
 
               
@@ -1191,13 +917,21 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
-<h1 id="列出所有topic"><a href="#列出所有topic" class="headerlink" title="列出所有topic"></a>列出所有topic</h1><p>.\bin\windows\kafka-topics.bat –list –bootstrap-server localhost:9092</p>
-<h1 id="删除Topic之后需要如下操作才能正常使用"><a href="#删除Topic之后需要如下操作才能正常使用" class="headerlink" title="删除Topic之后需要如下操作才能正常使用"></a>删除Topic之后需要如下操作才能正常使用</h1><ol>
-<li>删除test2对应的kafka日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\kafka-logs\test2-0</span><br></pre></td></tr></table></figure></li>
-<li>删除 ZK 日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\zookeeper\version-2\log.2a（或其他）</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+            <script src="\assets\js\APlayer.min.js"> </script><hr>
+<pre><code>mysql查看binlog日志: https://blog.csdn.net/m0_46426259/article/details/122215958
+</code></pre><hr>
+<h1 id="三种记录格式"><a href="#三种记录格式" class="headerlink" title="三种记录格式"></a>三种记录格式</h1><p>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）<br>ROW：基于行的复制（row-based replication, RBR）<br>MIXED：混合模式复制（mixed-based replication, MBR）</p>
+<blockquote>
+<p> 在 MySQL 5.7.7 之前，默认的格式是 STATEMENT，<br> 在 MySQL 5.7.7 及更高版本中，默认值是 ROW。日志格式通过 binlog-format 指定，如 binlog-format=STATEMENT、binlog-format=ROW、binlog-format=MIXED。</p>
+</blockquote>
+<p>Statement<br>每一条会修改数据的sql都会记录在binlog中</p>
+<p>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 提高了性能。</p>
+<p>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行的时候相同的结果。另外mysql的复制，像一些特定函数的功能，slave与master要保持一致会有很多相关问题。</p>
+<p>Row<br>5.1.5版本的MySQL才开始支持 row level 的复制,它不记录sql语句上下文相关信息，仅保存哪条记录被修改。</p>
+<p>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以row的日志内容会非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题.</p>
+<p>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
+<p>注：将二进制日志格式设置为ROW时，有些更改仍然使用基于语句的格式，包括所有DDL语句，例如CREATE TABLE， ALTER TABLE，或 DROP TABLE。</p>
+<p>Mixed<br>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
 
           
         
@@ -1254,7 +988,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-windows%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%88%A0%E9%99%A4topic%E5%AF%BC%E8%87%B4broker%E5%AE%95%E6%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1273,7 +1007,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-windows%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%88%A0%E9%99%A4topic%E5%AF%BC%E8%87%B4broker%E5%AE%95%E6%9C%BA/" itemprop="url">分布式-分布式消息队列-kafka-异常-windows环境下删除topic导致broker宕机</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/" itemprop="url">binlog开启</a></h1>
         
 
         <div class="post-meta">
@@ -1289,7 +1023,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T23:19:17+08:00">2022-04-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -1298,6 +1032,38 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1320,7 +1086,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">7.8k</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -1334,7 +1100,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">8 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1356,19 +1122,27 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="windows下删除topic导致Kafka退出"><a href="#windows下删除topic导致Kafka退出" class="headerlink" title="windows下删除topic导致Kafka退出"></a>windows下删除topic导致Kafka退出</h1><p>删除topic：test2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-04 23:12:47,807] ERROR Error while renaming dir for test2-0 in log dir D:\tmp\kafka-logs (kafka.server.LogDirFailureChannel)</span><br><span class="line">java.nio.file.AccessDeniedException: D:\tmp\kafka-logs\test2-0 -&gt; D:\tmp\kafka-logs\test2-0.75c7c849eca04c9a8d4a14b30d0ee427-delete</span><br><span class="line">        at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:83)</span><br><span class="line">        at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)</span><br><span class="line">        at sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:387)</span><br><span class="line">        at sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:287)</span><br><span class="line">        at java.nio.file.Files.move(Files.java:1395)</span><br><span class="line">        at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:934)</span><br><span class="line">        at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:918)</span><br><span class="line">        at kafka.log.LocalLog.$anonfun$renameDir$2(LocalLog.scala:111)</span><br><span class="line">        at kafka.log.LocalLog.renameDir(LocalLog.scala:739)</span><br><span class="line">        at kafka.log.UnifiedLog.$anonfun$renameDir$2(UnifiedLog.scala:681)</span><br><span class="line">        at kafka.log.UnifiedLog.renameDir(UnifiedLog.scala:1707)</span><br><span class="line">        at kafka.log.LogManager.asyncDelete(LogManager.scala:1068)</span><br><span class="line">        at kafka.log.LogManager.$anonfun$asyncDelete$3(LogManager.scala:1103)</span><br><span class="line">        at scala.Option.foreach(Option.scala:407)</span><br><span class="line">        at kafka.log.LogManager.$anonfun$asyncDelete$2$adapted(LogManager.scala:1101)</span><br><span class="line">        at scala.collection.mutable.HashSet.foreach(HashSet.scala:79)</span><br><span class="line">        at kafka.log.LogManager.asyncDelete(LogManager.scala:1099)</span><br><span class="line">        at kafka.server.ReplicaManager.stopPartitions(ReplicaManager.scala:460)</span><br><span class="line">        at kafka.server.ReplicaManager.stopReplicas(ReplicaManager.scala:397)</span><br><span class="line">        at kafka.server.KafkaApis.handleStopReplicaRequest(KafkaApis.scala:291)</span><br><span class="line">        at kafka.server.KafkaApis.handle(KafkaApis.scala:174)</span><br><span class="line">        at kafka.server.KafkaRequestHandler.run(KafkaRequestHandler.scala:75)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:745)</span><br><span class="line">        Suppressed: java.nio.file.AccessDeniedException: D:\tmp\kafka-logs\test2-0 -&gt; D:\tmp\kafka-logs\test2-0.75c7c849eca04c9a8d4a14b30d0ee427-delete</span><br><span class="line">                at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:83)</span><br><span class="line">                at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)</span><br><span class="line">                at sun.nio.fs.WindowsFileCopy.move(WindowsFileCopy.java:301)</span><br><span class="line">                at sun.nio.fs.WindowsFileSystemProvider.move(WindowsFileSystemProvider.java:287)</span><br><span class="line">                at java.nio.file.Files.move(Files.java:1395)</span><br><span class="line">                at org.apache.kafka.common.utils.Utils.atomicMoveWithFallback(Utils.java:931)</span><br><span class="line">                ... 17 more</span><br><span class="line">[2022-04-04 23:12:47,822] WARN [ReplicaManager broker&#x3D;0] Stopping serving replicas in dir D:\tmp\kafka-logs (kafka.server.ReplicaManager)</span><br></pre></td></tr></table></figure></p>
-<h1 id="参考方案"><a href="#参考方案" class="headerlink" title="参考方案"></a>参考方案</h1><p><a href="https://stackoverflow.com/questions/50755827/accessdeniedexception-when-deleting-a-topic-on-windows-kafka" target="_blank" rel="noopener"></a></p>
-<ol>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我知道我迟到了，但请记住，即使您手动删除主题或通过某些 Kafka UI 删除所有 kafka 日志，kafka 仍然可能无法启动，因为它与 ZK 同步的状态。</span><br><span class="line"></span><br><span class="line">因此，请确保通过删除 ZK 的日志来清理 ZK 状态。</span><br><span class="line"></span><br><span class="line">请知道这些行为是不可逆转的。也以管理员身份运行</span><br></pre></td></tr></table></figure></li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我有一个类似的问题，它只发生在 Windows 下，请参阅KAFKA-1194，它仍然适用于 Kafka 1.1.0</span><br><span class="line"></span><br><span class="line">唯一可用的解决方法是禁用清洁器log.cleaner.enable &#x3D; false</span><br><span class="line"></span><br><span class="line">对于 windows 下的本地开发，您可以忽略此问题，因为它不适用于其他操作系统。</span><br></pre></td></tr></table></figure></li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除主题后我遇到了类似的问题。我不得不去主题位置并手动删除它并且它有效。 &#x2F;tmp&#x2F;kafka-logs&#x2F;[yourTopicName]</span><br><span class="line"></span><br><span class="line">我不确定这是否对你有用，因为我也是 KAFKA 的新手。</span><br><span class="line"></span><br><span class="line">在我的情况下，我还必须删除 ZK 日志，然后它就起作用了</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><ol>
-<li>删除test2对应的kafka日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\kafka-logs\test2-0</span><br></pre></td></tr></table></figure></li>
-<li>删除 ZK 日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\zookeeper\version-2\log.2a（或其他）</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h1><p>写 Binlog 的时机<br>对支持事务的引擎如InnoDB而言，必须要提交了事务才会记录binlog。binlog 什么时候刷新到磁盘跟参数 sync_binlog 相关。</p>
+<p>如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新；</p>
+<p>如果设置为不为0的值，则表示每 sync_binlog 次事务，MySQL调用文件系统的刷新操作刷新binlog到磁盘中。</p>
+<p>设为1是最安全的，在系统故障时最多丢失一个事务的更新，但是会对性能有所影响。</p>
+<p>如果 sync_binlog=0 或 sync_binlog大于1，当发生电源故障或操作系统崩溃时，可能有一部分已提交但其binlog未被同步到磁盘的事务会被丢失，恢复程序将无法恢复这部分事务。</p>
+<p>在MySQL 5.7.7之前，默认值 sync_binlog 是0，MySQL 5.7.7和更高版本使用默认值1，这是最安全的选择。一般情况下会设置为100或者0，牺牲一定的一致性来获取更好的性能。</p>
+<h2 id="文件及扩展"><a href="#文件及扩展" class="headerlink" title="文件及扩展"></a>文件及扩展</h2><p>binlog日志包括两类文件:</p>
+<p>二进制日志索引文件（文件名后缀为.index）用于记录所有有效的的二进制文件</p>
+<p>二进制日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML语句事件</p>
+<p>binlog是一个二进制文件集合，每个binlog文件以一个4字节的魔数开头，接着是一组Events:</p>
+<p>魔数：0xfe62696e对应的是0xfebin；</p>
+<p>Event：每个Event包含header和data两个部分；header提供了Event的创建时间，哪个服务器等信息，data部分提供的是针对该Event的具体信息，如具体数据的修改；</p>
+<p>第一个Event用于描述binlog文件的格式版本，这个格式就是event写入binlog文件的格式；</p>
+<p>其余的Event按照第一个Event的格式版本写入；</p>
+<p>最后一个Event用于说明下一个binlog文件；</p>
+<p>binlog的索引文件是一个文本文件，其中内容为当前的binlog文件列表</p>
+<p>当遇到以下3种情况时，MySQL会重新生成一个新的日志文件，文件序号递增：</p>
+<p>MySQL服务器停止或重启时</p>
+<p>使用 flush logs 命令；</p>
+<p>当 binlog 文件大小超过 max_binlog_size 变量的值时；</p>
+<p>max_binlog_size 的最小值是4096字节，最大值和默认值是 1GB (1073741824字节)。事务被写入到binlog的一个块中，所以它不会在几个二进制日志之间被拆分。<br>因此，如果你有很大的事务，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的日志都记录到当前日志文件中，直到事务结束，你可能会看到binlog文件大于 max_binlog_size 的情况。</p>
 
           
         
@@ -1425,7 +1199,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E6%9F%A5%E7%9C%8Btopic%E5%BC%82%E5%B8%B8could-not-be-established-Broker-may-not-be-available/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1444,7 +1218,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E6%9F%A5%E7%9C%8Btopic%E5%BC%82%E5%B8%B8could-not-be-established-Broker-may-not-be-available/" itemprop="url">分布式-分布式消息队列-kafka-异常-查看topic异常could-not-be-established-Broker-may-not-be-available</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/" itemprop="url">mysql控制台</a></h1>
         
 
         <div class="post-meta">
@@ -1460,7 +1234,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T23:13:40+08:00">2022-04-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -1469,6 +1243,38 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1491,7 +1297,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.8k</span>
+                <span title="字数统计">467</span>
               
 
               
@@ -1505,7 +1311,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1527,8 +1333,9 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="查看topic异常"><a href="#查看topic异常" class="headerlink" title="查看topic异常"></a>查看topic异常</h1><p>could not be established. Broker may not be available<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D:\softAddress\kafka_2.12-3.1.0&gt;.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092</span><br><span class="line">[2022-04-04 23:13:08,655] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:10,808] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:12,937] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:15,190] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:17,594] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:20,472] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:23,517] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 23:13:26,695] WARN [AdminClient clientId&#x3D;adminclient-1] Connection to node -1 (localhost&#x2F;127.0.0.1:9092) could</span><br></pre></td></tr></table></figure></p>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>发现Kafka broker已经宕机</p>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>在环境变量Path中添加：<br>C:\Program Files\MySQL\MySQL Server 5.5\bin</p>
+<h1 id="打开cmd窗口"><a href="#打开cmd窗口" class="headerlink" title="打开cmd窗口"></a>打开cmd窗口</h1><p>在C:\Windows\System32\文件夹下搜索 cmd 并打开cmd窗口<br>C:\Windows\System32\cmd.exe</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>mysql –help<br>执行验证是否配置成功</p>
 
           
         
@@ -1585,7 +1392,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1604,7 +1411,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka本地测试</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/" itemprop="url">查找my.cnf位置</a></h1>
         
 
         <div class="post-meta">
@@ -1620,7 +1427,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T23:05:06+08:00">2022-04-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -1629,6 +1436,38 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1687,173 +1526,14 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="Kafka本地测试"><a href="#Kafka本地测试" class="headerlink" title="Kafka本地测试"></a>Kafka本地测试</h1><h2 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h2><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
-<h1 id="创建主题，同一个主题创建一次即可。"><a href="#创建主题，同一个主题创建一次即可。" class="headerlink" title="创建主题，同一个主题创建一次即可。"></a>创建主题，同一个主题创建一次即可。</h1><p>.\bin\windows\kafka-topics.bat –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic test1<br>或<br>.\bin\windows\kafka-topics.bat –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic test1</p>
-<h1 id="启动生产者和消费者"><a href="#启动生产者和消费者" class="headerlink" title="启动生产者和消费者"></a>启动生产者和消费者</h1><p>.\bin\windows\kafka-console-producer.bat –broker-list localhost:9092 –topic test1</p>
-<p>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E5%A4%B1%E8%B4%A5Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E5%A4%B1%E8%B4%A5Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected/" itemprop="url">分布式-分布式消息队列-kafka-异常-创建topic失败Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T22:55:23+08:00">2022-04-04</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">6.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected"><a href="#Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected" class="headerlink" title="Cancelled createTopics request with correlation id 3 due to node 0 being disconnected"></a>Cancelled createTopics request with correlation id 3 due to node 0 being disconnected</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D:\softAddress\kafka_2.12-3.1.0\bin\windows&gt;kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test1</span><br><span class="line">Error while executing topic command : Call(callName&#x3D;createTopics, deadlineMs&#x3D;1649084056838, tries&#x3D;1, nextAllowedTryMs&#x3D;1649084056951) timed out at 1649084056851 after 1 attempt(s)</span><br><span class="line">[2022-04-04 22:54:16,855] ERROR org.apache.kafka.common.errors.TimeoutException: Call(callName&#x3D;createTopics, deadlineMs&#x3D;1649084056838, tries&#x3D;1, nextAllowedTryMs&#x3D;1649084056951) timed out at 1649084056851 after 1 attempt(s)</span><br><span class="line">Caused by: org.apache.kafka.common.errors.DisconnectException: Cancelled createTopics request with correlation id 3 due to node 0 being disconnected</span><br><span class="line"> (kafka.admin.TopicCommand$)</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><ol>
-<li>查看kafka broker发现如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br><span class="line">[2022-04-04 22:15:05,385] INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br></pre></td></tr></table></figure></li>
-<li>使用ctrl + c执行如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-04 22:15:05,385] INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br><span class="line">[2022-04-04 22:15:05,385] INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br><span class="line">[2022-04-04 22:45:51,372] INFO Creating topic test1 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:53:17,084] INFO Creating topic test1 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:56:37,976] WARN Attempting to send response via channel for which there is no open connection, connection id 172.31.128.1:9092-172.31.128.1:54580-0 (kafka.network.Processor)</span><br><span class="line">[2022-04-04 22:56:38,133] INFO [Controller id&#x3D;0, targetBrokerId&#x3D;0] Node 0 disconnected. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 22:56:38,150] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions Set(test1-0) (kafka.server.ReplicaFetcherManager)</span><br><span class="line">[2022-04-04 22:56:38,260] INFO [LogLoader partition&#x3D;test1-0, dir&#x3D;D:\tmp\kafka-logs] Loading producer state till offset 0 with message format version 2 (kafka.log.UnifiedLog$)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO Created log for partition test1-0 in D:\tmp\kafka-logs\test1-0 with properties &#123;&#125; (kafka.log.LogManager)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO [Partition test1-0 broker&#x3D;0] No checkpointed highwatermark is found for partition test1-0 (kafka.cluster.Partition)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO [Partition test1-0 broker&#x3D;0] Log loaded for partition test1-0 with initial high watermark 0 (kafka.cluster.Partition)</span><br><span class="line">[2022-04-04 22:57:34,426] INFO Creating topic test2 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:57:34,593] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions Set(test2-0) (kafka.server.ReplicaFetcherManager)</span><br><span class="line">[2022-04-04 22:57:34,597] INFO [LogLoader partition&#x3D;test2-0, dir&#x3D;D:\tmp\kafka-logs] Loading producer state till offset 0 with message format version 2 (kafka.log.UnifiedLog$)</span><br><span class="line">[2022-04-04 22:57:34,597] INFO Created log for partition test2-0 in D:\tmp\kafka-logs\test2-0 with properties &#123;&#125; (kafka.log.LogManager)</span><br></pre></td></tr></table></figure>
-再创建即可</li>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="通过服务查找"><a href="#通过服务查找" class="headerlink" title="通过服务查找"></a>通过服务查找</h1><ol>
+<li>cmd -&gt; services.msc</li>
+<li>右键 MySQL -&gt; 属性 -&gt; 可执行文件路径：<br><img src="images/mysql可执行文件路径.png" alt=""></li>
+</ol>
+<h1 id="命令查找"><a href="#命令查找" class="headerlink" title="命令查找"></a>命令查找</h1><ol>
+<li>先打开mysql控制台<br><a href="./mysql控制台.md"></a></li>
+<li>查看 my.cnf 位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
           
@@ -1911,7 +1591,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1930,7 +1610,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka常用命令</a></h1>
+                <a class="post-title-link" href="/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">Markdown设置字体大小、颜色、类型、加粗</a></h1>
         
 
         <div class="post-meta">
@@ -1946,7 +1626,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T22:40:25+08:00">2022-04-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T00:00:00+08:00">2022-04-12</time>
             
 
             
@@ -1955,6 +1635,31 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1977,7 +1682,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.2k</span>
+                <span title="字数统计">1.1k</span>
               
 
               
@@ -1991,7 +1696,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -2013,18 +1718,581 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="Kafka常用命令"><a href="#Kafka常用命令" class="headerlink" title="Kafka常用命令"></a>Kafka常用命令</h1><h2 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h2><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
-<h3 id="后台常驻方式-带上参数-daemon-如"><a href="#后台常驻方式-带上参数-daemon-如" class="headerlink" title="后台常驻方式,带上参数 -daemon,如:"></a>后台常驻方式,带上参数 -daemon,如:</h3><p>/kafka/bin/kafka-server-start.sh -daemon /kafka/config/server.properties</p>
-<h3 id="指定-JMX-port-端口启动，指定-jmx，可以方便监控-Kafka-集群"><a href="#指定-JMX-port-端口启动，指定-jmx，可以方便监控-Kafka-集群" class="headerlink" title="指定 JMX port 端口启动，指定 jmx，可以方便监控 Kafka 集群"></a>指定 JMX port 端口启动，指定 jmx，可以方便监控 Kafka 集群</h3><p>JMX_PORT=9991 /kafka/bin/kafka-server-start.sh -daemon /kafka/config/server.properties</p>
-<h2 id="停止Kafka"><a href="#停止Kafka" class="headerlink" title="停止Kafka"></a>停止Kafka</h2><p>/kafka/bin/kafka-server-stop.sh</p>
-<h2 id="创建topic"><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h2><h3 id="官方推荐如果kafka版本大于等于2-2使用–bootstrap-server替代–zookeeper-（2-2以上也兼容–zookeeper）命令如下"><a href="#官方推荐如果kafka版本大于等于2-2使用–bootstrap-server替代–zookeeper-（2-2以上也兼容–zookeeper）命令如下" class="headerlink" title="官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下"></a>官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下</h3><p>kafka-topics.sh –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic mytest</p>
-<h3 id="如果kafka版本小于2-2则命令如下"><a href="#如果kafka版本小于2-2则命令如下" class="headerlink" title="如果kafka版本小于2.2则命令如下"></a>如果kafka版本小于2.2则命令如下</h3><p>kafka-topics.sh –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic mytest</p>
-<h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* 官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下</span><br><span class="line">kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic mytest</span><br><span class="line">如果kafka版本小于2.2则命令如下</span><br><span class="line">kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mytest</span><br><span class="line">* 参数解释</span><br><span class="line">1. 指定kafka集群(2.2以上)或zookeeper集群</span><br><span class="line">--bootstrap-server node1:9092,node2:9092,node3:9092....</span><br><span class="line">或</span><br><span class="line">--zookeeper node1:2181,node2:2181,node3:2181...</span><br><span class="line">2.指定分区数</span><br><span class="line">--partitions </span><br><span class="line">3.指定分区的副本数</span><br><span class="line">--replication-factor</span><br><span class="line">所以执行上面命令将会创建一个名为mytest的topic，该topic下面有1个分区,并且该分区只有1个副本</span><br></pre></td></tr></table></figure>
-<h2 id="列出所有Topic"><a href="#列出所有Topic" class="headerlink" title="列出所有Topic"></a>列出所有Topic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --list --bootstrap-server localhost:9092</span><br></pre></td></tr></table></figure>
-<h2 id="查看指定Topic"><a href="#查看指定Topic" class="headerlink" title="查看指定Topic"></a>查看指定Topic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic mytest</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Partition:0 表示该分区的id为0</span><br><span class="line">leader: 9 表示分区的首领副本所在的broker（本例子中broker.id配置为9,所以这里显示9,具体在config&#x2F;server.properties配置。这里只有一个分区，所以首领分区也就是自己）</span><br><span class="line">Replicas: 9 表示分区的跟随副本所在的broker</span><br><span class="line">Isr: 9 表示分区的同步副本所在的broker(同步副本可以认为跟首领副本准实时同步的副本，可以配置判断条件，后面会讲，首领副本挂掉后，服务器会从同步副本中选举新的首领)</span><br></pre></td></tr></table></figure>
-<h2 id="增加Topic的partition数"><a href="#增加Topic的partition数" class="headerlink" title="增加Topic的partition数"></a>增加Topic的partition数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic mytest --partitions 5</span><br></pre></td></tr></table></figure>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="uses"><a href="#uses" class="headerlink" title="uses"></a>uses</h1><p>使用其他手动编写的或者其他Mapper接口覆写相关的转换方法，不能循环引用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(uses=DateMapper<span class="class">.<span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="imports"><a href="#imports" class="headerlink" title="imports"></a>imports</h1><p>引用相关类，允许通过mapping.expression()、mapping.defaultExpression()直接使用这些类型<br>```java<br>@Mapper(imports = DateUtil.class)<br>public interface UserConvert {<br>    UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);<br>    @Mappings({<br>            @Mapping(source = “name”, target = “userName”),<br>            // 以指定方法转换属性，这里如果不使用imports，则需要写全引用类包路径<br>            @Mapping(target = “birthday”, expression = “java(DateUtil.formatDate(entity.getBirthday()))”)<br>    })<br>    UserVO toVO(User entity);<br>}</p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/" itemprop="url">Markdown设置字体大小、颜色、类型、加粗</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T00:00:00+08:00">2022-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/md/" itemprop="url" rel="index"><span itemprop="name">md</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="改变字体大小"><a href="#改变字体大小" class="headerlink" title="改变字体大小"></a>改变字体大小</h1><p>size：规定文本的尺寸大小，取值范围为1~7 ，浏览器默认值是 3。注意，size=50也是可以显示的，但与7的字体大小一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;font size&#x3D;1&gt;字体大小size&#x3D;1&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font size&#x3D;3&gt;字体大小size&#x3D;3&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="改变字体颜色"><a href="#改变字体颜色" class="headerlink" title="改变字体颜色"></a>改变字体颜色</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;red&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;&quot;blue&quot;&gt;蓝色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;Yellow&gt;黄色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;YellowGreen&gt;黄绿色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;#ff0000&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#00ff00&gt;绿色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#0000ff&gt;蓝色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="改变字体类型"><a href="#改变字体类型" class="headerlink" title="改变字体类型"></a>改变字体类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face&#x3D;&quot;黑体&quot;&gt;黑体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;宋体&quot;&gt;宋体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;仿宋&quot;&gt;仿宋&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;幼圆&quot;&gt;幼圆&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;楷书&quot;&gt;楷书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文行楷&quot;&gt;华文行楷&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文隶书&quot;&gt;华文隶书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文新魏&quot;&gt;华文新魏&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文彩云&quot;&gt;华文彩云&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文琥珀&quot;&gt;华文琥珀&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;&lt;font size&#x3D;10 face&#x3D;&quot;华文行楷&quot;&gt;非业务原因重开&lt;&#x2F;font&gt;&lt;&#x2F;center&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/07/swagger-swagger%E8%AE%BE%E7%BD%AE%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/07/swagger-swagger%E8%AE%BE%E7%BD%AE%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81/" itemprop="url">swagger设置账号密码</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T00:00:00+08:00">2022-04-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swagger/" itemprop="url" rel="index"><span itemprop="name">swagger</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>swagger ui：<a href="https://github.com/xiaoymin/swagger-bootstrap-ui" target="_blank" rel="noopener">https://github.com/xiaoymin/swagger-bootstrap-ui</a></strong></li>
+</ul>
+<hr>
+<h1 id="swagger设置账号密码"><a href="#swagger设置账号密码" class="headerlink" title="swagger设置账号密码"></a>swagger设置账号密码</h1><ol>
+<li>pom.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- swagger --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.xiaoymin&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-bootstrap-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.9.6&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- swagger2 start --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
+<li>注意 swagger-bootstrap-ui和knife4j-spring-boot-starter会冲突</li>
+<li>swagger配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">&#x2F;&#x2F;@EnableKnife4j</span><br><span class="line">@EnableSwaggerBootstrapUI</span><br><span class="line">public class Swagger2Config  &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">         * 全局参数</span><br><span class="line">         *</span><br><span class="line">         * @return List&lt;Parameter&gt;</span><br><span class="line">         *&#x2F;</span><br><span class="line">        private List&lt;Parameter&gt; parameter() &#123;</span><br><span class="line">            List&lt;Parameter&gt; params &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">            params.add(new ParameterBuilder().name(&quot;token&quot;)</span><br><span class="line">                    .description(&quot;认证令牌&quot;)</span><br><span class="line">                    .modelRef(new ModelRef(&quot;string&quot;))</span><br><span class="line">                    .parameterType(&quot;header&quot;)</span><br><span class="line">                    .required(false).build());</span><br><span class="line">            return params;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>application.properties配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swagger.basic.enable&#x3D;true</span><br><span class="line">swagger.basic.username&#x3D;admin</span><br><span class="line">swagger.basic.password&#x3D;123456</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">package com.xx.yy.adaptor.rest.config;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;</span><br><span class="line">import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.ParameterBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.schema.ModelRef;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.service.Parameter;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : Daiyin.Zhang</span><br><span class="line"> * @version ：$Id: Swagger2Config.java v 0.1 2021&#x2F;3&#x2F;31 10:43 Daiyin.Zhang Exp $</span><br><span class="line"> * @description : swagger2 config</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Slf4j</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">&#x2F;&#x2F;@EnableKnife4j</span><br><span class="line">@EnableSwaggerBootstrapUI</span><br><span class="line">public class Swagger2Config  &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;xx.center.env&#125;&quot;)</span><br><span class="line">    private String xxCenterEnv;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 全局参数</span><br><span class="line">     *</span><br><span class="line">     * @return List&lt;Parameter&gt;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private List&lt;Parameter&gt; parameter() &#123;</span><br><span class="line">        List&lt;Parameter&gt; params &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        params.add(new ParameterBuilder().name(&quot;token&quot;)</span><br><span class="line">                .description(&quot;认证令牌&quot;)</span><br><span class="line">                .modelRef(new ModelRef(&quot;string&quot;))</span><br><span class="line">                .parameterType(&quot;header&quot;)</span><br><span class="line">                .required(false).build());</span><br><span class="line">        return params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .groupName(&quot;XX系统普通接口管理&quot;)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.xx.yy.adaptor.rest.web&quot;))</span><br><span class="line">                &#x2F;&#x2F;可以根据url路径设置哪些请求加入文档，忽略哪些请求</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ApiInfo apiInfo() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(String.format(&quot;xx center API - %s &quot;, xxCenterEnv))</span><br><span class="line">                .description(&quot;XX系统相关API，使用JSON格式传输数据&quot;)</span><br><span class="line">                .version(&quot;1.0&quot;)</span><br><span class="line">                .contact(new Contact(&quot;张代银&quot;, &quot;&quot;, &quot;zhangdaiyin.cool@163.com&quot;))</span><br><span class="line">                .license(&quot;The Apache License, Version 2.0&quot;)</span><br><span class="line">                .licenseUrl(&quot;http:&#x2F;&#x2F;www.apache.org&#x2F;licenses&#x2F;LICENSE-2.0.html&quot;)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">mysql事务、锁、隔离级别</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T00:00:00+08:00">2022-04-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="mysql事务、锁、隔离级别"><a href="#mysql事务、锁、隔离级别" class="headerlink" title="mysql事务、锁、隔离级别"></a>mysql事务、锁、隔离级别</h1><h2 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h2><h3 id="事务ACID原则"><a href="#事务ACID原则" class="headerlink" title="事务ACID原则"></a>事务ACID原则</h3><h4 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性(Atomicity)"></a>原子性(Atomicity)</h4><p>事务是数据库的逻辑工作单位，它对数据库的修改要么全部执行，要么全部不执行。</p>
+<h4 id="一致性-Consistemcy"><a href="#一致性-Consistemcy" class="headerlink" title="一致性(Consistemcy)"></a>一致性(Consistemcy)</h4><p>事务前后，数据库的状态都满足所有的完整性约束。</p>
+<h4 id="隔离性-Isolation"><a href="#隔离性-Isolation" class="headerlink" title="隔离性(Isolation)"></a>隔离性(Isolation)</h4><p>并发执行的事务是隔离的，一个不影响另一个。<br>如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。<br>通过设置数据库的隔离级别，可以达到不同的隔离效果。</p>
+<h4 id="持久性-Durability"><a href="#持久性-Durability" class="headerlink" title="持久性(Durability)"></a>持久性(Durability)</h4><p>在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库库中。</p>
+<h2 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h2><p>表锁  行锁<br>排他锁 共享锁</p>
+<h2 id="mysql隔离级别"><a href="#mysql隔离级别" class="headerlink" title="mysql隔离级别"></a>mysql隔离级别</h2><h3 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h3><h3 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h3><h3 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h3><h3 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h3>
           
         
       
@@ -2068,7 +2336,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
   </nav>
 
 
@@ -2115,7 +2383,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">225</span>
+                    <span class="site-state-item-count">235</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2380,7 +2648,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">248k</span>
+    <span title="站点总字数">263k</span>
   
 
   
@@ -2389,7 +2657,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:08</span>
+    <span title="站点总阅读时长">4:23</span>
   
 </div>
 
