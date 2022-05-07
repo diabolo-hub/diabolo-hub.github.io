@@ -316,65 +316,6 @@
   </entry>
   
   <entry>
-    <title>操作数栈的特点（Operand Stack）</title>
-    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-52-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E7%89%B9%E7%82%B9/"/>
-    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-52-操作数栈的特点/</id>
-    <published>2022-05-01T16:00:00.000Z</published>
-    <updated>2022-05-02T16:52:12.067Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h1><ol><li>每一个独立的栈帧中除了包含局部变量表以外，还包含一个后进先出（Last-In-First-Out）的操作数栈，也可以称之为 表达式栈（Expression Stack）。  </li><li>操作数栈，在方法执行的过程中，根据字节码指令，往栈中写入数据或提取数据，即入栈（push）/出栈（pop）。<ul><li>某些字节码指令将值压入操作数栈，其余的字节码指令将操作数取出栈。使用它们后再把结果压入栈。</li><li>比如：执行复制、交换、求和等操作。</li></ul></li><li>例： <pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>{ <span class="keyword">byte</span> i = <span class="number">15</span>; <span class="keyword">int</span> j = <span class="number">8</span>; <span class="keyword">int</span> k = i + j;}</code></pre><ul><li>首先将方法test会翻译成字节码</li><li>对应的 byte i = 15 字节码指令，会将 15 入栈到 操作数栈</li><li>对应的 int j = 8 字节码指令，也会将 8 入栈到 操作数栈</li><li>然后再出栈，在执行引擎中进行add求和运算，再讲结果压入操作数栈<blockquote><p>对于局部变量，也会将 K 放入局部变量表中</p></blockquote></li></ul></li></ol><h1 id="理论1"><a href="#理论1" class="headerlink" title="理论1"></a>理论1</h1><ol><li>操作数栈，主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。</li><li>操作数栈就是JVM执行殷勤的一个工作区，当一个方法刚开始执行的时候，一个新的栈帧也会随之被创建出来，<b>这个方法的操作数栈是空的。</b></li><li>每一个操作数栈都会拥有一个明确的栈深度 用于存储数值，其所需的最大深度在编译器就定义好了，保存在方法的Code属性中，为max_stack的值。</li><li>栈中的任何一个元素都是可以任意的Java数据类型<ul><li>32bit的类型占用一个栈单位深度</li><li>64bit的类型占用两个栈单位深度</li></ul></li><li>操作数栈 并非采用访问索引的方式来进行数据访问的，而是只能通过标准的入栈（push）和出栈（pop）操作来完成一次数据访问。<blockquote><p>局部变量表的深度和操作数栈的深度 无关联</p></blockquote></li></ol><h1 id="理论2"><a href="#理论2" class="headerlink" title="理论2"></a>理论2</h1><ol><li>如果被调用的方法带有返回值的话，其返回值将会被压入当前栈帧的操作数栈中，并更新PC寄存器中下一条需要执行的字节码指令</li><li>操作数栈中元素的数据类型必须与字节码指令的序列严格匹配，这由编译器在编译器期间进行验证，同时在类加载过程中的类检验阶段的数据流分析阶段要再次验证。</li><li>另外，我们说Java虚拟机的解析引擎是基于栈的执行引擎，其中的栈指的就是操作数栈。</li></ol><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ol><li>栈的一种，先进后出  </li><li>使用数组来实现的</li></ol><h2 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h2><p>可以使用数组或链表来实现</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;含义&quot;&gt;&lt;a href=&quot;#含义&quot; class=&quot;headerlink&quot; title=&quot;含义&quot;&gt;&lt;/a&gt;含义&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;每一个独立的栈帧中除了包含局
-      
-    
-    </summary>
-    
-      <category term="java" scheme="http://yoursite.com/categories/java/"/>
-    
-      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
-    
-      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
-    
-    
-      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作数栈的字节码分析</title>
-    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-53-操作数栈的字节码分析/</id>
-    <published>2022-05-01T16:00:00.000Z</published>
-    <updated>2022-05-05T03:11:25.872Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="例-操作过程"><a href="#例-操作过程" class="headerlink" title="例-操作过程"></a>例-操作过程</h1><p><img src="操作数栈的字节码分析-1.png" alt=""><br><img src="操作数栈的字节码分析-2.png" alt=""><br><img src="操作数栈的字节码分析-3.png" alt=""><br><img src="操作数栈的字节码分析-4.png" alt=""><br><img src="操作数栈的字节码分析-5.png" alt=""></p><h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void getSum() &#123;</span><br><span class="line">    int m &#x3D; 10;</span><br><span class="line">    int n &#x3D; 20;</span><br><span class="line">    int k &#x3D; m + n;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">publicvoid testGetSum() &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取上一个栈帧返回的结果，并保存在操作数栈中</span><br><span class="line">    int i &#x3D; getSum();</span><br><span class="line">    int j &#x3D; 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>以上案例中，getSum()返回的K属于int类型，在getSum()字节码栈帧执行完后，在下一个方法testGetSum中会直接将k的值加载并压入 操作数栈<br>此时，如果我们返回的是一个对象，而不是基础数据类型int，压入栈的则是一个具体对象？</li><li>常见的 i++ 和 ++i 的区别<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public void add() &#123;</span><br><span class="line">    &#x2F;&#x2F; 第1类</span><br><span class="line">    int i1 &#x3D; 10;</span><br><span class="line">    i1++;</span><br><span class="line">    </span><br><span class="line">    int i2 &#x3D; 10;</span><br><span class="line">    ++i2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第2类</span><br><span class="line">    int i3 &#x3D; 10;</span><br><span class="line">    int i4 &#x3D; i3++;</span><br><span class="line">    </span><br><span class="line">    int i5 &#x3D; 10;</span><br><span class="line">    int i6 &#x3D; ++i5;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第3类</span><br><span class="line">    int i7 &#x3D; 10;</span><br><span class="line">    i7 &#x3D; i7++;</span><br><span class="line">    </span><br><span class="line">    int i8 &#x3D; 10;</span><br><span class="line">    i8 &#x3D; ++i8;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第4类</span><br><span class="line">    int i9 &#x3D; 10;</span><br><span class="line">    int i10 &#x3D; i9++ + ++i9;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;例-操作过程&quot;&gt;&lt;a href=&quot;#例-操作过程&quot; class=&quot;headerlink&quot; title=&quot;例-操作过程&quot;&gt;&lt;/a&gt;例-操作过程&lt;/h1&gt;&lt;p&gt;&lt;img
-      
-    
-    </summary>
-    
-      <category term="java" scheme="http://yoursite.com/categories/java/"/>
-    
-      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
-    
-      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
-    
-    
-      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>栈顶缓存技术</title>
     <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/"/>
     <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-54-栈顶缓存技术/</id>
@@ -388,6 +329,35 @@
       
       
         &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;回顾&quot;&gt;&lt;a href=&quot;#回顾&quot; class=&quot;headerlink&quot; title=&quot;回顾&quot;&gt;&lt;/a&gt;回顾&lt;/h1&gt;&lt;p&gt;基于栈式架构的虚拟机所使用的零地址指令更
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
+    
+      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
+    
+    
+      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>方法的调用</title>
+    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/"/>
+    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-56-方法的调用/</id>
+    <published>2022-05-01T16:00:00.000Z</published>
+    <updated>2022-05-02T17:24:34.854Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol><li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li></ol><h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p><h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;方法的绑定机制：静态绑定与动态绑定&quot;&gt;&lt;a href=&quot;#方法的绑定机制：静态绑定与动态绑定&quot; class=&quot;headerlink&quot; title=&quot;方法的绑定机制：
       
     
     </summary>
@@ -433,19 +403,49 @@
   </entry>
   
   <entry>
-    <title>方法的调用</title>
-    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/"/>
-    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-56-方法的调用/</id>
+    <title>操作数栈的字节码分析</title>
+    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-53-操作数栈的字节码分析/</id>
     <published>2022-05-01T16:00:00.000Z</published>
-    <updated>2022-05-02T17:24:34.854Z</updated>
+    <updated>2022-05-05T03:11:25.872Z</updated>
     
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol><li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li></ol><h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p><h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>]]></content>
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="例-操作过程"><a href="#例-操作过程" class="headerlink" title="例-操作过程"></a>例-操作过程</h1><p><img src="操作数栈的字节码分析-1.png" alt=""><br><img src="操作数栈的字节码分析-2.png" alt=""><br><img src="操作数栈的字节码分析-3.png" alt=""><br><img src="操作数栈的字节码分析-4.png" alt=""><br><img src="操作数栈的字节码分析-5.png" alt=""></p><h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void getSum() &#123;</span><br><span class="line">    int m &#x3D; 10;</span><br><span class="line">    int n &#x3D; 20;</span><br><span class="line">    int k &#x3D; m + n;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">publicvoid testGetSum() &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取上一个栈帧返回的结果，并保存在操作数栈中</span><br><span class="line">    int i &#x3D; getSum();</span><br><span class="line">    int j &#x3D; 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li>以上案例中，getSum()返回的K属于int类型，在getSum()字节码栈帧执行完后，在下一个方法testGetSum中会直接将k的值加载并压入 操作数栈<br>此时，如果我们返回的是一个对象，而不是基础数据类型int，压入栈的则是一个具体对象？</li><li>常见的 i++ 和 ++i 的区别<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public void add() &#123;</span><br><span class="line">    &#x2F;&#x2F; 第1类</span><br><span class="line">    int i1 &#x3D; 10;</span><br><span class="line">    i1++;</span><br><span class="line">    </span><br><span class="line">    int i2 &#x3D; 10;</span><br><span class="line">    ++i2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第2类</span><br><span class="line">    int i3 &#x3D; 10;</span><br><span class="line">    int i4 &#x3D; i3++;</span><br><span class="line">    </span><br><span class="line">    int i5 &#x3D; 10;</span><br><span class="line">    int i6 &#x3D; ++i5;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第3类</span><br><span class="line">    int i7 &#x3D; 10;</span><br><span class="line">    i7 &#x3D; i7++;</span><br><span class="line">    </span><br><span class="line">    int i8 &#x3D; 10;</span><br><span class="line">    i8 &#x3D; ++i8;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第4类</span><br><span class="line">    int i9 &#x3D; 10;</span><br><span class="line">    int i10 &#x3D; i9++ + ++i9;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;方法的绑定机制：静态绑定与动态绑定&quot;&gt;&lt;a href=&quot;#方法的绑定机制：静态绑定与动态绑定&quot; class=&quot;headerlink&quot; title=&quot;方法的绑定机制：
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;例-操作过程&quot;&gt;&lt;a href=&quot;#例-操作过程&quot; class=&quot;headerlink&quot; title=&quot;例-操作过程&quot;&gt;&lt;/a&gt;例-操作过程&lt;/h1&gt;&lt;p&gt;&lt;img
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+      <category term="jvm" scheme="http://yoursite.com/categories/java/jvm/"/>
+    
+      <category term="atguigu" scheme="http://yoursite.com/categories/java/jvm/atguigu/"/>
+    
+    
+      <category term="jvm" scheme="http://yoursite.com/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作数栈的特点（Operand Stack）</title>
+    <link href="http://yoursite.com/2022/05/02/java-jvm-atguigu-52-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E7%89%B9%E7%82%B9/"/>
+    <id>http://yoursite.com/2022/05/02/java-jvm-atguigu-52-操作数栈的特点/</id>
+    <published>2022-05-01T16:00:00.000Z</published>
+    <updated>2022-05-02T16:52:12.067Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h1><ol><li>每一个独立的栈帧中除了包含局部变量表以外，还包含一个后进先出（Last-In-First-Out）的操作数栈，也可以称之为 表达式栈（Expression Stack）。  </li><li>操作数栈，在方法执行的过程中，根据字节码指令，往栈中写入数据或提取数据，即入栈（push）/出栈（pop）。<ul><li>某些字节码指令将值压入操作数栈，其余的字节码指令将操作数取出栈。使用它们后再把结果压入栈。</li><li>比如：执行复制、交换、求和等操作。</li></ul></li><li>例： <pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>{ <span class="keyword">byte</span> i = <span class="number">15</span>; <span class="keyword">int</span> j = <span class="number">8</span>; <span class="keyword">int</span> k = i + j;}</code></pre><ul><li>首先将方法test会翻译成字节码</li><li>对应的 byte i = 15 字节码指令，会将 15 入栈到 操作数栈</li><li>对应的 int j = 8 字节码指令，也会将 8 入栈到 操作数栈</li><li>然后再出栈，在执行引擎中进行add求和运算，再讲结果压入操作数栈<blockquote><p>对于局部变量，也会将 K 放入局部变量表中</p></blockquote></li></ul></li></ol><h1 id="理论1"><a href="#理论1" class="headerlink" title="理论1"></a>理论1</h1><ol><li>操作数栈，主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。</li><li>操作数栈就是JVM执行殷勤的一个工作区，当一个方法刚开始执行的时候，一个新的栈帧也会随之被创建出来，<b>这个方法的操作数栈是空的。</b></li><li>每一个操作数栈都会拥有一个明确的栈深度 用于存储数值，其所需的最大深度在编译器就定义好了，保存在方法的Code属性中，为max_stack的值。</li><li>栈中的任何一个元素都是可以任意的Java数据类型<ul><li>32bit的类型占用一个栈单位深度</li><li>64bit的类型占用两个栈单位深度</li></ul></li><li>操作数栈 并非采用访问索引的方式来进行数据访问的，而是只能通过标准的入栈（push）和出栈（pop）操作来完成一次数据访问。<blockquote><p>局部变量表的深度和操作数栈的深度 无关联</p></blockquote></li></ol><h1 id="理论2"><a href="#理论2" class="headerlink" title="理论2"></a>理论2</h1><ol><li>如果被调用的方法带有返回值的话，其返回值将会被压入当前栈帧的操作数栈中，并更新PC寄存器中下一条需要执行的字节码指令</li><li>操作数栈中元素的数据类型必须与字节码指令的序列严格匹配，这由编译器在编译器期间进行验证，同时在类加载过程中的类检验阶段的数据流分析阶段要再次验证。</li><li>另外，我们说Java虚拟机的解析引擎是基于栈的执行引擎，其中的栈指的就是操作数栈。</li></ol><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ol><li>栈的一种，先进后出  </li><li>使用数组来实现的</li></ol><h2 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h2><p>可以使用数组或链表来实现</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;含义&quot;&gt;&lt;a href=&quot;#含义&quot; class=&quot;headerlink&quot; title=&quot;含义&quot;&gt;&lt;/a&gt;含义&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;每一个独立的栈帧中除了包含局
       
     
     </summary>

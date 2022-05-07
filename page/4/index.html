@@ -1751,6 +1751,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">binlog常用命令</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">6.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 查看binlog是否开启( ON 表示开启）</span><br><span class="line">show variables like &#39;log_%&#39;;</span><br><span class="line">#只查看第一个binlog文件的内容</span><br><span class="line">show binlog events;  </span><br><span class="line">#查看指定binlog文件的内容</span><br><span class="line">show binlog events &#96;&#96;in &#39;mysql-bin.000002&#39;&#96;&#96;; </span><br><span class="line">#获取binlog文件列表</span><br><span class="line">show binary logs;  </span><br><span class="line">#查看当前正在写入的binlog文件</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令2"><a href="#常用命令2" class="headerlink" title="常用命令2"></a>常用命令2</h1><h2 id="查看-my-cnf-位置"><a href="#查看-my-cnf-位置" class="headerlink" title="查看 my.cnf 位置"></a>查看 my.cnf 位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令3"><a href="#常用命令3" class="headerlink" title="常用命令3"></a>常用命令3</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br><span class="line"># 查看日志模式</span><br><span class="line">show variables like &quot;%binlog_format%&quot;;</span><br><span class="line"># 设置日志模式</span><br><span class="line">set global binlog_format&#x3D;&#39;MIXED&#39;;</span><br><span class="line"># 查看二进制日志文件</span><br><span class="line">show binary logs;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令4"><a href="#常用命令4" class="headerlink" title="常用命令4"></a>常用命令4</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"># 是否启用binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog的目录</span><br><span class="line">show global variables like &quot;%log_bin%&quot;;</span><br><span class="line"></span><br><span class="line"># 查看当前服务器使用的biglog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看主服务器使用的biglog文件及大小</span><br><span class="line"></span><br><span class="line"># 查看最新一个binlog日志文件名称和Position</span><br><span class="line">show master status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 事件查询命令</span><br><span class="line"># IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="line"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="line"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="line"># row_count ：查询总条数(不指定就是所有行)</span><br><span class="line">show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-09 14:00:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000003&#39;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1933,202 +2127,11 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" itemprop="url">binlog开启</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">255</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>MySQL主从复制：MySQL Replication在Master端开启binlog，Master把它的二进制日志传递给slaves来达到master-slave数据一致的目的<br>数据恢复：通过使用 mysqlbinlog工具来使恢复数据</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
   </nav>
 
 
@@ -2175,7 +2178,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">235</span>
+                    <span class="site-state-item-count">251</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2270,7 +2273,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2317,7 +2330,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2440,7 +2459,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">263k</span>
+    <span title="站点总字数">273k</span>
   
 
   
@@ -2449,7 +2468,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:23</span>
+    <span title="站点总阅读时长">4:33</span>
   
 </div>
 
