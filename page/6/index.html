@@ -373,6 +373,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">mysql事务、锁、隔离级别</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T00:00:00+08:00">2022-04-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="mysql事务、锁、隔离级别"><a href="#mysql事务、锁、隔离级别" class="headerlink" title="mysql事务、锁、隔离级别"></a>mysql事务、锁、隔离级别</h1><h2 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h2><h3 id="事务ACID原则"><a href="#事务ACID原则" class="headerlink" title="事务ACID原则"></a>事务ACID原则</h3><h4 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性(Atomicity)"></a>原子性(Atomicity)</h4><p>事务是数据库的逻辑工作单位，它对数据库的修改要么全部执行，要么全部不执行。</p>
+<h4 id="一致性-Consistemcy"><a href="#一致性-Consistemcy" class="headerlink" title="一致性(Consistemcy)"></a>一致性(Consistemcy)</h4><p>事务前后，数据库的状态都满足所有的完整性约束。</p>
+<h4 id="隔离性-Isolation"><a href="#隔离性-Isolation" class="headerlink" title="隔离性(Isolation)"></a>隔离性(Isolation)</h4><p>并发执行的事务是隔离的，一个不影响另一个。<br>如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。<br>通过设置数据库的隔离级别，可以达到不同的隔离效果。</p>
+<h4 id="持久性-Durability"><a href="#持久性-Durability" class="headerlink" title="持久性(Durability)"></a>持久性(Durability)</h4><p>在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库库中。</p>
+<h2 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h2><p>表锁  行锁<br>排他锁 共享锁</p>
+<h2 id="mysql隔离级别"><a href="#mysql隔离级别" class="headerlink" title="mysql隔离级别"></a>mysql隔离级别</h2><h3 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h3><h3 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h3><h3 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h3><h3 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/06/git-%E7%AC%94%E8%AE%B0-git%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1895,175 +2090,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/04/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka常用命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-04T22:40:25+08:00">2022-04-04</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="Kafka常用命令"><a href="#Kafka常用命令" class="headerlink" title="Kafka常用命令"></a>Kafka常用命令</h1><h2 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h2><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
-<h3 id="后台常驻方式-带上参数-daemon-如"><a href="#后台常驻方式-带上参数-daemon-如" class="headerlink" title="后台常驻方式,带上参数 -daemon,如:"></a>后台常驻方式,带上参数 -daemon,如:</h3><p>/kafka/bin/kafka-server-start.sh -daemon /kafka/config/server.properties</p>
-<h3 id="指定-JMX-port-端口启动，指定-jmx，可以方便监控-Kafka-集群"><a href="#指定-JMX-port-端口启动，指定-jmx，可以方便监控-Kafka-集群" class="headerlink" title="指定 JMX port 端口启动，指定 jmx，可以方便监控 Kafka 集群"></a>指定 JMX port 端口启动，指定 jmx，可以方便监控 Kafka 集群</h3><p>JMX_PORT=9991 /kafka/bin/kafka-server-start.sh -daemon /kafka/config/server.properties</p>
-<h2 id="停止Kafka"><a href="#停止Kafka" class="headerlink" title="停止Kafka"></a>停止Kafka</h2><p>/kafka/bin/kafka-server-stop.sh</p>
-<h2 id="创建topic"><a href="#创建topic" class="headerlink" title="创建topic"></a>创建topic</h2><h3 id="官方推荐如果kafka版本大于等于2-2使用–bootstrap-server替代–zookeeper-（2-2以上也兼容–zookeeper）命令如下"><a href="#官方推荐如果kafka版本大于等于2-2使用–bootstrap-server替代–zookeeper-（2-2以上也兼容–zookeeper）命令如下" class="headerlink" title="官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下"></a>官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下</h3><p>kafka-topics.sh –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic mytest</p>
-<h3 id="如果kafka版本小于2-2则命令如下"><a href="#如果kafka版本小于2-2则命令如下" class="headerlink" title="如果kafka版本小于2.2则命令如下"></a>如果kafka版本小于2.2则命令如下</h3><p>kafka-topics.sh –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic mytest</p>
-<h3 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">* 官方推荐如果kafka版本大于等于2.2使用–bootstrap-server替代–zookeeper （2.2以上也兼容–zookeeper）命令如下</span><br><span class="line">kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic mytest</span><br><span class="line">如果kafka版本小于2.2则命令如下</span><br><span class="line">kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mytest</span><br><span class="line">* 参数解释</span><br><span class="line">1. 指定kafka集群(2.2以上)或zookeeper集群</span><br><span class="line">--bootstrap-server node1:9092,node2:9092,node3:9092....</span><br><span class="line">或</span><br><span class="line">--zookeeper node1:2181,node2:2181,node3:2181...</span><br><span class="line">2.指定分区数</span><br><span class="line">--partitions </span><br><span class="line">3.指定分区的副本数</span><br><span class="line">--replication-factor</span><br><span class="line">所以执行上面命令将会创建一个名为mytest的topic，该topic下面有1个分区,并且该分区只有1个副本</span><br></pre></td></tr></table></figure>
-<h2 id="列出所有Topic"><a href="#列出所有Topic" class="headerlink" title="列出所有Topic"></a>列出所有Topic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --list --bootstrap-server localhost:9092</span><br></pre></td></tr></table></figure>
-<h2 id="查看指定Topic"><a href="#查看指定Topic" class="headerlink" title="查看指定Topic"></a>查看指定Topic</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic mytest</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Partition:0 表示该分区的id为0</span><br><span class="line">leader: 9 表示分区的首领副本所在的broker（本例子中broker.id配置为9,所以这里显示9,具体在config&#x2F;server.properties配置。这里只有一个分区，所以首领分区也就是自己）</span><br><span class="line">Replicas: 9 表示分区的跟随副本所在的broker</span><br><span class="line">Isr: 9 表示分区的同步副本所在的broker(同步副本可以认为跟首领副本准实时同步的副本，可以配置判断条件，后面会讲，首领副本挂掉后，服务器会从同步副本中选举新的首领)</span><br></pre></td></tr></table></figure>
-<h2 id="增加Topic的partition数"><a href="#增加Topic的partition数" class="headerlink" title="增加Topic的partition数"></a>增加Topic的partition数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kafka-topics.sh --bootstrap-server localhost:9092 --alter --topic mytest --partitions 5</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2115,7 +2141,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">251</span>
+                    <span class="site-state-item-count">258</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2220,7 +2246,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">46</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2273,7 +2309,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2396,7 +2436,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">273k</span>
+    <span title="站点总字数">278k</span>
   
 
   
@@ -2405,7 +2445,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:33</span>
+    <span title="站点总阅读时长">4:38</span>
   
 </div>
 
