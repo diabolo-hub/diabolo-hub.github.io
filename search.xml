@@ -70,20 +70,58 @@
       </tags>
   </entry>
   <entry>
-    <title>工作工具-wsl-6-wsl2-设置端口映射</title>
-    <url>/2022/05/09/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</url>
+    <title>netsh命令实现端口转发的添加删除</title>
+    <url>/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
-<pre><code>wsl2 设置端口映射: https://blog.csdn.net/keyiis_sh/article/details/113819244?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;utm_relevant_index=9
+<pre><code>【windows10】netsh命令实现端口转发的添加删除以及查看: https://blog.csdn.net/jn10010537/article/details/122715645
 </code></pre><hr>
-<h1 id="wsl2-设置端口映射"><a href="#wsl2-设置端口映射" class="headerlink" title="wsl2 设置端口映射"></a>wsl2 设置端口映射</h1><ol>
-<li>管理员启动cmd，获取虚拟机内ubuntu的ip地址<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wsl -- ifconfig eth0</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;wsl -- ifconfig eth0</span><br><span class="line">eth0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.23.229.221  netmask 255.255.240.0  broadcast 172.23.239.255</span><br><span class="line">        inet6 fe80::215:5dff:fe00:4d72  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:15:5d:00:4d:72  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 8553  bytes 873694 (873.6 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1433  bytes 121685 (121.6 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></li>
+<h1 id="netsh命令实现端口转发的添加删除"><a href="#netsh命令实现端口转发的添加删除" class="headerlink" title="netsh命令实现端口转发的添加删除"></a>netsh命令实现端口转发的添加删除</h1><p>netsh(Network Shell)是⼀个windows系统本⾝提供的功能强⼤的⽹络配置命令⾏⼯具  </p>
+<ol>
+<li>查看端口映射<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show v4tov4</span><br></pre></td></tr></table></figure>
+或<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure></li>
+<li>删除所有已经有的转发<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy reset</span><br></pre></td></tr></table></figure></li>
 <li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
-<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh interface portproxy show all</span><br><span class="line"></span><br><span class="line">侦听 ipv4:                 连接到 ipv4:</span><br><span class="line"></span><br><span class="line">地址            端口        地址            端口</span><br><span class="line">--------------- ----------  --------------- ----------</span><br><span class="line">0.0.0.0         8081        172.23.229.221  8081</span><br></pre></td></tr></table></figure>
+<li>删除转发<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy delete v4tov4 listenaddress&#x3D;0.0.0.0 listenport&#x3D;8081</span><br></pre></td></tr></table></figure></li>
+<li>判断⼀个端⼝是否开启<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netstat -ano -p tcp | findstr &quot;7778&quot; &gt;nul 2&gt;nul &amp;&amp; echo 7778端⼝已开启 || echo 7778端⼝未开启</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>若还是不行，关闭你本机的防火墙</p>
+]]></content>
+      <categories>
+        <category>win</category>
+        <category>net</category>
+      </categories>
+      <tags>
+        <tag>win</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>depth-docker-notes-dockerfile-local-dockerfile-3</title>
+    <url>/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-3/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p>
+<p>#作者<br>MAINTAINER xu</p>
+<p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p>
+<p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p>
+<p>#bash方式执行，使demo-0.0.1jar可访问</p>
+<p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p>
+<p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p>
+<p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>depth-docker-notes-dockerfile-local-dockerfile-2</title>
+    <url>/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-2/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p>
+<p>VOLUME /app</p>
+<p>COPY mall-task*.jar mall-task.jar</p>
+<p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p>
+<p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>depth-docker-notes-dockerfile-local-dockerfile-1</title>
+    <url>/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-1/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8<br>ADD /target/*.jar app.jar<br>EXPOSE 8082</p>
+<p>#ENTRYPOINT [“java”,”-jar”,”/app.jar”]<br>ENTRYPOINT [“java”,”-jar”,”-Duser.timezone=GMT+08”,”/app.jar”]</p>
 ]]></content>
   </entry>
   <entry>
@@ -254,6 +292,19 @@
       </tags>
   </entry>
   <entry>
+    <title>动态链接的理解与常量池的作用</title>
+    <url>/2022/05/02/java-jvm-atguigu-22/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+        <category>atguigu</category>
+      </categories>
+      <tags>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>静态变量与局部变量的对比</title>
     <url>/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h1><p>按照数据类型分：</p>
@@ -346,6 +397,21 @@
       </tags>
   </entry>
   <entry>
+    <title>栈顶缓存技术</title>
+    <url>/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈指令，这同时也就意味着将需要更多的指令分派（instruction dispatch）次数和内存读/写次数。<br>寄存器架构： 指令更少，执行速度更快</p>
+<h1 id="栈顶缓存来源"><a href="#栈顶缓存来源" class="headerlink" title="栈顶缓存来源"></a>栈顶缓存来源</h1><p>由于操作数是存储在内存中的，因此频繁地执行内存读/写操作必然会影响执行速度。<br>为了解决这个问题，HotSpot JVM的设计者们提出了 栈顶缓存（ToS， Top-of-Stack Cashing）技术，<br><b>将栈顶元素全部缓存在物理CPU的寄存器中，以此降低对内存的读/写次数，提升执行引擎的执行效率。</b></p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+        <category>atguigu</category>
+      </categories>
+      <tags>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>操作数栈的字节码分析</title>
     <url>/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="例-操作过程"><a href="#例-操作过程" class="headerlink" title="例-操作过程"></a>例-操作过程</h1><p><img src="操作数栈的字节码分析-1.png" alt=""><br><img src="操作数栈的字节码分析-2.png" alt=""><br><img src="操作数栈的字节码分析-3.png" alt=""><br><img src="操作数栈的字节码分析-4.png" alt=""><br><img src="操作数栈的字节码分析-5.png" alt=""></p>
@@ -355,52 +421,6 @@
 <li>常见的 i++ 和 ++i 的区别<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void add() &#123;</span><br><span class="line">    &#x2F;&#x2F; 第1类</span><br><span class="line">    int i1 &#x3D; 10;</span><br><span class="line">    i1++;</span><br><span class="line">    </span><br><span class="line">    int i2 &#x3D; 10;</span><br><span class="line">    ++i2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第2类</span><br><span class="line">    int i3 &#x3D; 10;</span><br><span class="line">    int i4 &#x3D; i3++;</span><br><span class="line">    </span><br><span class="line">    int i5 &#x3D; 10;</span><br><span class="line">    int i6 &#x3D; ++i5;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第3类</span><br><span class="line">    int i7 &#x3D; 10;</span><br><span class="line">    i7 &#x3D; i7++;</span><br><span class="line">    </span><br><span class="line">    int i8 &#x3D; 10;</span><br><span class="line">    i8 &#x3D; ++i8;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第4类</span><br><span class="line">    int i9 &#x3D; 10;</span><br><span class="line">    int i10 &#x3D; i9++ + ++i9;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-        <category>atguigu</category>
-      </categories>
-      <tags>
-        <tag>jvm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态链接的理解与常量池的作用</title>
-    <url>/2022/05/02/java-jvm-atguigu-22/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-        <category>atguigu</category>
-      </categories>
-      <tags>
-        <tag>jvm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>方法的调用</title>
-    <url>/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol>
-<li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li>
-</ol>
-<h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p>
-<h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>jvm</category>
-        <category>atguigu</category>
-      </categories>
-      <tags>
-        <tag>jvm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>栈顶缓存技术</title>
-    <url>/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈指令，这同时也就意味着将需要更多的指令分派（instruction dispatch）次数和内存读/写次数。<br>寄存器架构： 指令更少，执行速度更快</p>
-<h1 id="栈顶缓存来源"><a href="#栈顶缓存来源" class="headerlink" title="栈顶缓存来源"></a>栈顶缓存来源</h1><p>由于操作数是存储在内存中的，因此频繁地执行内存读/写操作必然会影响执行速度。<br>为了解决这个问题，HotSpot JVM的设计者们提出了 栈顶缓存（ToS， Top-of-Stack Cashing）技术，<br><b>将栈顶元素全部缓存在物理CPU的寄存器中，以此降低对内存的读/写次数，提升执行引擎的执行效率。</b></p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -441,8 +461,26 @@
       </tags>
   </entry>
   <entry>
+    <title>方法的调用</title>
+    <url>/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol>
+<li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li>
+</ol>
+<h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p>
+<h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>jvm</category>
+        <category>atguigu</category>
+      </categories>
+      <tags>
+        <tag>jvm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ideal工具中方法横线分割</title>
-    <url>/2022/05/02/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-ideal-notes-ideal%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%B9%E6%B3%95%E6%A8%AA%E7%BA%BF%E5%88%86%E5%89%B2/</url>
+    <url>/2022/05/02/tool-ideal-notes-ideal%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%B9%E6%B3%95%E6%A8%AA%E7%BA%BF%E5%88%86%E5%89%B2/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="ideal工具中方法横线分割"><a href="#ideal工具中方法横线分割" class="headerlink" title="ideal工具中方法横线分割"></a>ideal工具中方法横线分割</h1><p>setting -&gt; Editor -&gt; General -&gt; Appearance -&gt; Show method separators (勾选)</p>
 ]]></content>
       <categories>
@@ -626,9 +664,60 @@
       </tags>
   </entry>
   <entry>
+    <title>binlog</title>
+    <url>/2022/04/20/database-mysql-notes-binlog-binlog/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、一般来说开启binlog日志大概会有1%的性能损耗。</p>
+<p>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 配置文件的 log-bin 选项：</p>
+<p>2、在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<p>[mysqld]</p>
+<p>log-bin=my-binlog-name</p>
+<p>3、也可以通过 SET SQL_LOG_BIN=1命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+<p>以上就是mysql Binlog日志的启用，希望对大家有所帮助。更多mysql学习指路：MySQL</p>
+<p>推荐操作系统：windows7系统、mysql5.8、DELL G3电脑</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>binlog开启</title>
     <url>/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>MySQL主从复制：MySQL Replication在Master端开启binlog，Master把它的二进制日志传递给slaves来达到master-slave数据一致的目的<br>数据恢复：通过使用 mysqlbinlog工具来使恢复数据</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>binlog日志三种模式</title>
+    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
+<pre><code>mysql查看binlog日志: https://blog.csdn.net/m0_46426259/article/details/122215958
+</code></pre><hr>
+<h1 id="三种记录格式"><a href="#三种记录格式" class="headerlink" title="三种记录格式"></a>三种记录格式</h1><p>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）<br>ROW：基于行的复制（row-based replication, RBR）<br>MIXED：混合模式复制（mixed-based replication, MBR）</p>
+<blockquote>
+<p> 在 MySQL 5.7.7 之前，默认的格式是 STATEMENT，<br> 在 MySQL 5.7.7 及更高版本中，默认值是 ROW。日志格式通过 binlog-format 指定，如 binlog-format=STATEMENT、binlog-format=ROW、binlog-format=MIXED。</p>
+</blockquote>
+<p>Statement<br>每一条会修改数据的sql都会记录在binlog中</p>
+<p>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 提高了性能。</p>
+<p>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行的时候相同的结果。另外mysql的复制，像一些特定函数的功能，slave与master要保持一致会有很多相关问题。</p>
+<p>Row<br>5.1.5版本的MySQL才开始支持 row level 的复制,它不记录sql语句上下文相关信息，仅保存哪条记录被修改。</p>
+<p>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以row的日志内容会非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题.</p>
+<p>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
+<p>注：将二进制日志格式设置为ROW时，有些更改仍然使用基于语句的格式，包括所有DDL语句，例如CREATE TABLE， ALTER TABLE，或 DROP TABLE。</p>
+<p>Mixed<br>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
 ]]></content>
       <categories>
         <category>database</category>
@@ -676,63 +765,12 @@
       </tags>
   </entry>
   <entry>
-    <title>binlog日志三种模式</title>
-    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
-<pre><code>mysql查看binlog日志: https://blog.csdn.net/m0_46426259/article/details/122215958
-</code></pre><hr>
-<h1 id="三种记录格式"><a href="#三种记录格式" class="headerlink" title="三种记录格式"></a>三种记录格式</h1><p>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）<br>ROW：基于行的复制（row-based replication, RBR）<br>MIXED：混合模式复制（mixed-based replication, MBR）</p>
-<blockquote>
-<p> 在 MySQL 5.7.7 之前，默认的格式是 STATEMENT，<br> 在 MySQL 5.7.7 及更高版本中，默认值是 ROW。日志格式通过 binlog-format 指定，如 binlog-format=STATEMENT、binlog-format=ROW、binlog-format=MIXED。</p>
-</blockquote>
-<p>Statement<br>每一条会修改数据的sql都会记录在binlog中</p>
-<p>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 提高了性能。</p>
-<p>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行的时候相同的结果。另外mysql的复制，像一些特定函数的功能，slave与master要保持一致会有很多相关问题。</p>
-<p>Row<br>5.1.5版本的MySQL才开始支持 row level 的复制,它不记录sql语句上下文相关信息，仅保存哪条记录被修改。</p>
-<p>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以row的日志内容会非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题.</p>
-<p>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
-<p>注：将二进制日志格式设置为ROW时，有些更改仍然使用基于语句的格式，包括所有DDL语句，例如CREATE TABLE， ALTER TABLE，或 DROP TABLE。</p>
-<p>Mixed<br>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>binlog开启</title>
-    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查找my-ini或my-cnf"><a href="#查找my-ini或my-cnf" class="headerlink" title="查找my.ini或my.cnf"></a>查找my.ini或my.cnf</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql --help | grep &#39;Default options&#39; -A 1</span><br></pre></td></tr></table></figure>
-<ol>
-<li>linux<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">&#x2F;etc&#x2F;my.cnf &#x2F;etc&#x2F;mysql&#x2F;my.cnf &#x2F;usr&#x2F;etc&#x2F;my.cnf ~&#x2F;.my.cnf</span><br></pre></td></tr></table></figure></li>
-<li>windows<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h1><p>一般来说开启binlog日志大概会有1%的性能损耗。<br>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 或mysql\bin\my.ini 配置文件的 log-bin 选项：<br>在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
-<blockquote>
-<p>也可以通过 SET SQL_LOG_BIN=1 命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
-</blockquote>
-<ol>
-<li>windows<br>my.ini<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># Binary Logging</span><br><span class="line"># 开启Binlog 一般只需要修改这一行即可</span><br><span class="line">log-bin&#x3D;mysql-bin</span><br><span class="line"># 设置格式 此行可以不加 命令设置即可 详见下方拓展</span><br><span class="line">binlog-format&#x3D;ROW</span><br><span class="line"># 配置serverID  这一行本来就存在</span><br><span class="line">server_id&#x3D;1</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>写在 [mysqld]  下</p>
-</blockquote>
-</li>
-</ol>
-<p>然后再重启mysql服务，使用命令验证是否开启成功<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>二进制日志文件在mysql根目录的Data目录下，如果根目录下没有Data文件夹和配置文件，查一下C盘的ProgramData文件夹</p>
-</blockquote>
-<ol>
-<li>linux<br>/etc/my.cnf中mysqld节添加开启binlog的配置<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#第一种方式:</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br><span class="line"> </span><br><span class="line">#第二种方式:</span><br><span class="line">#此一行等同于上面log_bin三行</span><br><span class="line">log-bin&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="binlog其他配置"><a href="#binlog其他配置" class="headerlink" title="binlog其他配置"></a>binlog其他配置</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">#设置日志三种格式：STATEMENT、ROW、MIXED 。</span><br><span class="line">binlog_format &#x3D; ROW</span><br><span class="line">#设置日志路径，注意路经需要mysql用户有权限写</span><br><span class="line">log-bin &#x3D; &#x2F;data&#x2F;mysql&#x2F;logs&#x2F;mysql-bin.log</span><br><span class="line">#设置binlog清理时间</span><br><span class="line">expire_logs_days &#x3D; 7</span><br><span class="line">#binlog每个日志文件大小</span><br><span class="line">max_binlog_size &#x3D; 100m</span><br><span class="line">#binlog缓存大小</span><br><span class="line">binlog_cache_size &#x3D; 4m</span><br><span class="line">#最大binlog缓存大小</span><br><span class="line">max_binlog_cache_size &#x3D; 512m</span><br></pre></td></tr></table></figure>
+    <title>binlog常用命令</title>
+    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看binlog是否开启( ON 表示开启）</span><br><span class="line">show variables like &#39;log_%&#39;;</span><br><span class="line">#只查看第一个binlog文件的内容</span><br><span class="line">show binlog events;  </span><br><span class="line">#查看指定binlog文件的内容</span><br><span class="line">show binlog events &#96;&#96;in &#39;mysql-bin.000002&#39;&#96;&#96;; </span><br><span class="line">#获取binlog文件列表</span><br><span class="line">show binary logs;  </span><br><span class="line">#查看当前正在写入的binlog文件</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令2"><a href="#常用命令2" class="headerlink" title="常用命令2"></a>常用命令2</h1><h2 id="查看-my-cnf-位置"><a href="#查看-my-cnf-位置" class="headerlink" title="查看 my.cnf 位置"></a>查看 my.cnf 位置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令3"><a href="#常用命令3" class="headerlink" title="常用命令3"></a>常用命令3</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br><span class="line"># 查看日志模式</span><br><span class="line">show variables like &quot;%binlog_format%&quot;;</span><br><span class="line"># 设置日志模式</span><br><span class="line">set global binlog_format&#x3D;&#39;MIXED&#39;;</span><br><span class="line"># 查看二进制日志文件</span><br><span class="line">show binary logs;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令4"><a href="#常用命令4" class="headerlink" title="常用命令4"></a>常用命令4</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 是否启用binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog的目录</span><br><span class="line">show global variables like &quot;%log_bin%&quot;;</span><br><span class="line"></span><br><span class="line"># 查看当前服务器使用的biglog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看主服务器使用的biglog文件及大小</span><br><span class="line"></span><br><span class="line"># 查看最新一个binlog日志文件名称和Position</span><br><span class="line">show master status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 事件查询命令</span><br><span class="line"># IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="line"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="line"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="line"># row_count ：查询总条数(不指定就是所有行)</span><br><span class="line">show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-09 14:00:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000003&#39;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>database</category>
@@ -785,34 +823,34 @@
       </tags>
   </entry>
   <entry>
-    <title>binlog</title>
-    <url>/2022/04/20/database-mysql-notes-binlog-binlog/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、一般来说开启binlog日志大概会有1%的性能损耗。</p>
-<p>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 配置文件的 log-bin 选项：</p>
-<p>2、在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
-<p>[mysqld]</p>
-<p>log-bin=my-binlog-name</p>
-<p>3、也可以通过 SET SQL_LOG_BIN=1命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
-<p>以上就是mysql Binlog日志的启用，希望对大家有所帮助。更多mysql学习指路：MySQL</p>
-<p>推荐操作系统：windows7系统、mysql5.8、DELL G3电脑</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>binlog常用命令</title>
-    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看binlog是否开启( ON 表示开启）</span><br><span class="line">show variables like &#39;log_%&#39;;</span><br><span class="line">#只查看第一个binlog文件的内容</span><br><span class="line">show binlog events;  </span><br><span class="line">#查看指定binlog文件的内容</span><br><span class="line">show binlog events &#96;&#96;in &#39;mysql-bin.000002&#39;&#96;&#96;; </span><br><span class="line">#获取binlog文件列表</span><br><span class="line">show binary logs;  </span><br><span class="line">#查看当前正在写入的binlog文件</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-<h1 id="常用命令2"><a href="#常用命令2" class="headerlink" title="常用命令2"></a>常用命令2</h1><h2 id="查看-my-cnf-位置"><a href="#查看-my-cnf-位置" class="headerlink" title="查看 my.cnf 位置"></a>查看 my.cnf 位置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
-<h1 id="常用命令3"><a href="#常用命令3" class="headerlink" title="常用命令3"></a>常用命令3</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br><span class="line"># 查看日志模式</span><br><span class="line">show variables like &quot;%binlog_format%&quot;;</span><br><span class="line"># 设置日志模式</span><br><span class="line">set global binlog_format&#x3D;&#39;MIXED&#39;;</span><br><span class="line"># 查看二进制日志文件</span><br><span class="line">show binary logs;</span><br></pre></td></tr></table></figure>
-<h1 id="常用命令4"><a href="#常用命令4" class="headerlink" title="常用命令4"></a>常用命令4</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 是否启用binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog的目录</span><br><span class="line">show global variables like &quot;%log_bin%&quot;;</span><br><span class="line"></span><br><span class="line"># 查看当前服务器使用的biglog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看主服务器使用的biglog文件及大小</span><br><span class="line"></span><br><span class="line"># 查看最新一个binlog日志文件名称和Position</span><br><span class="line">show master status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 事件查询命令</span><br><span class="line"># IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="line"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="line"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="line"># row_count ：查询总条数(不指定就是所有行)</span><br><span class="line">show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-09 14:00:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000003&#39;;</span><br></pre></td></tr></table></figure>
+    <title>binlog开启</title>
+    <url>/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查找my-ini或my-cnf"><a href="#查找my-ini或my-cnf" class="headerlink" title="查找my.ini或my.cnf"></a>查找my.ini或my.cnf</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql --help | grep &#39;Default options&#39; -A 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>linux<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">&#x2F;etc&#x2F;my.cnf &#x2F;etc&#x2F;mysql&#x2F;my.cnf &#x2F;usr&#x2F;etc&#x2F;my.cnf ~&#x2F;.my.cnf</span><br></pre></td></tr></table></figure></li>
+<li>windows<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h1><p>一般来说开启binlog日志大概会有1%的性能损耗。<br>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 或mysql\bin\my.ini 配置文件的 log-bin 选项：<br>在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<blockquote>
+<p>也可以通过 SET SQL_LOG_BIN=1 命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+</blockquote>
+<ol>
+<li>windows<br>my.ini<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># Binary Logging</span><br><span class="line"># 开启Binlog 一般只需要修改这一行即可</span><br><span class="line">log-bin&#x3D;mysql-bin</span><br><span class="line"># 设置格式 此行可以不加 命令设置即可 详见下方拓展</span><br><span class="line">binlog-format&#x3D;ROW</span><br><span class="line"># 配置serverID  这一行本来就存在</span><br><span class="line">server_id&#x3D;1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>写在 [mysqld]  下</p>
+</blockquote>
+</li>
+</ol>
+<p>然后再重启mysql服务，使用命令验证是否开启成功<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>二进制日志文件在mysql根目录的Data目录下，如果根目录下没有Data文件夹和配置文件，查一下C盘的ProgramData文件夹</p>
+</blockquote>
+<ol>
+<li>linux<br>/etc/my.cnf中mysqld节添加开启binlog的配置<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#第一种方式:</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br><span class="line"> </span><br><span class="line">#第二种方式:</span><br><span class="line">#此一行等同于上面log_bin三行</span><br><span class="line">log-bin&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="binlog其他配置"><a href="#binlog其他配置" class="headerlink" title="binlog其他配置"></a>binlog其他配置</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">#设置日志三种格式：STATEMENT、ROW、MIXED 。</span><br><span class="line">binlog_format &#x3D; ROW</span><br><span class="line">#设置日志路径，注意路经需要mysql用户有权限写</span><br><span class="line">log-bin &#x3D; &#x2F;data&#x2F;mysql&#x2F;logs&#x2F;mysql-bin.log</span><br><span class="line">#设置binlog清理时间</span><br><span class="line">expire_logs_days &#x3D; 7</span><br><span class="line">#binlog每个日志文件大小</span><br><span class="line">max_binlog_size &#x3D; 100m</span><br><span class="line">#binlog缓存大小</span><br><span class="line">binlog_cache_size &#x3D; 4m</span><br><span class="line">#最大binlog缓存大小</span><br><span class="line">max_binlog_cache_size &#x3D; 512m</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>database</category>
@@ -826,7 +864,7 @@
   </entry>
   <entry>
     <title>Markdown设置字体大小、颜色、类型、加粗</title>
-    <url>/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/</url>
+    <url>/2022/04/12/tool-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="改变字体大小"><a href="#改变字体大小" class="headerlink" title="改变字体大小"></a>改变字体大小</h1><p>size：规定文本的尺寸大小，取值范围为1~7 ，浏览器默认值是 3。注意，size=50也是可以显示的，但与7的字体大小一样<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;font size&#x3D;1&gt;字体大小size&#x3D;1&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font size&#x3D;3&gt;字体大小size&#x3D;3&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure></p>
 <h1 id="改变字体颜色"><a href="#改变字体颜色" class="headerlink" title="改变字体颜色"></a>改变字体颜色</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;font color&#x3D;red&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;&quot;blue&quot;&gt;蓝色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;Yellow&gt;黄色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;YellowGreen&gt;黄绿色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;font color&#x3D;#ff0000&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#00ff00&gt;绿色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#0000ff&gt;蓝色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
@@ -843,7 +881,7 @@
   </entry>
   <entry>
     <title>Markdown设置字体大小、颜色、类型、加粗</title>
-    <url>/2022/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <url>/2022/04/12/tool-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="uses"><a href="#uses" class="headerlink" title="uses"></a>uses</h1><p>使用其他手动编写的或者其他Mapper接口覆写相关的转换方法，不能循环引用<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(uses=DateMapper<span class="class">.<span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="imports"><a href="#imports" class="headerlink" title="imports"></a>imports</h1><p>引用相关类，允许通过mapping.expression()、mapping.defaultExpression()直接使用这些类型<br>```java<br>@Mapper(imports = DateUtil.class)<br>public interface UserConvert {<br>    UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);<br>    @Mappings({<br>            @Mapping(source = “name”, target = “userName”),<br>            // 以指定方法转换属性，这里如果不使用imports，则需要写全引用类包路径<br>            @Mapping(target = “birthday”, expression = “java(DateUtil.formatDate(entity.getBirthday()))”)<br>    })<br>    UserVO toVO(User entity);<br>}</p>
 ]]></content>
@@ -1764,40 +1802,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>字符编码、版本等</title>
-    <url>/2022/03/19/database-mysql-config-1-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AD%89/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查看mysql字符编码"><a href="#查看mysql字符编码" class="headerlink" title="查看mysql字符编码"></a>查看mysql字符编码</h1><p>show variables like ‘%character%’;<br>常用的utf8和utf8mb4</p>
-<blockquote>
-<p><a href="https://www.cnblogs.com/yangmingxianshen/p/7999428.html" target="_blank" rel="noopener">MySQL查看和修改字符集的方法</a></p>
-</blockquote>
-<h1 id="查看MYSQL所支持的字符集"><a href="#查看MYSQL所支持的字符集" class="headerlink" title="查看MYSQL所支持的字符集"></a>查看MYSQL所支持的字符集</h1><p>show charset;</p>
-<h2 id="查看库的字符集"><a href="#查看库的字符集" class="headerlink" title="查看库的字符集"></a>查看库的字符集</h2><p>show database status from 库名 like  表名;</p>
-<h2 id="查看表的字符集"><a href="#查看表的字符集" class="headerlink" title="查看表的字符集"></a>查看表的字符集</h2><p>show table status from 库名 like  表名;</p>
-<h2 id="查看表中所有列的字符集"><a href="#查看表中所有列的字符集" class="headerlink" title="查看表中所有列的字符集"></a>查看表中所有列的字符集</h2><p>show full columns from 表名;</p>
-<h1 id="设置字符集"><a href="#设置字符集" class="headerlink" title="设置字符集"></a>设置字符集</h1><p>设置字符集一般有两种方法，一种是在创建表的时候设置字符集，另一种是表建成之后修改字符集。  </p>
-<h2 id="创建时指定"><a href="#创建时指定" class="headerlink" title="创建时指定"></a>创建时指定</h2><ol>
-<li>创建时指定字符集<br>创建库的时候指定字符集：<br>语法：create database 库名 default character set=字符集；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create database db2 default character set&#x3D;utf8</span><br></pre></td></tr></table></figure></li>
-<li>创建表的时候指定字符集<br>语法：create table 表名（属性）default character set = 字符集；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; create table test1(id int(6),name char(10)) default character set &#x3D; &#39;gbk&#39;;</span><br><span class="line">Query OK, 0 rows affected (0.39 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h2></li>
-<li>修改全局字符集<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*建立连接使用的编码*&#x2F;</span><br><span class="line">set character_set_connection&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库的编码*&#x2F;</span><br><span class="line">set character_set_database&#x3D;utf8;</span><br><span class="line">&#x2F;*结果集的编码*&#x2F;</span><br><span class="line">set character_set_results&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库服务器的编码*&#x2F;</span><br><span class="line">set character_set_server&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set character_set_system&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_connection&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_database&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_server&#x3D;utf8;</span><br></pre></td></tr></table></figure></li>
-<li>修改库的字符集<br>语法：alter database 库名 default character set 字符集;  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter database shiyan default character set gbk;</span><br></pre></td></tr></table></figure></li>
-<li>修改表的字符集<br>语法：alter table 表名 convert to character set 字符集;  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table test1 convert to character set utf8;</span><br></pre></td></tr></table></figure></li>
-<li>修改字段的字符集<br>语法：alter table 表名 modify 字段名 字段属性 character set gbk；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table test1 modify name char(10) character set gbk;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h1><p>select version();<br>mysql5.5.3以后才支持utf8mb4  </p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>config</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>查看存储引擎</title>
     <url>/2022/03/19/database-mysql-config-3-%E6%9F%A5%E7%9C%8B%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="看你的mysql现在已提供什么存储引擎"><a href="#看你的mysql现在已提供什么存储引擎" class="headerlink" title="看你的mysql现在已提供什么存储引擎:"></a>看你的mysql现在已提供什么存储引擎:</h1><p>show engines;</p>
@@ -1828,6 +1832,60 @@
         <category>database</category>
         <category>mysql</category>
         <category>curd</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>索引</title>
+    <url>/2022/03/19/database-mysql-curd-mysql-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/llzhang123/p/7889382.html" target="_blank" rel="noopener">mysql 创建索引和删除索引</a></p>
+<p>索引的创建可以在CREATE TABLE语句中进行，也可以单独用CREATE INDEX或ALTER TABLE来给表增加索引。删除索引可以利用ALTER TABLE或DROP INDEX语句来实现。<br>（1）使用ALTER TABLE语句创建索引。<br>语法如下：<br>alter table table_name add index index_name (column_list) ;<br>alter table table_name add unique (column_list) ;<br>alter table table_name add primary key (column_list) ;<br>其中包括普通索引、UNIQUE索引和PRIMARY KEY索引3种创建索引的格式，table_name是要增加索引的表名，column_list指出对哪些列进行索引，多列时各列之间用逗号分隔。索引名index_name可选，缺省时，MySQL将根据第一个索引列赋一个名称。另外，ALTER TABLE允许在单个语句中更改多个表，因此可以同时创建多个索引。<br>创建索引的示例如下：<br>mysql&gt; alter table table_test add index index_test1(name) ;<br>Query OK, 2 rows affected (0.08 sec)<br>（2）使用CREATE INDEX语句对表增加索引。<br>能够增加普通索引和UNIQUE索引两种。其格式如下：<br>create index index_name on table_name (column_list) ;<br>create unique index index_name on table_name (column_list) ;</p>
+<p>创建索引的示例如下：</p>
+<p>mysql&gt;create index index_test2 on table_test(age);</p>
+<p>Query OK, 2 rows affected (0.08 sec)</p>
+<p>说明：table_name、index_name和column_list具有与ALTER TABLE语句中相同的含义，索引名不可选。另外，不能用CREATE INDEX语句创建PRIMARY KEY索引。<br>（3）删除索引。<br>删除索引可以使用ALTER TABLE或DROP INDEX语句来实现。DROP INDEX可以在ALTER TABLE内部作为一条语句处理，其格式如下：<br>drop index index_name on table_name ;<br>alter table table_name drop index index_name ;<br>alter table table_name drop primary key ;<br>其中，在前面的两条语句中，都删除了table_name中的索引index_name。而在最后一条语句中，只在删除PRIMARY KEY索引中使用，因为一个表只可能有一个PRIMARY KEY索引，因此不需要指定索引名。如果没有创建PRIMARY KEY索引，但表具有一个或多个UNIQUE索引，则MySQL将删除第一个UNIQUE索引。<br>如果从表中删除某列，则索引会受影响。对于多列组合的索引，如果删除其中的某列，则该列也会从索引中删除。如果删除组成索引的所有列，则整个索引将被删除。<br>删除索引的操作，如下面的代码：<br>mysql&gt; drop index name on table_test ;<br>Query OK, 2 rows affected (0.08 sec)</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>curd</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字符编码、版本等</title>
+    <url>/2022/03/19/database-mysql-config-1-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AD%89/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查看mysql字符编码"><a href="#查看mysql字符编码" class="headerlink" title="查看mysql字符编码"></a>查看mysql字符编码</h1><p>show variables like ‘%character%’;<br>常用的utf8和utf8mb4</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/yangmingxianshen/p/7999428.html" target="_blank" rel="noopener">MySQL查看和修改字符集的方法</a></p>
+</blockquote>
+<h1 id="查看MYSQL所支持的字符集"><a href="#查看MYSQL所支持的字符集" class="headerlink" title="查看MYSQL所支持的字符集"></a>查看MYSQL所支持的字符集</h1><p>show charset;</p>
+<h2 id="查看库的字符集"><a href="#查看库的字符集" class="headerlink" title="查看库的字符集"></a>查看库的字符集</h2><p>show database status from 库名 like  表名;</p>
+<h2 id="查看表的字符集"><a href="#查看表的字符集" class="headerlink" title="查看表的字符集"></a>查看表的字符集</h2><p>show table status from 库名 like  表名;</p>
+<h2 id="查看表中所有列的字符集"><a href="#查看表中所有列的字符集" class="headerlink" title="查看表中所有列的字符集"></a>查看表中所有列的字符集</h2><p>show full columns from 表名;</p>
+<h1 id="设置字符集"><a href="#设置字符集" class="headerlink" title="设置字符集"></a>设置字符集</h1><p>设置字符集一般有两种方法，一种是在创建表的时候设置字符集，另一种是表建成之后修改字符集。  </p>
+<h2 id="创建时指定"><a href="#创建时指定" class="headerlink" title="创建时指定"></a>创建时指定</h2><ol>
+<li>创建时指定字符集<br>创建库的时候指定字符集：<br>语法：create database 库名 default character set=字符集；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create database db2 default character set&#x3D;utf8</span><br></pre></td></tr></table></figure></li>
+<li>创建表的时候指定字符集<br>语法：create table 表名（属性）default character set = 字符集；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; create table test1(id int(6),name char(10)) default character set &#x3D; &#39;gbk&#39;;</span><br><span class="line">Query OK, 0 rows affected (0.39 sec)</span><br></pre></td></tr></table></figure>
+<h2 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h2></li>
+<li>修改全局字符集<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*建立连接使用的编码*&#x2F;</span><br><span class="line">set character_set_connection&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库的编码*&#x2F;</span><br><span class="line">set character_set_database&#x3D;utf8;</span><br><span class="line">&#x2F;*结果集的编码*&#x2F;</span><br><span class="line">set character_set_results&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库服务器的编码*&#x2F;</span><br><span class="line">set character_set_server&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set character_set_system&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_connection&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_database&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_server&#x3D;utf8;</span><br></pre></td></tr></table></figure></li>
+<li>修改库的字符集<br>语法：alter database 库名 default character set 字符集;  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter database shiyan default character set gbk;</span><br></pre></td></tr></table></figure></li>
+<li>修改表的字符集<br>语法：alter table 表名 convert to character set 字符集;  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table test1 convert to character set utf8;</span><br></pre></td></tr></table></figure></li>
+<li>修改字段的字符集<br>语法：alter table 表名 modify 字段名 字段属性 character set gbk；  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table test1 modify name char(10) character set gbk;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h1><p>select version();<br>mysql5.5.3以后才支持utf8mb4  </p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>config</category>
       </categories>
       <tags>
         <tag>database</tag>
@@ -1874,41 +1932,6 @@
       </tags>
   </entry>
   <entry>
-    <title>查询某字段长度大于x的数据</title>
-    <url>/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="length-origin-msg-gt-22"><a href="#length-origin-msg-gt-22" class="headerlink" title="length(origin_msg) &gt;= 22"></a>length(origin_msg) &gt;= 22</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>curd</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>索引</title>
-    <url>/2022/03/19/database-mysql-curd-mysql-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/llzhang123/p/7889382.html" target="_blank" rel="noopener">mysql 创建索引和删除索引</a></p>
-<p>索引的创建可以在CREATE TABLE语句中进行，也可以单独用CREATE INDEX或ALTER TABLE来给表增加索引。删除索引可以利用ALTER TABLE或DROP INDEX语句来实现。<br>（1）使用ALTER TABLE语句创建索引。<br>语法如下：<br>alter table table_name add index index_name (column_list) ;<br>alter table table_name add unique (column_list) ;<br>alter table table_name add primary key (column_list) ;<br>其中包括普通索引、UNIQUE索引和PRIMARY KEY索引3种创建索引的格式，table_name是要增加索引的表名，column_list指出对哪些列进行索引，多列时各列之间用逗号分隔。索引名index_name可选，缺省时，MySQL将根据第一个索引列赋一个名称。另外，ALTER TABLE允许在单个语句中更改多个表，因此可以同时创建多个索引。<br>创建索引的示例如下：<br>mysql&gt; alter table table_test add index index_test1(name) ;<br>Query OK, 2 rows affected (0.08 sec)<br>（2）使用CREATE INDEX语句对表增加索引。<br>能够增加普通索引和UNIQUE索引两种。其格式如下：<br>create index index_name on table_name (column_list) ;<br>create unique index index_name on table_name (column_list) ;</p>
-<p>创建索引的示例如下：</p>
-<p>mysql&gt;create index index_test2 on table_test(age);</p>
-<p>Query OK, 2 rows affected (0.08 sec)</p>
-<p>说明：table_name、index_name和column_list具有与ALTER TABLE语句中相同的含义，索引名不可选。另外，不能用CREATE INDEX语句创建PRIMARY KEY索引。<br>（3）删除索引。<br>删除索引可以使用ALTER TABLE或DROP INDEX语句来实现。DROP INDEX可以在ALTER TABLE内部作为一条语句处理，其格式如下：<br>drop index index_name on table_name ;<br>alter table table_name drop index index_name ;<br>alter table table_name drop primary key ;<br>其中，在前面的两条语句中，都删除了table_name中的索引index_name。而在最后一条语句中，只在删除PRIMARY KEY索引中使用，因为一个表只可能有一个PRIMARY KEY索引，因此不需要指定索引名。如果没有创建PRIMARY KEY索引，但表具有一个或多个UNIQUE索引，则MySQL将删除第一个UNIQUE索引。<br>如果从表中删除某列，则索引会受影响。对于多列组合的索引，如果删除其中的某列，则该列也会从索引中删除。如果删除组成索引的所有列，则整个索引将被删除。<br>删除索引的操作，如下面的代码：<br>mysql&gt; drop index name on table_test ;<br>Query OK, 2 rows affected (0.08 sec)</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>curd</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>字段</title>
     <url>/2022/03/19/database-mysql-curd-4-Mysql%E5%91%BD%E4%BB%A4alter-add%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/hechaojie_com/article/details/82382716" target="_blank" rel="noopener">Mysql命令alter add：增加表的字段</a></p>
@@ -1938,9 +1961,9 @@
       </tags>
   </entry>
   <entry>
-    <title>随机查询数据</title>
-    <url>/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="order-by-rand"><a href="#order-by-rand" class="headerlink" title="order by rand()"></a>order by rand()</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
+    <title>查询某字段长度大于x的数据</title>
+    <url>/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="length-origin-msg-gt-22"><a href="#length-origin-msg-gt-22" class="headerlink" title="length(origin_msg) &gt;= 22"></a>length(origin_msg) &gt;= 22</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
 ]]></content>
       <categories>
         <category>database</category>
@@ -1975,21 +1998,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Unable to load authentication plugin &#39;caching_sha2_password&#39;</title>
-    <url>/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>[Unable to resolve name [org.hibernate.dialect.MySQL55Dialect] as strategy [org.hibernate.dialect.Dialect]]</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>excep</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>查询某个字段重复以及重复的次数</title>
     <url>/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E4%BB%A5%E5%8F%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E6%AC%A1%E6%95%B0/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>//当count(1) &gt; 1时，才有重复项<br>select name,count(1) from people group by name having count(1) &gt; 1;</p>
@@ -2002,6 +2010,36 @@
         <category>database</category>
         <category>mysql</category>
         <category>curd</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随机查询数据</title>
+    <url>/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="order-by-rand"><a href="#order-by-rand" class="headerlink" title="order by rand()"></a>order by rand()</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>curd</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Unable to load authentication plugin &#39;caching_sha2_password&#39;</title>
+    <url>/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>[Unable to resolve name [org.hibernate.dialect.MySQL55Dialect] as strategy [org.hibernate.dialect.Dialect]]</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>excep</category>
       </categories>
       <tags>
         <tag>database</tag>
@@ -2073,11 +2111,14 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql中utf8和utf8mb4区别</title>
-    <url>/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/Renyi-Fan/p/11065692.html" target="_blank" rel="noopener">mysql中utf8和utf8mb4区别</a></p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>utf8最多3个字节（中文汉字）<br>utf8mb4最多4个字节（中文汉字）  </p>
-<p>utf8mb4是utf8的超集  </p>
+    <title>mysql的默认隔离级别</title>
+    <url>/2022/03/19/database-mysql-notes-11-mysql%E7%9A%84%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/shoshana-kong/p/10516404.html" target="_blank" rel="noopener">mysql的默认隔离级别</a></p>
+<p>1.数据库默认隔离级别:  mysql —repeatable,oracle,sql server —read commited</p>
+<p>2.mysql binlog的格式三种：statement,row,mixed</p>
+<p>3.为什么mysql用的是repeatable而不是read committed:在 5.0之前只有statement一种格式，而主从复制存在了大量的不一致，故选用repeatable</p>
+<p>4.为什么默认的隔离级别都会选用read commited 原因有二：repeatable存在间隙锁会使死锁的概率增大，在RR隔离级别下，条件列未命中索引会锁表！而在RC隔离级别下，只锁行</p>
+<p>2.在RC级用别下，主从复制用什么binlog格式：row格式，是基于行的复制！</p>
 ]]></content>
       <categories>
         <category>database</category>
@@ -2090,14 +2131,11 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql的默认隔离级别</title>
-    <url>/2022/03/19/database-mysql-notes-11-mysql%E7%9A%84%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/shoshana-kong/p/10516404.html" target="_blank" rel="noopener">mysql的默认隔离级别</a></p>
-<p>1.数据库默认隔离级别:  mysql —repeatable,oracle,sql server —read commited</p>
-<p>2.mysql binlog的格式三种：statement,row,mixed</p>
-<p>3.为什么mysql用的是repeatable而不是read committed:在 5.0之前只有statement一种格式，而主从复制存在了大量的不一致，故选用repeatable</p>
-<p>4.为什么默认的隔离级别都会选用read commited 原因有二：repeatable存在间隙锁会使死锁的概率增大，在RR隔离级别下，条件列未命中索引会锁表！而在RC隔离级别下，只锁行</p>
-<p>2.在RC级用别下，主从复制用什么binlog格式：row格式，是基于行的复制！</p>
+    <title>mysql中utf8和utf8mb4区别</title>
+    <url>/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/Renyi-Fan/p/11065692.html" target="_blank" rel="noopener">mysql中utf8和utf8mb4区别</a></p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>utf8最多3个字节（中文汉字）<br>utf8mb4最多4个字节（中文汉字）  </p>
+<p>utf8mb4是utf8的超集  </p>
 ]]></content>
       <categories>
         <category>database</category>
@@ -2184,23 +2222,6 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql int和varchar查询效率</title>
-    <url>/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://cloud.tencent.com/developer/ask/62018" target="_blank" rel="noopener">mysql int和varchar查询效率</a></p>
-<p>INT比较比varchar比较快，因为INT占用的空间比varchars少得多。</p>
-<p>对于无索引访问和索引访问，这都是正确的。最快的方法是索引int列。</p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql前缀索引</title>
     <url>/2022/03/19/database-mysql-notes-14-mysql%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/u013295276/article/details/79105163" target="_blank" rel="noopener">mysql索引】之前缀索引</a></p>
@@ -2237,25 +2258,6 @@
       </tags>
   </entry>
   <entry>
-    <title>mysql索引注意点</title>
-    <url>/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><ol>
-<li>between 走索引情况 <a href="http://www.51testing.com/html/85/132585-860191.html" target="_blank" rel="noopener">http://www.51testing.com/html/85/132585-860191.html</a><br>１）如果表数据量小１４条时，取５条时就会使用索引，否则就使用全表描述<br>２）如果表数据量在１０００左右时，取出超过１８％时，就不会使用索引<br>３）如果表数据量超地１００００时，只要使用between and 都使用索引
-　　</li>
-<li>in 走索引，建议in(xxx) xxx小于100</li>
-</ol>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql支持hash索引吗</title>
     <url>/2022/03/19/database-mysql-notes-15-mysql%E6%94%AF%E6%8C%81hash%E7%B4%A2%E5%BC%95%E5%90%97/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/shenjian58/article/details/102493421" target="_blank" rel="noopener">mysql自适应哈希索引</a></p>
@@ -2270,6 +2272,42 @@
 <p>不管聚集索引还是普通索引，记录定位的寻路路径(Search Path)都很长。</p>
 <h3 id="建立自适应哈希索引"><a href="#建立自适应哈希索引" class="headerlink" title="建立自适应哈希索引"></a>建立自适应哈希索引</h3><p>在MySQL运行的过程中，如果InnoDB发现，有很多SQL存在这类很长的寻路，并且有很多SQL会命中相同的页面(page)，<br>InnoDB会在自己的内存缓冲区(Buffer)里，开辟一块区域，建立自适应哈希所有AHI，以加速查询。</p>
 <h2 id="为啥叫“自适应-adaptive-”哈希索引？"><a href="#为啥叫“自适应-adaptive-”哈希索引？" class="headerlink" title="为啥叫“自适应(adaptive)”哈希索引？"></a>为啥叫“自适应(adaptive)”哈希索引？</h2><p>系统自己判断“应该可以加速查询”而建立的，不需要用户手动建立，故称“自适应”。</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql int和varchar查询效率</title>
+    <url>/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://cloud.tencent.com/developer/ask/62018" target="_blank" rel="noopener">mysql int和varchar查询效率</a></p>
+<p>INT比较比varchar比较快，因为INT占用的空间比varchars少得多。</p>
+<p>对于无索引访问和索引访问，这都是正确的。最快的方法是索引int列。</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql索引注意点</title>
+    <url>/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><ol>
+<li>between 走索引情况 <a href="http://www.51testing.com/html/85/132585-860191.html" target="_blank" rel="noopener">http://www.51testing.com/html/85/132585-860191.html</a><br>１）如果表数据量小１４条时，取５条时就会使用索引，否则就使用全表描述<br>２）如果表数据量在１０００左右时，取出超过１８％时，就不会使用索引<br>３）如果表数据量超地１００００时，只要使用between and 都使用索引
+　　</li>
+<li>in 走索引，建议in(xxx) xxx小于100</li>
+</ol>
 ]]></content>
       <categories>
         <category>database</category>
@@ -2325,21 +2363,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL的binlog日志详解</title>
-    <url>/2022/03/19/database-mysql-notes-8-MySQL%E7%9A%84binlog%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/king_kgh/article/details/74833539" target="_blank" rel="noopener">MySQL的binlog日志详解</a></p>
-]]></content>
-      <categories>
-        <category>database</category>
-        <category>mysql</category>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>database</tag>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql中delete和truncate区别</title>
     <url>/2022/03/19/database-mysql-notes-5-mysql%E4%B8%ADdelete%E5%92%8Ctruncate%E5%8C%BA%E5%88%AB/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="delete和truncate区别如下："><a href="#delete和truncate区别如下：" class="headerlink" title="delete和truncate区别如下："></a>delete和truncate区别如下：</h1><p>一、灵活性：delete可以条件删除数据，而truncate只能删除表的所有数据；  </p>
@@ -2368,6 +2391,21 @@
 <p>ON DUPLICATE KEY UPDATE的使用<br>如果您指定了ON DUPLICATE KEY UPDATE，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则执行UPDATE。</p>
 <p>方法二：insert ignore 如果中已经存在相同的记录，则忽略当前新数据</p>
 <p>INSERT ignore INTO a(id, type)  VALUES  ( 11, 22)</p>
+]]></content>
+      <categories>
+        <category>database</category>
+        <category>mysql</category>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>database</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL的binlog日志详解</title>
+    <url>/2022/03/19/database-mysql-notes-8-MySQL%E7%9A%84binlog%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/king_kgh/article/details/74833539" target="_blank" rel="noopener">MySQL的binlog日志详解</a></p>
 ]]></content>
       <categories>
         <category>database</category>
@@ -2458,18 +2496,6 @@
       </tags>
   </entry>
   <entry>
-    <title>AQS</title>
-    <url>/2022/03/18/java-%E5%B9%B6%E5%8F%91-AQS/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-      <categories>
-        <category>java</category>
-        <category>并发</category>
-      </categories>
-      <tags>
-        <tag>并发</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>新增菜单标签（快速）</title>
     <url>/2022/03/18/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%87%E7%AD%BE%EF%BC%88%E5%BF%AB%E9%80%9F%EF%BC%89/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="新增菜单标签（快速）"><a href="#新增菜单标签（快速）" class="headerlink" title="新增菜单标签（快速）"></a>新增菜单标签（快速）</h1><p>创建新文章的时候直接指定categories: read配置<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 《好好学习》—黄金思维圈</span><br><span class="line">date: 2018-06-12 11:45:43</span><br><span class="line">tags:</span><br><span class="line">- read</span><br><span class="line">categories:</span><br><span class="line">- read</span><br><span class="line">notshow: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure><br>配置主题配置文件themes/_config.yml中添加以下代码（#号后为注释内容）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  read: &#x2F;categories&#x2F;read  #指定分类中阅读的路径</span><br></pre></td></tr></table></figure></p>
@@ -2483,25 +2509,15 @@
       </tags>
   </entry>
   <entry>
-    <title>消息队列</title>
-    <url>/2022/03/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A6%82%E8%A7%88-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="消息队列分类："><a href="#消息队列分类：" class="headerlink" title="消息队列分类："></a>消息队列分类：</h1><p>点对点和发布/订阅两种：</p>
-<ol>
-<li>点对点：<br>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<br>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</li>
-<li>发布/订阅：<br>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。<br>和点对点方式不同，发布到topic的消息会被所有订阅者消费。</li>
-</ol>
-<h1 id="MQ消息队列对比"><a href="#MQ消息队列对比" class="headerlink" title="MQ消息队列对比"></a>MQ消息队列对比</h1><ol>
-<li>RabbitMQ：支持的协议多，非常重量级消息队列，对路由(Routing)，负载均衡(Loadbalance)或者数据持久化都有很好的支持。</li>
-<li>ZeroMQ：号称最快的消息队列系统，尤其针对大吞吐量的需求场景，擅长的高级/复杂的队列，但是技术也复杂，并且只提供非持久性的队列。</li>
-<li>ActiveMQ：Apache下的一个子项，类似ZeroMQ，能够以代理人和点对点的技术实现队列。</li>
-<li>Redis：是一个key-Value的NOSql数据库，但也支持MQ功能，数据量较小，性能优于RabbitMQ，数据超过10K就慢的无法忍受。</li>
-</ol>
-]]></content>
+    <title>AQS</title>
+    <url>/2022/03/18/java-%E5%B9%B6%E5%8F%91-AQS/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
       <categories>
-        <category>消息队列</category>
+        <category>java</category>
+        <category>并发</category>
       </categories>
       <tags>
-        <tag>MQ</tag>
+        <tag>并发</tag>
       </tags>
   </entry>
   <entry>
@@ -2597,6 +2613,28 @@
       <categories>
         <category>消息队列</category>
         <category>kafka</category>
+      </categories>
+      <tags>
+        <tag>MQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>消息队列</title>
+    <url>/2022/03/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A6%82%E8%A7%88-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="消息队列分类："><a href="#消息队列分类：" class="headerlink" title="消息队列分类："></a>消息队列分类：</h1><p>点对点和发布/订阅两种：</p>
+<ol>
+<li>点对点：<br>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<br>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</li>
+<li>发布/订阅：<br>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。<br>和点对点方式不同，发布到topic的消息会被所有订阅者消费。</li>
+</ol>
+<h1 id="MQ消息队列对比"><a href="#MQ消息队列对比" class="headerlink" title="MQ消息队列对比"></a>MQ消息队列对比</h1><ol>
+<li>RabbitMQ：支持的协议多，非常重量级消息队列，对路由(Routing)，负载均衡(Loadbalance)或者数据持久化都有很好的支持。</li>
+<li>ZeroMQ：号称最快的消息队列系统，尤其针对大吞吐量的需求场景，擅长的高级/复杂的队列，但是技术也复杂，并且只提供非持久性的队列。</li>
+<li>ActiveMQ：Apache下的一个子项，类似ZeroMQ，能够以代理人和点对点的技术实现队列。</li>
+<li>Redis：是一个key-Value的NOSql数据库，但也支持MQ功能，数据量较小，性能优于RabbitMQ，数据超过10K就慢的无法忍受。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>消息队列</category>
       </categories>
       <tags>
         <tag>MQ</tag>
@@ -2738,24 +2776,6 @@
       </tags>
   </entry>
   <entry>
-    <title>点击爱心效果</title>
-    <url>/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E7%82%B9%E5%87%BB%E7%88%B1%E5%BF%83%E6%95%88%E6%9E%9C/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
-<p>七牛云图床</p>
-<hr>
-<h1 id="点击爱心效果"><a href="#点击爱心效果" class="headerlink" title="点击爱心效果"></a>点击爱心效果</h1><h2 id="创建js文件"><a href="#创建js文件" class="headerlink" title="创建js文件"></a>创建js文件</h2><p>在/themes/next/source/js/src下新建文件clicklove.js，接着把该链接下的代码拷贝粘贴到clicklove.js文件中。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#39;&#39;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e&#x3D;0;e&lt;d.length;e++)d[e].alpha&lt;&#x3D;0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+&#x3D;.004,d[e].alpha-&#x3D;.013,d[e].el.style.cssText&#x3D;&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof e.onclick&amp;&amp;e.onclick;e.onclick&#x3D;function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a&#x3D;t.createElement(&quot;div&quot;);a.className&#x3D;&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a&#x3D;t.createElement(&quot;style&quot;);a.type&#x3D;&quot;text&#x2F;css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText&#x3D;e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d&#x3D;[];e.requestAnimationFrame&#x3D;function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3&#x2F;60)&#125;&#125;(),n()&#125;(window,document);</span><br></pre></td></tr></table></figure></p>
-<h2 id="修改-layout-swig"><a href="#修改-layout-swig" class="headerlink" title="修改_layout.swig"></a>修改_layout.swig</h2><p>在\themes\next\layout_layout.swig文件末尾添加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 页面点击小红心 --&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;clicklove.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>hexo</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>留言板</title>
     <url>/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E7%95%99%E8%A8%80%E6%9D%BF/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
@@ -2782,6 +2802,24 @@
 <p>七牛云图床</p>
 <hr>
 <h1 id="自定义鼠标样式"><a href="#自定义鼠标样式" class="headerlink" title="自定义鼠标样式"></a>自定义鼠标样式</h1><p>打开themes/next/source/css/_custom/custom.styl，添加代码：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 鼠标样式</span><br><span class="line">  * &#123;</span><br><span class="line">      cursor: url(&quot;http:&#x2F;&#x2F;om8u46rmb.bkt.clouddn.com&#x2F;sword2.ico&quot;),auto!important</span><br><span class="line">  &#125;</span><br><span class="line">  :active &#123;</span><br><span class="line">      cursor: url(&quot;http:&#x2F;&#x2F;om8u46rmb.bkt.clouddn.com&#x2F;sword1.ico&quot;),auto!important</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>点击爱心效果</title>
+    <url>/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E7%82%B9%E5%87%BB%E7%88%B1%E5%BF%83%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
+<p>七牛云图床</p>
+<hr>
+<h1 id="点击爱心效果"><a href="#点击爱心效果" class="headerlink" title="点击爱心效果"></a>点击爱心效果</h1><h2 id="创建js文件"><a href="#创建js文件" class="headerlink" title="创建js文件"></a>创建js文件</h2><p>在/themes/next/source/js/src下新建文件clicklove.js，接着把该链接下的代码拷贝粘贴到clicklove.js文件中。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">!function(e,t,a)&#123;function n()&#123;c(&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#39;&#39;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;),o(),r()&#125;function r()&#123;for(var e&#x3D;0;e&lt;d.length;e++)d[e].alpha&lt;&#x3D;0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+&#x3D;.004,d[e].alpha-&#x3D;.013,d[e].el.style.cssText&#x3D;&quot;left:&quot;+d[e].x+&quot;px;top:&quot;+d[e].y+&quot;px;opacity:&quot;+d[e].alpha+&quot;;transform:scale(&quot;+d[e].scale+&quot;,&quot;+d[e].scale+&quot;) rotate(45deg);background:&quot;+d[e].color+&quot;;z-index:99999&quot;);requestAnimationFrame(r)&#125;function o()&#123;var t&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof e.onclick&amp;&amp;e.onclick;e.onclick&#x3D;function(e)&#123;t&amp;&amp;t(),i(e)&#125;&#125;function i(e)&#123;var a&#x3D;t.createElement(&quot;div&quot;);a.className&#x3D;&quot;heart&quot;,d.push(&#123;el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()&#125;),t.body.appendChild(a)&#125;function c(e)&#123;var a&#x3D;t.createElement(&quot;style&quot;);a.type&#x3D;&quot;text&#x2F;css&quot;;try&#123;a.appendChild(t.createTextNode(e))&#125;catch(t)&#123;a.styleSheet.cssText&#x3D;e&#125;t.getElementsByTagName(&quot;head&quot;)[0].appendChild(a)&#125;function s()&#123;return&quot;rgb(&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;,&quot;+~~(255*Math.random())+&quot;)&quot;&#125;var d&#x3D;[];e.requestAnimationFrame&#x3D;function()&#123;return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e)&#123;setTimeout(e,1e3&#x2F;60)&#125;&#125;(),n()&#125;(window,document);</span><br></pre></td></tr></table></figure></p>
+<h2 id="修改-layout-swig"><a href="#修改-layout-swig" class="headerlink" title="修改_layout.swig"></a>修改_layout.swig</h2><p>在\themes\next\layout_layout.swig文件末尾添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 页面点击小红心 --&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;clicklove.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>hexo</category>
@@ -2972,12 +3010,9 @@
       </tags>
   </entry>
   <entry>
-    <title>redis禁用危险命令</title>
-    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-6-redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="redis禁用危险命令"><a href="#redis禁用危险命令" class="headerlink" title="redis禁用危险命令"></a>redis禁用危险命令</h1><p>keys *<br>虽然其模糊匹配功能使用非常方便也很强大，在小数据量情况下使用没什么问题，数据量大会导致 Redis 锁住及 CPU 飙升，在生产环境建议禁用或者重命名！</p>
-<p>flushdb<br>删除 Redis 中当前所在数据库中的所有记录，并且此命令从不会执行失败</p>
-<p>flushall<br>删除 Redis 中所有数据库中的所有记录，不只是当前所在数据库，并且此命令从不会执行失败。<br>注：执行flushall命令，也会产生dump.rdb文件，但里面是空的，无意义</p>
-<p>config<br>客户端可修改 Redis 配置。</p>
+    <title>select</title>
+    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-7-select/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查询指定redis库"><a href="#查询指定redis库" class="headerlink" title="查询指定redis库"></a>查询指定redis库</h1><p>select 0  查询db0库</p>
 ]]></content>
       <categories>
         <category>redis</category>
@@ -2988,9 +3023,12 @@
       </tags>
   </entry>
   <entry>
-    <title>select</title>
-    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-7-select/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查询指定redis库"><a href="#查询指定redis库" class="headerlink" title="查询指定redis库"></a>查询指定redis库</h1><p>select 0  查询db0库</p>
+    <title>redis禁用危险命令</title>
+    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-6-redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="redis禁用危险命令"><a href="#redis禁用危险命令" class="headerlink" title="redis禁用危险命令"></a>redis禁用危险命令</h1><p>keys *<br>虽然其模糊匹配功能使用非常方便也很强大，在小数据量情况下使用没什么问题，数据量大会导致 Redis 锁住及 CPU 飙升，在生产环境建议禁用或者重命名！</p>
+<p>flushdb<br>删除 Redis 中当前所在数据库中的所有记录，并且此命令从不会执行失败</p>
+<p>flushall<br>删除 Redis 中所有数据库中的所有记录，不只是当前所在数据库，并且此命令从不会执行失败。<br>注：执行flushall命令，也会产生dump.rdb文件，但里面是空的，无意义</p>
+<p>config<br>客户端可修改 Redis 配置。</p>
 ]]></content>
       <categories>
         <category>redis</category>
@@ -3031,9 +3069,9 @@
       </tags>
   </entry>
   <entry>
-    <title>Hash命令</title>
-    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-2%E3%80%81Hash%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、常用命令：<br>hget、hset、hgetall等<br>Hash是一个String类型的field和value的映射表，hash特别适合用于存储对象。<br>比如：我们可以Hash数据结构来存储用户信息，商品信息等。  </p>
+    <title>String命令</title>
+    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-1%E3%80%81String%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、常用命令：<br>set、get、decr、incr、mget 等。<br>value其实不仅仅可以是String，也可以是 数字<br>应用场景：<br>a、常规key-value缓存应用；b、常规计数：微博数，粉丝数等。  </p>
 ]]></content>
       <categories>
         <category>redis</category>
@@ -3044,9 +3082,9 @@
       </tags>
   </entry>
   <entry>
-    <title>String命令</title>
-    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-1%E3%80%81String%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、常用命令：<br>set、get、decr、incr、mget 等。<br>value其实不仅仅可以是String，也可以是 数字<br>应用场景：<br>a、常规key-value缓存应用；b、常规计数：微博数，粉丝数等。  </p>
+    <title>Hash命令</title>
+    <url>/2022/03/12/redis-redis%E5%91%BD%E4%BB%A4-2%E3%80%81Hash%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>1、常用命令：<br>hget、hset、hgetall等<br>Hash是一个String类型的field和value的映射表，hash特别适合用于存储对象。<br>比如：我们可以Hash数据结构来存储用户信息，商品信息等。  </p>
 ]]></content>
       <categories>
         <category>redis</category>
@@ -3090,15 +3128,15 @@
 ]]></content>
   </entry>
   <entry>
-    <title>database-mysql-notes-6-mysql主从同步</title>
-    <url>/2022/03/12/database-mysql-notes-6-mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
-  </entry>
-  <entry>
     <title>database-mysql-notes-7-mysql读写分离架构</title>
     <url>/2022/03/12/database-mysql-notes-7-mysql%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E6%9E%B6%E6%9E%84/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="">mysql读写分离架构</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>database-mysql-notes-6-mysql主从同步</title>
+    <url>/2022/03/12/database-mysql-notes-6-mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script>]]></content>
   </entry>
   <entry>
     <title>database-mongodb-mongodb概介-RDBMS-vs-NoSQL</title>
@@ -3212,12 +3250,9 @@
       </tags>
   </entry>
   <entry>
-    <title>查看npm安装的包的版本</title>
-    <url>/2022/03/12/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%AE%89%E8%A3%85%E7%9A%84%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/hao-1234-1234/p/14119327.html" target="_blank" rel="noopener">npm 如何查看一个包的版本信息？（转载）</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm ls hexo</span><br><span class="line">hexo-site@0.0.0 E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code</span><br><span class="line">+-- hexo@3.9.0</span><br><span class="line">&#96;-- hexo-generator-baidu-sitemap@0.1.2</span><br><span class="line">  &#96;-- hexo@3.9.0  deduped</span><br></pre></td></tr></table></figure>
-<p>第二种方式：npm ls jquery -g    (查看全局安装的jquery)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;hexo version</span><br><span class="line">hexo: 3.9.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19042</span><br><span class="line">node: 12.16.0</span><br><span class="line">v8: 7.8.279.23-node.31</span><br><span class="line">uv: 1.34.0</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1d</span><br><span class="line">cldr: 35.1</span><br><span class="line">icu: 64.2</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
+    <title>查看npm已安装包的版本和最新版本</title>
+    <url>/2022/03/12/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%B7%B2%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC%E5%92%8C%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm outdated</span><br><span class="line">Package                       Current  Wanted  Latest  Location</span><br><span class="line">aplayer                         1.6.0  1.10.1  1.10.1  hexo-site</span><br><span class="line">hexo                            3.9.0   3.9.0   6.0.0  hexo-site</span><br><span class="line">hexo-algolia                    1.2.4   1.3.2   1.3.2  hexo-site</span><br><span class="line">hexo-deployer-git               0.3.1   0.3.1   3.0.0  hexo-site</span><br><span class="line">hexo-generator-archive          0.1.5   0.1.5   1.0.0  hexo-site</span><br><span class="line">hexo-generator-baidu-sitemap    0.1.2   0.1.9   0.1.9  hexo-site</span><br><span class="line">hexo-generator-category         0.1.3   0.1.3   1.0.0  hexo-site</span><br><span class="line">hexo-generator-feed             1.2.2   1.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-generator-index            0.2.1   0.2.1   2.0.0  hexo-site</span><br><span class="line">hexo-generator-sitemap          1.2.0   1.2.0   2.2.0  hexo-site</span><br><span class="line">hexo-generator-tag              0.2.0   0.2.0   1.0.0  hexo-site</span><br><span class="line">hexo-renderer-ejs               0.3.1   0.3.1   2.0.0  hexo-site</span><br><span class="line">hexo-renderer-marked            0.3.0   0.3.2   5.0.0  hexo-site</span><br><span class="line">hexo-renderer-stylus            0.3.3   0.3.3   2.0.1  hexo-site</span><br><span class="line">hexo-server                     0.2.2   0.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-tag-aplayer                2.0.7   2.0.7   3.0.4  hexo-site</span><br><span class="line">hexo-wordcount                  3.0.2   3.0.2   6.0.1  hexo-site</span><br><span class="line">uglify-js                       3.3.4  3.15.2  3.15.2  hexo-site</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>npm</category>
@@ -3228,9 +3263,12 @@
       </tags>
   </entry>
   <entry>
-    <title>查看npm已安装包的版本和最新版本</title>
-    <url>/2022/03/12/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%B7%B2%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC%E5%92%8C%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm outdated</span><br><span class="line">Package                       Current  Wanted  Latest  Location</span><br><span class="line">aplayer                         1.6.0  1.10.1  1.10.1  hexo-site</span><br><span class="line">hexo                            3.9.0   3.9.0   6.0.0  hexo-site</span><br><span class="line">hexo-algolia                    1.2.4   1.3.2   1.3.2  hexo-site</span><br><span class="line">hexo-deployer-git               0.3.1   0.3.1   3.0.0  hexo-site</span><br><span class="line">hexo-generator-archive          0.1.5   0.1.5   1.0.0  hexo-site</span><br><span class="line">hexo-generator-baidu-sitemap    0.1.2   0.1.9   0.1.9  hexo-site</span><br><span class="line">hexo-generator-category         0.1.3   0.1.3   1.0.0  hexo-site</span><br><span class="line">hexo-generator-feed             1.2.2   1.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-generator-index            0.2.1   0.2.1   2.0.0  hexo-site</span><br><span class="line">hexo-generator-sitemap          1.2.0   1.2.0   2.2.0  hexo-site</span><br><span class="line">hexo-generator-tag              0.2.0   0.2.0   1.0.0  hexo-site</span><br><span class="line">hexo-renderer-ejs               0.3.1   0.3.1   2.0.0  hexo-site</span><br><span class="line">hexo-renderer-marked            0.3.0   0.3.2   5.0.0  hexo-site</span><br><span class="line">hexo-renderer-stylus            0.3.3   0.3.3   2.0.1  hexo-site</span><br><span class="line">hexo-server                     0.2.2   0.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-tag-aplayer                2.0.7   2.0.7   3.0.4  hexo-site</span><br><span class="line">hexo-wordcount                  3.0.2   3.0.2   6.0.1  hexo-site</span><br><span class="line">uglify-js                       3.3.4  3.15.2  3.15.2  hexo-site</span><br></pre></td></tr></table></figure>
+    <title>查看npm安装的包的版本</title>
+    <url>/2022/03/12/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%AE%89%E8%A3%85%E7%9A%84%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/hao-1234-1234/p/14119327.html" target="_blank" rel="noopener">npm 如何查看一个包的版本信息？（转载）</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm ls hexo</span><br><span class="line">hexo-site@0.0.0 E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code</span><br><span class="line">+-- hexo@3.9.0</span><br><span class="line">&#96;-- hexo-generator-baidu-sitemap@0.1.2</span><br><span class="line">  &#96;-- hexo@3.9.0  deduped</span><br></pre></td></tr></table></figure>
+<p>第二种方式：npm ls jquery -g    (查看全局安装的jquery)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;hexo version</span><br><span class="line">hexo: 3.9.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: win32 10.0.19042</span><br><span class="line">node: 12.16.0</span><br><span class="line">v8: 7.8.279.23-node.31</span><br><span class="line">uv: 1.34.0</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.40.0</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 2.0.4</span><br><span class="line">http_parser: 2.9.3</span><br><span class="line">openssl: 1.1.1d</span><br><span class="line">cldr: 35.1</span><br><span class="line">icu: 64.2</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>npm</category>
@@ -3427,6 +3465,23 @@
       </tags>
   </entry>
   <entry>
+    <title>常用命令</title>
+    <url>/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands.html</a></p>
+<ol>
+<li>hexo n(new) fileName  # 新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;post title with whitespace&quot;</span><br></pre></td></tr></table></figure>
+hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<br>hexo d(deploy)        # 部署到线上<br>hexo p(publish)       # 发表草稿。<br>hexo version          # 显示hexo版本<br>hexo –debug          # 调试模式，在终端中显示调试信息并记录到 debug.log<br>hexo server –config custom.yml     # 使用 custom.yml 代替默认的 _config.yml<br>hexo clean            # 清除缓存文件 (db.json) 和已生成的静态文件 (public)。 在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。<br>hexo –draft          # 显示 source/_drafts 文件夹中的草稿文章。<br>hexo generate –config custom.yml,custom2.json,custom3.yml  # 使用 custom.yml, custom2.json 和 custom3.yml，其中 custom3.yml 优先级最高，其次是 custom2.json                        </li>
+</ol>
+]]></content>
+      <categories>
+        <category>hexo</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>阅读次数/时长和访客数【载】</title>
     <url>/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%A2%9E%E5%8A%A0%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0%E5%92%8C%E6%97%B6%E9%95%BF%E5%92%8C%E8%AE%BF%E5%AE%A2%E6%95%B0/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/Coder_Jeremy/article/details/83588674" target="_blank" rel="noopener">NexT 6 添加字数和阅读时间统计</a></p>
@@ -3445,6 +3500,22 @@
 </li>
 <li><p>以及修改next/layout/_macro/post.swig文件中的symbol部分：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">     &#123;% <span class="keyword">if</span> <span class="built_in">config</span>.symbols_count_time.symbols <span class="keyword">or</span> <span class="built_in">config</span>.symbols_count_time.time %&#125;</span><br><span class="line">       &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">symbolscount</span>"&gt;</span></span><br><span class="line"><span class="class">         &#123;</span>% <span class="keyword">if</span> <span class="keyword">not</span> theme.symbols_count_time.separated_meta %&#125;</span><br><span class="line">           &lt;span <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">meta</span>-<span class="title">divider</span>"&gt;|&lt;/span&gt;</span></span><br><span class="line"><span class="class">         &#123;</span>% endif %&#125;</span><br><span class="line"></span><br><span class="line">         &#123;% <span class="keyword">if</span> <span class="built_in">config</span>.symbols_count_time.symbols %&#125;</span><br><span class="line">           &lt;span <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">meta</span>-<span class="title">item</span>-<span class="title">icon</span>"&gt;</span></span><br><span class="line"><span class="class">             &lt;i class="fa fa-file-word-o"&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="class">           &lt;/span&gt;</span></span><br><span class="line"><span class="class">           &#123;</span>% <span class="keyword">if</span> theme.symbols_count_time.item_text_post %&#125;</span><br><span class="line">             &lt;span class="post-meta-item-text"&gt;&#123;&#123; __('symbols_count_time.count') + __('symbol.colon') &#125;&#125;&lt;/span&gt;</span><br><span class="line">           &#123;% endif %&#125;</span><br><span class="line">           &lt;!-- &lt;span title=<span class="string">"&#123;&#123; __('symbols_count_time.count') &#125;&#125;"</span>&gt;&#123;#</span><br><span class="line">           #&#125;&#123;&#123; symbolsCount(post.content) &#125;&#125;&#123;#</span><br><span class="line">         #&#125;&lt;/span&gt; --&gt;</span><br><span class="line">&lt;span title=<span class="string">"&#123;&#123; __('symbols_count_time.count') &#125;&#125;"</span>&gt;</span><br><span class="line">             &#123;&#123; wordcount(post.content) &#125;&#125;字</span><br><span class="line">           &lt;/span&gt;</span><br><span class="line">         &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>hexo</category>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章版权信息</title>
+    <url>/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="文章版权信息"><a href="#文章版权信息" class="headerlink" title="文章版权信息"></a>文章版权信息</h1><ol>
+<li>要想开启博客的版权功能，需要设置主题配置文件：<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: <span class="literal">true</span></span><br><span class="line">  post: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 ]]></content>
@@ -3486,39 +3557,6 @@
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="作者信息及侧边栏"><a href="#作者信息及侧边栏" class="headerlink" title="作者信息及侧边栏"></a>作者信息及侧边栏</h1><ol>
 <li>\themes\next\source\css_custom\custom.styl,向里面加入：<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 主页文章添加阴影效果</span></span><br><span class="line"> .post &#123;</span><br><span class="line">   margin-top: <span class="number">60</span>px;</span><br><span class="line">   margin-bottom: <span class="number">60</span>px;</span><br><span class="line">   padding: <span class="number">25</span>px;</span><br><span class="line">   -webkit-box-shadow: <span class="number">0</span> <span class="number">0</span> <span class="number">5</span><span class="function">px <span class="title">rgba</span><span class="params">(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">.5</span>)</span></span>;</span><br><span class="line">   -moz-box-shadow: <span class="number">0</span> <span class="number">0</span> <span class="number">5</span><span class="function">px <span class="title">rgba</span><span class="params">(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">.5</span>)</span></span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-]]></content>
-      <categories>
-        <category>hexo</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文章版权信息</title>
-    <url>/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="文章版权信息"><a href="#文章版权信息" class="headerlink" title="文章版权信息"></a>文章版权信息</h1><ol>
-<li>要想开启博客的版权功能，需要设置主题配置文件：<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: <span class="literal">true</span></span><br><span class="line">  post: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>hexo</category>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用命令</title>
-    <url>/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands.html</a></p>
-<ol>
-<li>hexo n(new) fileName  # 新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;post title with whitespace&quot;</span><br></pre></td></tr></table></figure>
-hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<br>hexo d(deploy)        # 部署到线上<br>hexo p(publish)       # 发表草稿。<br>hexo version          # 显示hexo版本<br>hexo –debug          # 调试模式，在终端中显示调试信息并记录到 debug.log<br>hexo server –config custom.yml     # 使用 custom.yml 代替默认的 _config.yml<br>hexo clean            # 清除缓存文件 (db.json) 和已生成的静态文件 (public)。 在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。<br>hexo –draft          # 显示 source/_drafts 文件夹中的草稿文章。<br>hexo generate –config custom.yml,custom2.json,custom3.yml  # 使用 custom.yml, custom2.json 和 custom3.yml，其中 custom3.yml 优先级最高，其次是 custom2.json                        </li>
 </ol>
 ]]></content>
       <categories>
@@ -3591,6 +3629,163 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
+    <title>virtualBox与本地挂载共享文件夹</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-0-virtualBox%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/yaolong336/article/details/78030500" target="_blank" rel="noopener">参考: VirtualBox 安装增强功能 ubuntu server版</a><br><a href="https://www.cnblogs.com/jerryzh/p/11091304.html" target="_blank" rel="noopener">VirtualBox mount报错：/sbin/mount.vboxsf: mounting failed with the error: No such device</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
+<li>virtualBox虚拟机，Ubuntu Server服务器，win10专业版（本地）</li>
+<li>通过虚拟机的”设备“去安装增强功能一直无法成功，不论是安装增强，还是”溢出虚拟盘“</li>
+<li>所以考虑通过命令的形式执行增强挂载（共享文件夹）</li>
+</ol>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li>确保当前使用的账号有root权限，即可以执行sudo</li>
+<li>更新apt-get，请执行 sudo apt-get update，以及 sudo apt-get upgrade</li>
+<li>安装依赖工具，sudo apt-get install dkms， sudo apt-get install build-essential</li>
+<li>重启， sudo reboot now，如果命令无效或有执行错误，也可以使用外面的virtualbox的重启按钮</li>
+<li>挂载cdrom， sudo mount /dev/cdrom /mnt/<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* 如果挂载失败，则需检查设备-&gt;分配光驱下是否包含了VBoxGuestAdditions.iso这个镜像</span><br><span class="line">* 如果有请选择它</span><br><span class="line">* 如果没有，请点击选择虚拟盘，然后在C:\Program Files\Oracle\VirtualBox 下找到它</span><br><span class="line">* 最后再执行上述命令，成功后的截图如下：</span><br><span class="line">sudo mount &#x2F;dev&#x2F;cdrom &#x2F;mnt&#x2F;</span><br><span class="line">mount: &#x2F;dev&#x2F;sr0 is write-protected,mounting read-only</span><br><span class="line">&gt; 自己执行挂载时，显示的时mounted（第一次没注意，第二次执行显示已挂载）</span><br></pre></td></tr></table></figure></li>
+<li>执行安装命令，sudo /mnt/VBoxLinuxAdditions.run（挂载之后自动生成的文件）， 不同版本的.run文件名可能有区别</li>
+<li>此时，我们需要 设备-&gt;共享文件夹-&gt;共享文件夹，请添加一个共享文件夹，一般会勾选自动挂载和固定分配两项，<br>共享文件夹路径以及名称，最好都不要出现中文。<br>请记下共享文件夹名称，且在共享文件夹中放入一个test.txt作为测试使用。<br>截图如下:<br><img src="0-virtualBox与本地挂载共享文件夹/共享文件夹界面.png" alt=""><br><img src="0-virtualBox与本地挂载共享文件夹/本地电脑创建的共享文件夹.png" alt="">  </li>
+<li>执行共享文件夹的挂载命令：<br>sudo mount -t vboxsf shared /home/share/<br>shared，为共享文件夹界面定义的共享文件夹名称<br>/home/share/，为Ubuntu中共享文件夹路径，需提前创建；当然该路径可以填/mnt/share，也许提前创建  </li>
+<li>当我们执行第7步时，报错如下：<br>/sbin/mount.vboxsf: mounting failed with the error: No such device<br>解决办法：  <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line">cd /opt/VBoxGuestAdditions-*/init  </span><br><span class="line">./vboxadd setup</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>再次执行第7步，即可成功</p>
+</blockquote>
+</li>
+<li>然后再/home/share/文件夹下即可找到本地电脑workspace-shared文件夹中的test.txt</li>
+<li>卸载， sudo umount /mnt/   (卸载命令未测试）(安装命令，sudo /mnt/VBoxLinuxAdditions.run)</li>
+</ol>
+<h1 id="重启电脑后，挂载需要重新执行-挂载需要时间，可以等待，不用执行下面的命令"><a href="#重启电脑后，挂载需要重新执行-挂载需要时间，可以等待，不用执行下面的命令" class="headerlink" title="重启电脑后，挂载需要重新执行(挂载需要时间，可以等待，不用执行下面的命令)"></a>重启电脑后，挂载需要重新执行(挂载需要时间，可以等待，不用执行下面的命令)</h1><p>sudo mount /dev/cdrom /mnt/</p>
+<ol>
+<li>sudo /mnt/VBoxLinuxAdditions.run</li>
+<li>ls</li>
+<li>sudo mount -t vboxsf shared /home/share/  </li>
+</ol>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>增强扩展包安装</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><ol>
+<li>官方下载对应版本的增强扩展包</li>
+<li>“管理”-&gt; “全局设置“-&gt; “扩展”-&gt; 右侧扩展界面中，靠右方的 + 号，添加扩展包</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vm虚拟机显示鼠标</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><ol>
+<li>转到机器设置-&gt;系统-&gt;主板。</li>
+<li>选择PS / 2鼠标作为定位设备。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义网卡</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-3-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E5%8D%A1/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="网卡配置模板"><a href="#网卡配置模板" class="headerlink" title="网卡配置模板"></a>网卡配置模板</h1><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">auto eth0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">iface eth0 inet dhcp <span class="comment">#自动获取IP(默认)</span></span></span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static #设置静态IP</span><br><span class="line">address 10.0.10.200 #设置IP地址</span><br><span class="line">netmask 255.255.255.0 #设置子网掩码(根据实际情况计算)</span><br><span class="line">gateway 10.0.10.1 #设置网关</span><br><span class="line">dns-nameservers 10.0.10.1 1.2.4.8 #比如这里就设置了两个DNS</span><br></pre></td></tr></table></figure>
+<h1 id="ubuntu网卡配置地址"><a href="#ubuntu网卡配置地址" class="headerlink" title="ubuntu网卡配置地址"></a>ubuntu网卡配置地址</h1><p>/etc/network/interfaces</p>
+<p># </p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网卡配置</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-3-%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查看-eth0及eth1等是否被rename"><a href="#查看-eth0及eth1等是否被rename" class="headerlink" title="查看 eth0及eth1等是否被rename"></a>查看 eth0及eth1等是否被rename</h1><p>dmesg | grep eth </p>
+<h2 id="如下方式，是被enp0s3重命名"><a href="#如下方式，是被enp0s3重命名" class="headerlink" title="如下方式，是被enp0s3重命名"></a>如下方式，是被enp0s3重命名</h2><h1 id="ubuntu16-04永久修改有线接口名称-enp0s3-gt-eth0"><a href="#ubuntu16-04永久修改有线接口名称-enp0s3-gt-eth0" class="headerlink" title="ubuntu16.04永久修改有线接口名称(enp0s3-&gt;eth0)"></a>ubuntu16.04永久修改有线接口名称(enp0s3-&gt;eth0)</h1><p>sudo nano /etc/default/grub<br>找到GRUB_CMDLINE_LINUX=””<br>改为GRUB_CMDLINE_LINUX=”net.ifnames=0 biosdevname=0”<br>然后sudo grub-mkconfig -o /boot/grub/grub.cfg</p>
+<blockquote>
+<p> 此操作之后，enp0s3消失</p>
+</blockquote>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><ol>
+<li>使用ifconfig<br>只出现 docker0 和 lo<br>而使用 ifconfig -a，则eth0 和 eth1 均出现</li>
+<li>使用如下命令启用eth0 和 eth1<br>sudo ifconfig eth0 up<br>sudo ifconfig eth1 up<blockquote>
+<p><a href="https://blog.csdn.net/u012789986/article/details/54178263" target="_blank" rel="noopener">参考</a></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="后续-1"><a href="#后续-1" class="headerlink" title="后续"></a>后续</h1><p>但是发现 eth0 和 eth1 中都没有 inet，也就是 ipv4<br><a href="https://blog.csdn.net/u014439239/article/details/79914614" target="_blank" rel="noopener">linux中eth0中没有inet addr - 没验证，虚拟机的Ubuntu中反正是不行</a><br><a href="https://blog.csdn.net/yueyeqingshan/article/details/52805546" target="_blank" rel="noopener">虚拟机安装红帽的eth0没有inet addr的解决方案- 虚拟机+Ubuntu已验证，可行</a></p>
+<h2 id="使用dhclient-eth0命令"><a href="#使用dhclient-eth0命令" class="headerlink" title="使用dhclient eth0命令"></a>使用dhclient eth0命令</h2><p>输入 dhclient eth0 命令来获取IP地址<br>再输入ifconfig命令，就能看到eth0已经有IP地址了  </p>
+<blockquote>
+<p>但是有一个问题：每次重启系统之后，使用ifconfig命令又看不到IP地址了，必须每次都使用 dhclient eth0 命令重新分配，很不方便  </p>
+<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>此时我们通过shell只能访问eth1，不能访问eth0<br>因为我们在virtualBox的网络-&gt;网卡设置中，对于网卡1的混杂模式为：拒绝，网卡2的混杂模式为：全部允许</p>
+</blockquote>
+<h2 id="方法二，但是Ubuntu中没有sysconfig-network-scripts-ifcfg-eth0"><a href="#方法二，但是Ubuntu中没有sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="方法二，但是Ubuntu中没有sysconfig/network-scripts/ifcfg-eth0"></a>方法二，但是Ubuntu中没有sysconfig/network-scripts/ifcfg-eth0</h2><p>vim /etc/sysconfig/network-scripts/ifcfg-eth0<br>将里面的ONBOOT属性设置为 yes<br>在执行service network restart 命令，就可以通过 ifconfig 查看eth0 的IP地址了</p>
+<blockquote>
+<p>重点是这样以后每次系统重启之后，都能自动获取IP 地址。所以问题解决了。</p>
+</blockquote>
+<h1 id="总结（需执行如下）"><a href="#总结（需执行如下）" class="headerlink" title="总结（需执行如下）"></a>总结（需执行如下）</h1><ol>
+<li>启动eth0和eth1<br>sudo ifconfig eth0 up<br>sudo ifconfig eth1 up</li>
+<li>显示ipv4<br> sudo dhclient eth0<br> sudo dhclient eth1</li>
+<li>查看网卡配置<br> ifconfig<blockquote>
+<p>/etc/network/interfaces中不能配置网卡，否则ifconfig显示正常，但是shell无法连接</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>删除停用多余虚拟网卡</title>
+    <url>/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>sudo apt install uml-utilities</p>
+<h1 id="查看网卡信息"><a href="#查看网卡信息" class="headerlink" title="查看网卡信息"></a>查看网卡信息</h1><p>ifconfig </p>
+<h1 id="查看所有网桥"><a href="#查看所有网桥" class="headerlink" title="查看所有网桥"></a>查看所有网桥</h1><p>ifconfig -a</p>
+<h1 id="删除虚拟网卡"><a href="#删除虚拟网卡" class="headerlink" title="删除虚拟网卡"></a>删除虚拟网卡</h1><p>tunctl -d 网卡名</p>
+<h1 id="删除虚拟网桥"><a href="#删除虚拟网桥" class="headerlink" title="删除虚拟网桥"></a>删除虚拟网桥</h1><p>ifconfig &lt;网桥名&gt; down –停用网桥<br>brctl delbr &lt;网桥名&gt; –删除</p>
+<p>can’t delete bridge vethee863c1: Operation not permitted</p>
+<h1 id="将网卡tvethee863c1-移出bridge-br0-执行失败"><a href="#将网卡tvethee863c1-移出bridge-br0-执行失败" class="headerlink" title="将网卡tvethee863c1 移出bridge(br0) (执行失败)"></a>将网卡tvethee863c1 移出bridge(br0) (执行失败)</h1><p>brctl delif br0 vethee863c1</p>
+<h1 id="重启网卡时-出现-RTNETLINK-answers-File-exists-提示"><a href="#重启网卡时-出现-RTNETLINK-answers-File-exists-提示" class="headerlink" title="重启网卡时 出现 :RTNETLINK answers: File exists  提示"></a>重启网卡时 出现 :RTNETLINK answers: File exists  提示</h1><p>删除多余无用网卡vethee863c1</p>
+<h1 id="查看指定网卡（查看指定网桥）"><a href="#查看指定网卡（查看指定网桥）" class="headerlink" title="查看指定网卡（查看指定网桥）"></a>查看指定网卡（查看指定网桥）</h1><p>sudo ifconfig eth1</p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>linux</category>
+        <category>vm</category>
+      </categories>
+      <tags>
+        <tag>vm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>百度统计服务</title>
     <url>/2021/05/04/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="百度统计服务"><a href="#百度统计服务" class="headerlink" title="百度统计服务"></a>百度统计服务</h1><ol>
@@ -3656,10 +3851,16 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>wsl启动暂停ubuntu</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-4-wsl%E5%90%AF%E5%8A%A8%E6%9A%82%E5%81%9Cubuntu/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="以管理员身份运行cmd"><a href="#以管理员身份运行cmd" class="headerlink" title="以管理员身份运行cmd"></a>以管理员身份运行cmd</h1><h2 id="启动ubuntu"><a href="#启动ubuntu" class="headerlink" title="启动ubuntu"></a>启动ubuntu</h2><p>net start LxssManager</p>
-<h2 id="暂停ubuntu"><a href="#暂停ubuntu" class="headerlink" title="暂停ubuntu"></a>暂停ubuntu</h2><p>net stop LxssManager</p>
+    <title>wsl安装Ubuntu</title>
+    <url>/2021/04/12/tool-wsl-1-wsl%E5%AE%89%E8%A3%85Ubuntu/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/luobing4365/article/details/105752549" target="_blank" rel="noopener">参考文档：</a><br><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual#installing-your-distro" target="_blank" rel="noopener">Ubuntu官方下载-很慢</a><br><a href="https://aka.ms/wsl-ubuntu-1804" target="_blank" rel="noopener">下载地址-很快</a><br><a href="https://blog.csdn.net/luobing4365/article/details/105752549" target="_blank" rel="noopener">wsl安装Ubuntu-下载源地址</a></p>
+<p><a href="https://aka.ms/wsl-ubuntu-1804" target="_blank" rel="noopener">Ubuntu 18.04：https://aka.ms/wsl-ubuntu-1804</a></p>
+<p><a href="https://aka.ms/wsl-ubuntu-1804-arm" target="_blank" rel="noopener">Ubuntu 18.04 ARM：https://aka.ms/wsl-ubuntu-1804-arm</a></p>
+<p><a href="https://aka.ms/wsl-ubuntu-1604" target="_blank" rel="noopener">Ubuntu 16.04：https://aka.ms/wsl-ubuntu-1604</a></p>
+<p><a href="https://aka.ms/wsl-debian-gnulinux" target="_blank" rel="noopener">Debian GNU/Linux：https://aka.ms/wsl-debian-gnulinux</a></p>
+<p><a href="https://aka.ms/wsl-kali-linux" target="_blank" rel="noopener">Kali Linux：https://aka.ms/wsl-kali-linux</a></p>
+<p><a href="https://aka.ms/wsl-opensuse-42" target="_blank" rel="noopener">OpenSUSE：https://aka.ms/wsl-opensuse-42</a></p>
+<p><a href="https://aka.ms/wsl-sles-12" target="_blank" rel="noopener">SLES：https://aka.ms/wsl-sles-12</a></p>
 ]]></content>
       <categories>
         <category>tool</category>
@@ -3672,7 +3873,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
   </entry>
   <entry>
     <title>wsl常用命令</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-2-wsl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <url>/2021/04/12/tool-wsl-2-wsl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="wsl常用命令"><a href="#wsl常用命令" class="headerlink" title="wsl常用命令"></a>wsl常用命令</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">列出分发版</span><br><span class="line">wsl -l , wsl --list</span><br><span class="line">wsl --list --all</span><br><span class="line">wsl --list --running</span><br><span class="line">设置默认分发版</span><br><span class="line">wsl -s Ubuntu</span><br><span class="line">取消注册和重新安装分发版</span><br><span class="line">注销后，与该分发关联的所有数据、设置和软件都将永久丢失。 从 Store 重新安装会安装分发版的干净副本。</span><br><span class="line">wsl --unregister &lt;DistributionName&gt;</span><br><span class="line">wsl --unregister Ubuntu</span><br><span class="line">将 WSL 2 设置为默认版本</span><br><span class="line">wsl --set-default-version 2</span><br><span class="line">用于管理适用于 Linux 的 Windows 子系统的参数</span><br><span class="line">--export &lt;分发版&gt; &lt;文件名&gt;  将分发版导出到 tar 文件</span><br><span class="line">--import &lt;分发版&gt; &lt;安装位置&gt; &lt;文件名&gt;  导入指定的 tar 文件作为新的分发版</span><br><span class="line">--list、-l [选项]  列出分发版</span><br><span class="line"></span><br><span class="line">wsl --shutdown</span><br><span class="line">立即终止所有正在运行的发行版和 WSL 2 轻量级实用程序虚拟机</span><br><span class="line">wsl --terminate Ubuntu 关闭ubuntu</span><br><span class="line"></span><br><span class="line">service docker status&#x2F;start&#x2F;restart</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -3686,7 +3887,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
   </entry>
   <entry>
     <title>wsl操作记录</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-3-wsl%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</url>
+    <url>/2021/04/12/tool-wsl-3-wsl%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="查看wsl版本"><a href="#查看wsl版本" class="headerlink" title="查看wsl版本"></a>查看wsl版本</h1><p>wsl -l -v</p>
 <h1 id="cmd命令窗口打开Ubuntu"><a href="#cmd命令窗口打开Ubuntu" class="headerlink" title="cmd命令窗口打开Ubuntu"></a>cmd命令窗口打开Ubuntu</h1><p>bash</p>
 <h1 id="重启、停止、启动windows子系统"><a href="#重启、停止、启动windows子系统" class="headerlink" title="重启、停止、启动windows子系统"></a>重启、停止、启动windows子系统</h1><p>services.msc<br>服务选项： LxssManager 服务</p>
@@ -3743,16 +3944,35 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>wsl安装Ubuntu</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-1-wsl%E5%AE%89%E8%A3%85Ubuntu/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/luobing4365/article/details/105752549" target="_blank" rel="noopener">参考文档：</a><br><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual#installing-your-distro" target="_blank" rel="noopener">Ubuntu官方下载-很慢</a><br><a href="https://aka.ms/wsl-ubuntu-1804" target="_blank" rel="noopener">下载地址-很快</a><br><a href="https://blog.csdn.net/luobing4365/article/details/105752549" target="_blank" rel="noopener">wsl安装Ubuntu-下载源地址</a></p>
-<p><a href="https://aka.ms/wsl-ubuntu-1804" target="_blank" rel="noopener">Ubuntu 18.04：https://aka.ms/wsl-ubuntu-1804</a></p>
-<p><a href="https://aka.ms/wsl-ubuntu-1804-arm" target="_blank" rel="noopener">Ubuntu 18.04 ARM：https://aka.ms/wsl-ubuntu-1804-arm</a></p>
-<p><a href="https://aka.ms/wsl-ubuntu-1604" target="_blank" rel="noopener">Ubuntu 16.04：https://aka.ms/wsl-ubuntu-1604</a></p>
-<p><a href="https://aka.ms/wsl-debian-gnulinux" target="_blank" rel="noopener">Debian GNU/Linux：https://aka.ms/wsl-debian-gnulinux</a></p>
-<p><a href="https://aka.ms/wsl-kali-linux" target="_blank" rel="noopener">Kali Linux：https://aka.ms/wsl-kali-linux</a></p>
-<p><a href="https://aka.ms/wsl-opensuse-42" target="_blank" rel="noopener">OpenSUSE：https://aka.ms/wsl-opensuse-42</a></p>
-<p><a href="https://aka.ms/wsl-sles-12" target="_blank" rel="noopener">SLES：https://aka.ms/wsl-sles-12</a></p>
+    <title>wsl启动暂停ubuntu</title>
+    <url>/2021/04/12/tool-wsl-4-wsl%E5%90%AF%E5%8A%A8%E6%9A%82%E5%81%9Cubuntu/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="以管理员身份运行cmd"><a href="#以管理员身份运行cmd" class="headerlink" title="以管理员身份运行cmd"></a>以管理员身份运行cmd</h1><h2 id="启动ubuntu"><a href="#启动ubuntu" class="headerlink" title="启动ubuntu"></a>启动ubuntu</h2><p>net start LxssManager</p>
+<h2 id="暂停ubuntu"><a href="#暂停ubuntu" class="headerlink" title="暂停ubuntu"></a>暂停ubuntu</h2><p>net stop LxssManager</p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl</category>
+      </categories>
+      <tags>
+        <tag>wsl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>wsl2 设置端口映射</title>
+    <url>/2021/04/12/tool-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
+<pre><code>wsl2 设置端口映射: https://blog.csdn.net/keyiis_sh/article/details/113819244?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;utm_relevant_index=9
+</code></pre><hr>
+<h1 id="wsl2-设置端口映射"><a href="#wsl2-设置端口映射" class="headerlink" title="wsl2 设置端口映射"></a>wsl2 设置端口映射</h1><ol>
+<li>管理员启动cmd，获取虚拟机内ubuntu的ip地址<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wsl -- ifconfig eth0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;wsl -- ifconfig eth0</span><br><span class="line">eth0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.23.229.221  netmask 255.255.240.0  broadcast 172.23.239.255</span><br><span class="line">        inet6 fe80::215:5dff:fe00:4d72  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:15:5d:00:4d:72  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 8553  bytes 873694 (873.6 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1433  bytes 121685 (121.6 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></li>
+<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
+<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh interface portproxy show all</span><br><span class="line"></span><br><span class="line">侦听 ipv4:                 连接到 ipv4:</span><br><span class="line"></span><br><span class="line">地址            端口        地址            端口</span><br><span class="line">--------------- ----------  --------------- ----------</span><br><span class="line">0.0.0.0         8081        172.23.229.221  8081</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若还是不行，关闭你本机的防火墙</p>
 ]]></content>
       <categories>
         <category>tool</category>
@@ -3765,7 +3985,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
   </entry>
   <entry>
     <title>wsl的ubuntu移动到其他磁盘</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-5-wsl%E7%9A%84ubuntu%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%85%B6%E4%BB%96%E7%A3%81%E7%9B%98/</url>
+    <url>/2021/04/12/tool-wsl-5-wsl%E7%9A%84ubuntu%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%85%B6%E4%BB%96%E7%A3%81%E7%9B%98/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/x356982611/article/details/108641601?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-4.baidujs&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-4.baidujs" target="_blank" rel="noopener">wsl的ubuntu移动到其他磁盘</a></p>
 <h1 id="导出系统-wsl-–export"><a href="#导出系统-wsl-–export" class="headerlink" title="导出系统 wsl –export  "></a>导出系统 wsl –export <DistroName> <PathToTarArchive></h1><p>wsl –export Ubuntu-18.04  E:\workspace-all\workspace-wsl\ubuntu18.04.tar</p>
 <h1 id="删除系统-wsl-–unregister"><a href="#删除系统-wsl-–unregister" class="headerlink" title="删除系统 wsl –unregister "></a>删除系统 wsl –unregister <DistroName></h1><p>wsl –unregister Ubuntu-18.04</p>
@@ -3784,39 +4004,9 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>访问wsl中docker容器的应用</title>
-    <url>/2021/04/12/depth-docker-notes-1-%E8%AE%BF%E9%97%AEwsl%E4%B8%ADdocker%E5%AE%B9%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="访问wsl中docker容器的应用"><a href="#访问wsl中docker容器的应用" class="headerlink" title="访问wsl中docker容器的应用"></a>访问wsl中docker容器的应用</h1><ol>
-<li>正常查看linux网址，ip addr, eth0那个网址就是wsl的网址.</li>
-</ol>
-<p><a href="./source/_posts/工作工具/wsl/6-wsl2%20设置端口映射.md">6-wsl2 设置端口映射</a></p>
-<ol>
-<li>使用docker for windows 不做任何设置的启动容器<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED        STATUS          PORTS      NAMES</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago   Up 21 minutes   8081&#x2F;tcp   suspicious_lovelace</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>此时无法被本机通过wsl的地址和端口访问  </p>
-</blockquote>
-</li>
-<li>通过docker run命令启动<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ sudo docker run -p 8081:8081 app-image:1.0</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED         STATUS                       PORTS                    NAMES</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   4 minutes ago   Up 4 minutes                 0.0.0.0:8081-&gt;8081&#x2F;tcp   flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago    Exited (143) 6 minutes ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过命令的方式启动可以正常被访问</p>
-</blockquote>
-</li>
-<li><p>通过对比发现，通过命令启动的时候，在PORTS中多了 0.0.0.0<br>分析原因是在通过docker for window启动时没有设置本机端口映射:<br><img src="1-访问wsl中docker容器的应用/docker for window启动端口映射.png" alt=""><br>设置后启动结果如下（test）：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED          STATUS                        PORTS                    NAMES</span><br><span class="line">e54bb915b322   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   20 seconds ago   Up 18 seconds                 0.0.0.0:8081-&gt;8081&#x2F;tcp   test</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   28 minutes ago   Exited (129) 9 minutes ago                             flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago     Exited (143) 11 seconds ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>访问</p>
-</li>
-</ol>
-<ul>
-<li>通过 ifconfig eth0 的inet访问</li>
-<li>通过 127.0.0.1 或 localhost 访问</li>
-</ul>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>需要开启映射</p>
-<ol>
-<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
-<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+    <title>查看docker使用情况和释放内存</title>
+    <url>/2021/04/12/depth-docker-notes-3-%E6%9F%A5%E7%9C%8Bdocker%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%92%8C%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>可以使用docker system df查看磁盘使用情况，可以使用docker system prune释放空间。</p>
 ]]></content>
       <categories>
         <category>depth</category>
@@ -3828,9 +4018,9 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>查看docker使用情况和释放内存</title>
-    <url>/2021/04/12/depth-docker-notes-3-%E6%9F%A5%E7%9C%8Bdocker%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%92%8C%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>可以使用docker system df查看磁盘使用情况，可以使用docker system prune释放空间。</p>
+    <title>Docker删除镜像和容器</title>
+    <url>/2021/04/12/depth-docker-notes-2-Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="Docker删除镜像和容器"><a href="#Docker删除镜像和容器" class="headerlink" title="Docker删除镜像和容器"></a>Docker删除镜像和容器</h1><p>一、删除容器<br>首先需要停止所有的容器（只停止单个时把后面的变量改为image id即可）<br>docker stop $(docker ps -a -q)<br>删除所有的容器（只删除单个时把后面的变量改为image id即可）<br>docker rm $(docker ps -a -q)<br>二、删除镜像<br>查看host中的镜像<br>docker images<br>删除指定id的镜像<br>docker rmi <image id><br>想要删除untagged images，也就是那些id为的image的话可以用<br>docker rmi $(docker images | grep “^” | awk “{print $3}”)<br>删除全部的images<br>docker rmi $(docker images -q)</p>
 ]]></content>
       <categories>
         <category>depth</category>
@@ -3903,9 +4093,39 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>Docker删除镜像和容器</title>
-    <url>/2021/04/12/depth-docker-notes-2-Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="Docker删除镜像和容器"><a href="#Docker删除镜像和容器" class="headerlink" title="Docker删除镜像和容器"></a>Docker删除镜像和容器</h1><p>一、删除容器<br>首先需要停止所有的容器（只停止单个时把后面的变量改为image id即可）<br>docker stop $(docker ps -a -q)<br>删除所有的容器（只删除单个时把后面的变量改为image id即可）<br>docker rm $(docker ps -a -q)<br>二、删除镜像<br>查看host中的镜像<br>docker images<br>删除指定id的镜像<br>docker rmi <image id><br>想要删除untagged images，也就是那些id为的image的话可以用<br>docker rmi $(docker images | grep “^” | awk “{print $3}”)<br>删除全部的images<br>docker rmi $(docker images -q)</p>
+    <title>访问wsl中docker容器的应用</title>
+    <url>/2021/04/12/depth-docker-notes-1-%E8%AE%BF%E9%97%AEwsl%E4%B8%ADdocker%E5%AE%B9%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="访问wsl中docker容器的应用"><a href="#访问wsl中docker容器的应用" class="headerlink" title="访问wsl中docker容器的应用"></a>访问wsl中docker容器的应用</h1><ol>
+<li>正常查看linux网址，ip addr, eth0那个网址就是wsl的网址.</li>
+</ol>
+<p><a href="./source/_posts/工作工具/wsl/6-wsl2%20设置端口映射.md">6-wsl2 设置端口映射</a></p>
+<ol>
+<li>使用docker for windows 不做任何设置的启动容器<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED        STATUS          PORTS      NAMES</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago   Up 21 minutes   8081&#x2F;tcp   suspicious_lovelace</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时无法被本机通过wsl的地址和端口访问  </p>
+</blockquote>
+</li>
+<li>通过docker run命令启动<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ sudo docker run -p 8081:8081 app-image:1.0</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED         STATUS                       PORTS                    NAMES</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   4 minutes ago   Up 4 minutes                 0.0.0.0:8081-&gt;8081&#x2F;tcp   flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago    Exited (143) 6 minutes ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过命令的方式启动可以正常被访问</p>
+</blockquote>
+</li>
+<li><p>通过对比发现，通过命令启动的时候，在PORTS中多了 0.0.0.0<br>分析原因是在通过docker for window启动时没有设置本机端口映射:<br><img src="1-访问wsl中docker容器的应用/docker for window启动端口映射.png" alt=""><br>设置后启动结果如下（test）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED          STATUS                        PORTS                    NAMES</span><br><span class="line">e54bb915b322   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   20 seconds ago   Up 18 seconds                 0.0.0.0:8081-&gt;8081&#x2F;tcp   test</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   28 minutes ago   Exited (129) 9 minutes ago                             flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago     Exited (143) 11 seconds ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问</p>
+</li>
+</ol>
+<ul>
+<li>通过 ifconfig eth0 的inet访问</li>
+<li>通过 127.0.0.1 或 localhost 访问</li>
+</ul>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>需要开启映射</p>
+<ol>
+<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
+<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>depth</category>
@@ -3917,102 +4137,26 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>在Windows 10下打开带管理员权限的PowerShell的5种方式</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-2-%E5%9C%A8Windows-10%E4%B8%8B%E6%89%93%E5%BC%80%E5%B8%A6%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E7%9A%84PowerShell%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/kenzo2017/article/details/79518540" target="_blank" rel="noopener">在Windows 10下打开带管理员权限的PowerShell的5种方式</a></p>
-<p>通过cmd将powerShell转为root启动，升级权限:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Start-Process powershell -Verb runAs</span><br></pre></td></tr></table></figure></p>
+    <title>System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</title>
+    <url>/2021/04/12/tool-wsl-excp-System-has-not-been-booted-with-systemd-as-init-system-PID-1-Can%E2%80%98t-operate-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_43685040/article/details/112056242" target="_blank" rel="noopener">System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</a></p>
+<p>#<br><img src="systemctl和system参考图.png" alt=""></p>
+<h1 id="用window10下WSL使用Ubuntu来用Docker"><a href="#用window10下WSL使用Ubuntu来用Docker" class="headerlink" title="用window10下WSL使用Ubuntu来用Docker"></a>用window10下WSL使用Ubuntu来用Docker</h1><p>当我使用命令sudo systemctl start docker的时候报错：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">System has not been booted with systemd as init system (PID 1). Can&#39;t operate.</span><br></pre></td></tr></table></figure></p>
+<h1 id="查了原因："><a href="#查了原因：" class="headerlink" title="查了原因："></a>查了原因：</h1><p>如果是一般的Linux操作系统，可能是因为Linux中没有使用systemd，想用systemd命令来管理Linux上的服务，因此会报错，很可能是使用的是经典的SysV init（sysvinit）系统。<br>但我这个是window10下WSL的Ubuntu，就会使SysV init而不是systemd。</p>
+<h1 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h1><p>更换命令，用SysV init的命令代替systemd的<br><img src="Sysv init和Systemctl命令图.png" alt=""></p>
 ]]></content>
       <categories>
         <category>tool</category>
         <category>wsl</category>
-        <category>wsl2</category>
+        <category>excp</category>
       </categories>
       <tags>
-        <tag>wsl2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>wsl-1安装docker</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-1-1-wsl-1%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="WSL1中安装Docker"><a href="#WSL1中安装Docker" class="headerlink" title="WSL1中安装Docker"></a>WSL1中安装Docker</h1><p><a href="https://www.cnblogs.com/talentzemin/p/12544273.html" target="_blank" rel="noopener">WSL1中安装Docker</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># step 0: clear</span><br><span class="line"># sudo apt-get remove docker docker-engine docker-ce docker.io</span><br><span class="line"></span><br><span class="line"># step 1: 安装必要的一些系统工具sudo apt-get update</span><br><span class="line">#sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common</span><br><span class="line"># step 2: 安装GPG证书</span><br><span class="line"># curl -fsSL https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -    &#x2F;&#x2F;官方</span><br><span class="line"># curl -fsSL https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -   &#x2F;&#x2F;阿里云</span><br><span class="line"></span><br><span class="line"># Step 3: 写入软件源信息</span><br><span class="line"># sudo add-apt-repository &quot;deb [arch&#x3D;amd64] https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  &#x2F;&#x2F;官方</span><br><span class="line"># sudo add-apt-repository &quot;deb [arch&#x3D;amd64] https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  &#x2F;&#x2F;阿里云</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Step 4: 更新并安装Docker-CE</span><br><span class="line"># sudo apt-get -y update</span><br><span class="line"># sudo apt-get -y install docker-ce</span><br><span class="line"># 此处默认安装的是docker最新版本，但由于WSL的问题，可能会存在问题，会在拉取镜像的时候出现错误：Error response from daemon: OCI runtime create failed context canceled</span><br><span class="line"># 所以我们安装指定的docker版本，见4.1，我安装的是18.03.1-ce</span><br><span class="line"></span><br><span class="line"># Step 4.1 安装指定版本的Docker-CE:</span><br><span class="line"># Step 4.11: 查找Docker-CE的版本:</span><br><span class="line"># apt-cache madison docker-ce</span><br><span class="line">#   docker-ce | 17.03.1~ce-0~ubuntu-xenial | https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu xenial&#x2F;stable amd64 Packages</span><br><span class="line">#   docker-ce | 17.03.0~ce-0~ubuntu-xenial | https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu xenial&#x2F;stable amd64 Packages</span><br><span class="line"># Step 4.1.2: 安装指定版本的Docker-CE: (VERSION例如上面的17.03.1~ce-0~ubuntu-xenial)</span><br><span class="line"># sudo apt-get -y install docker-ce&#x3D;[VERSION]</span><br><span class="line"></span><br><span class="line"># Step 5: 查看docker的版本</span><br><span class="line"># docker -v</span><br><span class="line"></span><br><span class="line"># Step 6: 查看docker的启动状态</span><br><span class="line"># sudo service docker status</span><br><span class="line"></span><br><span class="line"># Step 7：启动docker</span><br><span class="line"># sudo service docker start  &#x2F;&#x2F;备注：WSL目前是WSL1，所以linux的发行版本部分命令还不能使用，比如systemctl命令。此处启动docker可以使用：sudo systemctl start docker</span><br><span class="line"></span><br><span class="line"># Step 8：拉取hello-world镜像，验证docker是否正常</span><br><span class="line"># docker run hello-world</span><br><span class="line"># 输出：</span><br><span class="line"># Hello from Docker!</span><br><span class="line"># This message shows that your installation appears to be working correctly.</span><br><span class="line"># ......</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>wsl1</category>
-      </categories>
-      <tags>
-        <tag>wsl1</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>chown命令</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-4-chown%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/qiyebao/p/4320440.html" target="_blank" rel="noopener">chown参考</a></p>
-<h1 id="改变指定目录以及其子目录下的所有文件的拥有者和群组"><a href="#改变指定目录以及其子目录下的所有文件的拥有者和群组" class="headerlink" title="改变指定目录以及其子目录下的所有文件的拥有者和群组"></a>改变指定目录以及其子目录下的所有文件的拥有者和群组</h1><p>chown -R -v root:mail test6</p>
-<h1 id="改变文件群组"><a href="#改变文件群组" class="headerlink" title="改变文件群组"></a>改变文件群组</h1><p>chown :mail log2012.log</p>
-<h1 id="改变文件拥有者和群组"><a href="#改变文件拥有者和群组" class="headerlink" title="改变文件拥有者和群组"></a>改变文件拥有者和群组</h1><p>chown root: log2012.log</p>
-<h1 id="改变拥有者和群组"><a href="#改变拥有者和群组" class="headerlink" title="改变拥有者和群组"></a>改变拥有者和群组</h1><p>chown mail:mail log2012.log</p>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>wsl2</category>
-      </categories>
-      <tags>
-        <tag>wsl2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>wsl2中启动springboot程序</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-5-wsl2%E4%B8%AD%E5%90%AF%E5%8A%A8springboot%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="wsl2中启动springboot程序"><a href="#wsl2中启动springboot程序" class="headerlink" title="wsl2中启动springboot程序"></a>wsl2中启动springboot程序</h1><ol>
-<li>安装jdk8<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-8-jre-headless</span><br></pre></td></tr></table></figure></li>
-<li>下载(wget)或拷贝(cp)springboot.jar</li>
-<li>后台指定编码和端口运行<br>java -Dfile.encoding=utf-8 -jar xxx.jar –server.port=8080 &amp;</li>
-</ol>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>wsl2</category>
-      </categories>
-      <tags>
-        <tag>wsl2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查询java进程</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-6-%E6%9F%A5%E8%AF%A2java%E8%BF%9B%E7%A8%8B/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>ps -ef | grep java</p>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>wsl2</category>
-      </categories>
-      <tags>
-        <tag>wsl2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在window上找到wsl2的文件夹目录</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-7-%E5%9C%A8window%E4%B8%8A%E6%89%BE%E5%88%B0wsl2%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="在window上找到wsl2的文件夹目录"><a href="#在window上找到wsl2的文件夹目录" class="headerlink" title="在window上找到wsl2的文件夹目录"></a>在window上找到wsl2的文件夹目录</h1><p>在文件窗口运行 \wsl$</p>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>wsl2</category>
-      </categories>
-      <tags>
-        <tag>wsl2</tag>
+        <tag>wsl</tag>
       </tags>
   </entry>
   <entry>
     <title>win10和wsl的文件互访</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-1-win10%E5%92%8Cwsl%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF/</url>
+    <url>/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-1-win10%E5%92%8Cwsl%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/InitRain/p/12361617.html" target="_blank" rel="noopener">Windows10 与 WSL（Ubuntu）的文件互访</a></p>
 <p>从WSL访问win10的文件</p>
 <blockquote>
@@ -4035,26 +4179,8 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
-    <title>System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-excp-System-has-not-been-booted-with-systemd-as-init-system-PID-1-Can%E2%80%98t-operate-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_43685040/article/details/112056242" target="_blank" rel="noopener">System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</a></p>
-<p>#<br><img src="systemctl和system参考图.png" alt=""></p>
-<h1 id="用window10下WSL使用Ubuntu来用Docker"><a href="#用window10下WSL使用Ubuntu来用Docker" class="headerlink" title="用window10下WSL使用Ubuntu来用Docker"></a>用window10下WSL使用Ubuntu来用Docker</h1><p>当我使用命令sudo systemctl start docker的时候报错：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">System has not been booted with systemd as init system (PID 1). Can&#39;t operate.</span><br></pre></td></tr></table></figure></p>
-<h1 id="查了原因："><a href="#查了原因：" class="headerlink" title="查了原因："></a>查了原因：</h1><p>如果是一般的Linux操作系统，可能是因为Linux中没有使用systemd，想用systemd命令来管理Linux上的服务，因此会报错，很可能是使用的是经典的SysV init（sysvinit）系统。<br>但我这个是window10下WSL的Ubuntu，就会使SysV init而不是systemd。</p>
-<h1 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h1><p>更换命令，用SysV init的命令代替systemd的<br><img src="Sysv init和Systemctl命令图.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>tool</category>
-        <category>wsl</category>
-        <category>excp</category>
-      </categories>
-      <tags>
-        <tag>wsl</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>xshell连接wsl2</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-3-xshell%E8%BF%9E%E6%8E%A5wsl2/</url>
+    <url>/2021/04/12/tool-wsl-wsl-2-3-xshell%E8%BF%9E%E6%8E%A5wsl2/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/weixin_34789114/article/details/114443658" target="_blank" rel="noopener">记录一次使用ssh成功连接wsl2的Ubuntu</a><br><a href="http://blog.chinaunix.net/uid-26168435-id-5732463.html" target="_blank" rel="noopener">启动sshd时，报“Could not load host key: /etc/ssh/ssh_host_rsa_key”错</a></p>
 <blockquote>
 <p>首先可使用 sudo service ssh status 查看ssh是否启用</p>
@@ -4103,8 +4229,23 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
+    <title>wsl-1安装docker</title>
+    <url>/2021/04/12/tool-wsl-wsl-1-1-wsl-1%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="WSL1中安装Docker"><a href="#WSL1中安装Docker" class="headerlink" title="WSL1中安装Docker"></a>WSL1中安装Docker</h1><p><a href="https://www.cnblogs.com/talentzemin/p/12544273.html" target="_blank" rel="noopener">WSL1中安装Docker</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># step 0: clear</span><br><span class="line"># sudo apt-get remove docker docker-engine docker-ce docker.io</span><br><span class="line"></span><br><span class="line"># step 1: 安装必要的一些系统工具sudo apt-get update</span><br><span class="line">#sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common</span><br><span class="line"># step 2: 安装GPG证书</span><br><span class="line"># curl -fsSL https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -    &#x2F;&#x2F;官方</span><br><span class="line"># curl -fsSL https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -   &#x2F;&#x2F;阿里云</span><br><span class="line"></span><br><span class="line"># Step 3: 写入软件源信息</span><br><span class="line"># sudo add-apt-repository &quot;deb [arch&#x3D;amd64] https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  &#x2F;&#x2F;官方</span><br><span class="line"># sudo add-apt-repository &quot;deb [arch&#x3D;amd64] https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  &#x2F;&#x2F;阿里云</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Step 4: 更新并安装Docker-CE</span><br><span class="line"># sudo apt-get -y update</span><br><span class="line"># sudo apt-get -y install docker-ce</span><br><span class="line"># 此处默认安装的是docker最新版本，但由于WSL的问题，可能会存在问题，会在拉取镜像的时候出现错误：Error response from daemon: OCI runtime create failed context canceled</span><br><span class="line"># 所以我们安装指定的docker版本，见4.1，我安装的是18.03.1-ce</span><br><span class="line"></span><br><span class="line"># Step 4.1 安装指定版本的Docker-CE:</span><br><span class="line"># Step 4.11: 查找Docker-CE的版本:</span><br><span class="line"># apt-cache madison docker-ce</span><br><span class="line">#   docker-ce | 17.03.1~ce-0~ubuntu-xenial | https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu xenial&#x2F;stable amd64 Packages</span><br><span class="line">#   docker-ce | 17.03.0~ce-0~ubuntu-xenial | https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu xenial&#x2F;stable amd64 Packages</span><br><span class="line"># Step 4.1.2: 安装指定版本的Docker-CE: (VERSION例如上面的17.03.1~ce-0~ubuntu-xenial)</span><br><span class="line"># sudo apt-get -y install docker-ce&#x3D;[VERSION]</span><br><span class="line"></span><br><span class="line"># Step 5: 查看docker的版本</span><br><span class="line"># docker -v</span><br><span class="line"></span><br><span class="line"># Step 6: 查看docker的启动状态</span><br><span class="line"># sudo service docker status</span><br><span class="line"></span><br><span class="line"># Step 7：启动docker</span><br><span class="line"># sudo service docker start  &#x2F;&#x2F;备注：WSL目前是WSL1，所以linux的发行版本部分命令还不能使用，比如systemctl命令。此处启动docker可以使用：sudo systemctl start docker</span><br><span class="line"></span><br><span class="line"># Step 8：拉取hello-world镜像，验证docker是否正常</span><br><span class="line"># docker run hello-world</span><br><span class="line"># 输出：</span><br><span class="line"># Hello from Docker!</span><br><span class="line"># This message shows that your installation appears to be working correctly.</span><br><span class="line"># ......</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl1</category>
+      </categories>
+      <tags>
+        <tag>wsl1</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用cp文件复制到wsl</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-2-%E4%BD%BF%E7%94%A8cp%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0wsl/</url>
+    <url>/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-2-%E4%BD%BF%E7%94%A8cp%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0wsl/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>linux复制不是copy，而是cp</p>
 <p>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/arthas-tunnel-server-3.5.2-fatjar.jar /home/arthas/arthas-tunnel-server.jar<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/entrypoint.sh /home/arthas/entrypoint.sh<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/Arthas-Dockerfile /home/arthas/Dockerfile</p>
 <h1 id="复制invoice-war"><a href="#复制invoice-war" class="headerlink" title="复制invoice war"></a>复制invoice war</h1><p>sudo cp /mnt/e/G-工作文档/doc-cic/F-new-发票中心/第三方税控平台文档/1.32生产环境/前置应用_V1.32程序包/程序包/einvoicejr.war /home/war/einvoicejr.war</p>
@@ -4119,8 +4260,44 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       </tags>
   </entry>
   <entry>
+    <title>chown命令</title>
+    <url>/2021/04/12/tool-wsl-wsl-2-4-chown%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/qiyebao/p/4320440.html" target="_blank" rel="noopener">chown参考</a></p>
+<h1 id="改变指定目录以及其子目录下的所有文件的拥有者和群组"><a href="#改变指定目录以及其子目录下的所有文件的拥有者和群组" class="headerlink" title="改变指定目录以及其子目录下的所有文件的拥有者和群组"></a>改变指定目录以及其子目录下的所有文件的拥有者和群组</h1><p>chown -R -v root:mail test6</p>
+<h1 id="改变文件群组"><a href="#改变文件群组" class="headerlink" title="改变文件群组"></a>改变文件群组</h1><p>chown :mail log2012.log</p>
+<h1 id="改变文件拥有者和群组"><a href="#改变文件拥有者和群组" class="headerlink" title="改变文件拥有者和群组"></a>改变文件拥有者和群组</h1><p>chown root: log2012.log</p>
+<h1 id="改变拥有者和群组"><a href="#改变拥有者和群组" class="headerlink" title="改变拥有者和群组"></a>改变拥有者和群组</h1><p>chown mail:mail log2012.log</p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl2</category>
+      </categories>
+      <tags>
+        <tag>wsl2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>wsl2中启动springboot程序</title>
+    <url>/2021/04/12/tool-wsl-wsl-2-5-wsl2%E4%B8%AD%E5%90%AF%E5%8A%A8springboot%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="wsl2中启动springboot程序"><a href="#wsl2中启动springboot程序" class="headerlink" title="wsl2中启动springboot程序"></a>wsl2中启动springboot程序</h1><ol>
+<li>安装jdk8<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install openjdk-8-jre-headless</span><br></pre></td></tr></table></figure></li>
+<li>下载(wget)或拷贝(cp)springboot.jar</li>
+<li>后台指定编码和端口运行<br>java -Dfile.encoding=utf-8 -jar xxx.jar –server.port=8080 &amp;</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl2</category>
+      </categories>
+      <tags>
+        <tag>wsl2</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WSL1 升级为 WSL2</title>
-    <url>/2021/04/12/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-wsl-2-1-WSL1-%E5%8D%87%E7%BA%A7%E4%B8%BA-WSL2/</url>
+    <url>/2021/04/12/tool-wsl-wsl-2-1-WSL1-%E5%8D%87%E7%BA%A7%E4%B8%BA-WSL2/</url>
     <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/stulzq/p/13926936.html" target="_blank" rel="noopener">WSL1 升级为 WSL2</a></p>
 <h1 id="WSL2-是-WSL-1-的升级版，带来的主要优势："><a href="#WSL2-是-WSL-1-的升级版，带来的主要优势：" class="headerlink" title="WSL2 是 WSL 1 的升级版，带来的主要优势："></a>WSL2 是 WSL 1 的升级版，带来的主要优势：</h1><ul>
 <li>提高文件系统性能</li>
@@ -4142,6 +4319,49 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
 </li>
 </ol>
 <p>使用分享：<br>WSL2 是基于虚拟机的，所以可以在后台运行各种任务，比如 Docker 等等，但是带来的相应问题就是会占用一部分内存，<br>使用 [wsl –shutdown &lt;分发版名称&gt;] 可以再不使用的时候停止它，以节约资源</p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl2</category>
+      </categories>
+      <tags>
+        <tag>wsl2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Windows 10下打开带管理员权限的PowerShell的5种方式</title>
+    <url>/2021/04/12/tool-wsl-wsl-2-2-%E5%9C%A8Windows-10%E4%B8%8B%E6%89%93%E5%BC%80%E5%B8%A6%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E7%9A%84PowerShell%E7%9A%845%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/kenzo2017/article/details/79518540" target="_blank" rel="noopener">在Windows 10下打开带管理员权限的PowerShell的5种方式</a></p>
+<p>通过cmd将powerShell转为root启动，升级权限:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Start-Process powershell -Verb runAs</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl2</category>
+      </categories>
+      <tags>
+        <tag>wsl2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询java进程</title>
+    <url>/2021/04/12/tool-wsl-wsl-2-6-%E6%9F%A5%E8%AF%A2java%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>ps -ef | grep java</p>
+]]></content>
+      <categories>
+        <category>tool</category>
+        <category>wsl</category>
+        <category>wsl2</category>
+      </categories>
+      <tags>
+        <tag>wsl2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在window上找到wsl2的文件夹目录</title>
+    <url>/2021/04/12/tool-wsl-wsl-2-7-%E5%9C%A8window%E4%B8%8A%E6%89%BE%E5%88%B0wsl2%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="在window上找到wsl2的文件夹目录"><a href="#在window上找到wsl2的文件夹目录" class="headerlink" title="在window上找到wsl2的文件夹目录"></a>在window上找到wsl2的文件夹目录</h1><p>在文件窗口运行 \wsl$</p>
 ]]></content>
       <categories>
         <category>tool</category>
@@ -5030,19 +5250,9 @@ magic number添加错误</li>
       </tags>
   </entry>
   <entry>
-    <title>git生成SSH公钥</title>
-    <url>/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>生成 SSH 公钥：<a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a></strong></li>
-</ul>
-<hr>
-<p>如前所述，许多 Git 服务器都使用 SSH 公钥进行认证。 为了向 Git 服务器提供 SSH 公钥，如果某系统用户尚未拥有密钥，必须事先为其生成一份。<br>这个过程在所有操作系统上都是相似的。 首先，你需要确认自己是否已经拥有密钥。 默认情况下，用户的 SSH 密钥存储在其 ~/.ssh 目录下。<br>进入该目录并列出其中内容，你便可以快速确认自己是否已拥有密钥：</p>
-<p>$ cd ~/.ssh<br>$ ls<br>authorized_keys2  id_dsa       known_hosts<br>config            id_dsa.pub<br>我们需要寻找一对以 id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另一个则是与之对应的私钥。 如果找不到这样的文件（或者根本没有 .ssh 目录），你可以通过运行 ssh-keygen 程序来创建它们。 在 Linux/macOS 系统中，ssh-keygen 随 SSH 软件包提供；在 Windows 上，该程序包含于 MSysGit 软件包中。</p>
-<p>$ ssh-keygen -o<br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/home/schacon/.ssh/id_rsa):<br>Created directory ‘/home/schacon/.ssh’.<br>Enter passphrase (empty for no passphrase):<br>Enter same passphrase again:<br>Your identification has been saved in /home/schacon/.ssh/id_rsa.<br>Your public key has been saved in /home/schacon/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>d0:82:24:8e:d7:f1:bb:9b:33:53:96:93:49:da:9b:e3 schacon@mylaptop.local<br>首先 ssh-keygen 会确认密钥的存储位置（默认是 .ssh/id_rsa），然后它会要求你输入两次密钥口令。 如果你不想在使用密钥时输入口令，将其留空即可。 然而，如果你使用了密码，那么请确保添加了 -o 选项，它会以比默认格式更能抗暴力破解的格式保存私钥。 你也可以用 ssh-agent 工具来避免每次都要输入密码。</p>
-<p>现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员 （假设服务器正在使用基于公钥的 SSH 验证设置）。 他们所要做的就是复制各自的 .pub 文件内容，并将其通过邮件发送。 公钥看起来是这样的：</p>
-<p>$ cat ~/.ssh/id_rsa.pub<br>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU<br>GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3<br>Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA<br>t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En<br>mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx<br>NrRFi9wrf+M7Q== schacon@mylaptop.local<br>关于在多种操作系统中生成 SSH 密钥的更深入教程，请参阅 GitHub 的 SSH 密钥指南 <a href="https://help.github.com/articles/generating-ssh-keys。" target="_blank" rel="noopener">https://help.github.com/articles/generating-ssh-keys。</a></p>
-<h1 id="除了ssh-keygen-o"><a href="#除了ssh-keygen-o" class="headerlink" title="除了ssh-keygen -o"></a>除了ssh-keygen -o</h1><p>也可以使用指定邮箱配置公私密钥，如：<br>sshsshssh–    -keygenkeygenkeygen   —ttt   rsarsarsa   —CCC   ‘xxx@xxx.com’’xxx@xxx.com’’xxx@xxx.com’       然后一路回车然后一路回车然后一路回车    (((—CCC   参数是以下提供的邮箱地址参数是以下提供的邮箱地址参数是以下提供的邮箱地址    )))</p>
+    <title>git环境搭建和密钥生成</title>
+    <url>/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>2、Git配置<br>（1）、环境变量配置 如git安装路径C:\Program Files\Git<br>GIT_HOME=C:\Program Files\Git<br>PATH=C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin<br>（2）、git配置用户名和邮箱<br>设置Git的user name和email：（如果需要配置多git仓库地址，则此处不能使用–global，在各项目中设置: git config user.name “）<br>$ git config –global user.name “xxx”<br>$ git config –global user.email “xxx@xxx.com”<br>（3）、生成SSH公钥过程：cmd:C:\Users\xxxxx<br>$ ssh-keygen -t rsa -C “xxx@xxx.com”<br> 过程如下：<br>img: img/git-genkey.jpg</p>
 ]]></content>
       <categories>
         <category>git</category>
@@ -5089,9 +5299,19 @@ magic number添加错误</li>
       </tags>
   </entry>
   <entry>
-    <title>git环境搭建和密钥生成</title>
-    <url>/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/</url>
-    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>2、Git配置<br>（1）、环境变量配置 如git安装路径C:\Program Files\Git<br>GIT_HOME=C:\Program Files\Git<br>PATH=C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin<br>（2）、git配置用户名和邮箱<br>设置Git的user name和email：（如果需要配置多git仓库地址，则此处不能使用–global，在各项目中设置: git config user.name “）<br>$ git config –global user.name “xxx”<br>$ git config –global user.email “xxx@xxx.com”<br>（3）、生成SSH公钥过程：cmd:C:\Users\xxxxx<br>$ ssh-keygen -t rsa -C “xxx@xxx.com”<br> 过程如下：<br>img: img/git-genkey.jpg</p>
+    <title>git生成SSH公钥</title>
+    <url>/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/</url>
+    <content><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>生成 SSH 公钥：<a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a></strong></li>
+</ul>
+<hr>
+<p>如前所述，许多 Git 服务器都使用 SSH 公钥进行认证。 为了向 Git 服务器提供 SSH 公钥，如果某系统用户尚未拥有密钥，必须事先为其生成一份。<br>这个过程在所有操作系统上都是相似的。 首先，你需要确认自己是否已经拥有密钥。 默认情况下，用户的 SSH 密钥存储在其 ~/.ssh 目录下。<br>进入该目录并列出其中内容，你便可以快速确认自己是否已拥有密钥：</p>
+<p>$ cd ~/.ssh<br>$ ls<br>authorized_keys2  id_dsa       known_hosts<br>config            id_dsa.pub<br>我们需要寻找一对以 id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另一个则是与之对应的私钥。 如果找不到这样的文件（或者根本没有 .ssh 目录），你可以通过运行 ssh-keygen 程序来创建它们。 在 Linux/macOS 系统中，ssh-keygen 随 SSH 软件包提供；在 Windows 上，该程序包含于 MSysGit 软件包中。</p>
+<p>$ ssh-keygen -o<br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/home/schacon/.ssh/id_rsa):<br>Created directory ‘/home/schacon/.ssh’.<br>Enter passphrase (empty for no passphrase):<br>Enter same passphrase again:<br>Your identification has been saved in /home/schacon/.ssh/id_rsa.<br>Your public key has been saved in /home/schacon/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>d0:82:24:8e:d7:f1:bb:9b:33:53:96:93:49:da:9b:e3 schacon@mylaptop.local<br>首先 ssh-keygen 会确认密钥的存储位置（默认是 .ssh/id_rsa），然后它会要求你输入两次密钥口令。 如果你不想在使用密钥时输入口令，将其留空即可。 然而，如果你使用了密码，那么请确保添加了 -o 选项，它会以比默认格式更能抗暴力破解的格式保存私钥。 你也可以用 ssh-agent 工具来避免每次都要输入密码。</p>
+<p>现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员 （假设服务器正在使用基于公钥的 SSH 验证设置）。 他们所要做的就是复制各自的 .pub 文件内容，并将其通过邮件发送。 公钥看起来是这样的：</p>
+<p>$ cat ~/.ssh/id_rsa.pub<br>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU<br>GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3<br>Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA<br>t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En<br>mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx<br>NrRFi9wrf+M7Q== schacon@mylaptop.local<br>关于在多种操作系统中生成 SSH 密钥的更深入教程，请参阅 GitHub 的 SSH 密钥指南 <a href="https://help.github.com/articles/generating-ssh-keys。" target="_blank" rel="noopener">https://help.github.com/articles/generating-ssh-keys。</a></p>
+<h1 id="除了ssh-keygen-o"><a href="#除了ssh-keygen-o" class="headerlink" title="除了ssh-keygen -o"></a>除了ssh-keygen -o</h1><p>也可以使用指定邮箱配置公私密钥，如：<br>sshsshssh–    -keygenkeygenkeygen   —ttt   rsarsarsa   —CCC   ‘xxx@xxx.com’’xxx@xxx.com’’xxx@xxx.com’       然后一路回车然后一路回车然后一路回车    (((—CCC   参数是以下提供的邮箱地址参数是以下提供的邮箱地址参数是以下提供的邮箱地址    )))</p>
 ]]></content>
       <categories>
         <category>git</category>

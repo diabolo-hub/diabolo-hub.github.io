@@ -373,6 +373,529 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-3/" itemprop="url">depth-kubernetes-配置详解-pod配置详解-3</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-06T15:09:20+08:00">2022-05-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">8.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="pod详解-3"><a href="#pod详解-3" class="headerlink" title="pod详解-3"></a>pod详解-3</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">apiVersion:v1       					#必选，版本号，例如v1</span><br><span class="line">kind:Pod       					#必选，Pod</span><br><span class="line">metadata:       					#必选，元数据</span><br><span class="line">  name:string       					#必选，Pod名称</span><br><span class="line">  namespace:string    					#创建资源所属于的命名空间，不写的话默认创建在default空间</span><br><span class="line">  labels:      						#自定义标签</span><br><span class="line">    - name:string     		                        #自定义标签名字</span><br><span class="line">  annotations:       					#自定义注释列表</span><br><span class="line">    - name:string</span><br><span class="line">spec:       						#必选，Pod中容器的详细定义</span><br><span class="line">  containers:      					#必选，Pod中容器列表</span><br><span class="line">  - name:string     			                #必选，容器名称</span><br><span class="line">    image:string    			                #必选，容器的镜像名称</span><br><span class="line">    imagePullPolicy:[Always| Never | IfNotPresent]    #获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span><br><span class="line">    command: [string]    				#容器的启动命令列表，如不指定，使用打包时使用的启动命令</span><br><span class="line">    args: [string]     					#容器的启动命令参数列表</span><br><span class="line">    workingDir: string    				#容器的工作目录</span><br><span class="line">    volumeMounts:    					#挂载到容器内部的存储卷配置</span><br><span class="line">    - name: string     		                        #引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span><br><span class="line">      mountPath: string   				#存储卷在容器内mount的绝对路径，应少于512字符</span><br><span class="line">      readOnly: boolean   				#是否为只读模式</span><br><span class="line">    ports:       					#需要暴露的端口库号列表</span><br><span class="line">    - name: string     		                        #端口号名称</span><br><span class="line">      containerPort: int  				#容器需要监听的端口号</span><br><span class="line">      hostPort: int    					#容器所在主机需要监听的端口号，默认与Container相同</span><br><span class="line">      protocol: string    				#端口协议，支持TCP和UDP，默认TCP</span><br><span class="line">    env:       						#容器运行前需设置的环境变量列表</span><br><span class="line">    - name: string     		                        #环境变量名称</span><br><span class="line">      value: string    					#环境变量的值</span><br><span class="line">    resources:       					#资源限制和请求的设置</span><br><span class="line">      limits:      					#资源限制的设置</span><br><span class="line">        cpu: string    					#Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span><br><span class="line">        memory: string    				#内存限制，单位可以为Mib&#x2F;Gib，将用于docker run --memory参数</span><br><span class="line">      requests:      					#资源请求的设置</span><br><span class="line">        cpu: string    					#Cpu请求，容器启动的初始可用数量</span><br><span class="line">        memory: string    				#内存清楚，容器启动的初始可用数量</span><br><span class="line">    livenessProbe:     					#对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span><br><span class="line">      exec:      					#对Pod容器内检查方式设置为exec方式</span><br><span class="line">        command: [string] 				#exec方式需要制定的命令或脚本</span><br><span class="line">      httpGet:       					#对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span><br><span class="line">        path: string</span><br><span class="line">        port: number</span><br><span class="line">        host: string</span><br><span class="line">        scheme: string</span><br><span class="line">        HttpHeaders:</span><br><span class="line">        - name: string</span><br><span class="line">          value: string</span><br><span class="line">      tcpSocket:     					#对Pod内个容器健康检查方式设置为tcpSocket方式</span><br><span class="line">         port: number</span><br><span class="line">       initialDelaySeconds: 0  				#容器启动完成后首次探测的时间，单位为秒</span><br><span class="line">       timeoutSeconds: 0  				#对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span><br><span class="line">       periodSeconds: 0   				#对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span><br><span class="line">       successThreshold: 0</span><br><span class="line">       failureThreshold: 0</span><br><span class="line">       securityContext:</span><br><span class="line">         privileged:false</span><br><span class="line">    restartPolicy: [Always | Never | OnFailure]		#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span><br><span class="line">    nodeSelector: obeject 				#设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span><br><span class="line">    imagePullSecrets:    				#Pull镜像时使用的secret名称，以key：secretkey格式指定</span><br><span class="line">    - name: string</span><br><span class="line">    hostNetwork:false     				#是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span><br><span class="line">    volumes:       					#在该pod上定义共享存储卷列表</span><br><span class="line">    - name: string     		                        #共享存储卷名称 （volumes类型有很多种）</span><br><span class="line">      emptyDir: &#123;&#125;     					#类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span><br><span class="line">      hostPath: string   				#类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span><br><span class="line">        path: string     				#Pod所在宿主机的目录，将被用于同期中mount的目录</span><br><span class="line">      secret:      					#类型为secret的存储卷，挂载集群与定义的secre对象到容器内部</span><br><span class="line">        scretname: string  </span><br><span class="line">        items:     </span><br><span class="line">        - key: string</span><br><span class="line">          path: string</span><br><span class="line">      configMap:     					#类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span><br><span class="line">        name: string</span><br><span class="line">        items:</span><br><span class="line">        - key: string</span><br><span class="line">          path: string</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-2/" itemprop="url">depth-kubernetes-配置详解-pod配置详解-2</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-06T15:03:24+08:00">2022-05-06</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">7.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="pod配置-2"><a href="#pod配置-2" class="headerlink" title="pod配置-2"></a>pod配置-2</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1  # 版本号</span><br><span class="line">kind: Pod  # 资源类型</span><br><span class="line">metadata: </span><br><span class="line">  name: pod-name</span><br><span class="line">  namespace: dev</span><br><span class="line">spec: </span><br><span class="line">  containers: </span><br><span class="line">    - image: nginx:1.17.1</span><br><span class="line">      name: nginx-container</span><br><span class="line">      imagePullPolicy: Always</span><br><span class="line">      command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br><span class="line">      args: [&quot;&quot;,&quot;&quot;]</span><br><span class="line">      ports: </span><br><span class="line">      - name: &quot;port-name&quot;</span><br><span class="line">        containerPort: 8080</span><br><span class="line">        hostPort: 80</span><br><span class="line">        hostIP: &quot;192.168.1.101&quot;</span><br><span class="line">        protocol: TCP</span><br><span class="line">      env: </span><br><span class="line">      - name: &quot;key-1&quot;</span><br><span class="line">        value: &quot;value-1&quot;</span><br><span class="line">      - name: &quot;key-2&quot;</span><br><span class="line">        value: &quot;value-2&quot;</span><br><span class="line">      ports: </span><br><span class="line">      - name: nginx-port</span><br><span class="line">        containerPort: 80</span><br><span class="line">        protocol: TCP</span><br><span class="line">      resources: </span><br><span class="line">        limits: </span><br><span class="line">          cpu: &quot;2&quot;</span><br><span class="line">          memory: &quot;10Gi&quot;</span><br><span class="line">        requests: </span><br><span class="line">          cpu: &quot;1&quot;</span><br><span class="line">          memory: &quot;10Mi&quot;</span><br><span class="line">  initContainers:</span><br><span class="line">  - name: init-mysql</span><br><span class="line">    image: busybox:1.3.0</span><br><span class="line">    command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br></pre></td></tr></table></figure>
+<h1 id="解释描述"><a href="#解释描述" class="headerlink" title="解释描述"></a>解释描述</h1><h2 id="kind"><a href="#kind" class="headerlink" title="kind"></a>kind</h2><p>资源类型，一种有以下几种类型</p>
+<ul>
+<li>pod</li>
+<li>namespace ：命名空间</li>
+<li>deployment：pod控制器</li>
+<li>service ：网络访问</li>
+</ul>
+<h2 id="spec"><a href="#spec" class="headerlink" title="spec"></a>spec</h2><h3 id="spec-containers-image"><a href="#spec-containers-image" class="headerlink" title="spec.containers.image"></a>spec.containers.image</h3><p>指定容器镜像，包含镜像名称:版本号</p>
+<h3 id="spec-containers-command-和-spec-containers-args"><a href="#spec-containers-command-和-spec-containers-args" class="headerlink" title="spec.containers.command 和 spec.containers.args"></a>spec.containers.command 和 spec.containers.args</h3><p>启动命令，在启动容器时会执行command的命令，也可以配合args一起使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]     </span><br><span class="line">                                                                      </span><br><span class="line"># 也可以这样                                                               </span><br><span class="line">command: [&quot;&#x2F;bin&#x2F;sh&quot;]                                                  </span><br><span class="line">args: [&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h4><p>要知道，linux的指令是分为命令 和参数的，比如ls -l，ls 是命令，-l是参数，command是命令，args是参数，k8s的command和args其实是为了覆盖Fockerfile的ENTERPOINT功能</p>
+<ul>
+<li>如果command和args都没写，使用Dockerfile配置</li>
+<li>如果command写了， 那么Dockerfile的默认ENTRYPOINT配置会被忽略，执行command</li>
+<li>如果command没写，args写了， 那么Dockerfile的默认ENTRYPOINT配置会执行，使用k8s的args参数</li>
+<li>如果command和args都写了， 那么Dockerfile的默认ENTRYPOINT配置会被忽略，执行command并追加上args参数</li>
+</ul>
+<h3 id="spec-containers-imagePullPolicy"><a href="#spec-containers-imagePullPolicy" class="headerlink" title="spec.containers.imagePullPolicy"></a>spec.containers.imagePullPolicy</h3><p>镜像拉取策略</p>
+<ul>
+<li>Always：总是去远程仓库拉取镜像</li>
+<li>Never ：不去远程 仓库拉取镜像， 只用本地镜像，本地镜像不存在则报错</li>
+<li>IfNotPresent：（默认值）如果本地存在则使用本地镜像，不存在则去远程仓库拉取，<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4></li>
+<li>如果镜像的tag为具体的版本号，就像这样nginx:1.17.1，则使用IfNotPresent作为默认策略</li>
+<li>如果镜像tag为latest（最新版本），就像这样nginx:latest，则使用Always作为默认策略</li>
+</ul>
+<h3 id="spec-containers-env"><a href="#spec-containers-env" class="headerlink" title="spec.containers.env"></a>spec.containers.env</h3><p>配置容器的环境变量列表，每一个环境变量其实就是一对键值对，name是key，值为value</p>
+<h3 id="spec-containers-ports"><a href="#spec-containers-ports" class="headerlink" title="spec.containers.ports"></a>spec.containers.ports</h3><p>端口配置，支持多个端口，访问时的IP和端口是：podIp:containerPort，每个端口以下几个属性</p>
+<ul>
+<li>name: 端口名称，必须保证唯一</li>
+<li>containerPort: 容器内要监听的端口</li>
+<li>hostPort: 容器要在宿主机上公开的端口，如果设置，主机上只能运行容器的一个副本（一般省略）</li>
+<li>hostIP: 要将外部端口绑定到的主机IP（一般省略）</li>
+<li>protocol: 端口协议，有以下几个种类<ul>
+<li>TCP（默认）</li>
+<li>UDP</li>
+<li>SCTP</li>
+</ul>
+</li>
+</ul>
+<h3 id="spec-containers-resources"><a href="#spec-containers-resources" class="headerlink" title="spec.containers.resources"></a>spec.containers.resources</h3><p>resources是资源配额配置，容器中的程序要运行，肯定是要占用资源的，比如cpu和内存，如果不做资源限制，就可能会吃掉大量资源，导致其他 容器无法运行；资源配额有2个子选项“</p>
+<ul>
+<li>limits: 用于限制运行时容器的最大占用资源，当容器占用资源超过limits时会被终止，并且进行重启；</li>
+<li>requests：用于设置容器需要的最小资源，如果环境资源不够，容器将无法启动；<br>每个子选项也有2个属性，，他们分别是</li>
+<li>cpu: cpu核心数，单位（core）</li>
+<li>memory: 内存限制</li>
+</ul>
+<h3 id="spec-initContainers"><a href="#spec-initContainers" class="headerlink" title="spec.initContainers"></a>spec.initContainers</h3><p>initContainers是初始化容器，因为一个pod中可以有多个容器运行，只不过初始化容器和主容器不同，初始化容器必须先启动成功之后才能运行主容器；spec.initContainers下的属性和spec.containers一致；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/05/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/05/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/" itemprop="url">depth-kubernetes-配置详解-service配置简单案例-1</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-05T17:02:14+08:00">2022-05-05</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="service配置简单案例"><a href="#service配置简单案例" class="headerlink" title="service配置简单案例"></a>service配置简单案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 # 指定api版本，此值必须在kubectl api-versions中</span><br><span class="line">kind: Service # 指定创建资源的⾓⾊&#x2F;类型</span><br><span class="line">metadata: # 资源的元数据&#x2F;属性</span><br><span class="line">  name: demo # 资源的名字，在同⼀个namespace中必须唯⼀</span><br><span class="line">  namespace:default # 部署在哪个namespace中</span><br><span class="line">  labels: # 设定资源的标签</span><br><span class="line">    app: demo</span><br><span class="line">spec: # 资源规范字段</span><br><span class="line">  type: ClusterIP # ClusterIP 类型</span><br><span class="line">  ports:</span><br><span class="line">- port:8080 # service 端⼝</span><br><span class="line">      targetPort: http # 容器暴露的端⼝</span><br><span class="line">      protocol:TCP # 协议</span><br><span class="line">      name: http # 端⼝名称</span><br><span class="line">  selector: # 选择器</span><br><span class="line">    app: demo</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/05/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1067,6 +1590,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-22/" itemprop="url">动态链接的理解与常量池的作用</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1497,785 +2210,11 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/" itemprop="url">操作数栈的字节码分析</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="例-操作过程"><a href="#例-操作过程" class="headerlink" title="例-操作过程"></a>例-操作过程</h1><p><img src="操作数栈的字节码分析-1.png" alt=""><br><img src="操作数栈的字节码分析-2.png" alt=""><br><img src="操作数栈的字节码分析-3.png" alt=""><br><img src="操作数栈的字节码分析-4.png" alt=""><br><img src="操作数栈的字节码分析-5.png" alt=""></p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void getSum() &#123;</span><br><span class="line">    int m &#x3D; 10;</span><br><span class="line">    int n &#x3D; 20;</span><br><span class="line">    int k &#x3D; m + n;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">publicvoid testGetSum() &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取上一个栈帧返回的结果，并保存在操作数栈中</span><br><span class="line">    int i &#x3D; getSum();</span><br><span class="line">    int j &#x3D; 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>以上案例中，getSum()返回的K属于int类型，在getSum()字节码栈帧执行完后，在下一个方法testGetSum中会直接将k的值加载并压入 操作数栈<br>此时，如果我们返回的是一个对象，而不是基础数据类型int，压入栈的则是一个具体对象？</li>
-<li>常见的 i++ 和 ++i 的区别<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public void add() &#123;</span><br><span class="line">    &#x2F;&#x2F; 第1类</span><br><span class="line">    int i1 &#x3D; 10;</span><br><span class="line">    i1++;</span><br><span class="line">    </span><br><span class="line">    int i2 &#x3D; 10;</span><br><span class="line">    ++i2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第2类</span><br><span class="line">    int i3 &#x3D; 10;</span><br><span class="line">    int i4 &#x3D; i3++;</span><br><span class="line">    </span><br><span class="line">    int i5 &#x3D; 10;</span><br><span class="line">    int i6 &#x3D; ++i5;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第3类</span><br><span class="line">    int i7 &#x3D; 10;</span><br><span class="line">    i7 &#x3D; i7++;</span><br><span class="line">    </span><br><span class="line">    int i8 &#x3D; 10;</span><br><span class="line">    i8 &#x3D; ++i8;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第4类</span><br><span class="line">    int i9 &#x3D; 10;</span><br><span class="line">    int i10 &#x3D; i9++ + ++i9;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-22/" itemprop="url">动态链接的理解与常量池的作用</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/" itemprop="url">方法的调用</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">567</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol>
-<li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li>
-</ol>
-<h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p>
-<h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" itemprop="url">栈顶缓存技术</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">503</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈指令，这同时也就意味着将需要更多的指令分派（instruction dispatch）次数和内存读/写次数。<br>寄存器架构： 指令更少，执行速度更快</p>
-<h1 id="栈顶缓存来源"><a href="#栈顶缓存来源" class="headerlink" title="栈顶缓存来源"></a>栈顶缓存来源</h1><p>由于操作数是存储在内存中的，因此频繁地执行内存读/写操作必然会影响执行速度。<br>为了解决这个问题，HotSpot JVM的设计者们提出了 栈顶缓存（ToS， Top-of-Stack Cashing）技术，<br><b>将栈顶元素全部缓存在物理CPU的寄存器中，以此降低对内存的读/写次数，提升执行引擎的执行效率。</b></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
 
 
@@ -2322,7 +2261,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">268</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2437,7 +2376,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2494,7 +2441,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2617,7 +2568,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">283k</span>
   
 
   
@@ -2626,7 +2577,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:38</span>
+    <span title="站点总阅读时长">4:43</span>
   
 </div>
 

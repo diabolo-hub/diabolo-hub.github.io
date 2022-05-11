@@ -973,7 +973,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -992,7 +992,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/09/%E5%B7%A5%E4%BD%9C%E5%B7%A5%E5%85%B7-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/" itemprop="url">工作工具-wsl-6-wsl2-设置端口映射</a></h1>
+                <a class="post-title-link" href="/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/" itemprop="url">netsh命令实现端口转发的添加删除</a></h1>
         
 
         <div class="post-meta">
@@ -1008,7 +1008,203 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T14:35:58+08:00">2022-05-09</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-10T00:00:00+08:00">2022-05-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/win/" itemprop="url" rel="index"><span itemprop="name">win</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/win/net/" itemprop="url" rel="index"><span itemprop="name">net</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><hr>
+<pre><code>【windows10】netsh命令实现端口转发的添加删除以及查看: https://blog.csdn.net/jn10010537/article/details/122715645
+</code></pre><hr>
+<h1 id="netsh命令实现端口转发的添加删除"><a href="#netsh命令实现端口转发的添加删除" class="headerlink" title="netsh命令实现端口转发的添加删除"></a>netsh命令实现端口转发的添加删除</h1><p>netsh(Network Shell)是⼀个windows系统本⾝提供的功能强⼤的⽹络配置命令⾏⼯具  </p>
+<ol>
+<li>查看端口映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show v4tov4</span><br></pre></td></tr></table></figure>
+或<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure></li>
+<li>删除所有已经有的转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy reset</span><br></pre></td></tr></table></figure></li>
+<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
+<li>删除转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy delete v4tov4 listenaddress&#x3D;0.0.0.0 listenport&#x3D;8081</span><br></pre></td></tr></table></figure></li>
+<li>判断⼀个端⼝是否开启<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano -p tcp | findstr &quot;7778&quot; &gt;nul 2&gt;nul &amp;&amp; echo 7778端⼝已开启 || echo 7778端⼝未开启</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-3/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-3</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T17:42:20+08:00">2022-05-09</time>
             
 
             
@@ -1039,7 +1235,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.7k</span>
+                <span title="字数统计">528</span>
               
 
               
@@ -1053,7 +1249,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1075,18 +1271,337 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><hr>
-<pre><code>wsl2 设置端口映射: https://blog.csdn.net/keyiis_sh/article/details/113819244?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;utm_relevant_index=9
-</code></pre><hr>
-<h1 id="wsl2-设置端口映射"><a href="#wsl2-设置端口映射" class="headerlink" title="wsl2 设置端口映射"></a>wsl2 设置端口映射</h1><ol>
-<li>管理员启动cmd，获取虚拟机内ubuntu的ip地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -- ifconfig eth0</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;wsl -- ifconfig eth0</span><br><span class="line">eth0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.23.229.221  netmask 255.255.240.0  broadcast 172.23.239.255</span><br><span class="line">        inet6 fe80::215:5dff:fe00:4d72  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:15:5d:00:4d:72  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 8553  bytes 873694 (873.6 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1433  bytes 121685 (121.6 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></li>
-<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
-<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh interface portproxy show all</span><br><span class="line"></span><br><span class="line">侦听 ipv4:                 连接到 ipv4:</span><br><span class="line"></span><br><span class="line">地址            端口        地址            端口</span><br><span class="line">--------------- ----------  --------------- ----------</span><br><span class="line">0.0.0.0         8081        172.23.229.221  8081</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>若还是不行，关闭你本机的防火墙</p>
+            <script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p>
+<p>#作者<br>MAINTAINER xu</p>
+<p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p>
+<p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p>
+<p>#bash方式执行，使demo-0.0.1jar可访问</p>
+<p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p>
+<p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p>
+<p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-2/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-2</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T16:59:48+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">452</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p>
+<p>VOLUME /app</p>
+<p>COPY mall-task*.jar mall-task.jar</p>
+<p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p>
+<p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-1/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-1</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T16:56:25+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">225</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8<br>ADD /target/*.jar app.jar<br>EXPOSE 8082</p>
+<p>#ENTRYPOINT [“java”,”-jar”,”/app.jar”]<br>ENTRYPOINT [“java”,”-jar”,”-Duser.timezone=GMT+08”,”/app.jar”]</p>
 
           
         
@@ -1625,534 +2140,11 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-3/" itemprop="url">depth-kubernetes-配置详解-pod配置详解-3</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-06T15:09:20+08:00">2022-05-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">8.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">8 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="pod详解-3"><a href="#pod详解-3" class="headerlink" title="pod详解-3"></a>pod详解-3</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">apiVersion:v1       					#必选，版本号，例如v1</span><br><span class="line">kind:Pod       					#必选，Pod</span><br><span class="line">metadata:       					#必选，元数据</span><br><span class="line">  name:string       					#必选，Pod名称</span><br><span class="line">  namespace:string    					#创建资源所属于的命名空间，不写的话默认创建在default空间</span><br><span class="line">  labels:      						#自定义标签</span><br><span class="line">    - name:string     		                        #自定义标签名字</span><br><span class="line">  annotations:       					#自定义注释列表</span><br><span class="line">    - name:string</span><br><span class="line">spec:       						#必选，Pod中容器的详细定义</span><br><span class="line">  containers:      					#必选，Pod中容器列表</span><br><span class="line">  - name:string     			                #必选，容器名称</span><br><span class="line">    image:string    			                #必选，容器的镜像名称</span><br><span class="line">    imagePullPolicy:[Always| Never | IfNotPresent]    #获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span><br><span class="line">    command: [string]    				#容器的启动命令列表，如不指定，使用打包时使用的启动命令</span><br><span class="line">    args: [string]     					#容器的启动命令参数列表</span><br><span class="line">    workingDir: string    				#容器的工作目录</span><br><span class="line">    volumeMounts:    					#挂载到容器内部的存储卷配置</span><br><span class="line">    - name: string     		                        #引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span><br><span class="line">      mountPath: string   				#存储卷在容器内mount的绝对路径，应少于512字符</span><br><span class="line">      readOnly: boolean   				#是否为只读模式</span><br><span class="line">    ports:       					#需要暴露的端口库号列表</span><br><span class="line">    - name: string     		                        #端口号名称</span><br><span class="line">      containerPort: int  				#容器需要监听的端口号</span><br><span class="line">      hostPort: int    					#容器所在主机需要监听的端口号，默认与Container相同</span><br><span class="line">      protocol: string    				#端口协议，支持TCP和UDP，默认TCP</span><br><span class="line">    env:       						#容器运行前需设置的环境变量列表</span><br><span class="line">    - name: string     		                        #环境变量名称</span><br><span class="line">      value: string    					#环境变量的值</span><br><span class="line">    resources:       					#资源限制和请求的设置</span><br><span class="line">      limits:      					#资源限制的设置</span><br><span class="line">        cpu: string    					#Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span><br><span class="line">        memory: string    				#内存限制，单位可以为Mib&#x2F;Gib，将用于docker run --memory参数</span><br><span class="line">      requests:      					#资源请求的设置</span><br><span class="line">        cpu: string    					#Cpu请求，容器启动的初始可用数量</span><br><span class="line">        memory: string    				#内存清楚，容器启动的初始可用数量</span><br><span class="line">    livenessProbe:     					#对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span><br><span class="line">      exec:      					#对Pod容器内检查方式设置为exec方式</span><br><span class="line">        command: [string] 				#exec方式需要制定的命令或脚本</span><br><span class="line">      httpGet:       					#对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span><br><span class="line">        path: string</span><br><span class="line">        port: number</span><br><span class="line">        host: string</span><br><span class="line">        scheme: string</span><br><span class="line">        HttpHeaders:</span><br><span class="line">        - name: string</span><br><span class="line">          value: string</span><br><span class="line">      tcpSocket:     					#对Pod内个容器健康检查方式设置为tcpSocket方式</span><br><span class="line">         port: number</span><br><span class="line">       initialDelaySeconds: 0  				#容器启动完成后首次探测的时间，单位为秒</span><br><span class="line">       timeoutSeconds: 0  				#对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span><br><span class="line">       periodSeconds: 0   				#对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span><br><span class="line">       successThreshold: 0</span><br><span class="line">       failureThreshold: 0</span><br><span class="line">       securityContext:</span><br><span class="line">         privileged:false</span><br><span class="line">    restartPolicy: [Always | Never | OnFailure]		#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span><br><span class="line">    nodeSelector: obeject 				#设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span><br><span class="line">    imagePullSecrets:    				#Pull镜像时使用的secret名称，以key：secretkey格式指定</span><br><span class="line">    - name: string</span><br><span class="line">    hostNetwork:false     				#是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span><br><span class="line">    volumes:       					#在该pod上定义共享存储卷列表</span><br><span class="line">    - name: string     		                        #共享存储卷名称 （volumes类型有很多种）</span><br><span class="line">      emptyDir: &#123;&#125;     					#类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span><br><span class="line">      hostPath: string   				#类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span><br><span class="line">        path: string     				#Pod所在宿主机的目录，将被用于同期中mount的目录</span><br><span class="line">      secret:      					#类型为secret的存储卷，挂载集群与定义的secre对象到容器内部</span><br><span class="line">        scretname: string  </span><br><span class="line">        items:     </span><br><span class="line">        - key: string</span><br><span class="line">          path: string</span><br><span class="line">      configMap:     					#类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span><br><span class="line">        name: string</span><br><span class="line">        items:</span><br><span class="line">        - key: string</span><br><span class="line">          path: string</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/06/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-2/" itemprop="url">depth-kubernetes-配置详解-pod配置详解-2</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-06T15:03:24+08:00">2022-05-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">7.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">8 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="pod配置-2"><a href="#pod配置-2" class="headerlink" title="pod配置-2"></a>pod配置-2</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1  # 版本号</span><br><span class="line">kind: Pod  # 资源类型</span><br><span class="line">metadata: </span><br><span class="line">  name: pod-name</span><br><span class="line">  namespace: dev</span><br><span class="line">spec: </span><br><span class="line">  containers: </span><br><span class="line">    - image: nginx:1.17.1</span><br><span class="line">      name: nginx-container</span><br><span class="line">      imagePullPolicy: Always</span><br><span class="line">      command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br><span class="line">      args: [&quot;&quot;,&quot;&quot;]</span><br><span class="line">      ports: </span><br><span class="line">      - name: &quot;port-name&quot;</span><br><span class="line">        containerPort: 8080</span><br><span class="line">        hostPort: 80</span><br><span class="line">        hostIP: &quot;192.168.1.101&quot;</span><br><span class="line">        protocol: TCP</span><br><span class="line">      env: </span><br><span class="line">      - name: &quot;key-1&quot;</span><br><span class="line">        value: &quot;value-1&quot;</span><br><span class="line">      - name: &quot;key-2&quot;</span><br><span class="line">        value: &quot;value-2&quot;</span><br><span class="line">      ports: </span><br><span class="line">      - name: nginx-port</span><br><span class="line">        containerPort: 80</span><br><span class="line">        protocol: TCP</span><br><span class="line">      resources: </span><br><span class="line">        limits: </span><br><span class="line">          cpu: &quot;2&quot;</span><br><span class="line">          memory: &quot;10Gi&quot;</span><br><span class="line">        requests: </span><br><span class="line">          cpu: &quot;1&quot;</span><br><span class="line">          memory: &quot;10Mi&quot;</span><br><span class="line">  initContainers:</span><br><span class="line">  - name: init-mysql</span><br><span class="line">    image: busybox:1.3.0</span><br><span class="line">    command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br></pre></td></tr></table></figure>
-<h1 id="解释描述"><a href="#解释描述" class="headerlink" title="解释描述"></a>解释描述</h1><h2 id="kind"><a href="#kind" class="headerlink" title="kind"></a>kind</h2><p>资源类型，一种有以下几种类型</p>
-<ul>
-<li>pod</li>
-<li>namespace ：命名空间</li>
-<li>deployment：pod控制器</li>
-<li>service ：网络访问</li>
-</ul>
-<h2 id="spec"><a href="#spec" class="headerlink" title="spec"></a>spec</h2><h3 id="spec-containers-image"><a href="#spec-containers-image" class="headerlink" title="spec.containers.image"></a>spec.containers.image</h3><p>指定容器镜像，包含镜像名称:版本号</p>
-<h3 id="spec-containers-command-和-spec-containers-args"><a href="#spec-containers-command-和-spec-containers-args" class="headerlink" title="spec.containers.command 和 spec.containers.args"></a>spec.containers.command 和 spec.containers.args</h3><p>启动命令，在启动容器时会执行command的命令，也可以配合args一起使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command: [&quot;&#x2F;bin&#x2F;sh&quot;,&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]     </span><br><span class="line">                                                                      </span><br><span class="line"># 也可以这样                                                               </span><br><span class="line">command: [&quot;&#x2F;bin&#x2F;sh&quot;]                                                  </span><br><span class="line">args: [&quot;-c&quot;,&quot;while true;do echo hello;sleep 1;done&quot;]</span><br></pre></td></tr></table></figure></p>
-<h4 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h4><p>要知道，linux的指令是分为命令 和参数的，比如ls -l，ls 是命令，-l是参数，command是命令，args是参数，k8s的command和args其实是为了覆盖Fockerfile的ENTERPOINT功能</p>
-<ul>
-<li>如果command和args都没写，使用Dockerfile配置</li>
-<li>如果command写了， 那么Dockerfile的默认ENTRYPOINT配置会被忽略，执行command</li>
-<li>如果command没写，args写了， 那么Dockerfile的默认ENTRYPOINT配置会执行，使用k8s的args参数</li>
-<li>如果command和args都写了， 那么Dockerfile的默认ENTRYPOINT配置会被忽略，执行command并追加上args参数</li>
-</ul>
-<h3 id="spec-containers-imagePullPolicy"><a href="#spec-containers-imagePullPolicy" class="headerlink" title="spec.containers.imagePullPolicy"></a>spec.containers.imagePullPolicy</h3><p>镜像拉取策略</p>
-<ul>
-<li>Always：总是去远程仓库拉取镜像</li>
-<li>Never ：不去远程 仓库拉取镜像， 只用本地镜像，本地镜像不存在则报错</li>
-<li>IfNotPresent：（默认值）如果本地存在则使用本地镜像，不存在则去远程仓库拉取，<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4></li>
-<li>如果镜像的tag为具体的版本号，就像这样nginx:1.17.1，则使用IfNotPresent作为默认策略</li>
-<li>如果镜像tag为latest（最新版本），就像这样nginx:latest，则使用Always作为默认策略</li>
-</ul>
-<h3 id="spec-containers-env"><a href="#spec-containers-env" class="headerlink" title="spec.containers.env"></a>spec.containers.env</h3><p>配置容器的环境变量列表，每一个环境变量其实就是一对键值对，name是key，值为value</p>
-<h3 id="spec-containers-ports"><a href="#spec-containers-ports" class="headerlink" title="spec.containers.ports"></a>spec.containers.ports</h3><p>端口配置，支持多个端口，访问时的IP和端口是：podIp:containerPort，每个端口以下几个属性</p>
-<ul>
-<li>name: 端口名称，必须保证唯一</li>
-<li>containerPort: 容器内要监听的端口</li>
-<li>hostPort: 容器要在宿主机上公开的端口，如果设置，主机上只能运行容器的一个副本（一般省略）</li>
-<li>hostIP: 要将外部端口绑定到的主机IP（一般省略）</li>
-<li>protocol: 端口协议，有以下几个种类<ul>
-<li>TCP（默认）</li>
-<li>UDP</li>
-<li>SCTP</li>
-</ul>
-</li>
-</ul>
-<h3 id="spec-containers-resources"><a href="#spec-containers-resources" class="headerlink" title="spec.containers.resources"></a>spec.containers.resources</h3><p>resources是资源配额配置，容器中的程序要运行，肯定是要占用资源的，比如cpu和内存，如果不做资源限制，就可能会吃掉大量资源，导致其他 容器无法运行；资源配额有2个子选项“</p>
-<ul>
-<li>limits: 用于限制运行时容器的最大占用资源，当容器占用资源超过limits时会被终止，并且进行重启；</li>
-<li>requests：用于设置容器需要的最小资源，如果环境资源不够，容器将无法启动；<br>每个子选项也有2个属性，，他们分别是</li>
-<li>cpu: cpu核心数，单位（core）</li>
-<li>memory: 内存限制</li>
-</ul>
-<h3 id="spec-initContainers"><a href="#spec-initContainers" class="headerlink" title="spec.initContainers"></a>spec.initContainers</h3><p>initContainers是初始化容器，因为一个pod中可以有多个容器运行，只不过初始化容器和主容器不同，初始化容器必须先启动成功之后才能运行主容器；spec.initContainers下的属性和spec.containers一致；</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/05/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/05/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/" itemprop="url">depth-kubernetes-配置详解-service配置简单案例-1</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-05T17:02:14+08:00">2022-05-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="service配置简单案例"><a href="#service配置简单案例" class="headerlink" title="service配置简单案例"></a>service配置简单案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 # 指定api版本，此值必须在kubectl api-versions中</span><br><span class="line">kind: Service # 指定创建资源的⾓⾊&#x2F;类型</span><br><span class="line">metadata: # 资源的元数据&#x2F;属性</span><br><span class="line">  name: demo # 资源的名字，在同⼀个namespace中必须唯⼀</span><br><span class="line">  namespace:default # 部署在哪个namespace中</span><br><span class="line">  labels: # 设定资源的标签</span><br><span class="line">    app: demo</span><br><span class="line">spec: # 资源规范字段</span><br><span class="line">  type: ClusterIP # ClusterIP 类型</span><br><span class="line">  ports:</span><br><span class="line">- port:8080 # service 端⼝</span><br><span class="line">      targetPort: http # 容器暴露的端⼝</span><br><span class="line">      protocol:TCP # 协议</span><br><span class="line">      name: http # 端⼝名称</span><br><span class="line">  selector: # 选择器</span><br><span class="line">    app: demo</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
 
 
@@ -2199,7 +2191,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">268</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2314,7 +2306,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2371,7 +2371,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2494,7 +2498,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">283k</span>
   
 
   
@@ -2503,7 +2507,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:38</span>
+    <span title="站点总阅读时长">4:43</span>
   
 </div>
 

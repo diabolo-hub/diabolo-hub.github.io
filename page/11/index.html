@@ -373,6 +373,402 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-4-Mysql%E5%91%BD%E4%BB%A4alter-add%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-4-Mysql%E5%91%BD%E4%BB%A4alter-add%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5/" itemprop="url">字段</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/hechaojie_com/article/details/82382716" target="_blank" rel="noopener">Mysql命令alter add：增加表的字段</a></p>
+<p>alter add命令用来增加表的字段。</p>
+<p>alter add命令格式：alter table 表名 add字段 类型 其他;</p>
+<p>例如，在表MyClass中添加了一个字段passtest，类型为int(4)，默认值为0：<br>   mysql&gt; alter table MyClass add passtest int(4) default ‘0’;</p>
+<p>1) 加索引<br>   mysql&gt; alter table 表名 add index 索引名 (字段名1[，字段名2 …]);</p>
+<p>例子： mysql&gt; alter table employee add index emp_name (name);</p>
+<p>2) 加主关键字的索引<br>    mysql&gt; alter table 表名 add primary key (字段名);</p>
+<p>例子： mysql&gt; alter table employee add primary key(id);</p>
+<p>3) 加唯一限制条件的索引<br>   mysql&gt; alter table 表名 add unique 索引名 (字段名);</p>
+<p>例子： mysql&gt; alter table employee add unique emp_name2(cardnumber);</p>
+<p>4) 删除某个索引<br>   mysql&gt; alter table 表名 drop index 索引名;</p>
+<p>例子： mysql&gt;alter table employee drop index emp_name;</p>
+<p>5) 增加字段<br>    mysql&gt; ALTER TABLE table_name ADD field_name field_type;</p>
+<p>6) 修改原字段名称及类型<br>    mysql&gt; ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;</p>
+<p>7) 删除字段<br>    MySQL ALTER TABLE table_name DROP field_name;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/" itemprop="url">查询某字段长度大于x的数据</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">388</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="length-origin-msg-gt-22"><a href="#length-origin-msg-gt-22" class="headerlink" title="length(origin_msg) &gt;= 22"></a>length(origin_msg) &gt;= 22</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C%E5%8F%8Aselect%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E5%92%8CfileName%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -571,197 +967,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/" itemprop="url">Unable to load authentication plugin 'caching_sha2_password'</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/excep/" itemprop="url" rel="index"><span itemprop="name">excep</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">165</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><p>[Unable to resolve name [org.hibernate.dialect.MySQL55Dialect] as strategy [org.hibernate.dialect.Dialect]]</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E4%BB%A5%E5%8F%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E6%AC%A1%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -901,6 +1106,388 @@
 <p>– 来源： <a href="https://www.cnblogs.com/xiaofeng028/p/4098965.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaofeng028/p/4098965.html</a><br>//三表级联查询 join on<br>select article.aid, article.title, user.username, type.typename<br>from article inner join user<br>on article.uid = user.uid<br>inner join type<br>on article.tid = type.tid<br>;</p>
 <p>//三表级联 left join on<br>select article.aid, article.title, user.username, type.typename<br>from article left join user<br>on article.uid = user.uid<br>left join type<br>on article.tid = type.tid;</p>
 <p>//三表级联 right join on<br>SELECT article.aid,article.title,user.username,type.typename<br>FROM articleRIGHT JOIN user<br>ON article.uid=user.uid<br>RIGHT JOIN type<br>ON article.tid=type.tid;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/" itemprop="url">随机查询数据</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">344</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="order-by-rand"><a href="#order-by-rand" class="headerlink" title="order by rand()"></a>order by rand()</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/" itemprop="url">Unable to load authentication plugin 'caching_sha2_password'</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/excep/" itemprop="url" rel="index"><span itemprop="name">excep</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">165</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><p>[Unable to resolve name [org.hibernate.dialect.MySQL55Dialect] as strategy [org.hibernate.dialect.Dialect]]</p>
 
           
         
@@ -1549,199 +2136,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/" itemprop="url">mysql中utf8和utf8mb4区别</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">314</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/Renyi-Fan/p/11065692.html" target="_blank" rel="noopener">mysql中utf8和utf8mb4区别</a></p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>utf8最多3个字节（中文汉字）<br>utf8mb4最多4个字节（中文汉字）  </p>
-<p>utf8mb4是utf8的超集  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-11-mysql%E7%9A%84%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1922,421 +2316,11 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/" itemprop="url">mysql inner join 去重</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_29498555/article/details/79695815" target="_blank" rel="noopener">inner join 数据重复问题</a></p>
-<p>SELECT <include refid="fields"></include>,gmt_create<br>FROM t_fin_policy_main<br>WHERE seq_invoice_no IN<br>(SELECT DISTINCT seq_invoice_no FROM t_fin_policy_main WHERE ant_policy_no = #{antPolicyNo} AND is_valid = 1)<br>AND is_valid = 1</p>
-<p>// —-<br>  package表的id对应package_product表的package_id，并且两者是一对多的关系，今天想筛选出package表所有id存在于package_product表的记录，第一个想到的就是join</p>
-<p>select package.*,package_product.package_id from package join package_product<br>       on(package.id=package_product.package_id);<br>但是有一个问题，数据会重复，比如package_product表有3个相同的package_id就会查找出3条相同的package表记录,<br>加上distinct好像也没用</p>
-<p>所以，又想到了子查询，select * from package where id in(select distinct package_id from package_product)，虽然写起来简单，但是这条语句太耗性能了，查找6条记录要好几秒，最后找到了合适的方法</p>
-<p>select * from package join (select distinct package_id from package_product) as package_product on(package.id=package_product.package_id)；</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/" itemprop="url">UUID、自增ID、雪花算法哪个更合适</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/chendasheng/article/details/115222589" target="_blank" rel="noopener">使用雪花id或uuid作为Mysql主键，被老板怼了一顿！</a></p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>分别是user_auto_key，user_uuid，user_random_key，分别表示自动增长的主键，uuid作为主键，随机key作为主键，<br>其它我们完全保持不变。根据控制变量法，我们只把每个表的主键使用不同的策略生成，而其他的字段完全一样，然后测试一下表的插入速度和查询速度：</p>
-<h1 id="效率测试结果"><a href="#效率测试结果" class="headerlink" title="效率测试结果"></a>效率测试结果</h1><p><img src="images/自增id、uuid、雪花算法效率测试结果1.png" alt=""></p>
-<h2 id="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："><a href="#在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：" class="headerlink" title="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："></a>在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：</h2><p><img src="images/自增id、uuid、雪花算法效率测试结果2.png" alt="">  </p>
-<blockquote>
-<p>可以看出在数据量100W左右的时候,uuid的插入效率垫底，并且在后序增加了130W的数据，uudi的时间又直线下降。<br>时间占用量总体可以打出的效率排名为：auto_key&gt;random_key&gt;uuid,uuid的效率最低，<br>在数据量较大的情况下，效率直线下滑。那么为什么会出现这样的现象呢？带着疑问,我们来探讨一下这个问题： </p>
-</blockquote>
-<h1 id="使用uuid和自增id的索引结构对比"><a href="#使用uuid和自增id的索引结构对比" class="headerlink" title="使用uuid和自增id的索引结构对比"></a>使用uuid和自增id的索引结构对比</h1><h2 id="使用自增id的内部结构"><a href="#使用自增id的内部结构" class="headerlink" title="使用自增id的内部结构"></a>使用自增id的内部结构</h2><ol>
-<li>下一条记录就会写入新的页中，一旦数据按照这种顺序的方式加载，主键页就会近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</li>
-<li>新插入的行一定会在原有的最大数据行下一行,mysql定位和寻址很快，不会为计算新行的位置而做出额外的消耗</li>
-<li>减少了页分裂和碎片的产生<h2 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h2></li>
-<li>写入的目标页很可能已经刷新到磁盘上并且从缓存上移除，或者还没有被加载到缓存中，innodb在插入之前不得不先找到并从磁盘读取目标页到内存中，这将导致大量的随机IO </li>
-<li>因为写入是乱序的,innodb不得不频繁的做页分裂操作,以便为新的行分配空间,页分裂导致移动大量的数据，一次插入最少需要修改三个页以上</li>
-<li>由于频繁的页分裂，页会变得稀疏并被不规则的填充，最终会导致数据会有碎片<br>在把随机值（uuid和雪花id）载入到聚簇索引(innodb默认的索引类型)以后,有时候会需要做一次OPTIMEIZE TABLE来重建表并优化页的填充，这将又需要一定的时间消耗。<blockquote>
-<p>结论：使用innodb应该尽可能的按主键的自增顺序插入，并且尽可能使用单调的增加的聚簇键的值来插入新行</p>
-<h2 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h2></blockquote>
-</li>
-<li>别人一旦爬取你的数据库,就可以根据数据库的自增id获取到你的业务增长信息，很容易分析出你的经营情况</li>
-<li>对于高并发的负载，innodb在按主键进行插入的时候会造成明显的锁争用，主键的上界会成为争抢的热点，因为所有的插入都发生在这里，并发插入会导致间隙锁竞争</li>
-<li>Auto_Increment锁机制会造成自增锁的抢夺,有一定的性能损失<blockquote>
-<p>附：<br>Auto_increment的锁争抢问题，如果要改善需要调优innodb_autoinc_lock_mode的配置</p>
-</blockquote>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
   </nav>
 
 
@@ -2383,7 +2367,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">268</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2498,7 +2482,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2555,7 +2547,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2678,7 +2674,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">283k</span>
   
 
   
@@ -2687,7 +2683,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:38</span>
+    <span title="站点总阅读时长">4:43</span>
   
 </div>
 

@@ -373,6 +373,558 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/" itemprop="url">python-notes-course-1-19-枚举</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T15:01:44+08:00">2022-03-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">from enum import Enum</span><br><span class="line"></span><br><span class="line">Month &#x3D; Enum(&#39;Month&#39;, (&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;))</span><br><span class="line"></span><br><span class="line"># 遍历枚举类型</span><br><span class="line">for name, member in Month.__members__.items():</span><br><span class="line">    print(name, &#39;---------&#39;, member, &#39;----------&#39;, member.value)</span><br><span class="line"></span><br><span class="line"># 直接引用一个常量</span><br><span class="line">print(&#39;\n&#39;, Month.Jan)</span><br></pre></td></tr></table></figure>
+<p>上面的代码，我们创建了一个有关月份的枚举类型 Month ，这里要注意的是构造参数，第一个参数 Month 表示的是该枚举类的类名，第二个 tuple 参数，表示的是枚举类的值；当然，枚举类通过 <strong>members</strong> 遍历它的所有成员的方法。</p>
+<p>注意的一点是 ， member.value 是自动赋给成员的 int 类型的常量，默认是从 1 开始的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/" itemprop="url">python-notes-course-1-18-类的访问控制</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T14:58:36+08:00">2022-03-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="创建类的时候就会包含的方法"><a href="#创建类的时候就会包含的方法" class="headerlink" title="创建类的时候就会包含的方法"></a>创建类的时候就会包含的方法</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>init</strong></td>
+<td>构造函数，在生成对象时调用</td>
+</tr>
+<tr>
+<td><strong>del</strong></td>
+<td>析构函数，释放对象时使用</td>
+</tr>
+<tr>
+<td><strong>repr</strong></td>
+<td>打印，转换</td>
+</tr>
+<tr>
+<td><strong>setitem</strong></td>
+<td>按照索引赋值</td>
+</tr>
+<tr>
+<td><strong>getitem</strong></td>
+<td>按照索引获取值</td>
+</tr>
+<tr>
+<td><strong>len</strong></td>
+<td>获得长度</td>
+</tr>
+<tr>
+<td><strong>cmp</strong></td>
+<td>比较运算</td>
+</tr>
+<tr>
+<td><strong>call</strong></td>
+<td>函数调用</td>
+</tr>
+<tr>
+<td><strong>add</strong></td>
+<td>加运算</td>
+</tr>
+<tr>
+<td><strong>sub</strong></td>
+<td>减运算</td>
+</tr>
+<tr>
+<td><strong>mul</strong></td>
+<td>乘运算</td>
+</tr>
+<tr>
+<td><strong>div</strong></td>
+<td>除运算</td>
+</tr>
+<tr>
+<td><strong>mod</strong></td>
+<td>求余运算</td>
+</tr>
+<tr>
+<td><strong>pow</strong></td>
+<td>乘方</td>
+</tr>
+</tbody>
+</table>
+<h1 id="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："><a href="#当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：" class="headerlink" title="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："></a>当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：</h1><ul>
+<li>type(obj)：来获取对象的相应类型；</li>
+<li>isinstance(obj, type)：判断对象是否为指定的 type 类型的实例；</li>
+<li>hasattr(obj, attr)：判断对象是否具有指定属性/方法；</li>
+<li>getattr(obj, attr[, default]) 获取属性/方法的值, 要是没有对应的属性则返回 default 值（前提是设置了 default），否则会抛出 AttributeError 异常；</li>
+<li>setattr(obj, attr, value)：设定该属性/方法的值，类似于 obj.attr=value；</li>
+<li>dir(obj)：可以获取相应对象的所有属性和方法名的列表：</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/" itemprop="url">python-notes-course-1-17-生成器</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T14:53:41+08:00">2022-03-30</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">271</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>在 Python 中，这种一边循环一边计算的机制，称为生成器：generator。<br>在 Python 中，使用了 yield 的函数被称为生成器（generator）。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-16-list%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1604,630 +2156,11 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-8-%E5%85%83%E7%BB%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-8-%E5%85%83%E7%BB%84/" itemprop="url">python-notes-course-1-8-元组</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T13:46:14+08:00">2022-03-30</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>创建了 tuple 时候，它就不能改变了，也就是说它也没有 append()，insert() 这样的方法，但它也有获取某个索引值的方法，但是不能赋值。</p>
-<h1 id="创建元组"><a href="#创建元组" class="headerlink" title="创建元组"></a>创建元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456)</span><br><span class="line">tuple2&#x3D;&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456</span><br></pre></td></tr></table></figure>
-<h2 id="创建空元组"><a href="#创建空元组" class="headerlink" title="创建空元组"></a>创建空元组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tuple3&#x3D;()</span><br></pre></td></tr></table></figure>
-<h2 id="元组中只有一个元素时，需要在后面加逗号"><a href="#元组中只有一个元素时，需要在后面加逗号" class="headerlink" title="元组中只有一个元素时，需要在后面加逗号"></a>元组中只有一个元素时，需要在后面加逗号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tuple4&#x3D;(123,)</span><br></pre></td></tr></table></figure>
-<p>如果不加逗号，创建出来的就不是 元组（tuple），而是指 123 这个数了。<br>这是因为括号 () 既可以表示元组（tuple），又可以表示数学公式中的小括号，这就产生了歧义。<br>所以如果只有一个元素时，你不加逗号，计算机就根本没法识别你是要进行整数或者小数运算还是表示元组。</p>
-<h1 id="如何访问元组"><a href="#如何访问元组" class="headerlink" title="如何访问元组"></a>如何访问元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line"></span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456)</span><br><span class="line">tuple2&#x3D;&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456</span><br><span class="line"></span><br><span class="line">print(tuple1[1])</span><br><span class="line">print(tuple2[0])</span><br></pre></td></tr></table></figure>
-<h1 id="修改元组"><a href="#修改元组" class="headerlink" title="修改元组"></a>修改元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">list1&#x3D;[123,456]</span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowater&#39;,&#39;liangdianshui&#39;,list1)</span><br><span class="line">print(tuple1)</span><br><span class="line">list1[0]&#x3D;789</span><br><span class="line">list1[1]&#x3D;100</span><br><span class="line">print(tuple1)</span><br></pre></td></tr></table></figure>
-<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(&#39;两点水&#39;, &#39;twowater&#39;, &#39;liangdianshui&#39;, [123, 456])</span><br><span class="line">(&#39;两点水&#39;, &#39;twowater&#39;, &#39;liangdianshui&#39;, [789, 100])</span><br></pre></td></tr></table></figure></p>
-<h1 id="删除元组"><a href="#删除元组" class="headerlink" title="删除元组"></a>删除元组</h1><p>tuple 元组中的元素值是不允许删除的，但我们可以使用 del 语句来删除整个元组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line"></span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,[123,456])</span><br><span class="line">print(tuple1)</span><br><span class="line">del tuple1</span><br></pre></td></tr></table></figure></p>
-<h1 id="tuple-（元组）运算符"><a href="#tuple-（元组）运算符" class="headerlink" title="tuple （元组）运算符"></a>tuple （元组）运算符</h1><p>与字符串一样，元组之间可以使用 + 号和 * 号进行运算。这就意味着他们可以组合和复制，运算后会生成一个新的元组。    </p>
-<table>
-<thead>
-<tr>
-<th>Python 表达式</th>
-<th>结果</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>len((1, 2, 3))</td>
-<td>3</td>
-<td>计算元素个数</td>
-</tr>
-<tr>
-<td>(1, 2, 3) + (4, 5, 6)</td>
-<td>(1, 2, 3, 4, 5, 6)</td>
-<td>连接</td>
-</tr>
-<tr>
-<td>(‘Hi!’,) * 4</td>
-<td>(‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’)</td>
-<td>复制</td>
-</tr>
-<tr>
-<td>3 in (1, 2, 3)</td>
-<td>True</td>
-<td>元素是否存在</td>
-</tr>
-<tr>
-<td>for x in (1, 2, 3): print(x)</td>
-<td>1 2 3</td>
-<td>迭代</td>
-</tr>
-</tbody>
-</table>
-<h1 id="元组内置函数"><a href="#元组内置函数" class="headerlink" title="元组内置函数"></a>元组内置函数</h1><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>len(tuple)</td>
-<td>计算元组元素个数</td>
-</tr>
-<tr>
-<td>max(tuple)</td>
-<td>返回元组中元素最大值</td>
-</tr>
-<tr>
-<td>min(tuple)</td>
-<td>返回元组中元素最小值</td>
-</tr>
-<tr>
-<td>tuple(seq)</td>
-<td>将列表转换为元组</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-7-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-7-list/" itemprop="url">python-notes-course-1-7-list</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T13:29:33+08:00">2022-03-30</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">4.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="创建list"><a href="#创建list" class="headerlink" title="创建list"></a>创建list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list1&#x3D;[&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123]</span><br></pre></td></tr></table></figure>
-<h1 id="如何访问list中的值"><a href="#如何访问list中的值" class="headerlink" title="如何访问list中的值"></a>如何访问list中的值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">name &#x3D; [&#39;一点水&#39;, &#39;两点水&#39;, &#39;三点水&#39;, &#39;四点水&#39;, &#39;五点水&#39;]</span><br><span class="line"></span><br><span class="line"># 通过索引来访问列表</span><br><span class="line">print(name[2])</span><br><span class="line"># 通过方括号的形式来截取列表中的数据</span><br><span class="line">print(name[0:2])</span><br><span class="line"># 左闭右开，只会打印： 一点水  两点水</span><br><span class="line"></span><br><span class="line"># 打印整个list</span><br><span class="line">print(name[:])</span><br><span class="line"></span><br><span class="line"># 左闭右开，从左边初始位置到右边的2，打印一点水  两点水</span><br><span class="line">print(name[:2])</span><br><span class="line"></span><br><span class="line"># 从左边2索引开始，一直打印到最后，三点水  四点水 五点水</span><br><span class="line">print(name[2:])</span><br></pre></td></tr></table></figure>
-<h1 id="如何更新list"><a href="#如何更新list" class="headerlink" title="如何更新list"></a>如何更新list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 通过索引对列表的数据项进行修改或更新</span><br><span class="line">name[1]&#x3D;&#39;2点水&#39;</span><br><span class="line">print(name)</span><br><span class="line"></span><br><span class="line"># 使用 append() 方法来添加列表项</span><br><span class="line">name.append(&#39;六点水&#39;)</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
-<h1 id="如何删除元素"><a href="#如何删除元素" class="headerlink" title="如何删除元素"></a>如何删除元素</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 使用 del 语句来删除列表的的元素</span><br><span class="line">del name[3]</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
-<h1 id="list常用运算符"><a href="#list常用运算符" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><h2 id="求长度"><a href="#求长度" class="headerlink" title="求长度"></a>求长度</h2><p>len(list)                              3</p>
-<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>[1, 2, 3] + [4, 5, 6] = [1, 2, 3, 4, 5, 6]      </p>
-<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><p>[‘Hi!’] * 4                            [‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]    </p>
-<h2 id="元素是否存在列表中"><a href="#元素是否存在列表中" class="headerlink" title="元素是否存在列表中"></a>元素是否存在列表中</h2><p>3 in [1, 2, 3]                        true or false</p>
-<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>for x in [1, 2, 3]: print x,        1 2 3</p>
-<h1 id="list常用运算符-1"><a href="#list常用运算符-1" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><table>
-<thead>
-<tr>
-<th>函数&amp;方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>len(list)</td>
-<td>列表元素个数</td>
-</tr>
-<tr>
-<td>max(list)</td>
-<td>返回列表元素最大值</td>
-</tr>
-<tr>
-<td>min(list)</td>
-<td>返回列表元素最小值</td>
-</tr>
-<tr>
-<td>list(seq)</td>
-<td>将元组转换为列表</td>
-</tr>
-<tr>
-<td>list.append(obj)</td>
-<td>在列表末尾添加新的对象</td>
-</tr>
-<tr>
-<td>list.count(obj)</td>
-<td>统计某个元素在列表中出现的次数</td>
-</tr>
-<tr>
-<td>list.extend(seq)</td>
-<td>在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
-</tr>
-<tr>
-<td>list.index(obj)</td>
-<td>从列表中找出某个值第一个匹配项的索引位置</td>
-</tr>
-<tr>
-<td>list.insert(index, obj)</td>
-<td>将对象插入列表</td>
-</tr>
-<tr>
-<td>list.pop(obj=list[-1])</td>
-<td>移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
-</tr>
-<tr>
-<td>list.remove(obj)</td>
-<td>移除列表中的一个元素（参数是列表中元素），并且不返回任何值</td>
-</tr>
-<tr>
-<td>list.reverse()</td>
-<td>反向列表中元素</td>
-</tr>
-<tr>
-<td>list.sort([func])</td>
-<td>对原列表进行排序</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/30/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/30/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/" itemprop="url">python-notes-course-1-6-多变量赋值</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T13:27:53+08:00">2022-03-30</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">439</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="多变量赋值"><a href="#多变量赋值" class="headerlink" title="多变量赋值"></a>多变量赋值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, c &#x3D; 1, 2, &quot;liangdianshui&quot;</span><br></pre></td></tr></table></figure>
-<p>以上实例，两个整型对象 1 和 2 的分配给变量 a 和 b，字符串对象 “liangdianshui” 分配给变量 c。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/">27</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
   </nav>
 
 
@@ -2274,7 +2207,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">268</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2389,7 +2322,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2446,7 +2387,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2569,7 +2514,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">283k</span>
   
 
   
@@ -2578,7 +2523,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">4:38</span>
+    <span title="站点总阅读时长">4:43</span>
   
 </div>
 
