@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/" itemprop="url">mysql控制台</a></h1>
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/" itemprop="url">database-mysql-notes-lock-自增锁</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,1429 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:27:59+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/" itemprop="url">database-mysql-notes-lock-插入意向锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:27:48+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E6%8E%92%E4%BB%96%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E6%8E%92%E4%BB%96%E9%94%81/" itemprop="url">database-mysql-notes-lock-意向排他锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:27:38+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E5%85%B1%E4%BA%AB%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E5%85%B1%E4%BA%AB%E9%94%81/" itemprop="url">database-mysql-notes-lock-意向共享锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:27:27+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/" itemprop="url">database-mysql-notes-lock-临键锁（Next-key-Locks）</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:27:13+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-行级锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:19:35+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-页级锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:19:19+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-%E8%A1%A8%E7%BA%A7%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-%E8%A1%A8%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-表级锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:18:57+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/" itemprop="url">database-mysql-notes-lock-GET-LOCK函数实现MySQL加锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:18:24+08:00">2022-04-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">185</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="GET-LOCK函数实现MySQL加锁"><a href="#GET-LOCK函数实现MySQL加锁" class="headerlink" title="GET_LOCK函数实现MySQL加锁"></a>GET_LOCK函数实现MySQL加锁</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/22/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E5%88%A0%E9%99%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/22/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E5%88%A0%E9%99%A4/" itemprop="url">binlog日志删除</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-22T00:00:00+08:00">2022-04-22</time>
             
 
             
@@ -471,7 +1893,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">467</span>
+                <span title="字数统计">1.2k</span>
               
 
               
@@ -507,1700 +1929,14 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>在环境变量Path中添加：<br>C:\Program Files\MySQL\MySQL Server 5.5\bin</p>
-<h1 id="打开cmd窗口"><a href="#打开cmd窗口" class="headerlink" title="打开cmd窗口"></a>打开cmd窗口</h1><p>在C:\Windows\System32\文件夹下搜索 cmd 并打开cmd窗口<br>C:\Windows\System32\cmd.exe</p>
-<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>mysql –help<br>执行验证是否配置成功</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/" itemprop="url">binlog开启</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h1><p>写 Binlog 的时机<br>对支持事务的引擎如InnoDB而言，必须要提交了事务才会记录binlog。binlog 什么时候刷新到磁盘跟参数 sync_binlog 相关。</p>
-<p>如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新；</p>
-<p>如果设置为不为0的值，则表示每 sync_binlog 次事务，MySQL调用文件系统的刷新操作刷新binlog到磁盘中。</p>
-<p>设为1是最安全的，在系统故障时最多丢失一个事务的更新，但是会对性能有所影响。</p>
-<p>如果 sync_binlog=0 或 sync_binlog大于1，当发生电源故障或操作系统崩溃时，可能有一部分已提交但其binlog未被同步到磁盘的事务会被丢失，恢复程序将无法恢复这部分事务。</p>
-<p>在MySQL 5.7.7之前，默认值 sync_binlog 是0，MySQL 5.7.7和更高版本使用默认值1，这是最安全的选择。一般情况下会设置为100或者0，牺牲一定的一致性来获取更好的性能。</p>
-<h2 id="文件及扩展"><a href="#文件及扩展" class="headerlink" title="文件及扩展"></a>文件及扩展</h2><p>binlog日志包括两类文件:</p>
-<p>二进制日志索引文件（文件名后缀为.index）用于记录所有有效的的二进制文件</p>
-<p>二进制日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML语句事件</p>
-<p>binlog是一个二进制文件集合，每个binlog文件以一个4字节的魔数开头，接着是一组Events:</p>
-<p>魔数：0xfe62696e对应的是0xfebin；</p>
-<p>Event：每个Event包含header和data两个部分；header提供了Event的创建时间，哪个服务器等信息，data部分提供的是针对该Event的具体信息，如具体数据的修改；</p>
-<p>第一个Event用于描述binlog文件的格式版本，这个格式就是event写入binlog文件的格式；</p>
-<p>其余的Event按照第一个Event的格式版本写入；</p>
-<p>最后一个Event用于说明下一个binlog文件；</p>
-<p>binlog的索引文件是一个文本文件，其中内容为当前的binlog文件列表</p>
-<p>当遇到以下3种情况时，MySQL会重新生成一个新的日志文件，文件序号递增：</p>
-<p>MySQL服务器停止或重启时</p>
-<p>使用 flush logs 命令；</p>
-<p>当 binlog 文件大小超过 max_binlog_size 变量的值时；</p>
-<p>max_binlog_size 的最小值是4096字节，最大值和默认值是 1GB (1073741824字节)。事务被写入到binlog的一个块中，所以它不会在几个二进制日志之间被拆分。<br>因此，如果你有很大的事务，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的日志都记录到当前日志文件中，直到事务结束，你可能会看到binlog文件大于 max_binlog_size 的情况。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/" itemprop="url">查找my.cnf位置</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="通过服务查找"><a href="#通过服务查找" class="headerlink" title="通过服务查找"></a>通过服务查找</h1><ol>
-<li>cmd -&gt; services.msc</li>
-<li>右键 MySQL -&gt; 属性 -&gt; 可执行文件路径：<br><img src="images/mysql可执行文件路径.png" alt=""></li>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>binlog本身是一类二进制文件。二进制文件更省空间，写入速度更快，是无法直接打开来查看的</p>
+<h1 id="查看二进制日志文件"><a href="#查看二进制日志文件" class="headerlink" title="查看二进制日志文件"></a>查看二进制日志文件</h1><p>show binary logs;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Log_name            File_size</span><br><span class="line">mysql-bin.000001	107</span><br></pre></td></tr></table></figure></p>
+<h1 id="常见的删除binlog方式"><a href="#常见的删除binlog方式" class="headerlink" title="常见的删除binlog方式"></a>常见的删除binlog方式</h1><ol>
+<li>使用reset master,该命令将会删除所有日志，并让日志文件重新从000001开始</li>
+<li>PURGE { BINARY | MASTER } LOGS { TO ‘log_name’ | BEFORE datetime_expr }<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">purge master logs to &quot;binlog_name.00000X&quot;</span><br></pre></td></tr></table></figure>
+将会清空00000X之前的所有日志文件.</li>
+<li>使用–expire_logs_days=N选项指定过了多少天日志自动过期清空</li>
 </ol>
-<h1 id="命令查找"><a href="#命令查找" class="headerlink" title="命令查找"></a>命令查找</h1><ol>
-<li>先打开mysql控制台<br><a href="./mysql控制台.md"></a></li>
-<li>查看 my.cnf 位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/12/tool-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/12/tool-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/" itemprop="url">Markdown设置字体大小、颜色、类型、加粗</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T00:00:00+08:00">2022-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/md/" itemprop="url" rel="index"><span itemprop="name">md</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="改变字体大小"><a href="#改变字体大小" class="headerlink" title="改变字体大小"></a>改变字体大小</h1><p>size：规定文本的尺寸大小，取值范围为1~7 ，浏览器默认值是 3。注意，size=50也是可以显示的，但与7的字体大小一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;font size&#x3D;1&gt;字体大小size&#x3D;1&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font size&#x3D;3&gt;字体大小size&#x3D;3&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure></p>
-<h1 id="改变字体颜色"><a href="#改变字体颜色" class="headerlink" title="改变字体颜色"></a>改变字体颜色</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;red&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;&quot;blue&quot;&gt;蓝色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;Yellow&gt;黄色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;YellowGreen&gt;黄绿色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;#ff0000&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#00ff00&gt;绿色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#0000ff&gt;蓝色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="改变字体类型"><a href="#改变字体类型" class="headerlink" title="改变字体类型"></a>改变字体类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face&#x3D;&quot;黑体&quot;&gt;黑体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;宋体&quot;&gt;宋体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;仿宋&quot;&gt;仿宋&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;幼圆&quot;&gt;幼圆&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;楷书&quot;&gt;楷书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文行楷&quot;&gt;华文行楷&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文隶书&quot;&gt;华文隶书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文新魏&quot;&gt;华文新魏&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文彩云&quot;&gt;华文彩云&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文琥珀&quot;&gt;华文琥珀&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;&lt;font size&#x3D;10 face&#x3D;&quot;华文行楷&quot;&gt;非业务原因重开&lt;&#x2F;font&gt;&lt;&#x2F;center&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/12/tool-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/12/tool-mappingStruct-Mapper%E6%B3%A8%E8%A7%A3%E4%B8%ADuses%E5%92%8Cimports%E5%8F%82%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">Markdown设置字体大小、颜色、类型、加粗</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T00:00:00+08:00">2022-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="uses"><a href="#uses" class="headerlink" title="uses"></a>uses</h1><p>使用其他手动编写的或者其他Mapper接口覆写相关的转换方法，不能循环引用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(uses=DateMapper<span class="class">.<span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="imports"><a href="#imports" class="headerlink" title="imports"></a>imports</h1><p>引用相关类，允许通过mapping.expression()、mapping.defaultExpression()直接使用这些类型<br>```java<br>@Mapper(imports = DateUtil.class)<br>public interface UserConvert {<br>    UserConvert INSTANCE = Mappers.getMapper(UserConvert.class);<br>    @Mappings({<br>            @Mapping(source = “name”, target = “userName”),<br>            // 以指定方法转换属性，这里如果不使用imports，则需要写全引用类包路径<br>            @Mapping(target = “birthday”, expression = “java(DateUtil.formatDate(entity.getBirthday()))”)<br>    })<br>    UserVO toVO(User entity);<br>}</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/07/swagger-swagger%E8%AE%BE%E7%BD%AE%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/07/swagger-swagger%E8%AE%BE%E7%BD%AE%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81/" itemprop="url">swagger设置账号密码</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T00:00:00+08:00">2022-04-07</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/swagger/" itemprop="url" rel="index"><span itemprop="name">swagger</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">13k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">13 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>swagger ui：<a href="https://github.com/xiaoymin/swagger-bootstrap-ui" target="_blank" rel="noopener">https://github.com/xiaoymin/swagger-bootstrap-ui</a></strong></li>
-</ul>
-<hr>
-<h1 id="swagger设置账号密码"><a href="#swagger设置账号密码" class="headerlink" title="swagger设置账号密码"></a>swagger设置账号密码</h1><ol>
-<li>pom.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- swagger --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.github.xiaoymin&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;swagger-bootstrap-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.9.6&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;!-- swagger2 start --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>注意 swagger-bootstrap-ui和knife4j-spring-boot-starter会冲突</li>
-<li>swagger配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">&#x2F;&#x2F;@EnableKnife4j</span><br><span class="line">@EnableSwaggerBootstrapUI</span><br><span class="line">public class Swagger2Config  &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">         * 全局参数</span><br><span class="line">         *</span><br><span class="line">         * @return List&lt;Parameter&gt;</span><br><span class="line">         *&#x2F;</span><br><span class="line">        private List&lt;Parameter&gt; parameter() &#123;</span><br><span class="line">            List&lt;Parameter&gt; params &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">            params.add(new ParameterBuilder().name(&quot;token&quot;)</span><br><span class="line">                    .description(&quot;认证令牌&quot;)</span><br><span class="line">                    .modelRef(new ModelRef(&quot;string&quot;))</span><br><span class="line">                    .parameterType(&quot;header&quot;)</span><br><span class="line">                    .required(false).build());</span><br><span class="line">            return params;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>application.properties配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swagger.basic.enable&#x3D;true</span><br><span class="line">swagger.basic.username&#x3D;admin</span><br><span class="line">swagger.basic.password&#x3D;123456</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">package com.xx.yy.adaptor.rest.config;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;</span><br><span class="line">import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.ParameterBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.schema.ModelRef;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.service.Parameter;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : Daiyin.Zhang</span><br><span class="line"> * @version ：$Id: Swagger2Config.java v 0.1 2021&#x2F;3&#x2F;31 10:43 Daiyin.Zhang Exp $</span><br><span class="line"> * @description : swagger2 config</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Slf4j</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">&#x2F;&#x2F;@EnableKnife4j</span><br><span class="line">@EnableSwaggerBootstrapUI</span><br><span class="line">public class Swagger2Config  &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;xx.center.env&#125;&quot;)</span><br><span class="line">    private String xxCenterEnv;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 全局参数</span><br><span class="line">     *</span><br><span class="line">     * @return List&lt;Parameter&gt;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private List&lt;Parameter&gt; parameter() &#123;</span><br><span class="line">        List&lt;Parameter&gt; params &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        params.add(new ParameterBuilder().name(&quot;token&quot;)</span><br><span class="line">                .description(&quot;认证令牌&quot;)</span><br><span class="line">                .modelRef(new ModelRef(&quot;string&quot;))</span><br><span class="line">                .parameterType(&quot;header&quot;)</span><br><span class="line">                .required(false).build());</span><br><span class="line">        return params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .groupName(&quot;XX系统普通接口管理&quot;)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.xx.yy.adaptor.rest.web&quot;))</span><br><span class="line">                &#x2F;&#x2F;可以根据url路径设置哪些请求加入文档，忽略哪些请求</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ApiInfo apiInfo() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(String.format(&quot;xx center API - %s &quot;, xxCenterEnv))</span><br><span class="line">                .description(&quot;XX系统相关API，使用JSON格式传输数据&quot;)</span><br><span class="line">                .version(&quot;1.0&quot;)</span><br><span class="line">                .contact(new Contact(&quot;张代银&quot;, &quot;&quot;, &quot;zhangdaiyin.cool@163.com&quot;))</span><br><span class="line">                .license(&quot;The Apache License, Version 2.0&quot;)</span><br><span class="line">                .licenseUrl(&quot;http:&#x2F;&#x2F;www.apache.org&#x2F;licenses&#x2F;LICENSE-2.0.html&quot;)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/07/database-mysql-notes-16-mysql%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">mysql事务、锁、隔离级别</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T00:00:00+08:00">2022-04-07</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="mysql事务、锁、隔离级别"><a href="#mysql事务、锁、隔离级别" class="headerlink" title="mysql事务、锁、隔离级别"></a>mysql事务、锁、隔离级别</h1><h2 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h2><h3 id="事务ACID原则"><a href="#事务ACID原则" class="headerlink" title="事务ACID原则"></a>事务ACID原则</h3><h4 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性(Atomicity)"></a>原子性(Atomicity)</h4><p>事务是数据库的逻辑工作单位，它对数据库的修改要么全部执行，要么全部不执行。</p>
-<h4 id="一致性-Consistemcy"><a href="#一致性-Consistemcy" class="headerlink" title="一致性(Consistemcy)"></a>一致性(Consistemcy)</h4><p>事务前后，数据库的状态都满足所有的完整性约束。</p>
-<h4 id="隔离性-Isolation"><a href="#隔离性-Isolation" class="headerlink" title="隔离性(Isolation)"></a>隔离性(Isolation)</h4><p>并发执行的事务是隔离的，一个不影响另一个。<br>如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。<br>通过设置数据库的隔离级别，可以达到不同的隔离效果。</p>
-<h4 id="持久性-Durability"><a href="#持久性-Durability" class="headerlink" title="持久性(Durability)"></a>持久性(Durability)</h4><p>在事务完成以后，该事务所对数据库所作的更改便持久的保存在数据库库中。</p>
-<h2 id="mysql锁"><a href="#mysql锁" class="headerlink" title="mysql锁"></a>mysql锁</h2><p>表锁  行锁<br>排他锁 共享锁</p>
-<h2 id="mysql隔离级别"><a href="#mysql隔离级别" class="headerlink" title="mysql隔离级别"></a>mysql隔离级别</h2><h3 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h3><h3 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h3><h3 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h3><h3 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/06/git-%E7%AC%94%E8%AE%B0-git%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/06/git-%E7%AC%94%E8%AE%B0-git%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%B9%B6%E5%85%B3%E8%81%94%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/" itemprop="url">git初始化本地仓库并关联远程仓库</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T00:00:00+08:00">2022-04-06</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">6.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="git初始化本地仓库并关联远程仓库"><a href="#git初始化本地仓库并关联远程仓库" class="headerlink" title="git初始化本地仓库并关联远程仓库"></a>git初始化本地仓库并关联远程仓库</h1><h2 id="本地仓库操作"><a href="#本地仓库操作" class="headerlink" title="本地仓库操作"></a>本地仓库操作</h2><ol>
-<li>初始化仓库并关联远程仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init  &#x2F;*初始化一个版本库*&#x2F;</span><br><span class="line">git remote add origin git@github.com:your_account&#x2F;repository.git &#x2F;*连接远程仓库your_account为远程仓库的账号，repository为远程仓库名*&#x2F;</span><br></pre></td></tr></table></figure></li>
-<li>推送到远程仓库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master &#x2F;*把本地库与远程库关联，并且把本地库的master分支推送到远程库中去*&#x2F;</span><br><span class="line"></span><br><span class="line"># 报错</span><br><span class="line">$ git push -u origin master</span><br><span class="line">error: src refspec master does not match any</span><br><span class="line">error: failed to push some refs to &#39;git@github.com:diabolo-hub&#x2F;py-practicing.git&#39;</span><br></pre></td></tr></table></figure></li>
-<li>git push –set-upstream origin master<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push --set-upstream origin master</span><br><span class="line">error: src refspec master does not match any</span><br><span class="line">error: failed to push some refs to &#39;git@github.com:diabolo-hub&#x2F;py-practicing.git&#39;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol>
-<li>本地仓库创建README.md（远程仓库没有README.md）<br>创建完README.md文件后，执行如下操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git add README.md</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git commit -m &quot;first commit&quot;</span><br><span class="line">[master (root-commit) 7f8065e] first commit</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 README.md</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (master)</span><br><span class="line">$ git branch -M main    &#x2F;&#x2F; 分支重命名（本地和远程）</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9 MINGW64 &#x2F;e&#x2F;workspace-all&#x2F;workspace-py&#x2F;projects-practicing (main)</span><br><span class="line">$ git push -u origin main</span><br><span class="line">Enumerating objects: 3, done.</span><br><span class="line">Counting objects: 100% (3&#x2F;3), done.</span><br><span class="line">Writing objects: 100% (3&#x2F;3), 218 bytes | 218.00 KiB&#x2F;s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To github.com:diabolo-hub&#x2F;py-practicing.git</span><br><span class="line"> * [new branch]      main -&gt; main</span><br><span class="line">Branch &#39;main&#39; set up to track remote branch &#39;main&#39; from &#39;origin&#39;.</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后可再使用git add . 添加并推送所有的文件<br>其中省略了 git remote add origin git@…..，因为之前已经添加了</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="github上的解决办法"><a href="#github上的解决办法" class="headerlink" title="github上的解决办法"></a>github上的解决办法</h1><ol>
-<li>在命令行上创建一个新的存储库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# ttt&quot; &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin git@github.com:diabolo-hub&#x2F;ttt.git</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure></li>
-<li>从命令行推送现有存储库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:diabolo-hub&#x2F;ttt.git</span><br><span class="line">git branch -M main</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T00:40:37+08:00">2022-04-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’"><a href="#node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’" class="headerlink" title="node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’"></a>node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-05 00:39:16,165] INFO Creating &#x2F;brokers&#x2F;ids&#x2F;0 (is it secure? false) (kafka.zk.KafkaZkClient)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR Error while creating ephemeral at &#x2F;brokers&#x2F;ids&#x2F;0, node already exists and owner &#39;72083030559031298&#39; does not match current session &#39;72083315371278336&#39; (kafka.zk.KafkaZkClient$CheckedEphemeral)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR [KafkaServer id&#x3D;0] Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)</span><br><span class="line">org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode &#x3D; NodeExists</span><br><span class="line">        at org.apache.zookeeper.KeeperException.create(KeeperException.java:126)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.getAfterNodeExists(KafkaZkClient.scala:1904)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.create(KafkaZkClient.scala:1842)</span><br><span class="line">        at kafka.zk.KafkaZkClient.checkedEphemeralCreate(KafkaZkClient.scala:1809)</span><br><span class="line">        at kafka.zk.KafkaZkClient.registerBroker(KafkaZkClient.scala:96)</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:324)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:109)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [KafkaServer id&#x3D;0] shutting down (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopping socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopped socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [ReplicaManager broker&#x3D;0] Shutting down (kafka.server.ReplicaManager)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [LogDirFailureHandler]: Shutting down (kafka.server.ReplicaManager$LogDirFailureHandler)</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>实例抢占 重新启动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/05/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动日志分析</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T00:20:21+08:00">2022-04-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="记录新的控制器，从现在开始将使用代理"><a href="#记录新的控制器，从现在开始将使用代理" class="headerlink" title="记录新的控制器，从现在开始将使用代理"></a>记录新的控制器，从现在开始将使用代理</h1><p>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)<br>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</p>
-<h1 id="For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition"><a href="#For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition" class="headerlink" title="For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition"></a>For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;0</span><br><span class="line">&gt;[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 4 on topic-partition test2-0, retrying (2 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,937] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 6 on topic-partition test2-0, retrying (1 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,938] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 8 on topic-partition test2-0, retrying (0 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,145] ERROR Error when sending message to topic test2 with key: null, value: 1 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.</span><br><span class="line">[2022-04-05 00:55:22,145] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>原因是在集群环境下建立topic的时候，没有建立分区和副本，所以报了这个错。重新修改topic信息，然后就可以了。</p>
-</blockquote>
 
           
         
@@ -2245,7 +1981,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
   </nav>
 
 
@@ -2292,7 +2028,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">311</span>
+                    <span class="site-state-item-count">333</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2417,7 +2153,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2478,7 +2226,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2601,7 +2355,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">319k</span>
+    <span title="站点总字数">347k</span>
   
 
   
@@ -2610,7 +2364,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">5:19</span>
+    <span title="站点总阅读时长">5:47</span>
   
 </div>
 

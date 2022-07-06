@@ -136,28 +136,32 @@
 
 
   
-  <meta name="keywords" content="MQ," />
+  <meta name="keywords" content="database,mysql," />
 
 
-<meta name="description" content="- Kafka入门教程: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yuan_xw&#x2F;article&#x2F;details&#x2F;51210954kafka：在Kafka集群中，没有“中心主节点”的概念，集群中所有的服务器都是对等的因此，可以在不做任何配置的更改的情况下实现服务器的的添加与删除，同样的消息的生产者和消费者也能够做到随意重启和机器的上下线。 术语 消息生产者：即：Producer，是消息的产">
+<meta name="description" content="索引下推（英文全称Index Condition Pushdown，简称ICP）表1234567891011CREATE TABLE &#96;student&#96; (  &#96;id&#96; int(11) NOT NULL AUTO_INCREMENT,  &#96;name&#96; varchar(255)  DEFAULT NULL,  &#96;age&#96; int  D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka简介">
-<meta property="og:url" content="http://yoursite.com/2022/03/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-kafka%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:title" content="索引下推">
+<meta property="og:url" content="http://yoursite.com/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/index.html">
 <meta property="og:site_name" content="diabolo随笔">
-<meta property="og:description" content="- Kafka入门教程: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yuan_xw&#x2F;article&#x2F;details&#x2F;51210954kafka：在Kafka集群中，没有“中心主节点”的概念，集群中所有的服务器都是对等的因此，可以在不做任何配置的更改的情况下实现服务器的的添加与删除，同样的消息的生产者和消费者也能够做到随意重启和机器的上下线。 术语 消息生产者：即：Producer，是消息的产">
+<meta property="og:description" content="索引下推（英文全称Index Condition Pushdown，简称ICP）表1234567891011CREATE TABLE &#96;student&#96; (  &#96;id&#96; int(11) NOT NULL AUTO_INCREMENT,  &#96;name&#96; varchar(255)  DEFAULT NULL,  &#96;age&#96; int  D">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-18T16:11:48.861Z">
+<meta property="og:image" content="http://yoursite.com/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/mysql-5.5.62-%E6%97%A0%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png">
+<meta property="og:image" content="http://yoursite.com/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/mysq.-5.6-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png">
+<meta property="article:published_time" content="2022-03-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-06T07:42:24.897Z">
 <meta property="article:author" content="diabolo">
-<meta property="article:tag" content="MQ">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/mysql-5.5.62-%E6%97%A0%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2022/03/18/消息队列-kafka-kafka简介/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/03/19/database-mysql-index-1-索引下推/"/>
 
 
 
@@ -166,7 +170,7 @@
     sidebar: "",
   };
 </script>
-  <title>kafka简介 | diabolo随笔</title>
+  <title>索引下推 | diabolo随笔</title>
   
 
 
@@ -374,7 +378,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-kafka%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -391,7 +395,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kafka简介</h1>
+          <h1 class="post-title" itemprop="name headline">索引下推</h1>
         
 
         <div class="post-meta">
@@ -407,7 +411,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -428,14 +432,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/index/" itemprop="url" rel="index"><span itemprop="name">index</span></a></span>
 
                 
                 
@@ -468,7 +479,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">6.1k</span>
+                <span title="字数统计">4.1k</span>
               
 
               
@@ -482,7 +493,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -502,92 +513,39 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><hr>
-<h2 id="Kafka入门教程-https-blog-csdn-net-yuan-xw-article-details-51210954"><a href="#Kafka入门教程-https-blog-csdn-net-yuan-xw-article-details-51210954" class="headerlink" title="- Kafka入门教程: https://blog.csdn.net/yuan_xw/article/details/51210954"></a>- <strong>Kafka入门教程: <a href="https://blog.csdn.net/yuan_xw/article/details/51210954" target="_blank" rel="noopener">https://blog.csdn.net/yuan_xw/article/details/51210954</a></strong></h2><h1 id="kafka："><a href="#kafka：" class="headerlink" title="kafka："></a>kafka：</h1><p>在Kafka集群中，没有“中心主节点”的概念，集群中所有的服务器都是对等的<br>因此，可以在不做任何配置的更改的情况下实现服务器的的添加与删除，同样的消息的生产者和消费者也能够做到随意重启和机器的上下线。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ol>
-<li>消息生产者：即：Producer，是消息的产生的源头，负责生成消息并发送到Kafka服务器上。</li>
-<li>消息消费者：即：Consumer，是消息的使用方，负责消费Kafka服务器上的消息。</li>
-<li>主题：即：Topic，由用户定义并配置在Kafka服务器，用于建立生产者和消息者之间的订阅关系：生产者发送消息到指定的Topic下，消息者从这个Topic下消费消息。</li>
-<li>消息分区：即：Partition，一个Topic下面会分为很多分区，<br>例如：“kafka-test”这个Topic下可以分为6个分区，分别由两台服务器提供，那么通常可以配置为让每台服务器提供3个分区，<br>假如服务器ID分别为0、1，则所有的分区为0-0、0-1、0-2和1-0、1-1、1-2。<br>Topic物理上的分组，一个 topic可以分为多个 partition，每个 partition 是一个有序的队列。<br>partition中的每条消息都会被分配一个有序的 id（offset）。</li>
-<li>Broker：即Kafka的服务器，用户存储消息，Kafa集群中的一台或多台服务器统称为 broker。</li>
-<li>消费者分组：Group，用于归组同类消费者，<br>在Kafka中，多个消费者可以共同消息一个Topic下的消息，每个消费者消费其中的部分消息，这些消费者就组成了一个分组，拥有同一个分组名称，通常也被称为消费者集群。</li>
-<li>Offset：消息存储在Kafka的Broker上，消费者拉取消息数据的过程中需要知道消息在文件中的偏移量，这个偏移量就是所谓的Offset。<h2 id="Kafka中Broker"><a href="#Kafka中Broker" class="headerlink" title="Kafka中Broker"></a>Kafka中Broker</h2></li>
-<li>Broker：即Kafka的服务器，用户存储消息，Kafa集群中的一台或多台服务器统称为 broker。</li>
-<li>Message在Broker中通Log追加的方式进行持久化存储。并进行分区（patitions)。</li>
-<li>为了减少磁盘写入的次数,broker会将消息暂时buffer起来,当消息的个数(或尺寸)达到一定阀值时,再flush到磁盘,这样减少了磁盘IO调用的次数。</li>
-<li>Broker没有副本机制，一旦broker宕机，该broker的消息将都不可用。Message消息是有多份的。</li>
-<li>Broker不保存订阅者的状态，由订阅者自己保存。</li>
-<li>无状态导致消息的删除成为难题（可能删除的消息正在被订阅），kafka采用基于时间的SLA(服务水平保证)，消息保存一定时间（通常为7天）后会被删除。</li>
-<li>消息订阅者可以rewind back到任意位置重新进行消费，当订阅者故障时，可以选择最小的offset(id)进行重新读取消费消息。<h2 id="Kafka的Message组成"><a href="#Kafka的Message组成" class="headerlink" title="Kafka的Message组成"></a>Kafka的Message组成</h2></li>
-<li>Message消息：是通信的基本单位，每个 producer 可以向一个 topic（主题）发布一些消息。</li>
-<li>Kafka中的Message是以topic为基本单位组织的，不同的topic之间是相互独立的。每个topic又可以分成几个不同的partition(每个topic有几个partition是在创建topic时指定的)，每个partition存储一部分Message。</li>
-<li>partition中的每条Message包含了以下三个属性：<ul>
-<li>offset      即：消息唯一标识:对应类型：long</li>
-<li>MessageSize 对应类型：int32</li>
-<li>data        是message的具体内容。<h2 id="Kafka的Partitions分区"><a href="#Kafka的Partitions分区" class="headerlink" title="Kafka的Partitions分区"></a>Kafka的Partitions分区</h2></li>
+        <script src="\assets\js\APlayer.min.js"> </script><h1 id="索引下推（英文全称Index-Condition-Pushdown，简称ICP）"><a href="#索引下推（英文全称Index-Condition-Pushdown，简称ICP）" class="headerlink" title="索引下推（英文全称Index Condition Pushdown，简称ICP）"></a>索引下推（英文全称Index Condition Pushdown，简称ICP）</h1><h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;student&#96; (</span><br><span class="line">  &#96;id&#96; int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  &#96;name&#96; varchar(255)  DEFAULT NULL,</span><br><span class="line">  &#96;age&#96; int  DEFAULT 0,</span><br><span class="line">  &#96;class&#96; varchar(255)  DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (&#96;id&#96;),</span><br><span class="line">  KEY &#96;index_two&#96; (&#96;name&#96;,&#96;age&#96;)</span><br><span class="line">) ENGINE&#x3D;InnoDB;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;这张表增加一个复合索引</span><br><span class="line"> (&#96;name&#96;,&#96;age&#96;)</span><br></pre></td></tr></table></figure>
+<h2 id="判断是否走索引"><a href="#判断是否走索引" class="headerlink" title="判断是否走索引"></a>判断是否走索引</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from student where name like &#39;peng%&#39; and age &#x3D; 23;</span><br></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><ol>
+<li>5.5.62-log版本<br><img src="1-索引下推/mysql-5.5.62-无索引下推.png" alt=""><blockquote>
+<p>Extra: Using where</p>
+</blockquote>
+</li>
+<li>5.6及之后<br><img src="1-索引下推/mysq.-5.6-索引下推.png" alt=""><blockquote>
+<p>可以看到Extra字段显示为USING INDEX CONDITION，这就表明这个SQL使用了索引下推</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在MySQL5.6之前，只能从name字段中找出符合条件的行然后开始回表，到聚集索引上找出数据行，再对age字段进行对比，把符合条件的数据加入到结果集中。</span><br><span class="line"></span><br><span class="line">在MySQL5.6引入了索引下推优化，在索引的遍历过程中，对索引中包含字段先做判断，这里对age字段进行判断。直接将age字段不满足的数据行排除，从而减少回表的次数。</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h1 id="问答区"><a href="#问答区" class="headerlink" title="问答区"></a>问答区</h1><ol>
+<li><p>问题1 当复合索引列为（name，age，address）时 以下SQL能使用索引吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where name like &#39;peng%&#39; and age &#x3D; 23;</span><br></pre></td></tr></table></figure>
+<p>可以，遇到like会中断后续元素的匹配，但只能使用name这个字段，mysql会一直向右匹配直到遇到范围查询（&gt;、&lt;、between、like）就停止匹配。<br>范围列可以用到索引，但是范围列后面的列无法用到索引。<br>即索引最多用于一个范围列，因此如果查询条件中有两个范围列则无法全用到索引。</p>
+</li>
+<li><p>问题2 索引下推只能存在联合索引里吗？<br>是的，非联合索引无法使用索引下推。</p>
+</li>
+<li><p>问题3 索引下推在哪些情况下无法使用？</p>
+</li>
+</ol>
+<ul>
+<li>下推条件遇到子查询</li>
+<li>下推条件遇到函数</li>
+<li>非InnoDB表和MyISAM表</li>
 </ul>
-</li>
-<li>Kafka基于文件存储.通过分区，可以将日志内容分散到多个server上,来避免文件尺寸达到单机磁盘的上限，每个partiton都会被当前server(kafka实例)保存。</li>
-<li>可以将一个topic切分多任意多个partitions，来消息保存/消费的效率。</li>
-<li>越多的partitions意味着可以容纳更多的consumer，有效提升并发消费的能力。<h2 id="Kafka的Consumers"><a href="#Kafka的Consumers" class="headerlink" title="Kafka的Consumers"></a>Kafka的Consumers</h2></li>
-<li>消息和数据消费者，订阅 topics并处理其发布的消息的过程叫做 consumers。</li>
-<li>在 kafka中,我们可以认为一个group是一个“订阅者”，一个Topic中的每个partions，只会被一个“订阅者”中的一个consumer消费，不过一个 consumer可以消费多个partitions中的消息（消费者数据小于Partions的数量时）。注意：kafka的设计原理决定，对于一个topic，同一个group中不能有多于partitions个数的consumer同时消费，否则将意味着某些consumer将无法得到消息。</li>
-<li>一个partition中的消息只会被group中的一个consumer消息。每个group中consumer消息消费互相独立。<h2 id="Kafka的持久化"><a href="#Kafka的持久化" class="headerlink" title="Kafka的持久化"></a>Kafka的持久化</h2></li>
-<li>一个Topic可以认为是一类消息，每个topic将被分成多partition(区),每个partition在存储层面是append log文件。任何发布到此partition的消息都会被直接追加到log文件的尾部，每条消息在文件中的位置称为offset（偏移量），partition是以文件的形式存储在文件系统中。</li>
-<li>Logs文件根据broker中的配置要求,保留一定时间后删除来释放磁盘空间<blockquote>
-<p>partition: Topic物理上的分组，一个 topic可以分为多个 partition，每个 partition 是一个有序的队列。partition中的每条消息都会被分配一个有序的 id（offset）。</p>
-</blockquote>
-</li>
-<li>为数据文件建索引：稀疏存储，每隔一定字节的数据建立一条索引。<h2 id="Kafka的通讯协议"><a href="#Kafka的通讯协议" class="headerlink" title="Kafka的通讯协议"></a>Kafka的通讯协议</h2></li>
-<li>Kafka的Producer、Broker和Consumer之间采用的是一套自行设计基于TCP层的协议，根据业务需求定制，而非实现一套类似ProtocolBuffer的通用协议。</li>
-<li>基本数据类型：（Kafka是基于Scala语言实现的，类型也是Scala中的数据类型）<blockquote>
-<p>定长数据类型：int8,int16,int32和int64，对应到Java中就是byte, short, int和long。<br>变长数据类型：bytes和string。变长的数据类型由两部分组成，分别是一个有符号整数N(表示内容的长度)和N个字节的内容。其中，N为-1表示内容为null。bytes的长度由int32表示，string的长度由int16表示。<br>数组：数组由两部分组成，分别是一个由int32类型的数字表示的数组长度N和N个元素。</p>
-</blockquote>
-</li>
-<li>Kafka通讯的基本单位是Request/Response</li>
-<li>基本结构<br>RequestOrResponse =&gt; MessageSize(RequestMessage | ResponseMessage)</li>
-<li>通讯过程：<br>客户端打开与服务器端的Socket<br>往Socket写入一个int32的数字(数字表示这次发送的Request有多少字节)<br>服务器端先读出一个int32的整数从而获取这次Request的大小<br>然后读取对应字节数的数据从而得到Request的具体内容<br>服务器端处理了请求后，也用同样的方式来发送响应。</li>
-<li>RequestMessage结构：<br>RequestMessage =&gt; ApiKey ApiVersion CorrelationId ClientId Request  </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">描术</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ApiKey</td>
-<td style="text-align:center">int16</td>
-<td style="text-align:center">表示这次请求的API编号</td>
-</tr>
-<tr>
-<td style="text-align:center">ApiVersion</td>
-<td style="text-align:center">int16</td>
-<td style="text-align:center">表示请求的API的版本，有了版本后就可以做到后向兼容</td>
-</tr>
-<tr>
-<td style="text-align:center">CorrelationId</td>
-<td style="text-align:center">int32</td>
-<td style="text-align:center">由客户端指定的一个数字唯一标示这次请求的id，服务器端在处理完请求后也会把同样的CorrelationId写到Response中，这样客户端就能把某个请求和响应对应起来了。</td>
-</tr>
-<tr>
-<td style="text-align:center">ClientId</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">客户端指定的用来描述客户端的字符串，会被用来记录日志和监控，它唯一标示一个客户端。</td>
-</tr>
-<tr>
-<td style="text-align:center">Request</td>
-<td style="text-align:center">—</td>
-<td style="text-align:center">Request的具体内容。</td>
-</tr>
-</tbody>
-</table>
 <ol>
-<li>ResponseMessage结构：<br>ResponseMessage =&gt; CorrelationId Response<br>|名称 |类型 |描术|<br>|:—-:|:—-:|:—-:|<br>|CorrelationId     |int32         |对应Request的CorrelationId。  |<br>|Response        |—            |对应Request的Response，不同的Request的Response的字段是不一样的。 |</li>
+<li>问题4 索引下推如何开启和关闭？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 索引下推默认是开启的</span><br><span class="line">set optimizer_switch&#x3D;&#39;index_condition_pushdown&#x3D;off&#39;; &#x2F;&#x2F; 关闭</span><br><span class="line">set optimizer_switch&#x3D;&#39;index_condition_pushdown&#x3D;on&#39;; &#x2F;&#x2F; 开启</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
+<p>索引下推在非主键索引上的优化，可以有效减少回表的次数，大大提升了查询的效率，在平时工作中可以根据业务情况通过优化索引来达到使用索引下推，提高业务吞吐量。</p>
 
       
     </div>
@@ -616,7 +574,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/MQ/" rel="tag"># MQ</a>
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
         </div>
       
@@ -629,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/03/18/database-mysql-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-MVCC/" rel="next" title="MVCC">
-                <i class="fa fa-chevron-left"></i> MVCC
+              <a href="/2022/03/19/database-mysql-excep-there-can-be-only-oneTIMESTAMP-column-with-CURRENT-TIMESTAMP-in-DEFAULT-or-ON-UPDATE/" rel="next" title="there can be only oneTIMESTAMP column with CURRENT_TIMESTAMP in DEFAULT or ON UPDATE">
+                <i class="fa fa-chevron-left"></i> there can be only oneTIMESTAMP column with CURRENT_TIMESTAMP in DEFAULT or ON UPDATE
               </a>
             
           </div>
@@ -639,8 +599,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/03/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A6%82%E8%A7%88-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="prev" title="消息队列">
-                消息队列 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/03/19/database-mysql-excep-Unable-to-load-authentication-plugin-caching-sha2-password/" rel="prev" title="Unable to load authentication plugin 'caching_sha2_password'">
+                Unable to load authentication plugin 'caching_sha2_password' <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -750,7 +710,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">311</span>
+                    <span class="site-state-item-count">333</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -875,7 +835,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -936,7 +908,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1043,7 +1021,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka入门教程-https-blog-csdn-net-yuan-xw-article-details-51210954"><span class="nav-number">1.</span> <span class="nav-text">- Kafka入门教程: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yuan_xw&#x2F;article&#x2F;details&#x2F;51210954</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kafka："><span class="nav-number"></span> <span class="nav-text">kafka：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka中Broker"><span class="nav-number">2.</span> <span class="nav-text">Kafka中Broker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka的Message组成"><span class="nav-number">3.</span> <span class="nav-text">Kafka的Message组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka的Partitions分区"><span class="nav-number">4.</span> <span class="nav-text">Kafka的Partitions分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka的Consumers"><span class="nav-number">5.</span> <span class="nav-text">Kafka的Consumers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka的持久化"><span class="nav-number">6.</span> <span class="nav-text">Kafka的持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kafka的通讯协议"><span class="nav-number">7.</span> <span class="nav-text">Kafka的通讯协议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#索引下推（英文全称Index-Condition-Pushdown，简称ICP）"><span class="nav-number">1.</span> <span class="nav-text">索引下推（英文全称Index Condition Pushdown，简称ICP）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表"><span class="nav-number">1.1.</span> <span class="nav-text">表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断是否走索引"><span class="nav-number">1.2.</span> <span class="nav-text">判断是否走索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">1.3.</span> <span class="nav-text">结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问答区"><span class="nav-number">2.</span> <span class="nav-text">问答区</span></a></li></ol></div>
             
 
           </div>
@@ -1075,7 +1053,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">319k</span>
+    <span title="站点总字数">347k</span>
   
 
   
@@ -1084,7 +1062,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">5:19</span>
+    <span title="站点总阅读时长">5:47</span>
   
 </div>
 

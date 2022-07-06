@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-22/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-1-yaml%E5%AE%9A%E4%B9%89Pod%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-22/" itemprop="url">动态链接的理解与常量池的作用</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-1-yaml%E5%AE%9A%E4%B9%89Pod%E8%AF%A6%E8%A7%A3/" itemprop="url">yaml定义Pod详解</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
             
 
             
@@ -429,21 +429,598 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 #指定当前描述文件遵循v1版本的Kubernetes API</span><br><span class="line">kind: Pod #我们在描述一个pod</span><br><span class="line">metadata:</span><br><span class="line">  name: twocontainers #指定pod的名称</span><br><span class="line">  namespace: default #指定当前描述的pod所在的命名空间</span><br><span class="line">  labels: #指定pod标签</span><br><span class="line">    app: twocontainers</span><br><span class="line">  annotations: #指定pod注释</span><br><span class="line">    version: v0.5.0</span><br><span class="line">    releasedBy: david</span><br><span class="line">    purpose: demo</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: sise #容器的名称</span><br><span class="line">    image: quay.io&#x2F;openshiftlabs&#x2F;simpleservice:0.5.0 #创建容器所使用的镜像</span><br><span class="line">    ports:</span><br><span class="line">    - containerPort: 9876 #应用监听的端口</span><br><span class="line">  - name: shell #容器的名称</span><br><span class="line">    image: centos:7 #创建容器所使用的镜像</span><br><span class="line">    command: #容器启动命令</span><br><span class="line">      - &quot;bin&#x2F;bash&quot;</span><br><span class="line">      - &quot;-c&quot;</span><br><span class="line">      - &quot;sleep 10000&quot;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-0-deployment-yaml%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-0-deployment-yaml%E8%AF%A6%E8%A7%A3/" itemprop="url">deployment.yaml详解</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt; vim nginx-deployment.yaml</span><br><span class="line"></span><br><span class="line">apiVersion: extensions&#x2F;v1beta1                  # K8S对应的API版本</span><br><span class="line">kind: Deployment                                # 对应的类型</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-deployment</span><br><span class="line">  labels:</span><br><span class="line">    name: nginx-deployment</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1                                   # 镜像副本数量</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:                                   # 容器的标签 可和service关联</span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: nginx                          # 容器名和镜像</span><br><span class="line">          image: nginx</span><br><span class="line">          imagePullPolicy: Always</span><br><span class="line"></span><br><span class="line">&gt; kubectl create -f nginx-deployment.yaml</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          6s</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          15m</span><br><span class="line">&gt; kubectl get deployment</span><br><span class="line">NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">nginx-deployment   1         1         1            1           2m</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为使用deployment会部署很多个Pod所以Pod的名字后面会带一串随机数避免重复</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-1-Deployment%E6%89%A9%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-1-Deployment%E6%89%A9%E5%AE%B9/" itemprop="url">Deployment扩容</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl scale deployment nginx-deployment --replicas&#x3D;3</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-9r4p8   1&#x2F;1       Running   0          22s</span><br><span class="line">nginx-deployment-68fcbc9696-lkff2   1&#x2F;1       Running   0          22s</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          5m</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          21m</span><br></pre></td></tr></table></figure>
+<h1 id="最关键的功能就是可以弹性扩容根据CPU的占用率-需要结合资源限制一同使用-后面会进行实际演示"><a href="#最关键的功能就是可以弹性扩容根据CPU的占用率-需要结合资源限制一同使用-后面会进行实际演示" class="headerlink" title="最关键的功能就是可以弹性扩容根据CPU的占用率(需要结合资源限制一同使用),后面会进行实际演示"></a>最关键的功能就是可以弹性扩容根据CPU的占用率(需要结合资源限制一同使用),后面会进行实际演示</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl autoscale deployment nginx-deployment --min&#x3D;2 --max&#x3D;10 --cpu-percent&#x3D;80</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-3-Deployment%E6%A0%B9%E6%8D%AEcpu%E5%8D%A0%E7%94%A8%E7%8E%87%E5%BC%B9%E6%80%A7%E6%89%A9%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-3-Deployment%E6%A0%B9%E6%8D%AEcpu%E5%8D%A0%E7%94%A8%E7%8E%87%E5%BC%B9%E6%80%A7%E6%89%A9%E5%AE%B9/" itemprop="url">Deployment根据cpu占用率弹性扩容</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -563,7 +1140,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-2-Deployment%E7%BC%A9%E5%AE%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -582,7 +1159,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-51-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E5%AF%B9%E6%AF%94/" itemprop="url">静态变量与局部变量的对比</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-2-Deployment%E7%BC%A9%E5%AE%B9/" itemprop="url">Deployment缩容</a></h1>
         
 
         <div class="post-meta">
@@ -598,7 +1175,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
             
 
             
@@ -619,21 +1196,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -661,215 +1238,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h1><p>按照数据类型分：</p>
-<ol>
-<li>基本数据类型</li>
-<li>引用数据类型<br>按照在类中申明的位置：</li>
-<li>成员变量<br>在使用前，都经历过默认初始化值<br> a. 类变量（static）<pre><code>linking的prepare阶段：给类变量默认赋值 --&gt; initial阶段：给类变量显示赋值及静态代码块赋值
-</code></pre> b. 实例变量（非static）<pre><code>随着对象的创建，会在堆空间中分配实例变量空间，并进行默认赋值
-</code></pre></li>
-<li>局部变量<br>在使用前必须要进行显示赋值，否则编译不通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pubulic void test() &#123;</span><br><span class="line">    int num;</span><br><span class="line">    System.out.println(num); &#x2F;&#x2F; 错误信息：变量num未进行初始化</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>局部变量表中的数据必须显示赋值，否则无法使用</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h1><ol>
-<li>在栈帧中，与性能调优关系最为密切的部分就是前面提到的局部变量表。<br>在方法执行时，虚拟机使用局部变量表完成方法的传递。</li>
-<li>局部变量表中的变量也是重要的垃圾回收 根节点，只要被局部变量表中直接或间接引用的对象都不会被回收。</li>
-<li>局部变量表越大，栈帧越大</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-52-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E7%89%B9%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-52-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E7%89%B9%E7%82%B9/" itemprop="url">操作数栈的特点（Operand Stack）</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2k</span>
+                <span title="字数统计">2.1k</span>
               
 
               
@@ -905,54 +1274,11 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h1><ol>
-<li>每一个独立的栈帧中除了包含局部变量表以外，还包含一个后进先出（Last-In-First-Out）的操作数栈，也可以称之为 表达式栈（Expression Stack）。  </li>
-<li>操作数栈，在方法执行的过程中，根据字节码指令，往栈中写入数据或提取数据，即入栈（push）/出栈（pop）。<ul>
-<li>某些字节码指令将值压入操作数栈，其余的字节码指令将操作数取出栈。使用它们后再把结果压入栈。</li>
-<li>比如：执行复制、交换、求和等操作。</li>
-</ul>
-</li>
-<li>例： <pre><code class="java"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>{
- <span class="keyword">byte</span> i = <span class="number">15</span>;
- <span class="keyword">int</span> j = <span class="number">8</span>;
- <span class="keyword">int</span> k = i + j;
-}
-</code></pre>
-<ul>
-<li>首先将方法test会翻译成字节码</li>
-<li>对应的 byte i = 15 字节码指令，会将 15 入栈到 操作数栈</li>
-<li>对应的 int j = 8 字节码指令，也会将 8 入栈到 操作数栈</li>
-<li>然后再出栈，在执行引擎中进行add求和运算，再讲结果压入操作数栈<blockquote>
-<p>对于局部变量，也会将 K 放入局部变量表中</p>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="缩容到指定个数"><a href="#缩容到指定个数" class="headerlink" title="缩容到指定个数"></a>缩容到指定个数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl scale deployment nginx-deployment --replicas&#x3D;1</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          6m</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          21m</span><br></pre></td></tr></table></figure>
+<h1 id="Deployment回保障你的容器的运行状态-如果删除Pod-Deployment会立即重启一个"><a href="#Deployment回保障你的容器的运行状态-如果删除Pod-Deployment会立即重启一个" class="headerlink" title="Deployment回保障你的容器的运行状态,如果删除Pod,Deployment会立即重启一个"></a>Deployment回保障你的容器的运行状态,如果删除Pod,Deployment会立即重启一个</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl delete pod nginx-deployment-68fcbc9696-tr5fm</span><br><span class="line">  pod &quot;nginx-deployment-68fcbc9696-tr5fm&quot; deleted</span><br><span class="line">  </span><br><span class="line">  &gt; kubectl get pod</span><br><span class="line">  NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">  nginx-deployment-68fcbc9696-ndfzj   1&#x2F;1       Running   0          12s</span><br><span class="line">  nginx-mysql-pod                     2&#x2F;2       Running   0          32m</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Deployment会配合RC调度启动新的Pod从而保障定量的Pod数量</p>
 </blockquote>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="理论1"><a href="#理论1" class="headerlink" title="理论1"></a>理论1</h1><ol>
-<li>操作数栈，主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。</li>
-<li>操作数栈就是JVM执行殷勤的一个工作区，当一个方法刚开始执行的时候，一个新的栈帧也会随之被创建出来，<b>这个方法的操作数栈是空的。</b></li>
-<li>每一个操作数栈都会拥有一个明确的栈深度 用于存储数值，其所需的最大深度在编译器就定义好了，保存在方法的Code属性中，为max_stack的值。</li>
-<li>栈中的任何一个元素都是可以任意的Java数据类型<ul>
-<li>32bit的类型占用一个栈单位深度</li>
-<li>64bit的类型占用两个栈单位深度</li>
-</ul>
-</li>
-<li>操作数栈 并非采用访问索引的方式来进行数据访问的，而是只能通过标准的入栈（push）和出栈（pop）操作来完成一次数据访问。<blockquote>
-<p>局部变量表的深度和操作数栈的深度 无关联</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="理论2"><a href="#理论2" class="headerlink" title="理论2"></a>理论2</h1><ol>
-<li>如果被调用的方法带有返回值的话，其返回值将会被压入当前栈帧的操作数栈中，并更新PC寄存器中下一条需要执行的字节码指令</li>
-<li>操作数栈中元素的数据类型必须与字节码指令的序列严格匹配，这由编译器在编译器期间进行验证，同时在类加载过程中的类检验阶段的数据流分析阶段要再次验证。</li>
-<li>另外，我们说Java虚拟机的解析引擎是基于栈的执行引擎，其中的栈指的就是操作数栈。</li>
-</ol>
-<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ol>
-<li>栈的一种，先进后出  </li>
-<li>使用数组来实现的</li>
-</ol>
-<h2 id="栈："><a href="#栈：" class="headerlink" title="栈："></a>栈：</h2><p>可以使用数组或链表来实现</p>
 
           
         
@@ -1009,7 +1335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-1-postStart/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1028,7 +1354,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-53-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E5%88%86%E6%9E%90/" itemprop="url">操作数栈的字节码分析</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-1-postStart/" itemprop="url">postStart</a></h1>
         
 
         <div class="post-meta">
@@ -1044,7 +1370,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
             
 
             
@@ -1065,21 +1391,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1107,7 +1433,606 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.8k</span>
+                <span title="字数统计">6.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_33591903/article/details/103854648" target="_blank" rel="noopener">基于PostStart的环境演示</a></p>
+<h1 id="Kubernetes为我们提供了两种钩子函数"><a href="#Kubernetes为我们提供了两种钩子函数" class="headerlink" title="Kubernetes为我们提供了两种钩子函数:"></a>Kubernetes为我们提供了两种钩子函数:</h1><ul>
+<li>PostStart :这个钩子在容器创建后立即执行。但是，并不能保证钩子将在容器ENTRYPOINT之前运行，因为没有参数传递给处理程序。 主要用于资源部署、环境准备等。不过需要注意的是如果钩子花费时间过长以及于不能运行或者挂起，容器将不能达到Running状态。另外，PostStart的执行相对于容器的代码执行是异步的。</li>
+<li>PreStop :钩子在容器终止前立即被调用。它是阻塞的，意味着它是同步的，所以它必须在删除容器的调用触发之前完成。主要用于优雅关闭应用程序、通知其他系统等。如果钩子在执行期间挂起，Pod阶段将停留在Running状态并且不会达到failed状态。另外，PreStop的执行现对于SIGTERM信息，也是异步的，k8s也不会等待PreStop执行完成。</li>
+</ul>
+<h1 id="Pod终止的过程"><a href="#Pod终止的过程" class="headerlink" title="Pod终止的过程"></a>Pod终止的过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户发送命令删除Pod，Pod进入Terminating状态</span><br><span class="line">service摘除Pod节点</span><br><span class="line">当kubelet看到Pod已被标记终止，开始执行preStop钩子，假如preStop hook的运行时间超过了grace period，kubelet会发送SIGTERM并等2秒</span><br></pre></td></tr></table></figure>
+<h1 id="在Pod-Hook钩子函数中有Exec和HTTP两种方式"><a href="#在Pod-Hook钩子函数中有Exec和HTTP两种方式" class="headerlink" title="在Pod Hook钩子函数中有Exec和HTTP两种方式"></a>在Pod Hook钩子函数中有Exec和HTTP两种方式</h1><ul>
+<li>Exec – 用于执行一段特定的命令，不过要注意的是该命令消耗的资源会被计入容器</li>
+<li>HTTP – 对容器上的特定端点执行HTTP请求</li>
+</ul>
+<h1 id="基于PostStart命令演示"><a href="#基于PostStart命令演示" class="headerlink" title="基于PostStart命令演示"></a>基于PostStart命令演示</h1><p>首先我们先进行演示PostStart的两种方式</p>
+<h2 id="第一种Exec"><a href="#第一种Exec" class="headerlink" title="第一种Exec"></a>第一种Exec</h2><p>我们echo一段话追加到 /tmp/message，在Pod启动前进行操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: abcdocker</span><br><span class="line">  labels:</span><br><span class="line">    name: abcdocker</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: abcdocker</span><br><span class="line">    image: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: 80</span><br><span class="line">    lifecycle:</span><br><span class="line">      postStart:</span><br><span class="line">        exec:</span><br><span class="line">          command:</span><br><span class="line">          - bash</span><br><span class="line">          - -c</span><br><span class="line">          - &#39;echo &quot;https:&#x2F;&#x2F;i4t.com&quot; &gt; &#x2F;tmp&#x2F;message&#39;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用kubectl-apply-f-exec-test-yaml进行创建"><a href="#使用kubectl-apply-f-exec-test-yaml进行创建" class="headerlink" title="使用kubectl apply -f exec_test.yaml进行创建"></a>使用kubectl apply -f exec_test.yaml进行创建</h3><p>可以通过下面查看结果，pod的目录已经有我们在yaml文件写的测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@abcdocker yaml]# kubectl get pod</span><br><span class="line">NAME        READY   STATUS    RESTARTS   AGE</span><br><span class="line">abcdocker   1&#x2F;1     Running   0          37s</span><br><span class="line"> </span><br><span class="line">[root@abcdocker yaml]# kubectl exec -it -n default abcdocker &#x2F;bin&#x2F;bash</span><br><span class="line">root@abcdocker:&#x2F;# cat &#x2F;tmp&#x2F;message</span><br><span class="line">https:&#x2F;&#x2F;i4t.com</span><br><span class="line">root@abcdocker:&#x2F;#</span><br><span class="line">root@abcdocker:&#x2F;# exit</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>创建容器后，Kubernetes立即发送postStart事件。但是，不能保证在调用Container的入口点之前先调用postStart处理程序。<br>postStart处理程序相对于Container的代码异步运行，但是Kubernetes对容器的管理会阻塞，直到postStart处理程序完成。<br>在postStart处理程序完成之前，容器的状态不会设置为RUNNING。</p>
+</blockquote>
+<h2 id="第二种HTTP方式"><a href="#第二种HTTP方式" class="headerlink" title="第二种HTTP方式"></a>第二种HTTP方式</h2><p>使用HttpGet配置Host、Path、Port<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: abcdocker</span><br><span class="line">  labels:</span><br><span class="line">    name: abcdocker</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: abcdocker</span><br><span class="line">    image: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: 80</span><br><span class="line">    lifecycle:</span><br><span class="line">      postStart:</span><br><span class="line">        httpGet:</span><br><span class="line">          host: i4t.com</span><br><span class="line">          path: index.html</span><br><span class="line">          port: 80</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-2-2-kubernetes%E7%BB%88%E6%AD%A2pod%E7%9A%84%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-2-2-kubernetes%E7%BB%88%E6%AD%A2pod%E7%9A%84%E6%AD%A5%E9%AA%A4/" itemprop="url">kubernetes终止pod的步骤</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">774</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="简单的说Kubernetes终止Pod生命周期的每一步"><a href="#简单的说Kubernetes终止Pod生命周期的每一步" class="headerlink" title="简单的说Kubernetes终止Pod生命周期的每一步"></a>简单的说Kubernetes终止Pod生命周期的每一步</h1><ol>
+<li>Pod 设置为Terminating状态，并从所有服务的Endpoints列表中删除</li>
+<li>此时，Pod停止，但是Pod中运行的容器不受影响</li>
+<li>PreStop Hook被执行</li>
+<li>preStop Hook发送容器特殊命令或者Http请求到Pod中</li>
+<li>此时，Kubernetes将向Pod中的容器发送SIGTERM信号，这个信号即通知容器他们很快将进行关闭。</li>
+<li>Kubernetes等待优雅的终止</li>
+<li>此时，Kubernetes等待指定的时间称为优雅终止宽限期。默认情况下，这是30秒(可以修改)，值得注意的是，PreStop Hook和SIGTREM信息是属于并行执行，Kubernetes不会等待PreStop Hook完成。<blockquote>
+<p>如果Pod在terminationGracePeriod完成之前推出，Kubernetes将进入释放阶段，<br>如果容器在优雅终止宽限期(terminationGracePeriod限定时间)，则会发送SIGKILL信号并强制删除。与此同时，所有的Kubernetes对象也会被清除。</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-yaml%E9%80%9A%E7%94%A8%E8%AF%A6%E8%A7%A3-1-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-yaml%E9%80%9A%E7%94%A8%E8%AF%A6%E8%A7%A3-1-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE/" itemprop="url">编写部署nginx.yaml文件</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="\assets\js\APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-0-pod-yaml%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-0-pod-yaml%E8%AF%A6%E8%A7%A3/" itemprop="url">0-pod.yaml详解</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.4k</span>
               
 
               
@@ -1143,13 +2068,9 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="例-操作过程"><a href="#例-操作过程" class="headerlink" title="例-操作过程"></a>例-操作过程</h1><p><img src="操作数栈的字节码分析-1.png" alt=""><br><img src="操作数栈的字节码分析-2.png" alt=""><br><img src="操作数栈的字节码分析-3.png" alt=""><br><img src="操作数栈的字节码分析-4.png" alt=""><br><img src="操作数栈的字节码分析-5.png" alt=""></p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void getSum() &#123;</span><br><span class="line">    int m &#x3D; 10;</span><br><span class="line">    int n &#x3D; 20;</span><br><span class="line">    int k &#x3D; m + n;</span><br><span class="line">    return k;</span><br><span class="line">&#125;</span><br><span class="line">publicvoid testGetSum() &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取上一个栈帧返回的结果，并保存在操作数栈中</span><br><span class="line">    int i &#x3D; getSum();</span><br><span class="line">    int j &#x3D; 10;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>以上案例中，getSum()返回的K属于int类型，在getSum()字节码栈帧执行完后，在下一个方法testGetSum中会直接将k的值加载并压入 操作数栈<br>此时，如果我们返回的是一个对象，而不是基础数据类型int，压入栈的则是一个具体对象？</li>
-<li>常见的 i++ 和 ++i 的区别<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public void add() &#123;</span><br><span class="line">    &#x2F;&#x2F; 第1类</span><br><span class="line">    int i1 &#x3D; 10;</span><br><span class="line">    i1++;</span><br><span class="line">    </span><br><span class="line">    int i2 &#x3D; 10;</span><br><span class="line">    ++i2;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第2类</span><br><span class="line">    int i3 &#x3D; 10;</span><br><span class="line">    int i4 &#x3D; i3++;</span><br><span class="line">    </span><br><span class="line">    int i5 &#x3D; 10;</span><br><span class="line">    int i6 &#x3D; ++i5;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第3类</span><br><span class="line">    int i7 &#x3D; 10;</span><br><span class="line">    i7 &#x3D; i7++;</span><br><span class="line">    </span><br><span class="line">    int i8 &#x3D; 10;</span><br><span class="line">    i8 &#x3D; ++i8;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第4类</span><br><span class="line">    int i9 &#x3D; 10;</span><br><span class="line">    int i10 &#x3D; i9++ + ++i9;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+            <script src="\assets\js\APlayer.min.js"> </script><h1 id="web-app-nginx-yaml"><a href="#web-app-nginx-yaml" class="headerlink" title="web.app.nginx.yaml"></a>web.app.nginx.yaml</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps&#x2F;v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: web</span><br><span class="line">spec:</span><br><span class="line">  # pod终止最多可容忍的时间，terminationGracePeriodSeconds 值默认是30秒</span><br><span class="line">  # 当我们执行kubectl delete的时候也可以通过--grace-period参数显示指定一个优雅退出时间来覆盖Pod中的配置，如果我们配置的grace period超过时间之后，k8s就只能选择强制kill Pod</span><br><span class="line">  terminationGracePeriodSeconds: 30</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: web</span><br><span class="line">  replicas: 1</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: web</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: web</span><br><span class="line">        image: nginx</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br></pre></td></tr></table></figure>
+<p>这里就不进行演示了，因为日志会看不到这个请求</p>
+<h1 id="pod-2"><a href="#pod-2" class="headerlink" title="pod-2"></a>pod-2</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt; vim nginx-mysql-pod.yaml</span><br><span class="line">apiVersion: v1                          # api版本</span><br><span class="line">kind: Pod                               # 组件类型</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-mysql-pod</span><br><span class="line">  labels:                               # 标签</span><br><span class="line">    app: nginx-mysql</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: nginx                         # 名称</span><br><span class="line">    image: nginx                        # image地址</span><br><span class="line">  - name: mysql                         </span><br><span class="line">    image: mysql                        </span><br><span class="line">    env:                                # 环境变量</span><br><span class="line">    - name: MYSQL_ROOT_PASSWORD</span><br><span class="line">      value: mysql</span><br><span class="line"></span><br><span class="line">&gt; kubectl create -f nginx-mysql-pod.yaml</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME              READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-mysql-pod   2&#x2F;2       Running   0          1m</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1206,7 +2127,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-2-1-PreStop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1225,7 +2146,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-55-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9A%84%E4%BD%9C%E7%94%A8/" itemprop="url">动态链接的理解与常量池的作用</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-2-1-PreStop/" itemprop="url">PreStop</a></h1>
         
 
         <div class="post-meta">
@@ -1241,7 +2162,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
             
 
             
@@ -1262,21 +2183,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1304,7 +2225,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.5k</span>
+                <span title="字数统计">4.3k</span>
               
 
               
@@ -1318,7 +2239,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -1340,979 +2261,14 @@
       
         
           
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="栈帧的内部结构"><a href="#栈帧的内部结构" class="headerlink" title="栈帧的内部结构"></a>栈帧的内部结构</h1><p><img src="栈帧的内部结构.png" alt=""><br>附加信息： 帧数据区<br>动态链接： 也叫做 指向运行时常量池的方法引用  </p>
-<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><ol>
-<li>每一个栈帧内部都包含一个指向运行时常量池中该栈帧所属方法的引用。<br>包含这个引用的目的就是为了支持当前方法的代码能够实现 动态链接（Dynamic Linking）。比如：invokedynamic指令<blockquote>
-<p>帧数据区中保存着访问常量池的指针</p>
-</blockquote>
-</li>
-<li>在Java源文件被编译到字节码文件中时，所有的变量和方法引用都作为符号引用（Symbolic Reference）保存在class文件的常量池里。<br>比如：描述一个方法调用了另外的其他方法时，就是通过常量池中指向方法的符号引用来标识的，  <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2>那么 动态链接的作用 就是为了将这些符号引用转换为调用方法的直接引用。  </li>
-</ol>
-<h1 id="方法区与栈的关联结构"><a href="#方法区与栈的关联结构" class="headerlink" title="方法区与栈的关联结构"></a>方法区与栈的关联结构</h1><p><img src="方法区与栈的关联结构.png" alt=""></p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicLinkingTest&#123;</span><br><span class="line">    </span><br><span class="line">    private static int num &#x3D; 1;</span><br><span class="line"></span><br><span class="line">    public void methodA() &#123;</span><br><span class="line">        打印(&quot;方法A...&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    public void methodB() &#123;</span><br><span class="line">        打印(&quot;方法B...&quot;)</span><br><span class="line"></span><br><span class="line">        methodA();</span><br><span class="line"></span><br><span class="line">        num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>javap -v DynamicLinkingTest.class 分析</p>
-</blockquote>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><ol>
-<li>为什么需要 常量池？<br>有常量池的话 每个对象/属性 只需要一份，其他地方使用该对象/属性的引用，而不是每个地方写一份<br>常量池的作用，就是为了提供一些符号和常量，便于指令的识别。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-56-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/" itemprop="url">方法的调用</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">567</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="方法的绑定机制：静态绑定与动态绑定"><a href="#方法的绑定机制：静态绑定与动态绑定" class="headerlink" title="方法的绑定机制：静态绑定与动态绑定"></a>方法的绑定机制：静态绑定与动态绑定</h1><ol>
-<li>在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关</li>
-</ol>
-<h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p>
-<h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" itemprop="url">栈顶缓存技术</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/jvm/atguigu/" itemprop="url" rel="index"><span itemprop="name">atguigu</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">503</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈指令，这同时也就意味着将需要更多的指令分派（instruction dispatch）次数和内存读/写次数。<br>寄存器架构： 指令更少，执行速度更快</p>
-<h1 id="栈顶缓存来源"><a href="#栈顶缓存来源" class="headerlink" title="栈顶缓存来源"></a>栈顶缓存来源</h1><p>由于操作数是存储在内存中的，因此频繁地执行内存读/写操作必然会影响执行速度。<br>为了解决这个问题，HotSpot JVM的设计者们提出了 栈顶缓存（ToS， Top-of-Stack Cashing）技术，<br><b>将栈顶元素全部缓存在物理CPU的寄存器中，以此降低对内存的读/写次数，提升执行引擎的执行效率。</b></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/02/tool-ideal-notes-ideal%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%B9%E6%B3%95%E6%A8%AA%E7%BA%BF%E5%88%86%E5%89%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/02/tool-ideal-notes-ideal%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%B9%E6%B3%95%E6%A8%AA%E7%BA%BF%E5%88%86%E5%89%B2/" itemprop="url">ideal工具中方法横线分割</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-02T00:00:00+08:00">2022-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/ideal/" itemprop="url" rel="index"><span itemprop="name">ideal</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/ideal/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">258</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="ideal工具中方法横线分割"><a href="#ideal工具中方法横线分割" class="headerlink" title="ideal工具中方法横线分割"></a>ideal工具中方法横线分割</h1><p>setting -&gt; Editor -&gt; General -&gt; Appearance -&gt; Show method separators (勾选)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/27/database-mybatis-notes-mybatis%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE%E6%97%B6%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E4%B8%BB%E9%94%AEID/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/27/database-mybatis-notes-mybatis%E6%96%B0%E5%A2%9E%E6%95%B0%E6%8D%AE%E6%97%B6%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E4%B8%BB%E9%94%AEID/" itemprop="url">mybatis新增数据时返回数据主键ID</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-27T00:00:00+08:00">2022-04-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mybatis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><h1 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h1><p>useGeneratedKeys=”true” keyProperty=”id”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id&#x3D;&quot;insert&quot; useGeneratedKeys&#x3D;&quot;true&quot; keyProperty&#x3D;&quot;id&quot;  keyColumn&#x3D;&quot;id&quot; parameterType&#x3D;&quot;com.dao.dataObject.XXDO&quot;&gt;</span><br><span class="line">    insert into t_xx ... 正常普通的插入语句</span><br><span class="line">  &lt;&#x2F;insert&gt;</span><br></pre></td></tr></table></figure></p>
-<h1 id="code"><a href="#code" class="headerlink" title="code"></a>code</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XXDoMapper.insert(XXDO);</span><br><span class="line">return xxDO.getId();</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/25/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/25/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/" itemprop="url">database-mysql-notes-index-索引下推</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T09:45:47+08:00">2022-04-25</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="\assets\js\APlayer.min.js"> </script><hr>
-<p><a href="https://zhuanlan.zhihu.com/p/470255206" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/470255206</a></p>
-<hr>
-<h1 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h1><p>索引下推是从 MySQL5.6 开始引入一个特性，英文是 index condition pushdown，一般简称为 ICP，索引下推通过减少回表的次数，来提高数据库的查询效率。<br>索引下推是 MySQL5.6 中开始引入的新特</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;user2&#96; ( &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT, &#96;username&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, &#96;age&#96; int(11) DEFAULT NULL, &#96;address&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, PRIMARY KEY (&#96;id&#96;), KEY &#96;username&#96; (&#96;username&#96;(191),&#96;age&#96;) ) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;100001 DEFAULT CHARSET&#x3D;utf8mb4 COLLATE&#x3D;utf8mb4_unicode_ci;\</span><br></pre></td></tr></table></figure>
-<p>表中有一个由 username 和 age 组成的复合索引，索引名字就叫 username</p>
-<h2 id="MySQL-5-5"><a href="#MySQL-5-5" class="headerlink" title="MySQL 5.5"></a>MySQL 5.5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username&#x3D;&#39;1&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>首先 MySQL 的 server 层调用存储引擎获取 username=‘1’ 的第一条记录。</li>
-<li>存储引擎找到 username=‘1’ 的第一条记录后，在 B+Tree 的叶子结点中保存着主键 id，此时通过回表操作，去主键索引中找到该条记录的完整数据，并返回给 server 层。</li>
-<li>server 层拿到数据之后，判断该条记录的 age 是否为 99，如果 age=99，就把该条记录返回给客户端，如果 age!=99，那就就丢弃该记录。</li>
-<li>由于 username+age 组成的复合索引只是一个普通索引，并不是唯一索引（如果是唯一索引，那么这个查询就到此结束了），所以还需要继续去搜索有没有满足条件的记录。<blockquote>
-<p>username和age联合索引且同时使用时，会先使用一个条件（username）查询到结果记录，然后回表到server层，再通过age筛选，不通过的丢弃</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>类似这样的模糊查询，有多条的时候，在上面的基础上，通过的留下，然后再查询下一条数据（又要进行回表）</p>
-</blockquote>
-<h2 id="MySQL-5-7"><a href="#MySQL-5-7" class="headerlink" title="MySQL 5.7"></a>MySQL 5.7</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>MySQL 的 server 层首先调用存储引擎定位到第一个以 j 开头的 username。</li>
-<li>找到记录后，存储引擎并不急着回表，而是继续判断这条记录的 age 是否等于 99，如果 age=99，再去回表，如果 age 不等于 99，就不去回表了，直接继续读取下一条记录。</li>
-<li>存储引擎将读取到的数据行返回给 server 层，此时如果还有其他非索引的查询条件，server 层再去继续过滤，在我们上面的案例中，此时没有其他查询条件了。假设 server 层还有其他的过滤条件，并且这个过滤条件把刚刚查到的记录过滤掉了，那么就会通过记录的 next_record 属性读取下一条记录，然后重复第二步。<blockquote>
-<p>username和age联合索引且同时使用时，先使用（username）查询到结果记录，然后接着使用age过滤，等拿到所有的结果后，再进行回表， （所有的结果都拿到后，一次回表）</p>
-</blockquote>
-</li>
-</ol>
+            <script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_33591903/article/details/103854648" target="_blank" rel="noopener">基于PreStop的环境演示</a></p>
+<h1 id="起因"><a href="#起因" class="headerlink" title="起因:"></a>起因:</h1><p>在生产环境中使用spring框架，由于服务更新过程中，容器服务会被直接停止，部分请求仍被分发到终止的容器，导致服务出现500错误，这部分错误请求数据占用比较少，<br>因为Pod滚动更新都是一对一。因为部分用户会产生服务器错误的情况，考虑使用优雅的终止方式，将错误请求降到最低，直至滚动更新不影响用户</p>
+<p>Eureka是一个基于REST的服务，作为Spring Cloud服务注册中心，用于定位服务来进行中间层服务器的负载均衡和故障转移。<br>各服务启动时，会向Eureka Server注册自己的信息(IP、端口、服务信息等)，Eureka Server会存储这些信息，<br>微服务启动后，会周期性(默认30秒)的向Eureka Server发送心跳以续约自己的租期，并且可以从eureka中获取其他微服务的地址信息，执行相关逻辑</p>
+<p>由于Eureka默认的心跳检测为30秒，当K8S下线Pod时Eureka会有30秒的异常问题，所以我们需要在Pod 停止前发送一条请求，通知Eureka进行下线操作，<br>这样进行优雅的停止对用户的影响做到最小</p>
+<h1 id="具体yaml如下"><a href="#具体yaml如下" class="headerlink" title="具体yaml如下"></a>具体yaml如下</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: abcdocker</span><br><span class="line">  labels:</span><br><span class="line">    name: abcdocker</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: abcdocker</span><br><span class="line">    image: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: 80</span><br><span class="line">    lifecycle:</span><br><span class="line">      preStop:</span><br><span class="line">        exec:</span><br><span class="line">          command:</span><br><span class="line">            - bash</span><br><span class="line">            - -c</span><br><span class="line">            - &#39;curl -X POST --data DOWN http:&#x2F;&#x2F;127.0.0.1:8080&#x2F;service-registry&#x2F;instance-status  -H</span><br><span class="line">              &quot;Content-Type: application&#x2F;vnd.spring-boot.actuator.v2+json;charset&#x3D;UTF-8&quot;;sleep 30&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">####### 参数解释</span><br><span class="line">127.0.0.1:8080 #代表eureka地址</span><br><span class="line">service-registry    #代表注册中心</span><br><span class="line">DOWN        #执行down请求</span><br><span class="line">sleep       #等待30秒</span><br></pre></td></tr></table></figure>
+<h2 id="当我们删除Pod的时候就会执行上面的命令操作，并且等待30秒"><a href="#当我们删除Pod的时候就会执行上面的命令操作，并且等待30秒" class="headerlink" title="当我们删除Pod的时候就会执行上面的命令操作，并且等待30秒"></a>当我们删除Pod的时候就会执行上面的命令操作，并且等待30秒</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@yzsjhl82-135 yaml]# kubectl get pod</span><br><span class="line">NAME        READY   STATUS    RESTARTS   AGE</span><br><span class="line">abcdocker   1&#x2F;1     Running   0          2m16s</span><br><span class="line">[root@yzsjhl82-135 yaml]# kubectl delete pod abcdocker</span><br><span class="line">pod &quot;abcdocker&quot; deleted</span><br></pre></td></tr></table></figure>
+<h2 id="此刻Pod不会马上删除，而是执行Exec中的命令，并等待30秒"><a href="#此刻Pod不会马上删除，而是执行Exec中的命令，并等待30秒" class="headerlink" title="此刻Pod不会马上删除，而是执行Exec中的命令，并等待30秒"></a>此刻Pod不会马上删除，而是执行Exec中的命令，并等待30秒</h2><p>配置中添加了一个sleep时间，主要是作为服务停止的缓冲时间</p>
 
           
         
@@ -2357,7 +2313,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
   </nav>
 
 
@@ -2404,7 +2360,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">311</span>
+                    <span class="site-state-item-count">333</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2529,7 +2485,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2590,7 +2558,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2713,7 +2687,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">319k</span>
+    <span title="站点总字数">347k</span>
   
 
   
@@ -2722,7 +2696,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">5:19</span>
+    <span title="站点总阅读时长">5:47</span>
   
 </div>
 

@@ -147,7 +147,7 @@
 <meta property="og:description" content="方法的绑定机制：静态绑定与动态绑定 在JVM中，将符号引用转换为调用方法的直接引用与方法的绑定机制相关  静态链接当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。 动态链接如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，由于这种引">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-02T17:24:34.854Z">
+<meta property="article:modified_time" content="2022-05-24T12:00:52.977Z">
 <meta property="article:author" content="diabolo">
 <meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">567</span>
+                <span title="字数统计">4.8k</span>
               
 
               
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -514,6 +514,40 @@
 </ol>
 <h2 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h2><p>当一个字节码文件被装载进JVM内部时，如果被调用的目标方法在编译期可知，且运行期保持不变时。<br>这种情况下将调用方法的符号引用转换为直接引用的过程称之为 静态链接。</p>
 <h2 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h2><p>如果被调用的方法在编译期无法被确定下来，也就是说，只能够在程序运行期将调用方法的符号引用转换为直接引用，<br>由于这种引用转换过程具备动态性，因此也就被称之为 动态链接。</p>
+<h1 id="早期绑定和晚期绑定"><a href="#早期绑定和晚期绑定" class="headerlink" title="早期绑定和晚期绑定"></a>早期绑定和晚期绑定</h1><p>对应的方法的绑定机制为： 早期绑定（Early Binding）和晚期绑定（Late Binding）。<br>绑定是一个字段、方法或者类在符号引用被替换为直接引用的过程，这仅仅发生一次。</p>
+<h2 id="早期绑定"><a href="#早期绑定" class="headerlink" title="早期绑定"></a>早期绑定</h2><p>早期绑定就是指被：<br>被调用的目标方法如果在编译期可知，且运行期保持不变时，<br>即可将这个方法与所属的类进行绑定，这样一来，由于明确了被调用的目标方法究竟是哪一个，因此也就可以使用静态链接的方式将符号引用转换为直接引用。</p>
+<h2 id="晚期绑定"><a href="#晚期绑定" class="headerlink" title="晚期绑定"></a>晚期绑定</h2><p>如果被调用的方法在编译器无法被确定下来，只能够在程序运行期根据实际的类型绑定相关的方法，这种绑定方式也就被称之为晚期绑定。</p>
+<h2 id="关注点"><a href="#关注点" class="headerlink" title="关注点"></a>关注点</h2><p>支持封装、继承和多态等面向对象特性的语言都有一个共性，既然这一类的编程语言具备多态特性，那么自然也就具备早期绑定和晚期绑定两种绑定方式</p>
+<h1 id="虚方法和非虚方法"><a href="#虚方法和非虚方法" class="headerlink" title="虚方法和非虚方法"></a>虚方法和非虚方法</h1><h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>Java中任何一个普通的方法其实都具备虚函数的特征，如果在Java程序中不希望某个方法拥有虚函数的特征时，则可以使用关键字<b>final</b>来标记这个方法。</p>
+<h2 id="非虚方法"><a href="#非虚方法" class="headerlink" title="非虚方法"></a>非虚方法</h2><ul>
+<li>如果方法在编译期就确定了具体的调用版本，这个版本在运行时是不可变的，这样的方法称为 非虚方法。</li>
+<li>静态方法、私有方法、final方法、实例构造器、父类方法都是 非虚方法。</li>
+<li>其他方法称之为 虚方法。<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3>在类加载的解析阶段就可以进行解析，如下是非虚方法举例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Father &#123;</span><br><span class="line">    public static void print(String str) &#123;</span><br><span class="line">        System.out.println(&quot;father &quot; + str);</span><br><span class="line">    &#125;</span><br><span class="line">    public void show(String str) &#123;</span><br><span class="line">        System.out.println(&quot;father &quot; + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Son extends Father &#123;</span><br><span class="line">&#125;</span><br><span class="line">public class VirtualMethodTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Son.print(&quot;coder&quot;);</span><br><span class="line">        &#x2F;&#x2F;Father fa &#x3D; new Father();</span><br><span class="line">        &#x2F;&#x2F;fa.show(&quot;xxx.com&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+虚拟机中提供了以下几条方法调用指令：</li>
+<li>普通调用指令：<ol>
+<li>invokestatic: 调用静态方法，解析阶段确定唯一方法版本</li>
+<li>invokespecial: 调用<init>方法、私有及父类方法，解析阶段确定唯一方法版本</li>
+<li>invokevirtual: 调用所有虚方法</li>
+<li>invokeinterface: 调用接口方法</li>
+</ol>
+</li>
+<li>动态调用指令：<ol>
+<li>invokedynamic: 动态解析出需要调用的方法，然后执行</li>
+</ol>
+</li>
+</ul>
+<p>前面四条指令固化在虚拟机内部，方法的调用执行不可人为干预，而invokedynamic指令则支持由用户确定方法版本。<br>其中 invokestatic 指令和 invokespecial 指令调用的方法称为 非虚方法，其余的（final修饰的除外）称为 虚方法。</p>
+<h1 id="关于invokedynamic指令"><a href="#关于invokedynamic指令" class="headerlink" title="关于invokedynamic指令"></a>关于invokedynamic指令</h1><ul>
+<li>JVM字节码指令集一直比较稳定，一直到Java7中才增加了一个 invokedynamic 指令，这是 Java为了实现【动态类型语言】 支持而做的一种改进。</li>
+<li>但是在Java7中并没有提供直接生成invokedynamic指令的方法，需要借助ASM这种底层字节码工具来产生invokedynamic指令。<br>直到Java8的Lambda表达式的出现，invokedynamic指令的生成，在Java中才有了直接的生成方式。</li>
+<li>Java7中增加的动态语言类型支持的本质是对Java虚拟机规范的修改，而不是对Java语言规则的修改，这一块相对来讲比较复杂，增加了虚拟机中的方法调用，最直接的受益者就是运行在Java平台的动态语言的编译器。<h2 id="动态类型语言和静态类型语言"><a href="#动态类型语言和静态类型语言" class="headerlink" title="动态类型语言和静态类型语言"></a>动态类型语言和静态类型语言</h2></li>
+<li>动态类型语言和静态类型语言两者的区别就在与对类型的检查是在编译期还是在运行期，满足前者就是静态类型语言，反之是动态类型语言。</li>
+<li>静态类型语言是判断变量自身的类型信息；动态类型语言是判断变量值的类型信息，变量没有类型信息，变量值才有类型信息，这是动态语言的一个重要特征。</li>
+</ul>
+<h1 id="方法重写的本质"><a href="#方法重写的本质" class="headerlink" title="方法重写的本质"></a>方法重写的本质</h1><p>Java语言中方法重写的本质：</p>
+<ol>
+<li>找到操作数栈顶的</li>
+</ol>
 
       
     </div>
@@ -555,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/05/02/java-jvm-atguigu-54-%E6%A0%88%E9%A1%B6%E7%BC%93%E5%AD%98%E6%8A%80%E6%9C%AF/" rel="next" title="栈顶缓存技术">
-                <i class="fa fa-chevron-left"></i> 栈顶缓存技术
+              <a href="/2022/05/02/tool-ideal-notes-ideal%E5%B7%A5%E5%85%B7%E4%B8%AD%E6%96%B9%E6%B3%95%E6%A8%AA%E7%BA%BF%E5%88%86%E5%89%B2/" rel="next" title="ideal工具中方法横线分割">
+                <i class="fa fa-chevron-left"></i> ideal工具中方法横线分割
               </a>
             
           </div>
@@ -676,7 +710,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">311</span>
+                    <span class="site-state-item-count">333</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -801,7 +835,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -862,7 +908,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -969,7 +1021,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法的绑定机制：静态绑定与动态绑定"><span class="nav-number">1.</span> <span class="nav-text">方法的绑定机制：静态绑定与动态绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态链接"><span class="nav-number">1.1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态链接"><span class="nav-number">1.2.</span> <span class="nav-text">动态链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法的绑定机制：静态绑定与动态绑定"><span class="nav-number">1.</span> <span class="nav-text">方法的绑定机制：静态绑定与动态绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态链接"><span class="nav-number">1.1.</span> <span class="nav-text">静态链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态链接"><span class="nav-number">1.2.</span> <span class="nav-text">动态链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#早期绑定和晚期绑定"><span class="nav-number">2.</span> <span class="nav-text">早期绑定和晚期绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#早期绑定"><span class="nav-number">2.1.</span> <span class="nav-text">早期绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#晚期绑定"><span class="nav-number">2.2.</span> <span class="nav-text">晚期绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关注点"><span class="nav-number">2.3.</span> <span class="nav-text">关注点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚方法和非虚方法"><span class="nav-number">3.</span> <span class="nav-text">虚方法和非虚方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚函数"><span class="nav-number">3.1.</span> <span class="nav-text">虚函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非虚方法"><span class="nav-number">3.2.</span> <span class="nav-text">非虚方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">3.2.1.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于invokedynamic指令"><span class="nav-number">4.</span> <span class="nav-text">关于invokedynamic指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态类型语言和静态类型语言"><span class="nav-number">4.1.</span> <span class="nav-text">动态类型语言和静态类型语言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法重写的本质"><span class="nav-number">5.</span> <span class="nav-text">方法重写的本质</span></a></li></ol></div>
             
 
           </div>
@@ -1001,7 +1053,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">319k</span>
+    <span title="站点总字数">347k</span>
   
 
   
@@ -1010,7 +1062,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">5:19</span>
+    <span title="站点总阅读时长">5:47</span>
   
 </div>
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-03-01T02:46:48.191Z</updated>
+  <updated>2022-07-06T06:55:37.405Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,474 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring-注解-1-Lookup</title>
+    <link href="http://yoursite.com/2022/07/06/spring-%E6%B3%A8%E8%A7%A3-1-Lookup/"/>
+    <id>http://yoursite.com/2022/07/06/spring-注解-1-Lookup/</id>
+    <published>2022-07-06T06:37:25.778Z</published>
+    <updated>2022-07-06T06:55:37.405Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr><pre><code>@Lookup注解用法: https://blog.csdn.net/qq_25863845/article/details/123475147</code></pre><hr><h1 id="Lookup概述"><a href="#Lookup概述" class="headerlink" title="@Lookup概述"></a>@Lookup概述</h1><p>@Lookup用于单例组件引用prototype组件。<br>单例组件使用@Autowired方式注入prototype组件时，被引入prototype组件也会变成单例的。<br>@Lookup可以保证被引入的组件保持prototype模式。</p><h2 id="多例bean注入后变成单例bean的情况"><a href="#多例bean注入后变成单例bean的情况" class="headerlink" title="多例bean注入后变成单例bean的情况"></a>多例bean注入后变成单例bean的情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package com.hl.config;</span><br><span class="line"> </span><br><span class="line">import com.hl.bean.Car;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.ComponentScan;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"> </span><br><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;com.hl&quot;)</span><br><span class="line">public class MainConfig &#123;</span><br><span class="line"> </span><br><span class="line">    &#x2F;*@Bean</span><br><span class="line">    public Car getCar()&#123;</span><br><span class="line">        Car car &#x3D; new Car();</span><br><span class="line">        car.setName(&quot;红旗&quot;);</span><br><span class="line">        return car;</span><br><span class="line">    &#125;*&#x2F;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">package com.hl.bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><br><span class="line">@Component</span><br><span class="line">public class Seat &#123;</span><br><span class="line">    private String name;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">package com.hl.bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Seat seat;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public Seat getSeat() &#123;</span><br><span class="line">        return seat;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setSeat(Seat seat) &#123;</span><br><span class="line">        this.seat &#x3D; seat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>测试:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.hl;</span><br><span class="line"> </span><br><span class="line">import com.hl.bean.Car;</span><br><span class="line">import com.hl.bean.Seat;</span><br><span class="line">import com.hl.config.MainConfig;</span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        ApplicationContext context &#x3D; new AnnotationConfigApplicationContext(MainConfig.class);</span><br><span class="line">        Car car &#x3D; (Car) context.getBean(&quot;car&quot;);</span><br><span class="line">        Seat seat &#x3D; car.getSeat();</span><br><span class="line">        Car car1 &#x3D; (Car) context.getBean(&quot;car&quot;);</span><br><span class="line">        Seat seat1 &#x3D; car1.getSeat();</span><br><span class="line">        System.out.println(seat &#x3D;&#x3D; seat1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>执行结果： 两个bean，seat 和 seat1 一致相等<br>从容器中获取的两个Car的Seat是相同的。因为Car是单例的，只会在容器启动时创建一次Car，Seat也只会在装配一次，每次从容器中获取都是同一个Car，所以Seat也是相同的。</p></blockquote><h2 id="使用-Lookup注解注入prototype组件"><a href="#使用-Lookup注解注入prototype组件" class="headerlink" title="使用@Lookup注解注入prototype组件"></a>使用@Lookup注解注入prototype组件</h2><p>注释Autowired，在getSeat（）方法上添加@Lookup<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.hl.bean;</span><br><span class="line"> </span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Lookup;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"> </span><br><span class="line">@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    &#x2F;&#x2F;@Autowired</span><br><span class="line">    private Seat seat;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Lookup</span><br><span class="line">    public Seat getSeat() &#123;</span><br><span class="line">        return seat;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setSeat(Seat seat) &#123;</span><br><span class="line">        this.seat &#x3D; seat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>此时执行的结果：两个bean，seat 和 seat1 不一致，为两个bean<br>使用@Lookup，每次获取Seat都从容器中获取，因为Seat是prototity类型，所以每次都创建新的Seat对象。 </p></blockquote><h2 id="注意：使用-Bean的方式将Car注入容器，-Lookup会失效"><a href="#注意：使用-Bean的方式将Car注入容器，-Lookup会失效" class="headerlink" title="注意：使用@Bean的方式将Car注入容器，@Lookup会失效"></a>注意：使用@Bean的方式将Car注入容器，@Lookup会失效</h2><ol><li>注释掉Car上的@Component<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    &#x2F;&#x2F;@Autowired</span><br><span class="line">    private Seat seat;</span><br></pre></td></tr></table></figure></li><li>在配置类使用@Bean注解注入Car<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;com.hl&quot;)</span><br><span class="line">public class MainConfig &#123;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public Car getCar()&#123;</span><br><span class="line">        Car car &#x3D; new Car();</span><br><span class="line">        car.setName(&quot;红旗&quot;);</span><br><span class="line">        return car;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><blockquote><p>这样的话结果会变为true，两个seat 和 seat1 又变成了同一个对象</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;@Lookup注解用法: https://blog.csdn.net/qq_25863845/article/details/123475147
+&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>sql日志打印到指定文件或控制台</title>
+    <link href="http://yoursite.com/2022/06/29/log4j2-1-sql%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
+    <id>http://yoursite.com/2022/06/29/log4j2-1-sql日志打印到指定文件或控制台/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:37:30.216Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr><pre><code>（控制台或者日志文件二选一）mybatis设置sql语句打印在控制台或者日志文件中: https://blog.csdn.net/weixin_42585386/article/details/117328488</code></pre><hr><h1 id="打印至控制台"><a href="#打印至控制台" class="headerlink" title="打印至控制台"></a>打印至控制台</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#************mybatis  Begin****************</span><br><span class="line">mybatis.mapper-locations&#x3D;classpath*:mappers&#x2F;**&#x2F;*.xml</span><br><span class="line">mybatis.type-aliases-package&#x3D;com.cic.irc.invoice.repository.dataobject</span><br><span class="line"># 打印DEBUG的sql日至至控制台</span><br><span class="line">mybatis.configuration.log-impl&#x3D;org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure><h1 id="打印到指定文件"><a href="#打印到指定文件" class="headerlink" title="打印到指定文件"></a>打印到指定文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!--configuration status与monitorInterval采用默认值 --&gt;</span><br><span class="line">&lt;Configuration&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;!-- 这里的app_name改为对应子域的名称 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;app_name&quot;&gt;应用名&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_root&quot;&gt;.&#x2F;logs&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_level&quot;&gt;INFO&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;db_log_level&quot;&gt;TRACE&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--定义appender --&gt;</span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;!--输出控制台的配置 --&gt;</span><br><span class="line">        &lt;Console name&#x3D;&quot;STDOUT-APPENDER&quot; target&#x3D;&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台输出日志格式--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;$&#123;LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS&#125;&#125; $&#123;LOG_LEVEL_PATTERN:-%5p&#125; %processId -&amp;#45;&amp;#45; [%15.15t] %-40.40logger&#123;39&#125; : %m%n$&#123;LOG_EXCEPTION_CONVERSION_WORD:-%wEx&#125;&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Console name&#x3D;&quot;STDERR-APPENDER&quot; target&#x3D;&quot;SYSTEM_ERR&quot;&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：错误节点日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;ERROR-APPENDER&quot; fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error-%d&#123;yyyy-MM-dd&#125;.log&quot; append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">            &lt;ThresholdFilter level&#x3D;&quot;ERROR&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：SQL日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;SQL-APPENDER&quot;</span><br><span class="line">                     fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql-%d&#123;yyyy-MM-dd&#125;.log&quot;</span><br><span class="line">                     append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDOUT&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDERR&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDERR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;cn.cic.irc.cc.infrastructure.repository.mapper&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;db_log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;appender-ref ref&#x3D;&quot;SQL-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;!-- 虽然此处写了控制台日志打印，但是控制台和文件只能2选1--&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncRoot level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncRoot&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Loggers&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;Configuration&gt;</span><br></pre></td></tr></table></figure><ol><li>SQL-APPENDER 的异步日志即为sql日志</li><li>控制台和文件日志只能2选1</li><li>如果在springboot的application.properties中添加了 “mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl” 配置，那么日志只会打印在控制台中，删除后则会打印在指定文件</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;（控制台或者日志文件二选一）mybatis设置sql语句打印在控制台或者日志文件中: https://blog.csdn.net/weixin_42
+      
+    
+    </summary>
+    
+      <category term="log" scheme="http://yoursite.com/categories/log/"/>
+    
+      <category term="log4j2" scheme="http://yoursite.com/categories/log/log4j2/"/>
+    
+    
+      <category term="log" scheme="http://yoursite.com/tags/log/"/>
+    
+      <category term="log4j2" scheme="http://yoursite.com/tags/log4j2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SDS和C字符串的区别</title>
+    <link href="http://yoursite.com/2022/06/29/redis-notes-4-SDS%E5%92%8CC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2022/06/29/redis-notes-4-SDS和C字符串的区别/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-06-29T01:53:30.629Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="SDS和C字符串的区别-1"><a href="#SDS和C字符串的区别-1" class="headerlink" title="SDS和C字符串的区别 - 1"></a>SDS和C字符串的区别 - 1</h1><ol><li><p>常数复杂度获取字符串长度：因为SDS定义了len字段来记录自身长度，而C字符串的长度需要去遍历整个字符串，复杂度为O(n),这里的设计就提现出来redis在细节之处对性能的追求</p></li><li><p>杜绝缓存区溢出：C字符串不记录自身长度，如果在执行字符串拼接操作时，缓存区没有足够的内存，一旦忘记分配新的内存，就会发生缓存区溢出，可能对它相邻的数据造成覆盖，而对SDS进行修改时，SDS可以通过保存的长度和空间信息进行空间检验，如果内存不足，会进行扩容操作</p></li><li><p>减少内存重分配次数：对于C字符串的修改，无论是增长还是缩短，都需要进行一次内存的重新分配，这样就会导致大量的时间浪费在内存的分配上，而SDS通过free来记录未使用空间，解除了字符串长度和底层数组之间的长度关联，通过空间预分配和惰性空间释放的方式来减少内存重新分配的次数，优化reids对数据频繁修改场景下的性能</p></li><li><p>二进制安全：C字符串通过末尾的空字符来确认读取的结束，这就对字符串的存储带来了限制，因为C字符串的中间不能出现空字符，否则会导致空字符后面的数据不能被读取，而SDS通过len字段保存了字符串的长度，这样在读取的时候就不需要通过空字符来确认是否读取完全，直接按照len来读取指定长度的字符串，这样使得redis不仅能保存字符串，还能保存任意格式的二进制数据</p></li></ol><h1 id="SDS和C字符串的区别-2"><a href="#SDS和C字符串的区别-2" class="headerlink" title="SDS和C字符串的区别 - 2"></a>SDS和C字符串的区别 - 2</h1><ul><li>C 字符串</li></ul><ol><li>获取字符串长度的复杂度为 O(N) 。</li><li>API 是不安全的，可能会造成缓冲区溢出。</li><li>修改字符串长度 N 次必然需要执行 N 次内存重分配。</li><li>只能保存文本数据。</li><li>可以使用所有 <string.h> 库中的函数。 可以使用一部分 <string.h> 库中的函数。</li></ol><ul><li>SDS</li></ul><ol><li>获取字符串长度的复杂度为 O(1) 。（SDS结果中存储了len属性）</li><li>API 是安全的，不会造成缓冲区溢出。（自动分配内存）</li><li>修改字符串长度 N 次最多需要执行 N 次内存重分配。</li><li>可以保存文本或者二进制数据。</li><li>可以使用一部分 <string.h> 库中的函数。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;SDS和C字符串的区别-1&quot;&gt;&lt;a href=&quot;#SDS和C字符串的区别-1&quot; class=&quot;headerlink&quot; title=&quot;SDS和C字符串的区别 - 1&quot;
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/redis/notes/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>List底层数据结构实现</title>
+    <link href="http://yoursite.com/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2022/06/29/redis-notes-5-List底层数据结构实现/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-06-29T02:07:22.743Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="List底层数据结构实现"><a href="#List底层数据结构实现" class="headerlink" title="List底层数据结构实现"></a>List底层数据结构实现</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis列表是简单的字符串列表，按照插入顺序排序。<br>你可以添加一个元素到列表的头部（左边）或者尾部（右边），<br>主要的应用场景为消息队列、定时计算排行榜、非频繁更新的最新列表等，  </p><h2 id="实现的数据结构"><a href="#实现的数据结构" class="headerlink" title="实现的数据结构"></a>实现的数据结构</h2><p>list（列表）实现的数据结构包括ziplist（压缩列表）和linkedlist(链表)，<br>当列表元素比较少（元素数量小于512个）且列表项是小整数值或者较短字符串（长度小于64个字节）时会用ziplist来作为的底层实现<br>否则转为使用linkedlist(链表)</p><h2 id="ziplist（压缩列表）"><a href="#ziplist（压缩列表）" class="headerlink" title="ziplist（压缩列表）"></a>ziplist（压缩列表）</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;List底层数据结构实现&quot;&gt;&lt;a href=&quot;#List底层数据结构实现&quot; class=&quot;headerlink&quot; title=&quot;List底层数据结构实现&quot;&gt;&lt;/a&gt;
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/redis/notes/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>直接引用源参数的映射方法</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-10-%E7%9B%B4%E6%8E%A5%E5%BC%95%E7%94%A8%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-10-直接引用源参数的映射方法/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.789Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="直接引用源参数的映射方法"><a href="#直接引用源参数的映射方法" class="headerlink" title="直接引用源参数的映射方法"></a>直接引用源参数的映射方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface AddressMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(target &#x3D; &quot;description&quot;, source &#x3D; &quot;person.description&quot;)</span><br><span class="line">    @Mapping(target &#x3D; &quot;houseNumber&quot;, source &#x3D; &quot;hn&quot;)</span><br><span class="line">    DeliveryAddressDto personAndAddressToDeliveryAddressDto(Person person, Integer hn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;直接引用源参数的映射方法&quot;&gt;&lt;a href=&quot;#直接引用源参数的映射方法&quot; class=&quot;headerlink&quot; title=&quot;直接引用源参数的映射方法&quot;&gt;&lt;/a&gt;
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>检索映射器</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-11-%E6%A3%80%E7%B4%A2%E6%98%A0%E5%B0%84%E5%99%A8/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-11-检索映射器/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.797Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="检索映射器"><a href="#检索映射器" class="headerlink" title="检索映射器"></a>检索映射器</h1><h2 id="Mappers-工厂（无依赖注入）"><a href="#Mappers-工厂（无依赖注入）" class="headerlink" title="Mappers 工厂（无依赖注入）"></a>Mappers 工厂（无依赖注入）</h2><p>当不使用 DI 框架时，可以通过org.mapstruct.factory.Mappers类检索 Mapper 实例。只需调用该getMapper()方法，传递映射器的接口类型即可返回：</p><ol><li>使用 Mappers 工厂<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CarMapper mapper &#x3D; Mappers.getMapper( CarMapper.class );</span><br></pre></td></tr></table></figure>按照惯例，映射器接口应定义一个名为的成员，该成员INSTANCE包含映射器类型的单个实例：</li><li>声明映射器的实例（接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>声明映射器的实例（抽象类）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    public static final CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>这种模式使客户端可以很容易地使用映射器对象，而无需重复实例化新实例：</p><h2 id="访问映射器"><a href="#访问映射器" class="headerlink" title="访问映射器"></a>访问映射器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Car car &#x3D; ...;</span><br><span class="line">CarDto dto &#x3D; CarMapper.INSTANCE.carToCarDto( car );</span><br></pre></td></tr></table></figure><p>请注意，由 MapStruct 生成的映射器是无状态的和线程安全的，因此可以同时从多个线程安全地访问。</p></blockquote></li></ol><h2 id="使用依赖注入"><a href="#使用依赖注入" class="headerlink" title="使用依赖注入"></a>使用依赖注入</h2><ol><li>使用 CDI 组件模型的映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>生成的映射器实现将用@ApplicationScoped注释标记，因此可以使用注释注入字段、构造函数参数等@Inject：</p></blockquote></li><li>通过依赖注入获取映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Inject</span><br><span class="line">private CarMapper mapper;</span><br></pre></td></tr></table></figure></li></ol><h2 id="注入策略"><a href="#注入策略" class="headerlink" title="注入策略"></a>注入策略</h2><p>使用依赖注入时，您可以在字段注入和构造函数注入之间进行选择。这可以通过通过提供注入策略@Mapper或@MapperConfig注释来完成。</p><ol><li>使用构造函数注入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI, uses &#x3D; EngineMapper.class, injectionStrategy &#x3D; InjectionStrategy.CONSTRUCTOR)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>如果 MapStruct 检测到它需要使用它的实例进行映射，则生成的映射器将注入在uses属性中定义的类。<br>使用InjectionStrategy#CONSTRUCTOR时，构造函数将具有适当的注释，而字段则不会。<br>使用InjectionStrategy#FIELD时，注释在字段本身上。目前，默认的注入策略是字段注入，但可以使用配置选项进行配置。建议使用构造函数注入来简化测试。<br>对于抽象类或装饰器，应该使用 setter 注入。</p></blockquote></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;检索映射器&quot;&gt;&lt;a href=&quot;#检索映射器&quot; class=&quot;headerlink&quot; title=&quot;检索映射器&quot;&gt;&lt;/a&gt;检索映射器&lt;/h1&gt;&lt;h2 id=&quot;Map
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据类型转换</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-12-数据类型转换/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.860Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><ol><li>从 int 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;price&quot;, numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    List&lt;String&gt; prices(List&lt;Integer&gt; prices);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>从 BigDecimal 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;power&quot;, numberFormat &#x3D; &quot;#.##E0&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>从日期到字符串的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;manufacturingDate&quot;, dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    List&lt;String&gt; stringListToDateList(List&lt;Date&gt; dates);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;数据类型转换&quot;&gt;&lt;a href=&quot;#数据类型转换&quot; class=&quot;headerlink&quot; title=&quot;数据类型转换&quot;&gt;&lt;/a&gt;数据类型转换&lt;/h1&gt;&lt;ol&gt;
+&lt;l
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>uses介绍</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-4-uses%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-4-uses介绍/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:42:24.910Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="mapStruct-uses"><a href="#mapStruct-uses" class="headerlink" title="mapStruct uses"></a>mapStruct uses</h1><p>查看demo <a href="./4-mapStruct%20uses%20demo"></a></p><h2 id="mapper类如下"><a href="#mapper类如下" class="headerlink" title="mapper类如下"></a>mapper类如下</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>( uses = IterableNonInterableUtil<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">SourceTargetMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    SourceTargetMapper MAPPER = Mappers.getMapper( SourceTargetMapper<span class="class">.<span class="keyword">class</span> )</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping</span>( source = <span class="string">"myIntegers"</span>, target = <span class="string">"myInteger"</span>, qualifiedBy = FirstElement<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">    @<span class="title">Mapping</span>( <span class="title">source</span> </span>= <span class="string">"myStrings"</span>, target = <span class="string">"myString"</span>, qualifiedBy = LastElement<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">    <span class="title">Target</span> <span class="title">toTarget</span>( <span class="title">Source</span> <span class="title">s</span> )</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IterableNonInterableUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@FirstElement</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">first</span><span class="params">( List&lt;T&gt; in )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( in != <span class="keyword">null</span> &amp;&amp; !in.isEmpty() ) &#123;</span><br><span class="line">            <span class="keyword">return</span> in.get( <span class="number">0</span> );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LastElement</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">last</span><span class="params">( List&lt;T&gt; in )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( in != <span class="keyword">null</span> &amp;&amp; !in.isEmpty() ) &#123;</span><br><span class="line">            <span class="keyword">return</span> in.get( in.size() - <span class="number">1</span> );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我们使用了 uses 之后，表示此mapper中所有的字段转换，只要满足 IterableNonInterableUtil.class 中的first和last方法，<br>那么在其实现类生成中，都会优先使用 IterableNonInterableUtil.classs 中的方法</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;mapStruct-uses&quot;&gt;&lt;a href=&quot;#mapStruct-uses&quot; class=&quot;headerlink&quot; title=&quot;mapStruct uses
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mapStruct注解参数介绍</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-3-mapStruct%E6%B3%A8%E8%A7%A3%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-3-mapStruct注解参数介绍/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:42:24.860Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/anakinsky008/p/15513375.html" target="_blank" rel="noopener">Java实体映射工具MapStruct使用详解</a></p><p>通常在后端开发中经常不直接返回实体Entity类，经过处理转换返回前端，前端提交过来的对象也需要经过转换Entity实体才做存储；通常使用的BeanUtils.copyProperties方法也比较粗暴，不仅效率低下（使用反射）而且仅映射相同名的属性，多数情况下还需要手动编写对应的转换方法实现。<br>插件MapStruct以接口方法结合注解优雅实现对象转换，MapStruct生成器生成代码以更贴近原生的Setter、Getter方法处理属性映射更为高效。<br><a href="https://github.com/mapstruct/mapstruct/" target="_blank" rel="noopener">https://github.com/mapstruct/mapstruct/</a><br><a href="https://github.com/mapstruct/mapstruct-examples" target="_blank" rel="noopener">https://github.com/mapstruct/mapstruct-examples</a></p><p>2.简单用例<br>实体对象User<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>转换对象UserVO<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserVO</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>转换接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserConvert</span> </span>&#123;</span><br><span class="line">    UserConvert INSTANCE = Mappers.getMapper(UserConvert<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@Mapping</span>(source = <span class="string">"name"</span>, target = <span class="string">"userName"</span>)</span><br><span class="line">    <span class="function">UserVO <span class="title">toVO</span><span class="params">(User entity)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>使用示例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    User user = <span class="keyword">new</span> User(<span class="number">0</span>, <span class="string">"Tester"</span>, <span class="number">1</span>, <span class="string">"上海市徐汇区"</span>);</span><br><span class="line">    UserVO userVO = UserConvert.INSTANCE.toVO(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>3.使用详解<br>1)关于接口注解@Mapper几种属性用法详解<br>uses 使用其他手动编写的或者其他Mapper接口覆写相关的转换方法，不能循环引用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(uses=DateMapper<span class="class">.<span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure><br>imports 引用相关类，允许通过mapping.expression()、mapping.defaultExpression()直接使用这些类型<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(imports = DateUtil<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">UserConvert</span> </span>&#123;</span><br><span class="line">    UserConvert INSTANCE = Mappers.getMapper(UserConvert<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@Mappings</span>(&#123;</span><br><span class="line">            <span class="meta">@Mapping</span>(source = <span class="string">"name"</span>, target = <span class="string">"userName"</span>),</span><br><span class="line">            <span class="comment">// 以指定方法转换属性，这里如果不使用imports，则需要写全引用类包路径</span></span><br><span class="line">            <span class="meta">@Mapping</span>(target = <span class="string">"birthday"</span>, expression = <span class="string">"java(DateUtil.formatDate(entity.getBirthday()))"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">UserVO <span class="title">toVO</span><span class="params">(User entity)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>unmappedSourcePolicy、unmappedTargetPolicy 针对源类型/目标类型中未映射属性的反馈策略<br>typeConversionPolicy 针对有损转换的反馈策略，例如Long转Integer<br>反馈策略主要有三种：IGNORE，默认值，忽略未映射的字段。WARN，警告。ERROR，报错<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(unmappedSourcePolicy = ReportingPolicy.ERROR)</span><br></pre></td></tr></table></figure><br>componentModel 指定生成映射器实例的模式，主要有四种：</p><p>default，不主动生成实例，通常以Mappers.getMapper(Class)实例化。<br>cdi，以CDI标准实例化映射器，使用@Inject注入相关实例，<br>spring，Spring Bean方式实例化，<br>jsr330，jsr330标准实例化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(componentModel = <span class="string">"spring"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserConvert</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Mapping</span>(source = <span class="string">"name"</span>, target = <span class="string">"userName"</span>)</span><br><span class="line">    <span class="function">UserVO <span class="title">toVO</span><span class="params">(User entity)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserConvert userConvert;</span><br></pre></td></tr></table></figure><br>implementationName 指定实现类名称，映射生成器接口会自动生成实现类<CLASS_NAME>Impl，使用此属性可避免类冲突<br>implementationPackage 指定实现类包路径</p><p>config 指定配置类，由指定的@MapperConfig配置类，config导入相关配置<br>配置类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperConfig</span>(</span><br><span class="line">        uses = DateUtil<span class="class">.<span class="keyword">class</span>,</span></span><br><span class="line"><span class="class">        <span class="title">unmappedSourcePolicy</span> </span>= ReportingPolicy.WARN</span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>导入配置类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>(componentModel = <span class="string">"spring"</span>, config = UserConfig<span class="class">.<span class="keyword">class</span>)</span></span><br></pre></td></tr></table></figure><br>collectionMappingStrategy 集合映射策略，这里注意集合映射时，如果集合中的类型已有对应转换方法，集合转换时会优先使用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mappings</span>(&#123;</span><br><span class="line">        <span class="meta">@Mapping</span>(source = <span class="string">"name"</span>, target = <span class="string">"userName"</span>),</span><br><span class="line">        <span class="meta">@Mapping</span>(target = <span class="string">"birthday"</span>, expression = <span class="string">"java(DateUtil.formatDate(entity.getBirthday()))"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="function">UserVO <span class="title">toVO</span><span class="params">(User entity)</span></span>;</span><br><span class="line"><span class="function">List&lt;UserVO&gt; <span class="title">collectionCvt</span><span class="params">(List&lt;User&gt; entities)</span></span>;</span><br></pre></td></tr></table></figure><br>GENERATED CODE 生成器生成代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;UserVO&gt; <span class="title">collectionCvt</span><span class="params">(List&lt;User&gt; entities)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (entities == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        List&lt;UserVO&gt; list = <span class="keyword">new</span> ArrayList(entities.size());</span><br><span class="line">        Iterator var3 = entities.iterator();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(var3.hasNext()) &#123;</span><br><span class="line">            User user = (User)var3.next();</span><br><span class="line">            <span class="comment">// 集合转换时优先使用了已定义的toVO方法</span></span><br><span class="line">            list.add(<span class="keyword">this</span>.toVO(user));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>nullValueMappingStrategy null作为源值映射策略；RETURN_NULL默认返回null, RETURN_DEFAULT返回默认值，对于对象会通过构造器自动构造对象返回，集合会返回空集合</p><p>当值为RETURN_DEFAULT时，如果映射规则中包含Mapping.expression、Mapping.constant必须手动判空处理，否则NPE</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperConfig</span>(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)</span><br></pre></td></tr></table></figure><p>NullValuePropertyMappingStrategy null作为源属性映射策略；SET_TO_NULL默认返回null，SET_TO_DEFAULT返回默认值，IGNORE 忽略该值，以目标对象已存在的值为准</p><p>MappingInheritanceStrategy 继承方法级映射配置策略：EXPLICIT 显示使用InheritConfiguration生效。AUTO_INHERIT_FROM_CONFIG 自动继承正向转换的配置。<br>AUTO_INHERIT_REVERSE_FROM_CONFIG 自动继承反向转换的配置。AUTO_INHERIT_ALL_FROM_CONFIG 都继承<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperConfig</span>(</span><br><span class="line">        mappingInheritanceStrategy = MappingInheritanceStrategy.EXPLICIT</span><br><span class="line">)</span><br></pre></td></tr></table></figure><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@InheritConfiguration</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvtVO</span><span class="params">(User entity, @MappingTarget UserVO vo)</span></span>;</span><br></pre></td></tr></table></figure><br>nullValueCheckStrategy 空值监测策略</p><p>2) 其他方法级别注解<br>@InheritInverseConfiguration 反向转换时继承映射规则</p><p>@Mapping 配置类型属性的映射规则；<br>dateFormat 格式化日期<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapping</span>(target = <span class="string">"birthday"</span>, dateFormat = <span class="string">"yyyy-MM-dd HH:mm:ss"</span>)</span><br></pre></td></tr></table></figure><br>numberFormat 数字格式化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapping</span>(target = <span class="string">"price"</span>, numberFormat = <span class="string">"$#.00"</span>)</span><br></pre></td></tr></table></figure><br>constant 常量<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapping</span>(target = <span class="string">"age"</span>, constant = <span class="string">"0"</span>)</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/anakinsky008/p/15513375.html&quot; target=&quot;_blank&quot; rel=&quot;noo
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>向映射器添加自定义方法</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-8-向映射器添加自定义方法/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.814Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="向映射器添加自定义方法"><a href="#向映射器添加自定义方法" class="headerlink" title="向映射器添加自定义方法"></a>向映射器添加自定义方法</h1><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    default PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    public abstract CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    public PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>在转换 Car -&gt; CarDto 时，会自动将Car中的Person转换（通过寻找本类中的 personToPersonDto 实现转换）</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;向映射器添加自定义方法&quot;&gt;&lt;a href=&quot;#向映射器添加自定义方法&quot; class=&quot;headerlink&quot; title=&quot;向映射器添加自定义方法&quot;&gt;&lt;/a&gt;向映射
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>映射组合（实验）</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-7-%E6%98%A0%E5%B0%84%E7%BB%84%E5%90%88%EF%BC%88%E5%AE%9E%E9%AA%8C%EF%BC%89/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-7-映射组合（实验）/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.806Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="映射组合（实验）"><a href="#映射组合（实验）" class="headerlink" title="映射组合（实验）"></a>映射组合（实验）</h1><h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.CLASS)</span><br><span class="line">@Mapping(target &#x3D; &quot;id&quot;, ignore &#x3D; true)</span><br><span class="line">@Mapping(target &#x3D; &quot;creationDate&quot;, expression &#x3D; &quot;java(new java.util.Date())&quot;)</span><br><span class="line">@Mapping(target &#x3D; &quot;name&quot;, source &#x3D; &quot;groupName&quot;)</span><br><span class="line">public @interface ToEntity &#123; &#125;</span><br></pre></td></tr></table></figure><h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface StorageMapper &#123;</span><br><span class="line"></span><br><span class="line">    StorageMapper INSTANCE &#x3D; Mappers.getMapper( StorageMapper.class );</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;weightLimit&quot;, source &#x3D; &quot;maxWeight&quot;)</span><br><span class="line">    ShelveEntity map(ShelveDto source);</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;label&quot;, source &#x3D; &quot;designation&quot;)</span><br><span class="line">    BoxEntity map(BoxDto source);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>此功能仍处于试验阶段。错误信息还不成熟：显示问题发生的方法，以及@Mapping注解中的相关值。<br>但是，构图方面是不可见的。消息“好像”@Mapping会直接出现在相关方法上。<br>因此，用户应谨慎使用此功能，尤其是在不确定某个属性是否始终存在时。</p><blockquote><p>字段必须都存在才能使用</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;映射组合（实验）&quot;&gt;&lt;a href=&quot;#映射组合（实验）&quot; class=&quot;headerlink&quot; title=&quot;映射组合（实验）&quot;&gt;&lt;/a&gt;映射组合（实验）&lt;/h1
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>具有多个源参数的映射方法</title>
+    <link href="http://yoursite.com/2022/06/29/tool-mappingStruct-9-%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2022/06/29/tool-mappingStruct-9-具有多个源参数的映射方法/</id>
+    <published>2022-06-28T16:00:00.000Z</published>
+    <updated>2022-07-06T07:40:09.849Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="具有多个源参数的映射方法"><a href="#具有多个源参数的映射方法" class="headerlink" title="具有多个源参数的映射方法"></a>具有多个源参数的映射方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface AddressMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(target &#x3D; &quot;description&quot;, source &#x3D; &quot;person.description&quot;)</span><br><span class="line">    @Mapping(target &#x3D; &quot;houseNumber&quot;, source &#x3D; &quot;address.houseNo&quot;)</span><br><span class="line">    DeliveryAddressDto personAndAddressToDeliveryAddressDto(Person person, Address address);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;具有多个源参数的映射方法&quot;&gt;&lt;a href=&quot;#具有多个源参数的映射方法&quot; class=&quot;headerlink&quot; title=&quot;具有多个源参数的映射方法&quot;&gt;&lt;/a&gt;
+      
+    
+    </summary>
+    
+      <category term="tool" scheme="http://yoursite.com/categories/tool/"/>
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/categories/tool/mappingStruct/"/>
+    
+    
+      <category term="mappingStruct" scheme="http://yoursite.com/tags/mappingStruct/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java-maven-mvn常用命令</title>
+    <link href="http://yoursite.com/2022/06/28/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2022/06/28/java-maven-mvn常用命令/</id>
+    <published>2022-06-28T06:28:23.427Z</published>
+    <updated>2022-06-28T06:34:14.292Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><ol><li>mvn test -Dtest=xxx：执行指定测试用例的命令，后面的xxx就是指定的所有被标记的用例</li><li>mvn test -Dtest=包的路径.<em>   ，运行某个包下的所有用例（不包括子包中的用例）<br>mvn test -Dtest=com.xx.test.testCases.openApi.xxx.</em></li><li>指定任何一个不同包下相同子包的所用测试用例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn test -Dtest&#x3D;包的路径.*.相同子包的路径.*</span><br><span class="line">比如：mvn test -Dtest&#x3D;com.xxx.test.testcase.*.openApi.*</span><br><span class="line">指定testcase下的所有的包中包含openApi子包下的所有用例</span><br></pre></td></tr></table></figure><h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2></li><li>生成idea项目结构<br>mvn  idea:idea</li><li>生成eclipse项目结构<br>mvn  eclipse:eclipse</li><li>编译源代码<br>mvn compile</li><li>编译测试代码<br>mvn test-compile</li><li>打包项目<br>mvn  package</li><li>组合使用goal命令，如只打包不测试<br>mvn  -Dtest  package</li><li>跳过测试进行打包<br>mvn clean package -DskipTests -Prelease</li><li>在本地Repository中安装jar<br>mvn  install</li><li>打成jar命令<br>mvn  jar:jar</li><li>打包项目到本地仓库<br>mvn clean install -DskipTests</li><li>打包项目跳过测试<br>mvn clean package <em>**</em>  -DskipTests -DskipRat</li><li>查看错误的详细信息<br>mvn  -e</li><li>发生jar的冲突显示冲突的原因<br>mvn  install -x</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h1&gt;&lt;h2 id=&quot;test&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>redis存储对象信息是用hash还是string</title>
+    <link href="http://yoursite.com/2022/06/28/redis-notes-3-redis%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF%E6%98%AF%E7%94%A8hash%E8%BF%98%E6%98%AFstring/"/>
+    <id>http://yoursite.com/2022/06/28/redis-notes-3-redis存储对象信息是用hash还是string/</id>
+    <published>2022-06-27T16:00:00.000Z</published>
+    <updated>2022-06-29T01:53:30.711Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="redis存储对象信息是用hash还是string"><a href="#redis存储对象信息是用hash还是string" class="headerlink" title="redis存储对象信息是用hash还是string"></a>redis存储对象信息是用hash还是string</h1><p>建议是大部分情况下使用 string 存储就好，毕竟在存储具有多层嵌套的对象时方便很多，占用的空间也比 Hash 小。当我们需要存储一个特别大的对象时，而且在大多数情况中只需要访问该对象少量的字段时，可以考虑使用 Hash。</p><h2 id="适合用-string-存储的情况："><a href="#适合用-string-存储的情况：" class="headerlink" title="适合用 string 存储的情况："></a>适合用 string 存储的情况：</h2><p>每次需要访问大量的字段<br>存储的结构具有多层嵌套的时候</p><h2 id="适合用-hash-存储的情况："><a href="#适合用-hash-存储的情况：" class="headerlink" title="适合用 hash 存储的情况："></a>适合用 hash 存储的情况：</h2><p>在大多数情况中只需要访问少量字段<br>自己始终知道哪些字段可用，防止使用 mget 时获取不到想要的数据</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;redis存储对象信息是用hash还是string&quot;&gt;&lt;a href=&quot;#redis存储对象信息是用hash还是string&quot; class=&quot;headerlink&quot;
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/redis/notes/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java-maven-mvn-dependency-使用</title>
+    <link href="http://yoursite.com/2022/06/15/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2022/06/15/java-maven-mvn-dependency-使用/</id>
+    <published>2022-06-15T01:14:32.249Z</published>
+    <updated>2022-06-15T01:15:43.704Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="依赖树"><a href="#依赖树" class="headerlink" title="依赖树"></a>依赖树</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">  &lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;maven-dependency-plugin&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;3.0.2&lt;&#x2F;version&gt; </span><br><span class="line">    &lt;executions&gt; </span><br><span class="line">      &lt;execution&gt; </span><br><span class="line">        &lt;id&gt;copy-dependencies&lt;&#x2F;id&gt; </span><br><span class="line">        &lt;phase&gt;package&lt;&#x2F;phase&gt; </span><br><span class="line">        &lt;goals&gt; </span><br><span class="line">          &lt;goal&gt;copy-dependencies&lt;&#x2F;goal&gt; </span><br><span class="line">        &lt;&#x2F;goals&gt; </span><br><span class="line">        &lt;configuration&gt; </span><br><span class="line">          &lt;!-- configure the plugin here --&gt; </span><br><span class="line">        &lt;&#x2F;configuration&gt; </span><br><span class="line">      &lt;&#x2F;execution&gt; </span><br><span class="line">    &lt;&#x2F;executions&gt; </span><br><span class="line">  &lt;&#x2F;plugin&gt; </span><br><span class="line">&lt;&#x2F;plugins&gt;</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency</span><br><span class="line">mvn dependency -X</span><br><span class="line">mvn dependency -e</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;依赖树&quot;&gt;&lt;a href=&quot;#依赖树&quot; class=&quot;headerlink&quot; title=&quot;依赖树&quot;&gt;&lt;/a&gt;依赖树&lt;/h1&gt;&lt;figure class=&quot;high
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java-maven-mvn-install-X-的DEBUG模式</title>
+    <link href="http://yoursite.com/2022/06/07/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2022/06/07/java-maven-mvn-install-X-的DEBUG模式/</id>
+    <published>2022-06-07T02:16:46.144Z</published>
+    <updated>2022-06-07T02:42:51.588Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="直接在项目根目录下运行"><a href="#直接在项目根目录下运行" class="headerlink" title="直接在项目根目录下运行"></a>直接在项目根目录下运行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -X</span><br></pre></td></tr></table></figure><p>将输出debug内容</p><h1 id="也可以在打包时DEBUG"><a href="#也可以在打包时DEBUG" class="headerlink" title="也可以在打包时DEBUG"></a>也可以在打包时DEBUG</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -X -U clean package</span><br></pre></td></tr></table></figure><h1 id="is-invalid-transitive-dependencies-if-any-will-not-be-available"><a href="#is-invalid-transitive-dependencies-if-any-will-not-be-available" class="headerlink" title="is invalid, transitive dependencies (if any) will not be available"></a>is invalid, transitive dependencies (if any) will not be available</h1><p><a href="https://blog.csdn.net/u010739551/article/details/83242246" target="_blank" rel="noopener"></a><br><img src="mvn install -X 的DEBUG模式/依赖版本缺失.png" alt=""><br>比如如下场景，我有三个项目A, B, C，依赖关系如下：  </p><p>假如B invalid了，那么A通过B间接依赖的C就会失效，导致A项目编译不过。</p><p>问题定位<br>google了很长时间，没有在网上找到能解决我的问题的答案，那就自己动手来定位问题的原因，按照maven的提示打开debug日志，在A项目下执行如下命令：</p><p> mvn -X -U clean package<br>1<br>再次查看编译日志，这时候在[WARNING] The POM for com.winwill.test:0.0.1-SNAPSHOT is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details日志的下一行会有类似如下提示：</p><p>[ERROR] ‘dependencies.dependency.version’ for xxx:yyy:jar is missing. @-</p><p>这是ERROR日志，感觉应该是问题的root cause，这行日志表示B项目中依赖的xxx:yyy没有指定version。</p><p>在B项目中为xxx:yyy加上version之后再次编译，发现一切ok~~</p><p>简单总结<br>项目中依赖其他jar时，如果不指定version，或者version在父pom中通过DependencyManagement指定但是父pom没有deploy时，可能会导致项目jar invalid。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;直接在项目根目录下运行&quot;&gt;&lt;a href=&quot;#直接在项目根目录下运行&quot; class=&quot;headerlink&quot; title=&quot;直接在项目根目录下运行&quot;&gt;&lt;/a&gt;直接在
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>redis序列化</title>
+    <link href="http://yoursite.com/2022/05/25/redis-notes-1-%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+    <id>http://yoursite.com/2022/05/25/redis-notes-1-序列化/</id>
+    <published>2022-05-24T16:00:00.000Z</published>
+    <updated>2022-06-29T01:53:30.727Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/leilei1366615/article/details/122204776" target="_blank" rel="noopener">Redis 序列化 GenericJackson2JsonRedisSerializer和Jackson2JsonRedisSerializer的区别</a></p><h1 id="KEY序列化和Val序列化"><a href="#KEY序列化和Val序列化" class="headerlink" title="KEY序列化和Val序列化"></a>KEY序列化和Val序列化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;**</span><br><span class="line">     * 实例化 RedisTemplate 对象</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Bean</span><br><span class="line">    public RedisTemplate&lt;String, Object&gt; functionDomainRedisTemplate(RedisConnectionFactory factory) &#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; redisTemplate &#x3D; new RedisTemplate&lt;&gt;();</span><br><span class="line">        StringRedisSerializer stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        &#x2F;&#x2F; key 都使用String 序列化方式</span><br><span class="line">        redisTemplate.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer &#x3D; new GenericJackson2JsonRedisSerializer();</span><br><span class="line">&#x2F;&#x2F;        Jackson2JsonRedisSerializer&lt;Object&gt; jackson2JsonRedisSerializer &#x3D; new Jackson2JsonRedisSerializer&lt;&gt;(Object.class);</span><br><span class="line">        redisTemplate.setHashValueSerializer(genericJackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setConnectionFactory(factory);</span><br><span class="line">        return redisTemplate;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h2 id="GenericJackson2JsonRedisSerializer"><a href="#GenericJackson2JsonRedisSerializer" class="headerlink" title="GenericJackson2JsonRedisSerializer"></a>GenericJackson2JsonRedisSerializer</h2><p>GenericJackson2JsonRedisSerializer序列化时，会保存序列化的对象的完全限定名，从redis获取数据时即可直接反序列化成指定的对象</p><ol><li>结论：GenericJackson2JsonRedisSerializer 序列化方式 可直接存储VALUE为对象,且从Redis获取可进行强转</li><li>结论：GenericJackson2JsonRedisSerializer 序列化方式 可直接存储VALUE为JSON字符串形式,且从Redis获取后不可进行强转，需要将结果转为字符串，再将JSON字符串转为自己需要的对象或对象集合</li><li>结论: 使用GenericJackson2JsonRedisSerializer 序列化进行管道操作后，实体类@class属性会丢失，再次从redis获取数据将无法成功反序列化</li></ol><h2 id="Jackson2JsonRedisSerializer"><a href="#Jackson2JsonRedisSerializer" class="headerlink" title="Jackson2JsonRedisSerializer"></a>Jackson2JsonRedisSerializer</h2><ol><li>结论：Jackson2JsonRedisSerializer序列化方式，如VALUE直接存对象或者对象集合，获取时结果为LinkedHashMap,无法直接使用JDK强转方法转为对象或对象集合，需借助工具进行转换为实体与实体集合</li><li>结论:Jackson2JsonRedisSerializer序列化方式，VALUE存JSON字符串时，取值也为JSON字符串,需借助JSON工具进行转换为实体类或实体集合</li><li>结论：Jackson2JsonRedisSerializer 序列化方式，且使用管道操作后，获取的值也是一个linkedHashMap,需借助工具才可将值反序列化为实体对象或实体对象集合</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/leilei1366615/article/details/122204776&quot; target=&quot;_blank&quot;
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/redis/notes/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么通过命令行查询不到redis中的KEY</title>
+    <link href="http://yoursite.com/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/"/>
+    <id>http://yoursite.com/2022/05/25/redis-notes-1-为什么通过命令行查询不到redis中的KEY/</id>
+    <published>2022-05-24T16:00:00.000Z</published>
+    <updated>2022-06-29T01:53:30.727Z</updated>
+    
+    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/w8y56f/article/details/120225410" target="_blank" rel="noopener">为什么通过命令行查不到redis中的key</a></p><h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>RedisTemplate都没有特别配置序列化器，在执行后，使用命令行连上redis，执行keys my_key<em>，发现只有第二个key存在，第一个消失了，但是代码执行后是能够取到值的。这是为什么？<br>是因为命令行的工具有bug吗？不是的。使用 keys </em>my_key*，就可以显示两个key都存在。</p><h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>为什么key 前面没有奇怪的符号，因为Spring 在遇到 <String, String> 泛型的时候注入的不是 RedisTemplate 类，而是 StringRedisTemplate 类，而后者的所有序列化器都是 String的序列化器(StringRedisSerializer)，所以就很正常了。</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) &#123;</span><br><span class="line">        RedisTemplate template &#x3D; new RedisTemplate();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">         &#x2F;&#x2F;建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</span><br><span class="line">        RedisSerializer&lt;String&gt; stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        template.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        return template;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/w8y56f/article/details/120225410&quot; target=&quot;_blank&quot; rel=&quot;n
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/redis/notes/"/>
+    
+    
+      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>depth-kubernetes-知识点-2-k8s-Kubernetes-中-apiserver-advertise-address-与-pod-network-cidr-区别是什么</title>
@@ -56,494 +524,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>depth-kubernetes-Kubernetes的可视化UI界面-recommended-yaml</title>
-    <link href="http://yoursite.com/2022/05/12/depth-kubernetes-Kubernetes%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96UI%E7%95%8C%E9%9D%A2-recommended-yaml/"/>
-    <id>http://yoursite.com/2022/05/12/depth-kubernetes-Kubernetes的可视化UI界面-recommended-yaml/</id>
-    <published>2022-05-12T02:11:25.525Z</published>
-    <updated>2022-03-01T02:46:48.137Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>apiVersion: v1<br>kind: ServiceAccount<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard</p><hr><p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  type: NodePort<br>  ports:</p><pre><code>- port: 443  targetPort: 8443  nodePort: 31001</code></pre><p>  selector:<br>    k8s-app: kubernetes-dashboard</p><hr><p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-certs<br>  namespace: kubernetes-dashboard<br>type: Opaque</p><hr><p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-csrf<br>  namespace: kubernetes-dashboard<br>type: Opaque<br>data:<br>  csrf: “”</p><hr><p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-key-holder<br>  namespace: kubernetes-dashboard<br>type: Opaque</p><hr><p>kind: ConfigMap<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-settings<br>  namespace: kubernetes-dashboard</p><hr><p>kind: Role<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>rules:</p><h1 id="Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets"><a href="#Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets" class="headerlink" title="Allow Dashboard to get, update and delete Dashboard exclusive secrets."></a>Allow Dashboard to get, update and delete Dashboard exclusive secrets.</h1><ul><li>apiGroups: [“”]<br>resources: [“secrets”]<br>resourceNames: [“kubernetes-dashboard-key-holder”, “kubernetes-dashboard-certs”, “kubernetes-dashboard-csrf”]<br>verbs: [“get”, “update”, “delete”]<h1 id="Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map"><a href="#Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map" class="headerlink" title="Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map."></a>Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map.</h1></li><li>apiGroups: [“”]<br>resources: [“configmaps”]<br>resourceNames: [“kubernetes-dashboard-settings”]<br>verbs: [“get”, “update”]<h1 id="Allow-Dashboard-to-get-metrics"><a href="#Allow-Dashboard-to-get-metrics" class="headerlink" title="Allow Dashboard to get metrics."></a>Allow Dashboard to get metrics.</h1></li><li>apiGroups: [“”]<br>resources: [“services”]<br>resourceNames: [“heapster”, “dashboard-metrics-scraper”]<br>verbs: [“proxy”]</li><li>apiGroups: [“”]<br>resources: [“services/proxy”]<br>resourceNames: [“heapster”, “http:heapster:”, “https:heapster:”, “dashboard-metrics-scraper”, “http:dashboard-metrics-scraper”]<br>verbs: [“get”]</li></ul><hr><p>kind: ClusterRole<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>rules:</p><h1 id="Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server"><a href="#Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server" class="headerlink" title="Allow Metrics Scraper to get metrics from the Metrics server"></a>Allow Metrics Scraper to get metrics from the Metrics server</h1><ul><li>apiGroups: [“metrics.k8s.io”]<br>resources: [“pods”, “nodes”]<br>verbs: [“get”, “list”, “watch”]</li></ul><hr><p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: RoleBinding<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: Role<br>  name: kubernetes-dashboard<br>subjects:</p><ul><li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li></ul><hr><p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: ClusterRoleBinding<br>metadata:<br>  name: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: ClusterRole<br>  name: kubernetes-dashboard<br>subjects:</p><ul><li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li></ul><hr><p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: kubernetes-dashboard<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: kubernetes-dashboard<br>    spec:<br>      containers:</p><pre><code>  - name: kubernetes-dashboard    image: kubernetesui/dashboard:v2.0.0-rc5    imagePullPolicy: Always    ports:      - containerPort: 8443        protocol: TCP    args:      - --auto-generate-certificates      - --namespace=kubernetes-dashboard      # Uncomment the following line to manually specify Kubernetes API server Host      # If not specified, Dashboard will attempt to auto discover the API server and connect      # to it. Uncomment only if the default does not work.      # - --apiserver-host=http://my-address:port    volumeMounts:      - name: kubernetes-dashboard-certs        mountPath: /certs        # Create on-disk volume to store exec logs      - mountPath: /tmp        name: tmp-volume    livenessProbe:      httpGet:        scheme: HTTPS        path: /        port: 8443      initialDelaySeconds: 30      timeoutSeconds: 30    securityContext:      allowPrivilegeEscalation: false      readOnlyRootFilesystem: true      runAsUser: 1001      runAsGroup: 2001volumes:  - name: kubernetes-dashboard-certs    secret:      secretName: kubernetes-dashboard-certs  - name: tmp-volume    emptyDir: {}serviceAccountName: kubernetes-dashboardnodeSelector:  &quot;beta.kubernetes.io/os&quot;: linux# Comment the following tolerations if Dashboard must not be deployed on mastertolerations:  - key: node-role.kubernetes.io/master    effect: NoSchedule</code></pre><hr><p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  ports:</p><pre><code>- port: 8000  targetPort: 8000</code></pre><p>  selector:<br>    k8s-app: dashboard-metrics-scraper</p><hr><p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: dashboard-metrics-scraper<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: dashboard-metrics-scraper<br>      annotations:<br>        seccomp.security.alpha.kubernetes.io/pod: ‘runtime/default’<br>    spec:<br>      containers:</p><pre><code>  - name: dashboard-metrics-scraper    image: kubernetesui/metrics-scraper:v1.0.3    ports:      - containerPort: 8000        protocol: TCP    livenessProbe:      httpGet:        scheme: HTTP        path: /        port: 8000      initialDelaySeconds: 30      timeoutSeconds: 30    volumeMounts:    - mountPath: /tmp      name: tmp-volume    securityContext:      allowPrivilegeEscalation: false      readOnlyRootFilesystem: true      runAsUser: 1001      runAsGroup: 2001serviceAccountName: kubernetes-dashboardnodeSelector:  &quot;beta.kubernetes.io/os&quot;: linux# Comment the following tolerations if Dashboard must not be deployed on mastertolerations:  - key: node-role.kubernetes.io/master    effect: NoSchedulevolumes:  - name: tmp-volume    emptyDir: {}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;apiVersion: v1&lt;br&gt;kind: ServiceAccount&lt;br&gt;metadata:&lt;br&gt;  labels:&lt;br&gt;    k8s-app: kubern
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>depth-kubernetes-k8s安装-kubeadm-0-1-导出官方kubeadm-yml</title>
-    <link href="http://yoursite.com/2022/05/12/depth-kubernetes-k8s%E5%AE%89%E8%A3%85-kubeadm-0-1-%E5%AF%BC%E5%87%BA%E5%AE%98%E6%96%B9kubeadm-yml/"/>
-    <id>http://yoursite.com/2022/05/12/depth-kubernetes-k8s安装-kubeadm-0-1-导出官方kubeadm-yml/</id>
-    <published>2022-05-12T02:11:25.060Z</published>
-    <updated>2022-03-01T02:46:48.172Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://blog.csdn.net/csdn_welearn/article/details/101107426" target="_blank" rel="noopener">kubeadm.yml搭建k8s</a></p><h1 id="导出配置文件"><a href="#导出配置文件" class="headerlink" title="导出配置文件"></a>导出配置文件</h1><p>kubeadm config print init-defaults –kubeconfig ClusterConfiguration &gt; kubeadm.yml</p><p>#<br><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入kubeadm.yaml 所在的目录</span></span><br><span class="line">cd /usr/local/kubernetes</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所需镜像列表</span></span><br><span class="line">kubeadm config images list --config kubeadm.yml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取镜像</span></span><br><span class="line">kubeadm config images pull --config kubeadm.yml</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/csdn_welearn/article/details/101107426&quot; target=&quot;_blank&quot; 
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>netsh命令实现端口转发的添加删除</title>
-    <link href="http://yoursite.com/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/"/>
-    <id>http://yoursite.com/2022/05/10/tool-windows-网络-1-netsh命令实现端口转发的添加删除/</id>
-    <published>2022-05-09T16:00:00.000Z</published>
-    <updated>2022-05-11T01:27:37.247Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><hr><pre><code>【windows10】netsh命令实现端口转发的添加删除以及查看: https://blog.csdn.net/jn10010537/article/details/122715645</code></pre><hr><h1 id="netsh命令实现端口转发的添加删除"><a href="#netsh命令实现端口转发的添加删除" class="headerlink" title="netsh命令实现端口转发的添加删除"></a>netsh命令实现端口转发的添加删除</h1><p>netsh(Network Shell)是⼀个windows系统本⾝提供的功能强⼤的⽹络配置命令⾏⼯具  </p><ol><li>查看端口映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show v4tov4</span><br></pre></td></tr></table></figure>或<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure></li><li>删除所有已经有的转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy reset</span><br></pre></td></tr></table></figure></li><li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li><li>删除转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy delete v4tov4 listenaddress&#x3D;0.0.0.0 listenport&#x3D;8081</span><br></pre></td></tr></table></figure></li><li>判断⼀个端⼝是否开启<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano -p tcp | findstr &quot;7778&quot; &gt;nul 2&gt;nul &amp;&amp; echo 7778端⼝已开启 || echo 7778端⼝未开启</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;【windows10】netsh命令实现端口转发的添加删除以及查看: https://blog.csdn.net/jn10010537/articl
-      
-    
-    </summary>
-    
-      <category term="win" scheme="http://yoursite.com/categories/win/"/>
-    
-      <category term="net" scheme="http://yoursite.com/categories/win/net/"/>
-    
-    
-      <category term="win" scheme="http://yoursite.com/tags/win/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-notes-dockerfile-local-dockerfile-3</title>
-    <link href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-3/"/>
-    <id>http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-3/</id>
-    <published>2022-05-09T09:42:20.846Z</published>
-    <updated>2022-05-09T09:42:31.128Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p><p>#作者<br>MAINTAINER xu</p><p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p><p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p><p>#bash方式执行，使demo-0.0.1jar可访问</p><p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p><p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p><p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;FROM java:8&lt;/p&gt;
-&lt;p&gt;#作者&lt;br&gt;MAINTAINER xu&lt;/p&gt;
-&lt;p&gt;#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹&lt;br&gt;VOLUME /t
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-notes-dockerfile-local-dockerfile-2</title>
-    <link href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-2/"/>
-    <id>http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-2/</id>
-    <published>2022-05-09T08:59:48.011Z</published>
-    <updated>2022-05-09T08:59:59.929Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8</p><p>VOLUME /app</p><p>COPY mall-task*.jar mall-task.jar</p><p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p><p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;FROM java:8&lt;/p&gt;
-&lt;p&gt;VOLUME /app&lt;/p&gt;
-&lt;p&gt;COPY mall-task*.jar mall-task.jar&lt;/p&gt;
-&lt;p&gt;RUN ln -
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-notes-dockerfile-local-dockerfile-1</title>
-    <link href="http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-1/"/>
-    <id>http://yoursite.com/2022/05/09/depth-docker-notes-dockerfile-local-dockerfile-1/</id>
-    <published>2022-05-09T08:56:25.127Z</published>
-    <updated>2022-05-09T08:56:49.373Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>FROM java:8<br>ADD /target/*.jar app.jar<br>EXPOSE 8082</p><p>#ENTRYPOINT [“java”,”-jar”,”/app.jar”]<br>ENTRYPOINT [“java”,”-jar”,”-Duser.timezone=GMT+08”,”/app.jar”]</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;FROM java:8&lt;br&gt;ADD /target/*.jar app.jar&lt;br&gt;EXPOSE 8082&lt;/p&gt;
-&lt;p&gt;#ENTRYPOINT [“java”,”-ja
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Deployment 实践-1</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-1-Deployment-%E5%AE%9E%E8%B7%B5-1/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-Deployment和Pod-1-Deployment-实践-1/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:03.045Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.psvmc.cn/article/2021-02-27-kubernetes-start-3-kind.html" target="_blank" rel="noopener">Deployment 实践</a></p><p>首先配置好 Deployment 的配置文件（这里用的是 nginx 镜像）</p><h1 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;home&#x2F;k8s</span><br><span class="line">cd &#x2F;home&#x2F;k8s</span><br><span class="line">vi app.yaml</span><br></pre></td></tr></table></figure><h2 id="app-yaml"><a href="#app-yaml" class="headerlink" title="[ app.yaml ]"></a>[ app.yaml ]</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps&#x2F;v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: web</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: web</span><br><span class="line">  replicas: 1</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: web</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: web</span><br><span class="line">        image: nginx</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br></pre></td></tr></table></figure><h1 id="通过-kubectl-命令创建服务"><a href="#通过-kubectl-命令创建服务" class="headerlink" title="通过 kubectl 命令创建服务"></a>通过 kubectl 命令创建服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f app.yaml</span><br></pre></td></tr></table></figure><h1 id="等待一会后，查看-Pod-调度、运行情况。"><a href="#等待一会后，查看-Pod-调度、运行情况。" class="headerlink" title="等待一会后，查看 Pod 调度、运行情况。"></a>等待一会后，查看 Pod 调度、运行情况。</h1><p>我看可以看到 Pod 的名字、运行状态、Pod 的 ip、还有所在Node的名字等信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl get Pods -o wide</span><br><span class="line">NAME                   READY   STATUS    RESTARTS   AGE   IP           NODE                       NOMINATED NODE   READINESS GATES</span><br><span class="line">web-76d9ff54d5-mddws   1&#x2F;1     Running   0          16m   10.244.0.5   wsl2-k8s-1-control-plane   &lt;none&gt;           &lt;none&gt;</span><br></pre></td></tr></table></figure></p><blockquote><p>启动成功 READY 的状态会是1/1；刚开始是0/1，启动之后是1/1</p><h2 id="通过-kubectl-get-pod-也可以查看pod运行状态"><a href="#通过-kubectl-get-pod-也可以查看pod运行状态" class="headerlink" title="通过 kubectl get pod  也可以查看pod运行状态"></a>通过 kubectl get pod  也可以查看pod运行状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl get pod</span><br><span class="line">NAME                   READY   STATUS    RESTARTS   AGE</span><br><span class="line">web-76d9ff54d5-mddws   1&#x2F;1     Running   0          16m</span><br></pre></td></tr></table></figure></blockquote><h2 id="如果不是，查看pod启动失败的原因"><a href="#如果不是，查看pod启动失败的原因" class="headerlink" title="如果不是，查看pod启动失败的原因"></a>如果不是，查看pod启动失败的原因</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod web</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl describe pod web</span><br><span class="line">Name:           web-76d9ff54d5-mddws</span><br><span class="line">Namespace:      default</span><br><span class="line">Priority:       0</span><br><span class="line">Node:           wsl2-k8s-1-control-plane&#x2F;172.18.0.2</span><br><span class="line">Start Time:     Fri, 23 Jul 2021 10:05:42 +0800</span><br><span class="line">Labels:         app&#x3D;web</span><br><span class="line">                pod-template-hash&#x3D;76d9ff54d5</span><br><span class="line">Annotations:    &lt;none&gt;</span><br><span class="line">Status:         Pending</span><br><span class="line">IP:</span><br><span class="line">IPs:            &lt;none&gt;</span><br><span class="line">Controlled By:  ReplicaSet&#x2F;web-76d9ff54d5</span><br><span class="line">Containers:</span><br><span class="line">  web:</span><br><span class="line">    Container ID:</span><br><span class="line">    Image:          nginx</span><br><span class="line">    Image ID:</span><br><span class="line">    Port:           80&#x2F;TCP</span><br><span class="line">    Host Port:      0&#x2F;TCP</span><br><span class="line">    State:          Waiting</span><br><span class="line">      Reason:       ContainerCreating</span><br><span class="line">    Ready:          False</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      &#x2F;var&#x2F;run&#x2F;secrets&#x2F;kubernetes.io&#x2F;serviceaccount from kube-api-access-6z9fs (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type              Status</span><br><span class="line">  Initialized       True</span><br><span class="line">  Ready             False</span><br><span class="line">  ContainersReady   False</span><br><span class="line">  PodScheduled      True</span><br><span class="line">Volumes:</span><br><span class="line">  kube-api-access-6z9fs:</span><br><span class="line">    Type:                    Projected (a volume that contains injected data from multiple sources)</span><br><span class="line">    TokenExpirationSeconds:  3607</span><br><span class="line">    ConfigMapName:           kube-root-ca.crt</span><br><span class="line">    ConfigMapOptional:       &lt;nil&gt;</span><br><span class="line">    DownwardAPI:             true</span><br><span class="line">QoS Class:                   BestEffort</span><br><span class="line">Node-Selectors:              &lt;none&gt;</span><br><span class="line">Tolerations:                 node.kubernetes.io&#x2F;not-ready:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">                             node.kubernetes.io&#x2F;unreachable:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason     Age   From               Message</span><br><span class="line">  ----    ------     ----  ----               -------</span><br><span class="line">  Normal  Scheduled  60s   default-scheduler  Successfully assigned default&#x2F;web-76d9ff54d5-mddws to wsl2-k8s-1-control-plane</span><br><span class="line">  Normal  Pulling    58s   kubelet            Pulling image &quot;nginx&quot;</span><br></pre></td></tr></table></figure><h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f app.yaml</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.psvmc.cn/article/2021-02-27-kubernetes-start-3-kind.html&quot; target=&quot;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/k8s/notes/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>yaml定义Pod详解</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-0-Deployment%E5%92%8CPod%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-Deployment和Pod-0-Deployment和Pod的区别/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.360Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h1><ol><li>pod是最小的单元</li><li>Pod标示的是一个部署单元，可以理解为k8s中的应用程序的单个实例，可能由单个容器组成，也可能由少量紧密耦合并共享资源的容器组成</li></ol><h1 id="Pod相关"><a href="#Pod相关" class="headerlink" title="Pod相关"></a>Pod相关</h1><ol><li>多个容器在同一个Pod下，他们共用一个IP，所以端口不能重复</li><li>一个Pod下的多个容器可以使用localhost来访问对方的端口</li><li>因为Pod是最小的单元，如果在Pod中容器出现异常终止了，是不会重启；在实际中，不会直接使用Pod，而是使用Deployment部署自己的应用</li></ol><h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><ol><li>Deployment拥有更加灵活强大的升级、回滚功能,并且支持滚动更新</li><li>使用Deployment升级Pod只需要定义Pod的最终状态，k8s会为你执行必要的操作(RC要自己定义如何操作)</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;Pod&quot;&gt;&lt;a href=&quot;#Pod&quot; class=&quot;headerlink&quot; title=&quot;Pod&quot;&gt;&lt;/a&gt;Pod&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;pod是最小的单元&lt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/k8s/notes/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pod关闭</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-2-pod%E5%85%B3%E9%97%AD/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-Deployment和Pod-2-pod关闭/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.667Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>执行kubectl delete的时候也可以通过–grace-period参数显示指定一个优雅退出时间来覆盖Pod中的配置，如果我们配置的grace period超过时间之后，k8s就只能选择强制kill Pod</p><h1 id="关闭abcdocker-pod"><a href="#关闭abcdocker-pod" class="headerlink" title="关闭abcdocker pod"></a>关闭abcdocker pod</h1><p>kubectl delete pod abcdocker</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;执行kubectl delete的时候也可以通过–grace-period参数显示指定一个优雅退出时间来覆盖Pod中的配置，如果我们配置的grace period超过时间之后
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/k8s/notes/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-1-kubectl使用简介</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-0-1-kubectl%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-0-1-kubectl使用简介/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.832Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/51wansheng/p/10249182.html" target="_blank" rel="noopener">kubectl使用详解</a></p><h1 id="kubectl概述"><a href="#kubectl概述" class="headerlink" title="kubectl概述"></a>kubectl概述</h1><ul><li>kubectl是一个用于操作kubernetes集群的命令行接口，通过利用kubectl的各种命令可以实现各种功能。<br><img src=".0-1-kubectl使用简介/kubernetes集群图.png" alt=""></li></ul><h1 id="通过kubect命令工具创建容器"><a href="#通过kubect命令工具创建容器" class="headerlink" title="通过kubect命令工具创建容器"></a>通过kubect命令工具创建容器</h1><ul><li>在minion运行容器（nginx）<br>角色                    IP　　<br>master/etcd            192.168.10.5<br>node-1                192.168.10.8<br>node-2                192.168.10.9</li></ul><h1 id="kubectl命令"><a href="#kubectl命令" class="headerlink" title="kubectl命令"></a>kubectl命令</h1><h2 id="1-检查集群节点，及服务健康状态"><a href="#1-检查集群节点，及服务健康状态" class="headerlink" title="1. 检查集群节点，及服务健康状态"></a>1. 检查集群节点，及服务健康状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get node</span><br><span class="line">NAME           STATUS    AGE</span><br><span class="line">192.168.10.8   Ready     22h</span><br><span class="line">192.168.10.9   Ready     21h</span><br><span class="line"></span><br><span class="line">[root@master ~]# kubectl get cs</span><br><span class="line">NAME                 STATUS    MESSAGE              ERROR</span><br><span class="line">scheduler            Healthy   ok                   </span><br><span class="line">controller-manager   Healthy   ok                   </span><br><span class="line">etcd-0               Healthy   &#123;&quot;health&quot;: &quot;true&quot;&#125;</span><br></pre></td></tr></table></figure><ol><li>在node-1和node-2节点服务器上下载docker镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@node-1 ~]# docker pull docker.io&#x2F;nginx </span><br><span class="line">[root@node-1 ~]# docker pull docker.io&#x2F;tianyebj&#x2F;pod-infrastructure</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#这里需要打一个registry.access.redhat.com&#x2F;rhel7&#x2F;pod-infrastructure:latest 的tag</span><br><span class="line">[root@node-1 ~]# docker tag docker.io&#x2F;tianyebj&#x2F;pod-infrastructure registry.access.redhat.com&#x2F;rhel7&#x2F;pod-infrastructure:latest</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 这里首先会去检查本地目录镜像名称，如果没有会去拉去这个镜像，所以在本地把下载好的镜像指向这个名称[root@node-1 ~]# cat &#x2F;etc&#x2F;kubernetes&#x2F;kubelet |grep &quot;KUBELET_POD_INFRA_CONTAINER&quot;</span><br><span class="line">KUBELET_POD_INFRA_CONTAINER&#x3D;&quot;--pod-infra-container-image&#x3D;registry.access.redhat.com&#x2F;rhel7&#x2F;pod-infrastructure:latest&quot;</span><br></pre></td></tr></table></figure></li></ol><h2 id="使用kubectl-delete删除创建的对象"><a href="#使用kubectl-delete删除创建的对象" class="headerlink" title="使用kubectl delete删除创建的对象"></a>使用kubectl delete删除创建的对象</h2><ol><li>删除POD<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pods</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-2187705812-7btdb   1&#x2F;1       Running   0          1h</span><br><span class="line">[root@master ~]# kubectl delete pod nginx-2187705812-7btdb</span><br><span class="line">pod &quot;nginx-2187705812-7btdb&quot; deleted</span><br><span class="line">[root@master ~]# kubectl get pods</span><br><span class="line">NAME                     READY     STATUS              RESTARTS   AGE</span><br><span class="line">nginx-2187705812-qjp31   0&#x2F;1       ContainerCreating   0          3s</span><br><span class="line">[root@master ~]# kubectl describe pod nginx|grep Node</span><br><span class="line">Node:        192.168.10.9&#x2F;192.168.10.9</span><br></pre></td></tr></table></figure><blockquote><p>当我们使用delete删除pod时，可以看到kubectl又重新创建启动一个POD ，<br>而且我们通过describe指令看到pod已经运行在node-2服务器上了，这是正是replicas为1的作用，平台会一直保证有一个副本在运行</p></blockquote></li><li>删除deployment<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">直接删除pod触发了replicas的确保机制，所以需要我们直接删除deployment[root@master ~]# kubectl delete deployment nginx</span><br><span class="line">deployment &quot;nginx&quot; deleted</span><br><span class="line">[root@master ~]# kubectl get pods</span><br><span class="line">No resources found.</span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/51wansheng/p/10249182.html&quot; target=&quot;_blank&quot; rel=&quot;noope
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-2-使用kubectl管理集群中deployment资源和service服务</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-0-2-%E4%BD%BF%E7%94%A8kubectl%E7%AE%A1%E7%90%86%E9%9B%86%E7%BE%A4%E4%B8%ADdeployment%E8%B5%84%E6%BA%90%E5%92%8Cservice%E6%9C%8D%E5%8A%A1/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-0-2-使用kubectl管理集群中deployment资源和service服务/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.432Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="使用kubectl管理集群中deployment资源和service服务"><a href="#使用kubectl管理集群中deployment资源和service服务" class="headerlink" title="使用kubectl管理集群中deployment资源和service服务"></a>使用kubectl管理集群中deployment资源和service服务</h1><p>kubectl相关命令参数如下：<br>kubectl   edit 编辑服务器侧资源<br>kubectl   replace   使用文件名或者标准输入资源<br>kubectl   patch      部分更新资源相关信息<br>kubectl   apply      使用文件或者标准输入更改配置信息<br>kubectl   scale       重新设定Deployment/ReplicaSet/RC/Job的size<br>kubectl   autoscale       Deployment/ReplicaSet/RC的自动扩展设定<br>kubectl   cordon   设定node不可使用<br>kubectl   uncordon      设定node可以使用<br>kubectl   drain      设定node进入维护模式</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;使用kubectl管理集群中deployment资源和service服务&quot;&gt;&lt;a href=&quot;#使用kubectl管理集群中deployment资源和service
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-2-使用yaml文件生成deployment</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-0-2-%E4%BD%BF%E7%94%A8yaml%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90deployment/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-0-2-使用yaml文件生成deployment/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.409Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>kubectl 常用命令和参数说明：<br>命令              说明<br>kubectl run     运行一个pod<br>kubectl delete  删除一个POD<br>kubectl get     查看pod相关信息<br>kubectl create    创建deployment<br>kubectl logs               取得pod中容器的log信息<br>kubectl exec               在pod中执行一条命令<br>kubectl cp                  从容器拷出或向容器拷入文件<br>kubectl attach            Attach到一个运行中的容器上，实时查看容器消息</p><blockquote><p>使用kubectl run在设定很复杂的需求时，需要非常长的一条语句，也很容易出错，也没法保存。所以更多场景下会使用yaml或者json文件。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;kubectl 常用命令和参数说明：&lt;br&gt;命令              说明&lt;br&gt;kubectl run     运行一个pod&lt;br&gt;kubectl delete  
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>0-3-kubectl使用命令总结</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-0-3-kubectl%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-0-3-kubectl使用命令总结/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.338Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="kubectl使用命令总结"><a href="#kubectl使用命令总结" class="headerlink" title="kubectl使用命令总结"></a>kubectl使用命令总结</h1><h2 id="kubectl相关命令参数如下："><a href="#kubectl相关命令参数如下：" class="headerlink" title="kubectl相关命令参数如下："></a>kubectl相关命令参数如下：</h2><p>kubectl run 　　运行一个pod<br>kubectl delete 　　 删除一个POD<br>kubectl get　　 查看pod相关信息<br>kubectl create 　　 创建deployment<br>kubectl logs 　　 取得pod中容器的log信息<br>kubectl exec 　　 在pod中执行一条命令<br>kubectl cp 　　 从容器拷出或向容器拷入文件<br>kubectl attach 　　 Attach到一个运行中的容器上，实时查看容器消息<br>kubectl describe　　 获得resource集群相关的信息<br>kubectl edit 　　编辑服务器侧资源<br>kubectl replace　　 使用文件名或者标准输入资源<br>kubectl patch 　　 部分更新资源相关信息<br>kubectl apply 　　 使用文件或者标准输入更改配置信息<br>kubectl scale 　　 重新设定Deployment/ReplicaSet/RC/Job的size<br>kubectl autoscale 　　 Deployment/ReplicaSet/RC的自动扩展设定<br>kubectl cordon 　　 设定node不可使用<br>kubectl uncordon 　　 设定node可以使用<br>kubectl drain 　　 设定node进入维护模式<br>kucectl help 　　 查看帮助信息</p><h2 id="kubectl-get命令能够确认的信息类别："><a href="#kubectl-get命令能够确认的信息类别：" class="headerlink" title="kubectl get命令能够确认的信息类别："></a>kubectl get命令能够确认的信息类别：</h2><p>deployments (缩写 deploy)<br>events (缩写 ev)<br>namespaces (缩写 ns)<br>nodes (缩写 no)<br>pods (缩写 po)<br>replicasets (缩写 rs)<br>replicationcontrollers (缩写 rc)<br>services (缩写 svc)</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;kubectl使用命令总结&quot;&gt;&lt;a href=&quot;#kubectl使用命令总结&quot; class=&quot;headerlink&quot; title=&quot;kubectl使用命令总结&quot;&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1-1-kubectl create</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-1-1-kubectl-create/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-1-1-kubectl-create/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.713Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="通过pod-json文件创建一个pod。"><a href="#通过pod-json文件创建一个pod。" class="headerlink" title="通过pod.json文件创建一个pod。"></a>通过pod.json文件创建一个pod。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f .&#x2F;pod.json</span><br></pre></td></tr></table></figure><h1 id="通过stdin的JSON创建一个pod。"><a href="#通过stdin的JSON创建一个pod。" class="headerlink" title="通过stdin的JSON创建一个pod。"></a>通过stdin的JSON创建一个pod。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat pod.json | kubectl create -f -</span><br></pre></td></tr></table></figure><h1 id="API版本为v1的JSON格式的docker-registry-yaml文件创建资源。"><a href="#API版本为v1的JSON格式的docker-registry-yaml文件创建资源。" class="headerlink" title="API版本为v1的JSON格式的docker-registry.yaml文件创建资源。"></a>API版本为v1的JSON格式的docker-registry.yaml文件创建资源。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f docker-registry.yaml --edit --output-version&#x3D;v1 -o json</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;通过pod-json文件创建一个pod。&quot;&gt;&lt;a href=&quot;#通过pod-json文件创建一个pod。&quot; class=&quot;headerlink&quot; title=&quot;通过
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>10-kubctl replace</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-10-kubctl-replace/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-10-kubctl-replace/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.747Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/51wansheng/p/10249182.html" target="_blank" rel="noopener">参考</a></p><h1 id="kubctl-replace-用于替换，我们使用上个例子中的service的port，把它改为31003"><a href="#kubctl-replace-用于替换，我们使用上个例子中的service的port，把它改为31003" class="headerlink" title="kubctl replace 用于替换，我们使用上个例子中的service的port，把它改为31003"></a>kubctl replace 用于替换，我们使用上个例子中的service的port，把它改为31003</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get service nginx -o yaml &gt; nginx_replace.yaml</span><br></pre></td></tr></table></figure><p>查看导出文件并修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat nginx_replace.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: 2019-01-10T14:41:21Z</span><br><span class="line">  labels:</span><br><span class="line">    name: nginx</span><br><span class="line">  name: nginx</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: &quot;118277&quot;</span><br><span class="line">  selfLink: &#x2F;api&#x2F;v1&#x2F;namespaces&#x2F;default&#x2F;services&#x2F;nginx</span><br><span class="line">  uid: cc4cf987-14e5-11e9-88ba-000c2953a750</span><br><span class="line">spec:</span><br><span class="line">  clusterIP: 10.254.49.161</span><br><span class="line">  ports:</span><br><span class="line">  - nodePort: 31003</span><br><span class="line">    port: 80</span><br><span class="line">    protocol: TCP</span><br><span class="line">    targetPort: 80</span><br><span class="line">  selector:</span><br><span class="line">    name: nginx</span><br><span class="line">  sessionAffinity: None</span><br><span class="line">  type: NodePort</span><br><span class="line">status:</span><br><span class="line">  loadBalancer: &#123;&#125;</span><br></pre></td></tr></table></figure></p><h1 id="我们把映射端口改为31003，然后保存退出；使用replace-命令"><a href="#我们把映射端口改为31003，然后保存退出；使用replace-命令" class="headerlink" title="我们把映射端口改为31003，然后保存退出；使用replace 命令"></a>我们把映射端口改为31003，然后保存退出；使用replace 命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl replace -f nginx_replace.yaml</span><br><span class="line">service &quot;nginx&quot; replaced</span><br><span class="line">[root@master ~]# kubectl get service</span><br><span class="line">NAME         CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE</span><br><span class="line">kubernetes   10.254.0.1      &lt;none&gt;        443&#x2F;TCP        1d</span><br><span class="line">nginx        10.254.49.161   &lt;nodes&gt;       80:31003&#x2F;TCP   2h</span><br></pre></td></tr></table></figure><h1 id="重建资源-，修改已创建-service-pod等等"><a href="#重建资源-，修改已创建-service-pod等等" class="headerlink" title="重建资源 ，修改已创建 service,pod等等"></a>重建资源 ，修改已创建 service,pod等等</h1><p>kubectl replace –force -f rocketmq-rc.yml<br>注意：这条命令，实际上它是一个组合命令，kubectl delete -f rocketmq-rc.yml和kubectl create -f rocketmq-rc.yml的组合</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/51wansheng/p/10249182.html&quot; target=&quot;_blank&quot; rel=&quot;noope
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>11-kuberctl patch</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-11-kuberctl-patch/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-11-kuberctl-patch/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.940Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="kuberctl-patch-当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。"><a href="#kuberctl-patch-当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。" class="headerlink" title="kuberctl patch  当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。"></a>kuberctl patch  当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。</h1><p>给nginx容器替换一个支持php的docker镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl patch pod nginx-1011335894-4ngml -p &#39;&#123;&quot;spec&quot;:&#123;&quot;containers&quot;:[&#123;&quot;name&quot;:&quot;nginx&quot;,&quot;image&quot;:&quot;docker.io&#x2F;richarvey&#x2F;nginx-php-fpm&quot;&#125;]&#125;&#125;&#39;</span><br><span class="line">&quot;nginx-1011335894-4ngml&quot; patched</span><br><span class="line"></span><br><span class="line">[root@master ~]# kubectl get service</span><br><span class="line">NAME         CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE</span><br><span class="line">kubernetes   10.254.0.1      &lt;none&gt;        443&#x2F;TCP        1d</span><br><span class="line">nginx        10.254.49.161   &lt;nodes&gt;       80:31003&#x2F;TCP   2h</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;kuberctl-patch-当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。&quot;&gt;&lt;a href=&quot;#kuberctl-patch-当修
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1-2-kubectl create通过config配置创建集群</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-1-2-kubectl-create%E9%80%9A%E8%BF%87config%E9%85%8D%E7%BD%AE%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-1-2-kubectl-create通过config配置创建集群/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.595Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="首先需要创建-kind-配置"><a href="#首先需要创建-kind-配置" class="headerlink" title="首先需要创建 kind 配置"></a>首先需要创建 kind 配置</h1><ul><li>可以对要创建的集群进行一些定制化配置<br><a href="https://kind.sigs.k8s.io/docs/user/configuration/" target="_blank" rel="noopener">kind支持的配置</a></li><li>参照文档，编写配置 kind 配置文件 config.yaml，然后在 kind 创建集群的时候指定配置文件：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --config&#x3D;&#x2F;foo&#x2F;bar&#x2F;config.yaml</span><br></pre></td></tr></table></figure></li></ul><h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><p>默认 kind 创建出来的集群 apiserver 监听的地址是：127.0.0.1:[随机端口]，我要改成默认监听的地址是：0.0.0.0:6443，编写如下 config.yaml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">kind: Cluster</span><br><span class="line">apiVersion: kind.x-k8s.io&#x2F;v1alpha4</span><br><span class="line">networking:</span><br><span class="line">  # WARNING: It is _strongly_ recommended that you keep this the default</span><br><span class="line">  # (127.0.0.1) for security reasons. However it is possible to change this.</span><br><span class="line">  apiServerAddress: &quot;0.0.0.0&quot;</span><br><span class="line">  # By default the API server listens on a random open port.</span><br><span class="line">  # You may choose a specific port but probably don&#39;t need to in most cases.</span><br><span class="line">  # Using a random port makes it easier to spin up multiple clusters.</span><br><span class="line">  apiServerPort: 6443</span><br></pre></td></tr></table></figure></p><ul><li>创建集群时指定上面配置文件：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --config&#x3D;config.yaml</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;首先需要创建-kind-配置&quot;&gt;&lt;a href=&quot;#首先需要创建-kind-配置&quot; class=&quot;headerlink&quot; title=&quot;首先需要创建 kind 配置
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>12-kubectl scale</title>
-    <link href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-12-kubectl-scale/"/>
-    <id>http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl命令-12-kubectl-scale/</id>
-    <published>2022-05-08T16:00:00.000Z</published>
-    <updated>2022-05-12T03:35:02.349Z</updated>
-    
-    <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="kubectl-scale-用于横向扩展，是kubernetes或者swarm这类容器编辑平台的重要功能之一"><a href="#kubectl-scale-用于横向扩展，是kubernetes或者swarm这类容器编辑平台的重要功能之一" class="headerlink" title="kubectl scale   用于横向扩展，是kubernetes或者swarm这类容器编辑平台的重要功能之一"></a>kubectl scale   用于横向扩展，是kubernetes或者swarm这类容器编辑平台的重要功能之一</h1><p>实现环境： 之前已经设定nginx的replica副本为1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pod -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   1          3h        10.255.18.2   192.168.10.8</span><br><span class="line">nginx-1011335894-4ngml   1&#x2F;1       Running   2          2h        10.255.94.2   192.168.10.9</span><br><span class="line">[root@master ~]# kubectl get deployment</span><br><span class="line">NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">mysql     1         1         1            1           3h</span><br><span class="line">nginx     1         1         1            1           2h</span><br></pre></td></tr></table></figure><br>执行scale命令，使用scale命令进行横向扩展，将原本为1的副本提高到3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl scale --current-replicas&#x3D;1 --replicas&#x3D;3 deployment&#x2F;nginx</span><br><span class="line">deployment &quot;nginx&quot; scaled</span><br><span class="line">[root@master ~]# kubectl get deployment</span><br><span class="line">NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">mysql     1         1         1            1           3h</span><br><span class="line">nginx     3         3         3            3           2h</span><br></pre></td></tr></table></figure><br>我们可以看到nginx的副本分布，node-1 运行了一个nginx，node-2运行了两个nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pod -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   1          3h        10.255.18.2   192.168.10.8</span><br><span class="line">nginx-1011335894-4ngml   1&#x2F;1       Running   2          2h        10.255.94.2   192.168.10.9</span><br><span class="line">nginx-1011335894-lhm28   1&#x2F;1       Running   0          52s       10.255.18.3   192.168.10.8</span><br><span class="line">nginx-1011335894-xtmbb   1&#x2F;1       Running   0          52s       10.255.94.3   192.168.10.9</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;kubectl-scale-用于横向扩展，是kubernetes或者swarm这类容器编辑平台的重要功能之一&quot;&gt;&lt;a href=&quot;#kubectl-scale-用于
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="k8s" scheme="http://yoursite.com/categories/depth/k8s/"/>
-    
-      <category term="order" scheme="http://yoursite.com/categories/depth/k8s/order/"/>
-    
-    
-      <category term="k8s" scheme="http://yoursite.com/tags/k8s/"/>
     
   </entry>
   
