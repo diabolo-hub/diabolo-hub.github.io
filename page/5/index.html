@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/" itemprop="url">分布式-分布式消息队列-kafka-笔记-windows下删除topic</a></h1>
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka本地测试大全</a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">5.4k</span>
               
 
               
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -475,13 +475,40 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h1><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
+<hr>
+<p>title: “随机查询数据”<br>date: 2022-03-18<br>comments: true<br>share: true<br>toc: true<br>categories:</p>
+<ul>
+<li>分布式</li>
+<li>MQ</li>
+<li>kafka</li>
+<li>notes<br>tags:</li>
+<li>kafka</li>
+</ul>
+<hr>
+<h1 id="创建主题，同一个主题创建一次即可。"><a href="#创建主题，同一个主题创建一次即可。" class="headerlink" title="创建主题，同一个主题创建一次即可。"></a>创建主题，同一个主题创建一次即可。</h1><p>.\bin\windows\kafka-topics.bat –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic test1<br>或<br>.\bin\windows\kafka-topics.bat –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic test1</p>
+<h1 id="启动生产者和消费者"><a href="#启动生产者和消费者" class="headerlink" title="启动生产者和消费者"></a>启动生产者和消费者</h1><p>.\bin\windows\kafka-console-producer.bat –broker-list localhost:9092 –topic test1</p>
+<p>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning</p>
 <h1 id="列出所有topic"><a href="#列出所有topic" class="headerlink" title="列出所有topic"></a>列出所有topic</h1><p>.\bin\windows\kafka-topics.bat –list –bootstrap-server localhost:9092</p>
-<h1 id="删除Topic之后需要如下操作才能正常使用"><a href="#删除Topic之后需要如下操作才能正常使用" class="headerlink" title="删除Topic之后需要如下操作才能正常使用"></a>删除Topic之后需要如下操作才能正常使用</h1><ol>
-<li>删除test2对应的kafka日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\kafka-logs\test2-0</span><br></pre></td></tr></table></figure></li>
-<li>删除 ZK 日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\zookeeper\version-2\log.2a（或其他）</span><br></pre></td></tr></table></figure>
-</li>
+<h1 id="查看指定topic"><a href="#查看指定topic" class="headerlink" title="查看指定topic"></a>查看指定topic</h1><p>.\bin\windows\kafka-topics.bat –describe –bootstrap-server localhost:9092 –topic test1</p>
+<h1 id="增加topic的partition"><a href="#增加topic的partition" class="headerlink" title="增加topic的partition"></a>增加topic的partition</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –alter –topic test1 –partitions 5</p>
+<h1 id="查看-topic-指定分区-offset-的最大值或最小值"><a href="#查看-topic-指定分区-offset-的最大值或最小值" class="headerlink" title=".查看 topic 指定分区 offset 的最大值或最小值"></a>.查看 topic 指定分区 offset 的最大值或最小值</h1><p>.\bin\windows\kafka-run-class.bat kafka.tools.GetOffsetShell –topic test1 –time -1 –broker-list 127.0.0.1:9092 –partitions 0 </p>
+<h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
+<blockquote>
+<p> windows环境下删除topic需要关注brokder情况</p>
+</blockquote>
+<h1 id="消费消息"><a href="#消费消息" class="headerlink" title="消费消息"></a>消费消息</h1><p>1.从头开始<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning<br>2.从尾部开始<br>从尾部开始取数据，必需要指定分区：<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</p>
+<ol>
+<li>指定分区<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</li>
 </ol>
+<h1 id="消费者Group"><a href="#消费者Group" class="headerlink" title="消费者Group"></a>消费者Group</h1><ol>
+<li>指定Group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –topic test1 -group test_group –from-beginning</li>
+<li>消费者Group列表<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –list</li>
+<li>查看Group详情[用来判断是否有延迟数据]<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –describe<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Consumer group &#39;test_group&#39; has no active members.</span><br><span class="line"></span><br><span class="line">TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID</span><br><span class="line">test            0          5               5               0               -               -               -</span><br><span class="line"></span><br><span class="line"># CURRENT-OFFSET: 当前消费者群组最近提交的 offset，也就是消费者分区里读取的当前位置</span><br><span class="line"># LOG-END-OFFSET: 当前最高水位偏移量，也就是最近一个读取消息的偏移量，同时也是最近一个提交到集群的偏移量</span><br><span class="line"># LAG：消费者的 CURRENT-OFFSET 与 broker 的 LOG-END-OFFSET 之间的差距</span><br></pre></td></tr></table></figure></li>
+<li>删除group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –delete</li>
+</ol>
+<h1 id="平衡Leader"><a href="#平衡Leader" class="headerlink" title="平衡Leader"></a>平衡Leader</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kafka-preferred-replica-election.sh --bootstrap-server localhost:9092</span><br><span class="line">或</span><br><span class="line">kafka-leader-election.sh --bootstrap-server localhost:9092 --topic test --partition&#x3D;2 --election-type preferred</span><br><span class="line">--partition:指定需要重新分配leader的partition编号</span><br></pre></td></tr></table></figure>
+<h1 id="自带压测工具"><a href="#自带压测工具" class="headerlink" title="自带压测工具"></a>自带压测工具</h1><p>kafka-producer-perf-test.sh –topic test –num-records 100 –record-size 1 –throughput 100 –producer-props bootstrap.servers=localhost:9092 </p>
 
           
         
@@ -698,166 +725,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’"><a href="#node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’" class="headerlink" title="node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’"></a>node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-05 00:39:16,165] INFO Creating &#x2F;brokers&#x2F;ids&#x2F;0 (is it secure? false) (kafka.zk.KafkaZkClient)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR Error while creating ephemeral at &#x2F;brokers&#x2F;ids&#x2F;0, node already exists and owner &#39;72083030559031298&#39; does not match current session &#39;72083315371278336&#39; (kafka.zk.KafkaZkClient$CheckedEphemeral)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR [KafkaServer id&#x3D;0] Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)</span><br><span class="line">org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode &#x3D; NodeExists</span><br><span class="line">        at org.apache.zookeeper.KeeperException.create(KeeperException.java:126)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.getAfterNodeExists(KafkaZkClient.scala:1904)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.create(KafkaZkClient.scala:1842)</span><br><span class="line">        at kafka.zk.KafkaZkClient.checkedEphemeralCreate(KafkaZkClient.scala:1809)</span><br><span class="line">        at kafka.zk.KafkaZkClient.registerBroker(KafkaZkClient.scala:96)</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:324)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:109)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [KafkaServer id&#x3D;0] shutting down (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopping socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopped socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [ReplicaManager broker&#x3D;0] Shutting down (kafka.server.ReplicaManager)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [LogDirFailureHandler]: Shutting down (kafka.server.ReplicaManager$LogDirFailureHandler)</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>实例抢占 重新启动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -965,6 +832,166 @@
 <blockquote>
 <p>原因是在集群环境下建立topic的时候，没有建立分区和副本，所以报了这个错。重新修改topic信息，然后就可以了。</p>
 </blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’"><a href="#node-already-exists-and-owner-‘72083030559031298’-does-not-match-current-session-‘72083315371278336’" class="headerlink" title="node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’"></a>node already exists and owner ‘72083030559031298’ does not match current session ‘72083315371278336’</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-05 00:39:16,165] INFO Creating &#x2F;brokers&#x2F;ids&#x2F;0 (is it secure? false) (kafka.zk.KafkaZkClient)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR Error while creating ephemeral at &#x2F;brokers&#x2F;ids&#x2F;0, node already exists and owner &#39;72083030559031298&#39; does not match current session &#39;72083315371278336&#39; (kafka.zk.KafkaZkClient$CheckedEphemeral)</span><br><span class="line">[2022-04-05 00:39:16,233] ERROR [KafkaServer id&#x3D;0] Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)</span><br><span class="line">org.apache.zookeeper.KeeperException$NodeExistsException: KeeperErrorCode &#x3D; NodeExists</span><br><span class="line">        at org.apache.zookeeper.KeeperException.create(KeeperException.java:126)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.getAfterNodeExists(KafkaZkClient.scala:1904)</span><br><span class="line">        at kafka.zk.KafkaZkClient$CheckedEphemeral.create(KafkaZkClient.scala:1842)</span><br><span class="line">        at kafka.zk.KafkaZkClient.checkedEphemeralCreate(KafkaZkClient.scala:1809)</span><br><span class="line">        at kafka.zk.KafkaZkClient.registerBroker(KafkaZkClient.scala:96)</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:324)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:109)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [KafkaServer id&#x3D;0] shutting down (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-05 00:39:16,233] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopping socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [SocketServer listenerType&#x3D;ZK_BROKER, nodeId&#x3D;0] Stopped socket server request processors (kafka.network.SocketServer)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [ReplicaManager broker&#x3D;0] Shutting down (kafka.server.ReplicaManager)</span><br><span class="line">[2022-04-05 00:39:16,249] INFO [LogDirFailureHandler]: Shutting down (kafka.server.ReplicaManager$LogDirFailureHandler)</span><br></pre></td></tr></table></figure>
+<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>实例抢占 重新启动</p>
 
           
         
@@ -1363,169 +1390,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E6%8F%90%E7%A4%BAzookeeper-is-not-a-recognized-option/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E6%8F%90%E7%A4%BAzookeeper-is-not-a-recognized-option/" itemprop="url">分布式-分布式消息队列-kafka-异常-创建topic提示zookeeper-is-not-a-recognized-option</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="zookeeper-is-not-a-recognized-option"><a href="#zookeeper-is-not-a-recognized-option" class="headerlink" title="zookeeper is not a recognized option"></a>zookeeper is not a recognized option</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D:\softAddress\kafka_2.12-3.1.0&gt;.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test2</span><br><span class="line">Exception in thread &quot;main&quot; joptsimple.UnrecognizedOptionException: zookeeper is not a recognized option</span><br><span class="line">        at joptsimple.OptionException.unrecognizedOption(OptionException.java:108)</span><br><span class="line">        at joptsimple.OptionParser.handleLongOptionToken(OptionParser.java:510)</span><br><span class="line">        at joptsimple.OptionParserState$2.handleArgument(OptionParserState.java:56)</span><br><span class="line">        at joptsimple.OptionParser.parse(OptionParser.java:396)</span><br><span class="line">        at kafka.admin.TopicCommand$TopicCommandOptions.&lt;init&gt;(TopicCommand.scala:567)</span><br><span class="line">        at kafka.admin.TopicCommand$.main(TopicCommand.scala:47)</span><br><span class="line">        at kafka.admin.TopicCommand.main(TopicCommand.scala)</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>原来新版本的kafka，已经不需要依赖zookeeper来创建topic，新版的kafka创建topic指令为下：<br>windows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test1</span><br></pre></td></tr></table></figure><br>linux:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;kafka-topics.sh --create --bootstrap-server master:9097 --replication-factor 1 --partitions 1 --topic test1</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意，这里的master是我主机ip映射的主机名，改成该kafka服务器对应的IP即可。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E5%A4%B1%E8%B4%A5Cancelled-createTopics-request-with-correlation-id-3-due-to-node-0-being-disconnected/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1634,6 +1498,169 @@
 <li>使用ctrl + c执行如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[2022-04-04 22:15:05,385] INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br><span class="line">[2022-04-04 22:15:05,385] INFO [BrokerToControllerChannelManager broker&#x3D;0 name&#x3D;alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</span><br><span class="line">[2022-04-04 22:45:51,372] INFO Creating topic test1 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:53:17,084] INFO Creating topic test1 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:56:37,976] WARN Attempting to send response via channel for which there is no open connection, connection id 172.31.128.1:9092-172.31.128.1:54580-0 (kafka.network.Processor)</span><br><span class="line">[2022-04-04 22:56:38,133] INFO [Controller id&#x3D;0, targetBrokerId&#x3D;0] Node 0 disconnected. (org.apache.kafka.clients.NetworkClient)</span><br><span class="line">[2022-04-04 22:56:38,150] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions Set(test1-0) (kafka.server.ReplicaFetcherManager)</span><br><span class="line">[2022-04-04 22:56:38,260] INFO [LogLoader partition&#x3D;test1-0, dir&#x3D;D:\tmp\kafka-logs] Loading producer state till offset 0 with message format version 2 (kafka.log.UnifiedLog$)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO Created log for partition test1-0 in D:\tmp\kafka-logs\test1-0 with properties &#123;&#125; (kafka.log.LogManager)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO [Partition test1-0 broker&#x3D;0] No checkpointed highwatermark is found for partition test1-0 (kafka.cluster.Partition)</span><br><span class="line">[2022-04-04 22:56:38,358] INFO [Partition test1-0 broker&#x3D;0] Log loaded for partition test1-0 with initial high watermark 0 (kafka.cluster.Partition)</span><br><span class="line">[2022-04-04 22:57:34,426] INFO Creating topic test2 with configuration &#123;&#125; and initial partition assignment Map(0 -&gt; ArrayBuffer(0)) (kafka.zk.AdminZkClient)</span><br><span class="line">[2022-04-04 22:57:34,593] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions Set(test2-0) (kafka.server.ReplicaFetcherManager)</span><br><span class="line">[2022-04-04 22:57:34,597] INFO [LogLoader partition&#x3D;test2-0, dir&#x3D;D:\tmp\kafka-logs] Loading producer state till offset 0 with message format version 2 (kafka.log.UnifiedLog$)</span><br><span class="line">[2022-04-04 22:57:34,597] INFO Created log for partition test2-0 in D:\tmp\kafka-logs\test2-0 with properties &#123;&#125; (kafka.log.LogManager)</span><br></pre></td></tr></table></figure>
 再创建即可</li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E6%8F%90%E7%A4%BAzookeeper-is-not-a-recognized-option/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-%E5%88%9B%E5%BB%BAtopic%E6%8F%90%E7%A4%BAzookeeper-is-not-a-recognized-option/" itemprop="url">分布式-分布式消息队列-kafka-异常-创建topic提示zookeeper-is-not-a-recognized-option</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="zookeeper-is-not-a-recognized-option"><a href="#zookeeper-is-not-a-recognized-option" class="headerlink" title="zookeeper is not a recognized option"></a>zookeeper is not a recognized option</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">D:\softAddress\kafka_2.12-3.1.0&gt;.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test2</span><br><span class="line">Exception in thread &quot;main&quot; joptsimple.UnrecognizedOptionException: zookeeper is not a recognized option</span><br><span class="line">        at joptsimple.OptionException.unrecognizedOption(OptionException.java:108)</span><br><span class="line">        at joptsimple.OptionParser.handleLongOptionToken(OptionParser.java:510)</span><br><span class="line">        at joptsimple.OptionParserState$2.handleArgument(OptionParserState.java:56)</span><br><span class="line">        at joptsimple.OptionParser.parse(OptionParser.java:396)</span><br><span class="line">        at kafka.admin.TopicCommand$TopicCommandOptions.&lt;init&gt;(TopicCommand.scala:567)</span><br><span class="line">        at kafka.admin.TopicCommand$.main(TopicCommand.scala:47)</span><br><span class="line">        at kafka.admin.TopicCommand.main(TopicCommand.scala)</span><br></pre></td></tr></table></figure>
+<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><p>原来新版本的kafka，已经不需要依赖zookeeper来创建topic，新版的kafka创建topic指令为下：<br>windows:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test1</span><br></pre></td></tr></table></figure><br>linux:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;kafka-topics.sh --create --bootstrap-server master:9097 --replication-factor 1 --partitions 1 --topic test1</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意，这里的master是我主机ip映射的主机名，改成该kafka服务器对应的IP即可。</p>
+</blockquote>
 
           
         
@@ -1869,7 +1896,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-3-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-20-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1888,7 +1915,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-3-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url">python-notes-course-1-3-基本数据结构</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-20-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%9E%9A%E4%B8%BE/" itemprop="url">python-notes-course-1-20-自定义类型的枚举</a></h1>
         
 
         <div class="post-meta">
@@ -1935,7 +1962,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">3.2k</span>
               
 
               
@@ -1971,17 +1998,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>有单引号 ‘’，双引号 “”，三引号 ‘’’ ‘’’</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>如果要打印打印号，则可以使用双引号；如果要打印双引号，则可以使用三引号<br>例： ‘’’亮点水说：”你好！”‘’’</p>
-<h1 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h1><p>包括 正整数、负整数 和 零<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int1 &#x3D; 1</span><br><span class="line">int2 &#x3D; 100</span><br><span class="line">int3 &#x3D; -8080</span><br><span class="line">int 4 &#x3D; 0</span><br><span class="line"></span><br><span class="line">print(int1)</span><br></pre></td></tr></table></figure></p>
-<h1 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h1><p>输出数字类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int1 &#x3D; 1</span><br><span class="line">int2 &#x3D; 1 &#x2F; 2</span><br><span class="line"></span><br><span class="line">print(int1)</span><br><span class="line">print(int2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(type(int1))</span><br><span class="line">print(type(int2))</span><br><span class="line"></span><br><span class="line"># 结果</span><br><span class="line">1</span><br><span class="line">0.5</span><br><span class="line">&lt;class &#39;int&#39;&gt;</span><br><span class="line">&lt;class &#39;float&#39;&gt;</span><br></pre></td></tr></table></figure></p>
-<h1 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h1><p>布尔值可以用 and、or 和 not 运算。</p>
-<ol>
-<li>and 运算是与运算，只有所有都为 True，and 运算结果才是 True。</li>
-<li>or 运算是或运算，只要其中有一个为 True，or 运算结果就是 True。</li>
-<li>not 运算是非运算，它是一个单目运算符，把 True 变成 False，False 变成 True。</li>
-</ol>
-<h1 id="空值"><a href="#空值" class="headerlink" title="空值"></a>空值</h1><p>基本上每种编程语言都有自己的特殊值——空值，在 Python 中，用 None 来表示</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="自定义类型的枚举"><a href="#自定义类型的枚举" class="headerlink" title="自定义类型的枚举"></a>自定义类型的枚举</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">from enum import Enum, unique</span><br><span class="line"></span><br><span class="line">Enum(&#39;Month&#39;, (&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># @unique 装饰器可以帮助我们检查保证没有重复值</span><br><span class="line">@unique</span><br><span class="line">class Month(Enum):</span><br><span class="line">    Jan &#x3D; &#39;January&#39;</span><br><span class="line">    Feb &#x3D; &#39;February&#39;</span><br><span class="line">    Mar &#x3D; &#39;March&#39;</span><br><span class="line">    Apr &#x3D; &#39;April&#39;</span><br><span class="line">    May &#x3D; &#39;May&#39;</span><br><span class="line">    Jun &#x3D; &#39;June&#39;</span><br><span class="line">    Jul &#x3D; &#39;July&#39;</span><br><span class="line">    Aug &#x3D; &#39;August&#39;</span><br><span class="line">    Sep &#x3D; &#39;September &#39;</span><br><span class="line">    Oct &#x3D; &#39;October&#39;</span><br><span class="line">    Nov &#x3D; &#39;November&#39;</span><br><span class="line">    Dec &#x3D; &#39;December&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    print(Month.Jan, &#39;----------&#39;,</span><br><span class="line">          Month.Jan.name, &#39;----------&#39;, Month.Jan.value)</span><br><span class="line">    for name, member in Month.__members__.items():</span><br><span class="line">        print(name, &#39;----------&#39;, member, &#39;----------&#39;, member.value)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时，member.value = January 或 February …<br>若不自定义，member.value = 数字，从1 开始</p>
+</blockquote>
 
           
         
@@ -2422,7 +2442,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2431,7 +2451,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

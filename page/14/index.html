@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-11-%E6%A3%80%E7%B4%A2%E6%98%A0%E5%B0%84%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url">数据类型转换</a></h1>
+                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-11-%E6%A3%80%E7%B4%A2%E6%98%A0%E5%B0%84%E5%99%A8/" itemprop="url">检索映射器</a></h1>
         
 
         <div class="post-meta">
@@ -464,7 +464,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.9k</span>
+                <span title="字数统计">4.9k</span>
               
 
               
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -500,10 +500,34 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><ol>
-<li>从 int 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;price&quot;, numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    List&lt;String&gt; prices(List&lt;Integer&gt; prices);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>从 BigDecimal 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;power&quot;, numberFormat &#x3D; &quot;#.##E0&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>从日期到字符串的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;manufacturingDate&quot;, dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    List&lt;String&gt; stringListToDateList(List&lt;Date&gt; dates);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="检索映射器"><a href="#检索映射器" class="headerlink" title="检索映射器"></a>检索映射器</h1><h2 id="Mappers-工厂（无依赖注入）"><a href="#Mappers-工厂（无依赖注入）" class="headerlink" title="Mappers 工厂（无依赖注入）"></a>Mappers 工厂（无依赖注入）</h2><p>当不使用 DI 框架时，可以通过org.mapstruct.factory.Mappers类检索 Mapper 实例。只需调用该getMapper()方法，传递映射器的接口类型即可返回：</p>
+<ol>
+<li>使用 Mappers 工厂<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CarMapper mapper &#x3D; Mappers.getMapper( CarMapper.class );</span><br></pre></td></tr></table></figure>
+按照惯例，映射器接口应定义一个名为的成员，该成员INSTANCE包含映射器类型的单个实例：</li>
+<li>声明映射器的实例（接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>声明映射器的实例（抽象类）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    public static final CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这种模式使客户端可以很容易地使用映射器对象，而无需重复实例化新实例：</p>
+<h2 id="访问映射器"><a href="#访问映射器" class="headerlink" title="访问映射器"></a>访问映射器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Car car &#x3D; ...;</span><br><span class="line">CarDto dto &#x3D; CarMapper.INSTANCE.carToCarDto( car );</span><br></pre></td></tr></table></figure>
+<p>请注意，由 MapStruct 生成的映射器是无状态的和线程安全的，因此可以同时从多个线程安全地访问。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="使用依赖注入"><a href="#使用依赖注入" class="headerlink" title="使用依赖注入"></a>使用依赖注入</h2><ol>
+<li>使用 CDI 组件模型的映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>生成的映射器实现将用@ApplicationScoped注释标记，因此可以使用注释注入字段、构造函数参数等@Inject：</p>
+</blockquote>
+</li>
+<li>通过依赖注入获取映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Inject</span><br><span class="line">private CarMapper mapper;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="注入策略"><a href="#注入策略" class="headerlink" title="注入策略"></a>注入策略</h2><p>使用依赖注入时，您可以在字段注入和构造函数注入之间进行选择。这可以通过通过提供注入策略@Mapper或@MapperConfig注释来完成。</p>
+<ol>
+<li>使用构造函数注入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI, uses &#x3D; EngineMapper.class, injectionStrategy &#x3D; InjectionStrategy.CONSTRUCTOR)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果 MapStruct 检测到它需要使用它的实例进行映射，则生成的映射器将注入在uses属性中定义的类。<br>使用InjectionStrategy#CONSTRUCTOR时，构造函数将具有适当的注释，而字段则不会。<br>使用InjectionStrategy#FIELD时，注释在字段本身上。目前，默认的注入策略是字段注入，但可以使用配置选项进行配置。建议使用构造函数注入来简化测试。<br>对于抽象类或装饰器，应该使用 setter 注入。</p>
+</blockquote>
 </li>
 </ol>
 
@@ -949,6 +973,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/" itemprop="url">向映射器添加自定义方法</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="向映射器添加自定义方法"><a href="#向映射器添加自定义方法" class="headerlink" title="向映射器添加自定义方法"></a>向映射器添加自定义方法</h1><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    default PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    public abstract CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    public PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在转换 Car -&gt; CarDto 时，会自动将Car中的Person转换（通过寻找本类中的 personToPersonDto 实现转换）</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-4-uses%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1320,194 +1532,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/" itemprop="url">向映射器添加自定义方法</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="向映射器添加自定义方法"><a href="#向映射器添加自定义方法" class="headerlink" title="向映射器添加自定义方法"></a>向映射器添加自定义方法</h1><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    default PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    public abstract CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    public PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在转换 Car -&gt; CarDto 时，会自动将Car中的Person转换（通过寻找本类中的 personToPersonDto 实现转换）</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/28/redis-notes-3-redis%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF%E6%98%AF%E7%94%A8hash%E8%BF%98%E6%98%AFstring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1638,6 +1662,194 @@
             <script src="/assets/js/APlayer.min.js"> </script><h1 id="redis存储对象信息是用hash还是string"><a href="#redis存储对象信息是用hash还是string" class="headerlink" title="redis存储对象信息是用hash还是string"></a>redis存储对象信息是用hash还是string</h1><p>建议是大部分情况下使用 string 存储就好，毕竟在存储具有多层嵌套的对象时方便很多，占用的空间也比 Hash 小。当我们需要存储一个特别大的对象时，而且在大多数情况中只需要访问该对象少量的字段时，可以考虑使用 Hash。</p>
 <h2 id="适合用-string-存储的情况："><a href="#适合用-string-存储的情况：" class="headerlink" title="适合用 string 存储的情况："></a>适合用 string 存储的情况：</h2><p>每次需要访问大量的字段<br>存储的结构具有多层嵌套的时候</p>
 <h2 id="适合用-hash-存储的情况："><a href="#适合用-hash-存储的情况：" class="headerlink" title="适合用 hash 存储的情况："></a>适合用 hash 存储的情况：</h2><p>在大多数情况中只需要访问少量字段<br>自己始终知道哪些字段可用，防止使用 mget 时获取不到想要的数据</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/" itemprop="url">为什么通过命令行查询不到redis中的KEY</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-25T00:00:00+08:00">2022-05-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/w8y56f/article/details/120225410" target="_blank" rel="noopener">为什么通过命令行查不到redis中的key</a></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>RedisTemplate都没有特别配置序列化器，在执行后，使用命令行连上redis，执行keys my_key<em>，发现只有第二个key存在，第一个消失了，但是代码执行后是能够取到值的。这是为什么？<br>是因为命令行的工具有bug吗？不是的。使用 keys </em>my_key*，就可以显示两个key都存在。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>为什么key 前面没有奇怪的符号，因为Spring 在遇到 <String, String> 泛型的时候注入的不是 RedisTemplate 类，而是 StringRedisTemplate 类，而后者的所有序列化器都是 String的序列化器(StringRedisSerializer)，所以就很正常了。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) &#123;</span><br><span class="line">        RedisTemplate template &#x3D; new RedisTemplate();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">         &#x2F;&#x2F;建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</span><br><span class="line">        RedisSerializer&lt;String&gt; stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        template.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        return template;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1834,194 +2046,6 @@
 <li>结论:Jackson2JsonRedisSerializer序列化方式，VALUE存JSON字符串时，取值也为JSON字符串,需借助JSON工具进行转换为实体类或实体集合</li>
 <li>结论：Jackson2JsonRedisSerializer 序列化方式，且使用管道操作后，获取的值也是一个linkedHashMap,需借助工具才可将值反序列化为实体对象或实体对象集合</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/" itemprop="url">为什么通过命令行查询不到redis中的KEY</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-25T00:00:00+08:00">2022-05-25</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/w8y56f/article/details/120225410" target="_blank" rel="noopener">为什么通过命令行查不到redis中的key</a></p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>RedisTemplate都没有特别配置序列化器，在执行后，使用命令行连上redis，执行keys my_key<em>，发现只有第二个key存在，第一个消失了，但是代码执行后是能够取到值的。这是为什么？<br>是因为命令行的工具有bug吗？不是的。使用 keys </em>my_key*，就可以显示两个key都存在。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>为什么key 前面没有奇怪的符号，因为Spring 在遇到 <String, String> 泛型的时候注入的不是 RedisTemplate 类，而是 StringRedisTemplate 类，而后者的所有序列化器都是 String的序列化器(StringRedisSerializer)，所以就很正常了。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) &#123;</span><br><span class="line">        RedisTemplate template &#x3D; new RedisTemplate();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">         &#x2F;&#x2F;建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</span><br><span class="line">        RedisSerializer&lt;String&gt; stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        template.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        return template;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2658,7 +2682,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2667,7 +2691,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

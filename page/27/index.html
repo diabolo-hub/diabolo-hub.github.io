@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20220314-next%E9%9B%86%E6%88%90DaoVoice/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" itemprop="url">gitalk评论系统</a></h1>
+                <a class="post-title-link" href="/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20220314-next%E9%9B%86%E6%88%90DaoVoice/" itemprop="url">next集成DaoVoice</a></h1>
         
 
         <div class="post-meta">
@@ -464,7 +464,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">7.1k</span>
+                <span title="字数统计">4.4k</span>
               
 
               
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -502,35 +502,16 @@
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
 <ul>
-<li><strong>第三方服务集成-DISQUS评论系统：<a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/third-party-services.html</a></strong></li>
-<li><strong>Hexo NexT主题中集成gitalk评论系统：<a href="https://asdfv1929.github.io/2018/01/20/gitalk/" target="_blank" rel="noopener">https://asdfv1929.github.io/2018/01/20/gitalk/</a></strong></li>
-<li><strong>github gitalk评论系统：<a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener">https://github.com/gitalk/gitalk</a></strong></li>
-<li><strong>gitalk在线示例: <a href="https://gitalk.github.io/" target="_blank" rel="noopener">https://gitalk.github.io/</a></strong></li>
+<li><strong>DaoCloud：<a href="https://www.daocloud.io/" target="_blank" rel="noopener">https://www.daocloud.io/</a></strong></li>
+<li><strong>DaoVoice: <a href="http://dashboard.daovoice.io/#/get-started" target="_blank" rel="noopener">http://dashboard.daovoice.io/#/get-started</a></strong></li>
+<li><strong>DaoVoice接入： <a href="http://guide.daocloud.io/daovoice/daovoice-9151028.html" target="_blank" rel="noopener">http://guide.daocloud.io/daovoice/daovoice-9151028.html</a></strong></li>
 </ul>
 <hr>
-<h1 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h1><h2 id="使用js脚本（将容器添加到您的页面）"><a href="#使用js脚本（将容器添加到您的页面）" class="headerlink" title="使用js脚本（将容器添加到您的页面）"></a>使用js脚本（将容器添加到您的页面）</h2><h3 id="创建一个GitHub-应用程序"><a href="#创建一个GitHub-应用程序" class="headerlink" title="创建一个GitHub 应用程序"></a>创建一个GitHub 应用程序</h3><p><a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">创建一个GitHub 应用程序</a> 注意：您必须在字段中指定网站域 url Authorization callback URL。</p>
-<ol>
-<li>Application name : 随意取</li>
-<li>Homepage URL : 主页网址（<a href="https://xxx.github.io/" target="_blank" rel="noopener">https://xxx.github.io/</a>)</li>
-<li>Application description: 随意，授权时显示</li>
-<li>Authorization callback URL : 授权回调地址（<a href="https://xxx.github.io/" target="_blank" rel="noopener">https://xxx.github.io/</a>)<blockquote>
-<p>得到一个 client ID 和一个 client secret，这个将被用于之后的用户登录</p>
-<h3 id="gitalk-swig"><a href="#gitalk-swig" class="headerlink" title="gitalk.swig"></a>gitalk.swig</h3><p>新建/layout/_third-party/comments/gitalk.swig文件，并添加内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.css&quot;&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">        var gitalk &#x3D; new Gitalk(&#123;</span><br><span class="line">          clientID: &#39;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&#39;,</span><br><span class="line">          clientSecret: &#39;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&#39;,</span><br><span class="line">          repo: &#39;&#123;&#123; theme.gitalk.repo &#125;&#125;&#39;,</span><br><span class="line">          owner: &#39;&#123;&#123; theme.gitalk.githubID &#125;&#125;&#39;,</span><br><span class="line">          admin: [&#39;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&#39;],</span><br><span class="line">          id: location.pathname,</span><br><span class="line">          distractionFreeMode: &#39;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">        gitalk.render(&#39;gitalk-container&#39;)           </span><br><span class="line">       &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="comments-swig"><a href="#comments-swig" class="headerlink" title="comments.swig"></a>comments.swig</h3><p>修改/layout/_partials/comments.swig，添加内容如下，与前面的elseif同一级别上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% elseif theme.gitalk.enable %&#125;</span><br><span class="line"> &lt;div id&#x3D;&quot;gitalk-container&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="index-swig"><a href="#index-swig" class="headerlink" title="index.swig"></a>index.swig</h3><p>修改layout/_third-party/comments/index.swig，在最后一行添加内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include &#39;gitalk.swig&#39; %&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="gitalk-styl"><a href="#gitalk-styl" class="headerlink" title="gitalk.styl"></a>gitalk.styl</h3><p>新建/source/css/_common/components/third-party/gitalk.styl文件，添加内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.gt-header a, .gt-comments a, .gt-popup a</span><br><span class="line">  border-bottom: none;</span><br><span class="line">.gt-container .gt-popup .gt-action.is--active:before</span><br><span class="line">  top: 0.7em;</span><br></pre></td></tr></table></figure>
-<h3 id="third-party-styl"><a href="#third-party-styl" class="headerlink" title="third-party.styl"></a>third-party.styl</h3><p>修改/source/css/_common/components/third-party/third-party.styl，在最后一行上添加内容，引入样式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;gitalk&quot;;</span><br></pre></td></tr></table></figure>
-<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>在主题配置文件next/_config.yml中添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gitalk:</span><br><span class="line">  enable: true</span><br><span class="line">  githubID: github帐号  # 例：asdfv1929   </span><br><span class="line">  repo: 仓库名称   # 例：asdfv1929.github.io</span><br><span class="line">  ClientID: Client ID</span><br><span class="line">  ClientSecret: Client Secret</span><br><span class="line">  adminUser: github帐号 #指定可初始化评论账户</span><br><span class="line">  distractionFreeMode: true</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ol>
-<h2 id="在-React-中使用"><a href="#在-React-中使用" class="headerlink" title="在 React 中使用"></a>在 React 中使用</h2>
+<h1 id="next集成DaoVoice"><a href="#next集成DaoVoice" class="headerlink" title="next集成DaoVoice"></a>next集成DaoVoice</h1><h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册<a href="http://dashboard.daovoice.io/#/get-started" target="_blank" rel="noopener">DaoVoice</a><br>完成后，会得到一个app_id，后面会用到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2.调用下面的 JavaScript 与注册用户沟通</span><br><span class="line">daovoice(&#39;init&#39;, &#123;</span><br><span class="line">  app_id: &quot;xxxxx&quot;,</span><br><span class="line">  user_id: &quot;NO_89757&quot;, &#x2F;&#x2F; 必填: 该用户在您系统上的唯一ID</span><br><span class="line">  email: &quot;daovoice@example.com&quot;, &#x2F;&#x2F; 选填:  该用户在您系统上的主邮箱</span><br><span class="line">  name: &quot;道客船长&quot;, &#x2F;&#x2F; 选填: 用户名</span><br><span class="line">  signed_up: 1449821660 &#x2F;&#x2F; 选填: 用户的注册时间，用Unix时间戳表示</span><br><span class="line">&#125;);</span><br><span class="line">daovoice(&#39;update&#39;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="修改head-swig"><a href="#修改head-swig" class="headerlink" title="修改head.swig"></a>修改head.swig</h2><p>修改/themes/next/layout/_partials/head.swig文件，添加内容如下，注意’//widget.daovoice.io/widget/2e5d695d.js’ 中js文件名改成自己的id就行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.daovoice %&#125;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  (function(i,s,o,g,r,a,m)&#123;i[&quot;DaoVoiceObject&quot;]&#x3D;r;i[r]&#x3D;i[r]||function()&#123;(i[r].q&#x3D;i[r].q||[]).push(arguments)&#125;,i[r].l&#x3D;1*new Date();a&#x3D;s.createElement(o),m&#x3D;s.getElementsByTagName(o)[0];a.async&#x3D;1;a.src&#x3D;g;a.charset&#x3D;&quot;utf-8&quot;;m.parentNode.insertBefore(a,m)&#125;)(window,document,&quot;script&quot;,(&#39;https:&#39; &#x3D;&#x3D; document.location.protocol ? &#39;https:&#39; : &#39;http:&#39;) + &quot;&#x2F;&#x2F;widget.daovoice.io&#x2F;widget&#x2F;2e5d695d.js&quot;,&quot;daovoice&quot;)</span><br><span class="line">  daovoice(&#39;init&#39;, &#123;</span><br><span class="line">      app_id: &quot;&#123;&#123;theme.daovoice_app_id&#125;&#125;&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">  daovoice(&#39;update&#39;);</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><br>位置贴图：<br><img src="images/DaoVoice位置贴图.png" alt=""></p>
+<h2 id="主题配置文件"><a href="#主题配置文件" class="headerlink" title="主题配置文件"></a>主题配置文件</h2><p>在_config.yml文件中添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Online contact</span><br><span class="line">daovoice: true</span><br><span class="line">daovoice_app_id:   # 这里填你刚才获得的 app_id</span><br></pre></td></tr></table></figure></p>
+<h2 id="聊天窗口配置"><a href="#聊天窗口配置" class="headerlink" title="聊天窗口配置"></a>聊天窗口配置</h2><p>附上我的聊天窗口的颜色、位置等设置信息：<br><img src="images/定制聊天样式.png" alt=""><br>至此，网页的在线联系功能已经完成，重新hexo g，hexo d上传GitHub后，页面上就能看到效果了。</p>
+
           
         
       
@@ -1540,202 +1521,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/" itemprop="url">hexo和next升级</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">17k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">17 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next-gt-next6"><a href="#next-gt-next6" class="headerlink" title="next -&gt; next6"></a>next -&gt; next6</h1><h1 id="hexo-3-9-0-gt-hexo-4-2"><a href="#hexo-3-9-0-gt-hexo-4-2" class="headerlink" title="hexo-3.9.0 -&gt; hexo-4.2"></a>hexo-3.9.0 -&gt; hexo-4.2</h1><ol>
-<li>卸载原有的hexo<br>进入项目根目录，hexo uninstall hexo</li>
-<li>查找hexo和nodejs匹配的版本<br><a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo" target="_blank" rel="noopener">hexo安装说明</a><br>|—-|—-|<br>Hexo 版本    最低兼容 Node.js 版本<br>6.0+        12.13.0<br>5.0+        10.13.0<br>4.1 - 4.2    8.10<br>4.0            8.6<br>3.3 - 3.9    6.9<br>3.2 - 3.3    0.12<br>3.0 - 3.1    0.10 or iojs<br>0.0.1 - 2.8    0.10</li>
-<li>执行安装指定版本<br>npm install hexo@4.2</li>
-<li>安装过程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm uninstall hexo</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">audited 498 packages in 3.182s</span><br><span class="line"></span><br><span class="line">3 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 53 vulnerabilities (11 low, 23 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;clear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm install hexo@4.2</span><br><span class="line">npm WARN deprecated hexo-bunyan@2.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated highlight.js@9.18.5: Support has ended for 9.x series. Upgrade to @latest</span><br><span class="line">npm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies</span><br><span class="line">npm WARN deprecated source-map-resolve@0.5.3: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-resolve#deprecated</span><br><span class="line">npm WARN deprecated resolve-url@0.2.1: https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;resolve-url#deprecated</span><br><span class="line">npm WARN deprecated source-map-url@0.4.1: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-url#deprecated</span><br><span class="line">npm WARN deprecated urix@0.1.0: Please see https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;urix#deprecated</span><br><span class="line">npm WARN deprecated hexo-bunyan@1.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated core-js@1.2.7: core-js@&lt;3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.</span><br><span class="line"></span><br><span class="line">&gt; highlight.js@9.18.5 postinstall E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\highlight.js</span><br><span class="line">&gt; node deprecated.js</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line"></span><br><span class="line">  Verion 9 of Highlight.js has reached EOL.  It will no longer</span><br><span class="line">  be supported or receive security updates in the future.</span><br><span class="line">  Please upgrade to version 10 or encourage your indirect</span><br><span class="line">  dependencies to do so.</span><br><span class="line"></span><br><span class="line">  For more info:</span><br><span class="line"></span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;blob&#x2F;master&#x2F;VERSION_10_UPGRADE.md</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules\hexo\node_modules\chokidar\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ hexo@4.2.1</span><br><span class="line">added 590 packages from 581 contributors and audited 591 packages in 134.722s</span><br><span class="line"></span><br><span class="line">11 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 57 vulnerabilities (11 low, 27 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="hexo-g-异常"><a href="#hexo-g-异常" class="headerlink" title="hexo g 异常"></a>hexo g 异常</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">Version 9 of Highlight.js has reached EOL and is no longer supported.</span><br><span class="line">Please upgrade or ask whatever dependency you are using to upgrade.</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">INFO  Files loaded in 523 ms</span><br><span class="line">ERROR (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">    at Object.exports.prettifyError (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\lib.js:34:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:486:31</span><br><span class="line">    at new_cls.root [as rootRenderFunc] (eval at _compile (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:565:24), &lt;anonymous&gt;:43:3)</span><br><span class="line">    at new_cls.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:479:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\scripts\renderer.js:32:29</span><br><span class="line">    at viewFn._compiled (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:136:48)</span><br><span class="line">    at viewFn.View.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:41:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\index.js:61:21</span><br><span class="line">    at tryCatcher (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\router.js:126:3)</span><br><span class="line">    at RouteStream.Readable.read (_stream_readable.js:478:10)</span><br><span class="line">    at resume_ (_stream_readable.js:965:12)</span><br><span class="line">    at processTicksAndRejections (internal&#x2F;process&#x2F;task_queues.js:84:21)</span><br></pre></td></tr></table></figure>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ol>
-<li>我们发现hexo已经升级到4.2.1</li>
-<li>从 git@github.com:theme-next/hexo-theme-next.git 克隆下来的next6<br>只能是next6有问题，发现_config.yml中没有next的版本号，于是从github上单独下载next6的内容:<br><a href="https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3</a></li>
-<li>再次 hexo g，正常。。。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1935,7 +1720,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BD%9C%E8%80%85%E5%8F%8A%E5%B7%A6%E4%BE%A7%E6%A0%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1954,7 +1739,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BD%9C%E8%80%85%E5%8F%8A%E5%B7%A6%E4%BE%A7%E6%A0%8F/" itemprop="url">作者信息及侧边栏</a></h1>
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/" itemprop="url">hexo和next升级</a></h1>
         
 
         <div class="post-meta">
@@ -2026,7 +1811,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">12k</span>
+                <span title="字数统计">17k</span>
               
 
               
@@ -2040,7 +1825,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">12 mins.</span>
+                <span title="阅读时长">17 mins.</span>
               
             </div>
           
@@ -2062,20 +1847,204 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="作者信息及侧边栏"><a href="#作者信息及侧边栏" class="headerlink" title="作者信息及侧边栏"></a>作者信息及侧边栏</h1><ol>
-<li>blog/themes/next/_config.yml<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Sidebar Settings （侧边栏设置）</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Social Links.</span><br><span class="line"># Usage: `Key: permalink || icon`</span><br><span class="line"># Key is the link label showing to <span class="built_in">end</span> users.</span><br><span class="line"># Value before `||` delimeter is the target permalink.</span><br><span class="line"># Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.</span><br><span class="line">social:</span><br><span class="line">  GitHub: https:<span class="comment">//github.com/diabolo-hub  || github</span></span><br><span class="line">  Gitee: https:<span class="comment">//gitee.com/diabolo-hub || glide</span></span><br><span class="line">  E-Mail: mailto:yourname @gmail.com || envelope</span><br><span class="line">  Google: https:<span class="comment">//plus.google.com/ || google</span></span><br><span class="line">  CSDN: https:<span class="comment">//blog.csdn.net/nightmare_dimple || crosshairs</span></span><br><span class="line">  #Twitter: https:<span class="comment">//twitter.com/yourname || twitter</span></span><br><span class="line">  #FB Page: https:<span class="comment">//www.facebook.com/ || facebook</span></span><br><span class="line">  #VK Group: https:<span class="comment">//vk.com/yourname || vk</span></span><br><span class="line">  #StackOverflow: https:<span class="comment">//stackoverflow.com/yourname || stack-overflow</span></span><br><span class="line">  #YouTube: https:<span class="comment">//youtube.com/yourname || youtube</span></span><br><span class="line">  #Instagram: https:<span class="comment">//instagram.com/yourname || instagram</span></span><br><span class="line">  #Skype: skype:yourname?call|chat || skype</span><br><span class="line">  微博: https:<span class="comment">//www.weibo.com/ || weibo</span></span><br><span class="line">  知乎: https:<span class="comment">//www.zhihu.com/people/yourname  || bell</span></span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: <span class="literal">true</span> #是否显示社交图标</span><br><span class="line">  icons_only: <span class="literal">false</span> #是否仅显示社交图标</span><br><span class="line">  transition: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">github_banner: https:<span class="comment">//github.com/nightmaredimple || Follow me on GitHub #添加右上角github绑带</span></span><br><span class="line"></span><br><span class="line"># Blog rolls</span><br><span class="line">links_icon: link</span><br><span class="line">links_title: 友情链接</span><br><span class="line"># links_layout: block</span><br><span class="line">links_layout: <span class="keyword">inline</span></span><br><span class="line">links:</span><br><span class="line">  CSDN博客主页: <span class="number">000</span></span><br><span class="line">  中国站主页: https:<span class="comment">//diabolo-hub.gitee.io</span></span><br><span class="line">  全球站主页: https:<span class="comment">//diabolo-hub.github.io</span></span><br><span class="line"></span><br><span class="line"># 侧边栏头像</span><br><span class="line"><span class="meta"># in theme directory(source/images): /images/avatar.jpg</span></span><br><span class="line"><span class="meta"># in site  directory(source/uploads): /uploads/avatar.jpg</span></span><br><span class="line">avatar: /images/avatar.jpg</span><br><span class="line"></span><br><span class="line"># 侧边栏中的目录</span><br><span class="line">toc:</span><br><span class="line">  enable: <span class="literal">true</span> #是否自动生成目录</span><br><span class="line">  # Automatically add <span class="built_in">list</span> number to toc.</span><br><span class="line">  number: <span class="literal">true</span> #目录是否自动产生编号</span><br><span class="line">  # If <span class="literal">true</span>, all words will placed on next lines <span class="keyword">if</span> header <span class="built_in">width</span> longer then sidebar <span class="built_in">width</span>.</span><br><span class="line">  wrap: <span class="literal">false</span> #标题过长是否换行</span><br><span class="line">  max_depth: <span class="number">6</span> #最大标题深度</span><br><span class="line"></span><br><span class="line"># Creative Commons <span class="number">4.0</span> International License.</span><br><span class="line"><span class="meta"># http:<span class="comment">//creativecommons.org/</span></span></span><br><span class="line"># Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line">#creative_commons: by-nc-sa</span><br><span class="line">#creative_commons:</span><br><span class="line"></span><br><span class="line"># 目前仅 Pisces Scheme 支持 <span class="built_in">position</span> 配置。影响版本<span class="number">5.0</span><span class="number">.0</span>及更低版本。</span><br><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position, <span class="built_in">available</span> value: left | right (only <span class="keyword">for</span> Pisces | Gemini).</span><br><span class="line">  <span class="built_in">position</span>: left #侧边栏位置</span><br><span class="line">  <span class="meta">#position: right</span></span><br><span class="line"></span><br><span class="line">  # Sidebar Display, <span class="function"><span class="built_in">available</span> <span class="title">value</span> <span class="params">(only <span class="keyword">for</span> Muse | Mist)</span>:</span></span><br><span class="line">  # 已知侧栏在 use motion: false 的情况下不会展示。 影响版本5.0.0及更低版本。</span><br><span class="line">  #  - post    自动展开帖子。默认。 post - 默认行为，在文章页面（拥有目录列表）时显示</span><br><span class="line">  #  - always  自动展开所有页面 | 在所有页面中都显示</span><br><span class="line">  #  - hide    仅在单击侧边栏切换图标时展开。 | hide - 在所有页面中都隐藏（可以手动展开）</span><br><span class="line">  #  - <span class="built_in">remove</span>  Totally <span class="built_in">remove</span> sidebar including sidebar toggle.  | <span class="built_in">remove</span> - 完全移除</span><br><span class="line">  <span class="built_in">display</span>: post</span><br><span class="line">  <span class="meta">#display: always</span></span><br><span class="line">  <span class="meta">#display: hide</span></span><br><span class="line">  <span class="meta">#display: remove</span></span><br><span class="line"></span><br><span class="line">  # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).</span><br><span class="line">  offset: <span class="number">12</span> #侧边栏相对主菜单像素距离</span><br><span class="line">  # Back to top in sidebar (only for Pisces | Gemini).</span><br><span class="line">  b2t: <span class="literal">false</span> #是否提供一键置顶</span><br><span class="line">  # Scroll percent label in b2t button</span><br><span class="line">  scrollpercent: <span class="literal">true</span> #是否显示当前阅读进度</span><br><span class="line">  # Enable sidebar on narrow view (only for Muse | Mist).</span><br><span class="line">  onmobile: <span class="literal">true</span> #手机上是否显示侧边栏</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next-gt-next6"><a href="#next-gt-next6" class="headerlink" title="next -&gt; next6"></a>next -&gt; next6</h1><h1 id="hexo-3-9-0-gt-hexo-4-2"><a href="#hexo-3-9-0-gt-hexo-4-2" class="headerlink" title="hexo-3.9.0 -&gt; hexo-4.2"></a>hexo-3.9.0 -&gt; hexo-4.2</h1><ol>
+<li>卸载原有的hexo<br>进入项目根目录，hexo uninstall hexo</li>
+<li>查找hexo和nodejs匹配的版本<br><a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo" target="_blank" rel="noopener">hexo安装说明</a><br>|—-|—-|<br>Hexo 版本    最低兼容 Node.js 版本<br>6.0+        12.13.0<br>5.0+        10.13.0<br>4.1 - 4.2    8.10<br>4.0            8.6<br>3.3 - 3.9    6.9<br>3.2 - 3.3    0.12<br>3.0 - 3.1    0.10 or iojs<br>0.0.1 - 2.8    0.10</li>
+<li>执行安装指定版本<br>npm install hexo@4.2</li>
+<li>安装过程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm uninstall hexo</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">audited 498 packages in 3.182s</span><br><span class="line"></span><br><span class="line">3 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 53 vulnerabilities (11 low, 23 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;clear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm install hexo@4.2</span><br><span class="line">npm WARN deprecated hexo-bunyan@2.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated highlight.js@9.18.5: Support has ended for 9.x series. Upgrade to @latest</span><br><span class="line">npm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies</span><br><span class="line">npm WARN deprecated source-map-resolve@0.5.3: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-resolve#deprecated</span><br><span class="line">npm WARN deprecated resolve-url@0.2.1: https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;resolve-url#deprecated</span><br><span class="line">npm WARN deprecated source-map-url@0.4.1: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-url#deprecated</span><br><span class="line">npm WARN deprecated urix@0.1.0: Please see https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;urix#deprecated</span><br><span class="line">npm WARN deprecated hexo-bunyan@1.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated core-js@1.2.7: core-js@&lt;3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.</span><br><span class="line"></span><br><span class="line">&gt; highlight.js@9.18.5 postinstall E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\highlight.js</span><br><span class="line">&gt; node deprecated.js</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line"></span><br><span class="line">  Verion 9 of Highlight.js has reached EOL.  It will no longer</span><br><span class="line">  be supported or receive security updates in the future.</span><br><span class="line">  Please upgrade to version 10 or encourage your indirect</span><br><span class="line">  dependencies to do so.</span><br><span class="line"></span><br><span class="line">  For more info:</span><br><span class="line"></span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;blob&#x2F;master&#x2F;VERSION_10_UPGRADE.md</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules\hexo\node_modules\chokidar\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ hexo@4.2.1</span><br><span class="line">added 590 packages from 581 contributors and audited 591 packages in 134.722s</span><br><span class="line"></span><br><span class="line">11 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 57 vulnerabilities (11 low, 27 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="作者及左侧栏样式"><a href="#作者及左侧栏样式" class="headerlink" title="作者及左侧栏样式"></a>作者及左侧栏样式</h1><ol>
-<li>左侧栏样式(Pisces)<br>next6/source/css/_schemes/Pisces/_sidebar.styl<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.sidebar a &#123;</span><br><span class="line">  &#x2F;&#x2F; 个人信息界面，强制使用 #555</span><br><span class="line">  color: $black-light !important;</span><br><span class="line"></span><br><span class="line">  &amp;:hover &#123; color: $black-deep; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>需要使用 !important; 强制使用此颜色</p>
-</blockquote>
-</li>
-<li>作者及文章总览样式（Pisces)（头像下面的）<br>themes/next6/source/css/_custom/custom.styl  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#sidebar &#123;</span><br><span class="line">  background:url(&#x2F;images&#x2F;sidebar-1.jpg);</span><br><span class="line">  background-size: cover;</span><br><span class="line">  background-position:center;</span><br><span class="line">  background-repeat:no-repeat;</span><br><span class="line">  &#x2F;&#x2F;p,span,a &#123;color: rgba(255, 255, 255, 1);&#125;</span><br><span class="line">  p,span,a &#123;color: #555;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>该 p,span,a {} 会覆盖 _sidebar.styl 中的配置，除非使用强制符号 !important</p>
-</blockquote>
+<h1 id="hexo-g-异常"><a href="#hexo-g-异常" class="headerlink" title="hexo g 异常"></a>hexo g 异常</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">Version 9 of Highlight.js has reached EOL and is no longer supported.</span><br><span class="line">Please upgrade or ask whatever dependency you are using to upgrade.</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">INFO  Files loaded in 523 ms</span><br><span class="line">ERROR (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">    at Object.exports.prettifyError (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\lib.js:34:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:486:31</span><br><span class="line">    at new_cls.root [as rootRenderFunc] (eval at _compile (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:565:24), &lt;anonymous&gt;:43:3)</span><br><span class="line">    at new_cls.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:479:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\scripts\renderer.js:32:29</span><br><span class="line">    at viewFn._compiled (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:136:48)</span><br><span class="line">    at viewFn.View.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:41:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\index.js:61:21</span><br><span class="line">    at tryCatcher (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\router.js:126:3)</span><br><span class="line">    at RouteStream.Readable.read (_stream_readable.js:478:10)</span><br><span class="line">    at resume_ (_stream_readable.js:965:12)</span><br><span class="line">    at processTicksAndRejections (internal&#x2F;process&#x2F;task_queues.js:84:21)</span><br></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ol>
+<li>我们发现hexo已经升级到4.2.1</li>
+<li>从 git@github.com:theme-next/hexo-theme-next.git 克隆下来的next6<br>只能是next6有问题，发现_config.yml中没有next的版本号，于是从github上单独下载next6的内容:<br><a href="https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3</a></li>
+<li>再次 hexo g，正常。。。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5%E6%A0%B7%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5%E6%A0%B7%E5%BC%8F/" itemprop="url">修改文章链接样式</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="修改文章链接样式"><a href="#修改文章链接样式" class="headerlink" title="修改文章链接样式"></a>修改文章链接样式</h1><ol>
+<li>修改文件 themes\next\source\css_common\components\post\post.styl，在末尾添加如下css样式，：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文章内链接文本样式</span></span><br><span class="line">.post-body p a&#123;</span><br><span class="line">  color: #<span class="number">0593</span>d3;</span><br><span class="line">  border-bottom: none;</span><br><span class="line">  border-bottom: <span class="number">1</span>px solid #<span class="number">0593</span>d3;</span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    color: #fc6423;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    border-bottom: <span class="number">1</span>px solid #fc6423;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -2705,7 +2674,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2714,7 +2683,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

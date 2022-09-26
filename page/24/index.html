@@ -565,7 +565,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -584,7 +584,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/" itemprop="url">mysql inner join 去重</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/" itemprop="url">UUID、自增ID、雪花算法哪个更合适</a></h1>
         
 
         <div class="post-meta">
@@ -663,7 +663,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">2.3k</span>
               
 
               
@@ -677,7 +677,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -699,12 +699,30 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_29498555/article/details/79695815" target="_blank" rel="noopener">inner join 数据重复问题</a></p>
-<p>SELECT <include refid="fields"></include>,gmt_create<br>FROM t_fin_policy_main<br>WHERE seq_invoice_no IN<br>(SELECT DISTINCT seq_invoice_no FROM t_fin_policy_main WHERE ant_policy_no = #{antPolicyNo} AND is_valid = 1)<br>AND is_valid = 1</p>
-<p>// —-<br>  package表的id对应package_product表的package_id，并且两者是一对多的关系，今天想筛选出package表所有id存在于package_product表的记录，第一个想到的就是join</p>
-<p>select package.*,package_product.package_id from package join package_product<br>       on(package.id=package_product.package_id);<br>但是有一个问题，数据会重复，比如package_product表有3个相同的package_id就会查找出3条相同的package表记录,<br>加上distinct好像也没用</p>
-<p>所以，又想到了子查询，select * from package where id in(select distinct package_id from package_product)，虽然写起来简单，但是这条语句太耗性能了，查找6条记录要好几秒，最后找到了合适的方法</p>
-<p>select * from package join (select distinct package_id from package_product) as package_product on(package.id=package_product.package_id)；</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/chendasheng/article/details/115222589" target="_blank" rel="noopener">使用雪花id或uuid作为Mysql主键，被老板怼了一顿！</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>分别是user_auto_key，user_uuid，user_random_key，分别表示自动增长的主键，uuid作为主键，随机key作为主键，<br>其它我们完全保持不变。根据控制变量法，我们只把每个表的主键使用不同的策略生成，而其他的字段完全一样，然后测试一下表的插入速度和查询速度：</p>
+<h1 id="效率测试结果"><a href="#效率测试结果" class="headerlink" title="效率测试结果"></a>效率测试结果</h1><p><img src="images/自增id、uuid、雪花算法效率测试结果1.png" alt=""></p>
+<h2 id="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："><a href="#在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：" class="headerlink" title="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："></a>在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：</h2><p><img src="images/自增id、uuid、雪花算法效率测试结果2.png" alt="">  </p>
+<blockquote>
+<p>可以看出在数据量100W左右的时候,uuid的插入效率垫底，并且在后序增加了130W的数据，uudi的时间又直线下降。<br>时间占用量总体可以打出的效率排名为：auto_key&gt;random_key&gt;uuid,uuid的效率最低，<br>在数据量较大的情况下，效率直线下滑。那么为什么会出现这样的现象呢？带着疑问,我们来探讨一下这个问题： </p>
+</blockquote>
+<h1 id="使用uuid和自增id的索引结构对比"><a href="#使用uuid和自增id的索引结构对比" class="headerlink" title="使用uuid和自增id的索引结构对比"></a>使用uuid和自增id的索引结构对比</h1><h2 id="使用自增id的内部结构"><a href="#使用自增id的内部结构" class="headerlink" title="使用自增id的内部结构"></a>使用自增id的内部结构</h2><ol>
+<li>下一条记录就会写入新的页中，一旦数据按照这种顺序的方式加载，主键页就会近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</li>
+<li>新插入的行一定会在原有的最大数据行下一行,mysql定位和寻址很快，不会为计算新行的位置而做出额外的消耗</li>
+<li>减少了页分裂和碎片的产生<h2 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h2></li>
+<li>写入的目标页很可能已经刷新到磁盘上并且从缓存上移除，或者还没有被加载到缓存中，innodb在插入之前不得不先找到并从磁盘读取目标页到内存中，这将导致大量的随机IO </li>
+<li>因为写入是乱序的,innodb不得不频繁的做页分裂操作,以便为新的行分配空间,页分裂导致移动大量的数据，一次插入最少需要修改三个页以上</li>
+<li>由于频繁的页分裂，页会变得稀疏并被不规则的填充，最终会导致数据会有碎片<br>在把随机值（uuid和雪花id）载入到聚簇索引(innodb默认的索引类型)以后,有时候会需要做一次OPTIMEIZE TABLE来重建表并优化页的填充，这将又需要一定的时间消耗。<blockquote>
+<p>结论：使用innodb应该尽可能的按主键的自增顺序插入，并且尽可能使用单调的增加的聚簇键的值来插入新行</p>
+<h2 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h2></blockquote>
+</li>
+<li>别人一旦爬取你的数据库,就可以根据数据库的自增id获取到你的业务增长信息，很容易分析出你的经营情况</li>
+<li>对于高并发的负载，innodb在按主键进行插入的时候会造成明显的锁争用，主键的上界会成为争抢的热点，因为所有的插入都发生在这里，并发插入会导致间隙锁竞争</li>
+<li>Auto_Increment锁机制会造成自增锁的抢夺,有一定的性能损失<blockquote>
+<p>附：<br>Auto_increment的锁争抢问题，如果要改善需要调优innodb_autoinc_lock_mode的配置</p>
+</blockquote>
+</li>
+</ol>
 
           
         
@@ -907,6 +925,199 @@
 <p>不管聚集索引还是普通索引，记录定位的寻路路径(Search Path)都很长。</p>
 <h3 id="建立自适应哈希索引"><a href="#建立自适应哈希索引" class="headerlink" title="建立自适应哈希索引"></a>建立自适应哈希索引</h3><p>在MySQL运行的过程中，如果InnoDB发现，有很多SQL存在这类很长的寻路，并且有很多SQL会命中相同的页面(page)，<br>InnoDB会在自己的内存缓冲区(Buffer)里，开辟一块区域，建立自适应哈希所有AHI，以加速查询。</p>
 <h2 id="为啥叫“自适应-adaptive-”哈希索引？"><a href="#为啥叫“自适应-adaptive-”哈希索引？" class="headerlink" title="为啥叫“自适应(adaptive)”哈希索引？"></a>为啥叫“自适应(adaptive)”哈希索引？</h2><p>系统自己判断“应该可以加速查询”而建立的，不需要用户手动建立，故称“自适应”。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/" itemprop="url">mysql int和varchar查询效率</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">259</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://cloud.tencent.com/developer/ask/62018" target="_blank" rel="noopener">mysql int和varchar查询效率</a></p>
+<p>INT比较比varchar比较快，因为INT占用的空间比varchars少得多。</p>
+<p>对于无索引访问和索引访问，这都是正确的。最快的方法是索引int列。</p>
 
           
         
@@ -1175,7 +1386,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1194,7 +1405,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/" itemprop="url">mysql int和varchar查询效率</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/" itemprop="url">mysql索引注意点</a></h1>
         
 
         <div class="post-meta">
@@ -1273,7 +1484,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">259</span>
+                <span title="字数统计">388</span>
               
 
               
@@ -1309,9 +1520,11 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://cloud.tencent.com/developer/ask/62018" target="_blank" rel="noopener">mysql int和varchar查询效率</a></p>
-<p>INT比较比varchar比较快，因为INT占用的空间比varchars少得多。</p>
-<p>对于无索引访问和索引访问，这都是正确的。最快的方法是索引int列。</p>
+            <script src="/assets/js/APlayer.min.js"> </script><ol>
+<li>between 走索引情况 <a href="http://www.51testing.com/html/85/132585-860191.html" target="_blank" rel="noopener">http://www.51testing.com/html/85/132585-860191.html</a><br>１）如果表数据量小１４条时，取５条时就会使用索引，否则就使用全表描述<br>２）如果表数据量在１０００左右时，取出超过１８％时，就不会使用索引<br>３）如果表数据量超地１００００时，只要使用between and 都使用索引
+　　</li>
+<li>in 走索引，建议in(xxx) xxx小于100</li>
+</ol>
 
           
         
@@ -1508,201 +1721,6 @@
 <p>二、效率：delete效率低于truncate，delete是一行一行地删除，truncate会重建表结构，  </p>
 <p>三、事务：truncate是DDL语句，需要drop权限，因此会隐式提交，不能够rollback；delete是DML语句，可以使用rollback回滚。  </p>
 <p>四、触发器：truncate 不能触发任何Delete触发器；而delete可以触发delete触发器。  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/" itemprop="url">mysql索引注意点</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">388</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>between 走索引情况 <a href="http://www.51testing.com/html/85/132585-860191.html" target="_blank" rel="noopener">http://www.51testing.com/html/85/132585-860191.html</a><br>１）如果表数据量小１４条时，取５条时就会使用索引，否则就使用全表描述<br>２）如果表数据量在１０００左右时，取出超过１８％时，就不会使用索引<br>３）如果表数据量超地１００００时，只要使用between and 都使用索引
-　　</li>
-<li>in 走索引，建议in(xxx) xxx小于100</li>
-</ol>
 
           
         
@@ -2749,7 +2767,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2758,7 +2776,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

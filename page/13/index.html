@@ -1390,191 +1390,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/" itemprop="url">List底层数据结构实现</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">674</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="List底层数据结构实现"><a href="#List底层数据结构实现" class="headerlink" title="List底层数据结构实现"></a>List底层数据结构实现</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis列表是简单的字符串列表，按照插入顺序排序。<br>你可以添加一个元素到列表的头部（左边）或者尾部（右边），<br>主要的应用场景为消息队列、定时计算排行榜、非频繁更新的最新列表等，  </p>
-<h2 id="实现的数据结构"><a href="#实现的数据结构" class="headerlink" title="实现的数据结构"></a>实现的数据结构</h2><p>list（列表）实现的数据结构包括ziplist（压缩列表）和linkedlist(链表)，<br>当列表元素比较少（元素数量小于512个）且列表项是小整数值或者较短字符串（长度小于64个字节）时会用ziplist来作为的底层实现<br>否则转为使用linkedlist(链表)</p>
-<h2 id="ziplist（压缩列表）"><a href="#ziplist（压缩列表）" class="headerlink" title="ziplist（压缩列表）"></a>ziplist（压缩列表）</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/redis-notes-4-SDS%E5%92%8CC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1733,6 +1548,191 @@
 <li>可以使用一部分 <string.h> 库中的函数。</li>
 </ol>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/" itemprop="url">List底层数据结构实现</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">674</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="List底层数据结构实现"><a href="#List底层数据结构实现" class="headerlink" title="List底层数据结构实现"></a>List底层数据结构实现</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis列表是简单的字符串列表，按照插入顺序排序。<br>你可以添加一个元素到列表的头部（左边）或者尾部（右边），<br>主要的应用场景为消息队列、定时计算排行榜、非频繁更新的最新列表等，  </p>
+<h2 id="实现的数据结构"><a href="#实现的数据结构" class="headerlink" title="实现的数据结构"></a>实现的数据结构</h2><p>list（列表）实现的数据结构包括ziplist（压缩列表）和linkedlist(链表)，<br>当列表元素比较少（元素数量小于512个）且列表项是小整数值或者较短字符串（长度小于64个字节）时会用ziplist来作为的底层实现<br>否则转为使用linkedlist(链表)</p>
+<h2 id="ziplist（压缩列表）"><a href="#ziplist（压缩列表）" class="headerlink" title="ziplist（压缩列表）"></a>ziplist（压缩列表）</h2>
           
         
       
@@ -1972,7 +1972,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-11-%E6%A3%80%E7%B4%A2%E6%98%A0%E5%B0%84%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1991,7 +1991,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-11-%E6%A3%80%E7%B4%A2%E6%98%A0%E5%B0%84%E5%99%A8/" itemprop="url">检索映射器</a></h1>
+                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url">数据类型转换</a></h1>
         
 
         <div class="post-meta">
@@ -2063,7 +2063,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4.9k</span>
+                <span title="字数统计">2.9k</span>
               
 
               
@@ -2077,7 +2077,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -2099,34 +2099,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="检索映射器"><a href="#检索映射器" class="headerlink" title="检索映射器"></a>检索映射器</h1><h2 id="Mappers-工厂（无依赖注入）"><a href="#Mappers-工厂（无依赖注入）" class="headerlink" title="Mappers 工厂（无依赖注入）"></a>Mappers 工厂（无依赖注入）</h2><p>当不使用 DI 框架时，可以通过org.mapstruct.factory.Mappers类检索 Mapper 实例。只需调用该getMapper()方法，传递映射器的接口类型即可返回：</p>
-<ol>
-<li>使用 Mappers 工厂<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CarMapper mapper &#x3D; Mappers.getMapper( CarMapper.class );</span><br></pre></td></tr></table></figure>
-按照惯例，映射器接口应定义一个名为的成员，该成员INSTANCE包含映射器类型的单个实例：</li>
-<li>声明映射器的实例（接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>声明映射器的实例（抽象类）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    public static final CarMapper INSTANCE &#x3D; Mappers.getMapper( CarMapper.class );</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这种模式使客户端可以很容易地使用映射器对象，而无需重复实例化新实例：</p>
-<h2 id="访问映射器"><a href="#访问映射器" class="headerlink" title="访问映射器"></a>访问映射器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Car car &#x3D; ...;</span><br><span class="line">CarDto dto &#x3D; CarMapper.INSTANCE.carToCarDto( car );</span><br></pre></td></tr></table></figure>
-<p>请注意，由 MapStruct 生成的映射器是无状态的和线程安全的，因此可以同时从多个线程安全地访问。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="使用依赖注入"><a href="#使用依赖注入" class="headerlink" title="使用依赖注入"></a>使用依赖注入</h2><ol>
-<li>使用 CDI 组件模型的映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>生成的映射器实现将用@ApplicationScoped注释标记，因此可以使用注释注入字段、构造函数参数等@Inject：</p>
-</blockquote>
-</li>
-<li>通过依赖注入获取映射器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Inject</span><br><span class="line">private CarMapper mapper;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="注入策略"><a href="#注入策略" class="headerlink" title="注入策略"></a>注入策略</h2><p>使用依赖注入时，您可以在字段注入和构造函数注入之间进行选择。这可以通过通过提供注入策略@Mapper或@MapperConfig注释来完成。</p>
-<ol>
-<li>使用构造函数注入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Mapper(componentModel &#x3D; MappingConstants.ComponentModel.CDI, uses &#x3D; EngineMapper.class, injectionStrategy &#x3D; InjectionStrategy.CONSTRUCTOR)</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果 MapStruct 检测到它需要使用它的实例进行映射，则生成的映射器将注入在uses属性中定义的类。<br>使用InjectionStrategy#CONSTRUCTOR时，构造函数将具有适当的注释，而字段则不会。<br>使用InjectionStrategy#FIELD时，注释在字段本身上。目前，默认的注入策略是字段注入，但可以使用配置选项进行配置。建议使用构造函数注入来简化测试。<br>对于抽象类或装饰器，应该使用 setter 注入。</p>
-</blockquote>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><ol>
+<li>从 int 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;price&quot;, numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    List&lt;String&gt; prices(List&lt;Integer&gt; prices);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>从 BigDecimal 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;power&quot;, numberFormat &#x3D; &quot;#.##E0&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>从日期到字符串的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;manufacturingDate&quot;, dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    List&lt;String&gt; stringListToDateList(List&lt;Date&gt; dates);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -2569,7 +2545,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2578,7 +2554,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

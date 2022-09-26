@@ -758,7 +758,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -777,7 +777,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/" itemprop="url">git环境搭建和密钥生成</a></h1>
+                <a class="post-title-link" href="/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/" itemprop="url">git生成SSH公钥</a></h1>
         
 
         <div class="post-meta">
@@ -849,7 +849,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">513</span>
+                <span title="字数统计">2.7k</span>
               
 
               
@@ -863,7 +863,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -885,7 +885,17 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>2、Git配置<br>（1）、环境变量配置 如git安装路径C:\Program Files\Git<br>GIT_HOME=C:\Program Files\Git<br>PATH=C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin<br>（2）、git配置用户名和邮箱<br>设置Git的user name和email：（如果需要配置多git仓库地址，则此处不能使用–global，在各项目中设置: git config user.name “）<br>$ git config –global user.name “xxx”<br>$ git config –global user.email “xxx@xxx.com”<br>（3）、生成SSH公钥过程：cmd:C:\Users\xxxxx<br>$ ssh-keygen -t rsa -C “xxx@xxx.com”<br> 过程如下：<br>img: img/git-genkey.jpg</p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>生成 SSH 公钥：<a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a></strong></li>
+</ul>
+<hr>
+<p>如前所述，许多 Git 服务器都使用 SSH 公钥进行认证。 为了向 Git 服务器提供 SSH 公钥，如果某系统用户尚未拥有密钥，必须事先为其生成一份。<br>这个过程在所有操作系统上都是相似的。 首先，你需要确认自己是否已经拥有密钥。 默认情况下，用户的 SSH 密钥存储在其 ~/.ssh 目录下。<br>进入该目录并列出其中内容，你便可以快速确认自己是否已拥有密钥：</p>
+<p>$ cd ~/.ssh<br>$ ls<br>authorized_keys2  id_dsa       known_hosts<br>config            id_dsa.pub<br>我们需要寻找一对以 id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另一个则是与之对应的私钥。 如果找不到这样的文件（或者根本没有 .ssh 目录），你可以通过运行 ssh-keygen 程序来创建它们。 在 Linux/macOS 系统中，ssh-keygen 随 SSH 软件包提供；在 Windows 上，该程序包含于 MSysGit 软件包中。</p>
+<p>$ ssh-keygen -o<br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/home/schacon/.ssh/id_rsa):<br>Created directory ‘/home/schacon/.ssh’.<br>Enter passphrase (empty for no passphrase):<br>Enter same passphrase again:<br>Your identification has been saved in /home/schacon/.ssh/id_rsa.<br>Your public key has been saved in /home/schacon/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>d0:82:24:8e:d7:f1:bb:9b:33:53:96:93:49:da:9b:e3 schacon@mylaptop.local<br>首先 ssh-keygen 会确认密钥的存储位置（默认是 .ssh/id_rsa），然后它会要求你输入两次密钥口令。 如果你不想在使用密钥时输入口令，将其留空即可。 然而，如果你使用了密码，那么请确保添加了 -o 选项，它会以比默认格式更能抗暴力破解的格式保存私钥。 你也可以用 ssh-agent 工具来避免每次都要输入密码。</p>
+<p>现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员 （假设服务器正在使用基于公钥的 SSH 验证设置）。 他们所要做的就是复制各自的 .pub 文件内容，并将其通过邮件发送。 公钥看起来是这样的：</p>
+<p>$ cat ~/.ssh/id_rsa.pub<br>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU<br>GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3<br>Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA<br>t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En<br>mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx<br>NrRFi9wrf+M7Q== schacon@mylaptop.local<br>关于在多种操作系统中生成 SSH 密钥的更深入教程，请参阅 GitHub 的 SSH 密钥指南 <a href="https://help.github.com/articles/generating-ssh-keys。" target="_blank" rel="noopener">https://help.github.com/articles/generating-ssh-keys。</a></p>
+<h1 id="除了ssh-keygen-o"><a href="#除了ssh-keygen-o" class="headerlink" title="除了ssh-keygen -o"></a>除了ssh-keygen -o</h1><p>也可以使用指定邮箱配置公私密钥，如：<br>sshsshssh–    -keygenkeygenkeygen   —ttt   rsarsarsa   —CCC   ‘xxx@xxx.com’’xxx@xxx.com’’xxx@xxx.com’       然后一路回车然后一路回车然后一路回车    (((—CCC   参数是以下提供的邮箱地址参数是以下提供的邮箱地址参数是以下提供的邮箱地址    )))</p>
 
           
         
@@ -1149,7 +1159,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1168,7 +1178,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/git-config-git%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5/" itemprop="url">git生成SSH公钥</a></h1>
+                <a class="post-title-link" href="/2018/02/13/git-config-git%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/" itemprop="url">git环境搭建和密钥生成</a></h1>
         
 
         <div class="post-meta">
@@ -1240,7 +1250,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.7k</span>
+                <span title="字数统计">513</span>
               
 
               
@@ -1254,7 +1264,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1276,17 +1286,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>生成 SSH 公钥：<a href="https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5" target="_blank" rel="noopener">https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5</a></strong></li>
-</ul>
-<hr>
-<p>如前所述，许多 Git 服务器都使用 SSH 公钥进行认证。 为了向 Git 服务器提供 SSH 公钥，如果某系统用户尚未拥有密钥，必须事先为其生成一份。<br>这个过程在所有操作系统上都是相似的。 首先，你需要确认自己是否已经拥有密钥。 默认情况下，用户的 SSH 密钥存储在其 ~/.ssh 目录下。<br>进入该目录并列出其中内容，你便可以快速确认自己是否已拥有密钥：</p>
-<p>$ cd ~/.ssh<br>$ ls<br>authorized_keys2  id_dsa       known_hosts<br>config            id_dsa.pub<br>我们需要寻找一对以 id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另一个则是与之对应的私钥。 如果找不到这样的文件（或者根本没有 .ssh 目录），你可以通过运行 ssh-keygen 程序来创建它们。 在 Linux/macOS 系统中，ssh-keygen 随 SSH 软件包提供；在 Windows 上，该程序包含于 MSysGit 软件包中。</p>
-<p>$ ssh-keygen -o<br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/home/schacon/.ssh/id_rsa):<br>Created directory ‘/home/schacon/.ssh’.<br>Enter passphrase (empty for no passphrase):<br>Enter same passphrase again:<br>Your identification has been saved in /home/schacon/.ssh/id_rsa.<br>Your public key has been saved in /home/schacon/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>d0:82:24:8e:d7:f1:bb:9b:33:53:96:93:49:da:9b:e3 schacon@mylaptop.local<br>首先 ssh-keygen 会确认密钥的存储位置（默认是 .ssh/id_rsa），然后它会要求你输入两次密钥口令。 如果你不想在使用密钥时输入口令，将其留空即可。 然而，如果你使用了密码，那么请确保添加了 -o 选项，它会以比默认格式更能抗暴力破解的格式保存私钥。 你也可以用 ssh-agent 工具来避免每次都要输入密码。</p>
-<p>现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员 （假设服务器正在使用基于公钥的 SSH 验证设置）。 他们所要做的就是复制各自的 .pub 文件内容，并将其通过邮件发送。 公钥看起来是这样的：</p>
-<p>$ cat ~/.ssh/id_rsa.pub<br>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU<br>GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3<br>Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA<br>t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En<br>mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx<br>NrRFi9wrf+M7Q== schacon@mylaptop.local<br>关于在多种操作系统中生成 SSH 密钥的更深入教程，请参阅 GitHub 的 SSH 密钥指南 <a href="https://help.github.com/articles/generating-ssh-keys。" target="_blank" rel="noopener">https://help.github.com/articles/generating-ssh-keys。</a></p>
-<h1 id="除了ssh-keygen-o"><a href="#除了ssh-keygen-o" class="headerlink" title="除了ssh-keygen -o"></a>除了ssh-keygen -o</h1><p>也可以使用指定邮箱配置公私密钥，如：<br>sshsshssh–    -keygenkeygenkeygen   —ttt   rsarsarsa   —CCC   ‘xxx@xxx.com’’xxx@xxx.com’’xxx@xxx.com’       然后一路回车然后一路回车然后一路回车    (((—CCC   参数是以下提供的邮箱地址参数是以下提供的邮箱地址参数是以下提供的邮箱地址    )))</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>2、Git配置<br>（1）、环境变量配置 如git安装路径C:\Program Files\Git<br>GIT_HOME=C:\Program Files\Git<br>PATH=C:\Program Files\Git\bin;C:\Program Files\Git\usr\bin<br>（2）、git配置用户名和邮箱<br>设置Git的user name和email：（如果需要配置多git仓库地址，则此处不能使用–global，在各项目中设置: git config user.name “）<br>$ git config –global user.name “xxx”<br>$ git config –global user.email “xxx@xxx.com”<br>（3）、生成SSH公钥过程：cmd:C:\Users\xxxxx<br>$ ssh-keygen -t rsa -C “xxx@xxx.com”<br> 过程如下：<br>img: img/git-genkey.jpg</p>
 
           
         
@@ -2128,7 +2128,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2137,7 +2137,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 

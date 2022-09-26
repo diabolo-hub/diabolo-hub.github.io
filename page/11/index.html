@@ -1764,7 +1764,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-3%E3%80%81List%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-6-redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1783,7 +1783,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-3%E3%80%81List%E5%91%BD%E4%BB%A4/" itemprop="url">List命令</a></h1>
+                <a class="post-title-link" href="/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-6-redis%E7%A6%81%E7%94%A8%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4/" itemprop="url">redis禁用危险命令</a></h1>
         
 
         <div class="post-meta">
@@ -1855,7 +1855,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">682</span>
+                <span title="字数统计">446</span>
               
 
               
@@ -1891,8 +1891,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>1、常用命令：<br>lpush、rpush、lpop、rpop、lrange等<br>list = 双向链表  即：支持反向查找和遍历，但：会带来部分额外的内存开销。<br>应用： 微博的关注列表，粉丝列表，最新消息排行等  </p>
-<p>2、常用命令：<br>lRem(String key, long count, String value)  匹配指定value并移除<br>lSet(String key, long index, String value)  匹配指定index并修改<br>lTrim(String key, long start, long stop)    匹配指定start-stop区间，并只保留该区间<br>lRange(String key, int start, int end)      匹配指定start-end范围内的数据，并返回<br>lLen(String key)                            匹配该key的列表长度<br>lInsert(String key, ListPosition listPosition, String resourceValue, String newValue)  在列表的元素前或者后插入元素<br>lIndex(String key, int index)               匹配指定index的列表元素，并返回  </p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="redis禁用危险命令"><a href="#redis禁用危险命令" class="headerlink" title="redis禁用危险命令"></a>redis禁用危险命令</h1><p>keys *<br>虽然其模糊匹配功能使用非常方便也很强大，在小数据量情况下使用没什么问题，数据量大会导致 Redis 锁住及 CPU 飙升，在生产环境建议禁用或者重命名！</p>
+<p>flushdb<br>删除 Redis 中当前所在数据库中的所有记录，并且此命令从不会执行失败</p>
+<p>flushall<br>删除 Redis 中所有数据库中的所有记录，不只是当前所在数据库，并且此命令从不会执行失败。<br>注：执行flushall命令，也会产生dump.rdb文件，但里面是空的，无意义</p>
+<p>config<br>客户端可修改 Redis 配置。</p>
 
           
         
@@ -2517,7 +2519,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">370k</span>
+    <span title="站点总字数">371k</span>
   
 
   
@@ -2526,7 +2528,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:10</span>
+    <span title="站点总阅读时长">6:11</span>
   
 </div>
 
