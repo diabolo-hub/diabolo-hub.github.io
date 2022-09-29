@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-Kubernetes%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96UI%E7%95%8C%E9%9D%A2-recommended-yaml/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-16-list%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-Kubernetes%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96UI%E7%95%8C%E9%9D%A2-recommended-yaml/" itemprop="url">depth-kubernetes-Kubernetes的可视化UI界面-recommended-yaml</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-16-list%E7%94%9F%E6%88%90/" itemprop="url">python-notes-course-1-16-list生成</a></h1>
         
 
         <div class="post-meta">
@@ -439,1566 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">8 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>apiVersion: v1<br>kind: ServiceAccount<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard</p>
-<hr>
-<p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  type: NodePort<br>  ports:</p>
-<pre><code>- port: 443
-  targetPort: 8443
-  nodePort: 31001
-</code></pre><p>  selector:<br>    k8s-app: kubernetes-dashboard</p>
-<hr>
-<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-certs<br>  namespace: kubernetes-dashboard<br>type: Opaque</p>
-<hr>
-<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-csrf<br>  namespace: kubernetes-dashboard<br>type: Opaque<br>data:<br>  csrf: “”</p>
-<hr>
-<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-key-holder<br>  namespace: kubernetes-dashboard<br>type: Opaque</p>
-<hr>
-<p>kind: ConfigMap<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-settings<br>  namespace: kubernetes-dashboard</p>
-<hr>
-<p>kind: Role<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>rules:</p>
-<h1 id="Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets"><a href="#Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets" class="headerlink" title="Allow Dashboard to get, update and delete Dashboard exclusive secrets."></a>Allow Dashboard to get, update and delete Dashboard exclusive secrets.</h1><ul>
-<li>apiGroups: [“”]<br>resources: [“secrets”]<br>resourceNames: [“kubernetes-dashboard-key-holder”, “kubernetes-dashboard-certs”, “kubernetes-dashboard-csrf”]<br>verbs: [“get”, “update”, “delete”]<h1 id="Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map"><a href="#Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map" class="headerlink" title="Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map."></a>Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map.</h1></li>
-<li>apiGroups: [“”]<br>resources: [“configmaps”]<br>resourceNames: [“kubernetes-dashboard-settings”]<br>verbs: [“get”, “update”]<h1 id="Allow-Dashboard-to-get-metrics"><a href="#Allow-Dashboard-to-get-metrics" class="headerlink" title="Allow Dashboard to get metrics."></a>Allow Dashboard to get metrics.</h1></li>
-<li>apiGroups: [“”]<br>resources: [“services”]<br>resourceNames: [“heapster”, “dashboard-metrics-scraper”]<br>verbs: [“proxy”]</li>
-<li>apiGroups: [“”]<br>resources: [“services/proxy”]<br>resourceNames: [“heapster”, “http:heapster:”, “https:heapster:”, “dashboard-metrics-scraper”, “http:dashboard-metrics-scraper”]<br>verbs: [“get”]</li>
-</ul>
-<hr>
-<p>kind: ClusterRole<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>rules:</p>
-<h1 id="Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server"><a href="#Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server" class="headerlink" title="Allow Metrics Scraper to get metrics from the Metrics server"></a>Allow Metrics Scraper to get metrics from the Metrics server</h1><ul>
-<li>apiGroups: [“metrics.k8s.io”]<br>resources: [“pods”, “nodes”]<br>verbs: [“get”, “list”, “watch”]</li>
-</ul>
-<hr>
-<p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: RoleBinding<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: Role<br>  name: kubernetes-dashboard<br>subjects:</p>
-<ul>
-<li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li>
-</ul>
-<hr>
-<p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: ClusterRoleBinding<br>metadata:<br>  name: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: ClusterRole<br>  name: kubernetes-dashboard<br>subjects:</p>
-<ul>
-<li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li>
-</ul>
-<hr>
-<p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: kubernetes-dashboard<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: kubernetes-dashboard<br>    spec:<br>      containers:</p>
-<pre><code>  - name: kubernetes-dashboard
-    image: kubernetesui/dashboard:v2.0.0-rc5
-    imagePullPolicy: Always
-    ports:
-      - containerPort: 8443
-        protocol: TCP
-    args:
-      - --auto-generate-certificates
-      - --namespace=kubernetes-dashboard
-      # Uncomment the following line to manually specify Kubernetes API server Host
-      # If not specified, Dashboard will attempt to auto discover the API server and connect
-      # to it. Uncomment only if the default does not work.
-      # - --apiserver-host=http://my-address:port
-    volumeMounts:
-      - name: kubernetes-dashboard-certs
-        mountPath: /certs
-        # Create on-disk volume to store exec logs
-      - mountPath: /tmp
-        name: tmp-volume
-    livenessProbe:
-      httpGet:
-        scheme: HTTPS
-        path: /
-        port: 8443
-      initialDelaySeconds: 30
-      timeoutSeconds: 30
-    securityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      runAsUser: 1001
-      runAsGroup: 2001
-volumes:
-  - name: kubernetes-dashboard-certs
-    secret:
-      secretName: kubernetes-dashboard-certs
-  - name: tmp-volume
-    emptyDir: {}
-serviceAccountName: kubernetes-dashboard
-nodeSelector:
-  &quot;beta.kubernetes.io/os&quot;: linux
-# Comment the following tolerations if Dashboard must not be deployed on master
-tolerations:
-  - key: node-role.kubernetes.io/master
-    effect: NoSchedule
-</code></pre><hr>
-<p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  ports:</p>
-<pre><code>- port: 8000
-  targetPort: 8000
-</code></pre><p>  selector:<br>    k8s-app: dashboard-metrics-scraper</p>
-<hr>
-<p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: dashboard-metrics-scraper<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: dashboard-metrics-scraper<br>      annotations:<br>        seccomp.security.alpha.kubernetes.io/pod: ‘runtime/default’<br>    spec:<br>      containers:</p>
-<pre><code>  - name: dashboard-metrics-scraper
-    image: kubernetesui/metrics-scraper:v1.0.3
-    ports:
-      - containerPort: 8000
-        protocol: TCP
-    livenessProbe:
-      httpGet:
-        scheme: HTTP
-        path: /
-        port: 8000
-      initialDelaySeconds: 30
-      timeoutSeconds: 30
-    volumeMounts:
-    - mountPath: /tmp
-      name: tmp-volume
-    securityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      runAsUser: 1001
-      runAsGroup: 2001
-serviceAccountName: kubernetes-dashboard
-nodeSelector:
-  &quot;beta.kubernetes.io/os&quot;: linux
-# Comment the following tolerations if Dashboard must not be deployed on master
-tolerations:
-  - key: node-role.kubernetes.io/master
-    effect: NoSchedule
-volumes:
-  - name: tmp-volume
-    emptyDir: {}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-3</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">528</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
-<p>#作者<br>MAINTAINER xu</p>
-<p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p>
-<p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p>
-<p>#bash方式执行，使demo-0.0.1jar可访问</p>
-<p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p>
-<p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p>
-<p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-2</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">452</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
-<p>VOLUME /app</p>
-<p>COPY mall-task*.jar mall-task.jar</p>
-<p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p>
-<p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-1/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-1</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">225</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8<br>ADD /target/*.jar app.jar<br>EXPOSE 8082</p>
-<p>#ENTRYPOINT [“java”,”-jar”,”/app.jar”]<br>ENTRYPOINT [“java”,”-jar”,”-Duser.timezone=GMT+08”,”/app.jar”]</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/" itemprop="url">depth-architecture-1-架构风格和架构特征</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-architecture-2-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-architecture-2-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url">depth-architecture-2-架构设计</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">71</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>COLA，洋葱，整洁，充血</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-distributed-%E5%9F%BA%E4%BA%8EDAG%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-distributed-%E5%9F%BA%E4%BA%8EDAG%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url">depth-distributed-基于DAG的分布式系统</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-redo%E5%92%8Cundo%E6%97%A5%E5%BF%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-redo%E5%92%8Cundo%E6%97%A5%E5%BF%97/" itemprop="url">database-mysql-notes-redo和undo日志</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/" itemprop="url">database-mysql-notes-index-前缀索引</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/" itemprop="url">database-mysql-notes-index-索引下推</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
+                <span title="字数统计">3.2k</span>
               
 
               
@@ -2034,34 +475,1558 @@ volumes:
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<p><a href="https://zhuanlan.zhihu.com/p/470255206" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/470255206</a></p>
-<hr>
-<h1 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h1><p>索引下推是从 MySQL5.6 开始引入一个特性，英文是 index condition pushdown，一般简称为 ICP，索引下推通过减少回表的次数，来提高数据库的查询效率。<br>索引下推是 MySQL5.6 中开始引入的新特</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;user2&#96; ( &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT, &#96;username&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, &#96;age&#96; int(11) DEFAULT NULL, &#96;address&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, PRIMARY KEY (&#96;id&#96;), KEY &#96;username&#96; (&#96;username&#96;(191),&#96;age&#96;) ) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;100001 DEFAULT CHARSET&#x3D;utf8mb4 COLLATE&#x3D;utf8mb4_unicode_ci;\</span><br></pre></td></tr></table></figure>
-<p>表中有一个由 username 和 age 组成的复合索引，索引名字就叫 username</p>
-<h2 id="MySQL-5-5"><a href="#MySQL-5-5" class="headerlink" title="MySQL 5.5"></a>MySQL 5.5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username&#x3D;&#39;1&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="生成1-30元素的list"><a href="#生成1-30元素的list" class="headerlink" title="生成1-30元素的list"></a>生成1-30元素的list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">list1&#x3D;list ( range (1,31) )</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+<h1 id="迭代生成"><a href="#迭代生成" class="headerlink" title="迭代生成"></a>迭代生成</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[expr for iter_var in iterable] </span><br><span class="line">[expr for iter_var in iterable if cond_expr]</span><br></pre></td></tr></table></figure>
 <ol>
-<li>首先 MySQL 的 server 层调用存储引擎获取 username=‘1’ 的第一条记录。</li>
-<li>存储引擎找到 username=‘1’ 的第一条记录后，在 B+Tree 的叶子结点中保存着主键 id，此时通过回表操作，去主键索引中找到该条记录的完整数据，并返回给 server 层。</li>
-<li>server 层拿到数据之后，判断该条记录的 age 是否为 99，如果 age=99，就把该条记录返回给客户端，如果 age!=99，那就就丢弃该记录。</li>
-<li>由于 username+age 组成的复合索引只是一个普通索引，并不是唯一索引（如果是唯一索引，那么这个查询就到此结束了），所以还需要继续去搜索有没有满足条件的记录。<blockquote>
-<p>username和age联合索引且同时使用时，会先使用一个条件（username）查询到结果记录，然后回表到server层，再通过age筛选，不通过的丢弃</p>
-</blockquote>
+<li>for循环的迭代结果，再执行 expr表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D;[x * x for x in range(1, 11)]</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></li>
+<li>for循环的迭代结果，执行if判断语句，满足条件的结果，再执行 expr表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D; [x * x for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0]</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4, 16, 36, 64, 100]</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>类似这样的模糊查询，有多条的时候，在上面的基础上，通过的留下，然后再查询下一条数据（又要进行回表）</p>
-</blockquote>
-<h2 id="MySQL-5-7"><a href="#MySQL-5-7" class="headerlink" title="MySQL 5.7"></a>MySQL 5.7</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>MySQL 的 server 层首先调用存储引擎定位到第一个以 j 开头的 username。</li>
-<li>找到记录后，存储引擎并不急着回表，而是继续判断这条记录的 age 是否等于 99，如果 age=99，再去回表，如果 age 不等于 99，就不去回表了，直接继续读取下一条记录。</li>
-<li>存储引擎将读取到的数据行返回给 server 层，此时如果还有其他非索引的查询条件，server 层再去继续过滤，在我们上面的案例中，此时没有其他查询条件了。假设 server 层还有其他的过滤条件，并且这个过滤条件把刚刚查到的记录过滤掉了，那么就会通过记录的 next_record 属性读取下一条记录，然后重复第二步。<blockquote>
-<p>username和age联合索引且同时使用时，先使用（username）查询到结果记录，然后接着使用age过滤，等拿到所有的结果后，再进行回表， （所有的结果都拿到后，一次回表）</p>
-</blockquote>
+<h1 id="嵌套for循环生成list"><a href="#嵌套for循环生成list" class="headerlink" title="嵌套for循环生成list"></a>嵌套for循环生成list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D; [(x+1,y+1) for x in range(3) for y in range(5)] </span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5)]</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/" itemprop="url">python-notes-course-1-18-类的访问控制</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="创建类的时候就会包含的方法"><a href="#创建类的时候就会包含的方法" class="headerlink" title="创建类的时候就会包含的方法"></a>创建类的时候就会包含的方法</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>init</strong></td>
+<td>构造函数，在生成对象时调用</td>
+</tr>
+<tr>
+<td><strong>del</strong></td>
+<td>析构函数，释放对象时使用</td>
+</tr>
+<tr>
+<td><strong>repr</strong></td>
+<td>打印，转换</td>
+</tr>
+<tr>
+<td><strong>setitem</strong></td>
+<td>按照索引赋值</td>
+</tr>
+<tr>
+<td><strong>getitem</strong></td>
+<td>按照索引获取值</td>
+</tr>
+<tr>
+<td><strong>len</strong></td>
+<td>获得长度</td>
+</tr>
+<tr>
+<td><strong>cmp</strong></td>
+<td>比较运算</td>
+</tr>
+<tr>
+<td><strong>call</strong></td>
+<td>函数调用</td>
+</tr>
+<tr>
+<td><strong>add</strong></td>
+<td>加运算</td>
+</tr>
+<tr>
+<td><strong>sub</strong></td>
+<td>减运算</td>
+</tr>
+<tr>
+<td><strong>mul</strong></td>
+<td>乘运算</td>
+</tr>
+<tr>
+<td><strong>div</strong></td>
+<td>除运算</td>
+</tr>
+<tr>
+<td><strong>mod</strong></td>
+<td>求余运算</td>
+</tr>
+<tr>
+<td><strong>pow</strong></td>
+<td>乘方</td>
+</tr>
+</tbody>
+</table>
+<h1 id="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："><a href="#当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：" class="headerlink" title="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："></a>当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：</h1><ul>
+<li>type(obj)：来获取对象的相应类型；</li>
+<li>isinstance(obj, type)：判断对象是否为指定的 type 类型的实例；</li>
+<li>hasattr(obj, attr)：判断对象是否具有指定属性/方法；</li>
+<li>getattr(obj, attr[, default]) 获取属性/方法的值, 要是没有对应的属性则返回 default 值（前提是设置了 default），否则会抛出 AttributeError 异常；</li>
+<li>setattr(obj, attr, value)：设定该属性/方法的值，类似于 obj.attr=value；</li>
+<li>dir(obj)：可以获取相应对象的所有属性和方法名的列表：</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/" itemprop="url">python-notes-course-1-17-生成器</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">271</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>在 Python 中，这种一边循环一边计算的机制，称为生成器：generator。<br>在 Python 中，使用了 yield 的函数被称为生成器（generator）。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/" itemprop="url">python-notes-course-1-19-枚举</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">from enum import Enum</span><br><span class="line"></span><br><span class="line">Month &#x3D; Enum(&#39;Month&#39;, (&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;))</span><br><span class="line"></span><br><span class="line"># 遍历枚举类型</span><br><span class="line">for name, member in Month.__members__.items():</span><br><span class="line">    print(name, &#39;---------&#39;, member, &#39;----------&#39;, member.value)</span><br><span class="line"></span><br><span class="line"># 直接引用一个常量</span><br><span class="line">print(&#39;\n&#39;, Month.Jan)</span><br></pre></td></tr></table></figure>
+<p>上面的代码，我们创建了一个有关月份的枚举类型 Month ，这里要注意的是构造参数，第一个参数 Month 表示的是该枚举类的类名，第二个 tuple 参数，表示的是枚举类的值；当然，枚举类通过 <strong>members</strong> 遍历它的所有成员的方法。</p>
+<p>注意的一点是 ， member.value 是自动赋给成员的 int 类型的常量，默认是从 1 开始的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-2-%E6%B3%A8%E9%87%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-2-%E6%B3%A8%E9%87%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" itemprop="url">python-notes-course-1-2-注释命名规范</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="注释命名规范"><a href="#注释命名规范" class="headerlink" title="注释命名规范"></a>注释命名规范</h1><ol>
+<li>模块名 首字母保持小写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 正确的模块名</span><br><span class="line">import decoder</span><br><span class="line">import html_parser</span><br><span class="line"></span><br><span class="line"># 不推荐的模块名</span><br><span class="line">import Decoder</span><br></pre></td></tr></table></figure></li>
+<li>类名 使用驼峰命名风格，首字母大写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Farm():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class AnimalFarm(Farm):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>私有类名 可用一个下划线开头<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class _PrivateFarm(Farm):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>函数名 一律小写，如有多个单词，用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def run():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">def run_with_env():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>私有函数 在函数前加一个下划线<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Person():</span><br><span class="line"></span><br><span class="line">    def _private_func():</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></li>
+<li>变量名 尽量小写，如有多个单词，用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    school_name &#x3D; &#39;&#39;</span><br></pre></td></tr></table></figure></li>
+<li>常量采用全大写，如有多个单词，使用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_CLIENT &#x3D; 100</span><br><span class="line">MAX_CONNECTION &#x3D; 1000</span><br><span class="line">CONNECTION_TIMEOUT &#x3D; 600</span><br></pre></td></tr></table></figure></li>
+<li>常量使用以下划线分隔的大写命名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MAX_OVERFLOW &#x3D; 100</span><br><span class="line"></span><br><span class="line">Class FooBar:</span><br><span class="line"></span><br><span class="line">    def foo_bar(self, print_):</span><br><span class="line">        print(print_)</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-14-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-14-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" itemprop="url">python-notes-course-1-14-匿名函数</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">652</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">sum &#x3D; lambda num1 , num2 : num1 + num2;</span><br><span class="line"></span><br><span class="line">print( sum( 1 , 2 ) )</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/" itemprop="url">python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Could-not-find-a-version-that-satisfies-the-requirement-wx"><a href="#Could-not-find-a-version-that-satisfies-the-requirement-wx" class="headerlink" title="Could not find a version that satisfies the requirement wx"></a>Could not find a version that satisfies the requirement wx</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Could not find a version that satisfies the requirement wx (from versions: none)</span><br><span class="line">ERROR: No matching distribution found for wx</span><br><span class="line">WARNING: You are using pip version 21.3.1; however, version 22.0.4 is available.</span><br><span class="line">You should consider upgrading via the &#39;E:\workspace-all\workspace-py\projects-practicing\venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.</span><br></pre></td></tr></table></figure>
+<h2 id="pycharm处理"><a href="#pycharm处理" class="headerlink" title="pycharm处理"></a>pycharm处理</h2><p>写入 import wxpython，再鼠标放上去点击install</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/" itemprop="url">java-maven-jar冲突分析</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">336</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/ptqueen/p/7985198.html" target="_blank" rel="noopener">jar冲突 maven命令分析</a></p>
+<ol>
+<li><p>用mvn dependency:tree&gt;temp/tree.txt,直接输出到当前项目下,然后在idea中打开,搜索要找的jar包名字即可.</p>
+</li>
+<li><p>用include参数<br>mvn dependency:tree -Dincludes=jline</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/" itemprop="url">java-maven-mvn-dependency-使用</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="依赖树"><a href="#依赖树" class="headerlink" title="依赖树"></a>依赖树</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">  &lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;maven-dependency-plugin&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;3.0.2&lt;&#x2F;version&gt; </span><br><span class="line">    &lt;executions&gt; </span><br><span class="line">      &lt;execution&gt; </span><br><span class="line">        &lt;id&gt;copy-dependencies&lt;&#x2F;id&gt; </span><br><span class="line">        &lt;phase&gt;package&lt;&#x2F;phase&gt; </span><br><span class="line">        &lt;goals&gt; </span><br><span class="line">          &lt;goal&gt;copy-dependencies&lt;&#x2F;goal&gt; </span><br><span class="line">        &lt;&#x2F;goals&gt; </span><br><span class="line">        &lt;configuration&gt; </span><br><span class="line">          &lt;!-- configure the plugin here --&gt; </span><br><span class="line">        &lt;&#x2F;configuration&gt; </span><br><span class="line">      &lt;&#x2F;execution&gt; </span><br><span class="line">    &lt;&#x2F;executions&gt; </span><br><span class="line">  &lt;&#x2F;plugin&gt; </span><br><span class="line">&lt;&#x2F;plugins&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree</span><br><span class="line">mvn dependency</span><br><span class="line">mvn dependency -X</span><br><span class="line">mvn dependency -e</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">java-maven-mvn常用命令</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><ol>
+<li>mvn test -Dtest=xxx：执行指定测试用例的命令，后面的xxx就是指定的所有被标记的用例</li>
+<li>mvn test -Dtest=包的路径.<em>   ，运行某个包下的所有用例（不包括子包中的用例）<br>mvn test -Dtest=com.xx.test.testCases.openApi.xxx.</em></li>
+<li>指定任何一个不同包下相同子包的所用测试用例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn test -Dtest&#x3D;包的路径.*.相同子包的路径.*</span><br><span class="line">比如：mvn test -Dtest&#x3D;com.xxx.test.testcase.*.openApi.*</span><br><span class="line">指定testcase下的所有的包中包含openApi子包下的所有用例</span><br></pre></td></tr></table></figure>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2></li>
+<li>生成idea项目结构<br>mvn  idea:idea</li>
+<li>生成eclipse项目结构<br>mvn  eclipse:eclipse</li>
+<li>编译源代码<br>mvn compile</li>
+<li>编译测试代码<br>mvn test-compile</li>
+<li>打包项目<br>mvn  package</li>
+<li>组合使用goal命令，如只打包不测试<br>mvn  -Dtest  package</li>
+<li>跳过测试进行打包<br>mvn clean package -DskipTests -Prelease</li>
+<li>在本地Repository中安装jar<br>mvn  install</li>
+<li>打成jar命令<br>mvn  jar:jar</li>
+<li>打包项目到本地仓库<br>mvn clean install -DskipTests</li>
+<li>打包项目跳过测试<br>mvn clean package <em>**</em>  -DskipTests -DskipRat</li>
+<li>查看错误的详细信息<br>mvn  -e</li>
+<li>发生jar的冲突显示冲突的原因<br>mvn  install -x</li>
 </ol>
 
           
@@ -2107,7 +2072,7 @@ volumes:
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
   </nav>
 
 
@@ -2154,7 +2119,7 @@ volumes:
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">367</span>
+                    <span class="site-state-item-count">383</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2303,7 +2268,19 @@ volumes:
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2380,7 +2357,13 @@ volumes:
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2503,7 +2486,7 @@ volumes:
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">371k</span>
+    <span title="站点总字数">388k</span>
   
 
   
@@ -2512,7 +2495,7 @@ volumes:
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:11</span>
+    <span title="站点总阅读时长">6:28</span>
   
 </div>
 

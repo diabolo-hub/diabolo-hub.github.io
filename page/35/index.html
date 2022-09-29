@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/git-%E5%BC%82%E5%B8%B8-%E8%A7%A3%E5%86%B3%E5%B0%86%E5%B7%B2%E6%9C%89git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%B7%B2%E6%9C%89%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BA%A4%E7%9A%84%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/07/git-%E7%AC%94%E8%AE%B0-git-clone-mirror%E9%95%9C%E5%83%8F%E5%85%8B%E9%9A%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/07/git-%E5%BC%82%E5%B8%B8-%E8%A7%A3%E5%86%B3%E5%B0%86%E5%B7%B2%E6%9C%89git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%B7%B2%E6%9C%89%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BA%A4%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">解决将已有git远程仓库的项目复制到另外一个已有远程连接的本地仓库，并提交的方法</a></h1>
+                <a class="post-title-link" href="/2019/11/07/git-%E7%AC%94%E8%AE%B0-git-clone-mirror%E9%95%9C%E5%83%8F%E5%85%8B%E9%9A%86/" itemprop="url">git clone --mirror镜像克隆</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,571 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">2018-12-07</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T00:00:00+08:00">2019-11-07</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<hr>
+<h1 id="git仓库镜像克隆（仓库迁移）"><a href="#git仓库镜像克隆（仓库迁移）" class="headerlink" title="git仓库镜像克隆（仓库迁移）"></a>git仓库镜像克隆（仓库迁移）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. git clone --mirror  阿里云代码仓库URL</span><br><span class="line">2. cd xxx.git</span><br><span class="line">3. git remote add NEW-REMOTE  专有云代码仓库URL</span><br><span class="line">4. git push NEW-REMOTE --mirror</span><br></pre></td></tr></table></figure>
+<h2 id="样例："><a href="#样例：" class="headerlink" title="样例："></a>样例：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. git clone --mirror xxx@code.yyy.com:仓库组&#x2F;仓库名.git</span><br><span class="line">2. cd rpc-myapp-server.git</span><br><span class="line">3. git remote add NEW-REMOTE uuu@code.vvv.com:仓库组&#x2F;仓库名.git</span><br><span class="line">4. git push NEW-REMOTE --mirror</span><br></pre></td></tr></table></figure>
+<h1 id="git克隆镜像更新（update）"><a href="#git克隆镜像更新（update）" class="headerlink" title="git克隆镜像更新（update）"></a>git克隆镜像更新（update）</h1><ol>
+<li>cd xxx.git</li>
+<li>git remote update</li>
+<li>git push NEW-REMOTE –mirror</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>镜像克隆可迁移仓库所有的git分支及提交记录等操作活动</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/18/git-%E7%AC%94%E8%AE%B0-git-checkout-b-branchName/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/18/git-%E7%AC%94%E8%AE%B0-git-checkout-b-branchName/" itemprop="url">git checkout -b branchName</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-18T00:00:00+08:00">2019-09-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">255</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="checkout详情"><a href="#checkout详情" class="headerlink" title="checkout详情"></a>checkout详情</h1><p>git checkout -b branchName<br>等价于<br>创建新分支：git branch branchName<br>切换到新分支：git checkout branchName</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/git-%E7%AC%94%E8%AE%B0-git-config-list%E9%80%80%E5%87%BA%E6%A1%88%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/16/git-%E7%AC%94%E8%AE%B0-git-config-list%E9%80%80%E5%87%BA%E6%A1%88%E4%BB%B6/" itemprop="url">git config --list退出案件</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T00:00:00+08:00">2019-09-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">586</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="解决输入-git-config-–list-退出的问题"><a href="#解决输入-git-config-–list-退出的问题" class="headerlink" title="解决输入 git config –list 退出的问题"></a>解决输入 git config –list 退出的问题</h1><p>输入git config –list 最后出现一个 (END) ，要等一会才能退出来，这个怎么解决?</p>
+<h1 id="原因：-git日志过多最后显示end无法输入命令，打印的信息是全部用户配置的，表示可以用了。"><a href="#原因：-git日志过多最后显示end无法输入命令，打印的信息是全部用户配置的，表示可以用了。" class="headerlink" title="原因： git日志过多最后显示end无法输入命令，打印的信息是全部用户配置的，表示可以用了。"></a>原因： git日志过多最后显示end无法输入命令，打印的信息是全部用户配置的，表示可以用了。</h1><pre><code>直接按 q (或+Enter) ， 即可退出；
+    或
+退出这个界面重新进入即可。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/git-%E5%BC%82%E5%B8%B8-git%E6%8A%A5%E9%94%99%E9%94%A6%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/23/git-%E5%BC%82%E5%B8%B8-git%E6%8A%A5%E9%94%99%E9%94%A6%E9%9B%86/" itemprop="url">git报错锦集</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T00:00:00+08:00">2019-08-23</time>
             
 
             
@@ -464,7 +1028,201 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1k</span>
+                <span title="字数统计">3.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p>#提交github操作如下：<br>echo “# spring-practing” &gt;&gt; README.md<br>git init<br>git add README.md<br>git commit -m “first commit”<br>git remote add origin <a href="https://github.com/YaleZhangdy/spring-practing.git" target="_blank" rel="noopener">https://github.com/YaleZhangdy/spring-practing.git</a><br>git push -u origin master</p>
+<p>#设置user和email如下：<br>$ git config –global user.name author #将用户名设为author<br>$ git config –global user.email author@corpmail.com #将用户邮箱设为author@corpmail.com</p>
+<p>#git查看commit提交记录详情（只能查看git commit记录，无法查看git add记录）<br>git log 查看所有的commit提交记录<br>git show 查看提交的详情，之后的git show都是基于commit hashID输出的<br>查看指定commit hashID的所有修改：<br>git show commitId<br>3.查看某次commit中具体某个文件的修改：<br>git show commitId fileName</p>
+<p>#git push origin与git push -u origin master的区别<br>$ git push origin<br>上面命令表示，将当前分支推送到origin主机的对应分支。<br>如果当前分支只有一个追踪分支，那么主机名都可以省略。<br>$ git push 如果当前分支与多个主机存在追踪关系，那么这个时候-u选项会指定一个默认主机，这样后面就可以不加任何参数使用git push。<br>$ git push -u origin master 上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。<br>不带任何参数的git push，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，现在改为默认采用simple方式。</p>
+<p>报错如下：<br>1、执行git pull –rebase origin master<br>报错：fatal: Updating an unborn branch with changes added to the index.<br>原因：前面有git add . ，添加文件文件夹到提交目录，此部分需要git commit<br>解决：执行git commit -m “first commit” ，提交git add数据。</p>
+<p>2、执行git push -u origin master<br>报错：failed to push some refs to ‘<a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a><br>原因：主要原因是github中的README.md文件不在本地代码目录中，就是文件不一致<br>解决：可以通过如下命令进行代码合并【注：pull=fetch+merge]   git pull –rebase origin master</p>
+<p>#git push报错： The current branch practicing has no upstream branch.<br>To push the current branch and set the remote as upstream, use<br>git push –set-upstream origin developer<br>标黑的这一部分是重点，这是解决办法，只要执行了这一行代码就解决问题了。<br>出现这个问题的原因可能是(不太确认)：我连接了多个Git账号，当我在当前账号下向服务器端推送代码的时候，出现了身份验证的问题而导致的问题。</p>
+<p>#git push报错：fatal: Could not read from remote repository<br>报错详情：<br>E:\development-workspace\myGitHub\spring-practing&gt;git push<br>Connection reset by 13.250.177.223 port 22<br>fatal: Could not read from remote repository.</p>
+<p>Please make sure you have the correct access rights<br>and the repository exists.<br>解决办法： <a href="https://blog.csdn.net/Leolu007/article/details/79129446" target="_blank" rel="noopener">https://blog.csdn.net/Leolu007/article/details/79129446</a><br>查看远端地址 git remote –v<br>查看配置 git config –list<br>查看状态 git status<br>发现有文件未提交导致<br>此时将文件添加 git add .<br>再git commit -m “提交”<br>再git push </p>
+<p>#git pull 或 git pull master 或 git pull origin/master<br>报错详情：<br>$ git pull master<br>fatal: ‘master’ does not appear to be a git repository<br>fatal: Could not read from remote repository.</p>
+<p>Please make sure you have the correct access rights<br>and the repository exists.<br>解决办法：<br>0、未添加开发者权限（access rights：访问权限），或其他权限不满足。2020-01-21 已验证<br>1、添加本地与远程分支地址映射。 <a href="https://www.cnblogs.com/dingxu/p/9032014.html" target="_blank" rel="noopener"> git remote add origin 地址</a><br>2、强制覆盖本地master分支。<a href="https://blog.csdn.net/10km/article/details/84669270" target="_blank" rel="noopener">git pull –force origin master:master</a><br>3、删掉本地代码、关闭IDEA，使用 git fetch master</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/16/git-%E7%AC%94%E8%AE%B0-git-merge-no-ff%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/16/git-%E7%AC%94%E8%AE%B0-git-merge-no-ff%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/" itemprop="url">git merge --no-ff参数详解</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T00:00:00+08:00">2019-08-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">428</span>
               
 
               
@@ -500,23 +1258,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>项目A，已有远程仓库，可正常pull、push<br>项目B，已有远程仓库，可正常pull、push  </p>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><ol>
-<li>将项目B复制到项目A项目中，并git add . ， git commit   <h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2>在项目A中，项目B无法在项目中提交，整个git add 和 git commit过程无法发现项目B</li>
-</ol>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
-<li>在项目A中的项目B文件夹下，右键git bash here，通过命令窗口，我们使用git remote -v</li>
-</ol>
-<ul>
-<li>发现此项目B文件夹下的远程仓库链接存在，且为项目B原本的远程仓库</li>
-</ul>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ol>
-<li>删除项目A中项目B文件夹对应的远程仓库（项目B文件夹里执行）<br>git remote remove origin</li>
-<li>删除项目A中项目B文件夹里的git版本控制信息（项目B文件夹里执行）<br>find . -name “.git” | xargs rm -rf<blockquote>
-<p>此时git add . 会提示： fatal: in unpopulated submodule ‘B’</p>
-</blockquote>
-</li>
-<li>清除项目A中项目B文件夹的git缓存信息（此处需要在项目A文件夹中执行，这样才能找到项目B文件夹）<br>git rm -rf –cached hexo-theme-matery</li>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h1><ol>
+<li>使用fast forword，master分支上会显示两次提交记录 A，B。<br>使用no fast forword, master分支上只会显示 C 一次提交记录。<br>no fast forword时master分支提交点更少（如需master上提交记录减少，也就是git commit记录减少，可使用–squash参数）。</li>
+<li>使用git reset –hard HEAD^回退上一个版本时，<br>fast forword可以回退到branchA分支的某次提交点，<br>而no fast forword只能回退到master分支merge之前的提交点。</li>
 </ol>
 
           
@@ -574,7 +1318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/git-%E7%AC%94%E8%AE%B0-git%E4%B8%89%E7%A7%8D%E5%9B%9E%E6%BB%9A%E6%96%B9%E5%BC%8F-soft%EF%BC%8Chard%EF%BC%8Cmixed/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/git-%E7%AC%94%E8%AE%B0-git-check-ignore/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -593,7 +1337,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/26/git-%E7%AC%94%E8%AE%B0-git%E4%B8%89%E7%A7%8D%E5%9B%9E%E6%BB%9A%E6%96%B9%E5%BC%8F-soft%EF%BC%8Chard%EF%BC%8Cmixed/" itemprop="url">git三种回滚方式--soft、hard、mixed</a></h1>
+                <a class="post-title-link" href="/2019/06/28/git-%E7%AC%94%E8%AE%B0-git-check-ignore/" itemprop="url">git check-ignore</a></h1>
         
 
         <div class="post-meta">
@@ -609,7 +1353,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T00:00:00+08:00">2018-10-26</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">2019-06-28</time>
             
 
             
@@ -665,7 +1409,197 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">278</span>
+                <span title="字数统计">784</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>可能是.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gitcheck-ignore -v App.class</span><br><span class="line"></span><br><span class="line">.gitignore:3:*.class   App.class</span><br></pre></td></tr></table></figure>
+<p>Git会告诉我们，.gitignore的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>忽略某些文件时，需要编写.gitignore；</li>
+<li>.gitignore文件本身要放到版本库里，并且可以对.gitignore做版本管理！</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/python-excep-Microsoft-Visual-C-14-0-or-greater-is-required/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/28/python-excep-Microsoft-Visual-C-14-0-or-greater-is-required/" itemprop="url">Microsoft Visual C++ 14.0 or greater is required.</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">2019-06-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/excep/" itemprop="url" rel="index"><span itemprop="name">excep</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
               
 
               
@@ -703,9 +1637,12 @@
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
 <ul>
-<li><strong>git三种回滚方式–soft，hard，mixed：<a href="https://blog.csdn.net/chao821/article/details/81033003" target="_blank" rel="noopener">https://blog.csdn.net/chao821/article/details/81033003</a></strong></li>
+<li><strong>Microsoft Visual C++ 14.0 is required解决方法：<a href="https://zhuanlan.zhihu.com/p/126669852" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/126669852</a></strong></li>
 </ul>
 <hr>
+<h1 id="error-Microsoft-Visual-C-14-0-or-greater-is-required"><a href="#error-Microsoft-Visual-C-14-0-or-greater-is-required" class="headerlink" title="error: Microsoft Visual C++ 14.0 or greater is required."></a>error: Microsoft Visual C++ 14.0 or greater is required.</h1><h4 id="安装失败，提示如下："><a href="#安装失败，提示如下：" class="headerlink" title="安装失败，提示如下："></a>安装失败，提示如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Visual C++ 14.0 or greater is required</span><br></pre></td></tr></table></figure>
+<p>通过手动安装build tool验证通过，知乎上已经有大神分享过具体的解决操作方法，工具<a href="https://pan.baidu.com/s/1ytKIVSBXLMQhrXleC_I4dA" target="_blank" rel="noopener">百度网盘地址https://pan.baidu.com/s/1ytK</a> 提取码： 8scp<br>若分享链接已失效，可联系我给予分享</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>下载到本地后，电脑文件会显示一个镜像<br><img src="images/C++ 14.0镜像路径.png" alt=""><br>进入文件夹后直接点击安装即可<br><img src="images/安装文件.png" alt=""><br>若有需要选择文件时，需要根据本地电脑自行选择<br><img src="images/电脑版本选择.png" alt="">  </p>
 
           
         
@@ -762,7 +1699,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/git-%E7%AC%94%E8%AE%B0-git-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E3%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E3%80%81%E6%8A%8A%E5%88%86%E6%94%AF%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8Brepository%E3%80%81%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/python-excep-This-error-originates-from-a-subprocess-and-is-likely-not-a-problem-with-pip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -781,7 +1718,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/26/git-%E7%AC%94%E8%AE%B0-git-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E3%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E3%80%81%E6%8A%8A%E5%88%86%E6%94%AF%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8Brepository%E3%80%81%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/" itemprop="url">git查看远程分支、本地分支、创建分支、推送分支</a></h1>
+                <a class="post-title-link" href="/2019/06/28/python-excep-This-error-originates-from-a-subprocess-and-is-likely-not-a-problem-with-pip/" itemprop="url">This error originates from a subprocess, and is likely not a problem with pip.</a></h1>
         
 
         <div class="post-meta">
@@ -797,7 +1734,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T00:00:00+08:00">2018-10-26</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">2019-06-28</time>
             
 
             
@@ -818,14 +1755,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/excep/" itemprop="url" rel="index"><span itemprop="name">excep</span></a></span>
 
                 
                 
@@ -853,7 +1790,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1k</span>
+                <span title="字数统计">3.5k</span>
               
 
               
@@ -867,7 +1804,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -889,205 +1826,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看远程分支"><a href="#查看远程分支" class="headerlink" title="查看远程分支"></a>查看远程分支</h1><p>git branch -a</p>
-<h1 id="查看本地分支"><a href="#查看本地分支" class="headerlink" title="查看本地分支"></a>查看本地分支</h1><p>git branch</p>
-<h1 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h1><p>git branch test </p>
-<h1 id="把分支推到远程分支"><a href="#把分支推到远程分支" class="headerlink" title="把分支推到远程分支"></a>把分支推到远程分支</h1><p>git push origin test</p>
-<h1 id="切换分支到test"><a href="#切换分支到test" class="headerlink" title="切换分支到test"></a>切换分支到test</h1><p>git checkout test </p>
-<h1 id="删除本地分支test"><a href="#删除本地分支test" class="headerlink" title="删除本地分支test"></a>删除本地分支test</h1><p>git branch -d 本地分支名</p>
-<h1 id="删除远程版本"><a href="#删除远程版本" class="headerlink" title="删除远程版本"></a>删除远程版本</h1><p>git push origin :远程分支名</p>
-<h1 id="将分支为branchname合并到当前分值"><a href="#将分支为branchname合并到当前分值" class="headerlink" title="将分支为branchname合并到当前分值"></a>将分支为branchname合并到当前分值</h1><p> git merge branchname</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/23/git-%E7%AC%94%E8%AE%B0-%E8%BF%9B%E5%85%A5vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8E%E6%80%8E%E4%B9%88%E9%80%80%E5%87%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/23/git-%E7%AC%94%E8%AE%B0-%E8%BF%9B%E5%85%A5vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8E%E6%80%8E%E4%B9%88%E9%80%80%E5%87%BA/" itemprop="url">退出git vim编辑器</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">211</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li><p>一直按住esc ，再连续按大写的z两次就退出来了。</p>
-<blockquote>
-<p>用wq的时候，要先esc，然后按住shift键，出现下面这个界面时才可以输入命令：</p>
-</blockquote>
-</li>
-<li><p>直接按q，不保存改动 退出</p>
-</li>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>python安装pycrypto时报cl.exe错误返回状态2的解决方案：<a href="http://www.javashuo.com/article/p-uyeuckcm-ek.html" target="_blank" rel="noopener">http://www.javashuo.com/article/p-uyeuckcm-ek.html</a></strong></li>
+</ul>
+<hr>
+<h1 id="note-This-error-originates-from-a-subprocess-and-is-likely-not-a-problem-with-pip"><a href="#note-This-error-originates-from-a-subprocess-and-is-likely-not-a-problem-with-pip" class="headerlink" title="note: This error originates from a subprocess, and is likely not a problem with pip."></a>note: This error originates from a subprocess, and is likely not a problem with pip.</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt\inttypes.h(95): error C2143: syntax error: missing &#39;&#123;&#39; before &#39;__cdecl&#39;</span><br><span class="line">  error: command &#39;C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\BIN\\x86_amd64\\cl.exe&#39; failed with exit code 2</span><br><span class="line">  [end of output]</span><br><span class="line"></span><br><span class="line"> note: This error originates from a subprocess, and is likely not a problem with pip.</span><br><span class="line">error: legacy-install-failure</span><br><span class="line"></span><br><span class="line">Encountered error while trying to install package.</span><br><span class="line"></span><br><span class="line">pycrypto</span><br><span class="line"></span><br><span class="line">note: This is an issue with the package mentioned above, not pip.</span><br><span class="line">hint: See above for output from the failure.</span><br></pre></td></tr></table></figure>
+<h2 id="已成功解决"><a href="#已成功解决" class="headerlink" title="已成功解决"></a>已成功解决</h2><ol>
+<li>将 stdint.h 文件 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h</span><br></pre></td></tr></table></figure>
+copy一份到 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt</span><br></pre></td></tr></table></figure></li>
+<li>修改 inttypes.h 文件中的 stdint.h 引用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\inttypes.h</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">改为</span><br><span class="line">#include &quot;stdint.h&quot;</span><br></pre></td></tr></table></figure></li>
+<li>然后再去安装 pycrypto 即可成功</li>
 </ol>
 
           
@@ -1145,7 +1895,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/git-%E7%AC%94%E8%AE%B0-merge%E5%92%8Crebase%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/python-notes-python3-10-4%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1164,7 +1914,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/19/git-%E7%AC%94%E8%AE%B0-merge%E5%92%8Crebase%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">merge和rebase的区别</a></h1>
+                <a class="post-title-link" href="/2019/06/28/python-notes-python3-10-4%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" itemprop="url">python3.10.4安装使用</a></h1>
         
 
         <div class="post-meta">
@@ -1180,7 +1930,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T00:00:00+08:00">2018-08-19</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">2019-06-28</time>
             
 
             
@@ -1201,14 +1951,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1236,7 +1986,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">488</span>
+                <span title="字数统计">606</span>
               
 
               
@@ -1272,12 +2022,13 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>（一股脑）使用merge命令合并分支，解决完冲突，执行git add .和git commit -m’fix conflict’。这个时候会产生一个commit。</li>
-<li>（交互式）使用rebase命令合并分支，解决完冲突，执行git add .和git rebase –continue，不会产生额外的commit。这样的好处是，‘干净’，分支上不会有无意义的解决分支的commit；坏处，如果合并的分支中存在多个commit，需要重复处理多次冲突。</li>
-<li>git pull和git pull –rebase区别：git pull做了两个操作分别是‘获取’和合并。所以加了rebase就是以rebase的方式进行合并分支，默认为merge。</li>
-</ol>
-<p>git pull = git fetch + git merge<br>git pull –rebase = git fetch + git rebase</p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>python3.10.4下载地址：<a href="https://www.python.org/downloads/release/python-3104/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-3104/</a></strong></li>
+<li><strong>python windows各版本下载地址：<a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">https://www.python.org/downloads/windows/</a></strong></li>
+</ul>
+<hr>
+<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>自带开发工具: IDLE</p>
 
           
         
@@ -1334,7 +2085,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/git-%E7%AC%94%E8%AE%B0-idea%E5%8E%BB%E6%8E%89add%E5%92%8C%E5%9B%9E%E9%80%80%E5%88%B0%E7%AC%ACN%E6%AC%A1%E6%8F%90%E4%BA%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/python-notes-%E6%9F%A5%E7%9C%8Bwindows%E4%B8%8Bpython%E5%BA%93%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1353,7 +2104,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/git-%E7%AC%94%E8%AE%B0-idea%E5%8E%BB%E6%8E%89add%E5%92%8C%E5%9B%9E%E9%80%80%E5%88%B0%E7%AC%ACN%E6%AC%A1%E6%8F%90%E4%BA%A4/" itemprop="url">idea去掉add和回退到第N次提交</a></h1>
+                <a class="post-title-link" href="/2019/06/28/python-notes-%E6%9F%A5%E7%9C%8Bwindows%E4%B8%8Bpython%E5%BA%93%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url">py常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1369,7 +2120,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T00:00:00+08:00">2018-08-17</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T00:00:00+08:00">2019-06-28</time>
             
 
             
@@ -1390,14 +2141,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1425,7 +2176,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">628</span>
+                <span title="字数统计">2.3k</span>
               
 
               
@@ -1439,7 +2190,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -1461,753 +2212,12 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h1><p>git reset head</p>
-<h1 id="回退到最后一次提交之前状态"><a href="#回退到最后一次提交之前状态" class="headerlink" title="回退到最后一次提交之前状态"></a>回退到最后一次提交之前状态</h1><p>git reset HEAD~1</p>
-<h1 id="回退到第3次提交之前的状态"><a href="#回退到第3次提交之前的状态" class="headerlink" title="回退到第3次提交之前的状态"></a>回退到第3次提交之前的状态</h1><p>git reset HEAD~3</p>
-<h1 id="撤销-强制提交记录"><a href="#撤销-强制提交记录" class="headerlink" title="撤销+强制提交记录"></a>撤销+强制提交记录</h1><p>git log先查你提交的记录<br>git reset –hard xxxxxx回滚到那个记录<br>如果你也想修改远程仓库里的记录的话<br>git push origin master -f强制push</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/git-%E7%AC%94%E8%AE%B0-git%E8%8E%B7%E5%8F%96commit-id/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/11/git-%E7%AC%94%E8%AE%B0-git%E8%8E%B7%E5%8F%96commit-id/" itemprop="url">获取完整的commit id</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">567</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="获取完整commit-id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）"><a href="#获取完整commit-id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）" class="headerlink" title="获取完整commit id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）"></a>获取完整commit id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）</h1><p>git rev-parse HEAD</p>
-<h1 id="获取short-commit-id（如：bb4f92a）"><a href="#获取short-commit-id（如：bb4f92a）" class="headerlink" title="获取short commit id（如：bb4f92a）"></a>获取short commit id（如：bb4f92a）</h1><p>git rev-parse –short HEAD</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/git-%E7%AC%94%E8%AE%B0-git%E6%B8%85%E9%99%A4%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%EF%BC%8C%E8%AE%B0%E4%BD%8F%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/09/git-%E7%AC%94%E8%AE%B0-git%E6%B8%85%E9%99%A4%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%EF%BC%8C%E8%AE%B0%E4%BD%8F%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/" itemprop="url">清除用户名密码、记住用户名密码</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T00:00:00+08:00">2018-08-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">359</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="清除用户名密码-缓存"><a href="#清除用户名密码-缓存" class="headerlink" title="清除用户名密码 缓存"></a>清除用户名密码 缓存</h1><p>git credential-manager uninstall</p>
-<h1 id="设置记住用户名密码"><a href="#设置记住用户名密码" class="headerlink" title="设置记住用户名密码"></a>设置记住用户名密码</h1><p>git config –global credential.helper store (输入这个命令后,以后只要在输入一次用户名密码)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/git-%E7%AC%94%E8%AE%B0-git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E7%9A%84%E5%88%9B%E5%BB%BA%E8%80%85%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/07/git-%E7%AC%94%E8%AE%B0-git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E7%9A%84%E5%88%9B%E5%BB%BA%E8%80%85%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4/" itemprop="url">列出某个分支的数据（按作者或时间排序）</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T00:00:00+08:00">2018-08-07</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">371</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>列出远程Git分支按作者排序的committerdate：</p>
-<p>git for-each-ref –format=’%(committerdate) %09 %(authorname) %09 %(refname)’ | sort -k5n -k2M -k3n -k4n<br>然后比如你想查看某个分支branch_A, 那么就再后面加上|grep branch_A</p>
-<p>git for-each-ref –format=’%(committerdate) %09 %(authorname) %09 %(refname)’ | sort -k5n -k2M -k3n -k4n|grep branch_A</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/git-%E7%AC%94%E8%AE%B0-git%E6%92%A4%E9%94%80commit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/09/git-%E7%AC%94%E8%AE%B0-git%E6%92%A4%E9%94%80commit/" itemprop="url">git撤销</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-09T00:00:00+08:00">2018-07-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">213</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>$ git commit -m ‘initial commit’     提交</p>
-<p>$ git add forgotten_file     添加</p>
-<p>$ git commit –amend    撤销</p>
-<p>通过git commit –amend 命令可以查看到刚刚的log信息为</p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>python3.10.4下载地址：<a href="https://www.python.org/downloads/release/python-3104/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-3104/</a></strong></li>
+</ul>
+<hr>
+<h1 id="查看windows下python库系统配置"><a href="#查看windows下python库系统配置" class="headerlink" title="查看windows下python库系统配置"></a>查看windows下python库系统配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;python</span><br><span class="line">Python 3.8.4 (tags&#x2F;v3.8.4:dfa645a, Jul 13 2020, 16:46:45) [MSC v.1924 64 bit (AMD64)] on win32</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; sys.path</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">NameError: name &#39;sys&#39; is not defined</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; import sys</span><br><span class="line">&gt;&gt;&gt; sys.path</span><br><span class="line">[&#39;&#39;, &#39;D:\\developmentUsedSoftAddress\\Python\\Python384\\python38.zip&#39;, &#39;D:\\developmentUsedSoftAddress\\Python\\Python384\\DLLs&#39;, &#39;D:\\developmentUsedSoftAddress\\Python\\Python384\\lib&#39;, &#39;D:\\developmentUsedSoftAddress\\Python\\Python384&#39;, &#39;D:\\developmentUsedSoftAddress\\Python\\Python384\\lib\\site-packages&#39;, &#39;e:\\workspace-all\\workspace-py\\third_package\\python-uncompyle6&#39;]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2252,7 +2262,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/34/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/36/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/34/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/36/">下一页</a>
   </nav>
 
 
@@ -2299,7 +2309,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">367</span>
+                    <span class="site-state-item-count">383</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2448,7 +2458,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2525,7 +2547,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2648,7 +2676,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">371k</span>
+    <span title="站点总字数">388k</span>
   
 
   
@@ -2657,7 +2685,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:11</span>
+    <span title="站点总阅读时长">6:28</span>
   
 </div>
 

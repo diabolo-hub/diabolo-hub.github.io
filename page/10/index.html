@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-bk/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-bk/" itemprop="url">database-mysql-notes-lock-bk</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/" itemprop="url">java-maven-mvn-install-X-的DEBUG模式</a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">212</span>
+                <span title="字数统计">1.9k</span>
               
 
               
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -475,7 +475,17 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/lgxzzz/article/details/122368203" target="_blank" rel="noopener">https://blog.csdn.net/lgxzzz/article/details/122368203</a></p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="直接在项目根目录下运行"><a href="#直接在项目根目录下运行" class="headerlink" title="直接在项目根目录下运行"></a>直接在项目根目录下运行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -X</span><br></pre></td></tr></table></figure>
+<p>将输出debug内容</p>
+<h1 id="也可以在打包时DEBUG"><a href="#也可以在打包时DEBUG" class="headerlink" title="也可以在打包时DEBUG"></a>也可以在打包时DEBUG</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -X -U clean package</span><br></pre></td></tr></table></figure>
+<h1 id="is-invalid-transitive-dependencies-if-any-will-not-be-available"><a href="#is-invalid-transitive-dependencies-if-any-will-not-be-available" class="headerlink" title="is invalid, transitive dependencies (if any) will not be available"></a>is invalid, transitive dependencies (if any) will not be available</h1><p><a href="https://blog.csdn.net/u010739551/article/details/83242246" target="_blank" rel="noopener"></a><br><img src="mvn install -X 的DEBUG模式/依赖版本缺失.png" alt=""><br>比如如下场景，我有三个项目A, B, C，依赖关系如下：  </p>
+<p>假如B invalid了，那么A通过B间接依赖的C就会失效，导致A项目编译不过。</p>
+<p>问题定位<br>google了很长时间，没有在网上找到能解决我的问题的答案，那就自己动手来定位问题的原因，按照maven的提示打开debug日志，在A项目下执行如下命令：</p>
+<p> mvn -X -U clean package<br>1<br>再次查看编译日志，这时候在[WARNING] The POM for com.winwill.test:0.0.1-SNAPSHOT is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details日志的下一行会有类似如下提示：</p>
+<p>[ERROR] ‘dependencies.dependency.version’ for xxx:yyy:jar is missing. @-</p>
+<p>这是ERROR日志，感觉应该是问题的root cause，这行日志表示B项目中依赖的xxx:yyy没有指定version。</p>
+<p>在B项目中为xxx:yyy加上version之后再次编译，发现一切ok~~</p>
+<p>简单总结<br>项目中依赖其他jar时，如果不指定version，或者version在父pom中通过DependencyManagement指定但是父pom没有deploy时，可能会导致项目jar invalid。</p>
 
           
         
@@ -532,7 +542,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-jvm-jvm%E4%BC%98%E5%8C%96-TLAB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -551,165 +561,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/" itemprop="url">database-mysql-notes-lock-GET-LOCK函数实现MySQL加锁</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">185</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="GET-LOCK函数实现MySQL加锁"><a href="#GET-LOCK函数实现MySQL加锁" class="headerlink" title="GET_LOCK函数实现MySQL加锁"></a>GET_LOCK函数实现MySQL加锁</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95/" itemprop="url">database-mysql-notes-index-覆盖索引</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-jvm-jvm%E4%BC%98%E5%8C%96-TLAB/" itemprop="url">java-jvm-jvm优化-TLAB</a></h1>
         
 
         <div class="post-meta">
@@ -848,7 +700,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-jvm-notes-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -867,7 +719,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/" itemprop="url">database-mysql-notes-lock-临键锁（Next-key-Locks）</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-jvm-notes-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0/" itemprop="url">java-jvm-notes-三色标记</a></h1>
         
 
         <div class="post-meta">
@@ -1006,7 +858,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E5%85%B1%E4%BA%AB%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-%E7%9F%A5%E8%AF%86%E7%82%B9-2-k8s-Kubernetes-%E4%B8%AD-apiserver-advertise-address-%E4%B8%8E-pod-network-cidr-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1025,7 +877,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E5%85%B1%E4%BA%AB%E9%94%81/" itemprop="url">database-mysql-notes-lock-意向共享锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-%E7%9F%A5%E8%AF%86%E7%82%B9-2-k8s-Kubernetes-%E4%B8%AD-apiserver-advertise-address-%E4%B8%8E-pod-network-cidr-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" itemprop="url">depth-kubernetes-知识点-2-k8s-Kubernetes-中-apiserver-advertise-address-与-pod-network-cidr-区别是什么</a></h1>
         
 
         <div class="post-meta">
@@ -1072,7 +924,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">631</span>
               
 
               
@@ -1108,7 +960,16 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://q.cnblogs.com/q/122070/" target="_blank" rel="noopener">k8s(Kubernetes) 中 apiserver-advertise-address 与 pod-network-cidr 区别是什么</a></p>
+<ol>
+<li>对于 apiserver-advertise-address ，在博文 使用Kubeadm(1.13+)快速搭建Kubernetes集群 中找到了答案：</li>
+</ol>
+<p>kubeadm 使用 eth0 的默认网络接口（通常是内网IP）做为 Master 节点的 advertise address ，如果我们想使用不同的网络接口，可以使用 –apiserver-advertise-address=<ip-address> 参数来设置</p>
+<ol>
+<li>对于 pod-network-cidr ，在博文 使用kubeadm搭建Kubernetes(1.10.2)集群 中找到了答案：</li>
+</ol>
+<p>pod-network-cidr: 指定pod网络的IP地址范围，它的值取决于你在下一步选择的哪个网络网络插件，比如我在本文中使用的是Calico网络，需要指定为192.168.0.0/16。</p>
+
           
         
       
@@ -1164,7 +1025,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E6%8E%92%E4%BB%96%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1183,7 +1044,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E6%84%8F%E5%90%91%E6%8E%92%E4%BB%96%E9%94%81/" itemprop="url">database-mysql-notes-lock-意向排他锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1/" itemprop="url">depth-kubernetes-常用命令-1-常用命令-1</a></h1>
         
 
         <div class="post-meta">
@@ -1230,7 +1091,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">75</span>
               
 
               
@@ -1266,7 +1127,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p>kubectl get nodes</p>
+
           
         
       
@@ -1322,7 +1184,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-k8s%E5%AE%89%E8%A3%85-kubeadm-0-1-%E5%AF%BC%E5%87%BA%E5%AE%98%E6%96%B9kubeadm-yml/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1341,7 +1203,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/" itemprop="url">database-mysql-notes-lock-插入意向锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-k8s%E5%AE%89%E8%A3%85-kubeadm-0-1-%E5%AF%BC%E5%87%BA%E5%AE%98%E6%96%B9kubeadm-yml/" itemprop="url">depth-kubernetes-k8s安装-kubeadm-0-1-导出官方kubeadm-yml</a></h1>
         
 
         <div class="post-meta">
@@ -1388,7 +1250,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">1.3k</span>
               
 
               
@@ -1424,7 +1286,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/csdn_welearn/article/details/101107426" target="_blank" rel="noopener">kubeadm.yml搭建k8s</a></p>
+<h1 id="导出配置文件"><a href="#导出配置文件" class="headerlink" title="导出配置文件"></a>导出配置文件</h1><p>kubeadm config print init-defaults –kubeconfig ClusterConfiguration &gt; kubeadm.yml</p>
+<p>#<br><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入kubeadm.yaml 所在的目录</span></span><br><span class="line">cd /usr/local/kubernetes</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所需镜像列表</span></span><br><span class="line">kubeadm config images list --config kubeadm.yml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取镜像</span></span><br><span class="line">kubeadm config images pull --config kubeadm.yml</span><br></pre></td></tr></table></figure></p>
+
           
         
       
@@ -1480,7 +1345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-Kubernetes%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96UI%E7%95%8C%E9%9D%A2-recommended-yaml/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1499,7 +1364,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/" itemprop="url">database-mysql-notes-lock-自增锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-Kubernetes%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96UI%E7%95%8C%E9%9D%A2-recommended-yaml/" itemprop="url">depth-kubernetes-Kubernetes的可视化UI界面-recommended-yaml</a></h1>
         
 
         <div class="post-meta">
@@ -1546,7 +1411,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">8.1k</span>
               
 
               
@@ -1560,7 +1425,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">8 mins.</span>
               
             </div>
           
@@ -1582,7 +1447,128 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p>apiVersion: v1<br>kind: ServiceAccount<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard</p>
+<hr>
+<p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  type: NodePort<br>  ports:</p>
+<pre><code>- port: 443
+  targetPort: 8443
+  nodePort: 31001
+</code></pre><p>  selector:<br>    k8s-app: kubernetes-dashboard</p>
+<hr>
+<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-certs<br>  namespace: kubernetes-dashboard<br>type: Opaque</p>
+<hr>
+<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-csrf<br>  namespace: kubernetes-dashboard<br>type: Opaque<br>data:<br>  csrf: “”</p>
+<hr>
+<p>apiVersion: v1<br>kind: Secret<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-key-holder<br>  namespace: kubernetes-dashboard<br>type: Opaque</p>
+<hr>
+<p>kind: ConfigMap<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard-settings<br>  namespace: kubernetes-dashboard</p>
+<hr>
+<p>kind: Role<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>rules:</p>
+<h1 id="Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets"><a href="#Allow-Dashboard-to-get-update-and-delete-Dashboard-exclusive-secrets" class="headerlink" title="Allow Dashboard to get, update and delete Dashboard exclusive secrets."></a>Allow Dashboard to get, update and delete Dashboard exclusive secrets.</h1><ul>
+<li>apiGroups: [“”]<br>resources: [“secrets”]<br>resourceNames: [“kubernetes-dashboard-key-holder”, “kubernetes-dashboard-certs”, “kubernetes-dashboard-csrf”]<br>verbs: [“get”, “update”, “delete”]<h1 id="Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map"><a href="#Allow-Dashboard-to-get-and-update-‘kubernetes-dashboard-settings’-config-map" class="headerlink" title="Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map."></a>Allow Dashboard to get and update ‘kubernetes-dashboard-settings’ config map.</h1></li>
+<li>apiGroups: [“”]<br>resources: [“configmaps”]<br>resourceNames: [“kubernetes-dashboard-settings”]<br>verbs: [“get”, “update”]<h1 id="Allow-Dashboard-to-get-metrics"><a href="#Allow-Dashboard-to-get-metrics" class="headerlink" title="Allow Dashboard to get metrics."></a>Allow Dashboard to get metrics.</h1></li>
+<li>apiGroups: [“”]<br>resources: [“services”]<br>resourceNames: [“heapster”, “dashboard-metrics-scraper”]<br>verbs: [“proxy”]</li>
+<li>apiGroups: [“”]<br>resources: [“services/proxy”]<br>resourceNames: [“heapster”, “http:heapster:”, “https:heapster:”, “dashboard-metrics-scraper”, “http:dashboard-metrics-scraper”]<br>verbs: [“get”]</li>
+</ul>
+<hr>
+<p>kind: ClusterRole<br>apiVersion: rbac.authorization.k8s.io/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>rules:</p>
+<h1 id="Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server"><a href="#Allow-Metrics-Scraper-to-get-metrics-from-the-Metrics-server" class="headerlink" title="Allow Metrics Scraper to get metrics from the Metrics server"></a>Allow Metrics Scraper to get metrics from the Metrics server</h1><ul>
+<li>apiGroups: [“metrics.k8s.io”]<br>resources: [“pods”, “nodes”]<br>verbs: [“get”, “list”, “watch”]</li>
+</ul>
+<hr>
+<p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: RoleBinding<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: Role<br>  name: kubernetes-dashboard<br>subjects:</p>
+<ul>
+<li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li>
+</ul>
+<hr>
+<p>apiVersion: rbac.authorization.k8s.io/v1<br>kind: ClusterRoleBinding<br>metadata:<br>  name: kubernetes-dashboard<br>roleRef:<br>  apiGroup: rbac.authorization.k8s.io<br>  kind: ClusterRole<br>  name: kubernetes-dashboard<br>subjects:</p>
+<ul>
+<li>kind: ServiceAccount<br>name: kubernetes-dashboard<br>namespace: kubernetes-dashboard</li>
+</ul>
+<hr>
+<p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: kubernetes-dashboard<br>  name: kubernetes-dashboard<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: kubernetes-dashboard<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: kubernetes-dashboard<br>    spec:<br>      containers:</p>
+<pre><code>  - name: kubernetes-dashboard
+    image: kubernetesui/dashboard:v2.0.0-rc5
+    imagePullPolicy: Always
+    ports:
+      - containerPort: 8443
+        protocol: TCP
+    args:
+      - --auto-generate-certificates
+      - --namespace=kubernetes-dashboard
+      # Uncomment the following line to manually specify Kubernetes API server Host
+      # If not specified, Dashboard will attempt to auto discover the API server and connect
+      # to it. Uncomment only if the default does not work.
+      # - --apiserver-host=http://my-address:port
+    volumeMounts:
+      - name: kubernetes-dashboard-certs
+        mountPath: /certs
+        # Create on-disk volume to store exec logs
+      - mountPath: /tmp
+        name: tmp-volume
+    livenessProbe:
+      httpGet:
+        scheme: HTTPS
+        path: /
+        port: 8443
+      initialDelaySeconds: 30
+      timeoutSeconds: 30
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsUser: 1001
+      runAsGroup: 2001
+volumes:
+  - name: kubernetes-dashboard-certs
+    secret:
+      secretName: kubernetes-dashboard-certs
+  - name: tmp-volume
+    emptyDir: {}
+serviceAccountName: kubernetes-dashboard
+nodeSelector:
+  &quot;beta.kubernetes.io/os&quot;: linux
+# Comment the following tolerations if Dashboard must not be deployed on master
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+</code></pre><hr>
+<p>kind: Service<br>apiVersion: v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  ports:</p>
+<pre><code>- port: 8000
+  targetPort: 8000
+</code></pre><p>  selector:<br>    k8s-app: dashboard-metrics-scraper</p>
+<hr>
+<p>kind: Deployment<br>apiVersion: apps/v1<br>metadata:<br>  labels:<br>    k8s-app: dashboard-metrics-scraper<br>  name: dashboard-metrics-scraper<br>  namespace: kubernetes-dashboard<br>spec:<br>  replicas: 1<br>  revisionHistoryLimit: 10<br>  selector:<br>    matchLabels:<br>      k8s-app: dashboard-metrics-scraper<br>  template:<br>    metadata:<br>      labels:<br>        k8s-app: dashboard-metrics-scraper<br>      annotations:<br>        seccomp.security.alpha.kubernetes.io/pod: ‘runtime/default’<br>    spec:<br>      containers:</p>
+<pre><code>  - name: dashboard-metrics-scraper
+    image: kubernetesui/metrics-scraper:v1.0.3
+    ports:
+      - containerPort: 8000
+        protocol: TCP
+    livenessProbe:
+      httpGet:
+        scheme: HTTP
+        path: /
+        port: 8000
+      initialDelaySeconds: 30
+      timeoutSeconds: 30
+    volumeMounts:
+    - mountPath: /tmp
+      name: tmp-volume
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsUser: 1001
+      runAsGroup: 2001
+serviceAccountName: kubernetes-dashboard
+nodeSelector:
+  &quot;beta.kubernetes.io/os&quot;: linux
+# Comment the following tolerations if Dashboard must not be deployed on master
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+volumes:
+  - name: tmp-volume
+    emptyDir: {}
+</code></pre>
           
         
       
@@ -1638,7 +1624,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%A1%A8%E7%BA%A7%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1657,7 +1643,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%A1%A8%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-表级锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-1/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-1</a></h1>
         
 
         <div class="post-meta">
@@ -1704,7 +1690,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">225</span>
               
 
               
@@ -1740,7 +1726,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8<br>ADD /target/*.jar app.jar<br>EXPOSE 8082</p>
+<p>#ENTRYPOINT [“java”,”-jar”,”/app.jar”]<br>ENTRYPOINT [“java”,”-jar”,”-Duser.timezone=GMT+08”,”/app.jar”]</p>
+
           
         
       
@@ -1796,7 +1784,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1815,7 +1803,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-行级锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-2</a></h1>
         
 
         <div class="post-meta">
@@ -1862,7 +1850,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">452</span>
               
 
               
@@ -1898,7 +1886,178 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
+<p>VOLUME /app</p>
+<p>COPY mall-task*.jar mall-task.jar</p>
+<p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p>
+<p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-3</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">528</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
+<p>#作者<br>MAINTAINER xu</p>
+<p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p>
+<p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p>
+<p>#bash方式执行，使demo-0.0.1jar可访问</p>
+<p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p>
+<p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p>
+<p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>
+
           
         
       
@@ -1942,7 +2101,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
   </nav>
 
 
@@ -1989,7 +2148,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">367</span>
+                    <span class="site-state-item-count">383</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2138,7 +2297,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2215,7 +2386,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2338,7 +2515,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">371k</span>
+    <span title="站点总字数">388k</span>
   
 
   
@@ -2347,7 +2524,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:11</span>
+    <span title="站点总阅读时长">6:28</span>
   
 </div>
 

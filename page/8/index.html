@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-7-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/" itemprop="url">python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-7-list/" itemprop="url">python-notes-course-1-7-list</a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.2k</span>
+                <span title="字数统计">4.8k</span>
               
 
               
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -475,8 +475,77 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Could-not-find-a-version-that-satisfies-the-requirement-wx"><a href="#Could-not-find-a-version-that-satisfies-the-requirement-wx" class="headerlink" title="Could not find a version that satisfies the requirement wx"></a>Could not find a version that satisfies the requirement wx</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Could not find a version that satisfies the requirement wx (from versions: none)</span><br><span class="line">ERROR: No matching distribution found for wx</span><br><span class="line">WARNING: You are using pip version 21.3.1; however, version 22.0.4 is available.</span><br><span class="line">You should consider upgrading via the &#39;E:\workspace-all\workspace-py\projects-practicing\venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.</span><br></pre></td></tr></table></figure>
-<h2 id="pycharm处理"><a href="#pycharm处理" class="headerlink" title="pycharm处理"></a>pycharm处理</h2><p>写入 import wxpython，再鼠标放上去点击install</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="创建list"><a href="#创建list" class="headerlink" title="创建list"></a>创建list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list1&#x3D;[&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123]</span><br></pre></td></tr></table></figure>
+<h1 id="如何访问list中的值"><a href="#如何访问list中的值" class="headerlink" title="如何访问list中的值"></a>如何访问list中的值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">name &#x3D; [&#39;一点水&#39;, &#39;两点水&#39;, &#39;三点水&#39;, &#39;四点水&#39;, &#39;五点水&#39;]</span><br><span class="line"></span><br><span class="line"># 通过索引来访问列表</span><br><span class="line">print(name[2])</span><br><span class="line"># 通过方括号的形式来截取列表中的数据</span><br><span class="line">print(name[0:2])</span><br><span class="line"># 左闭右开，只会打印： 一点水  两点水</span><br><span class="line"></span><br><span class="line"># 打印整个list</span><br><span class="line">print(name[:])</span><br><span class="line"></span><br><span class="line"># 左闭右开，从左边初始位置到右边的2，打印一点水  两点水</span><br><span class="line">print(name[:2])</span><br><span class="line"></span><br><span class="line"># 从左边2索引开始，一直打印到最后，三点水  四点水 五点水</span><br><span class="line">print(name[2:])</span><br></pre></td></tr></table></figure>
+<h1 id="如何更新list"><a href="#如何更新list" class="headerlink" title="如何更新list"></a>如何更新list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 通过索引对列表的数据项进行修改或更新</span><br><span class="line">name[1]&#x3D;&#39;2点水&#39;</span><br><span class="line">print(name)</span><br><span class="line"></span><br><span class="line"># 使用 append() 方法来添加列表项</span><br><span class="line">name.append(&#39;六点水&#39;)</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
+<h1 id="如何删除元素"><a href="#如何删除元素" class="headerlink" title="如何删除元素"></a>如何删除元素</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 使用 del 语句来删除列表的的元素</span><br><span class="line">del name[3]</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
+<h1 id="list常用运算符"><a href="#list常用运算符" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><h2 id="求长度"><a href="#求长度" class="headerlink" title="求长度"></a>求长度</h2><p>len(list)                              3</p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>[1, 2, 3] + [4, 5, 6] = [1, 2, 3, 4, 5, 6]      </p>
+<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><p>[‘Hi!’] * 4                            [‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]    </p>
+<h2 id="元素是否存在列表中"><a href="#元素是否存在列表中" class="headerlink" title="元素是否存在列表中"></a>元素是否存在列表中</h2><p>3 in [1, 2, 3]                        true or false</p>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>for x in [1, 2, 3]: print x,        1 2 3</p>
+<h1 id="list常用运算符-1"><a href="#list常用运算符-1" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><table>
+<thead>
+<tr>
+<th>函数&amp;方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(list)</td>
+<td>列表元素个数</td>
+</tr>
+<tr>
+<td>max(list)</td>
+<td>返回列表元素最大值</td>
+</tr>
+<tr>
+<td>min(list)</td>
+<td>返回列表元素最小值</td>
+</tr>
+<tr>
+<td>list(seq)</td>
+<td>将元组转换为列表</td>
+</tr>
+<tr>
+<td>list.append(obj)</td>
+<td>在列表末尾添加新的对象</td>
+</tr>
+<tr>
+<td>list.count(obj)</td>
+<td>统计某个元素在列表中出现的次数</td>
+</tr>
+<tr>
+<td>list.extend(seq)</td>
+<td>在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
+</tr>
+<tr>
+<td>list.index(obj)</td>
+<td>从列表中找出某个值第一个匹配项的索引位置</td>
+</tr>
+<tr>
+<td>list.insert(index, obj)</td>
+<td>将对象插入列表</td>
+</tr>
+<tr>
+<td>list.pop(obj=list[-1])</td>
+<td>移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
+</tr>
+<tr>
+<td>list.remove(obj)</td>
+<td>移除列表中的一个元素（参数是列表中元素），并且不返回任何值</td>
+</tr>
+<tr>
+<td>list.reverse()</td>
+<td>反向列表中元素</td>
+</tr>
+<tr>
+<td>list.sort([func])</td>
+<td>对原列表进行排序</td>
+</tr>
+</tbody>
+</table>
 
           
         
@@ -533,7 +602,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-8-%E5%85%83%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -552,7 +621,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/" itemprop="url">java-maven-jar冲突分析</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-8-%E5%85%83%E7%BB%84/" itemprop="url">python-notes-course-1-8-元组</a></h1>
         
 
         <div class="post-meta">
@@ -599,7 +668,237 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">336</span>
+                <span title="字数统计">5.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>创建了 tuple 时候，它就不能改变了，也就是说它也没有 append()，insert() 这样的方法，但它也有获取某个索引值的方法，但是不能赋值。</p>
+<h1 id="创建元组"><a href="#创建元组" class="headerlink" title="创建元组"></a>创建元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456)</span><br><span class="line">tuple2&#x3D;&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456</span><br></pre></td></tr></table></figure>
+<h2 id="创建空元组"><a href="#创建空元组" class="headerlink" title="创建空元组"></a>创建空元组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tuple3&#x3D;()</span><br></pre></td></tr></table></figure>
+<h2 id="元组中只有一个元素时，需要在后面加逗号"><a href="#元组中只有一个元素时，需要在后面加逗号" class="headerlink" title="元组中只有一个元素时，需要在后面加逗号"></a>元组中只有一个元素时，需要在后面加逗号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tuple4&#x3D;(123,)</span><br></pre></td></tr></table></figure>
+<p>如果不加逗号，创建出来的就不是 元组（tuple），而是指 123 这个数了。<br>这是因为括号 () 既可以表示元组（tuple），又可以表示数学公式中的小括号，这就产生了歧义。<br>所以如果只有一个元素时，你不加逗号，计算机就根本没法识别你是要进行整数或者小数运算还是表示元组。</p>
+<h1 id="如何访问元组"><a href="#如何访问元组" class="headerlink" title="如何访问元组"></a>如何访问元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line"></span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456)</span><br><span class="line">tuple2&#x3D;&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123,456</span><br><span class="line"></span><br><span class="line">print(tuple1[1])</span><br><span class="line">print(tuple2[0])</span><br></pre></td></tr></table></figure>
+<h1 id="修改元组"><a href="#修改元组" class="headerlink" title="修改元组"></a>修改元组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">list1&#x3D;[123,456]</span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowater&#39;,&#39;liangdianshui&#39;,list1)</span><br><span class="line">print(tuple1)</span><br><span class="line">list1[0]&#x3D;789</span><br><span class="line">list1[1]&#x3D;100</span><br><span class="line">print(tuple1)</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(&#39;两点水&#39;, &#39;twowater&#39;, &#39;liangdianshui&#39;, [123, 456])</span><br><span class="line">(&#39;两点水&#39;, &#39;twowater&#39;, &#39;liangdianshui&#39;, [789, 100])</span><br></pre></td></tr></table></figure></p>
+<h1 id="删除元组"><a href="#删除元组" class="headerlink" title="删除元组"></a>删除元组</h1><p>tuple 元组中的元素值是不允许删除的，但我们可以使用 del 语句来删除整个元组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line"></span><br><span class="line">tuple1&#x3D;(&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,[123,456])</span><br><span class="line">print(tuple1)</span><br><span class="line">del tuple1</span><br></pre></td></tr></table></figure></p>
+<h1 id="tuple-（元组）运算符"><a href="#tuple-（元组）运算符" class="headerlink" title="tuple （元组）运算符"></a>tuple （元组）运算符</h1><p>与字符串一样，元组之间可以使用 + 号和 * 号进行运算。这就意味着他们可以组合和复制，运算后会生成一个新的元组。    </p>
+<table>
+<thead>
+<tr>
+<th>Python 表达式</th>
+<th>结果</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len((1, 2, 3))</td>
+<td>3</td>
+<td>计算元素个数</td>
+</tr>
+<tr>
+<td>(1, 2, 3) + (4, 5, 6)</td>
+<td>(1, 2, 3, 4, 5, 6)</td>
+<td>连接</td>
+</tr>
+<tr>
+<td>(‘Hi!’,) * 4</td>
+<td>(‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’)</td>
+<td>复制</td>
+</tr>
+<tr>
+<td>3 in (1, 2, 3)</td>
+<td>True</td>
+<td>元素是否存在</td>
+</tr>
+<tr>
+<td>for x in (1, 2, 3): print(x)</td>
+<td>1 2 3</td>
+<td>迭代</td>
+</tr>
+</tbody>
+</table>
+<h1 id="元组内置函数"><a href="#元组内置函数" class="headerlink" title="元组内置函数"></a>元组内置函数</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(tuple)</td>
+<td>计算元组元素个数</td>
+</tr>
+<tr>
+<td>max(tuple)</td>
+<td>返回元组中元素最大值</td>
+</tr>
+<tr>
+<td>min(tuple)</td>
+<td>返回元组中元素最小值</td>
+</tr>
+<tr>
+<td>tuple(seq)</td>
+<td>将列表转换为元组</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/" itemprop="url">python-notes-course-1-6-多变量赋值</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">439</span>
               
 
               
@@ -635,11 +934,934 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/ptqueen/p/7985198.html" target="_blank" rel="noopener">jar冲突 maven命令分析</a></p>
-<ol>
-<li><p>用mvn dependency:tree&gt;temp/tree.txt,直接输出到当前项目下,然后在idea中打开,搜索要找的jar包名字即可.</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="多变量赋值"><a href="#多变量赋值" class="headerlink" title="多变量赋值"></a>多变量赋值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, c &#x3D; 1, 2, &quot;liangdianshui&quot;</span><br></pre></td></tr></table></figure>
+<p>以上实例，两个整型对象 1 和 2 的分配给变量 a 和 b，字符串对象 “liangdianshui” 分配给变量 c。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-9-%E5%AD%97%E5%85%B8dict/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-9-%E5%AD%97%E5%85%B8dict/" itemprop="url">python-notes-course-1-9-字典dict</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">8.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>类似java中的hashmap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name &#x3D; &#123;&#39;一点水&#39;: &#39;131456780001&#39;, &#39;两点水&#39;: &#39;131456780002&#39;, &#39;三点水&#39;: &#39;131456780003&#39;, &#39;四点水&#39;: &#39;131456780004&#39;, &#39;五点水&#39;: &#39;131456780005&#39;&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建字典"><a href="#创建字典" class="headerlink" title="创建字典"></a>创建字典</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict &#x3D; &#123;key1 : value1, key2 : value2 &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：键必须是唯一的，但值则不必。值可以取任何数据类型，但键必须是不可变的。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dict1&#x3D;&#123;&#39;liangdianshui&#39;:&#39;111111&#39; ,&#39;twowater&#39;:&#39;222222&#39; ,&#39;两点水&#39;:&#39;333333&#39;&#125;</span><br><span class="line">dict2&#x3D;&#123;&#39;abc&#39;:1234,1234:&#39;abc&#39;&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="访问字典"><a href="#访问字典" class="headerlink" title="访问字典"></a>访问字典</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name &#x3D; &#123;&#39;一点水&#39;: &#39;131456780001&#39;, &#39;两点水&#39;: &#39;131456780002&#39;, &#39;三点水&#39;: &#39;131456780003&#39;, &#39;四点水&#39;: &#39;131456780004&#39;, &#39;五点水&#39;: &#39;131456780005&#39;&#125;</span><br><span class="line"></span><br><span class="line">print(name[&#39;两点水&#39;])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果字典中没有这个键，是会报错的。</p>
+</blockquote>
+<h1 id="修改字典"><a href="#修改字典" class="headerlink" title="修改字典"></a>修改字典</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">dict1&#x3D;&#123;&#39;liangdianshui&#39;:&#39;111111&#39; ,&#39;twowater&#39;:&#39;222222&#39; ,&#39;两点水&#39;:&#39;333333&#39;&#125;</span><br><span class="line">print(dict1)</span><br><span class="line"># 新增一个键值对</span><br><span class="line">dict1[&#39;jack&#39;]&#x3D;&#39;444444&#39;</span><br><span class="line">print(dict1)</span><br><span class="line"># 修改键值对</span><br><span class="line">dict1[&#39;liangdianshui&#39;]&#x3D;&#39;555555&#39;</span><br><span class="line">print(dict1)</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, &#39;twowater&#39;: &#39;222222&#39;, &#39;两点水&#39;: &#39;333333&#39;&#125;</span><br><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, &#39;twowater&#39;: &#39;222222&#39;, &#39;两点水&#39;: &#39;333333&#39;, &#39;jack&#39;: &#39;444444&#39;&#125;</span><br><span class="line">&#123;&#39;liangdianshui&#39;: &#39;555555&#39;, &#39;twowater&#39;: &#39;222222&#39;, &#39;两点水&#39;: &#39;333333&#39;, &#39;jack&#39;: &#39;444444&#39;&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="删除字典"><a href="#删除字典" class="headerlink" title="删除字典"></a>删除字典</h1><p>通过 del 可以删除 dict （字典）中的某个元素，也能删除 dict （字典）<br>通过调用 clear() 方法可以清除字典中的所有元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">dict1&#x3D;&#123;&#39;liangdianshui&#39;:&#39;111111&#39; ,&#39;twowater&#39;:&#39;222222&#39; ,&#39;两点水&#39;:&#39;333333&#39;&#125;</span><br><span class="line">print(dict1)</span><br><span class="line"># 通过 key 值，删除对应的元素</span><br><span class="line">del dict1[&#39;twowater&#39;]</span><br><span class="line">print(dict1)</span><br><span class="line"># 删除字典中的所有元素</span><br><span class="line">dict1.clear()</span><br><span class="line">print(dict1)</span><br><span class="line"># 删除字典</span><br><span class="line">del dict1</span><br></pre></td></tr></table></figure><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, &#39;twowater&#39;: &#39;222222&#39;, &#39;两点水&#39;: &#39;333333&#39;&#125;</span><br><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, &#39;两点水&#39;: &#39;333333&#39;&#125;</span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
+<li>dict （字典）是不允许一个键创建两次的，但是在创建 dict （字典）的时候如果出现了一个键值赋予了两次，会以最后一次赋予的值为准<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">dict1&#x3D;&#123;&#39;liangdianshui&#39;:&#39;111111&#39; ,&#39;twowater&#39;:&#39;222222&#39; ,&#39;两点水&#39;:&#39;333333&#39;,&#39;twowater&#39;:&#39;444444&#39;&#125;</span><br><span class="line">print(dict1)</span><br><span class="line">print(dict1[&#39;twowater&#39;])</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, &#39;twowater&#39;: &#39;444444&#39;, &#39;两点水&#39;: &#39;333333&#39;&#125;</span><br><span class="line">444444</span><br></pre></td></tr></table></figure></li>
+<li>dict （字典）键必须不可变，可是键可以用数字，字符串或元组充当，但是就是不能使用列表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">dict1&#x3D;&#123;&#39;liangdianshui&#39;:&#39;111111&#39; ,123:&#39;222222&#39; ,(123,&#39;tom&#39;):&#39;333333&#39;,&#39;twowater&#39;:&#39;444444&#39;&#125;</span><br><span class="line">print(dict1)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;liangdianshui&#39;: &#39;111111&#39;, 123: &#39;222222&#39;, (123, &#39;tom&#39;): &#39;333333&#39;, &#39;twowater&#39;: &#39;444444&#39;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>dict 内部存放的顺序和 key 放入的顺序是没有任何关系</li>
+</ol>
+<h1 id="函数和方法"><a href="#函数和方法" class="headerlink" title="函数和方法"></a>函数和方法</h1><table>
+<thead>
+<tr>
+<th>方法和函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>len(dict)</td>
+<td>计算字典元素个数</td>
+</tr>
+<tr>
+<td>str(dict)</td>
+<td>输出字典可打印的字符串表示</td>
+</tr>
+<tr>
+<td>type(variable)</td>
+<td>返回输入的变量类型，如果变量是字典就返回字典类型</td>
+</tr>
+<tr>
+<td>dict.clear()</td>
+<td>删除字典内所有元素</td>
+</tr>
+<tr>
+<td>dict.copy()</td>
+<td>返回一个字典的浅复制</td>
+</tr>
+<tr>
+<td>dict.values()</td>
+<td>以列表返回字典中的所有值</td>
+</tr>
+<tr>
+<td>popitem()</td>
+<td>随机返回并删除字典中的一对键和值</td>
+</tr>
+<tr>
+<td>dict.items()</td>
+<td>以列表返回可遍历的(键, 值) 元组数组</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-fuc-com-win32/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-fuc-com-win32/" itemprop="url">python-notes-fuc-com-win32</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>调用import win32com.client出错的解决办法：<a href="https://www.cnblogs.com/bbjs/p/13221599.html" target="_blank" rel="noopener">https://www.cnblogs.com/bbjs/p/13221599.html</a></strong></li>
+</ul>
+<hr>
+<h1 id="import-win32com-client"><a href="#import-win32com-client" class="headerlink" title="import win32com.client"></a>import win32com.client</h1><p>提示找不到模块时，在项目根目录终端下执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PS E:\workspace-all\workspace-py\projects-practicing&gt; python -m pip install pypiwin32</span><br><span class="line">Collecting pypiwin32</span><br><span class="line">  Using cached pypiwin32-223-py3-none-any.whl (1.7 kB)</span><br><span class="line">Collecting pywin32&gt;&#x3D;223</span><br><span class="line">  Using cached pywin32-303-cp38-cp38-win_amd64.whl (9.3 MB)</span><br><span class="line">Installing collected packages: pywin32, pypiwin32</span><br><span class="line">Successfully installed pypiwin32-223 pywin32-303</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-10-set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-10-set/" itemprop="url">python-notes-course-1-10-set</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><p>创建一个 set，需要提供一个 list 作为输入集合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set1&#x3D;set([123,456,789])</span><br><span class="line">print(set1)</span><br></pre></td></tr></table></figure><br>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;456, 123, 789&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>set是无序的</p>
+<h2 id="重复Key会被过滤，可以理解为hashset"><a href="#重复Key会被过滤，可以理解为hashset" class="headerlink" title="重复Key会被过滤，可以理解为hashset"></a>重复Key会被过滤，可以理解为hashset</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set1&#x3D;set([123,456,789,123,123])</span><br><span class="line">print(set1)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;456, 123, 789&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h1><p>通过 add(key) 方法可以添加元素到 set 中，可以重复添加，但不会有效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set1&#x3D;set([123,456,789])</span><br><span class="line">print(set1)</span><br><span class="line">set1.add(100)</span><br><span class="line">print(set1)</span><br><span class="line">set1.add(100)</span><br><span class="line">print(set1)</span><br></pre></td></tr></table></figure></p>
+<h1 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h1><p>通过 remove(key) 方法可以删除 set 中的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set1&#x3D;set([123,456,789])</span><br><span class="line">print(set1)</span><br><span class="line">set1.remove(456)</span><br><span class="line">print(set1)</span><br></pre></td></tr></table></figure></p>
+<h1 id="set-运用"><a href="#set-运用" class="headerlink" title="set 运用"></a>set 运用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set1&#x3D;set(&#39;hello&#39;)</span><br><span class="line">set2&#x3D;set([&#39;p&#39;,&#39;y&#39;,&#39;y&#39;,&#39;h&#39;,&#39;o&#39;,&#39;n&#39;])</span><br><span class="line">print(set1)</span><br><span class="line">print(set2)</span><br></pre></td></tr></table></figure>
+<h2 id="交集"><a href="#交集" class="headerlink" title="交集"></a>交集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 交集 (求两个 set 集合中相同的元素)</span><br><span class="line">set3&#x3D;set1 &amp; set2</span><br><span class="line">print(&#39;\n交集 set3:&#39;)</span><br><span class="line">print(set3)</span><br></pre></td></tr></table></figure>
+<h2 id="并集"><a href="#并集" class="headerlink" title="并集"></a>并集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 并集 （合并两个 set 集合的元素并去除重复的值）</span><br><span class="line">set4&#x3D;set1 | set2</span><br><span class="line">print(&#39;\n并集 set4:&#39;)</span><br><span class="line">print(set4)</span><br></pre></td></tr></table></figure>
+<h2 id="差集"><a href="#差集" class="headerlink" title="差集"></a>差集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 差集</span><br><span class="line">set5&#x3D;set1 - set2</span><br><span class="line">set6&#x3D;set2 - set1</span><br><span class="line">print(&#39;\n差集 set5:&#39;)</span><br><span class="line">print(set5)</span><br><span class="line">print(&#39;\n差集 set6:&#39;)</span><br><span class="line">print( set6)</span><br></pre></td></tr></table></figure>
+<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 去除海量列表里重复元素，用 hash 来解决也行，只不过感觉在性能上不是很高，用 set 解决还是很不错的</span><br><span class="line">list1 &#x3D; [111,222,333,444,111,222,333,444,555,666]  </span><br><span class="line">set7&#x3D;set(list1)</span><br><span class="line">print(&#39;\n去除列表里重复元素 set7:&#39;)</span><br><span class="line">print(set7)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-13-%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-13-%E5%87%BD%E6%95%B0/" itemprop="url">python-notes-course-1-13-函数</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">718</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def 函数名(参数1，参数2....参数n):</span><br><span class="line">    函数体</span><br><span class="line">    return 语句</span><br></pre></td></tr></table></figure>
+<ul>
+<li>函数代码块以 def 关键词开头，后接函数标识符名称和圆括号()</li>
+<li>任何传入参数和自变量必须放在圆括号中间。圆括号之间可以用于定义参数</li>
+<li>函数的第一行语句可以选择性地使用文档字符串（用于存放函数说明）</li>
+<li>函数内容以冒号起始，并且缩进</li>
+<li>return [表达式] 结束函数，选择性地返回一个值给调用方。不带表达式的 return 相当于返回 None。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-1-%E5%89%8D%E8%A8%80%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-1-%E5%89%8D%E8%A8%80%E8%A7%84%E8%8C%83%E4%BB%8B%E7%BB%8D/" itemprop="url">python-notes-course-1-1-前言规范介绍</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>教程来源：<a href="https://www.readwithu.com/Article/codeSpecification/codeSpecification_first.html" target="_blank" rel="noopener">https://www.readwithu.com/Article/codeSpecification/codeSpecification_first.html</a></strong></li>
+</ul>
+<hr>
+<h1 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h1><p>简单说，自然语言使用双引号，机器标示使用单引号，因此 代码里 多数应该使用 单引号</p>
+<ul>
+<li>自然语言 使用双引号 “…”<br>例如错误信息；很多情况还是 unicode，使用u”你好世界”</li>
+<li>机器标识 使用单引号 ‘…’ 例如 dict 里的 key</li>
+<li>正则表达式 使用原生的双引号 r”…”</li>
+<li>文档字符串 (docstring) 使用三个双引号 “””……”””</li>
+</ul>
+<h1 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h1><ul>
+<li>模块级函数和类定义之间空两行；</li>
+<li>类成员函数之间空一行；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">    def hello(self):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>可以使用多个空行分隔多组相关的函数</li>
+<li>函数中可以使用空行分隔出逻辑相关的代码</li>
+</ul>
+<h1 id="import-语句"><a href="#import-语句" class="headerlink" title="import 语句"></a>import 语句</h1><ul>
+<li>import 语句应该分行书写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">import sys,os</span><br><span class="line"></span><br><span class="line"># 正确的写法</span><br><span class="line">from subprocess import Popen, PIPE</span><br></pre></td></tr></table></figure></li>
+<li>import语句应该使用 absolute import<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">from foo.bar import Bar</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">from ..bar import Bar</span><br></pre></td></tr></table></figure></li>
+<li>import语句应该放在文件头部，置于模块说明及docstring之后，于全局变量之前；</li>
+<li>import语句应该按照顺序排列，每组之间用一个空行分隔<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">import msgpack</span><br><span class="line">import zmq</span><br><span class="line"></span><br><span class="line">import foo</span><br></pre></td></tr></table></figure></li>
+<li>导入其他模块的类定义时，可以使用相对导入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from myclass import MyClass</span><br></pre></td></tr></table></figure></li>
+<li>如果发生命名冲突，则可使用命名空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import bar</span><br><span class="line">import foo.bar</span><br><span class="line"></span><br><span class="line">bar.Bar()</span><br><span class="line">foo.bar.Bar()</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>用include参数<br>mvn dependency:tree -Dincludes=jline</p>
+</ul>
+<h1 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h1><ul>
+<li>在二元运算符两边各空一格[=,-,+=,==,&gt;,in,is not, and]:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">i &#x3D; i + 1</span><br><span class="line">submitted +&#x3D; 1</span><br><span class="line">x &#x3D; x * 2 - 1</span><br><span class="line">hypot2 &#x3D; x * x + y * y</span><br><span class="line">c &#x3D; (a + b) * (a - b)</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">i&#x3D;i+1</span><br><span class="line">submitted +&#x3D;1</span><br><span class="line">x &#x3D; x*2 - 1</span><br><span class="line">hypot2 &#x3D; x*x + y*y</span><br><span class="line">c &#x3D; (a+b) * (a-b)</span><br></pre></td></tr></table></figure></li>
+<li>函数的参数列表中，,之后要有空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">def complex(real, imag):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">def complex(real,imag):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>函数的参数列表中，默认值等号两边不要添加空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">def complex(real, imag&#x3D;0.0):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">def complex(real, imag &#x3D; 0.0):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>左括号之后，右括号之前不要加多余的空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">spam(ham[1], &#123;eggs: 2&#125;)</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">spam( ham[1], &#123; eggs : 2 &#125; )</span><br></pre></td></tr></table></figure></li>
+<li>字典对象的左括号之前不要多余的空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">dict[&#39;key&#39;] &#x3D; list[index]</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">dict [&#39;key&#39;] &#x3D; list [index]</span><br></pre></td></tr></table></figure></li>
+<li>不要为对齐赋值语句而使用的额外空格<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">x &#x3D; 1</span><br><span class="line">y &#x3D; 2</span><br><span class="line">long_variable &#x3D; 3</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">x             &#x3D; 1</span><br><span class="line">y             &#x3D; 2</span><br><span class="line">long_variable &#x3D; 3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h1><ul>
+<li>第二行缩进到括号的起始处<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo &#x3D; long_function_name(var_one, var_two,</span><br><span class="line">                         var_three, var_four)</span><br></pre></td></tr></table></figure></li>
+<li>第二行缩进 4 个空格，适用于起始括号就换行的情形<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def long_function_name(</span><br><span class="line">        var_one, var_two, var_three,</span><br><span class="line">        var_four):</span><br><span class="line">    print(var_one)</span><br></pre></td></tr></table></figure>
+使用反斜杠\换行，二元运算符+ .等应出现在行末；长字符串也可以用此法换行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">session.query(MyTable).\</span><br><span class="line">        filter_by(id&#x3D;1).\</span><br><span class="line">        one()</span><br><span class="line"></span><br><span class="line">print &#39;Hello, &#39;\</span><br><span class="line">      &#39;%s %s!&#39; %\</span><br><span class="line">      (&#39;Harry&#39;, &#39;Potter&#39;)</span><br></pre></td></tr></table></figure></li>
+<li>禁止复合语句，即一行中包含多个语句：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">do_first()</span><br><span class="line">do_second()</span><br><span class="line">do_third()</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">do_first();do_second();do_third();</span><br></pre></td></tr></table></figure></li>
+<li>if/for/while一定要换行：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 正确的写法</span><br><span class="line">if foo &#x3D;&#x3D; &#39;blah&#39;:</span><br><span class="line">    do_blah_thing()</span><br><span class="line"></span><br><span class="line"># 不推荐的写法</span><br><span class="line">if foo &#x3D;&#x3D; &#39;blah&#39;: do_blash_thing()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="docstring"><a href="#docstring" class="headerlink" title="docstring"></a>docstring</h1><p>docstring 的规范中最其本的两点：</p>
+<ol>
+<li>所有的公共模块、函数、类、方法，都应该写 docstring 。私有方法不一定需要，但应该在 def 后提供一个块注释来说明。</li>
+<li>docstring 的结束”””应该独占一行，除非此 docstring 只有一行。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;Return a foobar</span><br><span class="line">Optional plotz says to frobnicate the bizbaz first.</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;Oneline docstring&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -698,7 +1920,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-12-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -717,7 +1939,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/" itemprop="url">java-maven-mvn-dependency-使用</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-12-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/" itemprop="url">python-notes-course-1-12-循环语句</a></h1>
         
 
         <div class="post-meta">
@@ -764,7 +1986,206 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">4.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h1><table>
+<thead>
+<tr>
+<th>循环控制语句</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break</td>
+<td>在语句块执行过程中终止循环，并且跳出整个循环</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>在语句块执行过程中终止当前循环，跳出该次循环，执行下一次循环</td>
+</tr>
+<tr>
+<td>pass</td>
+<td>pass 是空语句，是为了保持程序结构的完整性</td>
+</tr>
+</tbody>
+</table>
+<h1 id="字符串循环打印字符"><a href="#字符串循环打印字符" class="headerlink" title="字符串循环打印字符"></a>字符串循环打印字符</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for letter in &#39;Hello 两点水&#39;:</span><br><span class="line">    print(letter)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">H</span><br><span class="line">e</span><br><span class="line">l</span><br><span class="line">l</span><br><span class="line">o</span><br><span class="line"></span><br><span class="line">两</span><br><span class="line">点</span><br><span class="line">水</span><br></pre></td></tr></table></figure></p>
+<h1 id="字典循环"><a href="#字典循环" class="headerlink" title="字典循环"></a>字典循环</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dict &#x3D; &#123;&#39;abc&#39;:&#39;123&#39;,&#39;edf&#39;:&#39;345&#39;&#125;</span><br><span class="line">for i in dict:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只打印字典中的KEY</p>
+</blockquote>
+<h1 id="range-函数"><a href="#range-函数" class="headerlink" title="range() 函数"></a>range() 函数</h1><ol>
+<li>使用 range(x) 函数，就可以生成一个从 0 到 x-1 的整数序列。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i in range(3):</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+结果:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>range(3) 可以写成 range(0,3), 结果是一样的。</p>
+</blockquote>
+</li>
+<li>range(a,b) 函数，你可以生成了一个左闭右开的整数序列。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i in range(2,3):</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="While-循环语句"><a href="#While-循环语句" class="headerlink" title="While 循环语句"></a>While 循环语句</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">count &#x3D; 1</span><br><span class="line">sum1 &#x3D; 0</span><br><span class="line"></span><br><span class="line">while count &lt;&#x3D; 100:</span><br><span class="line">    sum1 &#x3D; sum1 + count</span><br><span class="line">    count &#x3D; count + 1</span><br><span class="line">print(sum1)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5050</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-11-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-11-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/" itemprop="url">python-notes-course-1-11-条件语句</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.4k</span>
               
 
               
@@ -800,1157 +2221,12 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="依赖树"><a href="#依赖树" class="headerlink" title="依赖树"></a>依赖树</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">  &lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;maven-dependency-plugin&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;3.0.2&lt;&#x2F;version&gt; </span><br><span class="line">    &lt;executions&gt; </span><br><span class="line">      &lt;execution&gt; </span><br><span class="line">        &lt;id&gt;copy-dependencies&lt;&#x2F;id&gt; </span><br><span class="line">        &lt;phase&gt;package&lt;&#x2F;phase&gt; </span><br><span class="line">        &lt;goals&gt; </span><br><span class="line">          &lt;goal&gt;copy-dependencies&lt;&#x2F;goal&gt; </span><br><span class="line">        &lt;&#x2F;goals&gt; </span><br><span class="line">        &lt;configuration&gt; </span><br><span class="line">          &lt;!-- configure the plugin here --&gt; </span><br><span class="line">        &lt;&#x2F;configuration&gt; </span><br><span class="line">      &lt;&#x2F;execution&gt; </span><br><span class="line">    &lt;&#x2F;executions&gt; </span><br><span class="line">  &lt;&#x2F;plugin&gt; </span><br><span class="line">&lt;&#x2F;plugins&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree</span><br><span class="line">mvn dependency</span><br><span class="line">mvn dependency -X</span><br><span class="line">mvn dependency -e</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/" itemprop="url">java-maven-mvn-install-X-的DEBUG模式</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.9k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="直接在项目根目录下运行"><a href="#直接在项目根目录下运行" class="headerlink" title="直接在项目根目录下运行"></a>直接在项目根目录下运行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -X</span><br></pre></td></tr></table></figure>
-<p>将输出debug内容</p>
-<h1 id="也可以在打包时DEBUG"><a href="#也可以在打包时DEBUG" class="headerlink" title="也可以在打包时DEBUG"></a>也可以在打包时DEBUG</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -X -U clean package</span><br></pre></td></tr></table></figure>
-<h1 id="is-invalid-transitive-dependencies-if-any-will-not-be-available"><a href="#is-invalid-transitive-dependencies-if-any-will-not-be-available" class="headerlink" title="is invalid, transitive dependencies (if any) will not be available"></a>is invalid, transitive dependencies (if any) will not be available</h1><p><a href="https://blog.csdn.net/u010739551/article/details/83242246" target="_blank" rel="noopener"></a><br><img src="mvn install -X 的DEBUG模式/依赖版本缺失.png" alt=""><br>比如如下场景，我有三个项目A, B, C，依赖关系如下：  </p>
-<p>假如B invalid了，那么A通过B间接依赖的C就会失效，导致A项目编译不过。</p>
-<p>问题定位<br>google了很长时间，没有在网上找到能解决我的问题的答案，那就自己动手来定位问题的原因，按照maven的提示打开debug日志，在A项目下执行如下命令：</p>
-<p> mvn -X -U clean package<br>1<br>再次查看编译日志，这时候在[WARNING] The POM for com.winwill.test:0.0.1-SNAPSHOT is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details日志的下一行会有类似如下提示：</p>
-<p>[ERROR] ‘dependencies.dependency.version’ for xxx:yyy:jar is missing. @-</p>
-<p>这是ERROR日志，感觉应该是问题的root cause，这行日志表示B项目中依赖的xxx:yyy没有指定version。</p>
-<p>在B项目中为xxx:yyy加上version之后再次编译，发现一切ok~~</p>
-<p>简单总结<br>项目中依赖其他jar时，如果不指定version，或者version在父pom中通过DependencyManagement指定但是父pom没有deploy时，可能会导致项目jar invalid。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">java-maven-mvn常用命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><ol>
-<li>mvn test -Dtest=xxx：执行指定测试用例的命令，后面的xxx就是指定的所有被标记的用例</li>
-<li>mvn test -Dtest=包的路径.<em>   ，运行某个包下的所有用例（不包括子包中的用例）<br>mvn test -Dtest=com.xx.test.testCases.openApi.xxx.</em></li>
-<li>指定任何一个不同包下相同子包的所用测试用例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn test -Dtest&#x3D;包的路径.*.相同子包的路径.*</span><br><span class="line">比如：mvn test -Dtest&#x3D;com.xxx.test.testcase.*.openApi.*</span><br><span class="line">指定testcase下的所有的包中包含openApi子包下的所有用例</span><br></pre></td></tr></table></figure>
-<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2></li>
-<li>生成idea项目结构<br>mvn  idea:idea</li>
-<li>生成eclipse项目结构<br>mvn  eclipse:eclipse</li>
-<li>编译源代码<br>mvn compile</li>
-<li>编译测试代码<br>mvn test-compile</li>
-<li>打包项目<br>mvn  package</li>
-<li>组合使用goal命令，如只打包不测试<br>mvn  -Dtest  package</li>
-<li>跳过测试进行打包<br>mvn clean package -DskipTests -Prelease</li>
-<li>在本地Repository中安装jar<br>mvn  install</li>
-<li>打成jar命令<br>mvn  jar:jar</li>
-<li>打包项目到本地仓库<br>mvn clean install -DskipTests</li>
-<li>打包项目跳过测试<br>mvn clean package <em>**</em>  -DskipTests -DskipRat</li>
-<li>查看错误的详细信息<br>mvn  -e</li>
-<li>发生jar的冲突显示冲突的原因<br>mvn  install -x</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-jvm-jvm%E4%BC%98%E5%8C%96-TLAB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/java-jvm-jvm%E4%BC%98%E5%8C%96-TLAB/" itemprop="url">java-jvm-jvm优化-TLAB</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-jvm-notes-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/java-jvm-notes-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0/" itemprop="url">java-jvm-notes-三色标记</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-%E7%9F%A5%E8%AF%86%E7%82%B9-2-k8s-Kubernetes-%E4%B8%AD-apiserver-advertise-address-%E4%B8%8E-pod-network-cidr-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-%E7%9F%A5%E8%AF%86%E7%82%B9-2-k8s-Kubernetes-%E4%B8%AD-apiserver-advertise-address-%E4%B8%8E-pod-network-cidr-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" itemprop="url">depth-kubernetes-知识点-2-k8s-Kubernetes-中-apiserver-advertise-address-与-pod-network-cidr-区别是什么</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">631</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://q.cnblogs.com/q/122070/" target="_blank" rel="noopener">k8s(Kubernetes) 中 apiserver-advertise-address 与 pod-network-cidr 区别是什么</a></p>
-<ol>
-<li>对于 apiserver-advertise-address ，在博文 使用Kubeadm(1.13+)快速搭建Kubernetes集群 中找到了答案：</li>
-</ol>
-<p>kubeadm 使用 eth0 的默认网络接口（通常是内网IP）做为 Master 节点的 advertise address ，如果我们想使用不同的网络接口，可以使用 –apiserver-advertise-address=<ip-address> 参数来设置</p>
-<ol>
-<li>对于 pod-network-cidr ，在博文 使用kubeadm搭建Kubernetes(1.10.2)集群 中找到了答案：</li>
-</ol>
-<p>pod-network-cidr: 指定pod网络的IP地址范围，它的值取决于你在下一步选择的哪个网络网络插件，比如我在本文中使用的是Calico网络，需要指定为192.168.0.0/16。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1/" itemprop="url">depth-kubernetes-常用命令-1-常用命令-1</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">75</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>kubectl get nodes</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-kubernetes-k8s%E5%AE%89%E8%A3%85-kubeadm-0-1-%E5%AF%BC%E5%87%BA%E5%AE%98%E6%96%B9kubeadm-yml/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/depth-kubernetes-k8s%E5%AE%89%E8%A3%85-kubeadm-0-1-%E5%AF%BC%E5%87%BA%E5%AE%98%E6%96%B9kubeadm-yml/" itemprop="url">depth-kubernetes-k8s安装-kubeadm-0-1-导出官方kubeadm-yml</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/csdn_welearn/article/details/101107426" target="_blank" rel="noopener">kubeadm.yml搭建k8s</a></p>
-<h1 id="导出配置文件"><a href="#导出配置文件" class="headerlink" title="导出配置文件"></a>导出配置文件</h1><p>kubeadm config print init-defaults –kubeconfig ClusterConfiguration &gt; kubeadm.yml</p>
-<p>#<br><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入kubeadm.yaml 所在的目录</span></span><br><span class="line">cd /usr/local/kubernetes</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所需镜像列表</span></span><br><span class="line">kubeadm config images list --config kubeadm.yml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取镜像</span></span><br><span class="line">kubeadm config images pull --config kubeadm.yml</span><br></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h1><p>Python 程序语言指定任何非 0 和非空（null）值为 True，0 或者 null 为 False。</p>
+<h1 id="if-语句基本形式"><a href="#if-语句基本形式" class="headerlink" title="if 语句基本形式"></a>if 语句基本形式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if 判断条件：</span><br><span class="line">    执行语句……</span><br><span class="line">else：</span><br><span class="line">    执行语句……</span><br></pre></td></tr></table></figure>
+<h2 id="非零数值、非空字符串、非空-list-等，判断为-True，否则为-False。"><a href="#非零数值、非空字符串、非空-list-等，判断为-True，否则为-False。" class="headerlink" title="非零数值、非空字符串、非空 list 等，判断为 True，否则为 False。"></a>非零数值、非空字符串、非空 list 等，判断为 True，否则为 False。</h2><p>因此也可以这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num &#x3D; 6</span><br><span class="line">if num :</span><br><span class="line">    print(&#39;Hello Python&#39;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="多个条件判断形式"><a href="#多个条件判断形式" class="headerlink" title="多个条件判断形式"></a>多个条件判断形式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if 判断条件1:</span><br><span class="line">    执行语句1……</span><br><span class="line">elif 判断条件2:</span><br><span class="line">    执行语句2……</span><br><span class="line">elif 判断条件3:</span><br><span class="line">    执行语句3……</span><br><span class="line">else:</span><br><span class="line">    执行语句4……</span><br></pre></td></tr></table></figure>
+<h1 id="多个条件同时判断"><a href="#多个条件同时判断" class="headerlink" title="多个条件同时判断"></a>多个条件同时判断</h1><p>and  or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># -*-coding:utf-8-*-</span><br><span class="line"></span><br><span class="line">java &#x3D; 86</span><br><span class="line">python &#x3D; 68</span><br><span class="line"></span><br><span class="line">if java &gt; 80 and  python &gt; 80:</span><br><span class="line">    print(&#39;优秀&#39;)</span><br><span class="line">else :</span><br><span class="line">    print(&#39;不优秀&#39;)</span><br><span class="line"></span><br><span class="line">if ( java &gt;&#x3D; 80  and java &lt; 90 )  or ( python &gt;&#x3D; 80 and python &lt; 90):</span><br><span class="line">    print(&#39;良好&#39;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="if嵌套"><a href="#if嵌套" class="headerlink" title="if嵌套"></a>if嵌套</h1><p>类似java</p>
 
           
         
@@ -1995,7 +2271,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/7/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/9/">下一页</a>
   </nav>
 
 
@@ -2042,7 +2318,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">367</span>
+                    <span class="site-state-item-count">383</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2191,7 +2467,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2268,7 +2556,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2391,7 +2685,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">371k</span>
+    <span title="站点总字数">388k</span>
   
 
   
@@ -2400,7 +2694,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:11</span>
+    <span title="站点总阅读时长">6:28</span>
   
 </div>
 

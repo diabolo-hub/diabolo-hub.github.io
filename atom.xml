@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-09-26T06:34:24.314Z</updated>
+  <updated>2022-09-29T06:26:48.244Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,27 +17,381 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>mac用户查看</title>
-    <link href="http://yoursite.com/2022/09/26/mac-20220926-mac%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B/"/>
-    <id>http://yoursite.com/2022/09/26/mac-20220926-mac用户查看/</id>
-    <published>2022-09-25T16:00:00.000Z</published>
-    <updated>2022-09-26T06:34:24.314Z</updated>
+    <title>registry自定义发布的端口</title>
+    <link href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-registry%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%91%E5%B8%83%E7%9A%84%E7%AB%AF%E5%8F%A3/"/>
+    <id>http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-registry自定义发布的端口/</id>
+    <published>2022-09-28T16:00:00.000Z</published>
+    <updated>2022-09-29T06:26:48.244Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="当前用户的用户名"><a href="#当前用户的用户名" class="headerlink" title="当前用户的用户名"></a>当前用户的用户名</h1><p>whoami</p><h1 id="切换到root超级用户-—-需要输入密码"><a href="#切换到root超级用户-—-需要输入密码" class="headerlink" title="切换到root超级用户 —- 需要输入密码"></a>切换到root超级用户 —- 需要输入密码</h1><p>sudo -i</p><h1 id="su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格"><a href="#su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格" class="headerlink" title="su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格"></a>su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格</h1><p>su - diabolo，切换到 diabolo</p><h1 id="查看当前目录下所有文件的读写属性"><a href="#查看当前目录下所有文件的读写属性" class="headerlink" title="查看当前目录下所有文件的读写属性"></a>查看当前目录下所有文件的读写属性</h1><p>ls -l</p>]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="registry自定义发布的端口"><a href="#registry自定义发布的端口" class="headerlink" title="registry自定义发布的端口"></a>registry自定义发布的端口</h1><ol><li>如果您已经在使用端口 5000，或者您想要运行多个本地注册表来分隔关注区域，您可以自定义注册表的端口设置。此示例在端口 5001 上运行注册表并将其命名为 registry-test。请记住，-p值的第一部分是主机端口，第二部分是容器内的端口。在容器内，注册表5000默认侦听端口。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">     -p 5001:5000 \</span><br><span class="line">     --name registry-test \</span><br><span class="line">     registry:2</span><br></pre></td></tr></table></figure></li><li>如果要更改容器内注册表监听的端口，可以使用环境变量REGISTRY_HTTP_ADDR来更改它。此命令使注册表在容器内的端口 5001 上进行侦听：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">     -e REGISTRY_HTTP_ADDR&#x3D;0.0.0.0:5001 \</span><br><span class="line">     -p 5001:5001 \</span><br><span class="line">     --name registry-test \</span><br><span class="line">     registry:2</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;当前用户的用户名&quot;&gt;&lt;a href=&quot;#当前用户的用户名&quot; class=&quot;headerlink&quot; title=&quot;当前用户的用户名&quot;&gt;&lt;/a&gt;当前用户的用户名&lt;/h1
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;registry自定义发布的端口&quot;&gt;&lt;a href=&quot;#registry自定义发布的端口&quot; class=&quot;headerlink&quot; title=&quot;registry自定
       
     
     </summary>
     
-      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker registry" scheme="http://yoursite.com/categories/depth/docker/docker-registry/"/>
     
     
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+      <category term="docker-registry" scheme="http://yoursite.com/tags/docker-registry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推送至本地仓库</title>
+    <link href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/"/>
+    <id>http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-推送本地仓库/</id>
+    <published>2022-09-28T16:00:00.000Z</published>
+    <updated>2022-09-29T06:52:26.969Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="推送至本地仓库，若不指定my-ubuntu版本，则默认上传-latest"><a href="#推送至本地仓库，若不指定my-ubuntu版本，则默认上传-latest" class="headerlink" title="推送至本地仓库，若不指定my-ubuntu版本，则默认上传 latest"></a>推送至本地仓库，若不指定my-ubuntu版本，则默认上传 latest</h1><ol><li>将图像标记为localhost:5000/my-ubuntu. 这会为现有图像创建一个附加标签。当标签的第一部分是主机名和端口时，Docker 在推送时将其解释为注册表的位置。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag ubuntu:16.04 localhost:5000&#x2F;my-ubuntu:16.04</span><br></pre></td></tr></table></figure></li><li>将映像推送到运行在以下位置的本地注册表localhost:5000：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push localhost:5000&#x2F;my-ubuntu:16.04</span><br></pre></td></tr></table></figure></li><li>删除本地缓存ubuntu:16.04和localhost:5000/my-ubuntu 图像，以便您可以测试从注册表中提取图像。这不会localhost:5000/my-ubuntu从您的注册表中删除图像。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker image remove ubuntu:16.04</span><br><span class="line">docker image remove localhost:5000&#x2F;my-ubuntu</span><br><span class="line">或推送指定版本：</span><br><span class="line">docker image remove localhost:5000&#x2F;my-ubuntu:16.04</span><br></pre></td></tr></table></figure></li><li>localhost:5000/my-ubuntu从本地注册表中提取图像。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull localhost:5000&#x2F;my-ubuntu</span><br></pre></td></tr></table></figure></li></ol><h1 id="案例-myhexo-容器"><a href="#案例-myhexo-容器" class="headerlink" title="案例 myhexo 容器"></a>案例 myhexo 容器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">➜  wk-github-zdy docker images</span><br><span class="line">REPOSITORY            TAG            IMAGE ID       CREATED         SIZE</span><br><span class="line">myhexo                1.0            fcb95862615f   3 days ago      195MB</span><br><span class="line">redis                 latest         9fb1c428ea15   6 days ago      111MB</span><br><span class="line">oraclelinux           9              73ce309b1736   7 weeks ago     242MB</span><br><span class="line">registry              latest         4206ae70dd03   7 weeks ago     22.6MB</span><br><span class="line">mysql                 8.0            d56063370fd1   8 weeks ago     490MB</span><br><span class="line">mongo                 latest         8522acba0ea1   8 weeks ago     667MB</span><br><span class="line">elasticsearch         8.3.3          a21975dcd56a   2 months ago    657MB</span><br><span class="line">mongo-express         latest         ce615669da5e   11 months ago   136MB</span><br><span class="line">loululin&#x2F;dmanywhere   0.8.4-alpine   f346f25c02ec   2 years ago     37.3MB</span><br><span class="line">➜  wk-github-zdy docker tag myhexo:1.0 localhost:5001&#x2F;my-hexo</span><br><span class="line">➜  wk-github-zdy docker images</span><br><span class="line">REPOSITORY               TAG            IMAGE ID       CREATED         SIZE</span><br><span class="line">localhost:5001&#x2F;my-hexo   latest         fcb95862615f   3 days ago      195MB</span><br><span class="line">myhexo                   1.0            fcb95862615f   3 days ago      195MB</span><br><span class="line">redis                    latest         9fb1c428ea15   6 days ago      111MB</span><br><span class="line">oraclelinux              9              73ce309b1736   7 weeks ago     242MB</span><br><span class="line">registry                 latest         4206ae70dd03   7 weeks ago     22.6MB</span><br><span class="line">mysql                    8.0            d56063370fd1   8 weeks ago     490MB</span><br><span class="line">mongo                    latest         8522acba0ea1   8 weeks ago     667MB</span><br><span class="line">elasticsearch            8.3.3          a21975dcd56a   2 months ago    657MB</span><br><span class="line">mongo-express            latest         ce615669da5e   11 months ago   136MB</span><br><span class="line">loululin&#x2F;dmanywhere      0.8.4-alpine   f346f25c02ec   2 years ago     37.3MB</span><br><span class="line">➜  wk-github-zdy docker push localhost:5001&#x2F;my-hexo</span><br><span class="line">Using default tag: latest</span><br><span class="line">The push refers to repository [localhost:5001&#x2F;my-hexo]</span><br><span class="line">9d65187790aa: Pushed</span><br><span class="line">2cb39a2a325b: Pushed</span><br><span class="line">d3d59b289b09: Pushed</span><br><span class="line">2b49ce1e2b9c: Pushed</span><br><span class="line">958c20e8729d: Pushed</span><br><span class="line">089589b87ea4: Pushed</span><br><span class="line">9957769b57f7: Pushed</span><br><span class="line">6163139c6d2b: Pushed</span><br><span class="line">e7d566ca3222: Pushed</span><br><span class="line">7cce60e85825: Pushed</span><br><span class="line">9833f26c6bda: Pushed</span><br><span class="line">latest: digest: sha256:9747a0b5918c78739900d1f0a6db6883bb963859e7f842ed3ef7d933839ed6c0 size: 2610</span><br></pre></td></tr></table></figure><h1 id="若没配置-tag-提示权限不足"><a href="#若没配置-tag-提示权限不足" class="headerlink" title="若没配置 tag ,提示权限不足"></a>若没配置 tag ,提示权限不足</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  wk-github-zdy docker push registry</span><br><span class="line">Using default tag: latest</span><br><span class="line">The push refers to repository [docker.io&#x2F;library&#x2F;registry]</span><br><span class="line">7096a4058a34: Layer already exists</span><br><span class="line">98a9ffbe5dec: Layer already exists</span><br><span class="line">3b937836dc53: Layer already exists</span><br><span class="line">bfaf09ad3403: Layer already exists</span><br><span class="line">5d3e392a13a0: Layer already exists</span><br><span class="line">errors:</span><br><span class="line">denied: requested access to the resource is denied</span><br><span class="line">unauthorized: authentication required</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;推送至本地仓库，若不指定my-ubuntu版本，则默认上传-latest&quot;&gt;&lt;a href=&quot;#推送至本地仓库，若不指定my-ubuntu版本，则默认上传-late
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker registry" scheme="http://yoursite.com/categories/depth/docker/docker-registry/"/>
+    
+    
+      <category term="docker-registry" scheme="http://yoursite.com/tags/docker-registry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本地registry仓库搭建</title>
+    <link href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-%E6%9C%AC%E5%9C%B0registry%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-本地registry仓库搭建/</id>
+    <published>2022-09-28T16:00:00.000Z</published>
+    <updated>2022-09-29T06:50:19.190Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>Docker registry: <a href="https://docs.docker.com/registry/" target="_blank" rel="noopener">https://docs.docker.com/registry/</a></strong></li></ul><hr><h1 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br><span class="line">docker run -itd -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-registry:&#x2F;var&#x2F;lib&#x2F;registry -p 5001:5000 --restart&#x3D;always --name myregistry registry:latest</span><br><span class="line"># registry容器内默认监听端口 5000</span><br><span class="line"># 或者通过修改环境变量，修改容器内监听端口来发布</span><br><span class="line">docker run -itd -e REGISTRY_HTTP_ADDR&#x3D;0.0.0.0:5001 -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-registry:&#x2F;var&#x2F;lib&#x2F;registry -p 5001:5001 --restart&#x3D;always --name myregistry registry:latest</span><br></pre></td></tr></table></figure><blockquote><p>打开容器仓库地址: <a href="http://127.0.0.1:5001/v2/_catalog" target="_blank" rel="noopener">http://127.0.0.1:5001/v2/_catalog</a><br>列出my-hexo镜像有哪些tag: <a href="http://127.0.0.1:5001/v2/my-hexo/tags/list" target="_blank" rel="noopener">http://127.0.0.1:5001/v2/my-hexo/tags/list</a></p></blockquote><h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>-itd：在容器中打开一个伪终端进行交互操作，并在后台运行；<br>-v：把宿主机的/data/registry目录绑定 到 容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化；<br>-p：映射端口；访问宿主机的5000端口就访问到registry容器的服务了；<br>–restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器；<br>–name registry：创建容器命名为registry，你可以随便命名；<br>registry:latest：这个是刚才pull下来的镜像；</p><h1 id="停止registry"><a href="#停止registry" class="headerlink" title="停止registry"></a>停止registry</h1><ol><li>要停止注册表，请使用docker container stop与任何其他容器相同的命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop registry</span><br></pre></td></tr></table></figure></li><li>要移除容器，请使用docker container rm.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop registry &amp;&amp; docker container rm -v registry</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Docker registry: &lt;a href=&quot;https://docs.docker.com/registry/&quot; target=
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker registry" scheme="http://yoursite.com/categories/depth/docker/docker-registry/"/>
+    
+    
+      <category term="docker-registry" scheme="http://yoursite.com/tags/docker-registry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>通过配置文件启动registry</title>
+    <link href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8registry/"/>
+    <id>http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-通过配置文件启动registry/</id>
+    <published>2022-09-28T16:00:00.000Z</published>
+    <updated>2022-09-29T06:41:50.760Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>docker registry 配置注册表: <a href="https://docs.docker.com/registry/configuration/" target="_blank" rel="noopener">https://docs.docker.com/registry/configuration/</a></strong></li></ul><hr><h1 id="指定配置文件"><a href="#指定配置文件" class="headerlink" title="指定配置文件"></a>指定配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart&#x3D;always --name registry \</span><br><span class="line">             -v &#96;pwd&#96;&#x2F;config.yml:&#x2F;etc&#x2F;docker&#x2F;registry&#x2F;config.yml \</span><br><span class="line">             registry:latest</span><br></pre></td></tr></table></figure><h2 id="配置文件案例"><a href="#配置文件案例" class="headerlink" title="配置文件案例"></a>配置文件案例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br></pre></td><td class="code"><pre><span class="line">version: 0.1</span><br><span class="line">log:</span><br><span class="line">  accesslog:</span><br><span class="line">    disabled: true</span><br><span class="line">  level: debug</span><br><span class="line">  formatter: text</span><br><span class="line">  fields:</span><br><span class="line">    service: registry</span><br><span class="line">    environment: staging</span><br><span class="line">  hooks:</span><br><span class="line">    - type: mail</span><br><span class="line">      disabled: true</span><br><span class="line">      levels:</span><br><span class="line">        - panic</span><br><span class="line">      options:</span><br><span class="line">        smtp:</span><br><span class="line">          addr: mail.example.com:25</span><br><span class="line">          username: mailuser</span><br><span class="line">          password: password</span><br><span class="line">          insecure: true</span><br><span class="line">        from: sender@example.com</span><br><span class="line">        to:</span><br><span class="line">          - errors@example.com</span><br><span class="line">loglevel: debug # deprecated: use &quot;log&quot;</span><br><span class="line">storage:</span><br><span class="line">  filesystem:</span><br><span class="line">    rootdirectory: &#x2F;var&#x2F;lib&#x2F;registry</span><br><span class="line">    maxthreads: 100</span><br><span class="line">  azure:</span><br><span class="line">    accountname: accountname</span><br><span class="line">    accountkey: base64encodedaccountkey</span><br><span class="line">    container: containername</span><br><span class="line">  gcs:</span><br><span class="line">    bucket: bucketname</span><br><span class="line">    keyfile: &#x2F;path&#x2F;to&#x2F;keyfile</span><br><span class="line">    credentials:</span><br><span class="line">      type: service_account</span><br><span class="line">      project_id: project_id_string</span><br><span class="line">      private_key_id: private_key_id_string</span><br><span class="line">      private_key: private_key_string</span><br><span class="line">      client_email: client@example.com</span><br><span class="line">      client_id: client_id_string</span><br><span class="line">      auth_uri: http:&#x2F;&#x2F;example.com&#x2F;auth_uri</span><br><span class="line">      token_uri: http:&#x2F;&#x2F;example.com&#x2F;token_uri</span><br><span class="line">      auth_provider_x509_cert_url: http:&#x2F;&#x2F;example.com&#x2F;provider_cert_url</span><br><span class="line">      client_x509_cert_url: http:&#x2F;&#x2F;example.com&#x2F;client_cert_url</span><br><span class="line">    rootdirectory: &#x2F;gcs&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">    chunksize: 5242880</span><br><span class="line">  s3:</span><br><span class="line">    accesskey: awsaccesskey</span><br><span class="line">    secretkey: awssecretkey</span><br><span class="line">    region: us-west-1</span><br><span class="line">    regionendpoint: http:&#x2F;&#x2F;myobjects.local</span><br><span class="line">    bucket: bucketname</span><br><span class="line">    encrypt: true</span><br><span class="line">    keyid: mykeyid</span><br><span class="line">    secure: true</span><br><span class="line">    v4auth: true</span><br><span class="line">    chunksize: 5242880</span><br><span class="line">    multipartcopychunksize: 33554432</span><br><span class="line">    multipartcopymaxconcurrency: 100</span><br><span class="line">    multipartcopythresholdsize: 33554432</span><br><span class="line">    rootdirectory: &#x2F;s3&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">  swift:</span><br><span class="line">    username: username</span><br><span class="line">    password: password</span><br><span class="line">    authurl: https:&#x2F;&#x2F;storage.myprovider.com&#x2F;auth&#x2F;v1.0 or https:&#x2F;&#x2F;storage.myprovider.com&#x2F;v2.0 or https:&#x2F;&#x2F;storage.myprovider.com&#x2F;v3&#x2F;auth</span><br><span class="line">    tenant: tenantname</span><br><span class="line">    tenantid: tenantid</span><br><span class="line">    domain: domain name for Openstack Identity v3 API</span><br><span class="line">    domainid: domain id for Openstack Identity v3 API</span><br><span class="line">    insecureskipverify: true</span><br><span class="line">    region: fr</span><br><span class="line">    container: containername</span><br><span class="line">    rootdirectory: &#x2F;swift&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">  oss:</span><br><span class="line">    accesskeyid: accesskeyid</span><br><span class="line">    accesskeysecret: accesskeysecret</span><br><span class="line">    region: OSS region name</span><br><span class="line">    endpoint: optional endpoints</span><br><span class="line">    internal: optional internal endpoint</span><br><span class="line">    bucket: OSS bucket</span><br><span class="line">    encrypt: optional data encryption setting</span><br><span class="line">    secure: optional ssl setting</span><br><span class="line">    chunksize: optional size valye</span><br><span class="line">    rootdirectory: optional root directory</span><br><span class="line">  inmemory:  # This driver takes no parameters</span><br><span class="line">  delete:</span><br><span class="line">    enabled: false</span><br><span class="line">  redirect:</span><br><span class="line">    disable: false</span><br><span class="line">  cache:</span><br><span class="line">    blobdescriptor: redis</span><br><span class="line">  maintenance:</span><br><span class="line">    uploadpurging:</span><br><span class="line">      enabled: true</span><br><span class="line">      age: 168h</span><br><span class="line">      interval: 24h</span><br><span class="line">      dryrun: false</span><br><span class="line">    readonly:</span><br><span class="line">      enabled: false</span><br><span class="line">auth:</span><br><span class="line">  silly:</span><br><span class="line">    realm: silly-realm</span><br><span class="line">    service: silly-service</span><br><span class="line">  token:</span><br><span class="line">    autoredirect: true</span><br><span class="line">    realm: token-realm</span><br><span class="line">    service: token-service</span><br><span class="line">    issuer: registry-token-issuer</span><br><span class="line">    rootcertbundle: &#x2F;root&#x2F;certs&#x2F;bundle</span><br><span class="line">  htpasswd:</span><br><span class="line">    realm: basic-realm</span><br><span class="line">    path: &#x2F;path&#x2F;to&#x2F;htpasswd</span><br><span class="line">middleware:</span><br><span class="line">  registry:</span><br><span class="line">    - name: ARegistryMiddleware</span><br><span class="line">      options:</span><br><span class="line">        foo: bar</span><br><span class="line">  repository:</span><br><span class="line">    - name: ARepositoryMiddleware</span><br><span class="line">      options:</span><br><span class="line">        foo: bar</span><br><span class="line">  storage:</span><br><span class="line">    - name: cloudfront</span><br><span class="line">      options:</span><br><span class="line">        baseurl: https:&#x2F;&#x2F;my.cloudfronted.domain.com&#x2F;</span><br><span class="line">        privatekey: &#x2F;path&#x2F;to&#x2F;pem</span><br><span class="line">        keypairid: cloudfrontkeypairid</span><br><span class="line">        duration: 3000s</span><br><span class="line">        ipfilteredby: awsregion</span><br><span class="line">        awsregion: us-east-1, use-east-2</span><br><span class="line">        updatefrenquency: 12h</span><br><span class="line">        iprangesurl: https:&#x2F;&#x2F;ip-ranges.amazonaws.com&#x2F;ip-ranges.json</span><br><span class="line">  storage:</span><br><span class="line">    - name: redirect</span><br><span class="line">      options:</span><br><span class="line">        baseurl: https:&#x2F;&#x2F;example.com&#x2F;</span><br><span class="line">reporting:</span><br><span class="line">  bugsnag:</span><br><span class="line">    apikey: bugsnagapikey</span><br><span class="line">    releasestage: bugsnagreleasestage</span><br><span class="line">    endpoint: bugsnagendpoint</span><br><span class="line">  newrelic:</span><br><span class="line">    licensekey: newreliclicensekey</span><br><span class="line">    name: newrelicname</span><br><span class="line">    verbose: true</span><br><span class="line">http:</span><br><span class="line">  addr: localhost:5000</span><br><span class="line">  prefix: &#x2F;my&#x2F;nested&#x2F;registry&#x2F;</span><br><span class="line">  host: https:&#x2F;&#x2F;myregistryaddress.org:5000</span><br><span class="line">  secret: asecretforlocaldevelopment</span><br><span class="line">  relativeurls: false</span><br><span class="line">  draintimeout: 60s</span><br><span class="line">  tls:</span><br><span class="line">    certificate: &#x2F;path&#x2F;to&#x2F;x509&#x2F;public</span><br><span class="line">    key: &#x2F;path&#x2F;to&#x2F;x509&#x2F;private</span><br><span class="line">    clientcas:</span><br><span class="line">      - &#x2F;path&#x2F;to&#x2F;ca.pem</span><br><span class="line">      - &#x2F;path&#x2F;to&#x2F;another&#x2F;ca.pem</span><br><span class="line">    letsencrypt:</span><br><span class="line">      cachefile: &#x2F;path&#x2F;to&#x2F;cache-file</span><br><span class="line">      email: emailused@letsencrypt.com</span><br><span class="line">      hosts: [myregistryaddress.org]</span><br><span class="line">  debug:</span><br><span class="line">    addr: localhost:5001</span><br><span class="line">    prometheus:</span><br><span class="line">      enabled: true</span><br><span class="line">      path: &#x2F;metrics</span><br><span class="line">  headers:</span><br><span class="line">    X-Content-Type-Options: [nosniff]</span><br><span class="line">  http2:</span><br><span class="line">    disabled: false</span><br><span class="line">notifications:</span><br><span class="line">  events:</span><br><span class="line">    includereferences: true</span><br><span class="line">  endpoints:</span><br><span class="line">    - name: alistener</span><br><span class="line">      disabled: false</span><br><span class="line">      url: https:&#x2F;&#x2F;my.listener.com&#x2F;event</span><br><span class="line">      headers: &lt;http.Header&gt;</span><br><span class="line">      timeout: 1s</span><br><span class="line">      threshold: 10</span><br><span class="line">      backoff: 1s</span><br><span class="line">      ignoredmediatypes:</span><br><span class="line">        - application&#x2F;octet-stream</span><br><span class="line">      ignore:</span><br><span class="line">        mediatypes:</span><br><span class="line">           - application&#x2F;octet-stream</span><br><span class="line">        actions:</span><br><span class="line">           - pull</span><br><span class="line">redis:</span><br><span class="line">  addr: localhost:6379</span><br><span class="line">  password: asecret</span><br><span class="line">  db: 0</span><br><span class="line">  dialtimeout: 10ms</span><br><span class="line">  readtimeout: 10ms</span><br><span class="line">  writetimeout: 10ms</span><br><span class="line">  pool:</span><br><span class="line">    maxidle: 16</span><br><span class="line">    maxactive: 64</span><br><span class="line">    idletimeout: 300s</span><br><span class="line">health:</span><br><span class="line">  storagedriver:</span><br><span class="line">    enabled: true</span><br><span class="line">    interval: 10s</span><br><span class="line">    threshold: 3</span><br><span class="line">  file:</span><br><span class="line">    - file: &#x2F;path&#x2F;to&#x2F;checked&#x2F;file</span><br><span class="line">      interval: 10s</span><br><span class="line">  http:</span><br><span class="line">    - uri: http:&#x2F;&#x2F;server.to.check&#x2F;must&#x2F;return&#x2F;200</span><br><span class="line">      headers:</span><br><span class="line">        Authorization: [Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;]</span><br><span class="line">      statuscode: 200</span><br><span class="line">      timeout: 3s</span><br><span class="line">      interval: 10s</span><br><span class="line">      threshold: 3</span><br><span class="line">  tcp:</span><br><span class="line">    - addr: redis-server.domain.com:6379</span><br><span class="line">      timeout: 3s</span><br><span class="line">      interval: 10s</span><br><span class="line">      threshold: 3</span><br><span class="line">proxy:</span><br><span class="line">  remoteurl: https:&#x2F;&#x2F;registry-1.docker.io</span><br><span class="line">  username: [username]</span><br><span class="line">  password: [password]</span><br><span class="line">compatibility:</span><br><span class="line">  schema1:</span><br><span class="line">    signingkeyfile: &#x2F;etc&#x2F;registry&#x2F;key.json</span><br><span class="line">    enabled: true</span><br><span class="line">validation:</span><br><span class="line">  manifests:</span><br><span class="line">    urls:</span><br><span class="line">      allow:</span><br><span class="line">        - ^https?:&#x2F;&#x2F;([^&#x2F;]+\.)*example\.com&#x2F;</span><br><span class="line">      deny:</span><br><span class="line">        - ^https?:&#x2F;&#x2F;www\.example\.com&#x2F;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;docker registry 配置注册表: &lt;a href=&quot;https://docs.docker.com/registry/con
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker registry" scheme="http://yoursite.com/categories/depth/docker/docker-registry/"/>
+    
+    
+      <category term="docker-registry" scheme="http://yoursite.com/tags/docker-registry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker redis中版本号查看</title>
+    <link href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/"/>
+    <id>http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis版本查看/</id>
+    <published>2022-09-27T16:00:00.000Z</published>
+    <updated>2022-09-28T03:54:14.731Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="执行命令如下"><a href="#执行命令如下" class="headerlink" title="执行命令如下"></a>执行命令如下</h1><p>docker exec -it myredis redis-server -v</p><blockquote><p>myredis为容器名称</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;执行命令如下&quot;&gt;&lt;a href=&quot;#执行命令如下&quot; class=&quot;headerlink&quot; title=&quot;执行命令如下&quot;&gt;&lt;/a&gt;执行命令如下&lt;/h1&gt;&lt;p&gt;dock
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker redis" scheme="http://yoursite.com/categories/depth/docker/docker-redis/"/>
+    
+    
+      <category term="docker-redis" scheme="http://yoursite.com/tags/docker-redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用docker启动redis容器失败的原因</title>
+    <link href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/"/>
+    <id>http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-使用docker启动redis容器失败的原因/</id>
+    <published>2022-09-27T16:00:00.000Z</published>
+    <updated>2022-09-28T06:11:51.963Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>使用docker启动redis容器失败的原因：<a href="https://blog.csdn.net/m0_67402774/article/details/126553643" target="_blank" rel="noopener">https://blog.csdn.net/m0_67402774/article/details/126553643</a></strong></li></ul><hr><h1 id="使用docker启动redis容器失败的原因"><a href="#使用docker启动redis容器失败的原因" class="headerlink" title="使用docker启动redis容器失败的原因"></a>使用docker启动redis容器失败的原因</h1><h2 id="启动执行命令"><a href="#启动执行命令" class="headerlink" title="启动执行命令"></a>启动执行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v &#x2F;root&#x2F;guli&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf -d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>发现一启动，就停止。<br>后来，去网上查了以后发现，是因为redis.conf文件中的daemonize为yes，意思是redis服务在后台运行，与docker中的-d参数冲突了。<br>只要把daemonize的参数值改为no就可以了，再次执行以上命令，容器启动成功。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用docker启动redis容器失败的原因：&lt;a href=&quot;https://blog.csdn.net/m0_67402774/ar
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker redis" scheme="http://yoursite.com/categories/depth/docker/docker-redis/"/>
+    
+    
+      <category term="docker-redis" scheme="http://yoursite.com/tags/docker-redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决创建redis容器没有conf配置文件</title>
+    <link href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E8%A7%A3%E5%86%B3%E5%88%9B%E5%BB%BAredis%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-解决创建redis容器没有conf配置文件/</id>
+    <published>2022-09-27T16:00:00.000Z</published>
+    <updated>2022-09-28T04:01:19.685Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>解决创建redis容器没有conf配置文件: <a href="https://longsheng.org/post/18174.html" target="_blank" rel="noopener">https://longsheng.org/post/18174.html</a></strong></li></ul><hr><h1 id="解决创建redis容器没有conf配置文件"><a href="#解决创建redis容器没有conf配置文件" class="headerlink" title="解决创建redis容器没有conf配置文件"></a>解决创建redis容器没有conf配置文件</h1><ol><li>如果通过以下命令创建redis容器，docker redis中会出现 redis.conf 文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always -v  &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;data:&#x2F;data   --name myredis redis:latest redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure></li><li>解决</li></ol><ul><li>首先应该在宿主机路径下创建 redis.conf 文件</li><li>然后再通过命令创建容器</li><li>否则容器会将 redis.conf 以文件夹的形式关联创建</li></ul><h1 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h1><ul><li>-v /usr/local/redis/redis.conf:/etc/redis.conf：映射配置文件</li><li>-v /root/usr/local/redis/data:/data：映射数据目录</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;解决创建redis容器没有conf配置文件: &lt;a href=&quot;https://longsheng.org/post/18174.htm
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker redis" scheme="http://yoursite.com/categories/depth/docker/docker-redis/"/>
+    
+    
+      <category term="docker-redis" scheme="http://yoursite.com/tags/docker-redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker redis容器创建方式</title>
+    <link href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis容器创建方式/</id>
+    <published>2022-09-27T16:00:00.000Z</published>
+    <updated>2022-09-28T04:03:44.918Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-redis容器创建方式"><a href="#docker-redis容器创建方式" class="headerlink" title="docker redis容器创建方式"></a>docker redis容器创建方式</h1><ol><li>通过命令创建<br>docker run -d –name redis -p 6379:6379 redis:latest redis-server –appendonly yes –requirepass “你的密码”</li><li>通过数据卷挂载创建<br>docker run -d -p 6379:6379 –restart=always -v  /Users/diabolo/work/workspace/wk-docker/docker-redis/6379/redis.conf:/etc/redis/redis.conf  -v /Users/diabolo/work/workspace/wk-docker/docker-redis/6379/data:/data   –name myredis redis:latest redis-server /etc/redis/redis.conf</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;docker-redis容器创建方式&quot;&gt;&lt;a href=&quot;#docker-redis容器创建方式&quot; class=&quot;headerlink&quot; title=&quot;docker
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="docker redis" scheme="http://yoursite.com/categories/depth/docker/docker-redis/"/>
+    
+    
+      <category term="docker-redis" scheme="http://yoursite.com/tags/docker-redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker run其他参数</title>
+    <link href="http://yoursite.com/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/"/>
+    <id>http://yoursite.com/2022/09/28/depth-docker-notes-20220928-docker-run其他参数/</id>
+    <published>2022-09-27T16:00:00.000Z</published>
+    <updated>2022-09-28T03:36:54.806Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-run其他参数"><a href="#docker-run其他参数" class="headerlink" title="docker run其他参数"></a>docker run其他参数</h1><h2 id="–privileged-true"><a href="#–privileged-true" class="headerlink" title="–privileged=true"></a>–privileged=true</h2><p>–privileged=true表示让启动的容器用户具备真正root权限</p><h2 id="–restart-always参数能够使我们在重启docker时，自动启动相关容器。"><a href="#–restart-always参数能够使我们在重启docker时，自动启动相关容器。" class="headerlink" title="–restart=always参数能够使我们在重启docker时，自动启动相关容器。"></a>–restart=always参数能够使我们在重启docker时，自动启动相关容器。</h2><p>Docker容器的重启策略如下：</p><ul><li>no，默认策略，在容器退出时不重启容器</li><li>on-failure，在容器非正常退出时（退出状态非0），才会重启容器</li><li>on-failure:3，在容器非正常退出时重启容器，最多重启3次</li><li>always，在容器退出时总是重启容器</li><li>unless-stopped，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器<blockquote><p>如果创建的时候没有创建这个参数，则可以通过此命令添加： docker container update –restart=always 容器名字<br>还可以通过修改容器的配置文件来修尽管这个参数，首先停止容器，不然无法修改配置文件<br>配置默认文件路径为：/var/lib/docker/containers/容器ID<br>在该目录下找到一个文件 hostconfig.json ，找到该文件中关键字 RestartPolicy<br>修改前配置：“RestartPolicy”:{“Name”:“no”,“MaximumRetryCount”:0}<br>修改后配置：“RestartPolicy”:{“Name”:“always”,“MaximumRetryCount”:0}<br>最后启动容器。</p></blockquote></li></ul><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker run -p 6001:6001 -d -it --name myhexo1 -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;:&#x2F;usr&#x2F;blog&#x2F;diabolo-hub&#x2F; myhexo:1.0</span><br><span class="line"></span><br><span class="line">docker run -d --name redis -p 6379:6379 redis:latest redis-server --appendonly yes --requirepass &quot;你的密码&quot;</span><br><span class="line"></span><br><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always --privileged&#x3D;true  -v  &#x2F;var&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;var&#x2F;redis&#x2F;data:&#x2F;data   --name myredis redis:6.0.8 redis-server  &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;docker-run其他参数&quot;&gt;&lt;a href=&quot;#docker-run其他参数&quot; class=&quot;headerlink&quot; title=&quot;docker run其他参数
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>depth-docker-compose-疑问-20220927-疑问点</title>
+    <link href="http://yoursite.com/2022/09/27/depth-docker-compose-%E7%96%91%E9%97%AE-20220927-%E7%96%91%E9%97%AE%E7%82%B9/"/>
+    <id>http://yoursite.com/2022/09/27/depth-docker-compose-疑问-20220927-疑问点/</id>
+    <published>2022-09-27T06:52:11.883Z</published>
+    <updated>2022-09-27T06:53:20.837Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>一是，docker-compose和docker-engine可以分开装在不同的节点上么，就像docker-cli和docker-engine，若可以是不是需要一些配置；</p><p>二是，docker-compose.yml里面的service可不可以按照先后顺序启动，不如第一个service启动完成后，第二个service才启动</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;一是，docker-compose和docker-engine可以分开装在不同的节点上么，就像docker-cli和docker-engine，若可以是不是需要一些配置；&lt;/
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>compose.yml案例2</title>
+    <link href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/"/>
+    <id>http://yoursite.com/2022/09/27/depth-docker-compose-案例-20220927-compose-yml案例2/</id>
+    <published>2022-09-26T16:00:00.000Z</published>
+    <updated>2022-09-27T07:48:00.412Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用的yml版本</span><br><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  # 服务名称，可以自定义</span><br><span class="line">  myapp:</span><br><span class="line">    # 容器名称，可以自定义</span><br><span class="line">    container_name: myapp</span><br><span class="line">    # 指定Dockerfile所在的目录</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br></pre></td></tr></table></figure><h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p>然后执行docker-compose up即可，主要完成以下的两步操作：</p><ul><li>镜像构建docker build；</li><li>启动yml中的所有容器docker run；<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose up</span><br><span class="line"># 创建了默认类型的自定义网络，即bridge类型网络，而非使用默认的docker0桥接网络，拥有自己的独立网段，可以通过docker network ls及docker network inspect查看具体的网络信息</span><br><span class="line">Creating network &quot;myapp_default&quot; with the default driver</span><br><span class="line">Building myapp</span><br><span class="line">[+] Building 0.5s (7&#x2F;7) FINISHED</span><br><span class="line"> &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 153B                                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load .dockerignore                                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                      0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;openjdk:8                                                                         0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load build context                                                                                                    0.2s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 17.62MB                                                                                                 0.1s</span><br><span class="line"> &#x3D;&gt; CACHED [1&#x2F;2] FROM docker.io&#x2F;library&#x2F;openjdk:8                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; [2&#x2F;2] ADD  target&#x2F;myapp-0.0.1-SNAPSHOT.jar &#x2F;demo.jar                                                                             0.1s</span><br><span class="line"> &#x3D;&gt; exporting to image                                                                                                               0.1s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                              0.1s</span><br><span class="line"> # 将镜像写入本地的镜像仓库，并以项目名称_服务名称命名镜像</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; writing image sha256:c387978706931f09fa16a737704f2c1047e8f632de192a25b0dc42dc151ac4c7                                         0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;myapp_myapp                                                                                       0.0s</span><br><span class="line"></span><br><span class="line">Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them</span><br><span class="line">WARNING: Image for service myapp was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.</span><br><span class="line">Creating myapp ... done</span><br><span class="line">Attaching to myapp</span><br><span class="line">myapp    |</span><br><span class="line">myapp    |   .   ____          _            __ _ _</span><br><span class="line">myapp    |  &#x2F;\\ &#x2F; ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">myapp    | ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \&#x2F; _&#96; | \ \ \ \</span><br><span class="line">myapp    |  \\&#x2F;  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">myapp    |   &#39;  |____| .__|_| |_|_| |_\__, | &#x2F; &#x2F; &#x2F; &#x2F;</span><br><span class="line">myapp    |  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|_|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|___&#x2F;&#x3D;&#x2F;_&#x2F;_&#x2F;_&#x2F;</span><br><span class="line">myapp    |  :: Spring Boot ::                (v2.6.0)</span><br><span class="line">......</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;案例&quot;&gt;&lt;a href=&quot;#案例&quot; class=&quot;headerlink&quot; title=&quot;案例&quot;&gt;&lt;/a&gt;案例&lt;/h1&gt;&lt;figure class=&quot;highligh
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker-compose" scheme="http://yoursite.com/categories/depth/docker-compose/"/>
+    
+      <category term="yml案例" scheme="http://yoursite.com/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="docker-compose" scheme="http://yoursite.com/tags/docker-compose/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker-compose命令</title>
+    <link href="http://yoursite.com/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2022/09/27/depth-docker-compose-notes-20220927-docker-compose命令/</id>
+    <published>2022-09-26T16:00:00.000Z</published>
+    <updated>2022-09-27T07:54:10.776Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>Docker Compose介绍及使用入门: <a href="https://www.jianshu.com/p/ee2fea4136f0" target="_blank" rel="noopener">https://www.jianshu.com/p/ee2fea4136f0</a></strong></li><li><strong>docker-compose简介及使用: <a href="https://www.cnblogs.com/xiaoyuxixi/p/12738325.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoyuxixi/p/12738325.html</a></strong></li></ul><hr><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul><li>docker-compose up，构建镜像并启动容器；</li><li>docker-compose down，停止容器，删除容器，移除自定义网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose down</span><br><span class="line">Stopping myapp ... done</span><br><span class="line">Removing myapp ... done</span><br><span class="line">Removing network myapp_default</span><br></pre></td></tr></table></figure></li><li>docker-compose ls，查看所有运行的容器</li><li>docker-compose logs -f container_name，查看具体容器的日志，-f参数表示实时日志输出；</li><li>docker-compose port container_name container_port，查看和容器端口绑定的主机端口；</li><li>docker-compose stop container_name，停止指定的容器，如果不指定则停止所有的容器；</li><li>docker-compose start container_name，启动指定的容器，如果不指定则停止所有的容器；</li><li>docker-compose rm container_name，删除指定的已停止容器，如果不指定则删除所有已停止容器；</li><li>docker-compose build，构建或者重新构建服务的镜像，但不会创建和启动容器</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Docker Compose介绍及使用入门: &lt;a href=&quot;https://www.jianshu.com/p/ee2fea4136
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker-compose" scheme="http://yoursite.com/categories/depth/docker-compose/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/depth/docker-compose/notes/"/>
+    
+    
+      <category term="docker-compose" scheme="http://yoursite.com/tags/docker-compose/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker-compose.yml案例</title>
+    <link href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-docker-compose%E6%A1%88%E4%BE%8B1/"/>
+    <id>http://yoursite.com/2022/09/27/depth-docker-compose-案例-20220927-docker-compose案例1/</id>
+    <published>2022-09-26T16:00:00.000Z</published>
+    <updated>2022-09-27T06:53:20.844Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-compose-源码实例"><a href="#docker-compose-源码实例" class="headerlink" title="docker-compose 源码实例"></a>docker-compose 源码实例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#docker-Compse的版本</span><br><span class="line">version: &#39;3&#39;</span><br><span class="line"></span><br><span class="line">#建立2个service 一个wordpress 一个 mysql</span><br><span class="line">services:</span><br><span class="line">  wordpress:</span><br><span class="line">    image: wordpress</span><br><span class="line">    #端口映射80 映射到8080端口</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">    #环境变量2个</span><br><span class="line">    environment:</span><br><span class="line">      WORDPRESS_DB_HOST: mysql</span><br><span class="line">      WORDPRESS_DB_PASSWORD: root</span><br><span class="line">    networks:</span><br><span class="line">      - my-bridge</span><br><span class="line"></span><br><span class="line">  mysql:</span><br><span class="line">    image: mysql</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: root</span><br><span class="line">      MYSQL_DATABASE: wordpress</span><br><span class="line">    volumes:</span><br><span class="line">      - mysql-data:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">    networks:</span><br><span class="line">      - my-bridge</span><br><span class="line">#建立一个volumes</span><br><span class="line">volumes:</span><br><span class="line">  mysql-data:</span><br><span class="line">#建立一个networks</span><br><span class="line">networks:</span><br><span class="line">  my-bridge:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;docker-compose-源码实例&quot;&gt;&lt;a href=&quot;#docker-compose-源码实例&quot; class=&quot;headerlink&quot; title=&quot;dock
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker-compose" scheme="http://yoursite.com/categories/depth/docker-compose/"/>
+    
+      <category term="yml案例" scheme="http://yoursite.com/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/"/>
+    
+    
+      <category term="docker-compose" scheme="http://yoursite.com/tags/docker-compose/"/>
     
   </entry>
   
@@ -82,6 +436,31 @@
       
       
         &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;由于-db-json-属于-root，一直执行失败，提示没权限&quot;&gt;&lt;a href=&quot;#由于-db-json-属于-root，一直执行失败，提示没权限&quot; class=
+      
+    
+    </summary>
+    
+      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
+    
+    
+      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mac用户查看</title>
+    <link href="http://yoursite.com/2022/09/26/mac-20220926-mac%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B/"/>
+    <id>http://yoursite.com/2022/09/26/mac-20220926-mac用户查看/</id>
+    <published>2022-09-25T16:00:00.000Z</published>
+    <updated>2022-09-26T06:34:24.314Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="当前用户的用户名"><a href="#当前用户的用户名" class="headerlink" title="当前用户的用户名"></a>当前用户的用户名</h1><p>whoami</p><h1 id="切换到root超级用户-—-需要输入密码"><a href="#切换到root超级用户-—-需要输入密码" class="headerlink" title="切换到root超级用户 —- 需要输入密码"></a>切换到root超级用户 —- 需要输入密码</h1><p>sudo -i</p><h1 id="su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格"><a href="#su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格" class="headerlink" title="su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格"></a>su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格</h1><p>su - diabolo，切换到 diabolo</p><h1 id="查看当前目录下所有文件的读写属性"><a href="#查看当前目录下所有文件的读写属性" class="headerlink" title="查看当前目录下所有文件的读写属性"></a>查看当前目录下所有文件的读写属性</h1><p>ls -l</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;当前用户的用户名&quot;&gt;&lt;a href=&quot;#当前用户的用户名&quot; class=&quot;headerlink&quot; title=&quot;当前用户的用户名&quot;&gt;&lt;/a&gt;当前用户的用户名&lt;/h1
       
     
     </summary>
@@ -152,6 +531,35 @@
   </entry>
   
   <entry>
+    <title>Dockerfiler如何使用多个CMD命令</title>
+    <link href="http://yoursite.com/2022/09/26/depth-docker-notes-20220927-Dockerfiler%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AACMD%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2022/09/26/depth-docker-notes-20220927-Dockerfiler如何使用多个CMD命令/</id>
+    <published>2022-09-25T16:00:00.000Z</published>
+    <updated>2022-09-27T03:15:57.643Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="Dockerfiler如何使用多个CMD命令"><a href="#Dockerfiler如何使用多个CMD命令" class="headerlink" title="Dockerfiler如何使用多个CMD命令"></a>Dockerfiler如何使用多个CMD命令</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>一个是CMD不用中括号框起来，将命令用”&amp;&amp;”符号链接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 用nohup框起来，不然npm start执行了之后不会执行后面的</span><br><span class="line">CMD nohup sh -c &#39;npm start &amp;&amp; node .&#x2F;server&#x2F;server.js&#39;</span><br></pre></td></tr></table></figure></p><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>不用CMD，用ENTRYPOINT命令，指定一个执行的shell脚本，然后在entrypoint.sh文件中写上要执行的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;.&#x2F;entrypoint.sh&quot;]</span><br></pre></td></tr></table></figure><br>entrypoint.sh文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; entrypoint.sh</span><br><span class="line">nohup npm start &amp;</span><br><span class="line"></span><br><span class="line">nohup node .&#x2F;server&#x2F;server.js &amp;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;Dockerfiler如何使用多个CMD命令&quot;&gt;&lt;a href=&quot;#Dockerfiler如何使用多个CMD命令&quot; class=&quot;headerlink&quot; title
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>容器运行后退出，仍然保持一直运行</title>
     <link href="http://yoursite.com/2022/09/26/depth-docker-notes-20220926-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E5%90%8E%E9%80%80%E5%87%BA%EF%BC%8C%E4%BB%8D%E7%84%B6%E4%BF%9D%E6%8C%81%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C/"/>
     <id>http://yoursite.com/2022/09/26/depth-docker-notes-20220926-容器运行后退出，仍然保持一直运行/</id>
@@ -177,385 +585,6 @@
     
     
       <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker copy</title>
-    <link href="http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-copy/"/>
-    <id>http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-copy/</id>
-    <published>2022-09-22T16:00:00.000Z</published>
-    <updated>2022-09-26T03:29:10.902Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><pre><code>COPY 指令详解: https://blog.csdn.net/qq_33801641/article/details/121122340</code></pre><hr><h1 id="docker-copy"><a href="#docker-copy" class="headerlink" title="docker copy"></a>docker copy</h1><ul><li>作用：复制内容到镜像</li><li>格式： COPY <src> <dest></li><li>详解：复制本地主机的 <src>下内容到镜像中的 <dest>，目标路径不存在时，会自动创建。</li><li><src>：可以是 Dockerfile 所在目录的一个相对路径(文件或目录)</li><li><dest>：可以是镜像内绝对路径，或者相对于工作目录(WORKDIR)的相对路径</li><li>路径：支持正则表达式， COPY test* /tmp</li></ul><h1 id="两种格式"><a href="#两种格式" class="headerlink" title="两种格式"></a>两种格式</h1><p>COPY [–chown=<user>:<group>] <src>… <dest><br>COPY [–chown=<user>:<group>] [“<src>“,… “<dest>“]<br>–chown<br>仅适用于 linux 上的 dockerfile，在 window 上没有用户、组的概念</p><h1 id="COPY-作用"><a href="#COPY-作用" class="headerlink" title="COPY 作用"></a>COPY 作用</h1><p>COPY 指令从 <src> 复制新文件、目录或远程文件 URL，并将它们添加到路径 <dest><br>可以指定多个 <src> 资源，但如果它们是文件或目录，则它们的路径被解析为相对于构建上下文的源<br>每个 <src> 可能包含通配符，匹配将使用 Go 的 filepath.Match 规则完成</p><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol><li><ul><li>通配符<br>把所有 hom 开头的文件复制到镜像文件系统的 /mydir/ 目录下</li></ul></li></ol><p>COPY hom* /mydir/</p><ol><li>? 通配符<br>? 匹配 0 或 1 个字符，比如会把 home.txt 文件复制到 /mydir/ 目录下</li></ol><p>COPY hom?.txt /mydir/</p><ol><li>工作目录<br><dest> 是绝对路径，或相对于 WORKDIR 的路径，源将在目标容器内复制到该路径中</li></ol><p>使用相对路径的栗子<br>COPY test.txt relativeDir/</p><p>等价于</p><p>COPY test.txt <WORKDIR>/relativeDir/</p><h1 id="标志-–from"><a href="#标志-–from" class="headerlink" title="标志 –from="></a>标志 –from=<name></h1><p>将从 from 指定的构建阶段中寻找源文件 <src><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 第一构建阶段:将仅用于生成 requirements.txt 文件</span><br><span class="line">FROM tiangolo&#x2F;uvicorn-gunicorn:python3.9 as requirements-stage</span><br><span class="line"></span><br><span class="line"># 将当前工作目录设置为 &#x2F;tmp</span><br><span class="line">WORKDIR &#x2F;tmp</span><br><span class="line"></span><br><span class="line"># 生成 requirements.txt</span><br><span class="line">RUN touch requirements.txt</span><br><span class="line"></span><br><span class="line"># 第二构建阶段，在这往后的任何内容都将保留在最终容器映像中</span><br><span class="line">FROM python:3.9</span><br><span class="line"></span><br><span class="line"># 将当前工作目录设置为 &#x2F;code</span><br><span class="line">WORKDIR &#x2F;code</span><br><span class="line"></span><br><span class="line"># 从第一个阶段复制 requirements.txt;这个文件只存在于前一个 Docker 阶段，这就是使用 --from-requirements-stage 复制它的原因</span><br><span class="line">COPY --from&#x3D;requirements-stage &#x2F;tmp&#x2F;requirements.txt &#x2F;code&#x2F;requirements.txt</span><br><span class="line"></span><br><span class="line"># 运行命令</span><br><span class="line">RUN pip install --no-cache-dir --upgrade -r &#x2F;code&#x2F;requirements.txt</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;COPY 指令详解: https://blog.csdn.net/qq_33801641/article/details/121122340
-&lt;/c
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker volume</title>
-    <link href="http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-volume/"/>
-    <id>http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-volume/</id>
-    <published>2022-09-22T16:00:00.000Z</published>
-    <updated>2022-09-26T03:29:10.976Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h1><ol><li><p>创建数据卷<br>docker volume create [OPTIONS] [VOLUME]<br>例: docker volume create hello</p><blockquote><p>mac电脑默认挂在路径： /var/lib/docker/volumes</p></blockquote></li><li><p>查看数据卷的挂载信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2# docker volume inspect myhexo-vol</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;CreatedAt&quot;: &quot;2022-09-23T03:00:47Z&quot;,</span><br><span class="line">        &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">        &quot;Labels&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Mountpoint&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes&#x2F;myhexo-vol&#x2F;_data&quot;,</span><br><span class="line">        &quot;Name&quot;: &quot;myhexo-vol&quot;,</span><br><span class="line">        &quot;Options&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Scope&quot;: &quot;local&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h1 id="查看全部数据卷"><a href="#查看全部数据卷" class="headerlink" title="查看全部数据卷"></a>查看全部数据卷</h1><p>docker volume ls</p></li></ol><h1 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h1><p>docker volume rm 数据卷名称/id</p><h1 id="删除所有无用数据卷"><a href="#删除所有无用数据卷" class="headerlink" title="删除所有无用数据卷"></a>删除所有无用数据卷</h1><p>docker volume prune</p><h1 id="设置容器数据路径只读"><a href="#设置容器数据路径只读" class="headerlink" title="设置容器数据路径只读"></a>设置容器数据路径只读</h1><p>在容器路径后面追加 :ro<br>docker run -v 宿主路径:容器路径:ro</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;volume&quot;&gt;&lt;a href=&quot;#volume&quot; class=&quot;headerlink&quot; title=&quot;volume&quot;&gt;&lt;/a&gt;volume&lt;/h1&gt;&lt;ol&gt;
-&lt;l
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CMD与ENTRYPOINT区别</title>
-    <link href="http://yoursite.com/2022/09/23/depth-docker-notes-20220923-CMD%E4%B8%8EENTRYPOINT%E5%8C%BA%E5%88%AB/"/>
-    <id>http://yoursite.com/2022/09/23/depth-docker-notes-20220923-CMD与ENTRYPOINT区别/</id>
-    <published>2022-09-22T16:00:00.000Z</published>
-    <updated>2022-09-26T03:10:57.836Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>entrypoint和cmd的区别是:  <a href="https://www.php.cn/docker/456654.html" target="_blank" rel="noopener">https://www.php.cn/docker/456654.html</a></strong></li><li><strong>Dockerfile 里指定执行命令用RUN 、ENTRYPOING和用CMD有何不同？: <a href="https://blog.csdn.net/agonie201218/article/details/121976911" target="_blank" rel="noopener">https://blog.csdn.net/agonie201218/article/details/121976911</a></strong></li></ul><hr><h1 id="CMD与ENTRYPOINT区别"><a href="#CMD与ENTRYPOINT区别" class="headerlink" title="CMD与ENTRYPOINT区别"></a>CMD与ENTRYPOINT区别</h1><ol><li>CMD用法：</li></ol><ul><li>CMD [“executable”,“param1”,“param2”] ：exec形式（首选）</li><li>CMD [“param1”,“param2”] ：作为ENTRYPOINT的默认参数</li><li>CMD command param1 param2 ：Shell形式</li></ul><ol><li>ENTRYPOINT用法：</li></ol><ul><li>ENTRYPOINT [“executable”, “param1”, “param2”]</li><li>ENTRYPOINT command param1 param2</li><li>多个CMD命令只有最后一个生效，前面的会被覆盖</li></ul><ol><li>小结<br>CMD和ENTRYPOINT指令都可以用来定义运行容器时所使用的默认命令<br>Dockerfile至少指定一个CMD或ENTRYPOINT<br>CMD可以用作ENTRYPOINT默认参数，或者用作容器的默认命令<br>docker run指定时，将会覆盖CMD<br>如果是可执行文件，希望运行时传参，应该使用ENTRYPOINT</li></ol><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol><li>Dockerfile中只能指定一个ENTRYPOINT，如果指定了很多，只有最后一个有效。</li><li>执行docker run命令时，也可以添加–entrypoint参数，会把指定的参数继续传递给ENTRYPOINT<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;echo&quot;,&quot;foo&quot;]</span><br><span class="line">然后执行：</span><br><span class="line">docker run --entrypoint&#x3D;echo CONTAINER_NAME bar #注意没有echo</span><br><span class="line">那么，就相当于执行了echo bar，最终结果就是</span><br></pre></td></tr></table></figure></li><li>docker run命令如果指定了参数会把CMD里的参数覆盖：<br>（这里说明一下，如：docker run -it ubuntu /bin/bash 命令的参数是指/bin/bash 而非 -it ,-it只是docker 的参数，而不是容器的参数，以下所说参数均如此。）</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;entrypoint和cmd的区别是:  &lt;a href=&quot;https://www.php.cn/docker/456654.html&quot;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker信息命令</title>
-    <link href="http://yoursite.com/2022/09/23/depth-docker-notes-20220923-docker%E4%BF%A1%E6%81%AF%E5%91%BD%E4%BB%A4/"/>
-    <id>http://yoursite.com/2022/09/23/depth-docker-notes-20220923-docker信息命令/</id>
-    <published>2022-09-22T16:00:00.000Z</published>
-    <updated>2022-09-26T03:10:57.811Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="查看docker系统信息"><a href="#查看docker系统信息" class="headerlink" title="查看docker系统信息"></a>查看docker系统信息</h1><p>docker system df</p><h1 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h1><p>docker info</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;查看docker系统信息&quot;&gt;&lt;a href=&quot;#查看docker系统信息&quot; class=&quot;headerlink&quot; title=&quot;查看docker系统信息&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-excp-20220920-docker容器启动后立即退出</title>
-    <link href="http://yoursite.com/2022/09/20/depth-docker-excp-20220920-docker%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%90%8E%E7%AB%8B%E5%8D%B3%E9%80%80%E5%87%BA/"/>
-    <id>http://yoursite.com/2022/09/20/depth-docker-excp-20220920-docker容器启动后立即退出/</id>
-    <published>2022-09-20T02:04:37.247Z</published>
-    <updated>2022-09-20T06:36:37.685Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/m0_67393342/article/details/124171304" target="_blank" rel="noopener">docker启动容器之后马上又自动关闭解决办法</a></p><h1 id="docker容器启动后立即退出"><a href="#docker容器启动后立即退出" class="headerlink" title="docker容器启动后立即退出"></a>docker容器启动后立即退出</h1><h2 id="退出原因"><a href="#退出原因" class="headerlink" title="退出原因"></a>退出原因</h2><ol><li>docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出</li><li>容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出</li><li>这个是 docker 的机制问题</li></ol><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>网上有很多介绍，就是起一个死循环进程，让他不停的循环下去，前台永远有进程执行，那么容器就不会退出了,以centos为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d centos &#x2F;bin&#x2F;sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</span><br></pre></td></tr></table></figure></p><blockquote><p>缺点： 命令太冗长了，还占用一个终端</p><h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit centos &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure><p>添加-it 参数交互运行<br>添加-d 参数后台运行<br>这样就能启动一个一直停留在后台运行的Centos了。<br>docker ps 容器运行起来了<br>进入容器的方法：<br>使用exec，不要使用attach命令<br>attach命令就是使用现有终端，如果你要退出容器操作，那么bash结束，容器也就退出了<br>shell&gt;docker exec -it /bin/bash //新建一个bash</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/m0_67393342/article/details/124171304&quot; target=&quot;_blank&quot; r
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>hexo后台运行</title>
-    <link href="http://yoursite.com/2022/09/20/hexo-%E6%8F%92%E4%BB%B6-20220920-hexo%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/"/>
-    <id>http://yoursite.com/2022/09/20/hexo-插件-20220920-hexo后台运行/</id>
-    <published>2022-09-19T16:00:00.000Z</published>
-    <updated>2022-09-20T07:32:13.120Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>hexo 长期后台运行：<a href="http://t.zoukankan.com/young233-p-14628456.html" target="_blank" rel="noopener">http://t.zoukankan.com/young233-p-14628456.html</a></strong></li><li><strong>pm2官网文档：<a href="https://pm2.keymetrics.io/" target="_blank" rel="noopener">https://pm2.keymetrics.io/</a></strong></li></ul><hr><h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><ol><li>首先，我们需要安装它。<br>npm install -g pm2</li><li>进到博客的根目录，新建一个文件：hexo_run.js<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//run</span></span><br><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</span><br><span class="line"><span class="comment">/* 其实就是等于执行hexo server -p 6001，如果不指定端口，则默认端口: 4000 */</span></span><br><span class="line">exec(<span class="string">'hexo server -p 6001'</span>,(error, stdout, stderr) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(error)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'exec error: $&#123;error&#125;'</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'stdout: $&#123;stdout&#125;'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'stderr: $&#123;stderr&#125;'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li><li>在博客根目录启动这个进程<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hexo_run.js</span><br></pre></td></tr></table></figure></li></ol><h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 启动js</span><br><span class="line">pm2 start hexo_run.js</span><br><span class="line"># 停止js</span><br><span class="line">pm2 stop hexo_run.js</span><br><span class="line"># 运行起来后可以使用pm2 show + 进程pid查看后台hexo进行</span><br><span class="line">pm2 show pid</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;hexo 长期后台运行：&lt;a href=&quot;http://t.zoukankan.com/young233-p-14628456.html
-      
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
-    
-      <category term="plugin" scheme="http://yoursite.com/categories/hexo/plugin/"/>
-    
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker run</title>
-    <link href="http://yoursite.com/2022/09/20/depth-docker-notes-20220920-docker-run/"/>
-    <id>http://yoursite.com/2022/09/20/depth-docker-notes-20220920-docker-run/</id>
-    <published>2022-09-19T16:00:00.000Z</published>
-    <updated>2022-09-26T03:10:57.829Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><p>docker exec -it myhexo2 /bin/sh</p><h1 id="单纯启动应用"><a href="#单纯启动应用" class="headerlink" title="单纯启动应用"></a>单纯启动应用</h1><p>docker run -p 6001:6001 -d -it –name myhexo myhexo:1.0</p><h1 id="保持镜像永不退出运行"><a href="#保持镜像永不退出运行" class="headerlink" title="保持镜像永不退出运行"></a>保持镜像永不退出运行</h1><p>docker run -p 6001:6001 -d –name myhexo myhexo:1.0 /bin/sh -c “while true; do echo hello world; sleep 1; done”</p><h1 id="启动并进入容器"><a href="#启动并进入容器" class="headerlink" title="启动并进入容器"></a>启动并进入容器</h1><p>docker run -p 6001:6001 -d -it –name myhexo myhexo:1.0 /bin/bash</p><h1 id="docker-run-的时候执行-其他命令"><a href="#docker-run-的时候执行-其他命令" class="headerlink" title="docker run 的时候执行 其他命令"></a>docker run 的时候执行 其他命令</h1><p>docker run CONTAINER_NAME echo foo<br>等于运行的时候执行 echo foo</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;进入容器&quot;&gt;&lt;a href=&quot;#进入容器&quot; class=&quot;headerlink&quot; title=&quot;进入容器&quot;&gt;&lt;/a&gt;进入容器&lt;/h1&gt;&lt;p&gt;docker exec 
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-notes-20220919-docker-scan镜像扫描</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-notes-20220919-docker-scan%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-notes-20220919-docker-scan镜像扫描/</id>
-    <published>2022-09-19T06:14:00.520Z</published>
-    <updated>2022-09-19T06:15:37.046Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-scan"><a href="#docker-scan" class="headerlink" title="docker scan"></a>docker scan</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2# docker scan --json myhexo</span><br><span class="line">failed to read docker scan configuration file. Please restart Docker Desktop: open &#x2F;var&#x2F;root&#x2F;.docker&#x2F;scan&#x2F;config.json: no such file or directory</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;docker-scan&quot;&gt;&lt;a href=&quot;#docker-scan&quot; class=&quot;headerlink&quot; title=&quot;docker scan&quot;&gt;&lt;/a&gt;doc
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>depth-docker-notes-dockerfile-20220919-构建centos镜像使用</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-notes-dockerfile-20220919-%E6%9E%84%E5%BB%BAcentos%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-notes-dockerfile-20220919-构建centos镜像使用/</id>
-    <published>2022-09-19T02:22:10.661Z</published>
-    <updated>2022-09-19T02:22:45.959Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="构建centos镜像使用"><a href="#构建centos镜像使用" class="headerlink" title="构建centos镜像使用"></a>构建centos镜像使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">#指定作者</span><br><span class="line">MAINTAINER  zhangbao&lt;zhangbaohpu@163.com&gt;</span><br><span class="line"></span><br><span class="line">#ENV kv格式，这里指定工作目录，及默认进入容器的目录</span><br><span class="line">ENV MYPATH &#x2F;usr&#x2F;local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">#将原有的yum配置备份下</span><br><span class="line">RUN tar cvf &#x2F;etc&#x2F;yum.repos.d.tar &#x2F;etc&#x2F;yum.repos.d</span><br><span class="line"></span><br><span class="line">#修改yum源配置，</span><br><span class="line">RUN curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-vault-8.5.2111.repo</span><br><span class="line"></span><br><span class="line">#删除掉多于的repo文件</span><br><span class="line">RUN rm -rf &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Linux-*</span><br><span class="line"></span><br><span class="line">#使yum配置更新</span><br><span class="line">RUN yum clean all</span><br><span class="line">RUN yum makecache</span><br><span class="line"></span><br><span class="line">#下载需要的工具类</span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">CMD echo &quot;--end--&quot;</span><br><span class="line">CMD &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;构建centos镜像使用&quot;&gt;&lt;a href=&quot;#构建centos镜像使用&quot; class=&quot;headerlink&quot; title=&quot;构建centos镜像使用&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>dockerfile指令</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-config-20220919-dockerfile%E6%8C%87%E4%BB%A4/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-config-20220919-dockerfile指令/</id>
-    <published>2022-09-18T16:00:00.000Z</published>
-    <updated>2022-09-26T03:29:10.983Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="dockerfile指令"><a href="#dockerfile指令" class="headerlink" title="dockerfile指令"></a>dockerfile指令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FROM            指定基础镜像</span><br><span class="line">MAINTAINER      指定作者</span><br><span class="line">RUN             执行参数中定义的命令，构建镜像时需要的命令</span><br><span class="line">EXPOSE          向容器外部公开的端口号</span><br><span class="line">WORKDIR         设置容器内默认工作目录</span><br><span class="line">USER            指定用户</span><br><span class="line">ENTROYPOINT     指定一个容器启动时运行的命令</span><br><span class="line">ENV             设置环境变量</span><br><span class="line">ADD|COPY        复制文件到镜像中</span><br><span class="line">VOLUME          容器数据卷，向镜像创建的容器添加卷</span><br><span class="line">CMD             容器启动时要运行的命令，可以有多个，但只有最后一个生效</span><br></pre></td></tr></table></figure><h1 id="或"><a href="#或" class="headerlink" title="或"></a>或</h1><p>FROM image_name:tag 定义了使用哪个基础镜像启动构建流程<br>MAINTAINER user_name 声明了镜像的创建者<br>ENV key value 设置环境变量（可以写多条）<br>RUN command 是Dockerfile的核心部分（可以写多条）<br>ADD source_dir/file 将宿主机的文件复制到容器内，如果是一个压缩文件，将会在复制后自动解压<br>COPY source_dir/file 和ADD类似，区别在于如果是一个压缩文件，复制后不解压<br>WORKDIR path_dir 设置工作目录</p><h1 id="dockerfile的构建过程就是build的执行过程"><a href="#dockerfile的构建过程就是build的执行过程" class="headerlink" title="dockerfile的构建过程就是build的执行过程"></a>dockerfile的构建过程就是build的执行过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.把当前目录和子目录当做上下文传递给docker服务，命令最后的点表示当前上下文。</span><br><span class="line">2.从当前目录（不包括子目录）找到Dockerfile文件，如果不指定文件，必须是此文件名。</span><br><span class="line">3.检查docker语法。</span><br><span class="line">4.从基础镜像运行一个容器。</span><br><span class="line">5.执行指令，修改容器，如上面操作添加数据卷，修改首页。</span><br><span class="line">6.对修改后的容器提交一个新的镜像层，也可叫做中间层镜像。</span><br><span class="line">7.针对中间层生成的镜像，运行新的容器。</span><br><span class="line">8.重复执行修改容器、提交镜像、运行容器指令，直到所有指令执行完成。</span><br></pre></td></tr></table></figure><blockquote><p>注：每条指令都会生成新的镜像，也就是生成中间层镜像，这样执行速度其实会很慢，可以不使用缓存。在构建命令中加上–no-cache=true 即可。可根据实际场景选择是否需要缓存。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;dockerfile指令&quot;&gt;&lt;a href=&quot;#dockerfile指令&quot; class=&quot;headerlink&quot; title=&quot;dockerfile指令&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>workdir</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-config-20220919-workdir/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-config-20220919-workdir/</id>
-    <published>2022-09-18T16:00:00.000Z</published>
-    <updated>2022-09-26T03:29:10.958Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RUN cd &#x2F;app</span><br><span class="line">RUN echo &quot;hello&quot; &gt; world.txt</span><br></pre></td></tr></table></figure><ol><li>如上命令，在linux中，cd /app 会影响到后面执行的语句，表示linux中，连续两行是同一个进程执行环境，因此前一个命令修改的内容状态，会直接影响后一个命令；</li><li>在dockerfile中，这两行 run 命令的执行环境根本不同，是两个完全不同的容器，到第二行命令会启动一个全新的容器。 属于 dockerfile 构建分层存储的概念</li></ol><h1 id="workdir的作用"><a href="#workdir的作用" class="headerlink" title="workdir的作用"></a>workdir的作用</h1><ol><li>使用 cd /app 这样的命令，在dockerfile中不会影响到后续命令的执行，不会改变后续命令的执行环境</li><li>如果在dockerfile中需要改变后续命令的进程的工作目录，则需要使用 workdir /app 命令</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;figure class=&quot;highligh
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>构建新镜像</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-notes-20220919-%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-notes-20220919-镜像构建/</id>
-    <published>2022-09-18T16:00:00.000Z</published>
-    <updated>2022-09-26T03:10:57.787Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="构建新镜像"><a href="#构建新镜像" class="headerlink" title="构建新镜像"></a>构建新镜像</h1><p>如果是自定义Dockerfile文件名，则构建时必须指定文件名，否则文件名必须是：Dockerfile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f dockerfile-mycentos -t mysentos:1.0 .</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;构建新镜像&quot;&gt;&lt;a href=&quot;#构建新镜像&quot; class=&quot;headerlink&quot; title=&quot;构建新镜像&quot;&gt;&lt;/a&gt;构建新镜像&lt;/h1&gt;&lt;p&gt;如果是自定义Do
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker build的时候提示 operation not permitted</title>
-    <link href="http://yoursite.com/2022/09/19/depth-docker-excp-20220919-docker-build%E6%8F%90%E7%A4%BAoperation-not-permitted/"/>
-    <id>http://yoursite.com/2022/09/19/depth-docker-excp-20220919-docker-build提示operation-not-permitted/</id>
-    <published>2022-09-18T16:00:00.000Z</published>
-    <updated>2022-09-20T06:38:16.258Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-build的时候提示-operation-not-permitted"><a href="#docker-build的时候提示-operation-not-permitted" class="headerlink" title="docker build的时候提示 operation not permitted"></a>docker build的时候提示 operation not permitted</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker build -f Dockerfile -t myhexo:1.0 .</span><br><span class="line">[+] Building 0.0s (1&#x2F;2)</span><br><span class="line"> &#x3D;&gt; ERROR [internal] load build definition from Dockerfile                                                                               0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 40B                                                                                                      0.0s</span><br><span class="line">------</span><br><span class="line"> &gt; [internal] load build definition from Dockerfile:</span><br><span class="line">------</span><br><span class="line">failed to solve with frontend dockerfile.v0: failed to read dockerfile: error from sender: open .Trash: operation not permitted</span><br></pre></td></tr></table></figure><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><ol><li>获取root权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 先进入root权限</span><br><span class="line">sudo su</span><br><span class="line"># 输入密码</span><br><span class="line"></span><br><span class="line"># 进入dockerfile目录</span><br><span class="line">cd work&#x2F;workSpace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;</span><br><span class="line"></span><br><span class="line"># 再执行docker build</span><br><span class="line">docker build -f Dockerfile -t myhexo:1.0 .</span><br></pre></td></tr></table></figure></li><li>-f Dockerfile 全路径 （这个没试过）</li></ol><h2 id="此时再提示错误如下："><a href="#此时再提示错误如下：" class="headerlink" title="此时再提示错误如下："></a>此时再提示错误如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;docker-build的时候提示-operation-not-permitted&quot;&gt;&lt;a href=&quot;#docker-build的时候提示-operation-n
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
-    
-      <category term="excp" scheme="http://yoursite.com/categories/depth/docker/excp/"/>
-    
-    
-      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>npm-20220916-npm</title>
-    <link href="http://yoursite.com/2022/09/16/npm-20220916-npm/"/>
-    <id>http://yoursite.com/2022/09/16/npm-20220916-npm/</id>
-    <published>2022-09-16T06:32:40.437Z</published>
-    <updated>2022-09-16T06:33:07.573Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="查找npm安装根目录"><a href="#查找npm安装根目录" class="headerlink" title="查找npm安装根目录"></a>查找npm安装根目录</h1><p>npm root -g</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;查找npm安装根目录&quot;&gt;&lt;a href=&quot;#查找npm安装根目录&quot; class=&quot;headerlink&quot; title=&quot;查找npm安装根目录&quot;&gt;&lt;/a&gt;查找npm安
-      
-    
-    </summary>
-    
     
   </entry>
   

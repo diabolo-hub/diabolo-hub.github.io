@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%9F%B3%E4%B9%90%E5%A4%96%E9%93%BE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/12/hexo-%E6%8F%92%E4%BB%B6-20220312-next%E9%9B%86%E6%88%90Chatra/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,198 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%9F%B3%E4%B9%90%E5%A4%96%E9%93%BE/" itemprop="url">音乐外链</a></h1>
+                <a class="post-title-link" href="/2022/03/12/hexo-%E6%8F%92%E4%BB%B6-20220312-next%E9%9B%86%E6%88%90Chatra/" itemprop="url">next集成chatra</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-12T00:00:00+08:00">2022-03-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next集成Chatra"><a href="#next集成Chatra" class="headerlink" title="next集成Chatra"></a>next集成Chatra</h1><h2 id="首先-https-app-chatra-io-注册账号"><a href="#首先-https-app-chatra-io-注册账号" class="headerlink" title="首先 https://app.chatra.io/ 注册账号"></a>首先 <a href="https://app.chatra.io/" target="_blank" rel="noopener">https://app.chatra.io/</a> 注册账号</h2><h2 id="获取chat脚本"><a href="#获取chat脚本" class="headerlink" title="获取chat脚本"></a>获取chat脚本</h2><p>settings -&gt; Chatra widget -&gt; show setup instructions，获取脚本<br><img src="images/获取chatra脚本.png" alt=""></p>
+<h2 id="添加chatra启动按钮"><a href="#添加chatra启动按钮" class="headerlink" title="添加chatra启动按钮"></a>添加chatra启动按钮</h2><p>themes/next/layout/_macro/sidebar.swig中，将原本的RSS隐藏或替换成 chatra<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.rss %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;feed-link motion-element&quot;&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#123;&#123; url_for(theme.rss) &#125;&#125;&quot; rel&#x3D;&quot;alternate&quot;&gt;</span><br><span class="line">    &lt;i class&#x3D;&quot;fa fa-rss&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    RSS</span><br><span class="line">  &lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% if theme.chatra %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;chat motion-element&quot;&gt;</span><br><span class="line">  &lt;a onclick&#x3D;&quot;Chatra(&#39;openChat&#39;, true)&quot;&gt;</span><br><span class="line">  &lt;i class&#x3D;&quot;fa fa-comment&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">      Chat</span><br><span class="line">    &lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此处我直接使用的复写一个类似的，覆盖掉RSS，在themes/next/_config.yml中配置如下：<br>rss: false<br>chatra: true</p>
+<h2 id="设置chatra按钮样式"><a href="#设置chatra按钮样式" class="headerlink" title="设置chatra按钮样式"></a>设置chatra按钮样式</h2><p>\themes\next6\source\css_schemes\Pisces_sidebar.styl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; chat</span><br><span class="line">.feed-link, .chat &#123;</span><br><span class="line">  border-top: 1px dotted #ccc;</span><br><span class="line">  border-bottom: 1px dotted #ccc;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a, .chat a &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  border: none !important;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a, .chat a &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0 15px;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  &#x2F;&#x2F;border: 1px solid #fc6423 !important;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a i, .chat a i &#123;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.fa &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  font: normal normal normal 14px&#x2F;1 FontAwesome;</span><br><span class="line">  font-size: inherit;</span><br><span class="line">  text-rendering: auto;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">&#125;</span><br><span class="line">.use-motion .sidebar .motion-element &#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link, .chat &#123;</span><br><span class="line">  margin-top: 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="放置chatra脚本"><a href="#放置chatra脚本" class="headerlink" title="放置chatra脚本"></a>放置chatra脚本</h2><p>\themes\next6\layout_layout.swig，建议放置在主布局的header前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;html class&#x3D;&quot;&#123;&#123; html_class | lower &#125;&#125;&quot; lang&#x3D;&quot;&#123;&#123; config.language &#125;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Chatra &#123;literal&#125; --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    (function(d, w, c) &#123;</span><br><span class="line">        w.ChatraID &#x3D; &#39;密钥xxxxyyyyy&#39;;</span><br><span class="line">        var s &#x3D; d.createElement(&#39;script&#39;);</span><br><span class="line">        w[c] &#x3D; w[c] || function() &#123;</span><br><span class="line">            (w[c].q &#x3D; w[c].q || []).push(arguments);</span><br><span class="line">        &#125;;</span><br><span class="line">        s.async &#x3D; true;</span><br><span class="line">        s.src &#x3D; &#39;https:&#x2F;&#x2F;call.chatra.io&#x2F;chatra.js&#39;;</span><br><span class="line">        if (d.head) d.head.appendChild(s);</span><br><span class="line">    &#125;)(document, window, &#39;Chatra&#39;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;!-- &#x2F;Chatra &#123;&#x2F;literal&#125; --&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;head&#x2F;head.swig&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">  &#123;% include &#39;_partials&#x2F;head&#x2F;head-unique.swig&#39; %&#125;</span><br><span class="line">  &lt;title&gt;&#123;% block title %&#125;&#123;% endblock %&#125;&lt;&#x2F;title&gt;</span><br><span class="line">  &#123;% include &#39;_third-party&#x2F;analytics&#x2F;index.swig&#39; %&#125;</span><br><span class="line">  &#123;% include &#39;_scripts&#x2F;noscript.swig&#39; %&#125;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h2><p>生效</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-hexo%E5%92%8Cnext%E5%8D%87%E7%BA%A7/" itemprop="url">hexo和next升级</a></h1>
         
 
         <div class="post-meta">
@@ -464,7 +655,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4.5k</span>
+                <span title="字数统计">17k</span>
               
 
               
@@ -478,7 +669,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">17 mins.</span>
               
             </div>
           
@@ -500,389 +691,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="音乐外链"><a href="#音乐外链" class="headerlink" title="音乐外链"></a>音乐外链</h1><h2 id="download"><a href="#download" class="headerlink" title="download"></a>download</h2><p>点击访问<a href="https://github.com/DIYgod/APlayer" target="_blank" rel="noopener">Aplayer</a> 源码：GitHub Aplayer。下载到本地，解压后将dist文件夹复制到themes\next\source文件夹下。</p>
-<h1 id="music-js"><a href="#music-js" class="headerlink" title="music.js"></a>music.js</h1><p>  新建themes\next\source\dist\music.js文件，添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const ap &#x3D; new APlayer(&#123;</span><br><span class="line">    container: document.getElementById(&#39;aplayer&#39;),</span><br><span class="line">    fixed: true,</span><br><span class="line">    autoplay: false,</span><br><span class="line">    audio: [</span><br><span class="line">      &#123;</span><br><span class="line">        name: &quot;PDD洪荒之力&quot;,</span><br><span class="line">        artist: &#39;徐梦圆&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;39868.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;84.jpg&#39;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;9420&#39;,</span><br><span class="line">        artist: &#39;麦小兜&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;45967.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;8.jpg&#39;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;风筝误&#39;,</span><br><span class="line">        artist: &#39;刘珂矣&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;46644.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;96.jpg&#39;,</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>源码中对应的参数解释，这边都有： <a href="https://aplayer.js.org/#/zh-Hans/" target="_blank" rel="noopener">Aplayer 中文文档</a></p>
-<p>audio对应的便是音频文件，所以音乐播放器需要播放的音乐是需要自己进行相关信息（如歌曲链接、歌词、封面等）的配置。这里放一个mp3音乐外链网站：<a href="http://up.mcyt.net/" target="_blank" rel="noopener">http://up.mcyt.net/</a> ，搜索对应的音乐，然后复制url和右击封面图片链接粘贴到对应的位置上就行了。</p>
-<p>注：由于该外链网站没有歌词链接，我这边没有进行配置，所以播放器在播放音乐时点击歌词是没有显示的。</p>
-<h2 id="layout-swig"><a href="#layout-swig" class="headerlink" title="_layout.swig"></a>_layout.swig</h2><p>打开themes\next\layout_layout.swig文件，将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#x2F;dist&#x2F;APlayer.min.css&quot;&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;aplayer&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;dist&#x2F;APlayer.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;dist&#x2F;music.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>添加到<body itemscope ...>后面就行，即在<body></body>里面。</p>
-<p>重新生成，访问页面，就能看到左下角的音乐播放器了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/02/13/python-notes-course-1-15-%E8%BF%AD%E4%BB%A3%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/13/python-notes-course-1-15-%E8%BF%AD%E4%BB%A3%E5%99%A8/" itemprop="url">迭代器</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-13T00:00:00+08:00">2022-02-13</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p>迭代器，迭代器是一个可以记住遍历的位置的对象<br>两种迭代器： iter() 和 next(),且字符串<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">1</span>、字符创创建迭代器对象</span><br><span class="line">str1 = 'liangdianshui' </span><br><span class="line">iter1 = iter ( str1 )</span><br><span class="line"></span><br><span class="line"># <span class="number">2</span>、<span class="built_in">list</span>对象创建迭代器</span><br><span class="line">list1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">iter2 = iter ( list1 )</span><br><span class="line"></span><br><span class="line"># <span class="number">3</span>、tuple(元祖) 对象创建迭代器</span><br><span class="line">tuple1 = ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> )</span><br><span class="line">iter3 = iter ( tuple1 )</span><br><span class="line"></span><br><span class="line"># <span class="keyword">for</span> 循环遍历迭代器对象</span><br><span class="line"><span class="keyword">for</span> x in iter1 :</span><br><span class="line">    <span class="built_in">print</span> ( x , <span class="built_in">end</span> = <span class="string">' '</span> )</span><br><span class="line"></span><br><span class="line">print('\n------------------------')</span><br><span class="line"></span><br><span class="line"><span class="meta"># next() 函数遍历迭代器</span></span><br><span class="line"><span class="keyword">while</span> True :</span><br><span class="line">    <span class="keyword">try</span> :</span><br><span class="line">        <span class="built_in">print</span> ( next ( iter3 ) )</span><br><span class="line">    except StopIteration :</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><br>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">l i a n g d i a n s h u i </span><br><span class="line">------------------------</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/19/depth-docker-config-2-windows%E4%B8%8Bdocker%E9%95%9C%E5%83%8F%E8%BF%81%E7%A7%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/09/19/depth-docker-config-2-windows%E4%B8%8Bdocker%E9%95%9C%E5%83%8F%E8%BF%81%E7%A7%BB/" itemprop="url">windows下docker镜像迁移</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-19T00:00:00+08:00">2021-09-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">9.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">10 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="使用WSL修改docker文件存储位置"><a href="#使用WSL修改docker文件存储位置" class="headerlink" title="使用WSL修改docker文件存储位置"></a>使用WSL修改docker文件存储位置</h1><p>docker-desktop-data磁盘映像通常位于以下位置：C:\Users\86180\AppData\Local\Docker\wsl\data</p>
-<ol>
-<li>首先退出Docker桌面应用</li>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next-gt-next6"><a href="#next-gt-next6" class="headerlink" title="next -&gt; next6"></a>next -&gt; next6</h1><h1 id="hexo-3-9-0-gt-hexo-4-2"><a href="#hexo-3-9-0-gt-hexo-4-2" class="headerlink" title="hexo-3.9.0 -&gt; hexo-4.2"></a>hexo-3.9.0 -&gt; hexo-4.2</h1><ol>
+<li>卸载原有的hexo<br>进入项目根目录，hexo uninstall hexo</li>
+<li>查找hexo和nodejs匹配的版本<br><a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo" target="_blank" rel="noopener">hexo安装说明</a><br>|—-|—-|<br>Hexo 版本    最低兼容 Node.js 版本<br>6.0+        12.13.0<br>5.0+        10.13.0<br>4.1 - 4.2    8.10<br>4.0            8.6<br>3.3 - 3.9    6.9<br>3.2 - 3.3    0.12<br>3.0 - 3.1    0.10 or iojs<br>0.0.1 - 2.8    0.10</li>
+<li>执行安装指定版本<br>npm install hexo@4.2</li>
+<li>安装过程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm uninstall hexo</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">audited 498 packages in 3.182s</span><br><span class="line"></span><br><span class="line">3 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 53 vulnerabilities (11 low, 23 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;clear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm install hexo@4.2</span><br><span class="line">npm WARN deprecated hexo-bunyan@2.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated highlight.js@9.18.5: Support has ended for 9.x series. Upgrade to @latest</span><br><span class="line">npm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies</span><br><span class="line">npm WARN deprecated source-map-resolve@0.5.3: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-resolve#deprecated</span><br><span class="line">npm WARN deprecated resolve-url@0.2.1: https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;resolve-url#deprecated</span><br><span class="line">npm WARN deprecated source-map-url@0.4.1: See https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;source-map-url#deprecated</span><br><span class="line">npm WARN deprecated urix@0.1.0: Please see https:&#x2F;&#x2F;github.com&#x2F;lydell&#x2F;urix#deprecated</span><br><span class="line">npm WARN deprecated hexo-bunyan@1.0.0: Please see https:&#x2F;&#x2F;github.com&#x2F;hexojs&#x2F;hexo-bunyan&#x2F;issues&#x2F;17</span><br><span class="line">npm WARN deprecated core-js@1.2.7: core-js@&lt;3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.</span><br><span class="line"></span><br><span class="line">&gt; highlight.js@9.18.5 postinstall E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\highlight.js</span><br><span class="line">&gt; node deprecated.js</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line"></span><br><span class="line">  Verion 9 of Highlight.js has reached EOL.  It will no longer</span><br><span class="line">  be supported or receive security updates in the future.</span><br><span class="line">  Please upgrade to version 10 or encourage your indirect</span><br><span class="line">  dependencies to do so.</span><br><span class="line"></span><br><span class="line">  For more info:</span><br><span class="line"></span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">  https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;blob&#x2F;master&#x2F;VERSION_10_UPGRADE.md</span><br><span class="line"></span><br><span class="line">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules\hexo\node_modules\chokidar\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted &#123;&quot;os&quot;:&quot;darwin&quot;,&quot;arch&quot;:&quot;any&quot;&#125; (current: &#123;&quot;os&quot;:&quot;win32&quot;,&quot;arch&quot;:&quot;x64&quot;&#125;)</span><br><span class="line"></span><br><span class="line">+ hexo@4.2.1</span><br><span class="line">added 590 packages from 581 contributors and audited 591 packages in 134.722s</span><br><span class="line"></span><br><span class="line">11 packages are looking for funding</span><br><span class="line">  run &#96;npm fund&#96; for details</span><br><span class="line"></span><br><span class="line">found 57 vulnerabilities (11 low, 27 moderate, 16 high, 3 critical)</span><br><span class="line">  run &#96;npm audit fix&#96; to fix them, or &#96;npm audit&#96; for details</span><br><span class="line"></span><br><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">2. 查看运行状态</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Running         2</span><br><span class="line">  docker-desktop-data    Running         2</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line"></span><br><span class="line">3. 导出本地已有数据</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line"></span><br><span class="line">4. 删除本地数据</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --export docker-desktop-data &quot;E:\\docker-desktop-data.tar&quot;</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --unregister docker-desktop-data</span><br><span class="line">正在注销...</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME              STATE           VERSION</span><br><span class="line">* Ubuntu-18.04      Stopped         2</span><br><span class="line">  docker-desktop    Stopped         2</span><br><span class="line"></span><br><span class="line">5. 导入数据到新盘，设置路径，这里我设置的路径为D:\\Download\\Docker\\wsl</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --import docker-desktop-data &quot;E:\workspace-all\workspace-docker\wsl&quot; &quot;E:\workspace-all\workspace-docker\docker-desktop-data.tar&quot; --version 2</span><br><span class="line"></span><br><span class="line">6. 再次查看状态</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br></pre></td></tr></table></figure>
-<h2 id="以上是迁移-data，以下是-docker-desktop迁移"><a href="#以上是迁移-data，以下是-docker-desktop迁移" class="headerlink" title="以上是迁移 data，以下是 docker-desktop迁移"></a>以上是迁移 data，以下是 docker-desktop迁移</h2><p>docker-desktop迁移如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wsl --export docker-desktop E:\workspace-all\workspace-docker\docker-desktop.tar</span><br><span class="line"></span><br><span class="line">wsl --unregister docker-desktop</span><br><span class="line"></span><br><span class="line">wsl --import docker-desktop E:\workspace-all\workspace-docker\wsl\desktop E:\workspace-all\workspace-docker\docker-desktop.tar --version 2</span><br></pre></td></tr></table></figure></p>
-<h1 id="迁移之后启动报错"><a href="#迁移之后启动报错" class="headerlink" title="迁移之后启动报错"></a>迁移之后启动报错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">System.InvalidOperationException:</span><br><span class="line">distro stopped unexpectedly</span><br><span class="line">   在 Docker.Engines.LinuxkitDaemonStartup.&lt;WaitAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\LinuxkitDaemonStartup.cs:行号 60</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.Engines.WSL2.LinuxWSL2Engine.&lt;DoStartAsync&gt;d__28.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\WSL2\LinuxWSL2Engine.cs:行号 177</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.TaskExtensions.&lt;WrapAsyncInCancellationException&gt;d__0.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\TaskExtensions.cs:行号 29</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.StartTransition.&lt;DoRunAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\StartTransition.cs:行号 67</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 Docker.ApiServices.StateMachines.StartTransition.&lt;DoRunAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\StartTransition.cs:行号 92</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.EngineStateMachine.&lt;StartAsync&gt;d__14.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\EngineStateMachine.cs:行号 69</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.Engines.Engines.&lt;StartAsync&gt;d__22.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\Engines.cs:行号 108</span><br></pre></td></tr></table></figure>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li>netsh winsock reset ：<br>winsock是Windows网络编程接口，winsock工作在应用层，它提供与底层传输协议无关的高层数据传输编程接口 netsh winsock reset 是把它恢复到默认状态。</li>
+<h1 id="hexo-g-异常"><a href="#hexo-g-异常" class="headerlink" title="hexo g 异常"></a>hexo g 异常</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">Version 9 of Highlight.js has reached EOL and is no longer supported.</span><br><span class="line">Please upgrade or ask whatever dependency you are using to upgrade.</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;highlightjs&#x2F;highlight.js&#x2F;issues&#x2F;2877</span><br><span class="line">INFO  Files loaded in 523 ms</span><br><span class="line">ERROR (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig) [Line 8, Column 10]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\head\head-unique.swig) [Line 10, Column 21]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\page.swig)</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\index.swig) [Line 2, Column 8]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 20, Column 26]</span><br><span class="line">  Template render error: (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\layout\_partials\header\menu.swig) [Line 29, Column 13]</span><br><span class="line">  TypeError: str.replace is not a function</span><br><span class="line">    at Object.exports.prettifyError (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\lib.js:34:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:486:31</span><br><span class="line">    at new_cls.root [as rootRenderFunc] (eval at _compile (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:565:24), &lt;anonymous&gt;:43:3)</span><br><span class="line">    at new_cls.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\nunjucks\src\environment.js:479:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\themes\next6\scripts\renderer.js:32:29</span><br><span class="line">    at viewFn._compiled (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:136:48)</span><br><span class="line">    at viewFn.View.render (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\theme\view.js:41:15)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\index.js:61:21</span><br><span class="line">    at tryCatcher (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code\node_modules\hexo\lib\hexo\router.js:126:3)</span><br><span class="line">    at RouteStream.Readable.read (_stream_readable.js:478:10)</span><br><span class="line">    at resume_ (_stream_readable.js:965:12)</span><br><span class="line">    at processTicksAndRejections (internal&#x2F;process&#x2F;task_queues.js:84:21)</span><br></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ol>
+<li>我们发现hexo已经升级到4.2.1</li>
+<li>从 git@github.com:theme-next/hexo-theme-next.git 克隆下来的next6<br>只能是next6有问题，发现_config.yml中没有next的版本号，于是从github上单独下载next6的内容:<br><a href="https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/releases/tag/v6.0.3</a></li>
+<li>再次 hexo g，正常。。。</li>
 </ol>
 
           
@@ -940,7 +760,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/18/depth-docker-config-1-ideal-docker-configurations/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -959,7 +779,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/09/18/depth-docker-config-1-ideal-docker-configurations/" itemprop="url">ideal docker configurations</a></h1>
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-0/" itemprop="url">使用教程</a></h1>
         
 
         <div class="post-meta">
@@ -975,7 +795,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
             
 
             
@@ -996,21 +816,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1038,7 +851,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">1.7k</span>
               
 
               
@@ -1052,7 +865,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -1074,7 +887,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="ideal-docker-configurations（windows）"><a href="#ideal-docker-configurations（windows）" class="headerlink" title="ideal docker configurations（windows）"></a>ideal docker configurations（windows）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 连接配置</span><br><span class="line">Docker for Mac：如果你本地安装了 Docker for macOS，则推荐此连接选项。</span><br><span class="line">Unix socket： 如果你使用 Linux 系统，并在本地安装了 Docker，则推荐此连接选项。</span><br><span class="line">如果出现权限被拒绝错误，请将当前用户添加到计算机上的 docker 组，然后注销，重新登录。</span><br><span class="line">Docker Machine：如果您使用的是Docker Toolbox for Windows，建议使用此选项连接Docker API。</span><br><span class="line">TCP socket： 如果你使用的是Docker for Windows，则这是常用的连接选项。此选项也适用于Linux、Docker for macOS和Docker Toolbox。如果你本地并未安装任何 Docker 程序也可以使用此选项来连接远程主机上的 Docker 守护进程 （见下文，但是某些操作是不支持的）。</span><br><span class="line">    Engine API URL：取决于Docker版本和操作系统：</span><br><span class="line">        Docker for Windows: tcp:&#x2F;&#x2F;localhost:2375 。注意：需要事先在Docker设置的 General 部分，启用 Expose daemon on tcp:&#x2F;&#x2F;localhost:2375 without TLS 选项（其作用是：将docker与本地的连接设置为不需要TLS加密）。</span><br><span class="line">        Docker for macOS 或 Linux: unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line">        Docker Toolbox for Windows 或 macOS: https:&#x2F;&#x2F;192.168.99.100:2376</span><br><span class="line">    Certificates folder ： 证书文件夹的路径 （一般留空）。取决于你的Docker版本和操作系统：</span><br><span class="line">        Docker for Windows, macOS 或 Linux: 留空即可</span><br><span class="line">        Docker Toolbox for Windows： %HOMEPATH%.dockermachinemachinesdefault</span><br><span class="line"></span><br><span class="line"># 配置 Path mappings （路径映射） ：</span><br><span class="line">对于Windows和macOS：指定可以在主机和容器之间共享的文件夹的映射。</span><br><span class="line">    Local path: 用于（volume binding）卷绑定的本地文件夹的路径。</span><br><span class="line">    Virtual machine path: Docker虚拟机文件系统中的相应目录路径。</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ npm -v</span><br><span class="line">8.15.0</span><br><span class="line">➜  ~ node -v</span><br><span class="line">v16.17.0</span><br></pre></td></tr></table></figure>
+<h1 id="hexo安装启动"><a href="#hexo安装启动" class="headerlink" title="hexo安装启动"></a>hexo安装启动</h1><ol>
+<li>首先在项目目录下安装 npm install hexo<blockquote>
+<p>管理员模式下，全局安装hexo: npm install -g hexo</p>
+</blockquote>
+</li>
+<li>hexo s -p 5000<br>换成5000端口，果断可以访问。</li>
+<li>mac电脑使用 6001 端口</li>
+</ol>
+<h1 id="文档连接"><a href="#文档连接" class="headerlink" title="文档连接"></a>文档连接</h1><p><a href="https://www.cnblogs.com/curedfisher/p/12247766.html" target="_blank" rel="noopener">nodejs 指定全局安装路径和缓存路径</a><br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a><br><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">安装next</a><br><a href="https://blog.csdn.net/u011475210/article/details/79023429" target="_blank" rel="noopener">hexo - next教程大全</a></p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><p>hexo clean &amp;&amp; hexo deploy</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><a href="https://blog.csdn.net/u012246342/article/details/51543370?_t_t_t=0.3913191087191581" target="_blank" rel="noopener">hexo安装成功，并且正确运行，但是localhost:4000不能访问</a><br>启动hexo s 的时候，用这个命令，换一个端口。</p>
 
           
         
@@ -1131,7 +955,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1150,7 +974,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/" itemprop="url">vm虚拟机显示鼠标</a></h1>
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BB%9F%E8%AE%A1/" itemprop="url">不蒜子统计</a></h1>
         
 
         <div class="post-meta">
@@ -1166,7 +990,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
             
 
             
@@ -1187,21 +1011,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1229,7 +1046,592 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">119</span>
+                <span title="字数统计">6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>不蒜子官网：<a href="http://busuanzi.ibruce.info/?spm=a2c4e.11153940.blogcont648357.6.109231cbqdGC8o" target="_blank" rel="noopener">http://busuanzi.ibruce.info/?spm=a2c4e.11153940.blogcont648357.6.109231cbqdGC8o</a></strong></li>
+</ul>
+<hr>
+<h1 id="不蒜子统计"><a href="#不蒜子统计" class="headerlink" title="不蒜子统计"></a>不蒜子统计</h1><ol>
+<li>themes/next6/_config.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 用busuanzi显示网站页面的PV&#x2F;UV。</span><br><span class="line"># Get more information on http:&#x2F;&#x2F;ibruce.info&#x2F;2015&#x2F;04&#x2F;04&#x2F;busuanzi&#x2F;</span><br><span class="line">busuanzi_count:</span><br><span class="line">  # count values only if the other configs are false</span><br><span class="line">  enable: true</span><br><span class="line">  # custom uv span for the whole site</span><br><span class="line">  site_uv: true</span><br><span class="line">  site_uv_header: &lt;i class&#x3D;&quot;fa fa-user&quot;&gt;&lt;&#x2F;i&gt; 总访问数</span><br><span class="line">  site_uv_footer: 人</span><br><span class="line">  # custom pv span for the whole site</span><br><span class="line">  site_pv: true</span><br><span class="line">  site_pv_header: &lt;i class&#x3D;&quot;fa fa-eye&quot;&gt;&lt;&#x2F;i&gt; 总访问量</span><br><span class="line">  site_pv_footer: 次</span><br><span class="line">  # custom pv span for one page only</span><br><span class="line">  page_pv: true</span><br><span class="line">  page_pv_header: &lt;i class&#x3D;&quot;fa fa-file-o&quot;&gt;&lt;&#x2F;i&gt; 总阅读量</span><br><span class="line">  page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
+<li>不蒜子是一个极简的网页计数器，可以统计：</li>
+</ol>
+<ul>
+<li>文章的阅读量；</li>
+<li>站点访问量；</li>
+<li>站点访问人数；</li>
+</ul>
+<h1 id="不统计数量异常"><a href="#不统计数量异常" class="headerlink" title="不统计数量异常"></a>不统计数量异常</h1><p>修改不蒜子js，themes\next\layout_third-party\analytics\busuanzi-counter.swig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;!-- &lt;script async src&#x3D;&quot;https:&#x2F;&#x2F;dn-lbstatics.qbox.me&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt; --&gt;</span><br><span class="line">  &lt;script async src&#x3D;&quot;https:&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% if theme.busuanzi_count.site_uv %&#125;</span><br><span class="line">    &lt;span class&#x3D;&quot;site-uv&quot;&gt;</span><br><span class="line">      &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125;</span><br><span class="line">      &lt;span class&#x3D;&quot;busuanzi-value&quot; id&#x3D;&quot;busuanzi_value_site_uv&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">      &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">  &#123;% if theme.busuanzi_count.site_pv %&#125;</span><br><span class="line">    &lt;span class&#x3D;&quot;site-pv&quot;&gt;</span><br><span class="line">      &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125;</span><br><span class="line">      &lt;span class&#x3D;&quot;busuanzi-value&quot; id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">      &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="不蒜子官方代码"><a href="#不蒜子官方代码" class="headerlink" title="不蒜子官方代码"></a>不蒜子官方代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;script async src&#x3D;&quot;&#x2F;&#x2F;busuanzi.ibruce.info&#x2F;busuanzi&#x2F;2.3&#x2F;busuanzi.pure.mini.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;span id&#x3D;&quot;busuanzi_container_site_pv&quot;&gt;本站总访问量&lt;span id&#x3D;&quot;busuanzi_value_site_pv&quot;&gt;&lt;&#x2F;span&gt;次&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BD%9C%E8%80%85%E5%8F%8A%E5%B7%A6%E4%BE%A7%E6%A0%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BD%9C%E8%80%85%E5%8F%8A%E5%B7%A6%E4%BE%A7%E6%A0%8F/" itemprop="url">作者信息及侧边栏</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="作者信息及侧边栏"><a href="#作者信息及侧边栏" class="headerlink" title="作者信息及侧边栏"></a>作者信息及侧边栏</h1><ol>
+<li>blog/themes/next/_config.yml<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Sidebar Settings （侧边栏设置）</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Social Links.</span><br><span class="line"># Usage: `Key: permalink || icon`</span><br><span class="line"># Key is the link label showing to <span class="built_in">end</span> users.</span><br><span class="line"># Value before `||` delimeter is the target permalink.</span><br><span class="line"># Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.</span><br><span class="line">social:</span><br><span class="line">  GitHub: https:<span class="comment">//github.com/diabolo-hub  || github</span></span><br><span class="line">  Gitee: https:<span class="comment">//gitee.com/diabolo-hub || glide</span></span><br><span class="line">  E-Mail: mailto:yourname @gmail.com || envelope</span><br><span class="line">  Google: https:<span class="comment">//plus.google.com/ || google</span></span><br><span class="line">  CSDN: https:<span class="comment">//blog.csdn.net/nightmare_dimple || crosshairs</span></span><br><span class="line">  #Twitter: https:<span class="comment">//twitter.com/yourname || twitter</span></span><br><span class="line">  #FB Page: https:<span class="comment">//www.facebook.com/ || facebook</span></span><br><span class="line">  #VK Group: https:<span class="comment">//vk.com/yourname || vk</span></span><br><span class="line">  #StackOverflow: https:<span class="comment">//stackoverflow.com/yourname || stack-overflow</span></span><br><span class="line">  #YouTube: https:<span class="comment">//youtube.com/yourname || youtube</span></span><br><span class="line">  #Instagram: https:<span class="comment">//instagram.com/yourname || instagram</span></span><br><span class="line">  #Skype: skype:yourname?call|chat || skype</span><br><span class="line">  微博: https:<span class="comment">//www.weibo.com/ || weibo</span></span><br><span class="line">  知乎: https:<span class="comment">//www.zhihu.com/people/yourname  || bell</span></span><br><span class="line"></span><br><span class="line">social_icons:</span><br><span class="line">  enable: <span class="literal">true</span> #是否显示社交图标</span><br><span class="line">  icons_only: <span class="literal">false</span> #是否仅显示社交图标</span><br><span class="line">  transition: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">github_banner: https:<span class="comment">//github.com/nightmaredimple || Follow me on GitHub #添加右上角github绑带</span></span><br><span class="line"></span><br><span class="line"># Blog rolls</span><br><span class="line">links_icon: link</span><br><span class="line">links_title: 友情链接</span><br><span class="line"># links_layout: block</span><br><span class="line">links_layout: <span class="keyword">inline</span></span><br><span class="line">links:</span><br><span class="line">  CSDN博客主页: <span class="number">000</span></span><br><span class="line">  中国站主页: https:<span class="comment">//diabolo-hub.gitee.io</span></span><br><span class="line">  全球站主页: https:<span class="comment">//diabolo-hub.github.io</span></span><br><span class="line"></span><br><span class="line"># 侧边栏头像</span><br><span class="line"><span class="meta"># in theme directory(source/images): /images/avatar.jpg</span></span><br><span class="line"><span class="meta"># in site  directory(source/uploads): /uploads/avatar.jpg</span></span><br><span class="line">avatar: /images/avatar.jpg</span><br><span class="line"></span><br><span class="line"># 侧边栏中的目录</span><br><span class="line">toc:</span><br><span class="line">  enable: <span class="literal">true</span> #是否自动生成目录</span><br><span class="line">  # Automatically add <span class="built_in">list</span> number to toc.</span><br><span class="line">  number: <span class="literal">true</span> #目录是否自动产生编号</span><br><span class="line">  # If <span class="literal">true</span>, all words will placed on next lines <span class="keyword">if</span> header <span class="built_in">width</span> longer then sidebar <span class="built_in">width</span>.</span><br><span class="line">  wrap: <span class="literal">false</span> #标题过长是否换行</span><br><span class="line">  max_depth: <span class="number">6</span> #最大标题深度</span><br><span class="line"></span><br><span class="line"># Creative Commons <span class="number">4.0</span> International License.</span><br><span class="line"><span class="meta"># http:<span class="comment">//creativecommons.org/</span></span></span><br><span class="line"># Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line">#creative_commons: by-nc-sa</span><br><span class="line">#creative_commons:</span><br><span class="line"></span><br><span class="line"># 目前仅 Pisces Scheme 支持 <span class="built_in">position</span> 配置。影响版本<span class="number">5.0</span><span class="number">.0</span>及更低版本。</span><br><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position, <span class="built_in">available</span> value: left | right (only <span class="keyword">for</span> Pisces | Gemini).</span><br><span class="line">  <span class="built_in">position</span>: left #侧边栏位置</span><br><span class="line">  <span class="meta">#position: right</span></span><br><span class="line"></span><br><span class="line">  # Sidebar Display, <span class="function"><span class="built_in">available</span> <span class="title">value</span> <span class="params">(only <span class="keyword">for</span> Muse | Mist)</span>:</span></span><br><span class="line">  # 已知侧栏在 use motion: false 的情况下不会展示。 影响版本5.0.0及更低版本。</span><br><span class="line">  #  - post    自动展开帖子。默认。 post - 默认行为，在文章页面（拥有目录列表）时显示</span><br><span class="line">  #  - always  自动展开所有页面 | 在所有页面中都显示</span><br><span class="line">  #  - hide    仅在单击侧边栏切换图标时展开。 | hide - 在所有页面中都隐藏（可以手动展开）</span><br><span class="line">  #  - <span class="built_in">remove</span>  Totally <span class="built_in">remove</span> sidebar including sidebar toggle.  | <span class="built_in">remove</span> - 完全移除</span><br><span class="line">  <span class="built_in">display</span>: post</span><br><span class="line">  <span class="meta">#display: always</span></span><br><span class="line">  <span class="meta">#display: hide</span></span><br><span class="line">  <span class="meta">#display: remove</span></span><br><span class="line"></span><br><span class="line">  # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).</span><br><span class="line">  offset: <span class="number">12</span> #侧边栏相对主菜单像素距离</span><br><span class="line">  # Back to top in sidebar (only for Pisces | Gemini).</span><br><span class="line">  b2t: <span class="literal">false</span> #是否提供一键置顶</span><br><span class="line">  # Scroll percent label in b2t button</span><br><span class="line">  scrollpercent: <span class="literal">true</span> #是否显示当前阅读进度</span><br><span class="line">  # Enable sidebar on narrow view (only for Muse | Mist).</span><br><span class="line">  onmobile: <span class="literal">true</span> #手机上是否显示侧边栏</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="作者及左侧栏样式"><a href="#作者及左侧栏样式" class="headerlink" title="作者及左侧栏样式"></a>作者及左侧栏样式</h1><ol>
+<li>左侧栏样式(Pisces)<br>next6/source/css/_schemes/Pisces/_sidebar.styl<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.sidebar a &#123;</span><br><span class="line">  &#x2F;&#x2F; 个人信息界面，强制使用 #555</span><br><span class="line">  color: $black-light !important;</span><br><span class="line"></span><br><span class="line">  &amp;:hover &#123; color: $black-deep; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要使用 !important; 强制使用此颜色</p>
+</blockquote>
+</li>
+<li>作者及文章总览样式（Pisces)（头像下面的）<br>themes/next6/source/css/_custom/custom.styl  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#sidebar &#123;</span><br><span class="line">  background:url(&#x2F;images&#x2F;sidebar-1.jpg);</span><br><span class="line">  background-size: cover;</span><br><span class="line">  background-position:center;</span><br><span class="line">  background-repeat:no-repeat;</span><br><span class="line">  &#x2F;&#x2F;p,span,a &#123;color: rgba(255, 255, 255, 1);&#125;</span><br><span class="line">  p,span,a &#123;color: #555;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该 p,span,a {} 会覆盖 _sidebar.styl 中的配置，除非使用强制符号 !important</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" itemprop="url">代码高亮</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="代码高亮"><a href="#代码高亮" class="headerlink" title="代码高亮"></a>代码高亮</h1><ol>
+<li>代码块的行号显示在上面已经介绍了，位于站点配置文件，对于代码块的主题我么还能设置其背景，增加复制按钮等，可修改主题配置(blog/themes/next/_config.yml)文件如下：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 代码高亮主题</span><br><span class="line"># Available value:</span><br><span class="line"><span class="meta">#    normal | night | night eighties | night blue | night bright</span></span><br><span class="line"><span class="meta"># https:<span class="comment">//github.com/chriskempson/tomorrow-theme</span></span></span><br><span class="line">highlight_theme: night</span><br><span class="line">codeblock:</span><br><span class="line">  # Manual define the border radius in codeblock</span><br><span class="line">  # Leave it empty <span class="keyword">for</span> the <span class="keyword">default</span> <span class="number">1</span></span><br><span class="line">  border_radius:</span><br><span class="line">  # Add copy button on codeblock</span><br><span class="line">  copy_button:</span><br><span class="line">    enable: <span class="literal">true</span></span><br><span class="line">    # Show <span class="built_in">text</span> copy result</span><br><span class="line">    show_result: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5%E6%A0%B7%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E9%93%BE%E6%8E%A5%E6%A0%B7%E5%BC%8F/" itemprop="url">修改文章链接样式</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
               
 
               
@@ -1265,9 +1667,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>转到机器设置-&gt;系统-&gt;主板。</li>
-<li>选择PS / 2鼠标作为定位设备。</li>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="修改文章链接样式"><a href="#修改文章链接样式" class="headerlink" title="修改文章链接样式"></a>修改文章链接样式</h1><ol>
+<li>修改文件 themes\next\source\css_common\components\post\post.styl，在末尾添加如下css样式，：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文章内链接文本样式</span></span><br><span class="line">.post-body p a&#123;</span><br><span class="line">  color: #<span class="number">0593</span>d3;</span><br><span class="line">  border-bottom: none;</span><br><span class="line">  border-bottom: <span class="number">1</span>px solid #<span class="number">0593</span>d3;</span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    color: #fc6423;</span><br><span class="line">    border-bottom: none;</span><br><span class="line">    border-bottom: <span class="number">1</span>px solid #fc6423;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 
           
@@ -1325,7 +1727,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-0-virtualBox%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E5%BA%95%E9%83%A8%E5%B8%83%E5%B1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1344,7 +1746,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-0-virtualBox%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/" itemprop="url">virtualBox与本地挂载共享文件夹</a></h1>
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E5%BA%95%E9%83%A8%E5%B8%83%E5%B1%80/" itemprop="url">博客底部布局</a></h1>
         
 
         <div class="post-meta">
@@ -1360,7 +1762,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
             
 
             
@@ -1381,21 +1783,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1423,7 +1818,194 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.4k</span>
+                <span title="字数统计">4.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="博客底部布局"><a href="#博客底部布局" class="headerlink" title="博客底部布局"></a>博客底部布局</h1><ol>
+<li>这一部分对应主题配置文件中的：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 博客底部布局</span><br><span class="line">footer:</span><br><span class="line">  # Specify the date when the site was <span class="built_in">setup</span>.</span><br><span class="line">  # If <span class="keyword">not</span> defined, current year will be used.</span><br><span class="line">  since: <span class="number">2017</span> #建站时间</span><br><span class="line"></span><br><span class="line">  # Icon between year <span class="keyword">and</span> copyright info.</span><br><span class="line"><span class="meta">#  icon: user</span></span><br><span class="line">  icon:</span><br><span class="line">    # Icon name in fontawesome, see: https:<span class="comment">//fontawesome.com/v4.7.0/icons/</span></span><br><span class="line">    # `heart` is recommended with animation in red (#ff0000).</span><br><span class="line">    name: heart  #作者图标（默认是author人像)</span><br><span class="line">    # If you want to animate the icon, <span class="built_in">set</span> it to <span class="literal">true</span>.</span><br><span class="line">    animated: <span class="literal">true</span> #图标是否闪动</span><br><span class="line">    # Change the color of icon, <span class="keyword">using</span> Hex Code.</span><br><span class="line">    color: <span class="string">"#808080"</span> #图标颜色</span><br><span class="line">  # If <span class="keyword">not</span> defined, will be used `author` from Hexo main <span class="built_in">config</span>.</span><br><span class="line">  copyright: 空竹 #别填<span class="keyword">bool</span>型，最后显示的东西是copyright || author，即左边没有设置的话就显示作者</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Hexo link (Powered by Hexo).</span><br><span class="line">  powered: <span class="literal">false</span> #是否显示 Powered by hexo</span><br><span class="line">  theme:</span><br><span class="line">    # Theme &amp; scheme info link (Theme - NexT.scheme).</span><br><span class="line">    enable: <span class="literal">true</span> #是否显示主题信息</span><br><span class="line">    # Version info of NexT after scheme info (vX.X.X).</span><br><span class="line">    version: <span class="literal">false</span>  #是否显示主题版本</span><br><span class="line">  # -------------------------------------------------------------</span><br><span class="line">  # Any custom <span class="built_in">text</span> can be defined here.</span><br><span class="line">  #custom_text: Hosted by &lt;a target=<span class="string">"_blank"</span> href=<span class="string">"https://pages.github.com"</span>&gt;GitHub Pages&lt;/a&gt;</span><br><span class="line">  beian:</span><br><span class="line">    enable: <span class="literal">false</span>  #是否显示网站备案信息</span><br><span class="line">    icp:</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/" itemprop="url">博客摘要显示</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.7k</span>
               
 
               
@@ -1458,38 +2040,15 @@
 
       
         
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/yaolong336/article/details/78030500" target="_blank" rel="noopener">参考: VirtualBox 安装增强功能 ubuntu server版</a><br><a href="https://www.cnblogs.com/jerryzh/p/11091304.html" target="_blank" rel="noopener">VirtualBox mount报错：/sbin/mount.vboxsf: mounting failed with the error: No such device</a></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
-<li>virtualBox虚拟机，Ubuntu Server服务器，win10专业版（本地）</li>
-<li>通过虚拟机的”设备“去安装增强功能一直无法成功，不论是安装增强，还是”溢出虚拟盘“</li>
-<li>所以考虑通过命令的形式执行增强挂载（共享文件夹）</li>
-</ol>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
-<li>确保当前使用的账号有root权限，即可以执行sudo</li>
-<li>更新apt-get，请执行 sudo apt-get update，以及 sudo apt-get upgrade</li>
-<li>安装依赖工具，sudo apt-get install dkms， sudo apt-get install build-essential</li>
-<li>重启， sudo reboot now，如果命令无效或有执行错误，也可以使用外面的virtualbox的重启按钮</li>
-<li>挂载cdrom， sudo mount /dev/cdrom /mnt/<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* 如果挂载失败，则需检查设备-&gt;分配光驱下是否包含了VBoxGuestAdditions.iso这个镜像</span><br><span class="line">* 如果有请选择它</span><br><span class="line">* 如果没有，请点击选择虚拟盘，然后在C:\Program Files\Oracle\VirtualBox 下找到它</span><br><span class="line">* 最后再执行上述命令，成功后的截图如下：</span><br><span class="line">sudo mount &#x2F;dev&#x2F;cdrom &#x2F;mnt&#x2F;</span><br><span class="line">mount: &#x2F;dev&#x2F;sr0 is write-protected,mounting read-only</span><br><span class="line">&gt; 自己执行挂载时，显示的时mounted（第一次没注意，第二次执行显示已挂载）</span><br></pre></td></tr></table></figure></li>
-<li>执行安装命令，sudo /mnt/VBoxLinuxAdditions.run（挂载之后自动生成的文件）， 不同版本的.run文件名可能有区别</li>
-<li>此时，我们需要 设备-&gt;共享文件夹-&gt;共享文件夹，请添加一个共享文件夹，一般会勾选自动挂载和固定分配两项，<br>共享文件夹路径以及名称，最好都不要出现中文。<br>请记下共享文件夹名称，且在共享文件夹中放入一个test.txt作为测试使用。<br>截图如下:<br><img src="0-virtualBox与本地挂载共享文件夹/共享文件夹界面.png" alt=""><br><img src="0-virtualBox与本地挂载共享文件夹/本地电脑创建的共享文件夹.png" alt="">  </li>
-<li>执行共享文件夹的挂载命令：<br>sudo mount -t vboxsf shared /home/share/<br>shared，为共享文件夹界面定义的共享文件夹名称<br>/home/share/，为Ubuntu中共享文件夹路径，需提前创建；当然该路径可以填/mnt/share，也许提前创建  </li>
-<li>当我们执行第7步时，报错如下：<br>/sbin/mount.vboxsf: mounting failed with the error: No such device<br>解决办法：  <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/VBoxGuestAdditions-*/init  </span><br><span class="line">./vboxadd setup</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>再次执行第7步，即可成功</p>
-</blockquote>
-</li>
-<li>然后再/home/share/文件夹下即可找到本地电脑workspace-shared文件夹中的test.txt</li>
-<li>卸载， sudo umount /mnt/   (卸载命令未测试）(安装命令，sudo /mnt/VBoxLinuxAdditions.run)</li>
-</ol>
-<h1 id="重启电脑后，挂载需要重新执行-挂载需要时间，可以等待，不用执行下面的命令"><a href="#重启电脑后，挂载需要重新执行-挂载需要时间，可以等待，不用执行下面的命令" class="headerlink" title="重启电脑后，挂载需要重新执行(挂载需要时间，可以等待，不用执行下面的命令)"></a>重启电脑后，挂载需要重新执行(挂载需要时间，可以等待，不用执行下面的命令)</h1><p>sudo mount /dev/cdrom /mnt/</p>
-<ol>
-<li>sudo /mnt/VBoxLinuxAdditions.run</li>
-<li>ls</li>
-<li>sudo mount -t vboxsf shared /home/share/  </li>
-</ol>
-
-          
+          <h1 id="博客摘要显示"><a href="#博客摘要显示" class="headerlink" title="博客摘要显示"></a>博客摘要显示</h1><ol>
+<li>于摘要显示，首先我们需要开启摘要功能，修改主题配置（blog/themes/next/_config.yml）文件：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Post Settings（摘要设置）</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Automatically scroll page to section which is under &lt;!-- more --&gt; mark.</span><br><span class="line">scroll_to_more: <span class="literal">true</span> #选取博客正文&lt;!--more--&gt;前的内容</span><br><span class="line"># Automatically saving scroll <span class="built_in">position</span> on each post/page in cookies.</span><br><span class="line">save_scroll: <span class="literal">true</span></span><br><span class="line"># Automatically excerpt description in homepage as preamble <span class="built_in">text</span>.</span><br><span class="line">excerpt_description: <span class="literal">true</span> #自动截取摘要</span><br><span class="line"></span><br><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: <span class="literal">true</span> #自动截取一定程度的摘要</span><br><span class="line">  length: <span class="number">150</span></span><br><span class="line"># Read more button</span><br><span class="line"># If <span class="literal">true</span>, the <span class="built_in">read</span> more button would be displayed in excerpt section.</span><br><span class="line">read_more_btn: <span class="literal">true</span> #显示阅读全文按钮</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1544,7 +2103,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1563,7 +2122,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/" itemprop="url">增强扩展包安装</a></h1>
+                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1579,7 +2138,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
             
 
             
@@ -1600,629 +2159,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">149</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>官方下载对应版本的增强扩展包</li>
-<li>“管理”-&gt; “全局设置“-&gt; “扩展”-&gt; 右侧扩展界面中，靠右方的 + 号，添加扩展包</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-3-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E5%8D%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-3-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E5%8D%A1/" itemprop="url">自定义网卡</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="网卡配置模板"><a href="#网卡配置模板" class="headerlink" title="网卡配置模板"></a>网卡配置模板</h1><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">auto eth0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">iface eth0 inet dhcp <span class="comment">#自动获取IP(默认)</span></span></span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static #设置静态IP</span><br><span class="line">address 10.0.10.200 #设置IP地址</span><br><span class="line">netmask 255.255.255.0 #设置子网掩码(根据实际情况计算)</span><br><span class="line">gateway 10.0.10.1 #设置网关</span><br><span class="line">dns-nameservers 10.0.10.1 1.2.4.8 #比如这里就设置了两个DNS</span><br></pre></td></tr></table></figure>
-<h1 id="ubuntu网卡配置地址"><a href="#ubuntu网卡配置地址" class="headerlink" title="ubuntu网卡配置地址"></a>ubuntu网卡配置地址</h1><p>/etc/network/interfaces</p>
-<p># </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-3-%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-3-%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE/" itemprop="url">网卡配置</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看-eth0及eth1等是否被rename"><a href="#查看-eth0及eth1等是否被rename" class="headerlink" title="查看 eth0及eth1等是否被rename"></a>查看 eth0及eth1等是否被rename</h1><p>dmesg | grep eth </p>
-<h2 id="如下方式，是被enp0s3重命名"><a href="#如下方式，是被enp0s3重命名" class="headerlink" title="如下方式，是被enp0s3重命名"></a>如下方式，是被enp0s3重命名</h2><h1 id="ubuntu16-04永久修改有线接口名称-enp0s3-gt-eth0"><a href="#ubuntu16-04永久修改有线接口名称-enp0s3-gt-eth0" class="headerlink" title="ubuntu16.04永久修改有线接口名称(enp0s3-&gt;eth0)"></a>ubuntu16.04永久修改有线接口名称(enp0s3-&gt;eth0)</h1><p>sudo nano /etc/default/grub<br>找到GRUB_CMDLINE_LINUX=””<br>改为GRUB_CMDLINE_LINUX=”net.ifnames=0 biosdevname=0”<br>然后sudo grub-mkconfig -o /boot/grub/grub.cfg</p>
-<blockquote>
-<p> 此操作之后，enp0s3消失</p>
-</blockquote>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><ol>
-<li>使用ifconfig<br>只出现 docker0 和 lo<br>而使用 ifconfig -a，则eth0 和 eth1 均出现</li>
-<li>使用如下命令启用eth0 和 eth1<br>sudo ifconfig eth0 up<br>sudo ifconfig eth1 up<blockquote>
-<p><a href="https://blog.csdn.net/u012789986/article/details/54178263" target="_blank" rel="noopener">参考</a></p>
-</blockquote>
-</li>
-</ol>
-<h1 id="后续-1"><a href="#后续-1" class="headerlink" title="后续"></a>后续</h1><p>但是发现 eth0 和 eth1 中都没有 inet，也就是 ipv4<br><a href="https://blog.csdn.net/u014439239/article/details/79914614" target="_blank" rel="noopener">linux中eth0中没有inet addr - 没验证，虚拟机的Ubuntu中反正是不行</a><br><a href="https://blog.csdn.net/yueyeqingshan/article/details/52805546" target="_blank" rel="noopener">虚拟机安装红帽的eth0没有inet addr的解决方案- 虚拟机+Ubuntu已验证，可行</a></p>
-<h2 id="使用dhclient-eth0命令"><a href="#使用dhclient-eth0命令" class="headerlink" title="使用dhclient eth0命令"></a>使用dhclient eth0命令</h2><p>输入 dhclient eth0 命令来获取IP地址<br>再输入ifconfig命令，就能看到eth0已经有IP地址了  </p>
-<blockquote>
-<p>但是有一个问题：每次重启系统之后，使用ifconfig命令又看不到IP地址了，必须每次都使用 dhclient eth0 命令重新分配，很不方便  </p>
-<h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>此时我们通过shell只能访问eth1，不能访问eth0<br>因为我们在virtualBox的网络-&gt;网卡设置中，对于网卡1的混杂模式为：拒绝，网卡2的混杂模式为：全部允许</p>
-</blockquote>
-<h2 id="方法二，但是Ubuntu中没有sysconfig-network-scripts-ifcfg-eth0"><a href="#方法二，但是Ubuntu中没有sysconfig-network-scripts-ifcfg-eth0" class="headerlink" title="方法二，但是Ubuntu中没有sysconfig/network-scripts/ifcfg-eth0"></a>方法二，但是Ubuntu中没有sysconfig/network-scripts/ifcfg-eth0</h2><p>vim /etc/sysconfig/network-scripts/ifcfg-eth0<br>将里面的ONBOOT属性设置为 yes<br>在执行service network restart 命令，就可以通过 ifconfig 查看eth0 的IP地址了</p>
-<blockquote>
-<p>重点是这样以后每次系统重启之后，都能自动获取IP 地址。所以问题解决了。</p>
-</blockquote>
-<h1 id="总结（需执行如下）"><a href="#总结（需执行如下）" class="headerlink" title="总结（需执行如下）"></a>总结（需执行如下）</h1><ol>
-<li>启动eth0和eth1<br>sudo ifconfig eth0 up<br>sudo ifconfig eth1 up</li>
-<li>显示ipv4<br> sudo dhclient eth0<br> sudo dhclient eth1</li>
-<li>查看网卡配置<br> ifconfig<blockquote>
-<p>/etc/network/interfaces中不能配置网卡，否则ifconfig显示正常，但是shell无法连接</p>
-</blockquote>
-</li>
-</ol>
-<h1 id="20220512"><a href="#20220512" class="headerlink" title="20220512"></a>20220512</h1><p>若还是不行，可尝试如下设置，之后再重启服务重试:<br>更改VirtualBox上的网络设置，将连接方式改为桥接网卡<br><img src="3-网卡配置/virtualBox%20网卡-桥接模式.png" alt="">  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/" itemprop="url">删除停用多余虚拟网卡</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -2286,15 +2230,11 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>sudo apt install uml-utilities</p>
-<h1 id="查看网卡信息"><a href="#查看网卡信息" class="headerlink" title="查看网卡信息"></a>查看网卡信息</h1><p>ifconfig </p>
-<h1 id="查看所有网桥"><a href="#查看所有网桥" class="headerlink" title="查看所有网桥"></a>查看所有网桥</h1><p>ifconfig -a</p>
-<h1 id="删除虚拟网卡"><a href="#删除虚拟网卡" class="headerlink" title="删除虚拟网卡"></a>删除虚拟网卡</h1><p>tunctl -d 网卡名</p>
-<h1 id="删除虚拟网桥"><a href="#删除虚拟网桥" class="headerlink" title="删除虚拟网桥"></a>删除虚拟网桥</h1><p>ifconfig &lt;网桥名&gt; down –停用网桥<br>brctl delbr &lt;网桥名&gt; –删除</p>
-<p>can’t delete bridge vethee863c1: Operation not permitted</p>
-<h1 id="将网卡tvethee863c1-移出bridge-br0-执行失败"><a href="#将网卡tvethee863c1-移出bridge-br0-执行失败" class="headerlink" title="将网卡tvethee863c1 移出bridge(br0) (执行失败)"></a>将网卡tvethee863c1 移出bridge(br0) (执行失败)</h1><p>brctl delif br0 vethee863c1</p>
-<h1 id="重启网卡时-出现-RTNETLINK-answers-File-exists-提示"><a href="#重启网卡时-出现-RTNETLINK-answers-File-exists-提示" class="headerlink" title="重启网卡时 出现 :RTNETLINK answers: File exists  提示"></a>重启网卡时 出现 :RTNETLINK answers: File exists  提示</h1><p>删除多余无用网卡vethee863c1</p>
-<h1 id="查看指定网卡（查看指定网桥）"><a href="#查看指定网卡（查看指定网桥）" class="headerlink" title="查看指定网卡（查看指定网桥）"></a>查看指定网卡（查看指定网桥）</h1><p>sudo ifconfig eth1</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands.html</a></p>
+<ol>
+<li>hexo n(new) fileName  # 新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;post title with whitespace&quot;</span><br></pre></td></tr></table></figure>
+hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<br>hexo d(deploy)        # 部署到线上<br>hexo p(publish)       # 发表草稿。<br>hexo version          # 显示hexo版本<br>hexo –debug          # 调试模式，在终端中显示调试信息并记录到 debug.log<br>hexo server –config custom.yml     # 使用 custom.yml 代替默认的 _config.yml<br>hexo clean            # 清除缓存文件 (db.json) 和已生成的静态文件 (public)。 在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。<br>hexo –draft          # 显示 source/_drafts 文件夹中的草稿文章。<br>hexo generate –config custom.yml,custom2.json,custom3.yml  # 使用 custom.yml, custom2.json 和 custom3.yml，其中 custom3.yml 优先级最高，其次是 custom2.json                        </li>
+</ol>
 
           
         
@@ -2339,7 +2279,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/30/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/28/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/30/">下一页</a>
   </nav>
 
 
@@ -2386,7 +2326,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">367</span>
+                    <span class="site-state-item-count">383</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2535,7 +2475,19 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2612,7 +2564,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2735,7 +2693,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">371k</span>
+    <span title="站点总字数">388k</span>
   
 
   
@@ -2744,7 +2702,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:11</span>
+    <span title="站点总阅读时长">6:28</span>
   
 </div>
 
