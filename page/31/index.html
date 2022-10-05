@@ -373,6 +373,397 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/19/depth-docker-config-2-windows%E4%B8%8Bdocker%E9%95%9C%E5%83%8F%E8%BF%81%E7%A7%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/09/19/depth-docker-config-2-windows%E4%B8%8Bdocker%E9%95%9C%E5%83%8F%E8%BF%81%E7%A7%BB/" itemprop="url">windows下docker镜像迁移</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-19T00:00:00+08:00">2021-09-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">9.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="使用WSL修改docker文件存储位置"><a href="#使用WSL修改docker文件存储位置" class="headerlink" title="使用WSL修改docker文件存储位置"></a>使用WSL修改docker文件存储位置</h1><p>docker-desktop-data磁盘映像通常位于以下位置：C:\Users\86180\AppData\Local\Docker\wsl\data</p>
+<ol>
+<li>首先退出Docker桌面应用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">2. 查看运行状态</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Running         2</span><br><span class="line">  docker-desktop-data    Running         2</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line"></span><br><span class="line">3. 导出本地已有数据</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Running         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line"></span><br><span class="line">4. 删除本地数据</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --export docker-desktop-data &quot;E:\\docker-desktop-data.tar&quot;</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --unregister docker-desktop-data</span><br><span class="line">正在注销...</span><br><span class="line"></span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME              STATE           VERSION</span><br><span class="line">* Ubuntu-18.04      Stopped         2</span><br><span class="line">  docker-desktop    Stopped         2</span><br><span class="line"></span><br><span class="line">5. 导入数据到新盘，设置路径，这里我设置的路径为D:\\Download\\Docker\\wsl</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --import docker-desktop-data &quot;E:\workspace-all\workspace-docker\wsl&quot; &quot;E:\workspace-all\workspace-docker\docker-desktop-data.tar&quot; --version 2</span><br><span class="line"></span><br><span class="line">6. 再次查看状态</span><br><span class="line">C:\Users\zhangdaiyin&gt;wsl --list -v</span><br><span class="line">  NAME                   STATE           VERSION</span><br><span class="line">* Ubuntu-18.04           Stopped         2</span><br><span class="line">  docker-desktop-data    Stopped         2</span><br><span class="line">  docker-desktop         Stopped         2</span><br></pre></td></tr></table></figure>
+<h2 id="以上是迁移-data，以下是-docker-desktop迁移"><a href="#以上是迁移-data，以下是-docker-desktop迁移" class="headerlink" title="以上是迁移 data，以下是 docker-desktop迁移"></a>以上是迁移 data，以下是 docker-desktop迁移</h2><p>docker-desktop迁移如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wsl --export docker-desktop E:\workspace-all\workspace-docker\docker-desktop.tar</span><br><span class="line"></span><br><span class="line">wsl --unregister docker-desktop</span><br><span class="line"></span><br><span class="line">wsl --import docker-desktop E:\workspace-all\workspace-docker\wsl\desktop E:\workspace-all\workspace-docker\docker-desktop.tar --version 2</span><br></pre></td></tr></table></figure></p>
+<h1 id="迁移之后启动报错"><a href="#迁移之后启动报错" class="headerlink" title="迁移之后启动报错"></a>迁移之后启动报错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">System.InvalidOperationException:</span><br><span class="line">distro stopped unexpectedly</span><br><span class="line">   在 Docker.Engines.LinuxkitDaemonStartup.&lt;WaitAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\LinuxkitDaemonStartup.cs:行号 60</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.Engines.WSL2.LinuxWSL2Engine.&lt;DoStartAsync&gt;d__28.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\WSL2\LinuxWSL2Engine.cs:行号 177</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.TaskExtensions.&lt;WrapAsyncInCancellationException&gt;d__0.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\TaskExtensions.cs:行号 29</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.StartTransition.&lt;DoRunAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\StartTransition.cs:行号 67</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 Docker.ApiServices.StateMachines.StartTransition.&lt;DoRunAsync&gt;d__5.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\StartTransition.cs:行号 92</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.ApiServices.StateMachines.EngineStateMachine.&lt;StartAsync&gt;d__14.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\EngineStateMachine.cs:行号 69</span><br><span class="line">--- 引发异常的上一位置中堆栈跟踪的末尾 ---</span><br><span class="line">   在 System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()</span><br><span class="line">   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)</span><br><span class="line">   在 Docker.Engines.Engines.&lt;StartAsync&gt;d__22.MoveNext() 位置 C:\workspaces\PR-17739\src\github.com\docker\pinata\win\src\Docker.Engines\Engines.cs:行号 108</span><br></pre></td></tr></table></figure>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
+<li>netsh winsock reset ：<br>winsock是Windows网络编程接口，winsock工作在应用层，它提供与底层传输协议无关的高层数据传输编程接口 netsh winsock reset 是把它恢复到默认状态。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/18/depth-docker-config-1-ideal-docker-configurations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/09/18/depth-docker-config-1-ideal-docker-configurations/" itemprop="url">ideal docker configurations</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-18T00:00:00+08:00">2021-09-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="ideal-docker-configurations（windows）"><a href="#ideal-docker-configurations（windows）" class="headerlink" title="ideal docker configurations（windows）"></a>ideal docker configurations（windows）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 连接配置</span><br><span class="line">Docker for Mac：如果你本地安装了 Docker for macOS，则推荐此连接选项。</span><br><span class="line">Unix socket： 如果你使用 Linux 系统，并在本地安装了 Docker，则推荐此连接选项。</span><br><span class="line">如果出现权限被拒绝错误，请将当前用户添加到计算机上的 docker 组，然后注销，重新登录。</span><br><span class="line">Docker Machine：如果您使用的是Docker Toolbox for Windows，建议使用此选项连接Docker API。</span><br><span class="line">TCP socket： 如果你使用的是Docker for Windows，则这是常用的连接选项。此选项也适用于Linux、Docker for macOS和Docker Toolbox。如果你本地并未安装任何 Docker 程序也可以使用此选项来连接远程主机上的 Docker 守护进程 （见下文，但是某些操作是不支持的）。</span><br><span class="line">    Engine API URL：取决于Docker版本和操作系统：</span><br><span class="line">        Docker for Windows: tcp:&#x2F;&#x2F;localhost:2375 。注意：需要事先在Docker设置的 General 部分，启用 Expose daemon on tcp:&#x2F;&#x2F;localhost:2375 without TLS 选项（其作用是：将docker与本地的连接设置为不需要TLS加密）。</span><br><span class="line">        Docker for macOS 或 Linux: unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock</span><br><span class="line">        Docker Toolbox for Windows 或 macOS: https:&#x2F;&#x2F;192.168.99.100:2376</span><br><span class="line">    Certificates folder ： 证书文件夹的路径 （一般留空）。取决于你的Docker版本和操作系统：</span><br><span class="line">        Docker for Windows, macOS 或 Linux: 留空即可</span><br><span class="line">        Docker Toolbox for Windows： %HOMEPATH%.dockermachinemachinesdefault</span><br><span class="line"></span><br><span class="line"># 配置 Path mappings （路径映射） ：</span><br><span class="line">对于Windows和macOS：指定可以在主机和容器之间共享的文件夹的映射。</span><br><span class="line">    Local path: 用于（volume binding）卷绑定的本地文件夹的路径。</span><br><span class="line">    Virtual machine path: Docker虚拟机文件系统中的相应目录路径。</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-0-virtualBox%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%8C%82%E8%BD%BD%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,7 +983,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -611,7 +1002,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/" itemprop="url">增强扩展包安装</a></h1>
+                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/" itemprop="url">vm虚拟机显示鼠标</a></h1>
         
 
         <div class="post-meta">
@@ -690,7 +1081,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">149</span>
+                <span title="字数统计">119</span>
               
 
               
@@ -727,8 +1118,8 @@
         
           
             <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>官方下载对应版本的增强扩展包</li>
-<li>“管理”-&gt; “全局设置“-&gt; “扩展”-&gt; 右侧扩展界面中，靠右方的 + 号，添加扩展包</li>
+<li>转到机器设置-&gt;系统-&gt;主板。</li>
+<li>选择PS / 2鼠标作为定位设备。</li>
 </ol>
 
           
@@ -923,205 +1314,6 @@
             <script src="/assets/js/APlayer.min.js"> </script><h1 id="网卡配置模板"><a href="#网卡配置模板" class="headerlink" title="网卡配置模板"></a>网卡配置模板</h1><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">auto eth0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">iface eth0 inet dhcp <span class="comment">#自动获取IP(默认)</span></span></span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static #设置静态IP</span><br><span class="line">address 10.0.10.200 #设置IP地址</span><br><span class="line">netmask 255.255.255.0 #设置子网掩码(根据实际情况计算)</span><br><span class="line">gateway 10.0.10.1 #设置网关</span><br><span class="line">dns-nameservers 10.0.10.1 1.2.4.8 #比如这里就设置了两个DNS</span><br></pre></td></tr></table></figure>
 <h1 id="ubuntu网卡配置地址"><a href="#ubuntu网卡配置地址" class="headerlink" title="ubuntu网卡配置地址"></a>ubuntu网卡配置地址</h1><p>/etc/network/interfaces</p>
 <p># </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/" itemprop="url">删除停用多余虚拟网卡</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>sudo apt install uml-utilities</p>
-<h1 id="查看网卡信息"><a href="#查看网卡信息" class="headerlink" title="查看网卡信息"></a>查看网卡信息</h1><p>ifconfig </p>
-<h1 id="查看所有网桥"><a href="#查看所有网桥" class="headerlink" title="查看所有网桥"></a>查看所有网桥</h1><p>ifconfig -a</p>
-<h1 id="删除虚拟网卡"><a href="#删除虚拟网卡" class="headerlink" title="删除虚拟网卡"></a>删除虚拟网卡</h1><p>tunctl -d 网卡名</p>
-<h1 id="删除虚拟网桥"><a href="#删除虚拟网桥" class="headerlink" title="删除虚拟网桥"></a>删除虚拟网桥</h1><p>ifconfig &lt;网桥名&gt; down –停用网桥<br>brctl delbr &lt;网桥名&gt; –删除</p>
-<p>can’t delete bridge vethee863c1: Operation not permitted</p>
-<h1 id="将网卡tvethee863c1-移出bridge-br0-执行失败"><a href="#将网卡tvethee863c1-移出bridge-br0-执行失败" class="headerlink" title="将网卡tvethee863c1 移出bridge(br0) (执行失败)"></a>将网卡tvethee863c1 移出bridge(br0) (执行失败)</h1><p>brctl delif br0 vethee863c1</p>
-<h1 id="重启网卡时-出现-RTNETLINK-answers-File-exists-提示"><a href="#重启网卡时-出现-RTNETLINK-answers-File-exists-提示" class="headerlink" title="重启网卡时 出现 :RTNETLINK answers: File exists  提示"></a>重启网卡时 出现 :RTNETLINK answers: File exists  提示</h1><p>删除多余无用网卡vethee863c1</p>
-<h1 id="查看指定网卡（查看指定网桥）"><a href="#查看指定网卡（查看指定网桥）" class="headerlink" title="查看指定网卡（查看指定网桥）"></a>查看指定网卡（查看指定网桥）</h1><p>sudo ifconfig eth1</p>
 
           
         
@@ -1399,7 +1591,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1418,7 +1610,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-1-vm%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%98%BE%E7%A4%BA%E9%BC%A0%E6%A0%87/" itemprop="url">vm虚拟机显示鼠标</a></h1>
+                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-2-%E5%A2%9E%E5%BC%BA%E6%89%A9%E5%B1%95%E5%8C%85%E5%AE%89%E8%A3%85/" itemprop="url">增强扩展包安装</a></h1>
         
 
         <div class="post-meta">
@@ -1497,7 +1689,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">119</span>
+                <span title="字数统计">149</span>
               
 
               
@@ -1534,9 +1726,208 @@
         
           
             <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li>转到机器设置-&gt;系统-&gt;主板。</li>
-<li>选择PS / 2鼠标作为定位设备。</li>
+<li>官方下载对应版本的增强扩展包</li>
+<li>“管理”-&gt; “全局设置“-&gt; “扩展”-&gt; 右侧扩展界面中，靠右方的 + 号，添加扩展包</li>
 </ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/06/12/tool-linux-VM-VirtualBox-4-%E5%88%A0%E9%99%A4%E5%81%9C%E7%94%A8%E5%A4%9A%E4%BD%99%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1/" itemprop="url">删除停用多余虚拟网卡</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-12T00:00:00+08:00">2021-06-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/linux/vm/" itemprop="url" rel="index"><span itemprop="name">vm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p>sudo apt install uml-utilities</p>
+<h1 id="查看网卡信息"><a href="#查看网卡信息" class="headerlink" title="查看网卡信息"></a>查看网卡信息</h1><p>ifconfig </p>
+<h1 id="查看所有网桥"><a href="#查看所有网桥" class="headerlink" title="查看所有网桥"></a>查看所有网桥</h1><p>ifconfig -a</p>
+<h1 id="删除虚拟网卡"><a href="#删除虚拟网卡" class="headerlink" title="删除虚拟网卡"></a>删除虚拟网卡</h1><p>tunctl -d 网卡名</p>
+<h1 id="删除虚拟网桥"><a href="#删除虚拟网桥" class="headerlink" title="删除虚拟网桥"></a>删除虚拟网桥</h1><p>ifconfig &lt;网桥名&gt; down –停用网桥<br>brctl delbr &lt;网桥名&gt; –删除</p>
+<p>can’t delete bridge vethee863c1: Operation not permitted</p>
+<h1 id="将网卡tvethee863c1-移出bridge-br0-执行失败"><a href="#将网卡tvethee863c1-移出bridge-br0-执行失败" class="headerlink" title="将网卡tvethee863c1 移出bridge(br0) (执行失败)"></a>将网卡tvethee863c1 移出bridge(br0) (执行失败)</h1><p>brctl delif br0 vethee863c1</p>
+<h1 id="重启网卡时-出现-RTNETLINK-answers-File-exists-提示"><a href="#重启网卡时-出现-RTNETLINK-answers-File-exists-提示" class="headerlink" title="重启网卡时 出现 :RTNETLINK answers: File exists  提示"></a>重启网卡时 出现 :RTNETLINK answers: File exists  提示</h1><p>删除多余无用网卡vethee863c1</p>
+<h1 id="查看指定网卡（查看指定网桥）"><a href="#查看指定网卡（查看指定网桥）" class="headerlink" title="查看指定网卡（查看指定网桥）"></a>查看指定网卡（查看指定网桥）</h1><p>sudo ifconfig eth1</p>
 
           
         
@@ -1966,386 +2357,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/02/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/05/02/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2/" itemprop="url">本地搜索</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-02T00:00:00+08:00">2021-05-02</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.9k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="本地搜索"><a href="#本地搜索" class="headerlink" title="本地搜索"></a>本地搜索</h1><ol>
-<li>npm install hexo-generator-searchdb –save</li>
-<li>站点/_config.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 本地搜索服务</span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure></li>
-<li>themes/next6/_config.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Local search（本地搜索服务）</span><br><span class="line"># Dependencies: https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-generator-searchdb</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br><span class="line">  # 如果是自动，则通过更改输入触发搜索</span><br><span class="line">  # 如果是手动的，按回车键或搜索按钮触发搜索</span><br><span class="line">  trigger: auto</span><br><span class="line">  # 显示每篇文章的前 n 个结果，通过设置为 -1 显示所有结果</span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  # 将 html 字符串转义为可读的字符串</span><br><span class="line">  unescape: false</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-2-wsl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-2-wsl%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">wsl常用命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="wsl常用命令"><a href="#wsl常用命令" class="headerlink" title="wsl常用命令"></a>wsl常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">列出分发版</span><br><span class="line">wsl -l , wsl --list</span><br><span class="line">wsl --list --all</span><br><span class="line">wsl --list --running</span><br><span class="line">设置默认分发版</span><br><span class="line">wsl -s Ubuntu</span><br><span class="line">取消注册和重新安装分发版</span><br><span class="line">注销后，与该分发关联的所有数据、设置和软件都将永久丢失。 从 Store 重新安装会安装分发版的干净副本。</span><br><span class="line">wsl --unregister &lt;DistributionName&gt;</span><br><span class="line">wsl --unregister Ubuntu</span><br><span class="line">将 WSL 2 设置为默认版本</span><br><span class="line">wsl --set-default-version 2</span><br><span class="line">用于管理适用于 Linux 的 Windows 子系统的参数</span><br><span class="line">--export &lt;分发版&gt; &lt;文件名&gt;  将分发版导出到 tar 文件</span><br><span class="line">--import &lt;分发版&gt; &lt;安装位置&gt; &lt;文件名&gt;  导入指定的 tar 文件作为新的分发版</span><br><span class="line">--list、-l [选项]  列出分发版</span><br><span class="line"></span><br><span class="line">wsl --shutdown</span><br><span class="line">立即终止所有正在运行的发行版和 WSL 2 轻量级实用程序虚拟机</span><br><span class="line">wsl --terminate Ubuntu 关闭ubuntu</span><br><span class="line"></span><br><span class="line">service docker status&#x2F;start&#x2F;restart</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2397,7 +2408,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">383</span>
+                    <span class="site-state-item-count">385</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2558,7 +2569,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">74</span>
+                      
+                    
+                    <span class="site-state-item-count">75</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2764,7 +2777,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">388k</span>
+    <span title="站点总字数">392k</span>
   
 
   
@@ -2773,7 +2786,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:28</span>
+    <span title="站点总阅读时长">6:32</span>
   
 </div>
 

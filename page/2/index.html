@@ -567,6 +567,411 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/" itemprop="url">使用docker启动redis容器失败的原因</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>使用docker启动redis容器失败的原因：<a href="https://blog.csdn.net/m0_67402774/article/details/126553643" target="_blank" rel="noopener">https://blog.csdn.net/m0_67402774/article/details/126553643</a></strong></li>
+</ul>
+<hr>
+<h1 id="使用docker启动redis容器失败的原因"><a href="#使用docker启动redis容器失败的原因" class="headerlink" title="使用docker启动redis容器失败的原因"></a>使用docker启动redis容器失败的原因</h1><h2 id="启动执行命令"><a href="#启动执行命令" class="headerlink" title="启动执行命令"></a>启动执行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v &#x2F;root&#x2F;guli&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf -d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>发现一启动，就停止。<br>后来，去网上查了以后发现，是因为redis.conf文件中的daemonize为yes，意思是redis服务在后台运行，与docker中的-d参数冲突了。<br>只要把daemonize的参数值改为no就可以了，再次执行以上命令，容器启动成功。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E8%A7%A3%E5%86%B3%E5%88%9B%E5%BB%BAredis%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-%E8%A7%A3%E5%86%B3%E5%88%9B%E5%BB%BAredis%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">解决创建redis容器没有conf配置文件</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>解决创建redis容器没有conf配置文件: <a href="https://longsheng.org/post/18174.html" target="_blank" rel="noopener">https://longsheng.org/post/18174.html</a></strong></li>
+</ul>
+<hr>
+<h1 id="解决创建redis容器没有conf配置文件"><a href="#解决创建redis容器没有conf配置文件" class="headerlink" title="解决创建redis容器没有conf配置文件"></a>解决创建redis容器没有conf配置文件</h1><ol>
+<li>如果通过以下命令创建redis容器，docker redis中会出现 redis.conf 文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always -v  &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;data:&#x2F;data   --name myredis redis:latest redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure></li>
+<li>解决</li>
+</ol>
+<ul>
+<li>首先应该在宿主机路径下创建 redis.conf 文件</li>
+<li>然后再通过命令创建容器</li>
+<li>否则容器会将 redis.conf 以文件夹的形式关联创建</li>
+</ul>
+<h1 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h1><ul>
+<li>-v /usr/local/redis/redis.conf:/etc/redis.conf：映射配置文件</li>
+<li>-v /root/usr/local/redis/data:/data：映射数据目录</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -930,203 +1335,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/" itemprop="url">compose.yml案例2</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">yml案例</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">6.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用的yml版本</span><br><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  # 服务名称，可以自定义</span><br><span class="line">  myapp:</span><br><span class="line">    # 容器名称，可以自定义</span><br><span class="line">    container_name: myapp</span><br><span class="line">    # 指定Dockerfile所在的目录</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p>然后执行docker-compose up即可，主要完成以下的两步操作：</p>
-<ul>
-<li>镜像构建docker build；</li>
-<li>启动yml中的所有容器docker run；<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose up</span><br><span class="line"># 创建了默认类型的自定义网络，即bridge类型网络，而非使用默认的docker0桥接网络，拥有自己的独立网段，可以通过docker network ls及docker network inspect查看具体的网络信息</span><br><span class="line">Creating network &quot;myapp_default&quot; with the default driver</span><br><span class="line">Building myapp</span><br><span class="line">[+] Building 0.5s (7&#x2F;7) FINISHED</span><br><span class="line"> &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 153B                                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load .dockerignore                                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                      0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;openjdk:8                                                                         0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load build context                                                                                                    0.2s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 17.62MB                                                                                                 0.1s</span><br><span class="line"> &#x3D;&gt; CACHED [1&#x2F;2] FROM docker.io&#x2F;library&#x2F;openjdk:8                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; [2&#x2F;2] ADD  target&#x2F;myapp-0.0.1-SNAPSHOT.jar &#x2F;demo.jar                                                                             0.1s</span><br><span class="line"> &#x3D;&gt; exporting to image                                                                                                               0.1s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                              0.1s</span><br><span class="line"> # 将镜像写入本地的镜像仓库，并以项目名称_服务名称命名镜像</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; writing image sha256:c387978706931f09fa16a737704f2c1047e8f632de192a25b0dc42dc151ac4c7                                         0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;myapp_myapp                                                                                       0.0s</span><br><span class="line"></span><br><span class="line">Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them</span><br><span class="line">WARNING: Image for service myapp was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.</span><br><span class="line">Creating myapp ... done</span><br><span class="line">Attaching to myapp</span><br><span class="line">myapp    |</span><br><span class="line">myapp    |   .   ____          _            __ _ _</span><br><span class="line">myapp    |  &#x2F;\\ &#x2F; ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">myapp    | ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \&#x2F; _&#96; | \ \ \ \</span><br><span class="line">myapp    |  \\&#x2F;  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">myapp    |   &#39;  |____| .__|_| |_|_| |_\__, | &#x2F; &#x2F; &#x2F; &#x2F;</span><br><span class="line">myapp    |  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|_|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|___&#x2F;&#x3D;&#x2F;_&#x2F;_&#x2F;_&#x2F;</span><br><span class="line">myapp    |  :: Spring Boot ::                (v2.6.0)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1277,6 +1485,203 @@
 <li>docker-compose start container_name，启动指定的容器，如果不指定则停止所有的容器；</li>
 <li>docker-compose rm container_name，删除指定的已停止容器，如果不指定则删除所有已停止容器；</li>
 <li>docker-compose build，构建或者重新构建服务的镜像，但不会创建和启动容器</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/" itemprop="url">compose.yml案例2</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">yml案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">6.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用的yml版本</span><br><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  # 服务名称，可以自定义</span><br><span class="line">  myapp:</span><br><span class="line">    # 容器名称，可以自定义</span><br><span class="line">    container_name: myapp</span><br><span class="line">    # 指定Dockerfile所在的目录</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p>然后执行docker-compose up即可，主要完成以下的两步操作：</p>
+<ul>
+<li>镜像构建docker build；</li>
+<li>启动yml中的所有容器docker run；<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose up</span><br><span class="line"># 创建了默认类型的自定义网络，即bridge类型网络，而非使用默认的docker0桥接网络，拥有自己的独立网段，可以通过docker network ls及docker network inspect查看具体的网络信息</span><br><span class="line">Creating network &quot;myapp_default&quot; with the default driver</span><br><span class="line">Building myapp</span><br><span class="line">[+] Building 0.5s (7&#x2F;7) FINISHED</span><br><span class="line"> &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 153B                                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load .dockerignore                                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                      0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;openjdk:8                                                                         0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load build context                                                                                                    0.2s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 17.62MB                                                                                                 0.1s</span><br><span class="line"> &#x3D;&gt; CACHED [1&#x2F;2] FROM docker.io&#x2F;library&#x2F;openjdk:8                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; [2&#x2F;2] ADD  target&#x2F;myapp-0.0.1-SNAPSHOT.jar &#x2F;demo.jar                                                                             0.1s</span><br><span class="line"> &#x3D;&gt; exporting to image                                                                                                               0.1s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                              0.1s</span><br><span class="line"> # 将镜像写入本地的镜像仓库，并以项目名称_服务名称命名镜像</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; writing image sha256:c387978706931f09fa16a737704f2c1047e8f632de192a25b0dc42dc151ac4c7                                         0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;myapp_myapp                                                                                       0.0s</span><br><span class="line"></span><br><span class="line">Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them</span><br><span class="line">WARNING: Image for service myapp was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.</span><br><span class="line">Creating myapp ... done</span><br><span class="line">Attaching to myapp</span><br><span class="line">myapp    |</span><br><span class="line">myapp    |   .   ____          _            __ _ _</span><br><span class="line">myapp    |  &#x2F;\\ &#x2F; ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">myapp    | ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \&#x2F; _&#96; | \ \ \ \</span><br><span class="line">myapp    |  \\&#x2F;  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">myapp    |   &#39;  |____| .__|_| |_|_| |_\__, | &#x2F; &#x2F; &#x2F; &#x2F;</span><br><span class="line">myapp    |  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|_|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|___&#x2F;&#x3D;&#x2F;_&#x2F;_&#x2F;_&#x2F;</span><br><span class="line">myapp    |  :: Spring Boot ::                (v2.6.0)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
           
@@ -1719,184 +2124,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/mac-20220926-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/26/mac-20220926-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7/" itemprop="url">修改文件所属用户</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="由于-db-json-属于-root，一直执行失败，提示没权限"><a href="#由于-db-json-属于-root，一直执行失败，提示没权限" class="headerlink" title="由于 db.json 属于 root，一直执行失败，提示没权限"></a>由于 db.json 属于 root，一直执行失败，提示没权限</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyindeMacBook-Pro:diabolo-hub-source-code root# ls -l</span><br><span class="line">total 10632</span><br><span class="line">drwxr-xr-x   16 diabolo  staff      512 Sep 26 14:24 .git</span><br><span class="line">-rw-r--r--    1 diabolo  staff       66 Jul 10 22:48 .gitattributes</span><br><span class="line">-rw-r--r--    1 diabolo  staff       74 Jul 10 22:48 .gitignore</span><br><span class="line">drwxr-xr-x   10 diabolo  staff      320 Sep 26 14:20 .idea</span><br><span class="line">-rw-r--r--    1 diabolo  staff      934 Sep 23 17:29 Dockerfile-bak</span><br><span class="line">-rw-r--r--    1 diabolo  staff     1628 Sep 26 14:09 Dockerfile-hexo</span><br><span class="line">-rw-r--r--    1 diabolo  staff     2145 Sep 26 11:41 Dockerfile-pm2</span><br><span class="line">-rw-r--r--    1 diabolo  staff      640 Jul 10 22:48 README.md</span><br><span class="line">-rw-r--r--    1 diabolo  staff     3288 Aug  3 14:13 _config.yml</span><br><span class="line">-rw-r--r--    1 root     staff  4013230 Sep 26 11:38 db.json</span><br><span class="line">-rw-r--r--    1 diabolo  staff      184 Sep 26 10:42 entrypoint.sh</span><br><span class="line">-rw-r--r--    1 diabolo  staff      262 Sep 20 15:24 hexo_run.js</span><br><span class="line">drwxr-xr-x  374 diabolo  staff    11968 Sep 16 14:29 node_modules</span><br><span class="line">-rw-r--r--    1 diabolo  staff   458034 Sep 16 14:29 package-lock.json</span><br><span class="line">-rw-r--r--    1 diabolo  staff      969 Sep 16 14:29 package.json</span><br><span class="line">drwxr-xr-x   28 root     staff      896 Sep 26 11:21 public</span><br><span class="line">drwxr-xr-x    5 diabolo  staff      160 Jul 10 22:48 scaffolds</span><br><span class="line">drwxr-xr-x   10 diabolo  staff      320 Aug  3 14:13 source</span><br><span class="line">drwxr-xr-x    5 diabolo  staff      160 Jul 10 22:48 themes</span><br><span class="line">drwxr-xr-x    4 diabolo  staff      128 Aug  3 14:13 uploadPhotos</span><br><span class="line">-rw-r--r--    1 diabolo  staff     1430 Sep  5 14:47 ????????????????????????docker-hexo.md</span><br></pre></td></tr></table></figure>
-<h1 id="将-db-json-文件和-public-文件夹修改为-diabolo-用户所有"><a href="#将-db-json-文件和-public-文件夹修改为-diabolo-用户所有" class="headerlink" title="将 db.json 文件和 public 文件夹修改为 diabolo 用户所有"></a>将 db.json 文件和 public 文件夹修改为 diabolo 用户所有</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown diabolo:staff db.json</span><br><span class="line">sudo chown diabolo:staff public</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/mac-20220926-mac%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2061,200 +2288,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%83%A8%E7%BD%B2%E5%88%B0github/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/26/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%83%A8%E7%BD%B2%E5%88%B0github/" itemprop="url">部署到github</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">4 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="deploy配置"><a href="#deploy配置" class="headerlink" title="deploy配置"></a>deploy配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:diabolo-hub&#x2F;xxx.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  token: &#39;ghp_b...&#39;</span><br><span class="line">  message:</span><br><span class="line">  name: diabolo-hub</span><br><span class="line">  email: zhangdaiyin.cool@163.com</span><br></pre></td></tr></table></figure>
-<h1 id="token配置"><a href="#token配置" class="headerlink" title="token配置"></a>token配置</h1><p><a href="https://blog.csdn.net/qq_43659183/article/details/126041835" target="_blank" rel="noopener">使用personal token将hexo本地文件推到GitHub</a></p>
-<ol>
-<li>个人设置中心</li>
-<li>左侧底部的开发者中心</li>
-<li>创建一个 personal token，权限勾选第一个 repo 即可，点击底部创建token</li>
-</ol>
-<h1 id="提示权限不足时，需要重新生成token并验证"><a href="#提示权限不足时，需要重新生成token并验证" class="headerlink" title="提示权限不足时，需要重新生成token并验证"></a>提示权限不足时，需要重新生成token并验证</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">➜  diabolo-hub-source-code git:(first_code) ✗ hexo deploy</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line">ssh_dispatch_run_fatal: Connection to 20.205.243.166 port 22: Operation timed out</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#39;s wrong. Maybe you can find the solution here: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line">Error</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (&#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;node_modules&#x2F;hexo-util&#x2F;lib&#x2F;spawn.js:37:17)</span><br><span class="line">    at ChildProcess.emit (node:events:513:28)</span><br><span class="line">    at maybeClose (node:internal&#x2F;child_process:1093:16)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (node:internal&#x2F;child_process:302:5)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>若token无误，还是提示权限不足，可能是发布目录中存在文件 或 文件夹 的操作权限不足，如 root 读写权限，普通用户构建发布</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2306,7 +2339,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">383</span>
+                    <span class="site-state-item-count">385</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2467,7 +2500,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">74</span>
+                      
+                    
+                    <span class="site-state-item-count">75</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2673,7 +2708,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">388k</span>
+    <span title="站点总字数">392k</span>
   
 
   
@@ -2682,7 +2717,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:28</span>
+    <span title="站点总阅读时长">6:32</span>
   
 </div>
 

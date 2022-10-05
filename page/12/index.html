@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-bk/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-bk/" itemprop="url">database-mysql-notes-lock-bk</a></h1>
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/" itemprop="url">database-mysql-notes-index-索引下推</a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">212</span>
+                <span title="字数统计">3.1k</span>
               
 
               
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -475,7 +475,35 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/lgxzzz/article/details/122368203" target="_blank" rel="noopener">https://blog.csdn.net/lgxzzz/article/details/122368203</a></p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<p><a href="https://zhuanlan.zhihu.com/p/470255206" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/470255206</a></p>
+<hr>
+<h1 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h1><p>索引下推是从 MySQL5.6 开始引入一个特性，英文是 index condition pushdown，一般简称为 ICP，索引下推通过减少回表的次数，来提高数据库的查询效率。<br>索引下推是 MySQL5.6 中开始引入的新特</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;user2&#96; ( &#96;id&#96; int(11) unsigned NOT NULL AUTO_INCREMENT, &#96;username&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, &#96;age&#96; int(11) DEFAULT NULL, &#96;address&#96; varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL, PRIMARY KEY (&#96;id&#96;), KEY &#96;username&#96; (&#96;username&#96;(191),&#96;age&#96;) ) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;100001 DEFAULT CHARSET&#x3D;utf8mb4 COLLATE&#x3D;utf8mb4_unicode_ci;\</span><br></pre></td></tr></table></figure>
+<p>表中有一个由 username 和 age 组成的复合索引，索引名字就叫 username</p>
+<h2 id="MySQL-5-5"><a href="#MySQL-5-5" class="headerlink" title="MySQL 5.5"></a>MySQL 5.5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username&#x3D;&#39;1&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>首先 MySQL 的 server 层调用存储引擎获取 username=‘1’ 的第一条记录。</li>
+<li>存储引擎找到 username=‘1’ 的第一条记录后，在 B+Tree 的叶子结点中保存着主键 id，此时通过回表操作，去主键索引中找到该条记录的完整数据，并返回给 server 层。</li>
+<li>server 层拿到数据之后，判断该条记录的 age 是否为 99，如果 age=99，就把该条记录返回给客户端，如果 age!=99，那就就丢弃该记录。</li>
+<li>由于 username+age 组成的复合索引只是一个普通索引，并不是唯一索引（如果是唯一索引，那么这个查询就到此结束了），所以还需要继续去搜索有没有满足条件的记录。<blockquote>
+<p>username和age联合索引且同时使用时，会先使用一个条件（username）查询到结果记录，然后回表到server层，再通过age筛选，不通过的丢弃</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>类似这样的模糊查询，有多条的时候，在上面的基础上，通过的留下，然后再查询下一条数据（又要进行回表）</p>
+</blockquote>
+<h2 id="MySQL-5-7"><a href="#MySQL-5-7" class="headerlink" title="MySQL 5.7"></a>MySQL 5.7</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user2 where username like &#39;j%&#39; and age&#x3D;99;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>MySQL 的 server 层首先调用存储引擎定位到第一个以 j 开头的 username。</li>
+<li>找到记录后，存储引擎并不急着回表，而是继续判断这条记录的 age 是否等于 99，如果 age=99，再去回表，如果 age 不等于 99，就不去回表了，直接继续读取下一条记录。</li>
+<li>存储引擎将读取到的数据行返回给 server 层，此时如果还有其他非索引的查询条件，server 层再去继续过滤，在我们上面的案例中，此时没有其他查询条件了。假设 server 层还有其他的过滤条件，并且这个过滤条件把刚刚查到的记录过滤掉了，那么就会通过记录的 next_record 属性读取下一条记录，然后重复第二步。<blockquote>
+<p>username和age联合索引且同时使用时，先使用（username）查询到结果记录，然后接着使用age过滤，等拿到所有的结果后，再进行回表， （所有的结果都拿到后，一次回表）</p>
+</blockquote>
+</li>
+</ol>
 
           
         
@@ -532,7 +560,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -551,7 +579,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-行级锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/" itemprop="url">database-mysql-notes-lock-临键锁（Next-key-Locks）</a></h1>
         
 
         <div class="post-meta">
@@ -848,7 +876,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -867,7 +895,165 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E4%B8%B4%E9%94%AE%E9%94%81%EF%BC%88Next-key-Locks%EF%BC%89/" itemprop="url">database-mysql-notes-lock-临键锁（Next-key-Locks）</a></h1>
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81/" itemprop="url">database-mysql-notes-lock-插入意向锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%87%AA%E5%A2%9E%E9%94%81/" itemprop="url">database-mysql-notes-lock-自增锁</a></h1>
         
 
         <div class="post-meta">
@@ -1164,164 +1350,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-页级锁</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%A1%A8%E7%BA%A7%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1480,7 +1508,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-6-mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1499,7 +1527,165 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-6-mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/" itemprop="url">database-mysql-notes-6-mysql主从同步</a></h1>
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E8%A1%8C%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-行级锁</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">50</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-%E9%A1%B5%E7%BA%A7%E9%94%81/" itemprop="url">database-mysql-notes-lock-页级锁</a></h1>
         
 
         <div class="post-meta">
@@ -1781,198 +1967,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-interview-%E7%8E%B0%E6%9C%89%E4%B8%A4%E5%BC%A0%E8%A1%A8-A-B-%E5%AD%97%E6%AE%B5-%E5%8F%AA%E6%9C%89%E4%B8%A4%E5%88%97%EF%BC%8C%E9%83%BD%E6%98%AF-%E5%A7%93%E5%90%8D-%E5%92%8C%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%9A%84%E6%89%BE%E5%87%BA%E7%9B%B8%E5%90%8C%E7%9A%84%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/database-mysql-interview-%E7%8E%B0%E6%9C%89%E4%B8%A4%E5%BC%A0%E8%A1%A8-A-B-%E5%AD%97%E6%AE%B5-%E5%8F%AA%E6%9C%89%E4%B8%A4%E5%88%97%EF%BC%8C%E9%83%BD%E6%98%AF-%E5%A7%93%E5%90%8D-%E5%92%8C%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%EF%BC%8C%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%9A%84%E6%89%BE%E5%87%BA%E7%9B%B8%E5%90%8C%E7%9A%84%E8%AE%B0%E5%BD%95/" itemprop="url">sql场景面试题2</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">262</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>题目：现有两张表 A,B 字段 只有两列，都是 姓名 和身份证号，如何快速的找出相同的记录<br>table a   table b<br>nameA     nameB<br>cardA     cardB  </p>
-<p>select nameA,cardA from a<br>inner join<br>b on a.nameA = b.nameB and a.cardA = b.cardB;  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2024,7 +2018,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">383</span>
+                    <span class="site-state-item-count">385</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2185,7 +2179,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">74</span>
+                      
+                    
+                    <span class="site-state-item-count">75</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2391,7 +2387,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">388k</span>
+    <span title="站点总字数">392k</span>
   
 
   
@@ -2400,7 +2396,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:28</span>
+    <span title="站点总阅读时长">6:32</span>
   
 </div>
 
