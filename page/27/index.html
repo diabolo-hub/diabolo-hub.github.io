@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-%E6%97%A5%E5%8E%86/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/18/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-%E6%97%A5%E5%8E%86/" itemprop="url">日历</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/" itemprop="url">随机查询数据</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -429,14 +429,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
 
                 
                 
@@ -464,7 +471,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.1k</span>
+                <span title="字数统计">805</span>
               
 
               
@@ -478,7 +485,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -500,27 +507,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>theme-next-calendar：<a href="https://github.com/icecory/theme-next-calendar" target="_blank" rel="noopener">https://github.com/icecory/theme-next-calendar</a></strong></li>
-<li><strong>hexo-next 主题添加日历云: <a href="https://www.zhyong.cn/posts/1da9/" target="_blank" rel="noopener">https://www.zhyong.cn/posts/1da9/</a></strong></li>
-<li><strong>Hexo日历插件: <a href="http://howiefh.github.io/2016/04/29/hexo-s-calendar-plugin/?utm_source=tuicool" target="_blank" rel="noopener">http://howiefh.github.io/2016/04/29/hexo-s-calendar-plugin/?utm_source=tuicool</a></strong></li>
-<li><strong>Hexo主题中添加日历云功能: <a href="https://www.jianshu.com/p/b9665a8e8282" target="_blank" rel="noopener">https://www.jianshu.com/p/b9665a8e8282</a></strong></li>
-</ul>
-<hr>
-<h1 id="日历"><a href="#日历" class="headerlink" title="日历"></a>日历</h1><ol>
-<li>首先安装hexo插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save git:&#x2F;&#x2F;github.com&#x2F;icecory&#x2F;theme-next-calendar#hexo</span><br><span class="line">git clone --depth&#x3D;1 git@github.com&#x2F;icecory&#x2F;theme-next-calendar themes&#x2F;next&#x2F;source&#x2F;lib&#x2F;calendar</span><br></pre></td></tr></table></figure></li>
-<li><p>配置 把sidebar.swig, calendar.styl放到${root}/source/_data目录下<br>在themes/next/layout/_layout.swig最后加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include &#39;..&#x2F;source&#x2F;lib&#x2F;calendar&#x2F;calendar.swig&#39; %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在next主题配置文件_config.yml配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  sidebar: source&#x2F;_data&#x2F;sidebar.swig</span><br><span class="line">  styles: source&#x2F;_data&#x2F;calendar.styl</span><br><span class="line"></span><br><span class="line">CloudCalendar:</span><br><span class="line">  enable: true</span><br><span class="line">  language: zh-CN</span><br><span class="line">  single: true</span><br><span class="line">  root: &#x2F;calendar&#x2F;</span><br></pre></td></tr></table></figure>
-<h2 id="渲染日历"><a href="#渲染日历" class="headerlink" title="渲染日历"></a>渲染日历</h2><p>默认是在边栏中渲染, 当然也可以在任何位置显示, 只要移动sidebar.swig中的代码即可</p>
-<h2 id="自定义日历颜色"><a href="#自定义日历颜色" class="headerlink" title="自定义日历颜色"></a>自定义日历颜色</h2><p>日历插件内各元素的颜色都是可定制的, 可以通过修改calendar.styl文件来达到更好的效果.</p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>提取自Landscape-F主题, 修改后适配theme-next</p>
-</li>
-</ol>
-
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="order-by-rand"><a href="#order-by-rand" class="headerlink" title="order by rand()"></a>order by rand()</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -576,7 +564,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -595,7 +583,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/18/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/" itemprop="url">代码块复制功能</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-1-mysql-inner-join-%E5%8E%BB%E9%87%8D/" itemprop="url">mysql inner join 去重</a></h1>
         
 
         <div class="post-meta">
@@ -611,7 +599,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -632,14 +620,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -667,205 +662,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">21k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">21 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>clipboard.js：<a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.js" target="_blank" rel="noopener">https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.js</a></strong></li>
-<li><strong>clipboard.min.js: <a href="https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js" target="_blank" rel="noopener">https://raw.githubusercontent.com/zenorocha/clipboard.js/master/dist/clipboard.min.js</a></strong></li>
-<li><strong>Hexo NexT 代码块复制功能: <a href="https://www.jianshu.com/p/3e9d614c1e77" target="_blank" rel="noopener">https://www.jianshu.com/p/3e9d614c1e77</a></strong></li>
-</ul>
-<hr>
-<h1 id="代码块复制功能"><a href="#代码块复制功能" class="headerlink" title="代码块复制功能"></a>代码块复制功能</h1><ol>
-<li>保存文件clipboard.js / clipboard.min.js ，目录如下：<br>.\themes\next\source\js\src</li>
-<li>clipboardjs 使用<br>也是在.\themes\next\source\js\src目录下，创建clipboard-use.js，文件内容如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*页面载入完成后，创建复制按钮*&#x2F;</span><br><span class="line">!function (e, t, a) &#123; </span><br><span class="line">  &#x2F;* code *&#x2F;</span><br><span class="line">  var initCopyCode &#x3D; function()&#123;</span><br><span class="line">    var copyHtml &#x3D; &#39;&#39;;</span><br><span class="line">    copyHtml +&#x3D; &#39;&lt;button class&#x3D;&quot;btn-copy&quot; data-clipboard-snippet&#x3D;&quot;&quot;&gt;&#39;;</span><br><span class="line">    copyHtml +&#x3D; &#39;  &lt;i class&#x3D;&quot;fa fa-globe&quot;&gt;&lt;&#x2F;i&gt;&lt;span&gt;copy&lt;&#x2F;span&gt;&#39;;</span><br><span class="line">    copyHtml +&#x3D; &#39;&lt;&#x2F;button&gt;&#39;;</span><br><span class="line">    $(&quot;.highlight .code pre&quot;).before(copyHtml);</span><br><span class="line">    new ClipboardJS(&#39;.btn-copy&#39;, &#123;</span><br><span class="line">        target: function(trigger) &#123;</span><br><span class="line">            return trigger.nextElementSibling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  initCopyCode();</span><br><span class="line">&#125;(window, document);</span><br></pre></td></tr></table></figure></li>
-<li>在.\themes\next\source\css_custom\custom.styl样式文件中添加下面代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;代码块复制按钮</span><br><span class="line">.highlight&#123;</span><br><span class="line">  &#x2F;&#x2F;方便copy代码按钮（btn-copy）的定位</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.btn-copy &#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">    background-color: #eee;</span><br><span class="line">    background-image: linear-gradient(#fcfcfc,#eee);</span><br><span class="line">    border: 1px solid #d5d5d5;</span><br><span class="line">    border-radius: 3px;</span><br><span class="line">    -webkit-user-select: none;</span><br><span class="line">    -moz-user-select: none;</span><br><span class="line">    -ms-user-select: none;</span><br><span class="line">    user-select: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    font-size: 13px;</span><br><span class="line">    font-weight: 700;</span><br><span class="line">    line-height: 20px;</span><br><span class="line">    color: #333;</span><br><span class="line">    -webkit-transition: opacity .3s ease-in-out;</span><br><span class="line">    -o-transition: opacity .3s ease-in-out;</span><br><span class="line">    transition: opacity .3s ease-in-out;</span><br><span class="line">    padding: 2px 6px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    right: 5px;</span><br><span class="line">    top: 5px;</span><br><span class="line">    opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line">.btn-copy span &#123;</span><br><span class="line">    margin-left: 5px;</span><br><span class="line">&#125;</span><br><span class="line">.highlight:hover .btn-copy&#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2>在.\themes\next\layout_layout.swig文件中，添加引用（注：在 swig 末尾或 body 结束标签（</body>）之前添加）：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 代码块复制功能 --&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;clipboard.min.js&quot;&gt;&lt;&#x2F;script&gt;  </span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;clipboard-use.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="clipboard-min-js"><a href="#clipboard-min-js" class="headerlink" title="clipboard.min.js"></a>clipboard.min.js</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*!</span><br><span class="line"> * clipboard.js v2.0.10</span><br><span class="line"> * https:&#x2F;&#x2F;clipboardjs.com&#x2F;</span><br><span class="line"> *</span><br><span class="line"> * Licensed MIT © Zeno Rocha</span><br><span class="line"> *&#x2F;</span><br><span class="line">!function(t,e)&#123;&quot;object&quot;&#x3D;&#x3D;typeof exports&amp;&amp;&quot;object&quot;&#x3D;&#x3D;typeof module?module.exports&#x3D;e():&quot;function&quot;&#x3D;&#x3D;typeof define&amp;&amp;define.amd?define([],e):&quot;object&quot;&#x3D;&#x3D;typeof exports?exports.ClipboardJS&#x3D;e():t.ClipboardJS&#x3D;e()&#125;(this,function()&#123;return n&#x3D;&#123;686:function(t,e,n)&#123;&quot;use strict&quot;;n.d(e,&#123;default:function()&#123;return o&#125;&#125;);var e&#x3D;n(279),i&#x3D;n.n(e),e&#x3D;n(370),u&#x3D;n.n(e),e&#x3D;n(817),c&#x3D;n.n(e);function a(t)&#123;try&#123;return document.execCommand(t)&#125;catch(t)&#123;return&#125;&#125;var f&#x3D;function(t)&#123;t&#x3D;c()(t);return a(&quot;cut&quot;),t&#125;;var l&#x3D;function(t)&#123;var e,n,o,r&#x3D;1&lt;arguments.length&amp;&amp;void 0!&#x3D;&#x3D;arguments[1]?arguments[1]:&#123;container:document.body&#125;,i&#x3D;&quot;&quot;;return&quot;string&quot;&#x3D;&#x3D;typeof t?(e&#x3D;t,n&#x3D;&quot;rtl&quot;&#x3D;&#x3D;&#x3D;document.documentElement.getAttribute(&quot;dir&quot;),(o&#x3D;document.createElement(&quot;textarea&quot;)).style.fontSize&#x3D;&quot;12pt&quot;,o.style.border&#x3D;&quot;0&quot;,o.style.padding&#x3D;&quot;0&quot;,o.style.margin&#x3D;&quot;0&quot;,o.style.position&#x3D;&quot;absolute&quot;,o.style[n?&quot;right&quot;:&quot;left&quot;]&#x3D;&quot;-9999px&quot;,n&#x3D;window.pageYOffset||document.documentElement.scrollTop,o.style.top&#x3D;&quot;&quot;.concat(n,&quot;px&quot;),o.setAttribute(&quot;readonly&quot;,&quot;&quot;),o.value&#x3D;e,o&#x3D;o,r.container.appendChild(o),i&#x3D;c()(o),a(&quot;copy&quot;),o.remove()):(i&#x3D;c()(t),a(&quot;copy&quot;)),i&#125;;function r(t)&#123;return(r&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof Symbol&amp;&amp;&quot;symbol&quot;&#x3D;&#x3D;typeof Symbol.iterator?function(t)&#123;return typeof t&#125;:function(t)&#123;return t&amp;&amp;&quot;function&quot;&#x3D;&#x3D;typeof Symbol&amp;&amp;t.constructor&#x3D;&#x3D;&#x3D;Symbol&amp;&amp;t!&#x3D;&#x3D;Symbol.prototype?&quot;symbol&quot;:typeof t&#125;)(t)&#125;var s&#x3D;function()&#123;var t&#x3D;0&lt;arguments.length&amp;&amp;void 0!&#x3D;&#x3D;arguments[0]?arguments[0]:&#123;&#125;,e&#x3D;t.action,n&#x3D;void 0&#x3D;&#x3D;&#x3D;e?&quot;copy&quot;:e,o&#x3D;t.container,e&#x3D;t.target,t&#x3D;t.text;if(&quot;copy&quot;!&#x3D;&#x3D;n&amp;&amp;&quot;cut&quot;!&#x3D;&#x3D;n)throw new Error(&#39;Invalid &quot;action&quot; value, use either &quot;copy&quot; or &quot;cut&quot;&#39;);if(void 0!&#x3D;&#x3D;e)&#123;if(!e||&quot;object&quot;!&#x3D;&#x3D;r(e)||1!&#x3D;&#x3D;e.nodeType)throw new Error(&#39;Invalid &quot;target&quot; value, use a valid Element&#39;);if(&quot;copy&quot;&#x3D;&#x3D;&#x3D;n&amp;&amp;e.hasAttribute(&quot;disabled&quot;))throw new Error(&#39;Invalid &quot;target&quot; attribute. Please use &quot;readonly&quot; instead of &quot;disabled&quot; attribute&#39;);if(&quot;cut&quot;&#x3D;&#x3D;&#x3D;n&amp;&amp;(e.hasAttribute(&quot;readonly&quot;)||e.hasAttribute(&quot;disabled&quot;)))throw new Error(&#39;Invalid &quot;target&quot; attribute. You can\&#39;t cut text from elements with &quot;readonly&quot; or &quot;disabled&quot; attributes&#39;)&#125;return t?l(t,&#123;container:o&#125;):e?&quot;cut&quot;&#x3D;&#x3D;&#x3D;n?f(e):l(e,&#123;container:o&#125;):void 0&#125;;function p(t)&#123;return(p&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof Symbol&amp;&amp;&quot;symbol&quot;&#x3D;&#x3D;typeof Symbol.iterator?function(t)&#123;return typeof t&#125;:function(t)&#123;return t&amp;&amp;&quot;function&quot;&#x3D;&#x3D;typeof Symbol&amp;&amp;t.constructor&#x3D;&#x3D;&#x3D;Symbol&amp;&amp;t!&#x3D;&#x3D;Symbol.prototype?&quot;symbol&quot;:typeof t&#125;)(t)&#125;function d(t,e)&#123;for(var n&#x3D;0;n&lt;e.length;n++)&#123;var o&#x3D;e[n];o.enumerable&#x3D;o.enumerable||!1,o.configurable&#x3D;!0,&quot;value&quot;in o&amp;&amp;(o.writable&#x3D;!0),Object.defineProperty(t,o.key,o)&#125;&#125;function y(t,e)&#123;return(y&#x3D;Object.setPrototypeOf||function(t,e)&#123;return t.__proto__&#x3D;e,t&#125;)(t,e)&#125;function h(n)&#123;var o&#x3D;function()&#123;if(&quot;undefined&quot;&#x3D;&#x3D;typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if(&quot;function&quot;&#x3D;&#x3D;typeof Proxy)return!0;try&#123;return Date.prototype.toString.call(Reflect.construct(Date,[],function()&#123;&#125;)),!0&#125;catch(t)&#123;return!1&#125;&#125;();return function()&#123;var t,e&#x3D;m(n);return t&#x3D;o?(t&#x3D;m(this).constructor,Reflect.construct(e,arguments,t)):e.apply(this,arguments),e&#x3D;this,!(t&#x3D;t)||&quot;object&quot;!&#x3D;&#x3D;p(t)&amp;&amp;&quot;function&quot;!&#x3D;typeof t?function(t)&#123;if(void 0!&#x3D;&#x3D;t)return t;throw new ReferenceError(&quot;this hasn&#39;t been initialised - super() hasn&#39;t been called&quot;)&#125;(e):t&#125;&#125;function m(t)&#123;return(m&#x3D;Object.setPrototypeOf?Object.getPrototypeOf:function(t)&#123;return t.__proto__||Object.getPrototypeOf(t)&#125;)(t)&#125;function v(t,e)&#123;t&#x3D;&quot;data-clipboard-&quot;.concat(t);if(e.hasAttribute(t))return e.getAttribute(t)&#125;var o&#x3D;function()&#123;!function(t,e)&#123;if(&quot;function&quot;!&#x3D;typeof e&amp;&amp;null!&#x3D;&#x3D;e)throw new TypeError(&quot;Super expression must either be null or a function&quot;);t.prototype&#x3D;Object.create(e&amp;&amp;e.prototype,&#123;constructor:&#123;value:t,writable:!0,configurable:!0&#125;&#125;),e&amp;&amp;y(t,e)&#125;(r,i());var t,e,n,o&#x3D;h(r);function r(t,e)&#123;var n;return function(t)&#123;if(!(t instanceof r))throw new TypeError(&quot;Cannot call a class as a function&quot;)&#125;(this),(n&#x3D;o.call(this)).resolveOptions(e),n.listenClick(t),n&#125;return t&#x3D;r,n&#x3D;[&#123;key:&quot;copy&quot;,value:function(t)&#123;var e&#x3D;1&lt;arguments.length&amp;&amp;void 0!&#x3D;&#x3D;arguments[1]?arguments[1]:&#123;container:document.body&#125;;return l(t,e)&#125;&#125;,&#123;key:&quot;cut&quot;,value:function(t)&#123;return f(t)&#125;&#125;,&#123;key:&quot;isSupported&quot;,value:function()&#123;var t&#x3D;0&lt;arguments.length&amp;&amp;void 0!&#x3D;&#x3D;arguments[0]?arguments[0]:[&quot;copy&quot;,&quot;cut&quot;],t&#x3D;&quot;string&quot;&#x3D;&#x3D;typeof t?[t]:t,e&#x3D;!!document.queryCommandSupported;return t.forEach(function(t)&#123;e&#x3D;e&amp;&amp;!!document.queryCommandSupported(t)&#125;),e&#125;&#125;],(e&#x3D;[&#123;key:&quot;resolveOptions&quot;,value:function()&#123;var t&#x3D;0&lt;arguments.length&amp;&amp;void 0!&#x3D;&#x3D;arguments[0]?arguments[0]:&#123;&#125;;this.action&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof t.action?t.action:this.defaultAction,this.target&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof t.target?t.target:this.defaultTarget,this.text&#x3D;&quot;function&quot;&#x3D;&#x3D;typeof t.text?t.text:this.defaultText,this.container&#x3D;&quot;object&quot;&#x3D;&#x3D;&#x3D;p(t.container)?t.container:document.body&#125;&#125;,&#123;key:&quot;listenClick&quot;,value:function(t)&#123;var e&#x3D;this;this.listener&#x3D;u()(t,&quot;click&quot;,function(t)&#123;return e.onClick(t)&#125;)&#125;&#125;,&#123;key:&quot;onClick&quot;,value:function(t)&#123;var e&#x3D;t.delegateTarget||t.currentTarget,n&#x3D;this.action(e)||&quot;copy&quot;,t&#x3D;s(&#123;action:n,container:this.container,target:this.target(e),text:this.text(e)&#125;);this.emit(t?&quot;success&quot;:&quot;error&quot;,&#123;action:n,text:t,trigger:e,clearSelection:function()&#123;e&amp;&amp;e.focus(),document.activeElement.blur(),window.getSelection().removeAllRanges()&#125;&#125;)&#125;&#125;,&#123;key:&quot;defaultAction&quot;,value:function(t)&#123;return v(&quot;action&quot;,t)&#125;&#125;,&#123;key:&quot;defaultTarget&quot;,value:function(t)&#123;t&#x3D;v(&quot;target&quot;,t);if(t)return document.querySelector(t)&#125;&#125;,&#123;key:&quot;defaultText&quot;,value:function(t)&#123;return v(&quot;text&quot;,t)&#125;&#125;,&#123;key:&quot;destroy&quot;,value:function()&#123;this.listener.destroy()&#125;&#125;])&amp;&amp;d(t.prototype,e),n&amp;&amp;d(t,n),r&#125;()&#125;,828:function(t)&#123;var e;&quot;undefined&quot;&#x3D;&#x3D;typeof Element||Element.prototype.matches||((e&#x3D;Element.prototype).matches&#x3D;e.matchesSelector||e.mozMatchesSelector||e.msMatchesSelector||e.oMatchesSelector||e.webkitMatchesSelector),t.exports&#x3D;function(t,e)&#123;for(;t&amp;&amp;9!&#x3D;&#x3D;t.nodeType;)&#123;if(&quot;function&quot;&#x3D;&#x3D;typeof t.matches&amp;&amp;t.matches(e))return t;t&#x3D;t.parentNode&#125;&#125;&#125;,438:function(t,e,n)&#123;var u&#x3D;n(828);function i(t,e,n,o,r)&#123;var i&#x3D;function(e,n,t,o)&#123;return function(t)&#123;t.delegateTarget&#x3D;u(t.target,n),t.delegateTarget&amp;&amp;o.call(e,t)&#125;&#125;.apply(this,arguments);return t.addEventListener(n,i,r),&#123;destroy:function()&#123;t.removeEventListener(n,i,r)&#125;&#125;&#125;t.exports&#x3D;function(t,e,n,o,r)&#123;return&quot;function&quot;&#x3D;&#x3D;typeof t.addEventListener?i.apply(null,arguments):&quot;function&quot;&#x3D;&#x3D;typeof n?i.bind(null,document).apply(null,arguments):(&quot;string&quot;&#x3D;&#x3D;typeof t&amp;&amp;(t&#x3D;document.querySelectorAll(t)),Array.prototype.map.call(t,function(t)&#123;return i(t,e,n,o,r)&#125;))&#125;&#125;,879:function(t,n)&#123;n.node&#x3D;function(t)&#123;return void 0!&#x3D;&#x3D;t&amp;&amp;t instanceof HTMLElement&amp;&amp;1&#x3D;&#x3D;&#x3D;t.nodeType&#125;,n.nodeList&#x3D;function(t)&#123;var e&#x3D;Object.prototype.toString.call(t);return void 0!&#x3D;&#x3D;t&amp;&amp;(&quot;[object NodeList]&quot;&#x3D;&#x3D;&#x3D;e||&quot;[object HTMLCollection]&quot;&#x3D;&#x3D;&#x3D;e)&amp;&amp;&quot;length&quot;in t&amp;&amp;(0&#x3D;&#x3D;&#x3D;t.length||n.node(t[0]))&#125;,n.string&#x3D;function(t)&#123;return&quot;string&quot;&#x3D;&#x3D;typeof t||t instanceof String&#125;,n.fn&#x3D;function(t)&#123;return&quot;[object Function]&quot;&#x3D;&#x3D;&#x3D;Object.prototype.toString.call(t)&#125;&#125;,370:function(t,e,n)&#123;var f&#x3D;n(879),l&#x3D;n(438);t.exports&#x3D;function(t,e,n)&#123;if(!t&amp;&amp;!e&amp;&amp;!n)throw new Error(&quot;Missing required arguments&quot;);if(!f.string(e))throw new TypeError(&quot;Second argument must be a String&quot;);if(!f.fn(n))throw new TypeError(&quot;Third argument must be a Function&quot;);if(f.node(t))return c&#x3D;e,a&#x3D;n,(u&#x3D;t).addEventListener(c,a),&#123;destroy:function()&#123;u.removeEventListener(c,a)&#125;&#125;;if(f.nodeList(t))return o&#x3D;t,r&#x3D;e,i&#x3D;n,Array.prototype.forEach.call(o,function(t)&#123;t.addEventListener(r,i)&#125;),&#123;destroy:function()&#123;Array.prototype.forEach.call(o,function(t)&#123;t.removeEventListener(r,i)&#125;)&#125;&#125;;if(f.string(t))return t&#x3D;t,e&#x3D;e,n&#x3D;n,l(document.body,t,e,n);throw new TypeError(&quot;First argument must be a String, HTMLElement, HTMLCollection, or NodeList&quot;);var o,r,i,u,c,a&#125;&#125;,817:function(t)&#123;t.exports&#x3D;function(t)&#123;var e,n&#x3D;&quot;SELECT&quot;&#x3D;&#x3D;&#x3D;t.nodeName?(t.focus(),t.value):&quot;INPUT&quot;&#x3D;&#x3D;&#x3D;t.nodeName||&quot;TEXTAREA&quot;&#x3D;&#x3D;&#x3D;t.nodeName?((e&#x3D;t.hasAttribute(&quot;readonly&quot;))||t.setAttribute(&quot;readonly&quot;,&quot;&quot;),t.select(),t.setSelectionRange(0,t.value.length),e||t.removeAttribute(&quot;readonly&quot;),t.value):(t.hasAttribute(&quot;contenteditable&quot;)&amp;&amp;t.focus(),n&#x3D;window.getSelection(),(e&#x3D;document.createRange()).selectNodeContents(t),n.removeAllRanges(),n.addRange(e),n.toString());return n&#125;&#125;,279:function(t)&#123;function e()&#123;&#125;e.prototype&#x3D;&#123;on:function(t,e,n)&#123;var o&#x3D;this.e||(this.e&#x3D;&#123;&#125;);return(o[t]||(o[t]&#x3D;[])).push(&#123;fn:e,ctx:n&#125;),this&#125;,once:function(t,e,n)&#123;var o&#x3D;this;function r()&#123;o.off(t,r),e.apply(n,arguments)&#125;return r._&#x3D;e,this.on(t,r,n)&#125;,emit:function(t)&#123;for(var e&#x3D;[].slice.call(arguments,1),n&#x3D;((this.e||(this.e&#x3D;&#123;&#125;))[t]||[]).slice(),o&#x3D;0,r&#x3D;n.length;o&lt;r;o++)n[o].fn.apply(n[o].ctx,e);return this&#125;,off:function(t,e)&#123;var n&#x3D;this.e||(this.e&#x3D;&#123;&#125;),o&#x3D;n[t],r&#x3D;[];if(o&amp;&amp;e)for(var i&#x3D;0,u&#x3D;o.length;i&lt;u;i++)o[i].fn!&#x3D;&#x3D;e&amp;&amp;o[i].fn._!&#x3D;&#x3D;e&amp;&amp;r.push(o[i]);return r.length?n[t]&#x3D;r:delete n[t],this&#125;&#125;,t.exports&#x3D;e,t.exports.TinyEmitter&#x3D;e&#125;&#125;,r&#x3D;&#123;&#125;,o.n&#x3D;function(t)&#123;var e&#x3D;t&amp;&amp;t.__esModule?function()&#123;return t.default&#125;:function()&#123;return t&#125;;return o.d(e,&#123;a:e&#125;),e&#125;,o.d&#x3D;function(t,e)&#123;for(var n in e)o.o(e,n)&amp;&amp;!o.o(t,n)&amp;&amp;Object.defineProperty(t,n,&#123;enumerable:!0,get:e[n]&#125;)&#125;,o.o&#x3D;function(t,e)&#123;return Object.prototype.hasOwnProperty.call(t,e)&#125;,o(686).default;function o(t)&#123;if(r[t])return r[t].exports;var e&#x3D;r[t]&#x3D;&#123;exports:&#123;&#125;&#125;;return n[t](e,e.exports,o),e.exports&#125;var n,r&#125;);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%87%E7%AD%BE%EF%BC%88%E5%BF%AB%E9%80%9F%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/18/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%87%E7%AD%BE%EF%BC%88%E5%BF%AB%E9%80%9F%EF%BC%89/" itemprop="url">新增菜单标签（快速）</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.7k</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -901,8 +698,13 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="新增菜单标签（快速）"><a href="#新增菜单标签（快速）" class="headerlink" title="新增菜单标签（快速）"></a>新增菜单标签（快速）</h1><p>创建新文章的时候直接指定categories: read配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 《好好学习》—黄金思维圈</span><br><span class="line">date: 2018-06-12 11:45:43</span><br><span class="line">tags:</span><br><span class="line">- read</span><br><span class="line">categories:</span><br><span class="line">- read</span><br><span class="line">notshow: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure><br>配置主题配置文件themes/_config.yml中添加以下代码（#号后为注释内容）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  read: &#x2F;categories&#x2F;read  #指定分类中阅读的路径</span><br></pre></td></tr></table></figure></p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_29498555/article/details/79695815" target="_blank" rel="noopener">inner join 数据重复问题</a></p>
+<p>SELECT <include refid="fields"></include>,gmt_create<br>FROM t_fin_policy_main<br>WHERE seq_invoice_no IN<br>(SELECT DISTINCT seq_invoice_no FROM t_fin_policy_main WHERE ant_policy_no = #{antPolicyNo} AND is_valid = 1)<br>AND is_valid = 1</p>
+<p>// —-<br>  package表的id对应package_product表的package_id，并且两者是一对多的关系，今天想筛选出package表所有id存在于package_product表的记录，第一个想到的就是join</p>
+<p>select package.*,package_product.package_id from package join package_product<br>       on(package.id=package_product.package_id);<br>但是有一个问题，数据会重复，比如package_product表有3个相同的package_id就会查找出3条相同的package表记录,<br>加上distinct好像也没用</p>
+<p>所以，又想到了子查询，select * from package where id in(select distinct package_id from package_product)，虽然写起来简单，但是这条语句太耗性能了，查找6条记录要好几秒，最后找到了合适的方法</p>
+<p>select * from package join (select distinct package_id from package_product) as package_product on(package.id=package_product.package_id)；</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -958,7 +760,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/java-%E5%B9%B6%E5%8F%91-AQS/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -977,7 +779,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/18/java-%E5%B9%B6%E5%8F%91-AQS/" itemprop="url">AQS</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-10-mysql%E4%B8%ADutf8%E5%92%8Cutf8mb4%E5%8C%BA%E5%88%AB/" itemprop="url">mysql中utf8和utf8mb4区别</a></h1>
         
 
         <div class="post-meta">
@@ -993,190 +795,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">50</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/database-mysql-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-MVCC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/18/database-mysql-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-MVCC/" itemprop="url">MVCC</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -1208,6 +827,13 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
               
             </span>
           
@@ -1232,7 +858,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">606</span>
+                <span title="字数统计">775</span>
               
 
               
@@ -1268,10 +894,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h1><p>全称Multi-Version Concurrency Control，即多版本并发控制<br>最早的数据库系统，只有读读之间可以并发，读写，写读，写写都要阻塞。引入多版本之后，只有写写之间相互阻塞，其他三种操作都可以并行，这样大幅度提高了InnoDB的并发度</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>InnoDB是在undolog中实现的mvcc<br>在InnoDB内部中，会记录一个全局的活跃读写事务数组，其主要用来判断事务的可见性。</p>
-<h3 id="undolog的作用"><a href="#undolog的作用" class="headerlink" title="undolog的作用"></a>undolog的作用</h3><p>通过undolog可以找回数据的历史版本<br>找回的数据历史版本可以提供给用户读(按照隔离级别的定义，有些读请求只能看到比较老的数据版本)<br>也可以在回滚的时候覆盖数据页上的数据</p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/Renyi-Fan/p/11065692.html" target="_blank" rel="noopener">mysql中utf8和utf8mb4区别</a></p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>utf8最多3个字节（中文汉字）<br>utf8mb4最多4个字节（中文汉字）  </p>
+<p>utf8mb4是utf8的超集  </p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1327,7 +953,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-kafka%E7%AE%80%E4%BB%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-11-mysql%E7%9A%84%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1346,7 +972,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/18/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-kafka%E7%AE%80%E4%BB%8B/" itemprop="url">kafka简介</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-11-mysql%E7%9A%84%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">mysql的默认隔离级别</a></h1>
         
 
         <div class="post-meta">
@@ -1362,7 +988,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -1383,14 +1009,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1418,269 +1051,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">6.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">6 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<h2 id="Kafka入门教程-https-blog-csdn-net-yuan-xw-article-details-51210954"><a href="#Kafka入门教程-https-blog-csdn-net-yuan-xw-article-details-51210954" class="headerlink" title="- Kafka入门教程: https://blog.csdn.net/yuan_xw/article/details/51210954"></a>- <strong>Kafka入门教程: <a href="https://blog.csdn.net/yuan_xw/article/details/51210954" target="_blank" rel="noopener">https://blog.csdn.net/yuan_xw/article/details/51210954</a></strong></h2><h1 id="kafka："><a href="#kafka：" class="headerlink" title="kafka："></a>kafka：</h1><p>在Kafka集群中，没有“中心主节点”的概念，集群中所有的服务器都是对等的<br>因此，可以在不做任何配置的更改的情况下实现服务器的的添加与删除，同样的消息的生产者和消费者也能够做到随意重启和机器的上下线。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><ol>
-<li>消息生产者：即：Producer，是消息的产生的源头，负责生成消息并发送到Kafka服务器上。</li>
-<li>消息消费者：即：Consumer，是消息的使用方，负责消费Kafka服务器上的消息。</li>
-<li>主题：即：Topic，由用户定义并配置在Kafka服务器，用于建立生产者和消息者之间的订阅关系：生产者发送消息到指定的Topic下，消息者从这个Topic下消费消息。</li>
-<li>消息分区：即：Partition，一个Topic下面会分为很多分区，<br>例如：“kafka-test”这个Topic下可以分为6个分区，分别由两台服务器提供，那么通常可以配置为让每台服务器提供3个分区，<br>假如服务器ID分别为0、1，则所有的分区为0-0、0-1、0-2和1-0、1-1、1-2。<br>Topic物理上的分组，一个 topic可以分为多个 partition，每个 partition 是一个有序的队列。<br>partition中的每条消息都会被分配一个有序的 id（offset）。</li>
-<li>Broker：即Kafka的服务器，用户存储消息，Kafa集群中的一台或多台服务器统称为 broker。</li>
-<li>消费者分组：Group，用于归组同类消费者，<br>在Kafka中，多个消费者可以共同消息一个Topic下的消息，每个消费者消费其中的部分消息，这些消费者就组成了一个分组，拥有同一个分组名称，通常也被称为消费者集群。</li>
-<li>Offset：消息存储在Kafka的Broker上，消费者拉取消息数据的过程中需要知道消息在文件中的偏移量，这个偏移量就是所谓的Offset。<h2 id="Kafka中Broker"><a href="#Kafka中Broker" class="headerlink" title="Kafka中Broker"></a>Kafka中Broker</h2></li>
-<li>Broker：即Kafka的服务器，用户存储消息，Kafa集群中的一台或多台服务器统称为 broker。</li>
-<li>Message在Broker中通Log追加的方式进行持久化存储。并进行分区（patitions)。</li>
-<li>为了减少磁盘写入的次数,broker会将消息暂时buffer起来,当消息的个数(或尺寸)达到一定阀值时,再flush到磁盘,这样减少了磁盘IO调用的次数。</li>
-<li>Broker没有副本机制，一旦broker宕机，该broker的消息将都不可用。Message消息是有多份的。</li>
-<li>Broker不保存订阅者的状态，由订阅者自己保存。</li>
-<li>无状态导致消息的删除成为难题（可能删除的消息正在被订阅），kafka采用基于时间的SLA(服务水平保证)，消息保存一定时间（通常为7天）后会被删除。</li>
-<li>消息订阅者可以rewind back到任意位置重新进行消费，当订阅者故障时，可以选择最小的offset(id)进行重新读取消费消息。<h2 id="Kafka的Message组成"><a href="#Kafka的Message组成" class="headerlink" title="Kafka的Message组成"></a>Kafka的Message组成</h2></li>
-<li>Message消息：是通信的基本单位，每个 producer 可以向一个 topic（主题）发布一些消息。</li>
-<li>Kafka中的Message是以topic为基本单位组织的，不同的topic之间是相互独立的。每个topic又可以分成几个不同的partition(每个topic有几个partition是在创建topic时指定的)，每个partition存储一部分Message。</li>
-<li>partition中的每条Message包含了以下三个属性：<ul>
-<li>offset      即：消息唯一标识:对应类型：long</li>
-<li>MessageSize 对应类型：int32</li>
-<li>data        是message的具体内容。<h2 id="Kafka的Partitions分区"><a href="#Kafka的Partitions分区" class="headerlink" title="Kafka的Partitions分区"></a>Kafka的Partitions分区</h2></li>
-</ul>
-</li>
-<li>Kafka基于文件存储.通过分区，可以将日志内容分散到多个server上,来避免文件尺寸达到单机磁盘的上限，每个partiton都会被当前server(kafka实例)保存。</li>
-<li>可以将一个topic切分多任意多个partitions，来消息保存/消费的效率。</li>
-<li>越多的partitions意味着可以容纳更多的consumer，有效提升并发消费的能力。<h2 id="Kafka的Consumers"><a href="#Kafka的Consumers" class="headerlink" title="Kafka的Consumers"></a>Kafka的Consumers</h2></li>
-<li>消息和数据消费者，订阅 topics并处理其发布的消息的过程叫做 consumers。</li>
-<li>在 kafka中,我们可以认为一个group是一个“订阅者”，一个Topic中的每个partions，只会被一个“订阅者”中的一个consumer消费，不过一个 consumer可以消费多个partitions中的消息（消费者数据小于Partions的数量时）。注意：kafka的设计原理决定，对于一个topic，同一个group中不能有多于partitions个数的consumer同时消费，否则将意味着某些consumer将无法得到消息。</li>
-<li>一个partition中的消息只会被group中的一个consumer消息。每个group中consumer消息消费互相独立。<h2 id="Kafka的持久化"><a href="#Kafka的持久化" class="headerlink" title="Kafka的持久化"></a>Kafka的持久化</h2></li>
-<li>一个Topic可以认为是一类消息，每个topic将被分成多partition(区),每个partition在存储层面是append log文件。任何发布到此partition的消息都会被直接追加到log文件的尾部，每条消息在文件中的位置称为offset（偏移量），partition是以文件的形式存储在文件系统中。</li>
-<li>Logs文件根据broker中的配置要求,保留一定时间后删除来释放磁盘空间<blockquote>
-<p>partition: Topic物理上的分组，一个 topic可以分为多个 partition，每个 partition 是一个有序的队列。partition中的每条消息都会被分配一个有序的 id（offset）。</p>
-</blockquote>
-</li>
-<li>为数据文件建索引：稀疏存储，每隔一定字节的数据建立一条索引。<h2 id="Kafka的通讯协议"><a href="#Kafka的通讯协议" class="headerlink" title="Kafka的通讯协议"></a>Kafka的通讯协议</h2></li>
-<li>Kafka的Producer、Broker和Consumer之间采用的是一套自行设计基于TCP层的协议，根据业务需求定制，而非实现一套类似ProtocolBuffer的通用协议。</li>
-<li>基本数据类型：（Kafka是基于Scala语言实现的，类型也是Scala中的数据类型）<blockquote>
-<p>定长数据类型：int8,int16,int32和int64，对应到Java中就是byte, short, int和long。<br>变长数据类型：bytes和string。变长的数据类型由两部分组成，分别是一个有符号整数N(表示内容的长度)和N个字节的内容。其中，N为-1表示内容为null。bytes的长度由int32表示，string的长度由int16表示。<br>数组：数组由两部分组成，分别是一个由int32类型的数字表示的数组长度N和N个元素。</p>
-</blockquote>
-</li>
-<li>Kafka通讯的基本单位是Request/Response</li>
-<li>基本结构<br>RequestOrResponse =&gt; MessageSize(RequestMessage | ResponseMessage)</li>
-<li>通讯过程：<br>客户端打开与服务器端的Socket<br>往Socket写入一个int32的数字(数字表示这次发送的Request有多少字节)<br>服务器端先读出一个int32的整数从而获取这次Request的大小<br>然后读取对应字节数的数据从而得到Request的具体内容<br>服务器端处理了请求后，也用同样的方式来发送响应。</li>
-<li>RequestMessage结构：<br>RequestMessage =&gt; ApiKey ApiVersion CorrelationId ClientId Request  </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">描术</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ApiKey</td>
-<td style="text-align:center">int16</td>
-<td style="text-align:center">表示这次请求的API编号</td>
-</tr>
-<tr>
-<td style="text-align:center">ApiVersion</td>
-<td style="text-align:center">int16</td>
-<td style="text-align:center">表示请求的API的版本，有了版本后就可以做到后向兼容</td>
-</tr>
-<tr>
-<td style="text-align:center">CorrelationId</td>
-<td style="text-align:center">int32</td>
-<td style="text-align:center">由客户端指定的一个数字唯一标示这次请求的id，服务器端在处理完请求后也会把同样的CorrelationId写到Response中，这样客户端就能把某个请求和响应对应起来了。</td>
-</tr>
-<tr>
-<td style="text-align:center">ClientId</td>
-<td style="text-align:center">string</td>
-<td style="text-align:center">客户端指定的用来描述客户端的字符串，会被用来记录日志和监控，它唯一标示一个客户端。</td>
-</tr>
-<tr>
-<td style="text-align:center">Request</td>
-<td style="text-align:center">—</td>
-<td style="text-align:center">Request的具体内容。</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>ResponseMessage结构：<br>ResponseMessage =&gt; CorrelationId Response<br>|名称 |类型 |描术|<br>|:—-:|:—-:|:—-:|<br>|CorrelationId     |int32         |对应Request的CorrelationId。  |<br>|Response        |—            |对应Request的Response，不同的Request的Response的字段是不一样的。 |</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/18/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A6%82%E8%A7%88-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/18/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A6%82%E8%A7%88-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url">消息队列</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-18T00:00:00+08:00">2022-03-18</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">811</span>
+                <span title="字数统计">999</span>
               
 
               
@@ -1716,18 +1087,13 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="消息队列分类："><a href="#消息队列分类：" class="headerlink" title="消息队列分类："></a>消息队列分类：</h1><p>点对点和发布/订阅两种：</p>
-<ol>
-<li>点对点：<br>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息。<br>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。<br>Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费。</li>
-<li>发布/订阅：<br>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。<br>和点对点方式不同，发布到topic的消息会被所有订阅者消费。</li>
-</ol>
-<h1 id="MQ消息队列对比"><a href="#MQ消息队列对比" class="headerlink" title="MQ消息队列对比"></a>MQ消息队列对比</h1><ol>
-<li>RabbitMQ：支持的协议多，非常重量级消息队列，对路由(Routing)，负载均衡(Loadbalance)或者数据持久化都有很好的支持。</li>
-<li>ZeroMQ：号称最快的消息队列系统，尤其针对大吞吐量的需求场景，擅长的高级/复杂的队列，但是技术也复杂，并且只提供非持久性的队列。</li>
-<li>ActiveMQ：Apache下的一个子项，类似ZeroMQ，能够以代理人和点对点的技术实现队列。</li>
-<li>Redis：是一个key-Value的NOSql数据库，但也支持MQ功能，数据量较小，性能优于RabbitMQ，数据超过10K就慢的无法忍受。</li>
-</ol>
-
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/shoshana-kong/p/10516404.html" target="_blank" rel="noopener">mysql的默认隔离级别</a></p>
+<p>1.数据库默认隔离级别:  mysql —repeatable,oracle,sql server —read commited</p>
+<p>2.mysql binlog的格式三种：statement,row,mixed</p>
+<p>3.为什么mysql用的是repeatable而不是read committed:在 5.0之前只有statement一种格式，而主从复制存在了大量的不一致，故选用repeatable</p>
+<p>4.为什么默认的隔离级别都会选用read commited 原因有二：repeatable存在间隙锁会使死锁的概率增大，在RR隔离级别下，条件列未命中索引会锁表！而在RC隔离级别下，只锁行</p>
+<p>2.在RC级用别下，主从复制用什么binlog格式：row格式，是基于行的复制！</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1783,7 +1149,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1802,7 +1168,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86-2/" itemprop="url">文章加密-2</a></h1>
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-12-UUID%E3%80%81%E8%87%AA%E5%A2%9EID%E3%80%81%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E5%93%AA%E4%B8%AA%E6%9B%B4%E5%90%88%E9%80%82/" itemprop="url">UUID、自增ID、雪花算法哪个更合适</a></h1>
         
 
         <div class="post-meta">
@@ -1818,7 +1184,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-16T00:00:00+08:00">2022-03-16</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
             
 
             
@@ -1839,14 +1205,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1874,404 +1247,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="文章加密-2"><a href="#文章加密-2" class="headerlink" title="文章加密-2"></a>文章加密-2</h1><ol>
-<li>插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br><span class="line"></span><br><span class="line">或者 yarn add hexo-blog-encrypt (需要安装 Yarn)</span><br></pre></td></tr></table></figure></li>
-<li>站点启用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure></li>
-<li>然后在你的文章的头部添加上对应的字段，如 password, abstract, message<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章加密</span><br><span class="line">date: 2019-01-04T22:20:13.000Z</span><br><span class="line">category: 教程</span><br><span class="line">tags:</span><br><span class="line">  - 博客</span><br><span class="line">  - Hexo</span><br><span class="line">keywords: 博客文章密码</span><br><span class="line">password: TloveY</span><br><span class="line">abstract: 密码：TloveY</span><br><span class="line">message:  输入密码，查看文章</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li>password: 是该博客加密使用的密码</li>
-<li>abstract: 是该博客的摘要，会显示在博客的列表页</li>
-<li>message: 这个是博客查看时，密码输入框上面的描述性文字</li>
-</ul>
-<ol>
-<li>如果你想对 TOC 也进行加密，则在 article.ejs 中将 TOC 的生成代码修改成如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if(post.toc &#x3D;&#x3D; true)&#123; %&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;toc-div&quot; class&#x3D;&quot;toc-article&quot; &lt;% if (post.encrypt &#x3D;&#x3D; true) &#123; %&gt;style&#x3D;&quot;display:none&quot; &lt;% &#125; %&gt;&gt;</span><br><span class="line">        &lt;strong class&#x3D;&quot;toc-title&quot;&gt;Index&lt;&#x2F;strong&gt;</span><br><span class="line">        &lt;% if (post.encrypt &#x3D;&#x3D; true) &#123; %&gt;</span><br><span class="line">            &lt;%- toc(post.origin) %&gt;</span><br><span class="line">        &lt;% &#125; else &#123; %&gt;</span><br><span class="line">            &lt;%- toc(post.content) %&gt;</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br><span class="line">&lt;%- post.content %&gt;</span><br></pre></td></tr></table></figure></li>
-<li>然后使用 hexo clean &amp;&amp; hexo g &amp;&amp; hexo s，来查看效果。</li>
-</ol>
-<h1 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h1><ol>
-<li><p>如果你对默认的主题不满意，或者希望修改默认的提示和摘要内容，你可以添加如下配置在 站点配置文件 中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encrypt:</span><br><span class="line">  enable: true</span><br><span class="line">  default_abstract: 这是一篇加密文章，内容可能是个人情感宣泄或者收费技术。如果你确实想看，请与我联系。</span><br><span class="line">  default_message: 输入密码，查看文章。</span><br></pre></td></tr></table></figure>
-<p>这样，对于每一篇需要加密的文章就不必都在在头部添加 abstract 和 message 字段了，脚本会自动添加默认的内容填充。</p>
-</li>
-<li><p>如果你希望对某一篇特定的文章做特殊处理（如本文的 abstract ，可以在对应文章的头部添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章加密</span><br><span class="line">date: 2019-01-04T22:20:13.000Z</span><br><span class="line">category: 教程</span><br><span class="line">tags:</span><br><span class="line">  - 博客</span><br><span class="line">  - Hexo</span><br><span class="line">keywords: 博客文章密码</span><br><span class="line">password: TloveY</span><br><span class="line">abstract: 密码：TloveY</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>此时，博客头部的 abstract 会覆盖 站点配置文件 的 default_abstract 实现自定义。</p>
-</li>
-</ol>
-<h1 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h1><p>如果你开启了 字数统计功能 的话，那么本文的字数会显得比实际值大。</p>
-<p>加密文章内部分脚本会失效，已知 代码复制 失效。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86/" itemprop="url">文章加密</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-16T00:00:00+08:00">2022-03-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">4.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h1><h2 id="head脚本配置"><a href="#head脚本配置" class="headerlink" title="head脚本配置"></a>head脚本配置</h2><p>打开themes-&gt;next-&gt;layout-&gt;_partials-&gt;head.swig文件,在以下位置插入这样一段代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;edge&quot; &#x2F;&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1, maximum-scale&#x3D;1&quot;&#x2F;&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;theme-color&quot; content&#x3D;&quot;&#123;&#123; theme.android_chrome_color &#125;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 加密脚本 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    (function () &#123;</span><br><span class="line">        if (&#39;&#123;&#123; page.password &#125;&#125;&#39;) &#123;</span><br><span class="line">            if (prompt(&#39;请输入文章密码&#39;) !&#x3D;&#x3D; &#39;&#123;&#123; page.password &#125;&#125;&#39;) &#123;</span><br><span class="line">                alert(&#39;密码错误！&#39;);</span><br><span class="line">                if (history.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">                    location.replace(&quot;http:&#x2F;&#x2F;xxxxxxx.xxx&quot;); &#x2F;&#x2F; 这里替换成你的首页</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    history.back();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&#123;% if theme.needmoreshare2.enable %&#125;</span><br><span class="line">  &#123;% set needmoreshare2_css &#x3D; url_for(theme.vendors._internal + &#39;&#x2F;needsharebutton&#x2F;needsharebutton.css&#39;) %&#125;</span><br><span class="line">  &#123;% if theme.vendors.needmoreshare2 %&#125;</span><br><span class="line">    &#123;% set needmoreshare2_css &#x3D; theme.vendors.needmoreshare2_css %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#123;&#123; needmoreshare2_css &#125;&#125;&quot;&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="文章加密配置"><a href="#文章加密配置" class="headerlink" title="文章加密配置"></a>文章加密配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &quot;文章置顶&quot;</span><br><span class="line">date: 2022-03-16</span><br><span class="line">comments: true</span><br><span class="line">share: true</span><br><span class="line">toc: true</span><br><span class="line">password: xxxx</span><br><span class="line">categories:</span><br><span class="line">  - hexo</span><br><span class="line">  - 笔记</span><br><span class="line">tags:</span><br><span class="line">  - hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>password配置密码</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/16/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6/" itemprop="url">文章置顶</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-16T00:00:00+08:00">2022-03-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.9k</span>
+                <span title="字数统计">2.8k</span>
               
 
               
@@ -2307,9 +1283,1025 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h1><p>博客中执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><br>然后在需要置顶的文章的Front-matter中加上top: true即可。比如下面这篇文章：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &quot;git merge过程操作&quot;</span><br><span class="line">date: 2018-10-05</span><br><span class="line">comments: true</span><br><span class="line">share: true</span><br><span class="line">toc: true</span><br><span class="line">top: true</span><br><span class="line">categories:</span><br><span class="line">  - git</span><br><span class="line">tags:</span><br><span class="line">  - git</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<h1 id="设置置顶标志"><a href="#设置置顶标志" class="headerlink" title="设置置顶标志"></a>设置置顶标志</h1><p>/blog/themes/next/layout/_macro 目录下的post.swig文件，<br>定位到<div class="post-meta">标签下，插入代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;post-meta&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- 置顶标签 --&gt;</span><br><span class="line">  &#123;% if post.top %&#125;</span><br><span class="line">    &lt;i class&#x3D;&quot;fa fa-thumb-tack&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    &lt;font color&#x3D;7D26CD&gt;置顶&lt;&#x2F;font&gt;</span><br><span class="line">    &lt;span class&#x3D;&quot;post-meta-divider&quot;&gt;|&lt;&#x2F;span&gt;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/chendasheng/article/details/115222589" target="_blank" rel="noopener">使用雪花id或uuid作为Mysql主键，被老板怼了一顿！</a></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>分别是user_auto_key，user_uuid，user_random_key，分别表示自动增长的主键，uuid作为主键，随机key作为主键，<br>其它我们完全保持不变。根据控制变量法，我们只把每个表的主键使用不同的策略生成，而其他的字段完全一样，然后测试一下表的插入速度和查询速度：</p>
+<h1 id="效率测试结果"><a href="#效率测试结果" class="headerlink" title="效率测试结果"></a>效率测试结果</h1><p><img src="images/自增id、uuid、雪花算法效率测试结果1.png" alt=""></p>
+<h2 id="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："><a href="#在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：" class="headerlink" title="在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果："></a>在已有数据量为130W的时候：我们再来测试一下插入10w数据，看看会有什么结果：</h2><p><img src="images/自增id、uuid、雪花算法效率测试结果2.png" alt="">  </p>
+<blockquote>
+<p>可以看出在数据量100W左右的时候,uuid的插入效率垫底，并且在后序增加了130W的数据，uudi的时间又直线下降。<br>时间占用量总体可以打出的效率排名为：auto_key&gt;random_key&gt;uuid,uuid的效率最低，<br>在数据量较大的情况下，效率直线下滑。那么为什么会出现这样的现象呢？带着疑问,我们来探讨一下这个问题： </p>
+</blockquote>
+<h1 id="使用uuid和自增id的索引结构对比"><a href="#使用uuid和自增id的索引结构对比" class="headerlink" title="使用uuid和自增id的索引结构对比"></a>使用uuid和自增id的索引结构对比</h1><h2 id="使用自增id的内部结构"><a href="#使用自增id的内部结构" class="headerlink" title="使用自增id的内部结构"></a>使用自增id的内部结构</h2><ol>
+<li>下一条记录就会写入新的页中，一旦数据按照这种顺序的方式加载，主键页就会近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</li>
+<li>新插入的行一定会在原有的最大数据行下一行,mysql定位和寻址很快，不会为计算新行的位置而做出额外的消耗</li>
+<li>减少了页分裂和碎片的产生<h2 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h2></li>
+<li>写入的目标页很可能已经刷新到磁盘上并且从缓存上移除，或者还没有被加载到缓存中，innodb在插入之前不得不先找到并从磁盘读取目标页到内存中，这将导致大量的随机IO </li>
+<li>因为写入是乱序的,innodb不得不频繁的做页分裂操作,以便为新的行分配空间,页分裂导致移动大量的数据，一次插入最少需要修改三个页以上</li>
+<li>由于频繁的页分裂，页会变得稀疏并被不规则的填充，最终会导致数据会有碎片<br>在把随机值（uuid和雪花id）载入到聚簇索引(innodb默认的索引类型)以后,有时候会需要做一次OPTIMEIZE TABLE来重建表并优化页的填充，这将又需要一定的时间消耗。<blockquote>
+<p>结论：使用innodb应该尽可能的按主键的自增顺序插入，并且尽可能使用单调的增加的聚簇键的值来插入新行</p>
+<h2 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h2></blockquote>
+</li>
+<li>别人一旦爬取你的数据库,就可以根据数据库的自增id获取到你的业务增长信息，很容易分析出你的经营情况</li>
+<li>对于高并发的负载，innodb在按主键进行插入的时候会造成明显的锁争用，主键的上界会成为争抢的热点，因为所有的插入都发生在这里，并发插入会导致间隙锁竞争</li>
+<li>Auto_Increment锁机制会造成自增锁的抢夺,有一定的性能损失<blockquote>
+<p>附：<br>Auto_increment的锁争抢问题，如果要改善需要调优innodb_autoinc_lock_mode的配置</p>
+</blockquote>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-14-mysql%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-14-mysql%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/" itemprop="url">mysql前缀索引</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/u013295276/article/details/79105163" target="_blank" rel="noopener">mysql索引】之前缀索引</a></p>
+<h1 id="什么是前缀索引"><a href="#什么是前缀索引" class="headerlink" title="什么是前缀索引"></a>什么是前缀索引</h1><p>有时候需要索引很长的字符(例如BLOB,TEXT,或者很长的VARCHAR)，这样会使得索引又大又慢。  </p>
+<h2 id="改良方法有"><a href="#改良方法有" class="headerlink" title="改良方法有:"></a>改良方法有:</h2><ol>
+<li>改用哈希索引(这里不讲)。</li>
+<li>使用字符串的前几个字符作为索引(即前缀索引)。<blockquote>
+<p>下面具体主要说第2种方法，主要思路就是选择足够长的前缀以保证较高的选择性，同时又不能太长(造成空间浪费)。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="确认前缀索引的字符串长度方法"><a href="#确认前缀索引的字符串长度方法" class="headerlink" title="确认前缀索引的字符串长度方法"></a>确认前缀索引的字符串长度方法</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- 查询重复次数最多的10条完整城市名称及其数量(图1)</span><br><span class="line">SELECT COUNT(*) cnt, city FROM city_demo GROUP BY city ORDER BY cnt DESC LIMIT 10;</span><br><span class="line">-- 查询重复次数最多的10条城市名称(前3个字符)及其数量,可以发现:前3个字符的相同数量过大,不适合做前缀索引(图2)</span><br><span class="line">SELECT COUNT(*) cnt, LEFT(city,3) pref FROM city_demo GROUP BY pref ORDER BY cnt DESC LIMIT 10;</span><br><span class="line">-- 查询重复次数最多的10条城市名称(前7个字符)及其数量,可以发现:前7个字符的相同数量和完整城市名称很相近了,可以考虑作为做前缀索引(图3)</span><br><span class="line">SELECT COUNT(*) cnt, LEFT(city,7) pref FROM city_demo GROUP BY pref ORDER BY cnt DESC LIMIT 10;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过字符不同长度查询结果与完整长度结果匹配，最接近的即可未前缀索引字符长度</p>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-- 计算出完整字符串的选择性(图4)</span><br><span class="line">SELECT COUNT(DISTINCT city)&#x2F;COUNT(*) FROM city_demo;</span><br><span class="line">-- 计算各个前缀的选择性(图5)，然后找出选择性与图4相近的</span><br><span class="line">SELECT </span><br><span class="line">	COUNT(DISTINCT LEFT(city,3))&#x2F;COUNT(*) pref3,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,4))&#x2F;COUNT(*) pref4,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,5))&#x2F;COUNT(*) pref5,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,6))&#x2F;COUNT(*) pref6,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,7))&#x2F;COUNT(*) pref7</span><br><span class="line">FROM city_demo;</span><br></pre></td></tr></table></figure>
+<p>完整字符选择性，和不同长度字符选择性比较</p>
+</blockquote>
+<h1 id="建立前缀索引"><a href="#建立前缀索引" class="headerlink" title="建立前缀索引"></a>建立前缀索引</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &#96;city_demo&#96; ADD INDEX &#96;idx_city&#96; (&#96;city&#96;(7)) USING BTREE ;</span><br><span class="line">-- 或者这个也行</span><br><span class="line">ALTER TABLE &#96;city_demo&#96; ADD KEY &#96;idx_city&#96; (&#96;city&#96;(7))</span><br><span class="line">-- 又或者直接用Navicat可视化操作也行</span><br></pre></td></tr></table></figure>
+<h1 id="前缀索引的优缺点"><a href="#前缀索引的优缺点" class="headerlink" title="前缀索引的优缺点"></a>前缀索引的优缺点</h1><ul>
+<li><p>有点</p>
+</li>
+<li><p>缺点<br>MySQL中无法使用前缀索引进行ORDER BY和GROUP BY，也无法用来进行覆盖扫描</p>
+</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-13-MySQL%E6%95%B0%E6%8D%AE%E9%A1%B5%E4%BB%A5%E5%8F%8A%E9%A1%B5%E5%88%86%E8%A3%82%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-13-MySQL%E6%95%B0%E6%8D%AE%E9%A1%B5%E4%BB%A5%E5%8F%8A%E9%A1%B5%E5%88%86%E8%A3%82%E6%9C%BA%E5%88%B6/" itemprop="url">MySQL数据页以及页分裂机制</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">737</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/ZhuChangwu/p/14041410.html" target="_blank" rel="noopener">MySQL数据页以及页分裂机制</a></p>
+<p><a href="https://www.pianshen.com/article/89941890104/" target="_blank" rel="noopener">mysql页分裂</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-2-mysql-int%E5%92%8Cvarchar%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87/" itemprop="url">mysql int和varchar查询效率</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">720</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://cloud.tencent.com/developer/ask/62018" target="_blank" rel="noopener">mysql int和varchar查询效率</a></p>
+<p>INT比较比varchar比较快，因为INT占用的空间比varchars少得多。</p>
+<p>对于无索引访问和索引访问，这都是正确的。最快的方法是索引int列。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-15-mysql%E6%94%AF%E6%8C%81hash%E7%B4%A2%E5%BC%95%E5%90%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-15-mysql%E6%94%AF%E6%8C%81hash%E7%B4%A2%E5%BC%95%E5%90%97/" itemprop="url">mysql支持hash索引吗</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/shenjian58/article/details/102493421" target="_blank" rel="noopener">mysql自适应哈希索引</a></p>
+<h1 id="mysql支持hash索引吗"><a href="#mysql支持hash索引吗" class="headerlink" title="mysql支持hash索引吗"></a>mysql支持hash索引吗</h1><ol>
+<li>InnoDB用户无法手动创建哈希索引，这一层上说，InnoDB确实不支持哈希索引；</li>
+<li>InnoDB会自调优(self-tuning)，如果判定建立自适应哈希索引(Adaptive Hash Index, AHI)，能够提升查询效率，InnoDB自己会建立相关哈希索引，这一层上说，InnoDB又是支持哈希索引的；</li>
+</ol>
+<h1 id="什么是自适应哈希索引-Adaptive-Hash-Index-AHI-呢？原理又是怎样的呢？"><a href="#什么是自适应哈希索引-Adaptive-Hash-Index-AHI-呢？原理又是怎样的呢？" class="headerlink" title="什么是自适应哈希索引(Adaptive Hash Index, AHI)呢？原理又是怎样的呢？"></a>什么是自适应哈希索引(Adaptive Hash Index, AHI)呢？原理又是怎样的呢？</h1><h2 id="发起普通索引查询时："><a href="#发起普通索引查询时：" class="headerlink" title="发起普通索引查询时："></a>发起普通索引查询时：</h2><ol>
+<li>会先从普通索引查询出主键（上图右边）；</li>
+<li>再由主键，从聚集索引上二次遍历定位到记录（上图左边）。</li>
+</ol>
+<p>不管聚集索引还是普通索引，记录定位的寻路路径(Search Path)都很长。</p>
+<h3 id="建立自适应哈希索引"><a href="#建立自适应哈希索引" class="headerlink" title="建立自适应哈希索引"></a>建立自适应哈希索引</h3><p>在MySQL运行的过程中，如果InnoDB发现，有很多SQL存在这类很长的寻路，并且有很多SQL会命中相同的页面(page)，<br>InnoDB会在自己的内存缓冲区(Buffer)里，开辟一块区域，建立自适应哈希所有AHI，以加速查询。</p>
+<h2 id="为啥叫“自适应-adaptive-”哈希索引？"><a href="#为啥叫“自适应-adaptive-”哈希索引？" class="headerlink" title="为啥叫“自适应(adaptive)”哈希索引？"></a>为啥叫“自适应(adaptive)”哈希索引？</h2><p>系统自己判断“应该可以加速查询”而建立的，不需要用户手动建立，故称“自适应”。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/19/database-mysql-notes-3-mysql%E7%B4%A2%E5%BC%95%E6%B3%A8%E6%84%8F%E7%82%B9/" itemprop="url">mysql索引注意点</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">849</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><ol>
+<li>between 走索引情况 <a href="http://www.51testing.com/html/85/132585-860191.html" target="_blank" rel="noopener">http://www.51testing.com/html/85/132585-860191.html</a><br>１）如果表数据量小１４条时，取５条时就会使用索引，否则就使用全表描述<br>２）如果表数据量在１０００左右时，取出超过１８％时，就不会使用索引<br>３）如果表数据量超地１００００时，只要使用between and 都使用索引
+　　</li>
+<li>in 走索引，建议in(xxx) xxx小于100</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -2353,7 +2345,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/26/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/28/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/26/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/28/">下一页</a>
   </nav>
 
 
@@ -2400,7 +2392,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2563,7 +2555,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2646,7 +2654,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2769,7 +2783,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -2778,7 +2792,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

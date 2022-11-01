@@ -522,7 +522,7 @@
 <h2 id="如果不是，查看pod启动失败的原因"><a href="#如果不是，查看pod启动失败的原因" class="headerlink" title="如果不是，查看pod启动失败的原因"></a>如果不是，查看pod启动失败的原因</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod web</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl describe pod web</span><br><span class="line">Name:           web-76d9ff54d5-mddws</span><br><span class="line">Namespace:      default</span><br><span class="line">Priority:       0</span><br><span class="line">Node:           wsl2-k8s-1-control-plane&#x2F;172.18.0.2</span><br><span class="line">Start Time:     Fri, 23 Jul 2021 10:05:42 +0800</span><br><span class="line">Labels:         app&#x3D;web</span><br><span class="line">                pod-template-hash&#x3D;76d9ff54d5</span><br><span class="line">Annotations:    &lt;none&gt;</span><br><span class="line">Status:         Pending</span><br><span class="line">IP:</span><br><span class="line">IPs:            &lt;none&gt;</span><br><span class="line">Controlled By:  ReplicaSet&#x2F;web-76d9ff54d5</span><br><span class="line">Containers:</span><br><span class="line">  web:</span><br><span class="line">    Container ID:</span><br><span class="line">    Image:          nginx</span><br><span class="line">    Image ID:</span><br><span class="line">    Port:           80&#x2F;TCP</span><br><span class="line">    Host Port:      0&#x2F;TCP</span><br><span class="line">    State:          Waiting</span><br><span class="line">      Reason:       ContainerCreating</span><br><span class="line">    Ready:          False</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      &#x2F;var&#x2F;run&#x2F;secrets&#x2F;kubernetes.io&#x2F;serviceaccount from kube-api-access-6z9fs (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type              Status</span><br><span class="line">  Initialized       True</span><br><span class="line">  Ready             False</span><br><span class="line">  ContainersReady   False</span><br><span class="line">  PodScheduled      True</span><br><span class="line">Volumes:</span><br><span class="line">  kube-api-access-6z9fs:</span><br><span class="line">    Type:                    Projected (a volume that contains injected data from multiple sources)</span><br><span class="line">    TokenExpirationSeconds:  3607</span><br><span class="line">    ConfigMapName:           kube-root-ca.crt</span><br><span class="line">    ConfigMapOptional:       &lt;nil&gt;</span><br><span class="line">    DownwardAPI:             true</span><br><span class="line">QoS Class:                   BestEffort</span><br><span class="line">Node-Selectors:              &lt;none&gt;</span><br><span class="line">Tolerations:                 node.kubernetes.io&#x2F;not-ready:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">                             node.kubernetes.io&#x2F;unreachable:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason     Age   From               Message</span><br><span class="line">  ----    ------     ----  ----               -------</span><br><span class="line">  Normal  Scheduled  60s   default-scheduler  Successfully assigned default&#x2F;web-76d9ff54d5-mddws to wsl2-k8s-1-control-plane</span><br><span class="line">  Normal  Pulling    58s   kubelet            Pulling image &quot;nginx&quot;</span><br></pre></td></tr></table></figure>
 <h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f app.yaml</span><br></pre></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -684,7 +684,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -847,7 +847,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -930,7 +946,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1069,7 +1091,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1078,7 +1100,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

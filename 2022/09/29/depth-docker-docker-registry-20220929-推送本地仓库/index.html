@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">8k</span>
+                <span title="字数统计">8.4k</span>
               
 
               
@@ -518,7 +518,7 @@
 </ol>
 <h1 id="案例-myhexo-容器"><a href="#案例-myhexo-容器" class="headerlink" title="案例 myhexo 容器"></a>案例 myhexo 容器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">➜  wk-github-zdy docker images</span><br><span class="line">REPOSITORY            TAG            IMAGE ID       CREATED         SIZE</span><br><span class="line">myhexo                1.0            fcb95862615f   3 days ago      195MB</span><br><span class="line">redis                 latest         9fb1c428ea15   6 days ago      111MB</span><br><span class="line">oraclelinux           9              73ce309b1736   7 weeks ago     242MB</span><br><span class="line">registry              latest         4206ae70dd03   7 weeks ago     22.6MB</span><br><span class="line">mysql                 8.0            d56063370fd1   8 weeks ago     490MB</span><br><span class="line">mongo                 latest         8522acba0ea1   8 weeks ago     667MB</span><br><span class="line">elasticsearch         8.3.3          a21975dcd56a   2 months ago    657MB</span><br><span class="line">mongo-express         latest         ce615669da5e   11 months ago   136MB</span><br><span class="line">loululin&#x2F;dmanywhere   0.8.4-alpine   f346f25c02ec   2 years ago     37.3MB</span><br><span class="line">➜  wk-github-zdy docker tag myhexo:1.0 localhost:5001&#x2F;my-hexo</span><br><span class="line">➜  wk-github-zdy docker images</span><br><span class="line">REPOSITORY               TAG            IMAGE ID       CREATED         SIZE</span><br><span class="line">localhost:5001&#x2F;my-hexo   latest         fcb95862615f   3 days ago      195MB</span><br><span class="line">myhexo                   1.0            fcb95862615f   3 days ago      195MB</span><br><span class="line">redis                    latest         9fb1c428ea15   6 days ago      111MB</span><br><span class="line">oraclelinux              9              73ce309b1736   7 weeks ago     242MB</span><br><span class="line">registry                 latest         4206ae70dd03   7 weeks ago     22.6MB</span><br><span class="line">mysql                    8.0            d56063370fd1   8 weeks ago     490MB</span><br><span class="line">mongo                    latest         8522acba0ea1   8 weeks ago     667MB</span><br><span class="line">elasticsearch            8.3.3          a21975dcd56a   2 months ago    657MB</span><br><span class="line">mongo-express            latest         ce615669da5e   11 months ago   136MB</span><br><span class="line">loululin&#x2F;dmanywhere      0.8.4-alpine   f346f25c02ec   2 years ago     37.3MB</span><br><span class="line">➜  wk-github-zdy docker push localhost:5001&#x2F;my-hexo</span><br><span class="line">Using default tag: latest</span><br><span class="line">The push refers to repository [localhost:5001&#x2F;my-hexo]</span><br><span class="line">9d65187790aa: Pushed</span><br><span class="line">2cb39a2a325b: Pushed</span><br><span class="line">d3d59b289b09: Pushed</span><br><span class="line">2b49ce1e2b9c: Pushed</span><br><span class="line">958c20e8729d: Pushed</span><br><span class="line">089589b87ea4: Pushed</span><br><span class="line">9957769b57f7: Pushed</span><br><span class="line">6163139c6d2b: Pushed</span><br><span class="line">e7d566ca3222: Pushed</span><br><span class="line">7cce60e85825: Pushed</span><br><span class="line">9833f26c6bda: Pushed</span><br><span class="line">latest: digest: sha256:9747a0b5918c78739900d1f0a6db6883bb963859e7f842ed3ef7d933839ed6c0 size: 2610</span><br></pre></td></tr></table></figure>
 <h1 id="若没配置-tag-提示权限不足"><a href="#若没配置-tag-提示权限不足" class="headerlink" title="若没配置 tag ,提示权限不足"></a>若没配置 tag ,提示权限不足</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  wk-github-zdy docker push registry</span><br><span class="line">Using default tag: latest</span><br><span class="line">The push refers to repository [docker.io&#x2F;library&#x2F;registry]</span><br><span class="line">7096a4058a34: Layer already exists</span><br><span class="line">98a9ffbe5dec: Layer already exists</span><br><span class="line">3b937836dc53: Layer already exists</span><br><span class="line">bfaf09ad3403: Layer already exists</span><br><span class="line">5d3e392a13a0: Layer already exists</span><br><span class="line">errors:</span><br><span class="line">denied: requested access to the resource is denied</span><br><span class="line">unauthorized: authentication required</span><br></pre></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -569,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/09/29/depth-docker-docker-registry-20220929-registry%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%91%E5%B8%83%E7%9A%84%E7%AB%AF%E5%8F%A3/" rel="prev" title="registry自定义发布的端口">
-                registry自定义发布的端口 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/09/29/database-mongodb-docker%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C-20221008-mongo-ddl%E7%BB%83%E4%B9%A0/" rel="prev" title="本地registry仓库搭建">
+                本地registry仓库搭建 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -680,7 +680,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -843,7 +843,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -926,7 +942,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1065,7 +1087,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1074,7 +1096,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

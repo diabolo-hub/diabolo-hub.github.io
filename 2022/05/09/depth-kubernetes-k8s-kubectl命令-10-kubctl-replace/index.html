@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4.3k</span>
+                <span title="字数统计">4.7k</span>
               
 
               
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 mins.</span>
+                <span title="阅读时长">5 mins.</span>
               
             </div>
           
@@ -514,7 +514,7 @@
 <p>查看导出文件并修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# cat nginx_replace.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: 2019-01-10T14:41:21Z</span><br><span class="line">  labels:</span><br><span class="line">    name: nginx</span><br><span class="line">  name: nginx</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: &quot;118277&quot;</span><br><span class="line">  selfLink: &#x2F;api&#x2F;v1&#x2F;namespaces&#x2F;default&#x2F;services&#x2F;nginx</span><br><span class="line">  uid: cc4cf987-14e5-11e9-88ba-000c2953a750</span><br><span class="line">spec:</span><br><span class="line">  clusterIP: 10.254.49.161</span><br><span class="line">  ports:</span><br><span class="line">  - nodePort: 31003</span><br><span class="line">    port: 80</span><br><span class="line">    protocol: TCP</span><br><span class="line">    targetPort: 80</span><br><span class="line">  selector:</span><br><span class="line">    name: nginx</span><br><span class="line">  sessionAffinity: None</span><br><span class="line">  type: NodePort</span><br><span class="line">status:</span><br><span class="line">  loadBalancer: &#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="我们把映射端口改为31003，然后保存退出；使用replace-命令"><a href="#我们把映射端口改为31003，然后保存退出；使用replace-命令" class="headerlink" title="我们把映射端口改为31003，然后保存退出；使用replace 命令"></a>我们把映射端口改为31003，然后保存退出；使用replace 命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl replace -f nginx_replace.yaml</span><br><span class="line">service &quot;nginx&quot; replaced</span><br><span class="line">[root@master ~]# kubectl get service</span><br><span class="line">NAME         CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE</span><br><span class="line">kubernetes   10.254.0.1      &lt;none&gt;        443&#x2F;TCP        1d</span><br><span class="line">nginx        10.254.49.161   &lt;nodes&gt;       80:31003&#x2F;TCP   2h</span><br></pre></td></tr></table></figure>
 <h1 id="重建资源-，修改已创建-service-pod等等"><a href="#重建资源-，修改已创建-service-pod等等" class="headerlink" title="重建资源 ，修改已创建 service,pod等等"></a>重建资源 ，修改已创建 service,pod等等</h1><p>kubectl replace –force -f rocketmq-rc.yml<br>注意：这条命令，实际上它是一个组合命令，kubectl delete -f rocketmq-rc.yml和kubectl create -f rocketmq-rc.yml的组合</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -676,7 +676,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -839,7 +839,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -922,7 +938,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1061,7 +1083,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1070,7 +1092,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

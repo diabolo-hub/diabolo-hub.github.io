@@ -136,19 +136,21 @@
 
 
   
-  <meta name="keywords" content="Diabolo, Diabolo-hub" />
+  <meta name="keywords" content="database,mysql," />
 
 
-<meta name="description" content="redis预热缓存预热1、定义 缓存预热就是系统上线后，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！ 2、解决方案 1）直接写个缓存刷新页面，上线时手工操作下。2）数据量不大，可以在项目启动的时候自动进行加载。3）定时刷新缓存。 config预热方案 启动时批量预热，设置过期时间 增删改查修改缓存 定时刷新">
+<meta name="description" content="-+Navicat 批量插入数据&#x2F;编写储存过程&#x2F;函数: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;danhuai&#x2F;p&#x2F;16504051.html  新建函数 sql security {definer|invoker};指明谁有权限来执行；definer表示只有定义者才能执行；invoker表示拥有权的调用者才可以执行，默认情况下，系统指定为definer；  编写函数123456789">
 <meta property="og:type" content="article">
-<meta property="og:title" content="design-预热-1-redis预热方案">
-<meta property="og:url" content="http://yoursite.com/2022/09/04/design-%E9%A2%84%E7%83%AD-1-redis%E9%A2%84%E7%83%AD%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:title" content="navicat函数批量插入一百万数据">
+<meta property="og:url" content="http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat%E5%87%BD%E6%95%B0%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%B8%80%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE/index.html">
 <meta property="og:site_name" content="diabolo随笔">
-<meta property="og:description" content="redis预热缓存预热1、定义 缓存预热就是系统上线后，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！ 2、解决方案 1）直接写个缓存刷新页面，上线时手工操作下。2）数据量不大，可以在项目启动的时候自动进行加载。3）定时刷新缓存。 config预热方案 启动时批量预热，设置过期时间 增删改查修改缓存 定时刷新">
+<meta property="og:description" content="-+Navicat 批量插入数据&#x2F;编写储存过程&#x2F;函数: https:&#x2F;&#x2F;www.cnblogs.com&#x2F;danhuai&#x2F;p&#x2F;16504051.html  新建函数 sql security {definer|invoker};指明谁有权限来执行；definer表示只有定义者才能执行；invoker表示拥有权的调用者才可以执行，默认情况下，系统指定为definer；  编写函数123456789">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-03T16:08:53.235Z">
-<meta property="article:modified_time" content="2022-09-03T16:10:24.774Z">
+<meta property="article:published_time" content="2022-10-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-20T06:25:13.890Z">
 <meta property="article:author" content="diabolo">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
 
 
@@ -156,7 +158,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2022/09/04/design-预热-1-redis预热方案/"/>
+  <link rel="canonical" href="http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat函数批量插入一百万数据/"/>
 
 
 
@@ -165,7 +167,7 @@
     sidebar: "",
   };
 </script>
-  <title>design-预热-1-redis预热方案 | diabolo随笔</title>
+  <title>navicat函数批量插入一百万数据 | diabolo随笔</title>
   
 
 
@@ -373,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/04/design-%E9%A2%84%E7%83%AD-1-redis%E9%A2%84%E7%83%AD%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat%E5%87%BD%E6%95%B0%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%B8%80%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -390,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">design-预热-1-redis预热方案</h1>
+          <h1 class="post-title" itemprop="name headline">navicat函数批量插入一百万数据</h1>
         
 
         <div class="post-meta">
@@ -406,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-04T00:08:53+08:00">2022-09-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-20T00:00:00+08:00">2022-10-20</time>
             
 
             
@@ -415,6 +417,38 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/navicat/" itemprop="url" rel="index"><span itemprop="name">navicat</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -442,7 +476,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">498</span>
+                <span title="字数统计">3.7k</span>
               
 
               
@@ -456,7 +490,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -476,16 +510,15 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><h1 id="redis预热"><a href="#redis预热" class="headerlink" title="redis预热"></a>redis预热</h1><p>缓存预热<br>1、定义</p>
-<p>缓存预热就是系统上线后，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！</p>
-<p>2、解决方案</p>
-<p>1）直接写个缓存刷新页面，上线时手工操作下。<br>2）数据量不大，可以在项目启动的时候自动进行加载。<br>3）定时刷新缓存。</p>
-<h2 id="config预热方案"><a href="#config预热方案" class="headerlink" title="config预热方案"></a>config预热方案</h2><ol>
-<li>启动时批量预热，设置过期时间</li>
-<li>增删改查修改缓存</li>
-<li>定时刷新缓存</li>
-</ol>
-
+        <script src="/assets/js/APlayer.min.js"> </script><hr>
+<p>-<strong>+Navicat 批量插入数据/编写储存过程/函数: <a href="https://www.cnblogs.com/danhuai/p/16504051.html" target="_blank" rel="noopener">https://www.cnblogs.com/danhuai/p/16504051.html</a></strong></p>
+<hr>
+<h1 id="新建函数"><a href="#新建函数" class="headerlink" title="新建函数"></a>新建函数</h1><ul>
+<li>sql security {definer|invoker};指明谁有权限来执行；<br>definer表示只有定义者才能执行；<br>invoker表示拥有权的调用者才可以执行，默认情况下，系统指定为definer；</li>
+</ul>
+<h1 id="编写函数"><a href="#编写函数" class="headerlink" title="编写函数"></a>编写函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CREATE DEFINER&#x3D;&#96;root&#96;@&#96;%&#96; FUNCTION &#96;批量插入查询中间表&#96;(params1 int) RETURNS int</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    SQL SECURITY INVOKER</span><br><span class="line">BEGIN</span><br><span class="line">  #Routine body goes here...</span><br><span class="line"></span><br><span class="line">	# step1 创建一个循环变量i（默认值为 1）</span><br><span class="line">	DECLARE i INT DEFAULT(1);</span><br><span class="line">	# step2 循环params1 次</span><br><span class="line">	WHILE i &lt; params1 DO</span><br><span class="line">			# step3 循环插入数据</span><br><span class="line">			INSERT INTO &#96;t_inv_out_vat_query_middle&#96; (&#96;id&#96;, &#96;apply_flow_no&#96;, &#96;seq_inv_no&#96;, &#96;apply_type_cd&#96;, &#96;apply_status_cd&#96;, &#96;apply_dt&#96;, &#96;org_code&#96;, &#96;org_name&#96;, &#96;buyer_taxpayer_no&#96;, &#96;buyer_taxpayer_name&#96;, &#96;buyer_taxpayer_type_cd&#96;, &#96;seller_taxpayer_name&#96;, &#96;inv_type_code&#96;, &#96;inv_code&#96;, &#96;inv_no&#96;, &#96;print_status_cd&#96;, &#96;apply_user&#96;, &#96;deal_status_cd&#96;, &#96;vat_biz_status_cd&#96;, &#96;inv_dt&#96;, &#96;gmt_create&#96;, &#96;creator&#96;, &#96;gmt_modified&#96;, &#96;modifier&#96;, &#96;is_valid&#96;) VALUES (i, concat(&#39;applyFlowNo&#39;, i), concat(&#39;seqInvNo&#39;, i), 1, 3, now(), &#39;213701050000&#39;, NULL, &#39;123456789012345678&#39;, &#39;营业执照&#39;, &#39;1&#39;, NULL, &#39;007&#39;, concat(&#39;invCode&#39;,i), concat(&#39;invNo&#39;,i), 1, &#39;3798010067&#39;, 1, 4, now(), now(), &#39;3798010067&#39;, now(), &#39;3798010067&#39;, 1);</span><br><span class="line">			SET i &#x3D; i + 1;</span><br><span class="line">END WHILE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RETURN 0;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>点击左上角运行，输入 params1 = 10000000<br>执行数量较大时需要一定时间</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -511,6 +544,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
 
       
       
@@ -520,8 +561,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/09/04/engine-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E-1-Beetl-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" rel="next" title="Beetl 3中文文档">
-                <i class="fa fa-chevron-left"></i> Beetl 3中文文档
+              <a href="/2022/10/19/mac-20221019-mac%E8%BF%90%E8%A1%8Cios%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%B8%B8%E6%88%8F%E7%AD%89%EF%BC%89/" rel="next" title="mac运行ios应用程序（游戏等）">
+                <i class="fa fa-chevron-left"></i> mac运行ios应用程序（游戏等）
               </a>
             
           </div>
@@ -530,8 +571,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/09/04/java-maven-mac-1-maven-for-mac%E9%85%8D%E7%BD%AE/" rel="prev" title="java-maven-mac-1-maven-for-mac配置">
-                java-maven-mac-1-maven-for-mac配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/10/24/ideal-pojie-20221024-ideal%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E7%A0%81/" rel="prev" title="ideal-pojie-20221024-ideal破解激活码">
+                ideal-pojie-20221024-ideal破解激活码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -641,7 +682,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -804,7 +845,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -887,7 +944,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -994,7 +1057,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis预热"><span class="nav-number">1.</span> <span class="nav-text">redis预热</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config预热方案"><span class="nav-number">1.1.</span> <span class="nav-text">config预热方案</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新建函数"><span class="nav-number">1.</span> <span class="nav-text">新建函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写函数"><span class="nav-number">2.</span> <span class="nav-text">编写函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a></li></ol></div>
             
 
           </div>
@@ -1026,7 +1089,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1035,7 +1098,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

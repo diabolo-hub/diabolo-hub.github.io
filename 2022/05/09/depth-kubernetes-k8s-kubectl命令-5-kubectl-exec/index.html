@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.7k</span>
+                <span title="字数统计">3.2k</span>
               
 
               
@@ -513,7 +513,7 @@
 <h1 id="kubectl-exec-在pod中执行一条命令"><a href="#kubectl-exec-在pod中执行一条命令" class="headerlink" title="kubectl exec 在pod中执行一条命令"></a>kubectl exec 在pod中执行一条命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x ls &#x2F;</span><br><span class="line">bin                etc             lib64          proc    sys</span><br><span class="line">boot                healthcheck.cnf  media          root    tmp</span><br><span class="line">dev                healthcheck.sh   mnt          run    usr</span><br><span class="line">docker-entrypoint-initdb.d  home         mysql-init-complete  sbin    var</span><br><span class="line">entrypoint.sh            lib             opt          srv#进入容器环境</span><br><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x &#x2F;bin&#x2F;bash</span><br><span class="line">bash-4.2# ls  </span><br><span class="line">bin   dev              entrypoint.sh  healthcheck.cnf  home    lib64  mnt            opt   root    sbin  sys  usr</span><br><span class="line">boot  docker-entrypoint-initdb.d  etc         healthcheck.sh   lib    media  mysql-init-complete  proc  run    srv   tmp  var</span><br></pre></td></tr></table></figure>
 <h1 id="进入指定Pod"><a href="#进入指定Pod" class="headerlink" title="进入指定Pod"></a>进入指定Pod</h1><p>kubectl exec -it kubernetes-dashboard-8c9c48775-d6vgn – sh</p>
 <h1 id="进入指定Pod中的指定容器"><a href="#进入指定Pod中的指定容器" class="headerlink" title="进入指定Pod中的指定容器"></a>进入指定Pod中的指定容器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl exec twocontainers -c shell -i -t -- bash</span><br><span class="line">[root@twocontainers &#x2F;]# curl -s localhost:9876&#x2F;info</span><br><span class="line">&#123;&quot;host&quot;: &quot;localhost:9876&quot;, &quot;version&quot;: &quot;0.5.0&quot;, &quot;from&quot;: &quot;127.0.0.1&quot;&#125;</span><br></pre></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -564,8 +564,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-4-kubectl-get/" rel="prev" title="4-kubectl get">
-                4-kubectl get <i class="fa fa-chevron-right"></i>
+              <a href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-7-kubectl-cp/" rel="prev" title="7-kubectl cp">
+                7-kubectl cp <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +675,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -838,7 +838,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -921,7 +937,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1060,7 +1082,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1069,7 +1091,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

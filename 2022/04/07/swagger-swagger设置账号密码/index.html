@@ -508,7 +508,7 @@
 </li>
 </ol>
 <h1 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a>全局配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">package com.xx.yy.adaptor.rest.config;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;</span><br><span class="line">import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.ParameterBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.schema.ModelRef;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.service.Parameter;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author : Daiyin.Zhang</span><br><span class="line"> * @version ：$Id: Swagger2Config.java v 0.1 2021&#x2F;3&#x2F;31 10:43 Daiyin.Zhang Exp $</span><br><span class="line"> * @description : swagger2 config</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Slf4j</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">&#x2F;&#x2F;@EnableKnife4j</span><br><span class="line">@EnableSwaggerBootstrapUI</span><br><span class="line">public class Swagger2Config  &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;xx.center.env&#125;&quot;)</span><br><span class="line">    private String xxCenterEnv;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 全局参数</span><br><span class="line">     *</span><br><span class="line">     * @return List&lt;Parameter&gt;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private List&lt;Parameter&gt; parameter() &#123;</span><br><span class="line">        List&lt;Parameter&gt; params &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        params.add(new ParameterBuilder().name(&quot;token&quot;)</span><br><span class="line">                .description(&quot;认证令牌&quot;)</span><br><span class="line">                .modelRef(new ModelRef(&quot;string&quot;))</span><br><span class="line">                .parameterType(&quot;header&quot;)</span><br><span class="line">                .required(false).build());</span><br><span class="line">        return params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .groupName(&quot;XX系统普通接口管理&quot;)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.xx.yy.adaptor.rest.web&quot;))</span><br><span class="line">                &#x2F;&#x2F;可以根据url路径设置哪些请求加入文档，忽略哪些请求</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ApiInfo apiInfo() &#123;</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(String.format(&quot;xx center API - %s &quot;, xxCenterEnv))</span><br><span class="line">                .description(&quot;XX系统相关API，使用JSON格式传输数据&quot;)</span><br><span class="line">                .version(&quot;1.0&quot;)</span><br><span class="line">                .contact(new Contact(&quot;张代银&quot;, &quot;&quot;, &quot;zhangdaiyin.cool@163.com&quot;))</span><br><span class="line">                .license(&quot;The Apache License, Version 2.0&quot;)</span><br><span class="line">                .licenseUrl(&quot;http:&#x2F;&#x2F;www.apache.org&#x2F;licenses&#x2F;LICENSE-2.0.html&quot;)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -670,7 +670,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -833,7 +833,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -916,7 +932,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1055,7 +1077,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1064,7 +1086,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

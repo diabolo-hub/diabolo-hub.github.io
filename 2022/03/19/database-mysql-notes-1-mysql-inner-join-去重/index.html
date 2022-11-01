@@ -476,7 +476,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -490,7 +490,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -516,7 +516,7 @@
 <p>select package.*,package_product.package_id from package join package_product<br>       on(package.id=package_product.package_id);<br>但是有一个问题，数据会重复，比如package_product表有3个相同的package_id就会查找出3条相同的package表记录,<br>加上distinct好像也没用</p>
 <p>所以，又想到了子查询，select * from package where id in(select distinct package_id from package_product)，虽然写起来简单，但是这条语句太耗性能了，查找6条记录要好几秒，最后找到了合适的方法</p>
 <p>select * from package join (select distinct package_id from package_product) as package_product on(package.id=package_product.package_id)；</p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -569,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2022/03/19/database-mysql-index-1-%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8/" rel="prev" title="索引下推">
-                索引下推 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/" rel="prev" title="随机查询数据">
+                随机查询数据 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +671,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -834,7 +834,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -917,7 +933,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1040,7 +1062,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1049,7 +1071,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

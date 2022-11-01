@@ -526,7 +526,7 @@
 <li>区分大小写的建表语句<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;invoice&#96; (</span><br><span class="line">  &#96;seq_inv_no&#96; varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT &#39;发票请求流水号&#39;,</span><br><span class="line">  &#96;inv_code&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;发票代码&#39;,</span><br><span class="line">  &#96;inv_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;发票号码&#39;,</span><br><span class="line">  &#96;order_no&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;订单编号&#39;,</span><br><span class="line">  &#96;contract_no&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;合同编号&#39;,</span><br><span class="line">  &#96;trade_no&#96; varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;交易编号&#39;,</span><br><span class="line">  &#96;trade_desc&#96; varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;交易描述&#39;,</span><br><span class="line">  &#96;app_type_code&#96; char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;应用类型代码&#39;,</span><br><span class="line">  &#96;open_terminal_no&#96; varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;开票终端编号&#39;,</span><br><span class="line">  &#96;tax_control_serv_code&#96; varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;税控服务器编号&#39;,</span><br><span class="line">  &#96;inv_type_code&#96; char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT &#39;开票类型代码&#39;,</span><br><span class="line">  &#96;inv_category_cd&#96; tinyint(4) NOT NULL COMMENT &#39;发票大类（初始红蓝作废）&#39;,</span><br><span class="line">  &#96;special_inv_sign&#96; char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;特殊票种标识&#39;,</span><br><span class="line">  &#96;org_code&#96; varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;机构代码&#39;,</span><br><span class="line">  &#96;org_name&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;机构名称&#39;,</span><br><span class="line">  &#96;taxpayer_type_cd&#96; tinyint(4) NOT NULL COMMENT &#39;纳税人类型&#39;,</span><br><span class="line">  &#96;seller_taxpayer_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方纳税人识别号&#39;,</span><br><span class="line">  &#96;seller_taxpayer_name&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方纳税人名称&#39;,</span><br><span class="line">  &#96;seller_taxpayer_addr&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方纳税人地址&#39;,</span><br><span class="line">  &#96;seller_taxpayer_tel_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方电话&#39;,</span><br><span class="line">  &#96;seller_taxpayer_open_bank_no&#96; varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方纳税人开户银行号&#39;,</span><br><span class="line">  &#96;seller_taxpayer_open_bank_name&#96; varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;销方纳税人开户银行名称&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人识别号&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_name&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人名称&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_addr&#96; varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人地址&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_tel_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人电话&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_open_bank_no&#96; varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人开户银行号&#39;,</span><br><span class="line">  &#96;buyer_taxpayer_open_bank_name&#96; varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方纳税人开户银行名称&#39;,</span><br><span class="line">  &#96;buyer_email&#96; varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方邮箱&#39;,</span><br><span class="line">  &#96;buyer_tel_no&#96; varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方电话号码&#39;,</span><br><span class="line">  &#96;buyer_cert_type_cd&#96; varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方证件类型&#39;,</span><br><span class="line">  &#96;buyer_cert_no&#96; varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;购方证件号码&#39;,</span><br><span class="line">  &#96;is_list_cd&#96; tinyint(4) DEFAULT &#39;0&#39; COMMENT &#39;是否带清单：1-带清单，0-不带清单&#39;,</span><br><span class="line">  &#96;taxation_method_cd&#96; tinyint(4) DEFAULT &#39;0&#39; COMMENT &#39;征税方式（0 - 普通征税，...）&#39;,</span><br><span class="line">  &#96;total_amount&#96; decimal(24,8) DEFAULT NULL COMMENT &#39;发票总金额&#39;,</span><br><span class="line">  &#96;total_tax_amount&#96; decimal(24,8) DEFAULT NULL COMMENT &#39;发票总税额&#39;,</span><br><span class="line">  &#96;total_price_and_tax_amount&#96; decimal(24,8) DEFAULT NULL COMMENT &#39;发票价税合计&#39;,</span><br><span class="line">  &#96;diff_taxation_deduction_amount&#96; decimal(24,8) DEFAULT NULL COMMENT &#39;差额征税扣除额&#39;,</span><br><span class="line">  &#96;inv_remark&#96; varchar(184) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;发票备注&#39;,</span><br><span class="line">  &#96;payee&#96; varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;收款人&#39;,</span><br><span class="line">  &#96;reviewer&#96; varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;复核人&#39;,</span><br><span class="line">  &#96;drawer&#96; varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;开票人&#39;,</span><br><span class="line">  &#96;inv_period&#96; varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;开票属期&#39;,</span><br><span class="line">  &#96;inv_dt&#96; datetime DEFAULT NULL COMMENT &#39;开票日期&#39;,</span><br><span class="line">  &#96;check_code&#96; varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;校验码&#39;,</span><br><span class="line">  &#96;machinary_code&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;机器码&#39;,</span><br><span class="line">  &#96;qr_code&#96; varchar(1200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;二维码&#39;,</span><br><span class="line">  &#96;tax_control_code&#96; varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;税控码&#39;,</span><br><span class="line">  &#96;info_table_code&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;信息表编号&#39;,</span><br><span class="line">  &#96;org_inv_code&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;原发票代码&#39;,</span><br><span class="line">  &#96;org_inv_no&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;原发票号码&#39;,</span><br><span class="line">  &#96;vat_biz_status_cd&#96; tinyint(4) DEFAULT NULL COMMENT &#39;增值税业务状态&#39;,</span><br><span class="line">  &#96;push_status_cd&#96; tinyint(4) DEFAULT &#39;0&#39; COMMENT &#39;记录推送交易域的状态&#39;,</span><br><span class="line">  &#96;inv_deal_type_cd&#96; tinyint(4) DEFAULT NULL COMMENT &#39;发票处理方式&#39;,</span><br><span class="line">  &#96;is_pre_open_inv_cd&#96; tinyint(4) DEFAULT NULL COMMENT &#39;是否预开发票&#39;,</span><br><span class="line">  &#96;return_code&#96; varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;返回代码&#39;,</span><br><span class="line">  &#96;return_msg&#96; varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;返回信息&#39;,</span><br><span class="line">  &#96;upload_flag&#96; tinyint(4) DEFAULT NULL COMMENT &#39;上传标识&#39;,</span><br><span class="line">  &#96;changer&#96; varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;变更人&#39;,</span><br><span class="line">  &#96;change_dt&#96; timestamp(6) NULL DEFAULT NULL COMMENT &#39;变更日期（作废、红冲）&#39;,</span><br><span class="line">  &#96;inv_status_cd&#96; tinyint(4) NOT NULL DEFAULT &#39;1&#39; COMMENT &#39;发票状态&#39;,</span><br><span class="line">  &#96;sign_param&#96; varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;签名参数&#39;,</span><br><span class="line">  &#96;sign_value&#96; varchar(450) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;签名值&#39;,</span><br><span class="line">  &#96;opened_negative_amount&#96; decimal(24,8) DEFAULT NULL COMMENT &#39;已开负数金额&#39;,</span><br><span class="line">  &#96;signature_verification_result_cd&#96; tinyint(4) DEFAULT NULL COMMENT &#39;验签结果&#39;,</span><br><span class="line">  &#96;remark&#96; varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT &#39;备注&#39;,</span><br><span class="line">  &#96;gmt_create&#96; timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT &#39;创建时间&#39;,</span><br><span class="line">  &#96;gmt_modified&#96; timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT &#39;修改时间&#39;,</span><br><span class="line">  &#96;is_valid&#96; tinyint(4) NOT NULL DEFAULT &#39;1&#39; COMMENT &#39;是否有效&#39;,</span><br><span class="line">  PRIMARY KEY (&#96;seq_inv_no&#96;),</span><br><span class="line">  KEY &#96;idx_inv_code_and_no&#96; (&#96;inv_code&#96;, &#96;inv_no&#96;) BLOCK_SIZE 16384 GLOBAL,</span><br><span class="line">  KEY &#96;idx_org_inv_code_and_no&#96; (&#96;org_inv_code&#96;, &#96;org_inv_no&#96;) BLOCK_SIZE 16384 GLOBAL</span><br><span class="line">) DEFAULT CHARSET &#x3D; utf8mb4 ROW_FORMAT &#x3D; DYNAMIC COMPRESSION &#x3D; &#39;zstd_1.0&#39; REPLICA_NUM &#x3D; 3 BLOCK_SIZE &#x3D; 16384 USE_BLOOM_FILTER &#x3D; FALSE TABLET_SIZE &#x3D; 134217728 PCTFREE &#x3D; 0 COMMENT &#x3D; &#39;增值税销项发票信息表&#39;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -690,7 +690,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -853,7 +853,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -936,7 +952,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1075,7 +1097,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1084,7 +1106,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

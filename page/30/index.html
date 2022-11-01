@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%A2%9E%E5%8A%A0%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0%E5%92%8C%E6%97%B6%E9%95%BF%E5%92%8C%E8%AE%BF%E5%AE%A2%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%A2%9E%E5%8A%A0%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0%E5%92%8C%E6%97%B6%E9%95%BF%E5%92%8C%E8%AE%BF%E5%AE%A2%E6%95%B0/" itemprop="url">阅读次数/时长和访客数【载】</a></h1>
+                <a class="post-title-link" href="/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F/" itemprop="url">自定义鼠标样式</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-15T00:00:00+08:00">2022-03-15</time>
             
 
             
@@ -464,967 +464,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">9.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/Coder_Jeremy/article/details/83588674" target="_blank" rel="noopener">NexT 6 添加字数和阅读时间统计</a></p>
-<h1 id="阅读次数-时长和访客数"><a href="#阅读次数-时长和访客数" class="headerlink" title="阅读次数/时长和访客数"></a>阅读次数/时长和访客数</h1><ol>
-<li><p>Next6版本集成了多种相关功能，除了已有的<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener">busuanzi</a>，目前又加入了<a href="https://github.com/theme-next/hexo-symbols-count-time" target="_blank" rel="noopener">symbols-count-time</a>，二者在主题配置文件中的相关设置方法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Post wordcount <span class="built_in">display</span> settings</span><br><span class="line"># Dependencies: https:<span class="comment">//github.com/theme-next/hexo-symbols-count-time</span></span><br><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: <span class="literal">true</span> #分隔符|</span><br><span class="line">  item_text_post: <span class="literal">true</span> #是否统计站点总字数</span><br><span class="line">  item_text_total: <span class="literal">true</span> #是否同级文章总字数</span><br><span class="line">  awl: <span class="number">2</span> #平均每个字符的长度</span><br><span class="line">  wpm: <span class="number">300</span> <span class="meta">#words per minute</span></span><br><span class="line"> </span><br><span class="line">busuanzi_count:</span><br><span class="line">  enable: <span class="literal">true</span>  #是否开启不蒜子统计功能</span><br><span class="line">  total_visitors: <span class="literal">true</span> #是否统计总访客数</span><br><span class="line">  total_visitors_icon: user #访客数图标为人像</span><br><span class="line">  total_views: <span class="literal">true</span> #是否同级总访问数</span><br><span class="line">  total_views_icon: eye #访问数图标为眼睛</span><br><span class="line">  post_views: <span class="literal">true</span> #是否统计文章访问数</span><br><span class="line">  post_views_icon: eye #访问数图标为眼睛</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其中前者还需在站点配置文件中加入：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">symbols_count_time:</span><br><span class="line">  symbols: <span class="literal">true</span> #是否统计字数</span><br><span class="line">  time: <span class="literal">false</span> #是否统计阅读时长</span><br><span class="line">  total_symbols: <span class="literal">true</span> #是否统计总字数</span><br><span class="line">  total_time: <span class="literal">false</span> #是否统计总阅读时长</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>相关依赖如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-symbols-count-time --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不过symbols-count-time的数字经常不显示，不知道是不是我配置的问题，不过不担心，因为busuanzi自带了这些功能（除了阅读时长，不过这个意义不大），只需要修改next/layout/_partials/footer.swig文件如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=<span class="string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">  &#123;% <span class="keyword">if</span> <span class="built_in">config</span>.symbols_count_time.total_symbols %&#125;</span><br><span class="line">    &lt;span class=<span class="string">"post-meta-divider"</span>&gt;|&lt;/span&gt;</span><br><span class="line">    &lt;span class=<span class="string">"post-meta-item-icon"</span>&gt;</span><br><span class="line">      &lt;i class=<span class="string">"fa fa-area-chart"</span>&gt;&lt;/i&gt;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &#123;% <span class="keyword">if</span> theme.symbols_count_time.item_text_total %&#125;</span><br><span class="line">      &lt;span class="post-meta-item-text"&gt;&#123;&#123; __('symbols_count_time.count_total') + __('symbol.colon') &#125;&#125;&lt;/span&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">	&lt;span title=<span class="string">"&#123;&#123; __('post.totalcount') &#125;&#125;"</span>&gt;</span><br><span class="line">     &#123;&#123; totalcount(site, '0,0.0a') &#125;&#125;字 &lt;/span&gt;</span><br><span class="line">    &lt;!--&lt;span title=<span class="string">"&#123;&#123; __('symbols_count_time.count_total') &#125;&#125;"</span>&gt;&#123;&#123;symbolsCountTotal(site)&#125;&#125;&lt;/span&gt;--&gt;</span><br><span class="line">  &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>以及修改next/layout/_macro/post.swig文件中的symbol部分：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">     &#123;% <span class="keyword">if</span> <span class="built_in">config</span>.symbols_count_time.symbols <span class="keyword">or</span> <span class="built_in">config</span>.symbols_count_time.time %&#125;</span><br><span class="line">       &lt;div <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">symbolscount</span>"&gt;</span></span><br><span class="line"><span class="class">         &#123;</span>% <span class="keyword">if</span> <span class="keyword">not</span> theme.symbols_count_time.separated_meta %&#125;</span><br><span class="line">           &lt;span <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">meta</span>-<span class="title">divider</span>"&gt;|&lt;/span&gt;</span></span><br><span class="line"><span class="class">         &#123;</span>% endif %&#125;</span><br><span class="line"></span><br><span class="line">         &#123;% <span class="keyword">if</span> <span class="built_in">config</span>.symbols_count_time.symbols %&#125;</span><br><span class="line">           &lt;span <span class="class"><span class="keyword">class</span>="<span class="title">post</span>-<span class="title">meta</span>-<span class="title">item</span>-<span class="title">icon</span>"&gt;</span></span><br><span class="line"><span class="class">             &lt;i class="fa fa-file-word-o"&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="class">           &lt;/span&gt;</span></span><br><span class="line"><span class="class">           &#123;</span>% <span class="keyword">if</span> theme.symbols_count_time.item_text_post %&#125;</span><br><span class="line">             &lt;span class="post-meta-item-text"&gt;&#123;&#123; __('symbols_count_time.count') + __('symbol.colon') &#125;&#125;&lt;/span&gt;</span><br><span class="line">           &#123;% endif %&#125;</span><br><span class="line">           &lt;!-- &lt;span title=<span class="string">"&#123;&#123; __('symbols_count_time.count') &#125;&#125;"</span>&gt;&#123;#</span><br><span class="line">           #&#125;&#123;&#123; symbolsCount(post.content) &#125;&#125;&#123;#</span><br><span class="line">         #&#125;&lt;/span&gt; --&gt;</span><br><span class="line">&lt;span title=<span class="string">"&#123;&#123; __('symbols_count_time.count') &#125;&#125;"</span>&gt;</span><br><span class="line">             &#123;&#123; wordcount(post.content) &#125;&#125;字</span><br><span class="line">           &lt;/span&gt;</span><br><span class="line">         &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/" itemprop="url">博客摘要显示</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="博客摘要显示"><a href="#博客摘要显示" class="headerlink" title="博客摘要显示"></a>博客摘要显示</h1><ol>
-<li>于摘要显示，首先我们需要开启摘要功能，修改主题配置（blog/themes/next/_config.yml）文件：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Post Settings（摘要设置）</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"># Automatically scroll page to section which is under &lt;!-- more --&gt; mark.</span><br><span class="line">scroll_to_more: <span class="literal">true</span> #选取博客正文&lt;!--more--&gt;前的内容</span><br><span class="line"># Automatically saving scroll <span class="built_in">position</span> on each post/page in cookies.</span><br><span class="line">save_scroll: <span class="literal">true</span></span><br><span class="line"># Automatically excerpt description in homepage as preamble <span class="built_in">text</span>.</span><br><span class="line">excerpt_description: <span class="literal">true</span> #自动截取摘要</span><br><span class="line"></span><br><span class="line"># Automatically Excerpt. Not recommend.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: <span class="literal">true</span> #自动截取一定程度的摘要</span><br><span class="line">  length: <span class="number">150</span></span><br><span class="line"># Read more button</span><br><span class="line"># If <span class="literal">true</span>, the <span class="built_in">read</span> more button would be displayed in excerpt section.</span><br><span class="line">read_more_btn: <span class="literal">true</span> #显示阅读全文按钮</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%8D%9A%E5%AE%A2%E6%91%98%E8%A6%81%E6%98%BE%E7%A4%BA/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">常用命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands.html</a></p>
-<ol>
-<li>hexo n(new) fileName  # 新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;post title with whitespace&quot;</span><br></pre></td></tr></table></figure>
-hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<br>hexo d(deploy)        # 部署到线上<br>hexo p(publish)       # 发表草稿。<br>hexo version          # 显示hexo版本<br>hexo –debug          # 调试模式，在终端中显示调试信息并记录到 debug.log<br>hexo server –config custom.yml     # 使用 custom.yml 代替默认的 _config.yml<br>hexo clean            # 清除缓存文件 (db.json) 和已生成的静态文件 (public)。 在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。<br>hexo –draft          # 显示 source/_drafts 文件夹中的草稿文章。<br>hexo generate –config custom.yml,custom2.json,custom3.yml  # 使用 custom.yml, custom2.json 和 custom3.yml，其中 custom3.yml 优先级最高，其次是 custom2.json                        </li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF/" itemprop="url">文章版权信息</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">672</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="文章版权信息"><a href="#文章版权信息" class="headerlink" title="文章版权信息"></a>文章版权信息</h1><ol>
-<li>要想开启博客的版权功能，需要设置主题配置文件：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: <span class="literal">true</span></span><br><span class="line">  post: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%BB%93%E6%9D%9F%E8%AF%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E7%BB%93%E6%9D%9F%E8%AF%AD/" itemprop="url">文章结束语[载]</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<h2 id="文章结束语：https-blog-csdn-net-nightmare-dimple-article-details-86661502"><a href="#文章结束语：https-blog-csdn-net-nightmare-dimple-article-details-86661502" class="headerlink" title="- 文章结束语：https://blog.csdn.net/nightmare_dimple/article/details/86661502"></a>- <strong>文章结束语：<a href="https://blog.csdn.net/nightmare_dimple/article/details/86661502" target="_blank" rel="noopener">https://blog.csdn.net/nightmare_dimple/article/details/86661502</a></strong></h2><h1 id="文章结束标志"><a href="#文章结束标志" class="headerlink" title="文章结束标志"></a>文章结束标志</h1><ol>
-<li><p>在路径 \themes\next\layout_macro 中新建 passage-end-tag.swig 文件,并添加以下内容：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="keyword">not</span> is_index %&#125;</span><br><span class="line">        &lt;div style=<span class="string">"text-align:center;color: #ccc;font-size:14px;"</span>&gt;-------------本文结束&lt;i class=<span class="string">"fa fa-paw"</span>&gt;&lt;/i&gt;感谢您的阅读-------------&lt;/div&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接着打开\themes\next\layout_macro\post.swig文件，在post-body 之后(END POST BODY)， post-footer 之前添加如代码：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &#123;% <span class="keyword">if</span> <span class="keyword">not</span> is_index %&#125;</span><br><span class="line">    &#123;% include 'passage-end-tag.swig' %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后打开主题配置文件（_config.yml),在末尾添加：</p>
-</li>
-</ol>
-<h1 id="文章末尾添加“本文结束”标记"><a href="#文章末尾添加“本文结束”标记" class="headerlink" title="文章末尾添加“本文结束”标记"></a>文章末尾添加“本文结束”标记</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">passage_end_tag:</span><br><span class="line">  enabled: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E8%AE%BE%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E8%AE%BE%E7%BD%AE/" itemprop="url">作者信息及侧边栏</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.7k</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -1460,11 +500,11 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="作者信息及侧边栏"><a href="#作者信息及侧边栏" class="headerlink" title="作者信息及侧边栏"></a>作者信息及侧边栏</h1><ol>
-<li>\themes\next\source\css_custom\custom.styl,向里面加入：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主页文章添加阴影效果</span></span><br><span class="line"> .post &#123;</span><br><span class="line">   margin-top: <span class="number">60</span>px;</span><br><span class="line">   margin-bottom: <span class="number">60</span>px;</span><br><span class="line">   padding: <span class="number">25</span>px;</span><br><span class="line">   -webkit-box-shadow: <span class="number">0</span> <span class="number">0</span> <span class="number">5</span><span class="function">px <span class="title">rgba</span><span class="params">(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">.5</span>)</span></span>;</span><br><span class="line">   -moz-box-shadow: <span class="number">0</span> <span class="number">0</span> <span class="number">5</span><span class="function">px <span class="title">rgba</span><span class="params">(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">.5</span>)</span></span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<p>七牛云图床</p>
+<hr>
+<h1 id="自定义鼠标样式"><a href="#自定义鼠标样式" class="headerlink" title="自定义鼠标样式"></a>自定义鼠标样式</h1><p>打开themes/next/source/css/_custom/custom.styl，添加代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 鼠标样式</span><br><span class="line">  * &#123;</span><br><span class="line">      cursor: url(&quot;http:&#x2F;&#x2F;om8u46rmb.bkt.clouddn.com&#x2F;sword2.ico&quot;),auto!important</span><br><span class="line">  &#125;</span><br><span class="line">  :active &#123;</span><br><span class="line">      cursor: url(&quot;http:&#x2F;&#x2F;om8u46rmb.bkt.clouddn.com&#x2F;sword1.ico&quot;),auto!important</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1520,7 +560,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%B7%BB%E5%8A%A0%E6%89%93%E8%B5%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E7%95%99%E8%A8%80%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1539,7 +579,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%B7%BB%E5%8A%A0%E6%89%93%E8%B5%8F/" itemprop="url">添加打赏</a></h1>
+                <a class="post-title-link" href="/2022/03/15/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E7%95%99%E8%A8%80%E6%9D%BF/" itemprop="url">留言板</a></h1>
         
 
         <div class="post-meta">
@@ -1555,7 +595,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-15T00:00:00+08:00">2022-03-15</time>
             
 
             
@@ -1584,561 +624,6 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">857</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="添加打赏"><a href="#添加打赏" class="headerlink" title="添加打赏"></a>添加打赏</h1><ol>
-<li>在主题配置文件中设置如下：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">reward:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  comment: 坚持原创技术分享，您的支持将鼓励我继续创作！</span><br><span class="line">  wechatpay: /images/wechatpay.jpg</span><br><span class="line">  alipay: /images/alipay.jpg</span><br><span class="line">  <span class="meta">#bitcoin: /images/bitcoin.jpg</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE/" itemprop="url">添加导航标签</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.9k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next-config-yml"><a href="#next-config-yml" class="headerlink" title="next/_config.yml"></a>next/_config.yml</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">menu:  #设置博客各个页面的相对路径，默认根路径是blog&#x2F;source</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  categories: &#x2F;categories || th</span><br><span class="line">  tags: &#x2F;tags || tags</span><br><span class="line">  archives: &#x2F;archives || archive</span><br><span class="line">  about: &#x2F;about || user</span><br><span class="line">  commonweal: &#x2F;404.html || heartbeat</span><br><span class="line">  something: &#x2F;something || th</span><br><span class="line">  design: &#x2F;design || tags</span><br><span class="line">#  schedule: &#x2F;schedule || schedule</span><br><span class="line">#  sitemap: &#x2F;sitemap.xml || sitemap</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Enable&#x2F;Disable menu icons.</span><br><span class="line">menu_icons:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-<h1 id="zh-Hans-yml-zh-CH-yml"><a href="#zh-Hans-yml-zh-CH-yml" class="headerlink" title="zh-Hans.yml / zh-CH.yml"></a>zh-Hans.yml / zh-CH.yml</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: 首页</span><br><span class="line">  archives: 归档</span><br><span class="line">  categories: 分类</span><br><span class="line">  tags: 标签</span><br><span class="line">  about: 关于</span><br><span class="line">  search: 搜索</span><br><span class="line">  schedule: 日程表</span><br><span class="line">  sitemap: 站点地图</span><br><span class="line">  commonweal: 公益404</span><br><span class="line">  something: 有料</span><br><span class="line">  design: 设计</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%9F%B3%E4%B9%90%E5%A4%96%E9%93%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/09/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%9F%B3%E4%B9%90%E5%A4%96%E9%93%BE/" itemprop="url">音乐外链</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-09T00:00:00+08:00">2022-03-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">4.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="音乐外链"><a href="#音乐外链" class="headerlink" title="音乐外链"></a>音乐外链</h1><h2 id="download"><a href="#download" class="headerlink" title="download"></a>download</h2><p>点击访问<a href="https://github.com/DIYgod/APlayer" target="_blank" rel="noopener">Aplayer</a> 源码：GitHub Aplayer。下载到本地，解压后将dist文件夹复制到themes\next\source文件夹下。</p>
-<h1 id="music-js"><a href="#music-js" class="headerlink" title="music.js"></a>music.js</h1><p>  新建themes\next\source\dist\music.js文件，添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const ap &#x3D; new APlayer(&#123;</span><br><span class="line">    container: document.getElementById(&#39;aplayer&#39;),</span><br><span class="line">    fixed: true,</span><br><span class="line">    autoplay: false,</span><br><span class="line">    audio: [</span><br><span class="line">      &#123;</span><br><span class="line">        name: &quot;PDD洪荒之力&quot;,</span><br><span class="line">        artist: &#39;徐梦圆&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;39868.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;84.jpg&#39;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;9420&#39;,</span><br><span class="line">        artist: &#39;麦小兜&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;45967.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;8.jpg&#39;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;风筝误&#39;,</span><br><span class="line">        artist: &#39;刘珂矣&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;up.mcyt.net&#x2F;?down&#x2F;46644.mp3&#39;,</span><br><span class="line">        cover: &#39;http:&#x2F;&#x2F;oeff2vktt.bkt.clouddn.com&#x2F;image&#x2F;96.jpg&#39;,</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br>源码中对应的参数解释，这边都有： <a href="https://aplayer.js.org/#/zh-Hans/" target="_blank" rel="noopener">Aplayer 中文文档</a></p>
-<p>audio对应的便是音频文件，所以音乐播放器需要播放的音乐是需要自己进行相关信息（如歌曲链接、歌词、封面等）的配置。这里放一个mp3音乐外链网站：<a href="http://up.mcyt.net/" target="_blank" rel="noopener">http://up.mcyt.net/</a> ，搜索对应的音乐，然后复制url和右击封面图片链接粘贴到对应的位置上就行了。</p>
-<p>注：由于该外链网站没有歌词链接，我这边没有进行配置，所以播放器在播放音乐时点击歌词是没有显示的。</p>
-<h2 id="layout-swig"><a href="#layout-swig" class="headerlink" title="_layout.swig"></a>_layout.swig</h2><p>打开themes\next\layout_layout.swig文件，将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#x2F;dist&#x2F;APlayer.min.css&quot;&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;aplayer&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;dist&#x2F;APlayer.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;dist&#x2F;music.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>添加到<body itemscope ...>后面就行，即在<body></body>里面。</p>
-<p>重新生成，访问页面，就能看到左下角的音乐播放器了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/02/13/python-notes-course-1-15-%E8%BF%AD%E4%BB%A3%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/02/13/python-notes-course-1-15-%E8%BF%AD%E4%BB%A3%E5%99%A8/" itemprop="url">迭代器</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-13T00:00:00+08:00">2022-02-13</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
 
                 
                 
@@ -2202,8 +687,1588 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p>迭代器，迭代器是一个可以记住遍历的位置的对象<br>两种迭代器： iter() 和 next(),且字符串<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">1</span>、字符创创建迭代器对象</span><br><span class="line">str1 = 'liangdianshui' </span><br><span class="line">iter1 = iter ( str1 )</span><br><span class="line"></span><br><span class="line"># <span class="number">2</span>、<span class="built_in">list</span>对象创建迭代器</span><br><span class="line">list1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">iter2 = iter ( list1 )</span><br><span class="line"></span><br><span class="line"># <span class="number">3</span>、tuple(元祖) 对象创建迭代器</span><br><span class="line">tuple1 = ( <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> )</span><br><span class="line">iter3 = iter ( tuple1 )</span><br><span class="line"></span><br><span class="line"># <span class="keyword">for</span> 循环遍历迭代器对象</span><br><span class="line"><span class="keyword">for</span> x in iter1 :</span><br><span class="line">    <span class="built_in">print</span> ( x , <span class="built_in">end</span> = <span class="string">' '</span> )</span><br><span class="line"></span><br><span class="line">print('\n------------------------')</span><br><span class="line"></span><br><span class="line"><span class="meta"># next() 函数遍历迭代器</span></span><br><span class="line"><span class="keyword">while</span> True :</span><br><span class="line">    <span class="keyword">try</span> :</span><br><span class="line">        <span class="built_in">print</span> ( next ( iter3 ) )</span><br><span class="line">    except StopIteration :</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><br>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">l i a n g d i a n s h u i </span><br><span class="line">------------------------</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<hr>
+<h1 id="添加留言本-page"><a href="#添加留言本-page" class="headerlink" title="添加留言本 page"></a>添加留言本 page</h1><p>  进入到博客的根目录，运行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page guestbook</span><br></pre></td></tr></table></figure><br>生成index.md，在里面可以写一些留言板介绍内容等<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博客根目录\source\guestbook\index.md</span><br></pre></td></tr></table></figure></p>
+<h1 id="修改菜单目录"><a href="#修改菜单目录" class="headerlink" title="修改菜单目录"></a>修改菜单目录</h1><p>Next主题默认只有主页和和关于，如果要增加菜单，在themes/next/_config.yml中修改配置，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># ---------------------------------------------------------------</span><br><span class="line"># Menu Settings</span><br><span class="line"># ---------------------------------------------------------------</span><br><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags #标签</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th #分类</span><br><span class="line">  archives: &#x2F;archives&#x2F; || archive #归档</span><br><span class="line">  guestbook: &#x2F;guestbook&#x2F; || comment #留言</span><br><span class="line">  #schedule: &#x2F;schedule&#x2F; || calendar</span><br><span class="line">  #sitemap: &#x2F;sitemap.xml || sitemap</span><br><span class="line">  #commonweal: &#x2F;404&#x2F; || heartbeat</span><br></pre></td></tr></table></figure><br>其中留言页需要自己增加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">guestbook: &#x2F;guestbook&#x2F; || comment #留言</span><br></pre></td></tr></table></figure>
+<h1 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h1><p>本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure></p>
+<p>推荐使用 &amp;&amp; 作为组合命令的串联符号</p>
+<p>注：一定要严格清理缓存，这样不容易出现问题，即需要执行hexo clean</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E5%BC%82%E5%B8%B8-hexo%E7%AC%94%E8%AE%B0-%E9%9B%86%E6%88%90gittak%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E5%BC%82%E5%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E5%BC%82%E5%B8%B8-hexo%E7%AC%94%E8%AE%B0-%E9%9B%86%E6%88%90gittak%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E5%BC%82%E5%B8%B8/" itemprop="url">集成gittak评论系统异常</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">21k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">21 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="初始化失败"><a href="#初始化失败" class="headerlink" title="初始化失败"></a>初始化失败</h1><h2 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h2><p>在主题配置文件next/_config.yml中添加如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gitalk:</span><br><span class="line">  enable: true</span><br><span class="line">  githubID: github帐号  # 例：asdfv1929   </span><br><span class="line">  repo: 仓库名称   # 例：asdfv1929.github.io</span><br><span class="line">  ClientID: Client ID</span><br><span class="line">  ClientSecret: Client Secret</span><br><span class="line">  adminUser: github帐号 #指定可初始化评论账户</span><br><span class="line">  distractionFreeMode: true</span><br></pre></td></tr></table></figure></p>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>将 githubID 和 adminUser 配置一致</p>
+<hr>
+<ul>
+<li><strong>Hexo添加gitalk评论插件及 Error: Validation Failed 报错解决：<a href="https://blog.csdn.net/weixin_30642561/article/details/97126103" target="_blank" rel="noopener">https://blog.csdn.net/weixin_30642561/article/details/97126103</a></strong></li>
+<li><strong>报错出现 Error: Validation Failed. #102: <a href="https://github.com/gitalk/gitalk/issues/102" target="_blank" rel="noopener">https://github.com/gitalk/gitalk/issues/102</a></strong></li>
+</ul>
+<hr>
+<h1 id="评论提示错误，且无法评论"><a href="#评论提示错误，且无法评论" class="headerlink" title="评论提示错误，且无法评论"></a>评论提示错误，且无法评论</h1><p>页面显示：Error: Validation Failed.<br>浏览器http请求响应： POST <a href="https://api.github.com/repos/diabolo-hub/diabolo-hub.github.io/issues" target="_blank" rel="noopener">https://api.github.com/repos/diabolo-hub/diabolo-hub.github.io/issues</a> 422</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>文章名称经URL编码后添加到issues的label里，但是label的长度上限是50个字符，所以文章名有些长的都会生成label失败，也就没办法评论了。</p>
+<h2 id="处理-1"><a href="#处理-1" class="headerlink" title="处理"></a>处理</h2><p>文章名经URL编码后转MD5，然后再生成label,这样就不会超过长度了，也存在区分度</p>
+<ol>
+<li>在 themes\NexT\source\js\src\ 下添加 md5.min.js，代码如下<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;<span class="string">"use strict"</span>;<span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params">n,t</span>)</span>&#123;<span class="keyword">var</span> r=(<span class="number">65535</span>&amp;n)+(<span class="number">65535</span>&amp;t);<span class="keyword">return</span>(n&gt;&gt;<span class="number">16</span>)+(t&gt;&gt;<span class="number">16</span>)+(r&gt;&gt;<span class="number">16</span>)&lt;&lt;<span class="number">16</span>|<span class="number">65535</span>&amp;r&#125;<span class="function"><span class="keyword">function</span> <span class="title">r</span>(<span class="params">n,t</span>)</span>&#123;<span class="keyword">return</span> n&lt;&lt;t|n&gt;&gt;&gt;<span class="number">32</span>-t&#125;<span class="function"><span class="keyword">function</span> <span class="title">e</span>(<span class="params">n,e,o,u,c,f</span>)</span>&#123;<span class="keyword">return</span> t(r(t(t(e,n),t(u,f)),c),o)&#125;<span class="function"><span class="keyword">function</span> <span class="title">o</span>(<span class="params">n,t,r,o,u,c,f</span>)</span>&#123;<span class="keyword">return</span> e(t&amp;r|~t&amp;o,n,t,u,c,f)&#125;<span class="function"><span class="keyword">function</span> <span class="title">u</span>(<span class="params">n,t,r,o,u,c,f</span>)</span>&#123;<span class="keyword">return</span> e(t&amp;o|r&amp;~o,n,t,u,c,f)&#125;<span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">n,t,r,o,u,c,f</span>)</span>&#123;<span class="keyword">return</span> e(t^r^o,n,t,u,c,f)&#125;<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">n,t,r,o,u,c,f</span>)</span>&#123;<span class="keyword">return</span> e(r^(t|~o),n,t,u,c,f)&#125;<span class="function"><span class="keyword">function</span> <span class="title">i</span>(<span class="params">n,r</span>)</span>&#123;n[r&gt;&gt;<span class="number">5</span>]|=<span class="number">128</span>&lt;&lt;r%<span class="number">32</span>,n[<span class="number">14</span>+(r+<span class="number">64</span>&gt;&gt;&gt;<span class="number">9</span>&lt;&lt;<span class="number">4</span>)]=r;<span class="keyword">var</span> e,i,a,d,h,l=<span class="number">1732584193</span>,g=<span class="number">-271733879</span>,v=<span class="number">-1732584194</span>,m=<span class="number">271733878</span>;<span class="keyword">for</span>(e=<span class="number">0</span>;e&lt;n.length;e+=<span class="number">16</span>)i=l,a=g,d=v,h=m,g=f(g=f(g=f(g=f(g=c(g=c(g=c(g=c(g=u(g=u(g=u(g=u(g=o(g=o(g=o(g=o(g,v=o(v,m=o(m,l=o(l,g,v,m,n[e],<span class="number">7</span>,<span class="number">-680876936</span>),g,v,n[e+<span class="number">1</span>],<span class="number">12</span>,<span class="number">-389564586</span>),l,g,n[e+<span class="number">2</span>],<span class="number">17</span>,<span class="number">606105819</span>),m,l,n[e+<span class="number">3</span>],<span class="number">22</span>,<span class="number">-1044525330</span>),v=o(v,m=o(m,l=o(l,g,v,m,n[e+<span class="number">4</span>],<span class="number">7</span>,<span class="number">-176418897</span>),g,v,n[e+<span class="number">5</span>],<span class="number">12</span>,<span class="number">1200080426</span>),l,g,n[e+<span class="number">6</span>],<span class="number">17</span>,<span class="number">-1473231341</span>),m,l,n[e+<span class="number">7</span>],<span class="number">22</span>,<span class="number">-45705983</span>),v=o(v,m=o(m,l=o(l,g,v,m,n[e+<span class="number">8</span>],<span class="number">7</span>,<span class="number">1770035416</span>),g,v,n[e+<span class="number">9</span>],<span class="number">12</span>,<span class="number">-1958414417</span>),l,g,n[e+<span class="number">10</span>],<span class="number">17</span>,<span class="number">-42063</span>),m,l,n[e+<span class="number">11</span>],<span class="number">22</span>,<span class="number">-1990404162</span>),v=o(v,m=o(m,l=o(l,g,v,m,n[e+<span class="number">12</span>],<span class="number">7</span>,<span class="number">1804603682</span>),g,v,n[e+<span class="number">13</span>],<span class="number">12</span>,<span class="number">-40341101</span>),l,g,n[e+<span class="number">14</span>],<span class="number">17</span>,<span class="number">-1502002290</span>),m,l,n[e+<span class="number">15</span>],<span class="number">22</span>,<span class="number">1236535329</span>),v=u(v,m=u(m,l=u(l,g,v,m,n[e+<span class="number">1</span>],<span class="number">5</span>,<span class="number">-165796510</span>),g,v,n[e+<span class="number">6</span>],<span class="number">9</span>,<span class="number">-1069501632</span>),l,g,n[e+<span class="number">11</span>],<span class="number">14</span>,<span class="number">643717713</span>),m,l,n[e],<span class="number">20</span>,<span class="number">-373897302</span>),v=u(v,m=u(m,l=u(l,g,v,m,n[e+<span class="number">5</span>],<span class="number">5</span>,<span class="number">-701558691</span>),g,v,n[e+<span class="number">10</span>],<span class="number">9</span>,<span class="number">38016083</span>),l,g,n[e+<span class="number">15</span>],<span class="number">14</span>,<span class="number">-660478335</span>),m,l,n[e+<span class="number">4</span>],<span class="number">20</span>,<span class="number">-405537848</span>),v=u(v,m=u(m,l=u(l,g,v,m,n[e+<span class="number">9</span>],<span class="number">5</span>,<span class="number">568446438</span>),g,v,n[e+<span class="number">14</span>],<span class="number">9</span>,<span class="number">-1019803690</span>),l,g,n[e+<span class="number">3</span>],<span class="number">14</span>,<span class="number">-187363961</span>),m,l,n[e+<span class="number">8</span>],<span class="number">20</span>,<span class="number">1163531501</span>),v=u(v,m=u(m,l=u(l,g,v,m,n[e+<span class="number">13</span>],<span class="number">5</span>,<span class="number">-1444681467</span>),g,v,n[e+<span class="number">2</span>],<span class="number">9</span>,<span class="number">-51403784</span>),l,g,n[e+<span class="number">7</span>],<span class="number">14</span>,<span class="number">1735328473</span>),m,l,n[e+<span class="number">12</span>],<span class="number">20</span>,<span class="number">-1926607734</span>),v=c(v,m=c(m,l=c(l,g,v,m,n[e+<span class="number">5</span>],<span class="number">4</span>,<span class="number">-378558</span>),g,v,n[e+<span class="number">8</span>],<span class="number">11</span>,<span class="number">-2022574463</span>),l,g,n[e+<span class="number">11</span>],<span class="number">16</span>,<span class="number">1839030562</span>),m,l,n[e+<span class="number">14</span>],<span class="number">23</span>,<span class="number">-35309556</span>),v=c(v,m=c(m,l=c(l,g,v,m,n[e+<span class="number">1</span>],<span class="number">4</span>,<span class="number">-1530992060</span>),g,v,n[e+<span class="number">4</span>],<span class="number">11</span>,<span class="number">1272893353</span>),l,g,n[e+<span class="number">7</span>],<span class="number">16</span>,<span class="number">-155497632</span>),m,l,n[e+<span class="number">10</span>],<span class="number">23</span>,<span class="number">-1094730640</span>),v=c(v,m=c(m,l=c(l,g,v,m,n[e+<span class="number">13</span>],<span class="number">4</span>,<span class="number">681279174</span>),g,v,n[e],<span class="number">11</span>,<span class="number">-358537222</span>),l,g,n[e+<span class="number">3</span>],<span class="number">16</span>,<span class="number">-722521979</span>),m,l,n[e+<span class="number">6</span>],<span class="number">23</span>,<span class="number">76029189</span>),v=c(v,m=c(m,l=c(l,g,v,m,n[e+<span class="number">9</span>],<span class="number">4</span>,<span class="number">-640364487</span>),g,v,n[e+<span class="number">12</span>],<span class="number">11</span>,<span class="number">-421815835</span>),l,g,n[e+<span class="number">15</span>],<span class="number">16</span>,<span class="number">530742520</span>),m,l,n[e+<span class="number">2</span>],<span class="number">23</span>,<span class="number">-995338651</span>),v=f(v,m=f(m,l=f(l,g,v,m,n[e],<span class="number">6</span>,<span class="number">-198630844</span>),g,v,n[e+<span class="number">7</span>],<span class="number">10</span>,<span class="number">1126891415</span>),l,g,n[e+<span class="number">14</span>],<span class="number">15</span>,<span class="number">-1416354905</span>),m,l,n[e+<span class="number">5</span>],<span class="number">21</span>,<span class="number">-57434055</span>),v=f(v,m=f(m,l=f(l,g,v,m,n[e+<span class="number">12</span>],<span class="number">6</span>,<span class="number">1700485571</span>),g,v,n[e+<span class="number">3</span>],<span class="number">10</span>,<span class="number">-1894986606</span>),l,g,n[e+<span class="number">10</span>],<span class="number">15</span>,<span class="number">-1051523</span>),m,l,n[e+<span class="number">1</span>],<span class="number">21</span>,<span class="number">-2054922799</span>),v=f(v,m=f(m,l=f(l,g,v,m,n[e+<span class="number">8</span>],<span class="number">6</span>,<span class="number">1873313359</span>),g,v,n[e+<span class="number">15</span>],<span class="number">10</span>,<span class="number">-30611744</span>),l,g,n[e+<span class="number">6</span>],<span class="number">15</span>,<span class="number">-1560198380</span>),m,l,n[e+<span class="number">13</span>],<span class="number">21</span>,<span class="number">1309151649</span>),v=f(v,m=f(m,l=f(l,g,v,m,n[e+<span class="number">4</span>],<span class="number">6</span>,<span class="number">-145523070</span>),g,v,n[e+<span class="number">11</span>],<span class="number">10</span>,<span class="number">-1120210379</span>),l,g,n[e+<span class="number">2</span>],<span class="number">15</span>,<span class="number">718787259</span>),m,l,n[e+<span class="number">9</span>],<span class="number">21</span>,<span class="number">-343485551</span>),l=t(l,i),g=t(g,a),v=t(v,d),m=t(m,h);<span class="keyword">return</span>[l,g,v,m]&#125;<span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">var</span> t,r=<span class="string">""</span>,e=<span class="number">32</span>*n.length;<span class="keyword">for</span>(t=<span class="number">0</span>;t&lt;e;t+=<span class="number">8</span>)r+=<span class="built_in">String</span>.fromCharCode(n[t&gt;&gt;<span class="number">5</span>]&gt;&gt;&gt;t%<span class="number">32</span>&amp;<span class="number">255</span>);<span class="keyword">return</span> r&#125;<span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">var</span> t,r=[];<span class="keyword">for</span>(r[(n.length&gt;&gt;<span class="number">2</span>)<span class="number">-1</span>]=<span class="keyword">void</span> <span class="number">0</span>,t=<span class="number">0</span>;t&lt;r.length;t+=<span class="number">1</span>)r[t]=<span class="number">0</span>;<span class="keyword">var</span> e=<span class="number">8</span>*n.length;<span class="keyword">for</span>(t=<span class="number">0</span>;t&lt;e;t+=<span class="number">8</span>)r[t&gt;&gt;<span class="number">5</span>]|=(<span class="number">255</span>&amp;n.charCodeAt(t/<span class="number">8</span>))&lt;&lt;t%<span class="number">32</span>;<span class="keyword">return</span> r&#125;<span class="function"><span class="keyword">function</span> <span class="title">h</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">return</span> a(i(d(n),<span class="number">8</span>*n.length))&#125;<span class="function"><span class="keyword">function</span> <span class="title">l</span>(<span class="params">n,t</span>)</span>&#123;<span class="keyword">var</span> r,e,o=d(n),u=[],c=[];<span class="keyword">for</span>(u[<span class="number">15</span>]=c[<span class="number">15</span>]=<span class="keyword">void</span> <span class="number">0</span>,o.length&gt;<span class="number">16</span>&amp;&amp;(o=i(o,<span class="number">8</span>*n.length)),r=<span class="number">0</span>;r&lt;<span class="number">16</span>;r+=<span class="number">1</span>)u[r]=<span class="number">909522486</span>^o[r],c[r]=<span class="number">1549556828</span>^o[r];<span class="keyword">return</span> e=i(u.concat(d(t)),<span class="number">512</span>+<span class="number">8</span>*t.length),a(i(c.concat(e),<span class="number">640</span>))&#125;<span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">var</span> t,r,e=<span class="string">""</span>;<span class="keyword">for</span>(r=<span class="number">0</span>;r&lt;n.length;r+=<span class="number">1</span>)t=n.charCodeAt(r),e+=<span class="string">"0123456789abcdef"</span>.charAt(t&gt;&gt;&gt;<span class="number">4</span>&amp;<span class="number">15</span>)+<span class="string">"0123456789abcdef"</span>.charAt(<span class="number">15</span>&amp;t);<span class="keyword">return</span> e&#125;<span class="function"><span class="keyword">function</span> <span class="title">v</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">return</span> <span class="built_in">unescape</span>(<span class="built_in">encodeURIComponent</span>(n))&#125;<span class="function"><span class="keyword">function</span> <span class="title">m</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">return</span> h(v(n))&#125;<span class="function"><span class="keyword">function</span> <span class="title">p</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">return</span> g(m(n))&#125;<span class="function"><span class="keyword">function</span> <span class="title">s</span>(<span class="params">n,t</span>)</span>&#123;<span class="keyword">return</span> l(v(n),v(t))&#125;<span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params">n,t</span>)</span>&#123;<span class="keyword">return</span> g(s(n,t))&#125;<span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">n,t,r</span>)</span>&#123;<span class="keyword">return</span> t?r?s(t,n):C(t,n):r?m(n):p(n)&#125;<span class="string">"function"</span>==<span class="keyword">typeof</span> define&amp;&amp;define.amd?define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> A&#125;):<span class="string">"object"</span>==<span class="keyword">typeof</span> <span class="built_in">module</span>&amp;&amp;<span class="built_in">module</span>.exports?<span class="built_in">module</span>.exports=A:n.md5=A&#125;(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure></li>
+<li>然后修改修改gitalk.swig，引入md5.min.js，对id值md5编码化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.css&quot;&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script src&#x3D;&quot;&#x2F;js&#x2F;src&#x2F;md5.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">        var gitalk &#x3D; new Gitalk(&#123;</span><br><span class="line">          clientID: &#39;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&#39;,</span><br><span class="line">          clientSecret: &#39;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&#39;,</span><br><span class="line">          repo: &#39;&#123;&#123; theme.gitalk.repo &#125;&#125;&#39;,</span><br><span class="line">          owner: &#39;&#123;&#123; theme.gitalk.githubID &#125;&#125;&#39;,</span><br><span class="line">          admin: [&#39;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&#39;],</span><br><span class="line"></span><br><span class="line">          &lt;!-- id: location.pathname, --&gt;</span><br><span class="line">          id: md5(location.pathname),</span><br><span class="line"></span><br><span class="line">          distractionFreeMode: &#39;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">        gitalk.render(&#39;gitalk-container&#39;)</span><br><span class="line">       &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20221017-hexo%E9%9B%86%E6%88%90xmind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20221017-hexo%E9%9B%86%E6%88%90xmind/" itemprop="url">hexo集成xmind</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<p>-<strong>hexo中绘制思维导图：<a href="http://www.hnbian.cn/posts/fcc091a7.html" target="_blank" rel="noopener">http://www.hnbian.cn/posts/fcc091a7.html</a></strong></p>
+<hr>
+<ol>
+<li><p>安装插件<br>首先进入到 Hexo 博客的根目录，执行 npm install hexo-simple-mindmap 安装插件。</p>
+</li>
+<li><p>格式</p>
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>知识图谱<ul>
+<li>Scala</li>
+<li>java<ul>
+<li>jvm</li>
+</ul>
+</li>
+<li>消息队列<ul>
+<li>kafka</li>
+<li>pulsar</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20220314-next%E9%9B%86%E6%88%90DaoVoice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-20220314-next%E9%9B%86%E6%88%90DaoVoice/" itemprop="url">next集成DaoVoice</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>DaoCloud：<a href="https://www.daocloud.io/" target="_blank" rel="noopener">https://www.daocloud.io/</a></strong></li>
+<li><strong>DaoVoice: <a href="http://dashboard.daovoice.io/#/get-started" target="_blank" rel="noopener">http://dashboard.daovoice.io/#/get-started</a></strong></li>
+<li><strong>DaoVoice接入： <a href="http://guide.daocloud.io/daovoice/daovoice-9151028.html" target="_blank" rel="noopener">http://guide.daocloud.io/daovoice/daovoice-9151028.html</a></strong></li>
+</ul>
+<hr>
+<h1 id="next集成DaoVoice"><a href="#next集成DaoVoice" class="headerlink" title="next集成DaoVoice"></a>next集成DaoVoice</h1><h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>注册<a href="http://dashboard.daovoice.io/#/get-started" target="_blank" rel="noopener">DaoVoice</a><br>完成后，会得到一个app_id，后面会用到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2.调用下面的 JavaScript 与注册用户沟通</span><br><span class="line">daovoice(&#39;init&#39;, &#123;</span><br><span class="line">  app_id: &quot;xxxxx&quot;,</span><br><span class="line">  user_id: &quot;NO_89757&quot;, &#x2F;&#x2F; 必填: 该用户在您系统上的唯一ID</span><br><span class="line">  email: &quot;daovoice@example.com&quot;, &#x2F;&#x2F; 选填:  该用户在您系统上的主邮箱</span><br><span class="line">  name: &quot;道客船长&quot;, &#x2F;&#x2F; 选填: 用户名</span><br><span class="line">  signed_up: 1449821660 &#x2F;&#x2F; 选填: 用户的注册时间，用Unix时间戳表示</span><br><span class="line">&#125;);</span><br><span class="line">daovoice(&#39;update&#39;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="修改head-swig"><a href="#修改head-swig" class="headerlink" title="修改head.swig"></a>修改head.swig</h2><p>修改/themes/next/layout/_partials/head.swig文件，添加内容如下，注意’//widget.daovoice.io/widget/2e5d695d.js’ 中js文件名改成自己的id就行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.daovoice %&#125;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  (function(i,s,o,g,r,a,m)&#123;i[&quot;DaoVoiceObject&quot;]&#x3D;r;i[r]&#x3D;i[r]||function()&#123;(i[r].q&#x3D;i[r].q||[]).push(arguments)&#125;,i[r].l&#x3D;1*new Date();a&#x3D;s.createElement(o),m&#x3D;s.getElementsByTagName(o)[0];a.async&#x3D;1;a.src&#x3D;g;a.charset&#x3D;&quot;utf-8&quot;;m.parentNode.insertBefore(a,m)&#125;)(window,document,&quot;script&quot;,(&#39;https:&#39; &#x3D;&#x3D; document.location.protocol ? &#39;https:&#39; : &#39;http:&#39;) + &quot;&#x2F;&#x2F;widget.daovoice.io&#x2F;widget&#x2F;2e5d695d.js&quot;,&quot;daovoice&quot;)</span><br><span class="line">  daovoice(&#39;init&#39;, &#123;</span><br><span class="line">      app_id: &quot;&#123;&#123;theme.daovoice_app_id&#125;&#125;&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">  daovoice(&#39;update&#39;);</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><br>位置贴图：<br><img src="images/DaoVoice位置贴图.png" alt=""></p>
+<h2 id="主题配置文件"><a href="#主题配置文件" class="headerlink" title="主题配置文件"></a>主题配置文件</h2><p>在_config.yml文件中添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Online contact</span><br><span class="line">daovoice: true</span><br><span class="line">daovoice_app_id:   # 这里填你刚才获得的 app_id</span><br></pre></td></tr></table></figure></p>
+<h2 id="聊天窗口配置"><a href="#聊天窗口配置" class="headerlink" title="聊天窗口配置"></a>聊天窗口配置</h2><p>附上我的聊天窗口的颜色、位置等设置信息：<br><img src="images/定制聊天样式.png" alt=""><br>至此，网页的在线联系功能已经完成，重新hexo g，hexo d上传GitHub后，页面上就能看到效果了。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E6%8F%92%E4%BB%B6-hexo%E7%AC%94%E8%AE%B0-gitalk%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" itemprop="url">gitalk评论系统</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">7.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>第三方服务集成-DISQUS评论系统：<a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/third-party-services.html</a></strong></li>
+<li><strong>Hexo NexT主题中集成gitalk评论系统：<a href="https://asdfv1929.github.io/2018/01/20/gitalk/" target="_blank" rel="noopener">https://asdfv1929.github.io/2018/01/20/gitalk/</a></strong></li>
+<li><strong>github gitalk评论系统：<a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener">https://github.com/gitalk/gitalk</a></strong></li>
+<li><strong>gitalk在线示例: <a href="https://gitalk.github.io/" target="_blank" rel="noopener">https://gitalk.github.io/</a></strong></li>
+</ul>
+<hr>
+<h1 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h1><h2 id="使用js脚本（将容器添加到您的页面）"><a href="#使用js脚本（将容器添加到您的页面）" class="headerlink" title="使用js脚本（将容器添加到您的页面）"></a>使用js脚本（将容器添加到您的页面）</h2><h3 id="创建一个GitHub-应用程序"><a href="#创建一个GitHub-应用程序" class="headerlink" title="创建一个GitHub 应用程序"></a>创建一个GitHub 应用程序</h3><p><a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">创建一个GitHub 应用程序</a> 注意：您必须在字段中指定网站域 url Authorization callback URL。</p>
+<ol>
+<li>Application name : 随意取</li>
+<li>Homepage URL : 主页网址（<a href="https://xxx.github.io/" target="_blank" rel="noopener">https://xxx.github.io/</a>)</li>
+<li>Application description: 随意，授权时显示</li>
+<li>Authorization callback URL : 授权回调地址（<a href="https://xxx.github.io/" target="_blank" rel="noopener">https://xxx.github.io/</a>)<blockquote>
+<p>得到一个 client ID 和一个 client secret，这个将被用于之后的用户登录</p>
+<h3 id="gitalk-swig"><a href="#gitalk-swig" class="headerlink" title="gitalk.swig"></a>gitalk.swig</h3><p>新建/layout/_third-party/comments/gitalk.swig文件，并添加内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments &amp;&amp; theme.gitalk.enable %&#125;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.css&quot;&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;gitalk&#x2F;dist&#x2F;gitalk.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">        var gitalk &#x3D; new Gitalk(&#123;</span><br><span class="line">          clientID: &#39;&#123;&#123; theme.gitalk.ClientID &#125;&#125;&#39;,</span><br><span class="line">          clientSecret: &#39;&#123;&#123; theme.gitalk.ClientSecret &#125;&#125;&#39;,</span><br><span class="line">          repo: &#39;&#123;&#123; theme.gitalk.repo &#125;&#125;&#39;,</span><br><span class="line">          owner: &#39;&#123;&#123; theme.gitalk.githubID &#125;&#125;&#39;,</span><br><span class="line">          admin: [&#39;&#123;&#123; theme.gitalk.adminUser &#125;&#125;&#39;],</span><br><span class="line">          id: location.pathname,</span><br><span class="line">          distractionFreeMode: &#39;&#123;&#123; theme.gitalk.distractionFreeMode &#125;&#125;&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">        gitalk.render(&#39;gitalk-container&#39;)           </span><br><span class="line">       &lt;&#x2F;script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="comments-swig"><a href="#comments-swig" class="headerlink" title="comments.swig"></a>comments.swig</h3><p>修改/layout/_partials/comments.swig，添加内容如下，与前面的elseif同一级别上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% elseif theme.gitalk.enable %&#125;</span><br><span class="line"> &lt;div id&#x3D;&quot;gitalk-container&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="index-swig"><a href="#index-swig" class="headerlink" title="index.swig"></a>index.swig</h3><p>修改layout/_third-party/comments/index.swig，在最后一行添加内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include &#39;gitalk.swig&#39; %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="gitalk-styl"><a href="#gitalk-styl" class="headerlink" title="gitalk.styl"></a>gitalk.styl</h3><p>新建/source/css/_common/components/third-party/gitalk.styl文件，添加内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.gt-header a, .gt-comments a, .gt-popup a</span><br><span class="line">  border-bottom: none;</span><br><span class="line">.gt-container .gt-popup .gt-action.is--active:before</span><br><span class="line">  top: 0.7em;</span><br></pre></td></tr></table></figure>
+<h3 id="third-party-styl"><a href="#third-party-styl" class="headerlink" title="third-party.styl"></a>third-party.styl</h3><p>修改/source/css/_common/components/third-party/third-party.styl，在最后一行上添加内容，引入样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;gitalk&quot;;</span><br></pre></td></tr></table></figure>
+<h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>在主题配置文件next/_config.yml中添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gitalk:</span><br><span class="line">  enable: true</span><br><span class="line">  githubID: github帐号  # 例：asdfv1929   </span><br><span class="line">  repo: 仓库名称   # 例：asdfv1929.github.io</span><br><span class="line">  ClientID: Client ID</span><br><span class="line">  ClientSecret: Client Secret</span><br><span class="line">  adminUser: github帐号 #指定可初始化评论账户</span><br><span class="line">  distractionFreeMode: true</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h2 id="在-React-中使用"><a href="#在-React-中使用" class="headerlink" title="在 React 中使用"></a>在 React 中使用</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%B0%E5%A2%9E%E6%A0%87%E7%AD%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E6%96%B0%E5%A2%9E%E6%A0%87%E7%AD%BE/" itemprop="url">新增标签</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="新增标签"><a href="#新增标签" class="headerlink" title="新增标签"></a>新增标签</h1><h2 id="在NexT的-config-yml配置文件下，找到"><a href="#在NexT的-config-yml配置文件下，找到" class="headerlink" title="在NexT的_config.yml配置文件下，找到"></a>在NexT的_config.yml配置文件下，找到</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  archives: &#x2F;archives&#x2F; || archive</span><br><span class="line">  guestbook: &#x2F;guestbook # 增加这一行</span><br></pre></td></tr></table></figure>
+<h2 id="在NexT-languages-zh-Hans-yml下，找到"><a href="#在NexT-languages-zh-Hans-yml下，找到" class="headerlink" title="在NexT\languages\zh-Hans.yml下，找到"></a>在NexT\languages\zh-Hans.yml下，找到</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: 首页</span><br><span class="line">  archives: 归档</span><br><span class="line">  categories: 分类</span><br><span class="line">  tags: 标签</span><br><span class="line">  about: 关于</span><br><span class="line">  guestbook: 给我留言</span><br></pre></td></tr></table></figure>
+<h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2><p>hexo new page “guestbook”</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/14/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E9%9A%90%E8%97%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/14/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E9%9A%90%E8%97%8F/" itemprop="url">首页文章隐藏</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T00:00:00+08:00">2022-03-14</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="首页文章隐藏"><a href="#首页文章隐藏" class="headerlink" title="首页文章隐藏"></a>首页文章隐藏</h1><ol>
+<li>Hexo\themes\next\layout\index.swig中添加 if post.notshow != true<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block content %&#125;</span><br><span class="line">  &lt;section id&#x3D;&quot;posts&quot; class&#x3D;&quot;posts-expand&quot;&gt;</span><br><span class="line">    &#123;% for post in page.posts %&#125;</span><br><span class="line">        &#123;% if post.notshow !&#x3D; true %&#125;</span><br><span class="line">            &#123;&#123; post_template.render(post, true) &#125;&#125;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">  &lt;&#x2F;section&gt;</span><br><span class="line"></span><br><span class="line">  &#123;% include &#39;_partials&#x2F;pagination.swig&#39; %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在文章标题中添加如下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &quot;首页文章隐藏&quot;</span><br><span class="line">date: 2022-03-14</span><br><span class="line">comments: true</span><br><span class="line">share: true</span><br><span class="line">toc: true</span><br><span class="line">notshow: true</span><br><span class="line">categories:</span><br><span class="line">  - hexo</span><br><span class="line">  - 笔记</span><br><span class="line">tags:</span><br><span class="line">  - hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h2 id="生成"><a href="#生成" class="headerlink" title="生成"></a>生成</h2>hexo new page “guestbook”</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/13/hexo-%E6%8F%92%E4%BB%B6-%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/13/hexo-%E6%8F%92%E4%BB%B6-%E8%87%AA%E5%8A%A8%E5%88%86%E7%B1%BB%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/" itemprop="url">自动分类和生成文章标题</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-13T00:00:00+08:00">2022-03-13</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="自动分类和生成文章标题"><a href="#自动分类和生成文章标题" class="headerlink" title="自动分类和生成文章标题"></a>自动分类和生成文章标题</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>npm install hexo-enhancer –save</p>
+<h2 id="自动生成时间和标题"><a href="#自动生成时间和标题" class="headerlink" title="自动生成时间和标题"></a>自动生成时间和标题</h2><ol>
+<li>将date和title放入在文件名中，通过正则解析生成文章的标题和时间  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;^.?(\d&#123;4&#125;)[-_]?(\d&#123;2&#125;)[-_]?(\d&#123;2&#125;).?[-_.@# ]*(.*)$&#x2F;</span><br></pre></td></tr></table></figure>
+以下格式均支持：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">20091010-Title.md</span><br><span class="line">2009-10-10_Title.md</span><br><span class="line">2009-10-10-Title.md</span><br><span class="line">2009&#x2F;10&#x2F;10#Title.md</span><br><span class="line">2009&#x2F;10&#x2F;10@Title.md</span><br><span class="line">[20091010]-Title.md</span><br><span class="line">【20091010】Title.md</span><br><span class="line">「20091010」-Title.md</span><br></pre></td></tr></table></figure></li>
+<li>hexo-enhancer 会将以上文件名全部解析为（最终结果不会回写入.md文件中）：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#---</span><br><span class="line">#title: Title</span><br><span class="line">#date: 2009-10-10</span><br><span class="line">#---</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="自动分类（categories）"><a href="#自动分类（categories）" class="headerlink" title="自动分类（categories）"></a>自动分类（categories）</h2><p>hexo-enhancer 会将.md文件所在目录及父目录的名称添加入categories属性中，<br>因此你应该按照文章分类放置.md文件</p>
+<p>比如 _posts/区块链/比特币/20091010-比特币简介.md 文章将自动获得下面的categories属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#---</span><br><span class="line">#title: 比特币简介</span><br><span class="line">#date: 2009-10-10</span><br><span class="line">#categories: [区块链, 比特币]</span><br><span class="line">#---</span><br></pre></td></tr></table></figure></p>
+<h2 id="自动标签（tags）"><a href="#自动标签（tags）" class="headerlink" title="自动标签（tags）"></a>自动标签（tags）</h2><p>hexo-enhancer的做法是这样，启动后扫描_config.yml中的keywords与tags属性收集全局标签候选词，然后给每一篇文章自动扫描tags。<br>例如，_config.yml配置的标签可以是这样的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keywords: HTML, JavaScript, Hexo</span><br><span class="line">tags: Java, Golang, React, Vue</span><br></pre></td></tr></table></figure><br>hexo-enhancer会扫描您的.md文章，如果文章内出现以上关键词，则自动将其分配如文章的tags属性中。<br>需要特别指出的是，keywords是标准配置，它最终会出现在网页meta中，而tags是自定义的属性，只会被本插件使用。</p>
+<h2 id="abbrlink"><a href="#abbrlink" class="headerlink" title="abbrlink"></a>abbrlink</h2><p>hexo-enhancer使用 base32(crc32(title)) 算法为每一篇文章分配abbrlink属性，您可以在permlink中使用它们:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">permalink: :year&#x2F;:abbrlink.html</span><br><span class="line"># permalink: :year&#x2F;:abbrlink</span><br><span class="line"># permalink: posts&#x2F;:abbrlink.html</span><br><span class="line"># permalink: :year&#x2F;:month&#x2F;:day&#x2F;:abbrlink.html</span><br></pre></td></tr></table></figure><br>使用abbrlink之后，文章的url就会变得非常简洁，例如 <a href="https://sulin.me/2018/3055NXV.html" target="_blank" rel="noopener">https://sulin.me/2018/3055NXV.html</a></p>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/12/hexo-%E6%8F%92%E4%BB%B6-20220312-next%E9%9B%86%E6%88%90Chatra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/12/hexo-%E6%8F%92%E4%BB%B6-20220312-next%E9%9B%86%E6%88%90Chatra/" itemprop="url">next集成chatra</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-12T00:00:00+08:00">2022-03-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">9.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="next集成Chatra"><a href="#next集成Chatra" class="headerlink" title="next集成Chatra"></a>next集成Chatra</h1><h2 id="首先-https-app-chatra-io-注册账号"><a href="#首先-https-app-chatra-io-注册账号" class="headerlink" title="首先 https://app.chatra.io/ 注册账号"></a>首先 <a href="https://app.chatra.io/" target="_blank" rel="noopener">https://app.chatra.io/</a> 注册账号</h2><h2 id="获取chat脚本"><a href="#获取chat脚本" class="headerlink" title="获取chat脚本"></a>获取chat脚本</h2><p>settings -&gt; Chatra widget -&gt; show setup instructions，获取脚本<br><img src="images/获取chatra脚本.png" alt=""></p>
+<h2 id="添加chatra启动按钮"><a href="#添加chatra启动按钮" class="headerlink" title="添加chatra启动按钮"></a>添加chatra启动按钮</h2><p>themes/next/layout/_macro/sidebar.swig中，将原本的RSS隐藏或替换成 chatra<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.rss %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;feed-link motion-element&quot;&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;&#123;&#123; url_for(theme.rss) &#125;&#125;&quot; rel&#x3D;&quot;alternate&quot;&gt;</span><br><span class="line">    &lt;i class&#x3D;&quot;fa fa-rss&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    RSS</span><br><span class="line">  &lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% if theme.chatra %&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;chat motion-element&quot;&gt;</span><br><span class="line">  &lt;a onclick&#x3D;&quot;Chatra(&#39;openChat&#39;, true)&quot;&gt;</span><br><span class="line">  &lt;i class&#x3D;&quot;fa fa-comment&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">      Chat</span><br><span class="line">    &lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此处我直接使用的复写一个类似的，覆盖掉RSS，在themes/next/_config.yml中配置如下：<br>rss: false<br>chatra: true</p>
+<h2 id="设置chatra按钮样式"><a href="#设置chatra按钮样式" class="headerlink" title="设置chatra按钮样式"></a>设置chatra按钮样式</h2><p>\themes\next6\source\css_schemes\Pisces_sidebar.styl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; chat</span><br><span class="line">.feed-link, .chat &#123;</span><br><span class="line">  border-top: 1px dotted #ccc;</span><br><span class="line">  border-bottom: 1px dotted #ccc;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a, .chat a &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  border: none !important;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a, .chat a &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0 15px;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  &#x2F;&#x2F;border: 1px solid #fc6423 !important;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link a i, .chat a i &#123;</span><br><span class="line">  color: #fc6423;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.fa &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  font: normal normal normal 14px&#x2F;1 FontAwesome;</span><br><span class="line">  font-size: inherit;</span><br><span class="line">  text-rendering: auto;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">&#125;</span><br><span class="line">.use-motion .sidebar .motion-element &#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line">.feed-link, .chat &#123;</span><br><span class="line">  margin-top: 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="放置chatra脚本"><a href="#放置chatra脚本" class="headerlink" title="放置chatra脚本"></a>放置chatra脚本</h2><p>\themes\next6\layout_layout.swig，建议放置在主布局的header前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;html class&#x3D;&quot;&#123;&#123; html_class | lower &#125;&#125;&quot; lang&#x3D;&quot;&#123;&#123; config.language &#125;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Chatra &#123;literal&#125; --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    (function(d, w, c) &#123;</span><br><span class="line">        w.ChatraID &#x3D; &#39;密钥xxxxyyyyy&#39;;</span><br><span class="line">        var s &#x3D; d.createElement(&#39;script&#39;);</span><br><span class="line">        w[c] &#x3D; w[c] || function() &#123;</span><br><span class="line">            (w[c].q &#x3D; w[c].q || []).push(arguments);</span><br><span class="line">        &#125;;</span><br><span class="line">        s.async &#x3D; true;</span><br><span class="line">        s.src &#x3D; &#39;https:&#x2F;&#x2F;call.chatra.io&#x2F;chatra.js&#39;;</span><br><span class="line">        if (d.head) d.head.appendChild(s);</span><br><span class="line">    &#125;)(document, window, &#39;Chatra&#39;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;!-- &#x2F;Chatra &#123;&#x2F;literal&#125; --&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;head&#x2F;head.swig&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">  &#123;% include &#39;_partials&#x2F;head&#x2F;head-unique.swig&#39; %&#125;</span><br><span class="line">  &lt;title&gt;&#123;% block title %&#125;&#123;% endblock %&#125;&lt;&#x2F;title&gt;</span><br><span class="line">  &#123;% include &#39;_third-party&#x2F;analytics&#x2F;index.swig&#39; %&#125;</span><br><span class="line">  &#123;% include &#39;_scripts&#x2F;noscript.swig&#39; %&#125;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h2><p>生效</p>
+</blockquote>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -2247,7 +2312,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/29/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/31/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/29/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/31/">下一页</a>
   </nav>
 
 
@@ -2294,7 +2359,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2457,7 +2522,23 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2540,7 +2621,13 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2663,7 +2750,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -2672,7 +2759,7 @@ hexo g(generate)      # 生成网页<br>hexo s(server)        # 启动服务器<
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

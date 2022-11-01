@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-config-1-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AD%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mybatis-notes-mybatis%E6%97%A5%E5%BF%97%E6%8B%A6%E6%88%AA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/19/database-mysql-config-1-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E3%80%81%E7%89%88%E6%9C%AC%E7%AD%89/" itemprop="url">字符编码、版本等</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mybatis-notes-mybatis%E6%97%A5%E5%BF%97%E6%8B%A6%E6%88%AA/" itemprop="url">binlog日志三种模式</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -443,7 +443,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/config/" itemprop="url" rel="index"><span itemprop="name">config</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -471,7 +471,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4.6k</span>
+                <span title="字数统计">23k</span>
               
 
               
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">23 mins.</span>
               
             </div>
           
@@ -507,1418 +507,225 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看mysql字符编码"><a href="#查看mysql字符编码" class="headerlink" title="查看mysql字符编码"></a>查看mysql字符编码</h1><p>show variables like ‘%character%’;<br>常用的utf8和utf8mb4</p>
-<blockquote>
-<p><a href="https://www.cnblogs.com/yangmingxianshen/p/7999428.html" target="_blank" rel="noopener">MySQL查看和修改字符集的方法</a></p>
-</blockquote>
-<h1 id="查看MYSQL所支持的字符集"><a href="#查看MYSQL所支持的字符集" class="headerlink" title="查看MYSQL所支持的字符集"></a>查看MYSQL所支持的字符集</h1><p>show charset;</p>
-<h2 id="查看库的字符集"><a href="#查看库的字符集" class="headerlink" title="查看库的字符集"></a>查看库的字符集</h2><p>show database status from 库名 like  表名;</p>
-<h2 id="查看表的字符集"><a href="#查看表的字符集" class="headerlink" title="查看表的字符集"></a>查看表的字符集</h2><p>show table status from 库名 like  表名;</p>
-<h2 id="查看表中所有列的字符集"><a href="#查看表中所有列的字符集" class="headerlink" title="查看表中所有列的字符集"></a>查看表中所有列的字符集</h2><p>show full columns from 表名;</p>
-<h1 id="设置字符集"><a href="#设置字符集" class="headerlink" title="设置字符集"></a>设置字符集</h1><p>设置字符集一般有两种方法，一种是在创建表的时候设置字符集，另一种是表建成之后修改字符集。  </p>
-<h2 id="创建时指定"><a href="#创建时指定" class="headerlink" title="创建时指定"></a>创建时指定</h2><ol>
-<li>创建时指定字符集<br>创建库的时候指定字符集：<br>语法：create database 库名 default character set=字符集；  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database db2 default character set&#x3D;utf8</span><br></pre></td></tr></table></figure></li>
-<li>创建表的时候指定字符集<br>语法：create table 表名（属性）default character set = 字符集；  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table test1(id int(6),name char(10)) default character set &#x3D; &#39;gbk&#39;;</span><br><span class="line">Query OK, 0 rows affected (0.39 sec)</span><br></pre></td></tr></table></figure>
-<h2 id="修改字符集"><a href="#修改字符集" class="headerlink" title="修改字符集"></a>修改字符集</h2></li>
-<li>修改全局字符集<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*建立连接使用的编码*&#x2F;</span><br><span class="line">set character_set_connection&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库的编码*&#x2F;</span><br><span class="line">set character_set_database&#x3D;utf8;</span><br><span class="line">&#x2F;*结果集的编码*&#x2F;</span><br><span class="line">set character_set_results&#x3D;utf8;</span><br><span class="line">&#x2F;*数据库服务器的编码*&#x2F;</span><br><span class="line">set character_set_server&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set character_set_system&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_connection&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_database&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">set collation_server&#x3D;utf8;</span><br></pre></td></tr></table></figure></li>
-<li>修改库的字符集<br>语法：alter database 库名 default character set 字符集;  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter database shiyan default character set gbk;</span><br></pre></td></tr></table></figure></li>
-<li>修改表的字符集<br>语法：alter table 表名 convert to character set 字符集;  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table test1 convert to character set utf8;</span><br></pre></td></tr></table></figure></li>
-<li>修改字段的字符集<br>语法：alter table 表名 modify 字段名 字段属性 character set gbk；  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table test1 modify name char(10) character set gbk;</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package com.cathay.writeoff.component.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * mybatis拦截器配置</span><br><span class="line"> * @author zhangdaiyin</span><br><span class="line"> * @date 2020-04-07</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">public class MybatisConfig &#123;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;    @Bean</span><br><span class="line">&#x2F;&#x2F;    public LogInterceptor logInterceptor() &#123;</span><br><span class="line">&#x2F;&#x2F;        LogInterceptor interceptor &#x3D; new LogInterceptor();</span><br><span class="line">&#x2F;&#x2F;        Properties properties &#x3D; new Properties();</span><br><span class="line">&#x2F;&#x2F;        &#x2F;&#x2F; 设置是否显示数据库执行语句的执行时间</span><br><span class="line">&#x2F;&#x2F;        properties.setProperty(LogInterceptor.PROPERTIES_KEY_ENABLE_EXECUTOR_TIME, LogInterceptor.ENABLE_EXECUTOR_TIME);</span><br><span class="line">&#x2F;&#x2F;        interceptor.setProperties(properties);</span><br><span class="line">&#x2F;&#x2F;        return interceptor;</span><br><span class="line">&#x2F;&#x2F;    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">package com.cathay.writeoff.component.interceptor;</span><br><span class="line"></span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.ibatis.executor.Executor;</span><br><span class="line">import org.apache.ibatis.mapping.BoundSql;</span><br><span class="line">import org.apache.ibatis.mapping.MappedStatement;</span><br><span class="line">import org.apache.ibatis.mapping.ParameterMapping;</span><br><span class="line">import org.apache.ibatis.plugin.*;</span><br><span class="line">import org.apache.ibatis.reflection.MetaObject;</span><br><span class="line">import org.apache.ibatis.session.Configuration;</span><br><span class="line">import org.apache.ibatis.session.ResultHandler;</span><br><span class="line">import org.apache.ibatis.session.RowBounds;</span><br><span class="line">import org.apache.ibatis.type.TypeHandlerRegistry;</span><br><span class="line"></span><br><span class="line">import java.text.DateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Locale;</span><br><span class="line">import java.util.Properties;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 1. 打印mysql完整的执行语句</span><br><span class="line"> * 2. 打印mysql语句执行时间</span><br><span class="line"> * 这里我们拦截Executor里面的query和update方法</span><br><span class="line"> * @author zhangdaiyin</span><br><span class="line"> * @date 2020-04-07</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Slf4j</span><br><span class="line">@Intercepts(&#123;</span><br><span class="line">        @Signature(</span><br><span class="line">                method &#x3D; &quot;query&quot;,</span><br><span class="line">                type &#x3D; Executor.class,</span><br><span class="line">                args &#x3D; &#123;MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class&#125;</span><br><span class="line">        ),</span><br><span class="line">        @Signature(</span><br><span class="line">                type &#x3D; Executor.class,</span><br><span class="line">                method &#x3D; &quot;update&quot;,</span><br><span class="line">                args &#x3D; &#123;MappedStatement.class, Object.class&#125;</span><br><span class="line">        )</span><br><span class="line">&#125;)</span><br><span class="line">public class LogInterceptor implements Interceptor &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 是否显示语句的执行时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static final String PROPERTIES_KEY_ENABLE_EXECUTOR_TIME &#x3D; &quot;enableExecutorTIme&quot;;</span><br><span class="line">    public static final String ENABLE_EXECUTOR_TIME &#x3D; &quot;0&quot;; &#x2F;&#x2F; 显示</span><br><span class="line"></span><br><span class="line">    private boolean enableExecutorTime &#x3D; false;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Object intercept(Invocation invocation) throws Throwable &#123;</span><br><span class="line">        &#x2F;&#x2F; 获取执行方法的MappedStatement参数,不管是Executor的query方法还是update方法，第一个参数都是MappedStatement</span><br><span class="line">        MappedStatement mappedStatement &#x3D; (MappedStatement) invocation.getArgs()[0];</span><br><span class="line">        Object parameter &#x3D; null;</span><br><span class="line">        if (invocation.getArgs().length &gt; 1) &#123;</span><br><span class="line">            parameter &#x3D; invocation.getArgs()[1];</span><br><span class="line">        &#125;</span><br><span class="line">        String sqlId &#x3D; mappedStatement.getId();</span><br><span class="line">        BoundSql boundSql &#x3D; mappedStatement.getBoundSql(parameter);</span><br><span class="line">        Configuration configuration &#x3D; mappedStatement.getConfiguration();</span><br><span class="line">        long sqlStartTime &#x3D; System.currentTimeMillis();</span><br><span class="line">        Object re &#x3D; invocation.proceed();</span><br><span class="line">        long sqlEndTime &#x3D; System.currentTimeMillis();</span><br><span class="line">        &#x2F;&#x2F; 打印mysql执行语句</span><br><span class="line">        String sql &#x3D; getSql(configuration, boundSql, sqlId);</span><br><span class="line">        log.warn(sql);</span><br><span class="line">        &#x2F;&#x2F; 打印mysql执行时间</span><br><span class="line">        if (enableExecutorTime) &#123;</span><br><span class="line">            String sqlTimeLog &#x3D; sqlId + &quot; 方法对应sql执行时间:&quot; + (sqlEndTime - sqlStartTime) + &quot; ms&quot;;</span><br><span class="line">            log.warn(sqlTimeLog);</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 通过该方法决定要返回的对象是目标对象还是对应的代理</span><br><span class="line">     * 不要想的太复杂，一般就两种情况：</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 1. return target;  直接返回目标对象，相当于当前Interceptor没起作用，不会调用上面的intercept()方法</span><br><span class="line">     * 2. return Plugin.wrap(target, this);  返回代理对象，会调用上面的intercept()方法</span><br><span class="line">     *</span><br><span class="line">     * @param target 目标对象</span><br><span class="line">     * @return 目标对象或者代理对象</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Override</span><br><span class="line">    public Object plugin(Object target) &#123;</span><br><span class="line">        return Plugin.wrap(target, this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 用于获取在Configuration初始化当前的Interceptor时时候设置的一些参数</span><br><span class="line">     *</span><br><span class="line">     * @param properties Properties参数</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Override</span><br><span class="line">    public void setProperties(Properties properties) &#123;</span><br><span class="line">        if (properties !&#x3D; null) &#123;</span><br><span class="line">            String executorTImeValue &#x3D; properties.getProperty(PROPERTIES_KEY_ENABLE_EXECUTOR_TIME);</span><br><span class="line">            if (executorTImeValue !&#x3D; null) &#123;</span><br><span class="line">                enableExecutorTime &#x3D; executorTImeValue.equals(ENABLE_EXECUTOR_TIME);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static String getSql(Configuration configuration, BoundSql boundSql, String sqlId) &#123;</span><br><span class="line">        return sqlId + &quot; 方法对应sql执行语句:&quot; + assembleSql(configuration, boundSql);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 转义正则特殊字符 （$()*+.[]?\^&#123;&#125;</span><br><span class="line">     * \\需要第一个替换，否则replace方法替换时会有逻辑bug</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static String makeQueryStringAllRegExp(String str) &#123;</span><br><span class="line">        if (str !&#x3D; null &amp;&amp; !str.equals(&quot;&quot;)) &#123;</span><br><span class="line">            return str.replace(&quot;\\&quot;, &quot;\\\\&quot;).replace(&quot;*&quot;, &quot;\\*&quot;)</span><br><span class="line">                    .replace(&quot;+&quot;, &quot;\\+&quot;).replace(&quot;|&quot;, &quot;\\|&quot;)</span><br><span class="line">                    .replace(&quot;&#123;&quot;, &quot;\\&#123;&quot;).replace(&quot;&#125;&quot;, &quot;\\&#125;&quot;)</span><br><span class="line">                    .replace(&quot;(&quot;, &quot;\\(&quot;).replace(&quot;)&quot;, &quot;\\)&quot;)</span><br><span class="line">                    .replace(&quot;^&quot;, &quot;\\^&quot;).replace(&quot;$&quot;, &quot;\\$&quot;)</span><br><span class="line">                    .replace(&quot;[&quot;, &quot;\\[&quot;).replace(&quot;]&quot;, &quot;\\]&quot;)</span><br><span class="line">                    .replace(&quot;?&quot;, &quot;\\?&quot;).replace(&quot;,&quot;, &quot;\\,&quot;)</span><br><span class="line">                    .replace(&quot;.&quot;, &quot;\\.&quot;).replace(&quot;&amp;&quot;, &quot;\\&amp;&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 获取参数对应的string值</span><br><span class="line">     *</span><br><span class="line">     * @param obj 参数对应的值</span><br><span class="line">     * @return string</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static String getParameterValue(Object obj) &#123;</span><br><span class="line">        String value;</span><br><span class="line">        if (obj instanceof String) &#123;</span><br><span class="line">            value &#x3D; &quot;&#39;&quot; + obj.toString() + &quot;&#39;&quot;;</span><br><span class="line">        &#125; else if (obj instanceof Date) &#123;</span><br><span class="line">            DateFormat formatter &#x3D; DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);</span><br><span class="line">            value &#x3D; &quot;&#39;&quot; + formatter.format(new Date()) + &quot;&#39;&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (obj !&#x3D; null) &#123;</span><br><span class="line">                value &#x3D; obj.toString();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                value &#x3D; &quot;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 对特殊字符进行转义，方便之后处理替换</span><br><span class="line">        return value !&#x3D; null ? makeQueryStringAllRegExp(value) : value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 组装完整的sql语句 -- 把对应的参数都代入到sql语句里面</span><br><span class="line">     *</span><br><span class="line">     * @param configuration Configuration</span><br><span class="line">     * @param boundSql      BoundSql</span><br><span class="line">     * @return sql完整语句</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static String assembleSql(Configuration configuration, BoundSql boundSql) &#123;</span><br><span class="line">        &#x2F;&#x2F; 获取mapper里面方法上的参数</span><br><span class="line">        Object sqlParameter &#x3D; boundSql.getParameterObject();</span><br><span class="line">        &#x2F;&#x2F; sql语句里面需要的参数 -- 真实需要用到的参数 因为sqlParameter里面的每个参数不一定都会用到</span><br><span class="line">        List&lt;ParameterMapping&gt; parameterMappings &#x3D; boundSql.getParameterMappings();</span><br><span class="line">        &#x2F;&#x2F; sql原始语句(?还没有替换成我们具体的参数)</span><br><span class="line">        String sql &#x3D; boundSql.getSql().replaceAll(&quot;[\\s]+&quot;, &quot; &quot;);</span><br><span class="line">        if (parameterMappings.size() &gt; 0 &amp;&amp; sqlParameter !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; sql语句里面的?替换成真实的参数</span><br><span class="line">            TypeHandlerRegistry typeHandlerRegistry &#x3D; configuration.getTypeHandlerRegistry();</span><br><span class="line">            if (typeHandlerRegistry.hasTypeHandler(sqlParameter.getClass())) &#123;</span><br><span class="line">                sql &#x3D; sql.replaceFirst(&quot;\\?&quot;, getParameterValue(sqlParameter));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                MetaObject metaObject &#x3D; configuration.newMetaObject(sqlParameter);</span><br><span class="line">                for (ParameterMapping parameterMapping : parameterMappings) &#123;</span><br><span class="line">                    &#x2F;&#x2F; 一个一个把对应的值替换进去 按顺序把?替换成对应的值</span><br><span class="line">                    String propertyName &#x3D; parameterMapping.getProperty();</span><br><span class="line">                    if (metaObject.hasGetter(propertyName)) &#123;</span><br><span class="line">                        Object obj &#x3D; metaObject.getValue(propertyName);</span><br><span class="line">                        sql &#x3D; sql.replaceFirst(&quot;\\?&quot;, getParameterValue(obj));</span><br><span class="line">                    &#125; else if (boundSql.hasAdditionalParameter(propertyName)) &#123;</span><br><span class="line">                        Object obj &#x3D; boundSql.getAdditionalParameter(propertyName);</span><br><span class="line">                        sql &#x3D; sql.replaceFirst(&quot;\\?&quot;, getParameterValue(obj));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sql;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E5%BC%80%E5%90%AF/" itemprop="url">binlog开启</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">6.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查找my-ini或my-cnf"><a href="#查找my-ini或my-cnf" class="headerlink" title="查找my.ini或my.cnf"></a>查找my.ini或my.cnf</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --help | grep &#39;Default options&#39; -A 1</span><br></pre></td></tr></table></figure>
+<ol>
+<li>linux<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">&#x2F;etc&#x2F;my.cnf &#x2F;etc&#x2F;mysql&#x2F;my.cnf &#x2F;usr&#x2F;etc&#x2F;my.cnf ~&#x2F;.my.cnf</span><br></pre></td></tr></table></figure></li>
+<li>windows<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h1><p>select version();<br>mysql5.5.3以后才支持utf8mb4  </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-0-mysql-alter%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-0-mysql-alter%E6%93%8D%E4%BD%9C/" itemprop="url">增删改查</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="字段-——————–"><a href="#字段-——————–" class="headerlink" title="字段 ——————–"></a>字段 ——————–</h1><h1 id="新增字段"><a href="#新增字段" class="headerlink" title="新增字段"></a>新增字段</h1><p>alter table tableName add column scene_type char(2) null comment ‘类型1移动端,2pc’ after pay_type_cd</p>
-<h1 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h1><p>ALTER TABLE tableName drop field_name;</p>
-<h1 id="修改字段信息（可修改字段名称）"><a href="#修改字段信息（可修改字段名称）" class="headerlink" title="修改字段信息（可修改字段名称）"></a>修改字段信息（可修改字段名称）</h1><h3 id="修改字段类型及注释"><a href="#修改字段类型及注释" class="headerlink" title="修改字段类型及注释"></a>修改字段类型及注释</h3><p>alter table tableName  modify column app_name varchar(20) COMMENT ‘应用的名称’;</p>
-<h3 id="修改字段类型"><a href="#修改字段类型" class="headerlink" title="修改字段类型"></a>修改字段类型</h3><p>alter table tableName  modify column app_name text;</p>
-<h1 id="仅仅修改字段类型和注释"><a href="#仅仅修改字段类型和注释" class="headerlink" title="仅仅修改字段类型和注释"></a>仅仅修改字段类型和注释</h1><p>alter table tableName modify column schema_code varchar(20) null comment ‘方案编号’</p>
-<h1 id="索引-——————"><a href="#索引-——————" class="headerlink" title="索引 ——————"></a>索引 ——————</h1><h1 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h1><p>alter table tableName drop index <code>i_pay_type_config_channel</code>,add index <code>i_pay_type_config_channel</code> (channel_code,channel_platform_no,product_code,type)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E4%BB%A5%E5%8F%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E6%AC%A1%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%87%8D%E5%A4%8D%E4%BB%A5%E5%8F%8A%E9%87%8D%E5%A4%8D%E7%9A%84%E6%AC%A1%E6%95%B0/" itemprop="url">查询某个字段重复以及重复的次数</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>//当count(1) &gt; 1时，才有重复项<br>select name,count(1) from people group by name having count(1) &gt; 1;</p>
-<p>//删除除了最小的id意外的重复记录<br>delete from people where id not in (<br>select min(id)) from people group by name having count(*) &gt; 1<br>);</p>
-<p>– 来源： <a href="https://www.cnblogs.com/xiaofeng028/p/4098965.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaofeng028/p/4098965.html</a><br>//三表级联查询 join on<br>select article.aid, article.title, user.username, type.typename<br>from article inner join user<br>on article.uid = user.uid<br>inner join type<br>on article.tid = type.tid<br>;</p>
-<p>//三表级联 left join on<br>select article.aid, article.title, user.username, type.typename<br>from article left join user<br>on article.uid = user.uid<br>left join type<br>on article.tid = type.tid;</p>
-<p>//三表级联 right join on<br>SELECT article.aid,article.title,user.username,type.typename<br>FROM articleRIGHT JOIN user<br>ON article.uid=user.uid<br>RIGHT JOIN type<br>ON article.tid=type.tid;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-3-Mysql%E5%91%BD%E4%BB%A4alter%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-3-Mysql%E5%91%BD%E4%BB%A4alter%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" itemprop="url">索引</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/gengyufei/p/12551083.html" target="_blank" rel="noopener">Mysql命令alter</a></p>
-<p>alter add命令用来增加表的字段。</p>
-<p>alter add命令格式：alter table 表名 add字段 类型 其他;</p>
-<p>例如，在表MyClass中添加了一个字段passtest，类型为int(4)，默认值为0：<br>   mysql&gt; alter table MyClass add passtest int(4) default ‘0’;</p>
-<p>1) 加索引<br>   mysql&gt; alter table 表名 add index 索引名 (字段名1[，字段名2 …]);</p>
-<p>例子： mysql&gt; alter table employee add index emp_name (name);</p>
-<p>2) 加主关键字的索引<br>    mysql&gt; alter table 表名 add primary key (字段名);</p>
-<p>例子： mysql&gt; alter table employee add primary key(id);</p>
-<p>3) 加唯一限制条件的索引<br>   mysql&gt; alter table 表名 add unique 索引名 (字段名);</p>
-<p>例子： mysql&gt; alter table employee add unique emp_name2(cardnumber);</p>
-<p>4) 删除某个索引<br>   mysql&gt; alter table 表名 drop index 索引名;</p>
-<p>例子： mysql&gt;alter table employee drop index emp_name;</p>
-<p>5) 增加字段<br>    mysql&gt; ALTER TABLE table_name ADD field_name field_type;</p>
-<p>6) 修改原字段名称及类型<br>    mysql&gt; ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;</p>
-<p>7) 删除字段<br>    MySQL ALTER TABLE table_name DROP field_name;</p>
-<p>全文：<a href="http://c.biancheng.net/cpp/html/1456.html" target="_blank" rel="noopener">http://c.biancheng.net/cpp/html/1456.html</a></p>
-<p>8) 修改字段</p>
-<p>如果要修改字段的话就用这个：</p>
-<p>ALTER TABLE 创建好的表名称 MODIFY COLUMN 创建好的表需要修改的字段 INT AUTO_INCREMENT</p>
-<p>全文：<a href="https://zhidao.baidu.com/question/359185899.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/359185899.html</a></p>
-<p>9) 修改字段属性</p>
-<p>mysql修改已存在的表增加ID属性为auto_increment自动增长</p>
-<p>今天有需要将已经存在表设置自动增长属性<br>具体如下<br>alter table customers change id id int not null auto_increment primary key;</p>
-<p>//添加字段并设置主键<br>ALTER TABLE tabelname ADD new_field_id int(5) unsigned default 0 not null auto_increment ,ADD primary key (new_field_id);</p>
-<p>全文：<a href="http://www.2cto.com/database/201203/125731.html" target="_blank" rel="noopener">http://www.2cto.com/database/201203/125731.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-4-Mysql%E5%91%BD%E4%BB%A4alter-add%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-4-Mysql%E5%91%BD%E4%BB%A4alter-add%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5/" itemprop="url">字段</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/hechaojie_com/article/details/82382716" target="_blank" rel="noopener">Mysql命令alter add：增加表的字段</a></p>
-<p>alter add命令用来增加表的字段。</p>
-<p>alter add命令格式：alter table 表名 add字段 类型 其他;</p>
-<p>例如，在表MyClass中添加了一个字段passtest，类型为int(4)，默认值为0：<br>   mysql&gt; alter table MyClass add passtest int(4) default ‘0’;</p>
-<p>1) 加索引<br>   mysql&gt; alter table 表名 add index 索引名 (字段名1[，字段名2 …]);</p>
-<p>例子： mysql&gt; alter table employee add index emp_name (name);</p>
-<p>2) 加主关键字的索引<br>    mysql&gt; alter table 表名 add primary key (字段名);</p>
-<p>例子： mysql&gt; alter table employee add primary key(id);</p>
-<p>3) 加唯一限制条件的索引<br>   mysql&gt; alter table 表名 add unique 索引名 (字段名);</p>
-<p>例子： mysql&gt; alter table employee add unique emp_name2(cardnumber);</p>
-<p>4) 删除某个索引<br>   mysql&gt; alter table 表名 drop index 索引名;</p>
-<p>例子： mysql&gt;alter table employee drop index emp_name;</p>
-<p>5) 增加字段<br>    mysql&gt; ALTER TABLE table_name ADD field_name field_type;</p>
-<p>6) 修改原字段名称及类型<br>    mysql&gt; ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;</p>
-<p>7) 删除字段<br>    MySQL ALTER TABLE table_name DROP field_name;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE/" itemprop="url">随机查询数据</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">344</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="order-by-rand"><a href="#order-by-rand" class="headerlink" title="order by rand()"></a>order by rand()</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E6%9F%A5%E8%AF%A2%E6%9F%90%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%A4%A7%E4%BA%8Ex%E7%9A%84%E6%95%B0%E6%8D%AE/" itemprop="url">查询某字段长度大于x的数据</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">388</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="length-origin-msg-gt-22"><a href="#length-origin-msg-gt-22" class="headerlink" title="length(origin_msg) &gt;= 22"></a>length(origin_msg) &gt;= 22</h1><p>select * from t_fin_pay_issue_log<br>where pay_channel_cd = 30 and error_category_cd = ‘voucherServiceHandler’ and length(origin_msg) &gt;= 22<br>order by rand() limit 10;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C%E5%8F%8Aselect%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E5%92%8CfileName%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C%E5%8F%8Aselect%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E5%92%8CfileName%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">索引</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="新增索引"><a href="#新增索引" class="headerlink" title="新增索引"></a>新增索引</h1><p>alter table t_fin_wro_identifier add index index_test(bill_detail_no) ;<br>create index index_test on t_fin_wro_identifier (bill_detail_no) ;<br>create unique index index_test on t_fin_wro_identifier (bill_detail_no) ;</p>
-<h1 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h1><p>drop index index_test on t_fin_wro_identifier ;<br>alter table table_name drop index index_name ;<br>alter table table_name drop primary key ;</p>
-<h1 id="index索引描述"><a href="#index索引描述" class="headerlink" title="index索引描述"></a>index索引描述</h1><p>index索引允许 字段列多个列值为 空  或者 为 null</p>
-<h1 id="unique-index索引描述"><a href="#unique-index索引描述" class="headerlink" title="unique index索引描述"></a>unique index索引描述</h1><p>index索引允许 字段列多个列值为 空  或者 为 null</p>
-<h1 id="select-和-select-fieldName-的区别"><a href="#select-和-select-fieldName-的区别" class="headerlink" title="select(*) 和 select(fieldName) 的区别"></a>select(*) 和 select(fieldName) 的区别</h1><ol>
-<li>select(*)查询出所有满足where条件的行，包括为空或为null的列值行</li>
-<li>select(fieldName)查询出所有满足where条件的行，但“无法统计列值为 null 的行”，可以统计“列值为 空 的行”</li>
+<h1 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h1><p>一般来说开启binlog日志大概会有1%的性能损耗。<br>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 或mysql\bin\my.ini 配置文件的 log-bin 选项：<br>在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<blockquote>
+<p>也可以通过 SET SQL_LOG_BIN=1 命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+</blockquote>
+<ol>
+<li>windows<br>my.ini<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># Binary Logging</span><br><span class="line"># 开启Binlog 一般只需要修改这一行即可</span><br><span class="line">log-bin&#x3D;mysql-bin</span><br><span class="line"># 设置格式 此行可以不加 命令设置即可 详见下方拓展</span><br><span class="line">binlog-format&#x3D;ROW</span><br><span class="line"># 配置serverID  这一行本来就存在</span><br><span class="line">server_id&#x3D;1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>写在 [mysqld]  下</p>
+</blockquote>
+</li>
 </ol>
-
+<p>然后再重启mysql服务，使用命令验证是否开启成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>二进制日志文件在mysql根目录的Data目录下，如果根目录下没有Data文件夹和配置文件，查一下C盘的ProgramData文件夹</p>
+</blockquote>
+<ol>
+<li>linux<br>/etc/my.cnf中mysqld节添加开启binlog的配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#第一种方式:</span><br><span class="line">#开启binlog日志</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line">#binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#binlog文件的索引文件，管理所有binlog文件</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br><span class="line"> </span><br><span class="line">#第二种方式:</span><br><span class="line">#此一行等同于上面log_bin三行</span><br><span class="line">log-bin&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line">#配置serverid</span><br><span class="line">server-id&#x3D;1</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="binlog其他配置"><a href="#binlog其他配置" class="headerlink" title="binlog其他配置"></a>binlog其他配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">#设置日志三种格式：STATEMENT、ROW、MIXED 。</span><br><span class="line">binlog_format &#x3D; ROW</span><br><span class="line">#设置日志路径，注意路经需要mysql用户有权限写</span><br><span class="line">log-bin &#x3D; &#x2F;data&#x2F;mysql&#x2F;logs&#x2F;mysql-bin.log</span><br><span class="line">#设置binlog清理时间</span><br><span class="line">expire_logs_days &#x3D; 7</span><br><span class="line">#binlog每个日志文件大小</span><br><span class="line">max_binlog_size &#x3D; 100m</span><br><span class="line">#binlog缓存大小</span><br><span class="line">binlog_cache_size &#x3D; 4m</span><br><span class="line">#最大binlog缓存大小</span><br><span class="line">max_binlog_cache_size &#x3D; 512m</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1974,7 +781,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-curd-mysql-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1993,7 +800,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/19/database-mysql-curd-mysql-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95/" itemprop="url">索引</a></h1>
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog/" itemprop="url">binlog</a></h1>
         
 
         <div class="post-meta">
@@ -2009,7 +816,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
             
 
             
@@ -2044,7 +851,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/curd/" itemprop="url" rel="index"><span itemprop="name">curd</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -2072,203 +879,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/llzhang123/p/7889382.html" target="_blank" rel="noopener">mysql 创建索引和删除索引</a></p>
-<p>索引的创建可以在CREATE TABLE语句中进行，也可以单独用CREATE INDEX或ALTER TABLE来给表增加索引。删除索引可以利用ALTER TABLE或DROP INDEX语句来实现。<br>（1）使用ALTER TABLE语句创建索引。<br>语法如下：<br>alter table table_name add index index_name (column_list) ;<br>alter table table_name add unique (column_list) ;<br>alter table table_name add primary key (column_list) ;<br>其中包括普通索引、UNIQUE索引和PRIMARY KEY索引3种创建索引的格式，table_name是要增加索引的表名，column_list指出对哪些列进行索引，多列时各列之间用逗号分隔。索引名index_name可选，缺省时，MySQL将根据第一个索引列赋一个名称。另外，ALTER TABLE允许在单个语句中更改多个表，因此可以同时创建多个索引。<br>创建索引的示例如下：<br>mysql&gt; alter table table_test add index index_test1(name) ;<br>Query OK, 2 rows affected (0.08 sec)<br>（2）使用CREATE INDEX语句对表增加索引。<br>能够增加普通索引和UNIQUE索引两种。其格式如下：<br>create index index_name on table_name (column_list) ;<br>create unique index index_name on table_name (column_list) ;</p>
-<p>创建索引的示例如下：</p>
-<p>mysql&gt;create index index_test2 on table_test(age);</p>
-<p>Query OK, 2 rows affected (0.08 sec)</p>
-<p>说明：table_name、index_name和column_list具有与ALTER TABLE语句中相同的含义，索引名不可选。另外，不能用CREATE INDEX语句创建PRIMARY KEY索引。<br>（3）删除索引。<br>删除索引可以使用ALTER TABLE或DROP INDEX语句来实现。DROP INDEX可以在ALTER TABLE内部作为一条语句处理，其格式如下：<br>drop index index_name on table_name ;<br>alter table table_name drop index index_name ;<br>alter table table_name drop primary key ;<br>其中，在前面的两条语句中，都删除了table_name中的索引index_name。而在最后一条语句中，只在删除PRIMARY KEY索引中使用，因为一个表只可能有一个PRIMARY KEY索引，因此不需要指定索引名。如果没有创建PRIMARY KEY索引，但表具有一个或多个UNIQUE索引，则MySQL将删除第一个UNIQUE索引。<br>如果从表中删除某列，则索引会受影响。对于多列组合的索引，如果删除其中的某列，则该列也会从索引中删除。如果删除组成索引的所有列，则整个索引将被删除。<br>删除索引的操作，如下面的代码：<br>mysql&gt; drop index name on table_test ;<br>Query OK, 2 rows affected (0.08 sec)</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/19/database-mysql-excep-Unable-to-resolve-name-org-hibernate-dialect-MySQL55Dialect-as-strategy-org-hibernate-dialect-Dialect/" itemprop="url">Unable to load authentication plugin 'caching_sha2_password'</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-19T00:00:00+08:00">2022-03-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/excep/" itemprop="url" rel="index"><span itemprop="name">excep</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">165</span>
+                <span title="字数统计">987</span>
               
 
               
@@ -2304,8 +915,1396 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>[Unable to resolve name [org.hibernate.dialect.MySQL55Dialect] as strategy [org.hibernate.dialect.Dialect]]</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>1、一般来说开启binlog日志大概会有1%的性能损耗。</p>
+<p>启用binlog，通过配置 /etc/my.cnf 或 /etc/mysql/mysql.conf.d/mysqld.cnf 配置文件的 log-bin 选项：</p>
+<p>2、在配置文件中加入 log-bin 配置，表示启用binlog，如果没有给定值，写成 log-bin=，则默认名称为主机名。（注：名称若带有小数点，则只取第一个小数点前的部分作为名称）</p>
+<p>[mysqld]</p>
+<p>log-bin=my-binlog-name</p>
+<p>3、也可以通过 SET SQL_LOG_BIN=1命令来启用 binlog，通过 SET SQL_LOG_BIN=0 命令停用 binlog。启用 binlog 之后须重启MySQL才能生效。</p>
+<p>以上就是mysql Binlog日志的启用，希望对大家有所帮助。更多mysql学习指路：MySQL</p>
+<p>推荐操作系统：windows7系统、mysql5.8、DELL G3电脑</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" itemprop="url">binlog日志三种模式</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>mysql查看binlog日志: https://blog.csdn.net/m0_46426259/article/details/122215958
+</code></pre><hr>
+<h1 id="三种记录格式"><a href="#三种记录格式" class="headerlink" title="三种记录格式"></a>三种记录格式</h1><p>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）<br>ROW：基于行的复制（row-based replication, RBR）<br>MIXED：混合模式复制（mixed-based replication, MBR）</p>
+<blockquote>
+<p> 在 MySQL 5.7.7 之前，默认的格式是 STATEMENT，<br> 在 MySQL 5.7.7 及更高版本中，默认值是 ROW。日志格式通过 binlog-format 指定，如 binlog-format=STATEMENT、binlog-format=ROW、binlog-format=MIXED。</p>
+</blockquote>
+<p>Statement<br>每一条会修改数据的sql都会记录在binlog中</p>
+<p>优点：不需要记录每一行的变化，减少了binlog日志量，节约了IO, 提高了性能。</p>
+<p>缺点：由于记录的只是执行语句，为了这些语句能在slave上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在slave得到和在master端执行的时候相同的结果。另外mysql的复制，像一些特定函数的功能，slave与master要保持一致会有很多相关问题。</p>
+<p>Row<br>5.1.5版本的MySQL才开始支持 row level 的复制,它不记录sql语句上下文相关信息，仅保存哪条记录被修改。</p>
+<p>优点： binlog中可以不记录执行的sql语句的上下文相关的信息，仅需要记录那一条记录被修改成什么了。所以row的日志内容会非常清楚的记录下每一行数据修改的细节。而且不会出现某些特定情况下的存储过程，或function，以及trigger的调用和触发无法被正确复制的问题.</p>
+<p>缺点:所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</p>
+<p>注：将二进制日志格式设置为ROW时，有些更改仍然使用基于语句的格式，包括所有DDL语句，例如CREATE TABLE， ALTER TABLE，或 DROP TABLE。</p>
+<p>Mixed<br>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。<br>在Mixed模式下，一般的语句修改使用statment格式保存binlog，如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog，MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" itemprop="url">binlog开启</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">716</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>MySQL主从复制：MySQL Replication在Master端开启binlog，Master把它的二进制日志传递给slaves来达到master-slave数据一致的目的<br>数据恢复：通过使用 mysqlbinlog工具来使恢复数据</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">binlog常用命令</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">7.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 查看binlog是否开启( ON 表示开启）</span><br><span class="line">show variables like &#39;log_%&#39;;</span><br><span class="line">#只查看第一个binlog文件的内容</span><br><span class="line">show binlog events;  </span><br><span class="line">#查看指定binlog文件的内容</span><br><span class="line">show binlog events &#96;&#96;in &#39;mysql-bin.000002&#39;&#96;&#96;; </span><br><span class="line">#获取binlog文件列表</span><br><span class="line">show binary logs;  </span><br><span class="line">#查看当前正在写入的binlog文件</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令2"><a href="#常用命令2" class="headerlink" title="常用命令2"></a>常用命令2</h1><h2 id="查看-my-cnf-位置"><a href="#查看-my-cnf-位置" class="headerlink" title="查看 my.cnf 位置"></a>查看 my.cnf 位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令3"><a href="#常用命令3" class="headerlink" title="常用命令3"></a>常用命令3</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># OFF：关闭   ON：开启</span><br><span class="line">SHOW VARIABLES LIKE &#39;log_bin&#39;;</span><br><span class="line"># 查看日志模式</span><br><span class="line">show variables like &quot;%binlog_format%&quot;;</span><br><span class="line"># 设置日志模式</span><br><span class="line">set global binlog_format&#x3D;&#39;MIXED&#39;;</span><br><span class="line"># 查看二进制日志文件</span><br><span class="line">show binary logs;</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令4"><a href="#常用命令4" class="headerlink" title="常用命令4"></a>常用命令4</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"># 是否启用binlog日志</span><br><span class="line">show variables like &#39;log_bin&#39;;</span><br><span class="line"></span><br><span class="line"># 查看详细的日志配置信息</span><br><span class="line">show global variables like &#39;%log%&#39;;</span><br><span class="line"></span><br><span class="line"># mysql数据存储目录</span><br><span class="line">show variables like &#39;%dir%&#39;;</span><br><span class="line"></span><br><span class="line"># 查看binlog的目录</span><br><span class="line">show global variables like &quot;%log_bin%&quot;;</span><br><span class="line"></span><br><span class="line"># 查看当前服务器使用的biglog文件及大小</span><br><span class="line">show binary logs;</span><br><span class="line"></span><br><span class="line"># 查看主服务器使用的biglog文件及大小</span><br><span class="line"></span><br><span class="line"># 查看最新一个binlog日志文件名称和Position</span><br><span class="line">show master status;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 事件查询命令</span><br><span class="line"># IN &#39;log_name&#39; ：指定要查询的binlog文件名(不指定就是第一个binlog文件)</span><br><span class="line"># FROM pos ：指定从哪个pos起始点开始查起(不指定就是从整个文件首个pos点开始算)</span><br><span class="line"># LIMIT [offset,] ：偏移量(不指定就是0)</span><br><span class="line"># row_count ：查询总条数(不指定就是所有行)</span><br><span class="line">show binlog events [IN &#39;log_name&#39;] [FROM pos] [LIMIT [offset,] row_count];</span><br><span class="line"></span><br><span class="line"># 查看 binlog 内容</span><br><span class="line">show binlog events;</span><br><span class="line"></span><br><span class="line"># 查看具体一个binlog文件的内容 （in 后面为binlog的文件名）</span><br><span class="line">show binlog events in &#39;master.000003&#39;;</span><br><span class="line"></span><br><span class="line"># 设置binlog文件保存事件，过期删除，单位天</span><br><span class="line">set global expire_log_days&#x3D;3; </span><br><span class="line"></span><br><span class="line"># 删除当前的binlog文件</span><br><span class="line">reset master; </span><br><span class="line"></span><br><span class="line"># 删除slave的中继日志</span><br><span class="line">reset slave;</span><br><span class="line"></span><br><span class="line"># 删除指定日期前的日志索引中binlog日志文件</span><br><span class="line">purge master logs before &#39;2019-03-09 14:00:00&#39;;</span><br><span class="line"></span><br><span class="line"># 删除指定日志文件</span><br><span class="line">purge master logs to &#39;master.000003&#39;;</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-mysql%E6%8E%A7%E5%88%B6%E5%8F%B0/" itemprop="url">mysql控制台</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">928</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><p>在环境变量Path中添加：<br>C:\Program Files\MySQL\MySQL Server 5.5\bin</p>
+<h1 id="打开cmd窗口"><a href="#打开cmd窗口" class="headerlink" title="打开cmd窗口"></a>打开cmd窗口</h1><p>在C:\Windows\System32\文件夹下搜索 cmd 并打开cmd窗口<br>C:\Windows\System32\cmd.exe</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>mysql –help<br>执行验证是否配置成功</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-%E6%9F%A5%E6%89%BEmy-cnf%E4%BD%8D%E7%BD%AE/" itemprop="url">查找my.cnf位置</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="通过服务查找"><a href="#通过服务查找" class="headerlink" title="通过服务查找"></a>通过服务查找</h1><ol>
+<li>cmd -&gt; services.msc</li>
+<li>右键 MySQL -&gt; 属性 -&gt; 可执行文件路径：<br><img src="images/mysql可执行文件路径.png" alt=""></li>
+</ol>
+<h1 id="命令查找"><a href="#命令查找" class="headerlink" title="命令查找"></a>命令查找</h1><ol>
+<li>先打开mysql控制台<br><a href="./mysql控制台.md"></a></li>
+<li>查看 my.cnf 位置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;mysql --help | grep &#39;Default options&#39; -A 1</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">C:\WINDOWS\my.ini C:\WINDOWS\my.cnf C:\my.ini C:\my.cnf C:\Program Files\MySQL\MySQL Server 5.5\my.ini C:\Program Files\MySQL\MySQL Server 5.5\my.cnf</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/20/database-mysql-notes-binlog-binlog%E6%97%A5%E5%BF%97%E7%AD%96%E7%95%A5/" itemprop="url">binlog开启</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-20T00:00:00+08:00">2022-04-20</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h1><p>写 Binlog 的时机<br>对支持事务的引擎如InnoDB而言，必须要提交了事务才会记录binlog。binlog 什么时候刷新到磁盘跟参数 sync_binlog 相关。</p>
+<p>如果设置为0，则表示MySQL不控制binlog的刷新，由文件系统去控制它缓存的刷新；</p>
+<p>如果设置为不为0的值，则表示每 sync_binlog 次事务，MySQL调用文件系统的刷新操作刷新binlog到磁盘中。</p>
+<p>设为1是最安全的，在系统故障时最多丢失一个事务的更新，但是会对性能有所影响。</p>
+<p>如果 sync_binlog=0 或 sync_binlog大于1，当发生电源故障或操作系统崩溃时，可能有一部分已提交但其binlog未被同步到磁盘的事务会被丢失，恢复程序将无法恢复这部分事务。</p>
+<p>在MySQL 5.7.7之前，默认值 sync_binlog 是0，MySQL 5.7.7和更高版本使用默认值1，这是最安全的选择。一般情况下会设置为100或者0，牺牲一定的一致性来获取更好的性能。</p>
+<h2 id="文件及扩展"><a href="#文件及扩展" class="headerlink" title="文件及扩展"></a>文件及扩展</h2><p>binlog日志包括两类文件:</p>
+<p>二进制日志索引文件（文件名后缀为.index）用于记录所有有效的的二进制文件</p>
+<p>二进制日志文件（文件名后缀为.00000*）记录数据库所有的DDL和DML语句事件</p>
+<p>binlog是一个二进制文件集合，每个binlog文件以一个4字节的魔数开头，接着是一组Events:</p>
+<p>魔数：0xfe62696e对应的是0xfebin；</p>
+<p>Event：每个Event包含header和data两个部分；header提供了Event的创建时间，哪个服务器等信息，data部分提供的是针对该Event的具体信息，如具体数据的修改；</p>
+<p>第一个Event用于描述binlog文件的格式版本，这个格式就是event写入binlog文件的格式；</p>
+<p>其余的Event按照第一个Event的格式版本写入；</p>
+<p>最后一个Event用于说明下一个binlog文件；</p>
+<p>binlog的索引文件是一个文本文件，其中内容为当前的binlog文件列表</p>
+<p>当遇到以下3种情况时，MySQL会重新生成一个新的日志文件，文件序号递增：</p>
+<p>MySQL服务器停止或重启时</p>
+<p>使用 flush logs 命令；</p>
+<p>当 binlog 文件大小超过 max_binlog_size 变量的值时；</p>
+<p>max_binlog_size 的最小值是4096字节，最大值和默认值是 1GB (1073741824字节)。事务被写入到binlog的一个块中，所以它不会在几个二进制日志之间被拆分。<br>因此，如果你有很大的事务，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的日志都记录到当前日志文件中，直到事务结束，你可能会看到binlog文件大于 max_binlog_size 的情况。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/12/tool-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/12/tool-MD%E6%96%87%E4%BB%B6-Markdown%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F%E3%80%81%E9%A2%9C%E8%89%B2%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8A%A0%E7%B2%97/" itemprop="url">Markdown设置字体大小、颜色、类型、加粗</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T00:00:00+08:00">2022-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/md/" itemprop="url" rel="index"><span itemprop="name">md</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="改变字体大小"><a href="#改变字体大小" class="headerlink" title="改变字体大小"></a>改变字体大小</h1><p>size：规定文本的尺寸大小，取值范围为1~7 ，浏览器默认值是 3。注意，size=50也是可以显示的，但与7的字体大小一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;font size&#x3D;1&gt;字体大小size&#x3D;1&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font size&#x3D;3&gt;字体大小size&#x3D;3&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="改变字体颜色"><a href="#改变字体颜色" class="headerlink" title="改变字体颜色"></a>改变字体颜色</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;red&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;&quot;blue&quot;&gt;蓝色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;Yellow&gt;黄色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;YellowGreen&gt;黄绿色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;font color&#x3D;#ff0000&gt;红色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#00ff00&gt;绿色&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font color&#x3D;#0000ff&gt;蓝色&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="改变字体类型"><a href="#改变字体类型" class="headerlink" title="改变字体类型"></a>改变字体类型</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;font face&#x3D;&quot;黑体&quot;&gt;黑体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;宋体&quot;&gt;宋体&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;仿宋&quot;&gt;仿宋&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;幼圆&quot;&gt;幼圆&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;楷书&quot;&gt;楷书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文行楷&quot;&gt;华文行楷&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文隶书&quot;&gt;华文隶书&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文新魏&quot;&gt;华文新魏&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文彩云&quot;&gt;华文彩云&lt;&#x2F;font&gt;</span><br><span class="line">&lt;font face&#x3D;&quot;华文琥珀&quot;&gt;华文琥珀&lt;&#x2F;font&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;&lt;font size&#x3D;10 face&#x3D;&quot;华文行楷&quot;&gt;非业务原因重开&lt;&#x2F;font&gt;&lt;&#x2F;center&gt;</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -2349,7 +2348,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/25/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/23/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/25/">下一页</a>
   </nav>
 
 
@@ -2396,7 +2395,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2559,7 +2558,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2642,7 +2657,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2765,7 +2786,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -2774,7 +2795,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

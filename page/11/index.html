@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-16-list%E7%94%9F%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-2/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-2</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-16-list%E7%94%9F%E6%88%90/" itemprop="url">python-notes-course-1-16-list生成</a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">452</span>
+                <span title="字数统计">3.7k</span>
               
 
               
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -475,12 +475,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
-<p>VOLUME /app</p>
-<p>COPY mall-task*.jar mall-task.jar</p>
-<p>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>RUN echo ‘Asia/Shanghai’ &gt;/etc/timezone</p>
-<p>RUN bash -c “touch /mall-task.jar”<br>EXPOSE 8090<br>ENTRYPOINT [“java”,“-Djava.security.egd=file:/dev/./uranedom”,“-jar”,“-Dspring.profiles.active=pre-prod”, “-Duser.timezone=GMT+08”, “/mall-task.jar”]</p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="生成1-30元素的list"><a href="#生成1-30元素的list" class="headerlink" title="生成1-30元素的list"></a>生成1-30元素的list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">list1&#x3D;list ( range (1,31) )</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+<h1 id="迭代生成"><a href="#迭代生成" class="headerlink" title="迭代生成"></a>迭代生成</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[expr for iter_var in iterable] </span><br><span class="line">[expr for iter_var in iterable if cond_expr]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>for循环的迭代结果，再执行 expr表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D;[x * x for x in range(1, 11)]</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br></pre></td></tr></table></figure></li>
+<li>for循环的迭代结果，执行if判断语句，满足条件的结果，再执行 expr表达式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D; [x * x for x in range(1, 11) if x % 2 &#x3D;&#x3D; 0]</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[4, 16, 36, 64, 100]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="嵌套for循环生成list"><a href="#嵌套for循环生成list" class="headerlink" title="嵌套for循环生成list"></a>嵌套for循环生成list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line">list1&#x3D; [(x+1,y+1) for x in range(3) for y in range(5)] </span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5)]</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -536,7 +542,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -555,7 +561,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-docker-notes-dockerfile-local-dockerfile-3/" itemprop="url">depth-docker-notes-dockerfile-local-dockerfile-3</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-17-%E7%94%9F%E6%88%90%E5%99%A8/" itemprop="url">python-notes-course-1-17-生成器</a></h1>
         
 
         <div class="post-meta">
@@ -602,7 +608,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">528</span>
+                <span title="字数统计">732</span>
               
 
               
@@ -638,15 +644,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>FROM java:8</p>
-<p>#作者<br>MAINTAINER xu</p>
-<p>#声明一个挂载点，容器内此路径会对应宿主机的某个文件夹<br>VOLUME /tmp</p>
-<p>#复制上下文目录下的target/demo-1.0.0.jar 到容器里<br>COPY target/demo-0.0.1.jar demo-0.0.1.jar</p>
-<p>#bash方式执行，使demo-0.0.1jar可访问</p>
-<p>#RUN新建立一层，在其上执行这些命令，执行结束后， commit 这一层的修改，构成新的镜像。<br>RUN bash -c “touch /demo-0.0.1.jar”</p>
-<p>#声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务<br>EXPOSE 8899</p>
-<p>#指定容器启动程序及参数   <ENTRYPOINT> “<CMD>“<br>ENTRYPOINT [“java”,”-jar”,”demo-0.0.1.jar”]</p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>在 Python 中，这种一边循环一边计算的机制，称为生成器：generator。<br>在 Python 中，使用了 yield 的函数被称为生成器（generator）。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -702,7 +701,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -721,7 +720,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/" itemprop="url">depth-architecture-1-架构风格和架构特征</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-18-%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/" itemprop="url">python-notes-course-1-18-类的访问控制</a></h1>
         
 
         <div class="post-meta">
@@ -768,7 +767,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">2.1k</span>
               
 
               
@@ -782,7 +781,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -804,7 +803,81 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="创建类的时候就会包含的方法"><a href="#创建类的时候就会包含的方法" class="headerlink" title="创建类的时候就会包含的方法"></a>创建类的时候就会包含的方法</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>init</strong></td>
+<td>构造函数，在生成对象时调用</td>
+</tr>
+<tr>
+<td><strong>del</strong></td>
+<td>析构函数，释放对象时使用</td>
+</tr>
+<tr>
+<td><strong>repr</strong></td>
+<td>打印，转换</td>
+</tr>
+<tr>
+<td><strong>setitem</strong></td>
+<td>按照索引赋值</td>
+</tr>
+<tr>
+<td><strong>getitem</strong></td>
+<td>按照索引获取值</td>
+</tr>
+<tr>
+<td><strong>len</strong></td>
+<td>获得长度</td>
+</tr>
+<tr>
+<td><strong>cmp</strong></td>
+<td>比较运算</td>
+</tr>
+<tr>
+<td><strong>call</strong></td>
+<td>函数调用</td>
+</tr>
+<tr>
+<td><strong>add</strong></td>
+<td>加运算</td>
+</tr>
+<tr>
+<td><strong>sub</strong></td>
+<td>减运算</td>
+</tr>
+<tr>
+<td><strong>mul</strong></td>
+<td>乘运算</td>
+</tr>
+<tr>
+<td><strong>div</strong></td>
+<td>除运算</td>
+</tr>
+<tr>
+<td><strong>mod</strong></td>
+<td>求余运算</td>
+</tr>
+<tr>
+<td><strong>pow</strong></td>
+<td>乘方</td>
+</tr>
+</tbody>
+</table>
+<h1 id="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："><a href="#当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：" class="headerlink" title="当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法："></a>当然有些时候我们需要获取类的相关信息，我们可以使用如下的方法：</h1><ul>
+<li>type(obj)：来获取对象的相应类型；</li>
+<li>isinstance(obj, type)：判断对象是否为指定的 type 类型的实例；</li>
+<li>hasattr(obj, attr)：判断对象是否具有指定属性/方法；</li>
+<li>getattr(obj, attr[, default]) 获取属性/方法的值, 要是没有对应的属性则返回 default 值（前提是设置了 default），否则会抛出 AttributeError 异常；</li>
+<li>setattr(obj, attr, value)：设定该属性/方法的值，类似于 obj.attr=value；</li>
+<li>dir(obj)：可以获取相应对象的所有属性和方法名的列表：</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -860,7 +933,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-architecture-2-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -879,7 +952,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-architecture-2-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url">depth-architecture-2-架构设计</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-19-%E6%9E%9A%E4%B8%BE/" itemprop="url">python-notes-course-1-19-枚举</a></h1>
         
 
         <div class="post-meta">
@@ -926,7 +999,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">71</span>
+                <span title="字数统计">2.2k</span>
               
 
               
@@ -940,7 +1013,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -962,8 +1035,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>COLA，洋葱，整洁，充血</p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">from enum import Enum</span><br><span class="line"></span><br><span class="line">Month &#x3D; Enum(&#39;Month&#39;, (&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;))</span><br><span class="line"></span><br><span class="line"># 遍历枚举类型</span><br><span class="line">for name, member in Month.__members__.items():</span><br><span class="line">    print(name, &#39;---------&#39;, member, &#39;----------&#39;, member.value)</span><br><span class="line"></span><br><span class="line"># 直接引用一个常量</span><br><span class="line">print(&#39;\n&#39;, Month.Jan)</span><br></pre></td></tr></table></figure>
+<p>上面的代码，我们创建了一个有关月份的枚举类型 Month ，这里要注意的是构造参数，第一个参数 Month 表示的是该枚举类的类名，第二个 tuple 参数，表示的是枚举类的值；当然，枚举类通过 <strong>members</strong> 遍历它的所有成员的方法。</p>
+<p>注意的一点是 ， member.value 是自动赋给成员的 int 类型的常量，默认是从 1 开始的。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1019,7 +1094,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/depth-distributed-%E5%9F%BA%E4%BA%8EDAG%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-2-%E6%B3%A8%E9%87%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1038,7 +1113,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/depth-distributed-%E5%9F%BA%E4%BA%8EDAG%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url">depth-distributed-基于DAG的分布式系统</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-2-%E6%B3%A8%E9%87%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" itemprop="url">python-notes-course-1-2-注释命名规范</a></h1>
         
 
         <div class="post-meta">
@@ -1085,7 +1160,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">4.5k</span>
               
 
               
@@ -1099,7 +1174,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">4 mins.</span>
               
             </div>
           
@@ -1121,7 +1196,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="注释命名规范"><a href="#注释命名规范" class="headerlink" title="注释命名规范"></a>注释命名规范</h1><ol>
+<li>模块名 首字母保持小写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 正确的模块名</span><br><span class="line">import decoder</span><br><span class="line">import html_parser</span><br><span class="line"></span><br><span class="line"># 不推荐的模块名</span><br><span class="line">import Decoder</span><br></pre></td></tr></table></figure></li>
+<li>类名 使用驼峰命名风格，首字母大写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Farm():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">class AnimalFarm(Farm):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>私有类名 可用一个下划线开头<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class _PrivateFarm(Farm):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>函数名 一律小写，如有多个单词，用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def run():</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">def run_with_env():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></li>
+<li>私有函数 在函数前加一个下划线<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Person():</span><br><span class="line"></span><br><span class="line">    def _private_func():</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></li>
+<li>变量名 尽量小写，如有多个单词，用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    school_name &#x3D; &#39;&#39;</span><br></pre></td></tr></table></figure></li>
+<li>常量采用全大写，如有多个单词，使用下划线隔开<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_CLIENT &#x3D; 100</span><br><span class="line">MAX_CONNECTION &#x3D; 1000</span><br><span class="line">CONNECTION_TIMEOUT &#x3D; 600</span><br></pre></td></tr></table></figure></li>
+<li>常量使用以下划线分隔的大写命名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MAX_OVERFLOW &#x3D; 100</span><br><span class="line"></span><br><span class="line">Class FooBar:</span><br><span class="line"></span><br><span class="line">    def foo_bar(self, print_):</span><br><span class="line">        print(print_)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1177,7 +1263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-redo%E5%92%8Cundo%E6%97%A5%E5%BF%97/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1196,7 +1282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-redo%E5%92%8Cundo%E6%97%A5%E5%BF%97/" itemprop="url">database-mysql-notes-redo和undo日志</a></h1>
+                <a class="post-title-link" href="/2022/08/03/python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx/" itemprop="url">python-excep-Could-not-find-a-version-that-satisfies-the-requirement-wx</a></h1>
         
 
         <div class="post-meta">
@@ -1243,7 +1329,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">1.7k</span>
               
 
               
@@ -1257,7 +1343,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -1279,7 +1365,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Could-not-find-a-version-that-satisfies-the-requirement-wx"><a href="#Could-not-find-a-version-that-satisfies-the-requirement-wx" class="headerlink" title="Could not find a version that satisfies the requirement wx"></a>Could not find a version that satisfies the requirement wx</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Could not find a version that satisfies the requirement wx (from versions: none)</span><br><span class="line">ERROR: No matching distribution found for wx</span><br><span class="line">WARNING: You are using pip version 21.3.1; however, version 22.0.4 is available.</span><br><span class="line">You should consider upgrading via the &#39;E:\workspace-all\workspace-py\projects-practicing\venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.</span><br></pre></td></tr></table></figure>
+<h2 id="pycharm处理"><a href="#pycharm处理" class="headerlink" title="pycharm处理"></a>pycharm处理</h2><p>写入 import wxpython，再鼠标放上去点击install</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1335,7 +1423,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1354,7 +1442,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95/" itemprop="url">database-mysql-notes-index-覆盖索引</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-maven-jar%E5%86%B2%E7%AA%81%E5%88%86%E6%9E%90/" itemprop="url">java-maven-jar冲突分析</a></h1>
         
 
         <div class="post-meta">
@@ -1401,7 +1489,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">797</span>
               
 
               
@@ -1437,7 +1525,14 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/ptqueen/p/7985198.html" target="_blank" rel="noopener">jar冲突 maven命令分析</a></p>
+<ol>
+<li><p>用mvn dependency:tree&gt;temp/tree.txt,直接输出到当前项目下,然后在idea中打开,搜索要找的jar包名字即可.</p>
+</li>
+<li><p>用include参数<br>mvn dependency:tree -Dincludes=jline</p>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1493,7 +1588,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-index-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1512,7 +1607,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-index-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95/" itemprop="url">database-mysql-notes-index-前缀索引</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-dependency-%E4%BD%BF%E7%94%A8/" itemprop="url">java-maven-mvn-dependency-使用</a></h1>
         
 
         <div class="post-meta">
@@ -1559,7 +1654,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">50</span>
+                <span title="字数统计">3.1k</span>
               
 
               
@@ -1573,7 +1668,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -1595,7 +1690,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="依赖树"><a href="#依赖树" class="headerlink" title="依赖树"></a>依赖树</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">  &lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;maven-dependency-plugin&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;3.0.2&lt;&#x2F;version&gt; </span><br><span class="line">    &lt;executions&gt; </span><br><span class="line">      &lt;execution&gt; </span><br><span class="line">        &lt;id&gt;copy-dependencies&lt;&#x2F;id&gt; </span><br><span class="line">        &lt;phase&gt;package&lt;&#x2F;phase&gt; </span><br><span class="line">        &lt;goals&gt; </span><br><span class="line">          &lt;goal&gt;copy-dependencies&lt;&#x2F;goal&gt; </span><br><span class="line">        &lt;&#x2F;goals&gt; </span><br><span class="line">        &lt;configuration&gt; </span><br><span class="line">          &lt;!-- configure the plugin here --&gt; </span><br><span class="line">        &lt;&#x2F;configuration&gt; </span><br><span class="line">      &lt;&#x2F;execution&gt; </span><br><span class="line">    &lt;&#x2F;executions&gt; </span><br><span class="line">  &lt;&#x2F;plugin&gt; </span><br><span class="line">&lt;&#x2F;plugins&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree</span><br><span class="line">mvn dependency</span><br><span class="line">mvn dependency -X</span><br><span class="line">mvn dependency -e</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1651,7 +1748,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-bk/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1670,7 +1767,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-bk/" itemprop="url">database-mysql-notes-lock-bk</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">java-maven-mvn常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1717,7 +1814,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">212</span>
+                <span title="字数统计">2k</span>
               
 
               
@@ -1731,7 +1828,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -1753,8 +1850,26 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/lgxzzz/article/details/122368203" target="_blank" rel="noopener">https://blog.csdn.net/lgxzzz/article/details/122368203</a></p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><ol>
+<li>mvn test -Dtest=xxx：执行指定测试用例的命令，后面的xxx就是指定的所有被标记的用例</li>
+<li>mvn test -Dtest=包的路径.<em>   ，运行某个包下的所有用例（不包括子包中的用例）<br>mvn test -Dtest=com.xx.test.testCases.openApi.xxx.</em></li>
+<li>指定任何一个不同包下相同子包的所用测试用例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn test -Dtest&#x3D;包的路径.*.相同子包的路径.*</span><br><span class="line">比如：mvn test -Dtest&#x3D;com.xxx.test.testcase.*.openApi.*</span><br><span class="line">指定testcase下的所有的包中包含openApi子包下的所有用例</span><br></pre></td></tr></table></figure>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2></li>
+<li>生成idea项目结构<br>mvn  idea:idea</li>
+<li>生成eclipse项目结构<br>mvn  eclipse:eclipse</li>
+<li>编译源代码<br>mvn compile</li>
+<li>编译测试代码<br>mvn test-compile</li>
+<li>打包项目<br>mvn  package</li>
+<li>组合使用goal命令，如只打包不测试<br>mvn  -Dtest  package</li>
+<li>跳过测试进行打包<br>mvn clean package -DskipTests -Prelease</li>
+<li>在本地Repository中安装jar<br>mvn  install</li>
+<li>打成jar命令<br>mvn  jar:jar</li>
+<li>打包项目到本地仓库<br>mvn clean install -DskipTests</li>
+<li>打包项目跳过测试<br>mvn clean package <em>**</em>  -DskipTests -DskipRat</li>
+<li>查看错误的详细信息<br>mvn  -e</li>
+<li>发生jar的冲突显示冲突的原因<br>mvn  install -x</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1810,7 +1925,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1829,7 +1944,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/database-mysql-notes-lock-GET-LOCK%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0MySQL%E5%8A%A0%E9%94%81/" itemprop="url">database-mysql-notes-lock-GET-LOCK函数实现MySQL加锁</a></h1>
+                <a class="post-title-link" href="/2022/08/03/java-maven-mvn-install-X-%E7%9A%84DEBUG%E6%A8%A1%E5%BC%8F/" itemprop="url">java-maven-mvn-install-X-的DEBUG模式</a></h1>
         
 
         <div class="post-meta">
@@ -1876,7 +1991,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">185</span>
+                <span title="字数统计">2.4k</span>
               
 
               
@@ -1890,7 +2005,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -1912,7 +2027,18 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="GET-LOCK函数实现MySQL加锁"><a href="#GET-LOCK函数实现MySQL加锁" class="headerlink" title="GET_LOCK函数实现MySQL加锁"></a>GET_LOCK函数实现MySQL加锁</h1>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="直接在项目根目录下运行"><a href="#直接在项目根目录下运行" class="headerlink" title="直接在项目根目录下运行"></a>直接在项目根目录下运行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install -X</span><br></pre></td></tr></table></figure>
+<p>将输出debug内容</p>
+<h1 id="也可以在打包时DEBUG"><a href="#也可以在打包时DEBUG" class="headerlink" title="也可以在打包时DEBUG"></a>也可以在打包时DEBUG</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -X -U clean package</span><br></pre></td></tr></table></figure>
+<h1 id="is-invalid-transitive-dependencies-if-any-will-not-be-available"><a href="#is-invalid-transitive-dependencies-if-any-will-not-be-available" class="headerlink" title="is invalid, transitive dependencies (if any) will not be available"></a>is invalid, transitive dependencies (if any) will not be available</h1><p><a href="https://blog.csdn.net/u010739551/article/details/83242246" target="_blank" rel="noopener"></a><br><img src="mvn install -X 的DEBUG模式/依赖版本缺失.png" alt=""><br>比如如下场景，我有三个项目A, B, C，依赖关系如下：  </p>
+<p>假如B invalid了，那么A通过B间接依赖的C就会失效，导致A项目编译不过。</p>
+<p>问题定位<br>google了很长时间，没有在网上找到能解决我的问题的答案，那就自己动手来定位问题的原因，按照maven的提示打开debug日志，在A项目下执行如下命令：</p>
+<p> mvn -X -U clean package<br>1<br>再次查看编译日志，这时候在[WARNING] The POM for com.winwill.test:0.0.1-SNAPSHOT is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details日志的下一行会有类似如下提示：</p>
+<p>[ERROR] ‘dependencies.dependency.version’ for xxx:yyy:jar is missing. @-</p>
+<p>这是ERROR日志，感觉应该是问题的root cause，这行日志表示B项目中依赖的xxx:yyy没有指定version。</p>
+<p>在B项目中为xxx:yyy加上version之后再次编译，发现一切ok~~</p>
+<p>简单总结<br>项目中依赖其他jar时，如果不指定version，或者version在父pom中通过DependencyManagement指定但是父pom没有deploy时，可能会导致项目jar invalid。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1956,7 +2082,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
   </nav>
 
 
@@ -2003,7 +2129,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2166,7 +2292,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2249,7 +2391,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2372,7 +2520,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -2381,7 +2529,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

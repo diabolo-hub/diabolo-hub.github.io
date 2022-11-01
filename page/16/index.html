@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-7-%E6%98%A0%E5%B0%84%E7%BB%84%E5%90%88%EF%BC%88%E5%AE%9E%E9%AA%8C%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%B7%B2%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC%E5%92%8C%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-7-%E6%98%A0%E5%B0%84%E7%BB%84%E5%90%88%EF%BC%88%E5%AE%9E%E9%AA%8C%EF%BC%89/" itemprop="url">映射组合（实验）</a></h1>
+                <a class="post-title-link" href="/2022/07/10/npm-%E6%9F%A5%E7%9C%8Bnpm%E5%B7%B2%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%89%88%E6%9C%AC%E5%92%8C%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC/" itemprop="url">查看npm已安装包的版本和最新版本</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -429,14 +429,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/npm/" itemprop="url" rel="index"><span itemprop="name">npm</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/npm/nodejs/" itemprop="url" rel="index"><span itemprop="name">nodejs</span></a></span>
 
                 
                 
@@ -464,7 +464,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">3.2k</span>
               
 
               
@@ -500,13 +500,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="映射组合（实验）"><a href="#映射组合（实验）" class="headerlink" title="映射组合（实验）"></a>映射组合（实验）</h1><h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.CLASS)</span><br><span class="line">@Mapping(target &#x3D; &quot;id&quot;, ignore &#x3D; true)</span><br><span class="line">@Mapping(target &#x3D; &quot;creationDate&quot;, expression &#x3D; &quot;java(new java.util.Date())&quot;)</span><br><span class="line">@Mapping(target &#x3D; &quot;name&quot;, source &#x3D; &quot;groupName&quot;)</span><br><span class="line">public @interface ToEntity &#123; &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface StorageMapper &#123;</span><br><span class="line"></span><br><span class="line">    StorageMapper INSTANCE &#x3D; Mappers.getMapper( StorageMapper.class );</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;weightLimit&quot;, source &#x3D; &quot;maxWeight&quot;)</span><br><span class="line">    ShelveEntity map(ShelveDto source);</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;label&quot;, source &#x3D; &quot;designation&quot;)</span><br><span class="line">    BoxEntity map(BoxDto source);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>此功能仍处于试验阶段。错误信息还不成熟：显示问题发生的方法，以及@Mapping注解中的相关值。<br>但是，构图方面是不可见的。消息“好像”@Mapping会直接出现在相关方法上。<br>因此，用户应谨慎使用此功能，尤其是在不确定某个属性是否始终存在时。</p>
-<blockquote>
-<p>字段必须都存在才能使用</p>
-</blockquote>
-
+            <script src="/assets/js/APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">E:\workspace-all\workspace-github\blog-projects\diabolo-hub-source-code&gt;npm outdated</span><br><span class="line">Package                       Current  Wanted  Latest  Location</span><br><span class="line">aplayer                         1.6.0  1.10.1  1.10.1  hexo-site</span><br><span class="line">hexo                            3.9.0   3.9.0   6.0.0  hexo-site</span><br><span class="line">hexo-algolia                    1.2.4   1.3.2   1.3.2  hexo-site</span><br><span class="line">hexo-deployer-git               0.3.1   0.3.1   3.0.0  hexo-site</span><br><span class="line">hexo-generator-archive          0.1.5   0.1.5   1.0.0  hexo-site</span><br><span class="line">hexo-generator-baidu-sitemap    0.1.2   0.1.9   0.1.9  hexo-site</span><br><span class="line">hexo-generator-category         0.1.3   0.1.3   1.0.0  hexo-site</span><br><span class="line">hexo-generator-feed             1.2.2   1.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-generator-index            0.2.1   0.2.1   2.0.0  hexo-site</span><br><span class="line">hexo-generator-sitemap          1.2.0   1.2.0   2.2.0  hexo-site</span><br><span class="line">hexo-generator-tag              0.2.0   0.2.0   1.0.0  hexo-site</span><br><span class="line">hexo-renderer-ejs               0.3.1   0.3.1   2.0.0  hexo-site</span><br><span class="line">hexo-renderer-marked            0.3.0   0.3.2   5.0.0  hexo-site</span><br><span class="line">hexo-renderer-stylus            0.3.3   0.3.3   2.0.1  hexo-site</span><br><span class="line">hexo-server                     0.2.2   0.2.2   3.0.0  hexo-site</span><br><span class="line">hexo-tag-aplayer                2.0.7   2.0.7   3.0.4  hexo-site</span><br><span class="line">hexo-wordcount                  3.0.2   3.0.2   6.0.1  hexo-site</span><br><span class="line">uglify-js                       3.3.4  3.15.2  3.15.2  hexo-site</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -562,7 +557,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-9-%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-10-redis-cluster%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -581,7 +576,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-9-%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/" itemprop="url">具有多个源参数的映射方法</a></h1>
+                <a class="post-title-link" href="/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-10-redis-cluster%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">redis cluster常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -597,7 +592,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -618,14 +613,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/redis%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">redis命令</span></a></span>
 
                 
                 
@@ -653,7 +648,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">649</span>
               
 
               
@@ -689,8 +684,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="具有多个源参数的映射方法"><a href="#具有多个源参数的映射方法" class="headerlink" title="具有多个源参数的映射方法"></a>具有多个源参数的映射方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface AddressMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(target &#x3D; &quot;description&quot;, source &#x3D; &quot;person.description&quot;)</span><br><span class="line">    @Mapping(target &#x3D; &quot;houseNumber&quot;, source &#x3D; &quot;address.houseNo&quot;)</span><br><span class="line">    DeliveryAddressDto personAndAddressToDeliveryAddressDto(Person person, Address address);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/zhoujinyi/p/11606935.html" target="_blank" rel="noopener">Redis 5.0 redis-cli –cluster help说明</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -746,7 +741,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-1%E3%80%81String%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -765,7 +760,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/" itemprop="url">向映射器添加自定义方法</a></h1>
+                <a class="post-title-link" href="/2022/07/10/redis-redis%E5%91%BD%E4%BB%A4-1%E3%80%81String%E5%91%BD%E4%BB%A4/" itemprop="url">String命令</a></h1>
         
 
         <div class="post-meta">
@@ -781,382 +776,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="向映射器添加自定义方法"><a href="#向映射器添加自定义方法" class="headerlink" title="向映射器添加自定义方法"></a>向映射器添加自定义方法</h1><h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    default PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public abstract class CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(...)</span><br><span class="line">    ...</span><br><span class="line">    public abstract CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    public PersonDto personToPersonDto(Person person) &#123;</span><br><span class="line">        &#x2F;&#x2F;hand-written mapping logic</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在转换 Car -&gt; CarDto 时，会自动将Car中的Person转换（通过寻找本类中的 personToPersonDto 实现转换）</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-4-uses%E4%BB%8B%E7%BB%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-4-uses%E4%BB%8B%E7%BB%8D/" itemprop="url">uses介绍</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="mapStruct-uses"><a href="#mapStruct-uses" class="headerlink" title="mapStruct uses"></a>mapStruct uses</h1><p>查看demo <a href="./4-mapStruct%20uses%20demo"></a></p>
-<h2 id="mapper类如下"><a href="#mapper类如下" class="headerlink" title="mapper类如下"></a>mapper类如下</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span>( uses = IterableNonInterableUtil<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">SourceTargetMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    SourceTargetMapper MAPPER = Mappers.getMapper( SourceTargetMapper<span class="class">.<span class="keyword">class</span> )</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Mapping</span>( source = <span class="string">"myIntegers"</span>, target = <span class="string">"myInteger"</span>, qualifiedBy = FirstElement<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">    @<span class="title">Mapping</span>( <span class="title">source</span> </span>= <span class="string">"myStrings"</span>, target = <span class="string">"myString"</span>, qualifiedBy = LastElement<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">    <span class="title">Target</span> <span class="title">toTarget</span>( <span class="title">Source</span> <span class="title">s</span> )</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IterableNonInterableUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@FirstElement</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">first</span><span class="params">( List&lt;T&gt; in )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( in != <span class="keyword">null</span> &amp;&amp; !in.isEmpty() ) &#123;</span><br><span class="line">            <span class="keyword">return</span> in.get( <span class="number">0</span> );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LastElement</span></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">last</span><span class="params">( List&lt;T&gt; in )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ( in != <span class="keyword">null</span> &amp;&amp; !in.isEmpty() ) &#123;</span><br><span class="line">            <span class="keyword">return</span> in.get( in.size() - <span class="number">1</span> );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>我们使用了 uses 之后，表示此mapper中所有的字段转换，只要满足 IterableNonInterableUtil.class 中的first和last方法，<br>那么在其实现类生成中，都会优先使用 IterableNonInterableUtil.classs 中的方法</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/28/redis-notes-3-redis%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF%E6%98%AF%E7%94%A8hash%E8%BF%98%E6%98%AFstring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/28/redis-notes-3-redis%E5%AD%98%E5%82%A8%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF%E6%98%AF%E7%94%A8hash%E8%BF%98%E6%98%AFstring/" itemprop="url">redis存储对象信息是用hash还是string</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-28T00:00:00+08:00">2022-06-28</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -1184,7 +804,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/redis%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">redis命令</span></a></span>
 
                 
                 
@@ -1212,7 +832,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">673</span>
+                <span title="字数统计">635</span>
               
 
               
@@ -1248,10 +868,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="redis存储对象信息是用hash还是string"><a href="#redis存储对象信息是用hash还是string" class="headerlink" title="redis存储对象信息是用hash还是string"></a>redis存储对象信息是用hash还是string</h1><p>建议是大部分情况下使用 string 存储就好，毕竟在存储具有多层嵌套的对象时方便很多，占用的空间也比 Hash 小。当我们需要存储一个特别大的对象时，而且在大多数情况中只需要访问该对象少量的字段时，可以考虑使用 Hash。</p>
-<h2 id="适合用-string-存储的情况："><a href="#适合用-string-存储的情况：" class="headerlink" title="适合用 string 存储的情况："></a>适合用 string 存储的情况：</h2><p>每次需要访问大量的字段<br>存储的结构具有多层嵌套的时候</p>
-<h2 id="适合用-hash-存储的情况："><a href="#适合用-hash-存储的情况：" class="headerlink" title="适合用 hash 存储的情况："></a>适合用 hash 存储的情况：</h2><p>在大多数情况中只需要访问少量字段<br>自己始终知道哪些字段可用，防止使用 mget 时获取不到想要的数据</p>
-
+            <script src="/assets/js/APlayer.min.js"> </script><p>1、常用命令：<br>set、get、decr、incr、mget 等。<br>value其实不仅仅可以是String，也可以是 数字<br>应用场景：<br>a、常规key-value缓存应用；b、常规计数：微博数，粉丝数等。  </p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1307,7 +925,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-oracle-%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%BC%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1326,7 +944,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/25/redis-notes-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%9F%A5%E8%AF%A2%E4%B8%8D%E5%88%B0redis%E4%B8%AD%E7%9A%84KEY/" itemprop="url">为什么通过命令行查询不到redis中的KEY</a></h1>
+                <a class="post-title-link" href="/2022/07/10/database-oracle-%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%BC%E8%BF%B0/" itemprop="url">database-oracle-基础教程-数据库综述</a></h1>
         
 
         <div class="post-meta">
@@ -1342,7 +960,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-25T00:00:00+08:00">2022-05-25</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -1351,31 +969,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1398,7 +991,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.3k</span>
+                <span title="字数统计">767</span>
               
 
               
@@ -1412,7 +1005,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1434,12 +1027,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/w8y56f/article/details/120225410" target="_blank" rel="noopener">为什么通过命令行查不到redis中的key</a></p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>RedisTemplate都没有特别配置序列化器，在执行后，使用命令行连上redis，执行keys my_key<em>，发现只有第二个key存在，第一个消失了，但是代码执行后是能够取到值的。这是为什么？<br>是因为命令行的工具有bug吗？不是的。使用 keys </em>my_key*，就可以显示两个key都存在。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>为什么key 前面没有奇怪的符号，因为Spring 在遇到 <String, String> 泛型的时候注入的不是 RedisTemplate 类，而是 StringRedisTemplate 类，而后者的所有序列化器都是 String的序列化器(StringRedisSerializer)，所以就很正常了。</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) &#123;</span><br><span class="line">        RedisTemplate template &#x3D; new RedisTemplate();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line">         &#x2F;&#x2F;建议设置一下 key 和 hash key 的序列化器为String序列化器，这样可读性才强，debug的时候才好发现，另外不需要重复 new StringRedisSerializer()，共用即可，线程安全</span><br><span class="line">        RedisSerializer&lt;String&gt; stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        template.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        return template;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+            <script src="/assets/js/APlayer.min.js"> </script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1495,7 +1084,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/25/redis-notes-1-%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-mongodb-mongodb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1514,7 +1103,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/25/redis-notes-1-%E5%BA%8F%E5%88%97%E5%8C%96/" itemprop="url">redis序列化</a></h1>
+                <a class="post-title-link" href="/2022/07/10/database-mongodb-mongodb/" itemprop="url">database-mongodb-mongodb</a></h1>
         
 
         <div class="post-meta">
@@ -1530,7 +1119,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-25T00:00:00+08:00">2022-05-25</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -1539,31 +1128,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1586,7 +1150,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.8k</span>
+                <span title="字数统计">511</span>
               
 
               
@@ -1600,7 +1164,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -1622,20 +1186,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/leilei1366615/article/details/122204776" target="_blank" rel="noopener">Redis 序列化 GenericJackson2JsonRedisSerializer和Jackson2JsonRedisSerializer的区别</a></p>
-<h1 id="KEY序列化和Val序列化"><a href="#KEY序列化和Val序列化" class="headerlink" title="KEY序列化和Val序列化"></a>KEY序列化和Val序列化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;**</span><br><span class="line">     * 实例化 RedisTemplate 对象</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Bean</span><br><span class="line">    public RedisTemplate&lt;String, Object&gt; functionDomainRedisTemplate(RedisConnectionFactory factory) &#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; redisTemplate &#x3D; new RedisTemplate&lt;&gt;();</span><br><span class="line">        StringRedisSerializer stringRedisSerializer &#x3D; new StringRedisSerializer();</span><br><span class="line">        &#x2F;&#x2F; key 都使用String 序列化方式</span><br><span class="line">        redisTemplate.setKeySerializer(stringRedisSerializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(stringRedisSerializer);</span><br><span class="line">        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer &#x3D; new GenericJackson2JsonRedisSerializer();</span><br><span class="line">&#x2F;&#x2F;        Jackson2JsonRedisSerializer&lt;Object&gt; jackson2JsonRedisSerializer &#x3D; new Jackson2JsonRedisSerializer&lt;&gt;(Object.class);</span><br><span class="line">        redisTemplate.setHashValueSerializer(genericJackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setValueSerializer(genericJackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setConnectionFactory(factory);</span><br><span class="line">        return redisTemplate;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="GenericJackson2JsonRedisSerializer"><a href="#GenericJackson2JsonRedisSerializer" class="headerlink" title="GenericJackson2JsonRedisSerializer"></a>GenericJackson2JsonRedisSerializer</h2><p>GenericJackson2JsonRedisSerializer序列化时，会保存序列化的对象的完全限定名，从redis获取数据时即可直接反序列化成指定的对象</p>
-<ol>
-<li>结论：GenericJackson2JsonRedisSerializer 序列化方式 可直接存储VALUE为对象,且从Redis获取可进行强转</li>
-<li>结论：GenericJackson2JsonRedisSerializer 序列化方式 可直接存储VALUE为JSON字符串形式,且从Redis获取后不可进行强转，需要将结果转为字符串，再将JSON字符串转为自己需要的对象或对象集合</li>
-<li>结论: 使用GenericJackson2JsonRedisSerializer 序列化进行管道操作后，实体类@class属性会丢失，再次从redis获取数据将无法成功反序列化</li>
-</ol>
-<h2 id="Jackson2JsonRedisSerializer"><a href="#Jackson2JsonRedisSerializer" class="headerlink" title="Jackson2JsonRedisSerializer"></a>Jackson2JsonRedisSerializer</h2><ol>
-<li>结论：Jackson2JsonRedisSerializer序列化方式，如VALUE直接存对象或者对象集合，获取时结果为LinkedHashMap,无法直接使用JDK强转方法转为对象或对象集合，需借助工具进行转换为实体与实体集合</li>
-<li>结论:Jackson2JsonRedisSerializer序列化方式，VALUE存JSON字符串时，取值也为JSON字符串,需借助JSON工具进行转换为实体类或实体集合</li>
-<li>结论：Jackson2JsonRedisSerializer 序列化方式，且使用管道操作后，获取的值也是一个linkedHashMap,需借助工具才可将值反序列化为实体对象或实体对象集合</li>
-</ol>
-
+            <script src="/assets/js/APlayer.min.js"> </script><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1691,7 +1242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-mongodb-mongodb%E6%A6%82%E4%BB%8B-RDBMS-vs-NoSQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1710,7 +1261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/10/tool-windows-%E7%BD%91%E7%BB%9C-1-netsh%E5%91%BD%E4%BB%A4%E5%AE%9E%E7%8E%B0%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E7%9A%84%E6%B7%BB%E5%8A%A0%E5%88%A0%E9%99%A4/" itemprop="url">netsh命令实现端口转发的添加删除</a></h1>
+                <a class="post-title-link" href="/2022/07/10/database-mongodb-mongodb%E6%A6%82%E4%BB%8B-RDBMS-vs-NoSQL/" itemprop="url">database-mongodb-mongodb概介-RDBMS-vs-NoSQL</a></h1>
         
 
         <div class="post-meta">
@@ -1726,7 +1277,673 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-10T00:00:00+08:00">2022-05-10</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.runoob.com/mongodb/nosql.html" target="_blank" rel="noopener">NoSQL简介、CAP介绍</a></p>
+<h1 id="RDBMS"><a href="#RDBMS" class="headerlink" title="RDBMS"></a>RDBMS</h1><ul>
+<li>高度组织化结构化数据</li>
+<li>结构化查询语言（SQL） (SQL)</li>
+<li>数据和关系都存储在单独的表中。</li>
+<li>数据操纵语言，数据定义语言</li>
+<li>严格的一致性</li>
+<li>基础事务</li>
+</ul>
+<h1 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h1><ul>
+<li>代表着不仅仅是SQL</li>
+<li>没有声明性查询语言</li>
+<li>没有预定义的模式<br>-键 - 值对存储，列存储，文档存储，图形数据库</li>
+<li>最终一致性，而非ACID属性</li>
+<li>非结构化和不可预知的数据</li>
+<li>CAP定理</li>
+<li>高性能，高可用性和可伸缩性</li>
+</ul>
+<h1 id="NoSQL的优点-缺点"><a href="#NoSQL的优点-缺点" class="headerlink" title="NoSQL的优点/缺点"></a>NoSQL的优点/缺点</h1><p>  优点:</p>
+<ul>
+<li>高可扩展性</li>
+<li>分布式计算</li>
+<li>低成本</li>
+<li>架构的灵活性，半结构化数据</li>
+<li><p>没有复杂的关系<br>缺点:</p>
+</li>
+<li><p>没有标准化</p>
+</li>
+<li>有限的查询功能（到目前为止）</li>
+<li>最终一致是不直观的程序</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-hbase-hbase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/database-hbase-hbase/" itemprop="url">database-hbase-hbase</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">511</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-jdbc-1-Sharding-JDBC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/database-jdbc-1-Sharding-JDBC/" itemprop="url">database-jdbc-1-Sharding-JDBC</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">745</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/yixinjishu/p/10876071.html" target="_blank" rel="noopener">Sharding-JDBC 使用入门和基本配置</a></p>
+<p><a href="https://www.jianshu.com/p/60960deed354" target="_blank" rel="noopener">Sharding-JDBC简介</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-hbase-%E9%9D%A2%E8%AF%95%E9%A2%98-1-hbase%E9%9D%A2%E8%AF%95%E9%A2%981/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/database-hbase-%E9%9D%A2%E8%AF%95%E9%A2%98-1-hbase%E9%9D%A2%E8%AF%95%E9%A2%981/" itemprop="url">database-hbase-面试题-1-hbase面试题1</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">626</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/bigdata-stone/p/9374751.html" target="_blank" rel="noopener">Hbase面试题1</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/log4j2-1-sql%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E6%8E%A7%E5%88%B6%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/29/log4j2-1-sql%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E6%8E%A7%E5%88%B6%E5%8F%B0/" itemprop="url">sql日志打印到指定文件或控制台</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
             
 
             
@@ -1747,14 +1964,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/win/" itemprop="url" rel="index"><span itemprop="name">win</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">log</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/win/net/" itemprop="url" rel="index"><span itemprop="name">net</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/log/log4j2/" itemprop="url" rel="index"><span itemprop="name">log4j2</span></a></span>
 
                 
                 
@@ -1782,7 +1999,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.3k</span>
+                <span title="字数统计">11k</span>
               
 
               
@@ -1796,7 +2013,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">11 mins.</span>
               
             </div>
           
@@ -1819,425 +2036,16 @@
         
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
-<pre><code>【windows10】netsh命令实现端口转发的添加删除以及查看: https://blog.csdn.net/jn10010537/article/details/122715645
+<pre><code>（控制台或者日志文件二选一）mybatis设置sql语句打印在控制台或者日志文件中: https://blog.csdn.net/weixin_42585386/article/details/117328488
 </code></pre><hr>
-<h1 id="netsh命令实现端口转发的添加删除"><a href="#netsh命令实现端口转发的添加删除" class="headerlink" title="netsh命令实现端口转发的添加删除"></a>netsh命令实现端口转发的添加删除</h1><p>netsh(Network Shell)是⼀个windows系统本⾝提供的功能强⼤的⽹络配置命令⾏⼯具  </p>
+<h1 id="打印至控制台"><a href="#打印至控制台" class="headerlink" title="打印至控制台"></a>打印至控制台</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#************mybatis  Begin****************</span><br><span class="line">mybatis.mapper-locations&#x3D;classpath*:mappers&#x2F;**&#x2F;*.xml</span><br><span class="line">mybatis.type-aliases-package&#x3D;com.cic.irc.invoice.repository.dataobject</span><br><span class="line"># 打印DEBUG的sql日至至控制台</span><br><span class="line">mybatis.configuration.log-impl&#x3D;org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
+<h1 id="打印到指定文件"><a href="#打印到指定文件" class="headerlink" title="打印到指定文件"></a>打印到指定文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!--configuration status与monitorInterval采用默认值 --&gt;</span><br><span class="line">&lt;Configuration&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;!-- 这里的app_name改为对应子域的名称 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;app_name&quot;&gt;应用名&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_root&quot;&gt;.&#x2F;logs&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_level&quot;&gt;INFO&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;db_log_level&quot;&gt;TRACE&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--定义appender --&gt;</span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;!--输出控制台的配置 --&gt;</span><br><span class="line">        &lt;Console name&#x3D;&quot;STDOUT-APPENDER&quot; target&#x3D;&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台输出日志格式--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;$&#123;LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS&#125;&#125; $&#123;LOG_LEVEL_PATTERN:-%5p&#125; %processId -&amp;#45;&amp;#45; [%15.15t] %-40.40logger&#123;39&#125; : %m%n$&#123;LOG_EXCEPTION_CONVERSION_WORD:-%wEx&#125;&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Console name&#x3D;&quot;STDERR-APPENDER&quot; target&#x3D;&quot;SYSTEM_ERR&quot;&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：错误节点日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;ERROR-APPENDER&quot; fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error-%d&#123;yyyy-MM-dd&#125;.log&quot; append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">            &lt;ThresholdFilter level&#x3D;&quot;ERROR&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：SQL日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;SQL-APPENDER&quot;</span><br><span class="line">                     fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql-%d&#123;yyyy-MM-dd&#125;.log&quot;</span><br><span class="line">                     append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDOUT&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDERR&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDERR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;cn.cic.irc.cc.infrastructure.repository.mapper&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;db_log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;appender-ref ref&#x3D;&quot;SQL-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;!-- 虽然此处写了控制台日志打印，但是控制台和文件只能2选1--&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncRoot level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncRoot&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Loggers&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;Configuration&gt;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>查看端口映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show v4tov4</span><br></pre></td></tr></table></figure>
-或<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure></li>
-<li>删除所有已经有的转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy reset</span><br></pre></td></tr></table></figure></li>
-<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
-<li>删除转发<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy delete v4tov4 listenaddress&#x3D;0.0.0.0 listenport&#x3D;8081</span><br></pre></td></tr></table></figure></li>
-<li>判断⼀个端⼝是否开启<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano -p tcp | findstr &quot;7778&quot; &gt;nul 2&gt;nul &amp;&amp; echo 7778端⼝已开启 || echo 7778端⼝未开启</span><br></pre></td></tr></table></figure>
-</li>
+<li>SQL-APPENDER 的异步日志即为sql日志</li>
+<li>控制台和文件日志只能2选1</li>
+<li>如果在springboot的application.properties中添加了 “mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl” 配置，那么日志只会打印在控制台中，删除后则会打印在指定文件</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-0-Deployment%E5%92%8CPod%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-0-Deployment%E5%92%8CPod%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">yaml定义Pod详解</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">700</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h1><ol>
-<li>pod是最小的单元</li>
-<li>Pod标示的是一个部署单元，可以理解为k8s中的应用程序的单个实例，可能由单个容器组成，也可能由少量紧密耦合并共享资源的容器组成</li>
-</ol>
-<h1 id="Pod相关"><a href="#Pod相关" class="headerlink" title="Pod相关"></a>Pod相关</h1><ol>
-<li>多个容器在同一个Pod下，他们共用一个IP，所以端口不能重复</li>
-<li>一个Pod下的多个容器可以使用localhost来访问对方的端口</li>
-<li>因为Pod是最小的单元，如果在Pod中容器出现异常终止了，是不会重启；在实际中，不会直接使用Pod，而是使用Deployment部署自己的应用</li>
-</ol>
-<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><ol>
-<li>Deployment拥有更加灵活强大的升级、回滚功能,并且支持滚动更新</li>
-<li>使用Deployment升级Pod只需要定义Pod的最终状态，k8s会为你执行必要的操作(RC要自己定义如何操作)</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-1-Deployment-%E5%AE%9E%E8%B7%B5-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-1-Deployment-%E5%AE%9E%E8%B7%B5-1/" itemprop="url">Deployment 实践-1</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">10k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">10 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.psvmc.cn/article/2021-02-27-kubernetes-start-3-kind.html" target="_blank" rel="noopener">Deployment 实践</a></p>
-<p>首先配置好 Deployment 的配置文件（这里用的是 nginx 镜像）</p>
-<h1 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;home&#x2F;k8s</span><br><span class="line">cd &#x2F;home&#x2F;k8s</span><br><span class="line">vi app.yaml</span><br></pre></td></tr></table></figure>
-<h2 id="app-yaml"><a href="#app-yaml" class="headerlink" title="[ app.yaml ]"></a>[ app.yaml ]</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps&#x2F;v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: web</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: web</span><br><span class="line">  replicas: 1</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: web</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: web</span><br><span class="line">        image: nginx</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br></pre></td></tr></table></figure>
-<h1 id="通过-kubectl-命令创建服务"><a href="#通过-kubectl-命令创建服务" class="headerlink" title="通过 kubectl 命令创建服务"></a>通过 kubectl 命令创建服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f app.yaml</span><br></pre></td></tr></table></figure>
-<h1 id="等待一会后，查看-Pod-调度、运行情况。"><a href="#等待一会后，查看-Pod-调度、运行情况。" class="headerlink" title="等待一会后，查看 Pod 调度、运行情况。"></a>等待一会后，查看 Pod 调度、运行情况。</h1><p>我看可以看到 Pod 的名字、运行状态、Pod 的 ip、还有所在Node的名字等信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl get Pods -o wide</span><br><span class="line">NAME                   READY   STATUS    RESTARTS   AGE   IP           NODE                       NOMINATED NODE   READINESS GATES</span><br><span class="line">web-76d9ff54d5-mddws   1&#x2F;1     Running   0          16m   10.244.0.5   wsl2-k8s-1-control-plane   &lt;none&gt;           &lt;none&gt;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>启动成功 READY 的状态会是1/1；刚开始是0/1，启动之后是1/1</p>
-<h2 id="通过-kubectl-get-pod-也可以查看pod运行状态"><a href="#通过-kubectl-get-pod-也可以查看pod运行状态" class="headerlink" title="通过 kubectl get pod  也可以查看pod运行状态"></a>通过 kubectl get pod  也可以查看pod运行状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl get pod</span><br><span class="line">NAME                   READY   STATUS    RESTARTS   AGE</span><br><span class="line">web-76d9ff54d5-mddws   1&#x2F;1     Running   0          16m</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h2 id="如果不是，查看pod启动失败的原因"><a href="#如果不是，查看pod启动失败的原因" class="headerlink" title="如果不是，查看pod启动失败的原因"></a>如果不是，查看pod启动失败的原因</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod web</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">root@LAPTOP-BKST47D9:&#x2F;home&#x2F;k8s# kubectl describe pod web</span><br><span class="line">Name:           web-76d9ff54d5-mddws</span><br><span class="line">Namespace:      default</span><br><span class="line">Priority:       0</span><br><span class="line">Node:           wsl2-k8s-1-control-plane&#x2F;172.18.0.2</span><br><span class="line">Start Time:     Fri, 23 Jul 2021 10:05:42 +0800</span><br><span class="line">Labels:         app&#x3D;web</span><br><span class="line">                pod-template-hash&#x3D;76d9ff54d5</span><br><span class="line">Annotations:    &lt;none&gt;</span><br><span class="line">Status:         Pending</span><br><span class="line">IP:</span><br><span class="line">IPs:            &lt;none&gt;</span><br><span class="line">Controlled By:  ReplicaSet&#x2F;web-76d9ff54d5</span><br><span class="line">Containers:</span><br><span class="line">  web:</span><br><span class="line">    Container ID:</span><br><span class="line">    Image:          nginx</span><br><span class="line">    Image ID:</span><br><span class="line">    Port:           80&#x2F;TCP</span><br><span class="line">    Host Port:      0&#x2F;TCP</span><br><span class="line">    State:          Waiting</span><br><span class="line">      Reason:       ContainerCreating</span><br><span class="line">    Ready:          False</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    &lt;none&gt;</span><br><span class="line">    Mounts:</span><br><span class="line">      &#x2F;var&#x2F;run&#x2F;secrets&#x2F;kubernetes.io&#x2F;serviceaccount from kube-api-access-6z9fs (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type              Status</span><br><span class="line">  Initialized       True</span><br><span class="line">  Ready             False</span><br><span class="line">  ContainersReady   False</span><br><span class="line">  PodScheduled      True</span><br><span class="line">Volumes:</span><br><span class="line">  kube-api-access-6z9fs:</span><br><span class="line">    Type:                    Projected (a volume that contains injected data from multiple sources)</span><br><span class="line">    TokenExpirationSeconds:  3607</span><br><span class="line">    ConfigMapName:           kube-root-ca.crt</span><br><span class="line">    ConfigMapOptional:       &lt;nil&gt;</span><br><span class="line">    DownwardAPI:             true</span><br><span class="line">QoS Class:                   BestEffort</span><br><span class="line">Node-Selectors:              &lt;none&gt;</span><br><span class="line">Tolerations:                 node.kubernetes.io&#x2F;not-ready:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">                             node.kubernetes.io&#x2F;unreachable:NoExecute op&#x3D;Exists for 300s</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason     Age   From               Message</span><br><span class="line">  ----    ------     ----  ----               -------</span><br><span class="line">  Normal  Scheduled  60s   default-scheduler  Successfully assigned default&#x2F;web-76d9ff54d5-mddws to wsl2-k8s-1-control-plane</span><br><span class="line">  Normal  Pulling    58s   kubelet            Pulling image &quot;nginx&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete -f app.yaml</span><br></pre></td></tr></table></figure>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -2281,7 +2089,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><a class="extend next" rel="next" href="/page/17/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/15/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/17/">下一页</a>
   </nav>
 
 
@@ -2328,7 +2136,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2491,7 +2299,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2574,7 +2398,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2697,7 +2527,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -2706,7 +2536,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

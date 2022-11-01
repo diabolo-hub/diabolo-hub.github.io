@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.6k</span>
+                <span title="字数统计">2k</span>
               
 
               
@@ -511,7 +511,7 @@
       
         <script src="/assets/js/APlayer.min.js"> </script><h1 id="Dockerfiler如何使用多个CMD命令"><a href="#Dockerfiler如何使用多个CMD命令" class="headerlink" title="Dockerfiler如何使用多个CMD命令"></a>Dockerfiler如何使用多个CMD命令</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>一个是CMD不用中括号框起来，将命令用”&amp;&amp;”符号链接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 用nohup框起来，不然npm start执行了之后不会执行后面的</span><br><span class="line">CMD nohup sh -c &#39;npm start &amp;&amp; node .&#x2F;server&#x2F;server.js&#39;</span><br></pre></td></tr></table></figure></p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>不用CMD，用ENTRYPOINT命令，指定一个执行的shell脚本，然后在entrypoint.sh文件中写上要执行的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;.&#x2F;entrypoint.sh&quot;]</span><br></pre></td></tr></table></figure><br>entrypoint.sh文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; entrypoint.sh</span><br><span class="line">nohup npm start &amp;</span><br><span class="line"></span><br><span class="line">nohup node .&#x2F;server&#x2F;server.js &amp;</span><br></pre></td></tr></table></figure></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -552,8 +552,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/09/26/depth-docker-compose-yml-%E4%BB%8B%E7%BB%8D-20220927-network/" rel="next" title="network">
-                <i class="fa fa-chevron-left"></i> network
+              <a href="/2022/09/26/depth-docker-compose-yml-%E4%BB%8B%E7%BB%8D-20220927-services/" rel="next" title="services">
+                <i class="fa fa-chevron-left"></i> services
               </a>
             
           </div>
@@ -673,7 +673,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -836,7 +836,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -919,7 +935,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1058,7 +1080,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1067,7 +1089,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 

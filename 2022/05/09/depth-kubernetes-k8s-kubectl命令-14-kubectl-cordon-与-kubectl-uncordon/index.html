@@ -475,7 +475,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">5.4k</span>
+                <span title="字数统计">5.8k</span>
               
 
               
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 mins.</span>
+                <span title="阅读时长">6 mins.</span>
               
             </div>
           
@@ -513,7 +513,7 @@
 <p>执行scale命令，再次执行横向扩展命令，看是否会有pod漂到node2这台机器上，结果发现只有之前的一个pod，再没有新的pod漂过去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS                     AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready                      1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready,SchedulingDisabled   1d        &lt;none&gt;</span><br><span class="line">[root@master ~]# kubectl scale --replicas&#x3D;6 deployment&#x2F;mysql</span><br><span class="line">deployment &quot;mysql&quot; scaledMySQL的6个副本全部运行在node-1</span><br><span class="line">[root@master ~]# kubectl get pod -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   1          4h        10.255.18.2   192.168.10.8</span><br><span class="line">mysql-3013141301-5679l   1&#x2F;1       Running   0          19s       10.255.18.8   192.168.10.8</span><br><span class="line">mysql-3013141301-9736f   1&#x2F;1       Running   0          19s       10.255.18.7   192.168.10.8</span><br><span class="line">mysql-3013141301-d0lgh   1&#x2F;1       Running   0          19s       10.255.18.4   192.168.10.8</span><br><span class="line">mysql-3013141301-kgtrz   1&#x2F;1       Running   0          19s       10.255.18.6   192.168.10.8</span><br><span class="line">mysql-3013141301-qst0p   1&#x2F;1       Running   0          19s       10.255.18.5   192.168.10.8</span><br><span class="line">nginx-1011335894-4ngml   1&#x2F;1       Running   2          3h        10.255.94.2   192.168.10.9</span><br><span class="line">nginx-1011335894-lhm28   1&#x2F;1       Running   0          28m       10.255.18.3   192.168.10.8</span><br><span class="line">nginx-1011335894-xtmbb   1&#x2F;1       Running   0          28m       10.255.94.3   192.168.10.9</span><br></pre></td></tr></table></figure></p>
 <p>执行uncordon解除封锁命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl uncordon 192.168.10.9</span><br><span class="line">node &quot;192.168.10.9&quot; uncordoned</span><br></pre></td></tr></table></figure></p>
 <p>使用uncordon命令解除对node2机器的限制，通过get node确认状态也已经正常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS    AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready     1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready     1d        &lt;none&gt;</span><br></pre></td></tr></table></figure></p>
-
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
     
@@ -675,7 +675,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">385</span>
+                    <span class="site-state-item-count">403</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -838,7 +838,23 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -921,7 +937,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">35</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1060,7 +1082,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">392k</span>
+    <span title="站点总字数">415k</span>
   
 
   
@@ -1069,7 +1091,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:32</span>
+    <span title="站点总阅读时长">6:55</span>
   
 </div>
 
