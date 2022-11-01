@@ -373,6 +373,582 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-5-kubectl-exec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-5-kubectl-exec/" itemprop="url">5-kubectl exec</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="通过bash获得-pod-中某个容器的TTY，相当于登录容器"><a href="#通过bash获得-pod-中某个容器的TTY，相当于登录容器" class="headerlink" title="通过bash获得 pod 中某个容器的TTY，相当于登录容器"></a>通过bash获得 pod 中某个容器的TTY，相当于登录容器</h1><p>kubectl exec -it <pod-name> -n <ns-name> bash</p>
+<h1 id="kubectl-exec-在pod中执行一条命令"><a href="#kubectl-exec-在pod中执行一条命令" class="headerlink" title="kubectl exec 在pod中执行一条命令"></a>kubectl exec 在pod中执行一条命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x ls &#x2F;</span><br><span class="line">bin                etc             lib64          proc    sys</span><br><span class="line">boot                healthcheck.cnf  media          root    tmp</span><br><span class="line">dev                healthcheck.sh   mnt          run    usr</span><br><span class="line">docker-entrypoint-initdb.d  home         mysql-init-complete  sbin    var</span><br><span class="line">entrypoint.sh            lib             opt          srv#进入容器环境</span><br><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x &#x2F;bin&#x2F;bash</span><br><span class="line">bash-4.2# ls  </span><br><span class="line">bin   dev              entrypoint.sh  healthcheck.cnf  home    lib64  mnt            opt   root    sbin  sys  usr</span><br><span class="line">boot  docker-entrypoint-initdb.d  etc         healthcheck.sh   lib    media  mysql-init-complete  proc  run    srv   tmp  var</span><br></pre></td></tr></table></figure>
+<h1 id="进入指定Pod"><a href="#进入指定Pod" class="headerlink" title="进入指定Pod"></a>进入指定Pod</h1><p>kubectl exec -it kubernetes-dashboard-8c9c48775-d6vgn – sh</p>
+<h1 id="进入指定Pod中的指定容器"><a href="#进入指定Pod中的指定容器" class="headerlink" title="进入指定Pod中的指定容器"></a>进入指定Pod中的指定容器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl exec twocontainers -c shell -i -t -- bash</span><br><span class="line">[root@twocontainers &#x2F;]# curl -s localhost:9876&#x2F;info</span><br><span class="line">&#123;&quot;host&quot;: &quot;localhost:9876&quot;, &quot;version&quot;: &quot;0.5.0&quot;, &quot;from&quot;: &quot;127.0.0.1&quot;&#125;</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-6-kubectl-logs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-6-kubectl-logs/" itemprop="url">6-kubectl logs</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-logs-查看pod中容器日志信息："><a href="#kubectl-logs-查看pod中容器日志信息：" class="headerlink" title="kubectl logs 查看pod中容器日志信息："></a>kubectl logs 查看pod中容器日志信息：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pods</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   0          19m</span><br><span class="line">[root@master ~]# kubectl logs mysql-3013141301-2000x</span><br><span class="line">[Entrypoint] MySQL Docker Image 8.0.13-1.1.8</span><br><span class="line">[Entrypoint] Initializing database</span><br><span class="line">2019-01-10T13:32:27.838555Z 0 [System] [MY-013169] [Server] &#x2F;usr&#x2F;sbin&#x2F;mysqld (mysqld 8.0.13) initializing of server in progress as process 20</span><br><span class="line">2019-01-10T13:32:32.491456Z 5 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-8-kubectl-attath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-8-kubectl-attath/" itemprop="url">8-kubectl attath</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">756</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-attath-用于动态查看pod中容器日志信息"><a href="#kubectl-attath-用于动态查看pod中容器日志信息" class="headerlink" title="kubectl attath 用于动态查看pod中容器日志信息"></a>kubectl attath 用于动态查看pod中容器日志信息</h1><p>[root@master ~]# kubectl attach mysql-3013141301-2000x</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-9-kubectl-edit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -513,6 +1089,408 @@
 <blockquote>
 <p>注：edit编辑的是运行环境的设定而不需要停止服务。</p>
 </blockquote>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-7-kubectl-cp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-7-kubectl-cp/" itemprop="url">7-kubectl cp</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-cp-用于从容器与物理机文件的拷贝"><a href="#kubectl-cp-用于从容器与物理机文件的拷贝" class="headerlink" title="kubectl cp   用于从容器与物理机文件的拷贝"></a>kubectl cp   用于从容器与物理机文件的拷贝</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#容器需要安装tar二进制文件方能执行kuberctl cp[root@master ~]# kubectl cp --help</span><br><span class="line">Copy files and directories to and from containers.</span><br><span class="line"></span><br><span class="line">Examples:  # !!!Important Note!!!</span><br><span class="line">  # Requires that the &#39;tar&#39; binary is present in your container</span><br><span class="line">  # image.  If &#39;tar&#39; is not present, &#39;kubectl cp&#39; will fail.</span><br><span class="line">  语法：</span><br><span class="line">  # Copy &#x2F;tmp&#x2F;foo_dir local directory to &#x2F;tmp&#x2F;bar_dir in a remote pod in the default namespace</span><br><span class="line">  kubectl cp &#x2F;tmp&#x2F;foo_dir &lt;some-pod&gt;:&#x2F;tmp&#x2F;bar_dir</span><br><span class="line">  </span><br><span class="line">  # Copy &#x2F;tmp&#x2F;foo local file to &#x2F;tmp&#x2F;bar in a remote pod in a specific container</span><br><span class="line">  kubectl cp &#x2F;tmp&#x2F;foo &lt;some-pod&gt;:&#x2F;tmp&#x2F;bar -c &lt;specific-container&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="在容器里安装tar命令："><a href="#在容器里安装tar命令：" class="headerlink" title="在容器里安装tar命令："></a>在容器里安装tar命令：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x &#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">bash-4.2# yum -y install tar</span><br></pre></td></tr></table></figure>
+<h1 id="从容器拷贝文件到物理机"><a href="#从容器拷贝文件到物理机" class="headerlink" title="从容器拷贝文件到物理机"></a>从容器拷贝文件到物理机</h1><p>[root@master ~]#  kubectl cp mysql-3013141301-2000x:/etc/hosts ./hosts</p>
+<h1 id="从物理机拷贝文件到容器"><a href="#从物理机拷贝文件到容器" class="headerlink" title="从物理机拷贝文件到容器"></a>从物理机拷贝文件到容器</h1><p>[root@master ~]#  kubectl cp hosts mysql-3013141301-2000x:/tmp/hosts</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-1/" itemprop="url">pod配置详解-1</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">10k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="pod配置-1"><a href="#pod配置-1" class="headerlink" title="pod配置-1"></a>pod配置-1</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">apiVersion : vl # 必选：版本号，例如v1</span><br><span class="line">kind: Pod # 必选：pod</span><br><span class="line">metadata : # 必选：元数据</span><br><span class="line">  name : string # # 资源的名字，在同一个namespace中必须唯一</span><br><span class="line">  namespace: string  # 必选：pod的名称，命名规范需要符合RFC 1035规范</span><br><span class="line">  labels:  # 非必选：自定义标签列表</span><br><span class="line">    - name: string </span><br><span class="line"> annotations:  # 非必选：自定义注解列表</span><br><span class="line">   - name: string</span><br><span class="line">spec:  # 必选：pod中容器的详细定义</span><br><span class="line">  containers :  # 必选：Pod中的容器列表</span><br><span class="line">    - name : string # 必选：容器的名称，需符合RFC 1035规范</span><br><span class="line">      image : string # 必选：容器的镜像名称</span><br><span class="line">      imagePullPolicy:[Always I Never I IfNotPresent]  # 非必选：获取镜像的策略，可选值包括： Always（Always 表示每次都尝试重新下载镜像），Never（Never 表示仅使用本地镜像），IfNotPresent（IfNotPresent 表示如果本地有该镜像，则使用本地安卓的镜像，本地不存在时下载镜像） ，默认值为 Always</span><br><span class="line">      command : [string]  # 非必选：容器的启动命令，如果不指定，则使用镜像打包时使用的启动命令</span><br><span class="line">      args: [string]  # 非必选：容器的启动命令参数列表</span><br><span class="line">      workingDir: string # 非必选：容器的工作目录</span><br><span class="line">      volumeMounts:  # 非必选：挂载到容梅内部的存储卷配置</span><br><span class="line">       - name: string  # 非必选：引用 Pod 定义的共享存储卷的名称，需使用volumes[]部分定义的共享存储卷名称</span><br><span class="line">         mountPath: string  # 非必选：存储卷在容器内 Mount 绝对路径，应少于 12个字符</span><br><span class="line">         readOnly: boolean # 非必选：是否为只读模式，默认值为读写模式</span><br><span class="line">      ports: # 非必选：容器需要暴露的端口号列表</span><br><span class="line">      - name: string # 非必选：端口名称</span><br><span class="line">         containerPort: int # 非必选：容器挥自要监听的端口号</span><br><span class="line">         hostPort : int # 非必选：容器所在主机需要监听的端口号，默认与containerPort 相同。设置 hostPort 时，同台宿主机将无法启动该容器的第2份副本</span><br><span class="line">         hostIP: &quot;192.168.1.101&quot;  # 未校验是否存在 hostIP， 要将外部端口绑定到的主机IP（一般省略）</span><br><span class="line">         protocol : string # 非必选：端口协议，支持 TCP&#x2F;UDP ，默认值为 TCP</span><br><span class="line">      env: # 非必选：容器运行前需设置的环境变量列表</span><br><span class="line">       - name: string # 非必选：环境变盘的名称</span><br><span class="line">         value : string # 非必选：环填变量的值</span><br><span class="line">      resources : # 非必选：资源限制和资源请求的设置</span><br><span class="line">       limits: # 非必选：资源限制的设置</span><br><span class="line">        cpu : string # 非必选：CPU 限制，单位为 core 数，将用 docker run --cpu- shares 参数</span><br><span class="line">        memory : string # 非必选：内存限制，单位可以为 MiB&#x2F;GiB 等，将用于 docker run --memory 参数</span><br><span class="line">       requests : # 非必选：资源限制的设置</span><br><span class="line">        cpu: string # 非必选：CPU 请求，单位为 core 数， 容器启动的初始可用数量</span><br><span class="line">        memory : string # 非必选：内存请求，单位可以为 MiB&#x2F;GiB 等，容器启动的初始可用数量</span><br><span class="line">  restartPolicy: [Always I Never I OnFailure] # 非必选：Pod 的重启策略，可选值为 Always（Always: Pod 一旦终止运行，则无论容器是如何终止的， kubelet 都将将启它．），OnFailure（OnFailure ：只有 Pod 以非零退出码终止时， kubelet才会重启该容器．如果容器正常结束（退出码为0），Never（Never: Pod 终止后， kubelet将退出码报告给Master，不会再重启该Pod），则 kubelet 将不会重启它。）,默认值为Always.</span><br><span class="line">  nodeSelector: object # 非必选：设置 NodeSelector 表示将该 Pod 调度到包含这些label的Node 上，以 key:value 格式指定</span><br><span class="line">  imagePullSecrets : </span><br><span class="line">   - name: string # 非必选：Pull 镜像时使用的 secret 名称，以 name :sec retkkey格式指定 </span><br><span class="line">  hostNetwork : false # Boolean：非必选：是否使用主机网络模式，默认值为false ，如果设置为true ，则表示容器使用宿主机网络，不再使用Docker 网桥，该 Pod 将无法在同一台宿主机上启动第2个副本</span><br><span class="line">livenessProbe: </span><br><span class="line">  exec: </span><br><span class="line">    command: [string] </span><br><span class="line">  httpGet: </span><br><span class="line">    path: string </span><br><span class="line">    port umber</span><br><span class="line">    host: string </span><br><span class="line">    scheme: string </span><br><span class="line">  httpHeaders: </span><br><span class="line">  - name: string </span><br><span class="line">    value: string </span><br><span class="line">  tcpSocket: </span><br><span class="line">    port : number </span><br><span class="line">  initialDelaySeconds : 0 </span><br><span class="line">  timeoutSeconds: 0 </span><br><span class="line">  periodSeconds: 0 </span><br><span class="line">  successThreshold: 0</span><br><span class="line">  failureThreshold : 0 </span><br><span class="line">securityContext : </span><br><span class="line">  privileged: false </span><br><span class="line">volumes: </span><br><span class="line">  - name : string </span><br><span class="line">    emptyDir : &#123;&#125; </span><br><span class="line">    hostPath : </span><br><span class="line">      path : string </span><br><span class="line">  secret : </span><br><span class="line">    secretName : string </span><br><span class="line">    items: </span><br><span class="line">    - key : string </span><br><span class="line">      path: string </span><br><span class="line">  configMap: </span><br><span class="line">    name: string </span><br><span class="line">    items : </span><br><span class="line">    - key : string </span><br><span class="line">      path: string</span><br></pre></td></tr></table></figure>
+<h1 id="pod其他配置解释"><a href="#pod其他配置解释" class="headerlink" title="pod其他配置解释"></a>pod其他配置解释</h1><h2 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h2><ul>
+<li>spec.volumes[]：List：非必选：在该 Pod 上定义的共享存储卷列表</li>
+<li>spec.volumes[].name：String：非必选：共享存储卷的名称，在 Pod 中每个存储卷定义一个名称，应符合RFC 1035 规范。容器定义部分的 containers[].volumeMounts[].name 将引用该共享存储卷的名称。Volume 类型包括 emptyDir、 hostPathgce、PersistentDisk、awsElasticBlockStore、gitRepo、secret 、nfs 、iscsi 、glusterfs 、persistentVolumeClaim、rbd、flexVolume、cinder、cephfs、flecker 、downwardAPI、fc、azureFile、configMap、vsphereVolume，可以 定义多个 volume ，每个volume name 保持唯一 。</li>
+<li>spec.volumes[].emptyDir：Object：非必选：类型为 emptyDir 的存储卷， 表示与 Pod 生命周期一个临时目录，其值为 个空对象： emptyDir: {}</li>
+<li>spec. volumes[] .hostPath：Object：非必选：类型为 hostPath 的存储卷，表示挂载 Pod 所在宿主机的目录，通过 volumes[]. hostPath.path 指定</li>
+<li>spec.volumes[].hostPath.path：String：非必选：Pod 在主机的目录，将被用于容器中 mount的目录</li>
+<li>spec.volumes[].secret：Object：非必选：类型为 secret 的存储，表示挂载集群预定义的secret 对象到容器内部</li>
+<li>spec.volumes[].configMap：Object：非必选：类型为 configMap 的存储卷， 表示挂载集群预定义的 configMap 对象到容器内部</li>
+<li>spec.volumes[].livenessProbe：Object：非必选：对Pod 内各容器健康检查的设置，当探测无响应几次之后，系统将自动启动该容器。可以设置的方法包括： exec httpGet tcpSocket。对一个容器仅需设置一种健康检查方法</li>
+<li>spec.volumes[].livenessProbe.exec：Object：非必选：对Pod 内各容器健康检查的设置， exec 方式</li>
+<li>spec .volumes[].livenessProbe.exec.command[]：String：非必选：exec 方式需要指定的命令或者脚本</li>
+<li>spec.volumes[].livenessProbe.httpGet：Object：非必选：对Pod 内各容器健康检查的设置， HTTPGet 方式．需指定 path、 port</li>
+<li>spec.volumes[].livenessProbe.tcpSocket：Object：非必选：对Pod 各容器健康检查的设置， tcpSocket 方式</li>
+<li>spec.volumes[].livenssProbe.initialDelaySeconds：Numeber：非必选：容器启动完成后进行首次探测的时间，单位为s</li>
+<li>spec.volumes[].livenessProbe.timeoutSeconds：Numeber：非必选：对容器健康检查的探测等待响应的超时时间设置，单位为 s，默认值为1 s. 超过该超时时间设置，将认为该容器不健康，将重启该容器</li>
+<li>spec.volumes[].livenessProbe.periodSeconds：Numeber：非必选：对容器健康检查的定期探测时间设置，单位为 s,默认为10s探测一次</li>
+</ul>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -806,7 +1784,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -825,7 +1803,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-pod%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-1/" itemprop="url">pod配置详解-1</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/" itemprop="url">pod配置详解-4</a></h1>
         
 
         <div class="post-meta">
@@ -904,7 +1882,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">10k</span>
+                <span title="字数统计">2.1k</span>
               
 
               
@@ -918,7 +1896,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">10 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -940,24 +1918,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="pod配置-1"><a href="#pod配置-1" class="headerlink" title="pod配置-1"></a>pod配置-1</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">apiVersion : vl # 必选：版本号，例如v1</span><br><span class="line">kind: Pod # 必选：pod</span><br><span class="line">metadata : # 必选：元数据</span><br><span class="line">  name : string # # 资源的名字，在同一个namespace中必须唯一</span><br><span class="line">  namespace: string  # 必选：pod的名称，命名规范需要符合RFC 1035规范</span><br><span class="line">  labels:  # 非必选：自定义标签列表</span><br><span class="line">    - name: string </span><br><span class="line"> annotations:  # 非必选：自定义注解列表</span><br><span class="line">   - name: string</span><br><span class="line">spec:  # 必选：pod中容器的详细定义</span><br><span class="line">  containers :  # 必选：Pod中的容器列表</span><br><span class="line">    - name : string # 必选：容器的名称，需符合RFC 1035规范</span><br><span class="line">      image : string # 必选：容器的镜像名称</span><br><span class="line">      imagePullPolicy:[Always I Never I IfNotPresent]  # 非必选：获取镜像的策略，可选值包括： Always（Always 表示每次都尝试重新下载镜像），Never（Never 表示仅使用本地镜像），IfNotPresent（IfNotPresent 表示如果本地有该镜像，则使用本地安卓的镜像，本地不存在时下载镜像） ，默认值为 Always</span><br><span class="line">      command : [string]  # 非必选：容器的启动命令，如果不指定，则使用镜像打包时使用的启动命令</span><br><span class="line">      args: [string]  # 非必选：容器的启动命令参数列表</span><br><span class="line">      workingDir: string # 非必选：容器的工作目录</span><br><span class="line">      volumeMounts:  # 非必选：挂载到容梅内部的存储卷配置</span><br><span class="line">       - name: string  # 非必选：引用 Pod 定义的共享存储卷的名称，需使用volumes[]部分定义的共享存储卷名称</span><br><span class="line">         mountPath: string  # 非必选：存储卷在容器内 Mount 绝对路径，应少于 12个字符</span><br><span class="line">         readOnly: boolean # 非必选：是否为只读模式，默认值为读写模式</span><br><span class="line">      ports: # 非必选：容器需要暴露的端口号列表</span><br><span class="line">      - name: string # 非必选：端口名称</span><br><span class="line">         containerPort: int # 非必选：容器挥自要监听的端口号</span><br><span class="line">         hostPort : int # 非必选：容器所在主机需要监听的端口号，默认与containerPort 相同。设置 hostPort 时，同台宿主机将无法启动该容器的第2份副本</span><br><span class="line">         hostIP: &quot;192.168.1.101&quot;  # 未校验是否存在 hostIP， 要将外部端口绑定到的主机IP（一般省略）</span><br><span class="line">         protocol : string # 非必选：端口协议，支持 TCP&#x2F;UDP ，默认值为 TCP</span><br><span class="line">      env: # 非必选：容器运行前需设置的环境变量列表</span><br><span class="line">       - name: string # 非必选：环境变盘的名称</span><br><span class="line">         value : string # 非必选：环填变量的值</span><br><span class="line">      resources : # 非必选：资源限制和资源请求的设置</span><br><span class="line">       limits: # 非必选：资源限制的设置</span><br><span class="line">        cpu : string # 非必选：CPU 限制，单位为 core 数，将用 docker run --cpu- shares 参数</span><br><span class="line">        memory : string # 非必选：内存限制，单位可以为 MiB&#x2F;GiB 等，将用于 docker run --memory 参数</span><br><span class="line">       requests : # 非必选：资源限制的设置</span><br><span class="line">        cpu: string # 非必选：CPU 请求，单位为 core 数， 容器启动的初始可用数量</span><br><span class="line">        memory : string # 非必选：内存请求，单位可以为 MiB&#x2F;GiB 等，容器启动的初始可用数量</span><br><span class="line">  restartPolicy: [Always I Never I OnFailure] # 非必选：Pod 的重启策略，可选值为 Always（Always: Pod 一旦终止运行，则无论容器是如何终止的， kubelet 都将将启它．），OnFailure（OnFailure ：只有 Pod 以非零退出码终止时， kubelet才会重启该容器．如果容器正常结束（退出码为0），Never（Never: Pod 终止后， kubelet将退出码报告给Master，不会再重启该Pod），则 kubelet 将不会重启它。）,默认值为Always.</span><br><span class="line">  nodeSelector: object # 非必选：设置 NodeSelector 表示将该 Pod 调度到包含这些label的Node 上，以 key:value 格式指定</span><br><span class="line">  imagePullSecrets : </span><br><span class="line">   - name: string # 非必选：Pull 镜像时使用的 secret 名称，以 name :sec retkkey格式指定 </span><br><span class="line">  hostNetwork : false # Boolean：非必选：是否使用主机网络模式，默认值为false ，如果设置为true ，则表示容器使用宿主机网络，不再使用Docker 网桥，该 Pod 将无法在同一台宿主机上启动第2个副本</span><br><span class="line">livenessProbe: </span><br><span class="line">  exec: </span><br><span class="line">    command: [string] </span><br><span class="line">  httpGet: </span><br><span class="line">    path: string </span><br><span class="line">    port umber</span><br><span class="line">    host: string </span><br><span class="line">    scheme: string </span><br><span class="line">  httpHeaders: </span><br><span class="line">  - name: string </span><br><span class="line">    value: string </span><br><span class="line">  tcpSocket: </span><br><span class="line">    port : number </span><br><span class="line">  initialDelaySeconds : 0 </span><br><span class="line">  timeoutSeconds: 0 </span><br><span class="line">  periodSeconds: 0 </span><br><span class="line">  successThreshold: 0</span><br><span class="line">  failureThreshold : 0 </span><br><span class="line">securityContext : </span><br><span class="line">  privileged: false </span><br><span class="line">volumes: </span><br><span class="line">  - name : string </span><br><span class="line">    emptyDir : &#123;&#125; </span><br><span class="line">    hostPath : </span><br><span class="line">      path : string </span><br><span class="line">  secret : </span><br><span class="line">    secretName : string </span><br><span class="line">    items: </span><br><span class="line">    - key : string </span><br><span class="line">      path: string </span><br><span class="line">  configMap: </span><br><span class="line">    name: string </span><br><span class="line">    items : </span><br><span class="line">    - key : string </span><br><span class="line">      path: string</span><br></pre></td></tr></table></figure>
-<h1 id="pod其他配置解释"><a href="#pod其他配置解释" class="headerlink" title="pod其他配置解释"></a>pod其他配置解释</h1><h2 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h2><ul>
-<li>spec.volumes[]：List：非必选：在该 Pod 上定义的共享存储卷列表</li>
-<li>spec.volumes[].name：String：非必选：共享存储卷的名称，在 Pod 中每个存储卷定义一个名称，应符合RFC 1035 规范。容器定义部分的 containers[].volumeMounts[].name 将引用该共享存储卷的名称。Volume 类型包括 emptyDir、 hostPathgce、PersistentDisk、awsElasticBlockStore、gitRepo、secret 、nfs 、iscsi 、glusterfs 、persistentVolumeClaim、rbd、flexVolume、cinder、cephfs、flecker 、downwardAPI、fc、azureFile、configMap、vsphereVolume，可以 定义多个 volume ，每个volume name 保持唯一 。</li>
-<li>spec.volumes[].emptyDir：Object：非必选：类型为 emptyDir 的存储卷， 表示与 Pod 生命周期一个临时目录，其值为 个空对象： emptyDir: {}</li>
-<li>spec. volumes[] .hostPath：Object：非必选：类型为 hostPath 的存储卷，表示挂载 Pod 所在宿主机的目录，通过 volumes[]. hostPath.path 指定</li>
-<li>spec.volumes[].hostPath.path：String：非必选：Pod 在主机的目录，将被用于容器中 mount的目录</li>
-<li>spec.volumes[].secret：Object：非必选：类型为 secret 的存储，表示挂载集群预定义的secret 对象到容器内部</li>
-<li>spec.volumes[].configMap：Object：非必选：类型为 configMap 的存储卷， 表示挂载集群预定义的 configMap 对象到容器内部</li>
-<li>spec.volumes[].livenessProbe：Object：非必选：对Pod 内各容器健康检查的设置，当探测无响应几次之后，系统将自动启动该容器。可以设置的方法包括： exec httpGet tcpSocket。对一个容器仅需设置一种健康检查方法</li>
-<li>spec.volumes[].livenessProbe.exec：Object：非必选：对Pod 内各容器健康检查的设置， exec 方式</li>
-<li>spec .volumes[].livenessProbe.exec.command[]：String：非必选：exec 方式需要指定的命令或者脚本</li>
-<li>spec.volumes[].livenessProbe.httpGet：Object：非必选：对Pod 内各容器健康检查的设置， HTTPGet 方式．需指定 path、 port</li>
-<li>spec.volumes[].livenessProbe.tcpSocket：Object：非必选：对Pod 各容器健康检查的设置， tcpSocket 方式</li>
-<li>spec.volumes[].livenssProbe.initialDelaySeconds：Numeber：非必选：容器启动完成后进行首次探测的时间，单位为s</li>
-<li>spec.volumes[].livenessProbe.timeoutSeconds：Numeber：非必选：对容器健康检查的探测等待响应的超时时间设置，单位为 s，默认值为1 s. 超过该超时时间设置，将认为该容器不健康，将重启该容器</li>
-<li>spec.volumes[].livenessProbe.periodSeconds：Numeber：非必选：对容器健康检查的定期探测时间设置，单位为 s,默认为10s探测一次</li>
-</ul>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="service配置简单案例"><a href="#service配置简单案例" class="headerlink" title="service配置简单案例"></a>service配置简单案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 # 指定api版本，此值必须在kubectl api-versions中</span><br><span class="line">kind: Service # 指定创建资源的⾓⾊&#x2F;类型</span><br><span class="line">metadata: # 资源的元数据&#x2F;属性</span><br><span class="line">  name: demo # 资源的名字，在同⼀个namespace中必须唯⼀</span><br><span class="line">  namespace:default # 部署在哪个namespace中</span><br><span class="line">  labels: # 设定资源的标签</span><br><span class="line">    app: demo</span><br><span class="line">spec: # 资源规范字段</span><br><span class="line">  type: ClusterIP # ClusterIP 类型</span><br><span class="line">  ports:</span><br><span class="line">- port:8080 # service 端⼝</span><br><span class="line">      targetPort: http # 容器暴露的端⼝</span><br><span class="line">      protocol:TCP # 协议</span><br><span class="line">      name: http # 端⼝名称</span><br><span class="line">  selector: # 选择器</span><br><span class="line">    app: demo</span><br></pre></td></tr></table></figure>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1205,197 +2166,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-service%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E6%A1%88%E4%BE%8B-1/" itemprop="url">pod配置详解-4</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="service配置简单案例"><a href="#service配置简单案例" class="headerlink" title="service配置简单案例"></a>service配置简单案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1 # 指定api版本，此值必须在kubectl api-versions中</span><br><span class="line">kind: Service # 指定创建资源的⾓⾊&#x2F;类型</span><br><span class="line">metadata: # 资源的元数据&#x2F;属性</span><br><span class="line">  name: demo # 资源的名字，在同⼀个namespace中必须唯⼀</span><br><span class="line">  namespace:default # 部署在哪个namespace中</span><br><span class="line">  labels: # 设定资源的标签</span><br><span class="line">    app: demo</span><br><span class="line">spec: # 资源规范字段</span><br><span class="line">  type: ClusterIP # ClusterIP 类型</span><br><span class="line">  ports:</span><br><span class="line">- port:8080 # service 端⼝</span><br><span class="line">      targetPort: http # 容器暴露的端⼝</span><br><span class="line">      protocol:TCP # 协议</span><br><span class="line">      name: http # 端⼝名称</span><br><span class="line">  selector: # 选择器</span><br><span class="line">    app: demo</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-1-yaml%E5%AE%9A%E4%B9%89Pod%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1571,794 +2341,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-0-deployment-yaml%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-0-deployment-yaml%E8%AF%A6%E8%A7%A3/" itemprop="url">deployment.yaml详解</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&gt; vim nginx-deployment.yaml</span><br><span class="line"></span><br><span class="line">apiVersion: extensions&#x2F;v1beta1                  # K8S对应的API版本</span><br><span class="line">kind: Deployment                                # 对应的类型</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-deployment</span><br><span class="line">  labels:</span><br><span class="line">    name: nginx-deployment</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1                                   # 镜像副本数量</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:                                   # 容器的标签 可和service关联</span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: nginx                          # 容器名和镜像</span><br><span class="line">          image: nginx</span><br><span class="line">          imagePullPolicy: Always</span><br><span class="line"></span><br><span class="line">&gt; kubectl create -f nginx-deployment.yaml</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          6s</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          15m</span><br><span class="line">&gt; kubectl get deployment</span><br><span class="line">NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">nginx-deployment   1         1         1            1           2m</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>因为使用deployment会部署很多个Pod所以Pod的名字后面会带一串随机数避免重复</p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-1-Deployment%E6%89%A9%E5%AE%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-1-Deployment%E6%89%A9%E5%AE%B9/" itemprop="url">Deployment扩容</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl scale deployment nginx-deployment --replicas&#x3D;3</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-9r4p8   1&#x2F;1       Running   0          22s</span><br><span class="line">nginx-deployment-68fcbc9696-lkff2   1&#x2F;1       Running   0          22s</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          5m</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          21m</span><br></pre></td></tr></table></figure>
-<h1 id="最关键的功能就是可以弹性扩容根据CPU的占用率-需要结合资源限制一同使用-后面会进行实际演示"><a href="#最关键的功能就是可以弹性扩容根据CPU的占用率-需要结合资源限制一同使用-后面会进行实际演示" class="headerlink" title="最关键的功能就是可以弹性扩容根据CPU的占用率(需要结合资源限制一同使用),后面会进行实际演示"></a>最关键的功能就是可以弹性扩容根据CPU的占用率(需要结合资源限制一同使用),后面会进行实际演示</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl autoscale deployment nginx-deployment --min&#x3D;2 --max&#x3D;10 --cpu-percent&#x3D;80</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-2-Deployment%E7%BC%A9%E5%AE%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-deployment-yaml%E8%AF%A6%E8%A7%A3-2-Deployment%E7%BC%A9%E5%AE%B9/" itemprop="url">Deployment缩容</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="缩容到指定个数"><a href="#缩容到指定个数" class="headerlink" title="缩容到指定个数"></a>缩容到指定个数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl scale deployment nginx-deployment --replicas&#x3D;1</span><br><span class="line">&gt; kubectl get pod</span><br><span class="line">NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">nginx-deployment-68fcbc9696-tr5fm   1&#x2F;1       Running   0          6m</span><br><span class="line">nginx-mysql-pod                     2&#x2F;2       Running   0          21m</span><br></pre></td></tr></table></figure>
-<h1 id="Deployment回保障你的容器的运行状态-如果删除Pod-Deployment会立即重启一个"><a href="#Deployment回保障你的容器的运行状态-如果删除Pod-Deployment会立即重启一个" class="headerlink" title="Deployment回保障你的容器的运行状态,如果删除Pod,Deployment会立即重启一个"></a>Deployment回保障你的容器的运行状态,如果删除Pod,Deployment会立即重启一个</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; kubectl delete pod nginx-deployment-68fcbc9696-tr5fm</span><br><span class="line">  pod &quot;nginx-deployment-68fcbc9696-tr5fm&quot; deleted</span><br><span class="line">  </span><br><span class="line">  &gt; kubectl get pod</span><br><span class="line">  NAME                                READY     STATUS    RESTARTS   AGE</span><br><span class="line">  nginx-deployment-68fcbc9696-ndfzj   1&#x2F;1       Running   0          12s</span><br><span class="line">  nginx-mysql-pod                     2&#x2F;2       Running   0          32m</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Deployment会配合RC调度启动新的Pod从而保障定量的Pod数量</p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-1-postStart/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-Deployment%E5%92%8CPod-yaml-pod-yaml%E8%AF%A6%E8%A7%A3-1-postStart/" itemprop="url">postStart</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_33591903/article/details/103854648" target="_blank" rel="noopener">基于PostStart的环境演示</a></p>
-<h1 id="Kubernetes为我们提供了两种钩子函数"><a href="#Kubernetes为我们提供了两种钩子函数" class="headerlink" title="Kubernetes为我们提供了两种钩子函数:"></a>Kubernetes为我们提供了两种钩子函数:</h1><ul>
-<li>PostStart :这个钩子在容器创建后立即执行。但是，并不能保证钩子将在容器ENTRYPOINT之前运行，因为没有参数传递给处理程序。 主要用于资源部署、环境准备等。不过需要注意的是如果钩子花费时间过长以及于不能运行或者挂起，容器将不能达到Running状态。另外，PostStart的执行相对于容器的代码执行是异步的。</li>
-<li>PreStop :钩子在容器终止前立即被调用。它是阻塞的，意味着它是同步的，所以它必须在删除容器的调用触发之前完成。主要用于优雅关闭应用程序、通知其他系统等。如果钩子在执行期间挂起，Pod阶段将停留在Running状态并且不会达到failed状态。另外，PreStop的执行现对于SIGTERM信息，也是异步的，k8s也不会等待PreStop执行完成。</li>
-</ul>
-<h1 id="Pod终止的过程"><a href="#Pod终止的过程" class="headerlink" title="Pod终止的过程"></a>Pod终止的过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户发送命令删除Pod，Pod进入Terminating状态</span><br><span class="line">service摘除Pod节点</span><br><span class="line">当kubelet看到Pod已被标记终止，开始执行preStop钩子，假如preStop hook的运行时间超过了grace period，kubelet会发送SIGTERM并等2秒</span><br></pre></td></tr></table></figure>
-<h1 id="在Pod-Hook钩子函数中有Exec和HTTP两种方式"><a href="#在Pod-Hook钩子函数中有Exec和HTTP两种方式" class="headerlink" title="在Pod Hook钩子函数中有Exec和HTTP两种方式"></a>在Pod Hook钩子函数中有Exec和HTTP两种方式</h1><ul>
-<li>Exec – 用于执行一段特定的命令，不过要注意的是该命令消耗的资源会被计入容器</li>
-<li>HTTP – 对容器上的特定端点执行HTTP请求</li>
-</ul>
-<h1 id="基于PostStart命令演示"><a href="#基于PostStart命令演示" class="headerlink" title="基于PostStart命令演示"></a>基于PostStart命令演示</h1><p>首先我们先进行演示PostStart的两种方式</p>
-<h2 id="第一种Exec"><a href="#第一种Exec" class="headerlink" title="第一种Exec"></a>第一种Exec</h2><p>我们echo一段话追加到 /tmp/message，在Pod启动前进行操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: abcdocker</span><br><span class="line">  labels:</span><br><span class="line">    name: abcdocker</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: abcdocker</span><br><span class="line">    image: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: 80</span><br><span class="line">    lifecycle:</span><br><span class="line">      postStart:</span><br><span class="line">        exec:</span><br><span class="line">          command:</span><br><span class="line">          - bash</span><br><span class="line">          - -c</span><br><span class="line">          - &#39;echo &quot;https:&#x2F;&#x2F;i4t.com&quot; &gt; &#x2F;tmp&#x2F;message&#39;</span><br></pre></td></tr></table></figure></p>
-<h3 id="使用kubectl-apply-f-exec-test-yaml进行创建"><a href="#使用kubectl-apply-f-exec-test-yaml进行创建" class="headerlink" title="使用kubectl apply -f exec_test.yaml进行创建"></a>使用kubectl apply -f exec_test.yaml进行创建</h3><p>可以通过下面查看结果，pod的目录已经有我们在yaml文件写的测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@abcdocker yaml]# kubectl get pod</span><br><span class="line">NAME        READY   STATUS    RESTARTS   AGE</span><br><span class="line">abcdocker   1&#x2F;1     Running   0          37s</span><br><span class="line"> </span><br><span class="line">[root@abcdocker yaml]# kubectl exec -it -n default abcdocker &#x2F;bin&#x2F;bash</span><br><span class="line">root@abcdocker:&#x2F;# cat &#x2F;tmp&#x2F;message</span><br><span class="line">https:&#x2F;&#x2F;i4t.com</span><br><span class="line">root@abcdocker:&#x2F;#</span><br><span class="line">root@abcdocker:&#x2F;# exit</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>创建容器后，Kubernetes立即发送postStart事件。但是，不能保证在调用Container的入口点之前先调用postStart处理程序。<br>postStart处理程序相对于Container的代码异步运行，但是Kubernetes对容器的管理会阻塞，直到postStart处理程序完成。<br>在postStart处理程序完成之前，容器的状态不会设置为RUNNING。</p>
-</blockquote>
-<h2 id="第二种HTTP方式"><a href="#第二种HTTP方式" class="headerlink" title="第二种HTTP方式"></a>第二种HTTP方式</h2><p>使用HttpGet配置Host、Path、Port<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: abcdocker</span><br><span class="line">  labels:</span><br><span class="line">    name: abcdocker</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: abcdocker</span><br><span class="line">    image: nginx</span><br><span class="line">    ports:</span><br><span class="line">      - containerPort: 80</span><br><span class="line">    lifecycle:</span><br><span class="line">      postStart:</span><br><span class="line">        httpGet:</span><br><span class="line">          host: i4t.com</span><br><span class="line">          path: index.html</span><br><span class="line">          port: 80</span><br></pre></td></tr></table></figure></p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2410,7 +2392,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">403</span>
+                    <span class="site-state-item-count">407</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2801,7 +2783,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">415k</span>
+    <span title="站点总字数">416k</span>
   
 
   
@@ -2810,7 +2792,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:55</span>
+    <span title="站点总阅读时长">6:56</span>
   
 </div>
 

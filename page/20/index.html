@@ -373,6 +373,780 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-11-kuberctl-patch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-11-kuberctl-patch/" itemprop="url">11-kuberctl patch</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kuberctl-patch-当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。"><a href="#kuberctl-patch-当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。" class="headerlink" title="kuberctl patch  当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。"></a>kuberctl patch  当修改一部分设定时，使用patch很方便。比如：给pod换个image镜像。</h1><p>给nginx容器替换一个支持php的docker镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl patch pod nginx-1011335894-4ngml -p &#39;&#123;&quot;spec&quot;:&#123;&quot;containers&quot;:[&#123;&quot;name&quot;:&quot;nginx&quot;,&quot;image&quot;:&quot;docker.io&#x2F;richarvey&#x2F;nginx-php-fpm&quot;&#125;]&#125;&#125;&#39;</span><br><span class="line">&quot;nginx-1011335894-4ngml&quot; patched</span><br><span class="line"></span><br><span class="line">[root@master ~]# kubectl get service</span><br><span class="line">NAME         CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE</span><br><span class="line">kubernetes   10.254.0.1      &lt;none&gt;        443&#x2F;TCP        1d</span><br><span class="line">nginx        10.254.49.161   &lt;nodes&gt;       80:31003&#x2F;TCP   2h</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-14-kubectl-cordon-%E4%B8%8E-kubectl-uncordon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-14-kubectl-cordon-%E4%B8%8E-kubectl-uncordon/" itemprop="url">14-kubectl cordon 与 kubectl  uncordon</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-cordon-与-kubectl-uncordon"><a href="#kubectl-cordon-与-kubectl-uncordon" class="headerlink" title="kubectl cordon 与 kubectl  uncordon"></a>kubectl cordon 与 kubectl  uncordon</h1><p>在实际维护的时候会出现某个node坏掉，或者做一些处理，暂时不能让生成的pod在此node上运行，需要通知kubernetes让其不要创建过来，<br>这条命令就是cordon，uncordon则是取消这个要求。<br>设定node2上不再运行新的pod实例，使用get node确认，其状态显示SchedulingDisabled<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS    AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready     1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready     1d        &lt;none&gt;</span><br><span class="line"></span><br><span class="line">[root@master ~]# kubectl cordon 192.168.10.9</span><br><span class="line">node &quot;192.168.10.9&quot; cordoned</span><br><span class="line"></span><br><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS                     AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready                      1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready,SchedulingDisabled   1d        &lt;none&gt;</span><br></pre></td></tr></table></figure></p>
+<p>执行scale命令，再次执行横向扩展命令，看是否会有pod漂到node2这台机器上，结果发现只有之前的一个pod，再没有新的pod漂过去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS                     AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready                      1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready,SchedulingDisabled   1d        &lt;none&gt;</span><br><span class="line">[root@master ~]# kubectl scale --replicas&#x3D;6 deployment&#x2F;mysql</span><br><span class="line">deployment &quot;mysql&quot; scaledMySQL的6个副本全部运行在node-1</span><br><span class="line">[root@master ~]# kubectl get pod -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   1          4h        10.255.18.2   192.168.10.8</span><br><span class="line">mysql-3013141301-5679l   1&#x2F;1       Running   0          19s       10.255.18.8   192.168.10.8</span><br><span class="line">mysql-3013141301-9736f   1&#x2F;1       Running   0          19s       10.255.18.7   192.168.10.8</span><br><span class="line">mysql-3013141301-d0lgh   1&#x2F;1       Running   0          19s       10.255.18.4   192.168.10.8</span><br><span class="line">mysql-3013141301-kgtrz   1&#x2F;1       Running   0          19s       10.255.18.6   192.168.10.8</span><br><span class="line">mysql-3013141301-qst0p   1&#x2F;1       Running   0          19s       10.255.18.5   192.168.10.8</span><br><span class="line">nginx-1011335894-4ngml   1&#x2F;1       Running   2          3h        10.255.94.2   192.168.10.9</span><br><span class="line">nginx-1011335894-lhm28   1&#x2F;1       Running   0          28m       10.255.18.3   192.168.10.8</span><br><span class="line">nginx-1011335894-xtmbb   1&#x2F;1       Running   0          28m       10.255.94.3   192.168.10.9</span><br></pre></td></tr></table></figure></p>
+<p>执行uncordon解除封锁命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl uncordon 192.168.10.9</span><br><span class="line">node &quot;192.168.10.9&quot; uncordoned</span><br></pre></td></tr></table></figure></p>
+<p>使用uncordon命令解除对node2机器的限制，通过get node确认状态也已经正常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get nodes -o wide</span><br><span class="line">NAME           STATUS    AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready     1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready     1d        &lt;none&gt;</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-15-kubectl-drain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-15-kubectl-drain/" itemprop="url">15-kubectl drain</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-drain-用于对某个node结点进行维护"><a href="#kubectl-drain-用于对某个node结点进行维护" class="headerlink" title="kubectl drain 用于对某个node结点进行维护"></a>kubectl drain 用于对某个node结点进行维护</h1><p>　　drain两个作用：</p>
+<p>　　　　1. 设定此node不可以使用（cordon)</p>
+<p>　　　　2. evict驱逐pod到他正常的node节点上</p>
+<h2 id="事前准备："><a href="#事前准备：" class="headerlink" title="事前准备："></a>事前准备：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl delete deployment nginx</span><br></pre></td></tr></table></figure>
+<p>将nginx 的副本设定为4<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl create -f nginx-deployment.yaml </span><br><span class="line">deployment &quot;nginx&quot; created</span><br><span class="line">[root@master ~]# kubectl scale --replicas&#x3D;4 deployment  nginx</span><br><span class="line">deployment &quot;nginx&quot; scaled</span><br><span class="line">发现两边分别运行了两个[root@master ~]# kubectl get pod -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">nginx-1011335894-5wlvs   1&#x2F;1       Running   0          9s        10.255.94.3   192.168.10.9</span><br><span class="line">nginx-1011335894-crl6j   1&#x2F;1       Running   0          9s        10.255.18.3   192.168.10.8</span><br><span class="line">nginx-1011335894-g7rs0   1&#x2F;1       Running   0          23s       10.255.18.2   192.168.10.8</span><br><span class="line">nginx-1011335894-wft9s   1&#x2F;1       Running   0          21s       10.255.94.2   192.168.10.9</span><br></pre></td></tr></table></figure></p>
+<h2 id="执行drain命令，让node2不可用，并把node2上已经运行pod驱逐到其他node1上"><a href="#执行drain命令，让node2不可用，并把node2上已经运行pod驱逐到其他node1上" class="headerlink" title="执行drain命令，让node2不可用，并把node2上已经运行pod驱逐到其他node1上:"></a>执行drain命令，让node2不可用，并把node2上已经运行pod驱逐到其他node1上:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl drain 192.168.10.9</span><br><span class="line">node &quot;192.168.10.9&quot; cordoned</span><br><span class="line">pod &quot;nginx-1011335894-5wlvs&quot; evicted</span><br><span class="line">pod &quot;nginx-1011335894-wft9s&quot; evicted</span><br><span class="line">node &quot;192.168.10.9&quot; drained</span><br></pre></td></tr></table></figure>
+<p>把node2上的pod删除后，k8s会根据replicas的机制，在清退pod和设定node时，在其他结点上生成新的pod。这时就可以对node2节点进行维护了，维护好后，重新uncordon即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get node</span><br><span class="line">NAME           STATUS                     AGE</span><br><span class="line">192.168.10.8   Ready                      1d</span><br><span class="line">192.168.10.9   Ready,SchedulingDisabled   1d</span><br><span class="line">[root@master ~]# kubectl get pods -o wide</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE</span><br><span class="line">nginx-1011335894-83vxq   1&#x2F;1       Running   0          5m        10.255.18.5   192.168.10.8</span><br><span class="line">nginx-1011335894-crl6j   1&#x2F;1       Running   0          8m        10.255.18.3   192.168.10.8</span><br><span class="line">nginx-1011335894-g7rs0   1&#x2F;1       Running   0          8m        10.255.18.2   192.168.10.8</span><br><span class="line">nginx-1011335894-swb88   1&#x2F;1       Running   0          5m        10.255.18.4   192.168.10.8</span><br></pre></td></tr></table></figure></p>
+<p>等修改好后，现在恢复可用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]#  kubectl uncordon 192.168.10.9</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get node -o wide</span><br><span class="line">NAME           STATUS    AGE       EXTERNAL-IP</span><br><span class="line">192.168.10.8   Ready     1d        &lt;none&gt;</span><br><span class="line">192.168.10.9   Ready     1d        &lt;none&gt;</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-16-kubectl-expose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-16-kubectl-expose/" itemprop="url">16-kubectl expose</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="对外部暴露服务"><a href="#对外部暴露服务" class="headerlink" title="对外部暴露服务"></a>对外部暴露服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl expose deployment&#x2F;kubernetes-bootcamp --type&#x3D;&quot;NodePort&quot; --port 8080</span><br><span class="line">service &quot;kubernetes-bootcamp&quot; exposed</span><br><span class="line">$ kubectl get servicesNAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE</span><br><span class="line">kubernetes            ClusterIP   10.96.0.1       &lt;none&gt;        443&#x2F;TCP     2m</span><br><span class="line">kubernetes-bootcamp   NodePort    10.99.175.225   &lt;none&gt;        8080:32172&#x2F;TCP   5s</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-17-kubectl-describe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -755,203 +1529,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-19-kubectl-proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-19-kubectl-proxy/" itemprop="url">19-kubectl proxy</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>使用kubectl proxy命令就可以使API server监听在本地的8001端口上：<br>$ kubectl proxy<br>Starting to serve on 127.0.0.1:8001</p>
-<p>如果想通过其它主机访问就需要指定监听的地址：<br>$ kubectl proxy –address=0.0.0.0<br>Starting to serve on [::]:8001</p>
-<p>此时通过curl访问会出现未认证的提示：<br>$ curl -X GET -L <a href="http://mini:8001/" target="_blank" rel="noopener">http://mini:8001/</a></p>
-<h3>Unauthorized</h3>
-
-<p>设置API server接收所有主机的请求：<br>$ kubectl proxy –address=’0.0.0.0’  –accept-hosts=’^*$’<br>Starting to serve on [::]:8001</p>
-<p>访问正常：<br>$ curl -X GET -L <a href="http://mini:8001/" target="_blank" rel="noopener">http://mini:8001/</a><br>{<br>  “paths”: [<br>    “/api”,<br>    “/api/v1”,<br>    …<br>  ]<br>}</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-2-kubectl-apply/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1144,7 +1721,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-3-kubectl-delete/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-19-kubectl-proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1163,7 +1740,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-3-kubectl-delete/" itemprop="url">3-kubectl delete</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-19-kubectl-proxy/" itemprop="url">19-kubectl proxy</a></h1>
         
 
         <div class="post-meta">
@@ -1242,7 +1819,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.5k</span>
+                <span title="字数统计">1.2k</span>
               
 
               
@@ -1278,18 +1855,13 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="通过pod名称abcdocker删除-pod"><a href="#通过pod名称abcdocker删除-pod" class="headerlink" title="通过pod名称abcdocker删除 pod"></a>通过pod名称abcdocker删除 pod</h1><p>kubectl delete pod abcdocker</p>
-<h1 id="通过yaml删除pod"><a href="#通过yaml删除pod" class="headerlink" title="通过yaml删除pod"></a>通过yaml删除pod</h1><p>kubectl delete -f myapp-pod.yaml</p>
-<h1 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h1><pre><code class="textmate">$ kubectl get services
-NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-kubernetes            ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP     12m
-kubernetes-bootcamp   NodePort    10.99.175.225   &lt;none&gt;        8080:32172/TCP   10m
-$ kubectl delete service -l run=kubernetes-bootcamp
-service &quot;kubernetes-bootcamp&quot; deleted
-$ kubectl get services
-NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
-</code></pre>
+            <script src="/assets/js/APlayer.min.js"> </script><p>使用kubectl proxy命令就可以使API server监听在本地的8001端口上：<br>$ kubectl proxy<br>Starting to serve on 127.0.0.1:8001</p>
+<p>如果想通过其它主机访问就需要指定监听的地址：<br>$ kubectl proxy –address=0.0.0.0<br>Starting to serve on [::]:8001</p>
+<p>此时通过curl访问会出现未认证的提示：<br>$ curl -X GET -L <a href="http://mini:8001/" target="_blank" rel="noopener">http://mini:8001/</a></p>
+<h3>Unauthorized</h3>
+
+<p>设置API server接收所有主机的请求：<br>$ kubectl proxy –address=’0.0.0.0’  –accept-hosts=’^*$’<br>Starting to serve on [::]:8001</p>
+<p>访问正常：<br>$ curl -X GET -L <a href="http://mini:8001/" target="_blank" rel="noopener">http://mini:8001/</a><br>{<br>  “paths”: [<br>    “/api”,<br>    “/api/v1”,<br>    …<br>  ]<br>}</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1562,7 +2134,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-7-kubectl-cp/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-3-kubectl-delete/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1581,7 +2153,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-7-kubectl-cp/" itemprop="url">7-kubectl cp</a></h1>
+                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-3-kubectl-delete/" itemprop="url">3-kubectl delete</a></h1>
         
 
         <div class="post-meta">
@@ -1660,586 +2232,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-cp-用于从容器与物理机文件的拷贝"><a href="#kubectl-cp-用于从容器与物理机文件的拷贝" class="headerlink" title="kubectl cp   用于从容器与物理机文件的拷贝"></a>kubectl cp   用于从容器与物理机文件的拷贝</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#容器需要安装tar二进制文件方能执行kuberctl cp[root@master ~]# kubectl cp --help</span><br><span class="line">Copy files and directories to and from containers.</span><br><span class="line"></span><br><span class="line">Examples:  # !!!Important Note!!!</span><br><span class="line">  # Requires that the &#39;tar&#39; binary is present in your container</span><br><span class="line">  # image.  If &#39;tar&#39; is not present, &#39;kubectl cp&#39; will fail.</span><br><span class="line">  语法：</span><br><span class="line">  # Copy &#x2F;tmp&#x2F;foo_dir local directory to &#x2F;tmp&#x2F;bar_dir in a remote pod in the default namespace</span><br><span class="line">  kubectl cp &#x2F;tmp&#x2F;foo_dir &lt;some-pod&gt;:&#x2F;tmp&#x2F;bar_dir</span><br><span class="line">  </span><br><span class="line">  # Copy &#x2F;tmp&#x2F;foo local file to &#x2F;tmp&#x2F;bar in a remote pod in a specific container</span><br><span class="line">  kubectl cp &#x2F;tmp&#x2F;foo &lt;some-pod&gt;:&#x2F;tmp&#x2F;bar -c &lt;specific-container&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="在容器里安装tar命令："><a href="#在容器里安装tar命令：" class="headerlink" title="在容器里安装tar命令："></a>在容器里安装tar命令：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x &#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">bash-4.2# yum -y install tar</span><br></pre></td></tr></table></figure>
-<h1 id="从容器拷贝文件到物理机"><a href="#从容器拷贝文件到物理机" class="headerlink" title="从容器拷贝文件到物理机"></a>从容器拷贝文件到物理机</h1><p>[root@master ~]#  kubectl cp mysql-3013141301-2000x:/etc/hosts ./hosts</p>
-<h1 id="从物理机拷贝文件到容器"><a href="#从物理机拷贝文件到容器" class="headerlink" title="从物理机拷贝文件到容器"></a>从物理机拷贝文件到容器</h1><p>[root@master ~]#  kubectl cp hosts mysql-3013141301-2000x:/tmp/hosts</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-5-kubectl-exec/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-5-kubectl-exec/" itemprop="url">5-kubectl exec</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="通过bash获得-pod-中某个容器的TTY，相当于登录容器"><a href="#通过bash获得-pod-中某个容器的TTY，相当于登录容器" class="headerlink" title="通过bash获得 pod 中某个容器的TTY，相当于登录容器"></a>通过bash获得 pod 中某个容器的TTY，相当于登录容器</h1><p>kubectl exec -it <pod-name> -n <ns-name> bash</p>
-<h1 id="kubectl-exec-在pod中执行一条命令"><a href="#kubectl-exec-在pod中执行一条命令" class="headerlink" title="kubectl exec 在pod中执行一条命令"></a>kubectl exec 在pod中执行一条命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x ls &#x2F;</span><br><span class="line">bin                etc             lib64          proc    sys</span><br><span class="line">boot                healthcheck.cnf  media          root    tmp</span><br><span class="line">dev                healthcheck.sh   mnt          run    usr</span><br><span class="line">docker-entrypoint-initdb.d  home         mysql-init-complete  sbin    var</span><br><span class="line">entrypoint.sh            lib             opt          srv#进入容器环境</span><br><span class="line">[root@master ~]# kubectl exec -it mysql-3013141301-2000x &#x2F;bin&#x2F;bash</span><br><span class="line">bash-4.2# ls  </span><br><span class="line">bin   dev              entrypoint.sh  healthcheck.cnf  home    lib64  mnt            opt   root    sbin  sys  usr</span><br><span class="line">boot  docker-entrypoint-initdb.d  etc         healthcheck.sh   lib    media  mysql-init-complete  proc  run    srv   tmp  var</span><br></pre></td></tr></table></figure>
-<h1 id="进入指定Pod"><a href="#进入指定Pod" class="headerlink" title="进入指定Pod"></a>进入指定Pod</h1><p>kubectl exec -it kubernetes-dashboard-8c9c48775-d6vgn – sh</p>
-<h1 id="进入指定Pod中的指定容器"><a href="#进入指定Pod中的指定容器" class="headerlink" title="进入指定Pod中的指定容器"></a>进入指定Pod中的指定容器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl exec twocontainers -c shell -i -t -- bash</span><br><span class="line">[root@twocontainers &#x2F;]# curl -s localhost:9876&#x2F;info</span><br><span class="line">&#123;&quot;host&quot;: &quot;localhost:9876&quot;, &quot;version&quot;: &quot;0.5.0&quot;, &quot;from&quot;: &quot;127.0.0.1&quot;&#125;</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-6-kubectl-logs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-6-kubectl-logs/" itemprop="url">6-kubectl logs</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.9k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-logs-查看pod中容器日志信息："><a href="#kubectl-logs-查看pod中容器日志信息：" class="headerlink" title="kubectl logs 查看pod中容器日志信息："></a>kubectl logs 查看pod中容器日志信息：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# kubectl get pods</span><br><span class="line">NAME                     READY     STATUS    RESTARTS   AGE</span><br><span class="line">mysql-3013141301-2000x   1&#x2F;1       Running   0          19m</span><br><span class="line">[root@master ~]# kubectl logs mysql-3013141301-2000x</span><br><span class="line">[Entrypoint] MySQL Docker Image 8.0.13-1.1.8</span><br><span class="line">[Entrypoint] Initializing database</span><br><span class="line">2019-01-10T13:32:27.838555Z 0 [System] [MY-013169] [Server] &#x2F;usr&#x2F;sbin&#x2F;mysqld (mysqld 8.0.13) initializing of server in progress as process 20</span><br><span class="line">2019-01-10T13:32:32.491456Z 5 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-8-kubectl-attath/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/05/09/depth-kubernetes-k8s-kubectl%E5%91%BD%E4%BB%A4-8-kubectl-attath/" itemprop="url">8-kubectl attath</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00+08:00">2022-05-09</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/k8s/order/" itemprop="url" rel="index"><span itemprop="name">order</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">756</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -2275,7 +2268,18 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="kubectl-attath-用于动态查看pod中容器日志信息"><a href="#kubectl-attath-用于动态查看pod中容器日志信息" class="headerlink" title="kubectl attath 用于动态查看pod中容器日志信息"></a>kubectl attath 用于动态查看pod中容器日志信息</h1><p>[root@master ~]# kubectl attach mysql-3013141301-2000x</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="通过pod名称abcdocker删除-pod"><a href="#通过pod名称abcdocker删除-pod" class="headerlink" title="通过pod名称abcdocker删除 pod"></a>通过pod名称abcdocker删除 pod</h1><p>kubectl delete pod abcdocker</p>
+<h1 id="通过yaml删除pod"><a href="#通过yaml删除pod" class="headerlink" title="通过yaml删除pod"></a>通过yaml删除pod</h1><p>kubectl delete -f myapp-pod.yaml</p>
+<h1 id="删除服务"><a href="#删除服务" class="headerlink" title="删除服务"></a>删除服务</h1><pre><code class="textmate">$ kubectl get services
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+kubernetes            ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP     12m
+kubernetes-bootcamp   NodePort    10.99.175.225   &lt;none&gt;        8080:32172/TCP   10m
+$ kubectl delete service -l run=kubernetes-bootcamp
+service &quot;kubernetes-bootcamp&quot; deleted
+$ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
+</code></pre>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2367,7 +2371,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">403</span>
+                    <span class="site-state-item-count">407</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2758,7 +2762,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">415k</span>
+    <span title="站点总字数">416k</span>
   
 
   
@@ -2767,7 +2771,7 @@ kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   12m
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:55</span>
+    <span title="站点总阅读时长">6:56</span>
   
 </div>
 

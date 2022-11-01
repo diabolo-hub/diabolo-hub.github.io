@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-hbase-hbase/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/redis-notes-5-List%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/" itemprop="url">List底层数据结构实现</a></h1>
+                <a class="post-title-link" href="/2022/07/10/database-hbase-hbase/" itemprop="url">database-hbase-hbase</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
             
 
             
@@ -417,31 +417,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -464,7 +439,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">511</span>
               
 
               
@@ -500,9 +475,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="List底层数据结构实现"><a href="#List底层数据结构实现" class="headerlink" title="List底层数据结构实现"></a>List底层数据结构实现</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Redis列表是简单的字符串列表，按照插入顺序排序。<br>你可以添加一个元素到列表的头部（左边）或者尾部（右边），<br>主要的应用场景为消息队列、定时计算排行榜、非频繁更新的最新列表等，  </p>
-<h2 id="实现的数据结构"><a href="#实现的数据结构" class="headerlink" title="实现的数据结构"></a>实现的数据结构</h2><p>list（列表）实现的数据结构包括ziplist（压缩列表）和linkedlist(链表)，<br>当列表元素比较少（元素数量小于512个）且列表项是小整数值或者较短字符串（长度小于64个字节）时会用ziplist来作为的底层实现<br>否则转为使用linkedlist(链表)</p>
-<h2 id="ziplist（压缩列表）"><a href="#ziplist（压缩列表）" class="headerlink" title="ziplist（压缩列表）"></a>ziplist（压缩列表）</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            <script src="/assets/js/APlayer.min.js"> </script><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -558,7 +531,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/redis-notes-4-SDS%E5%92%8CC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-jdbc-1-Sharding-JDBC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -577,7 +550,326 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/06/29/redis-notes-4-SDS%E5%92%8CC%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">SDS和C字符串的区别</a></h1>
+                <a class="post-title-link" href="/2022/07/10/database-jdbc-1-Sharding-JDBC/" itemprop="url">database-jdbc-1-Sharding-JDBC</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">745</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/yixinjishu/p/10876071.html" target="_blank" rel="noopener">Sharding-JDBC 使用入门和基本配置</a></p>
+<p><a href="https://www.jianshu.com/p/60960deed354" target="_blank" rel="noopener">Sharding-JDBC简介</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/07/10/database-hbase-%E9%9D%A2%E8%AF%95%E9%A2%98-1-hbase%E9%9D%A2%E8%AF%95%E9%A2%981/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/10/database-hbase-%E9%9D%A2%E8%AF%95%E9%A2%98-1-hbase%E9%9D%A2%E8%AF%95%E9%A2%981/" itemprop="url">database-hbase-面试题-1-hbase面试题1</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-10T22:48:15+08:00">2022-07-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">626</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/bigdata-stone/p/9374751.html" target="_blank" rel="noopener">Hbase面试题1</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/log4j2-1-sql%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E6%8E%A7%E5%88%B6%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/29/log4j2-1-sql%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E6%88%96%E6%8E%A7%E5%88%B6%E5%8F%B0/" itemprop="url">sql日志打印到指定文件或控制台</a></h1>
         
 
         <div class="post-meta">
@@ -614,14 +906,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/log/" itemprop="url" rel="index"><span itemprop="name">log</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/log/log4j2/" itemprop="url" rel="index"><span itemprop="name">log4j2</span></a></span>
 
                 
                 
@@ -649,7 +941,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.8k</span>
+                <span title="字数统计">11k</span>
               
 
               
@@ -663,7 +955,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">11 mins.</span>
               
             </div>
           
@@ -685,35 +977,15 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="SDS和C字符串的区别-1"><a href="#SDS和C字符串的区别-1" class="headerlink" title="SDS和C字符串的区别 - 1"></a>SDS和C字符串的区别 - 1</h1><ol>
-<li><p>常数复杂度获取字符串长度：因为SDS定义了len字段来记录自身长度，而C字符串的长度需要去遍历整个字符串，复杂度为O(n),这里的设计就提现出来redis在细节之处对性能的追求</p>
-</li>
-<li><p>杜绝缓存区溢出：C字符串不记录自身长度，如果在执行字符串拼接操作时，缓存区没有足够的内存，一旦忘记分配新的内存，就会发生缓存区溢出，可能对它相邻的数据造成覆盖，而对SDS进行修改时，SDS可以通过保存的长度和空间信息进行空间检验，如果内存不足，会进行扩容操作</p>
-</li>
-<li><p>减少内存重分配次数：对于C字符串的修改，无论是增长还是缩短，都需要进行一次内存的重新分配，这样就会导致大量的时间浪费在内存的分配上，而SDS通过free来记录未使用空间，解除了字符串长度和底层数组之间的长度关联，通过空间预分配和惰性空间释放的方式来减少内存重新分配的次数，优化reids对数据频繁修改场景下的性能</p>
-</li>
-<li><p>二进制安全：C字符串通过末尾的空字符来确认读取的结束，这就对字符串的存储带来了限制，因为C字符串的中间不能出现空字符，否则会导致空字符后面的数据不能被读取，而SDS通过len字段保存了字符串的长度，这样在读取的时候就不需要通过空字符来确认是否读取完全，直接按照len来读取指定长度的字符串，这样使得redis不仅能保存字符串，还能保存任意格式的二进制数据</p>
-</li>
-</ol>
-<h1 id="SDS和C字符串的区别-2"><a href="#SDS和C字符串的区别-2" class="headerlink" title="SDS和C字符串的区别 - 2"></a>SDS和C字符串的区别 - 2</h1><ul>
-<li>C 字符串</li>
-</ul>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>（控制台或者日志文件二选一）mybatis设置sql语句打印在控制台或者日志文件中: https://blog.csdn.net/weixin_42585386/article/details/117328488
+</code></pre><hr>
+<h1 id="打印至控制台"><a href="#打印至控制台" class="headerlink" title="打印至控制台"></a>打印至控制台</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#************mybatis  Begin****************</span><br><span class="line">mybatis.mapper-locations&#x3D;classpath*:mappers&#x2F;**&#x2F;*.xml</span><br><span class="line">mybatis.type-aliases-package&#x3D;com.cic.irc.invoice.repository.dataobject</span><br><span class="line"># 打印DEBUG的sql日至至控制台</span><br><span class="line">mybatis.configuration.log-impl&#x3D;org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
+<h1 id="打印到指定文件"><a href="#打印到指定文件" class="headerlink" title="打印到指定文件"></a>打印到指定文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!--configuration status与monitorInterval采用默认值 --&gt;</span><br><span class="line">&lt;Configuration&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;!-- 这里的app_name改为对应子域的名称 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;app_name&quot;&gt;应用名&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_root&quot;&gt;.&#x2F;logs&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;log_level&quot;&gt;INFO&lt;&#x2F;property&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;db_log_level&quot;&gt;TRACE&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--定义appender --&gt;</span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;!--输出控制台的配置 --&gt;</span><br><span class="line">        &lt;Console name&#x3D;&quot;STDOUT-APPENDER&quot; target&#x3D;&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台输出日志格式--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;!--            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;$&#123;LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS&#125;&#125; $&#123;LOG_LEVEL_PATTERN:-%5p&#125; %processId -&amp;#45;&amp;#45; [%15.15t] %-40.40logger&#123;39&#125; : %m%n$&#123;LOG_EXCEPTION_CONVERSION_WORD:-%wEx&#125;&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;--&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Console name&#x3D;&quot;STDERR-APPENDER&quot; target&#x3D;&quot;SYSTEM_ERR&quot;&gt;</span><br><span class="line">            &lt;PatternLayout pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%c&#123;2&#125;,%-5p  - %m%n%throwable&quot; charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：错误节点日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;ERROR-APPENDER&quot; fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;common-error-%d&#123;yyyy-MM-dd&#125;.log&quot; append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">            &lt;ThresholdFilter level&#x3D;&quot;ERROR&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--打印节点定义：SQL日志--&gt;</span><br><span class="line">        &lt;RollingFile name&#x3D;&quot;SQL-APPENDER&quot;</span><br><span class="line">                     fileName&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql.log&quot;</span><br><span class="line">                     filePattern&#x3D;&quot;$&#123;log_root&#125;&#x2F;$&#123;app_name&#125;&#x2F;$&#123;app_name&#125;-sql-%d&#123;yyyy-MM-dd&#125;.log&quot;</span><br><span class="line">                     append&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern&#x3D;&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;,%t,%r,%-5p,[%X&#123;SOFA-TraceId&#125; %X&#123;SOFA-SpanId&#125; - %X&#123;remoteAddr&#125;&#x2F;%X&#123;clientId&#125; - %X&#123;requestURIWithQueryString&#125;] %c&#123;2&#125; - %m%n%throwable&quot;</span><br><span class="line">                    charset&#x3D;&quot;UTF-8&quot;&#x2F;&gt;</span><br><span class="line">            &lt;TimeBasedTriggeringPolicy&#x2F;&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;RollingFile&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDOUT&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;STDERR&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDERR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncLogger name&#x3D;&quot;cn.cic.irc.cc.infrastructure.repository.mapper&quot; additivity&#x3D;&quot;false&quot; level&#x3D;&quot;$&#123;db_log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;appender-ref ref&#x3D;&quot;SQL-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;!-- 虽然此处写了控制台日志打印，但是控制台和文件只能2选1--&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncLogger&gt;</span><br><span class="line"></span><br><span class="line">        &lt;AsyncRoot level&#x3D;&quot;$&#123;log_level&#125;&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;STDOUT-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">            &lt;AppenderRef ref&#x3D;&quot;ERROR-APPENDER&quot;&#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;AsyncRoot&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;Loggers&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;Configuration&gt;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>获取字符串长度的复杂度为 O(N) 。</li>
-<li>API 是不安全的，可能会造成缓冲区溢出。</li>
-<li>修改字符串长度 N 次必然需要执行 N 次内存重分配。</li>
-<li>只能保存文本数据。</li>
-<li>可以使用所有 <string.h> 库中的函数。 可以使用一部分 <string.h> 库中的函数。</li>
-</ol>
-<ul>
-<li>SDS</li>
-</ul>
-<ol>
-<li>获取字符串长度的复杂度为 O(1) 。（SDS结果中存储了len属性）</li>
-<li>API 是安全的，不会造成缓冲区溢出。（自动分配内存）</li>
-<li>修改字符串长度 N 次最多需要执行 N 次内存重分配。</li>
-<li>可以保存文本或者二进制数据。</li>
-<li>可以使用一部分 <string.h> 库中的函数。</li>
+<li>SQL-APPENDER 的异步日志即为sql日志</li>
+<li>控制台和文件日志只能2选1</li>
+<li>如果在springboot的application.properties中添加了 “mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl” 配置，那么日志只会打印在控制台中，删除后则会打印在指定文件</li>
 </ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
@@ -1168,6 +1440,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url">数据类型转换</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><ol>
+<li>从 int 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;price&quot;, numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    List&lt;String&gt; prices(List&lt;Integer&gt; prices);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>从 BigDecimal 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;power&quot;, numberFormat &#x3D; &quot;#.##E0&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>从日期到字符串的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;manufacturingDate&quot;, dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    List&lt;String&gt; stringListToDateList(List&lt;Date&gt; dates);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-4-uses%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1553,568 +2014,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-12-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url">数据类型转换</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><ol>
-<li>从 int 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;price&quot;, numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(numberFormat &#x3D; &quot;$#.00&quot;)</span><br><span class="line">    List&lt;String&gt; prices(List&lt;Integer&gt; prices);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>从 BigDecimal 到 String 的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;power&quot;, numberFormat &#x3D; &quot;#.##E0&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>从日期到字符串的转换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface CarMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(source &#x3D; &quot;manufacturingDate&quot;, dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    CarDto carToCarDto(Car car);</span><br><span class="line"></span><br><span class="line">    @IterableMapping(dateFormat &#x3D; &quot;dd.MM.yyyy&quot;)</span><br><span class="line">    List&lt;String&gt; stringListToDateList(List&lt;Date&gt; dates);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-7-%E6%98%A0%E5%B0%84%E7%BB%84%E5%90%88%EF%BC%88%E5%AE%9E%E9%AA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-7-%E6%98%A0%E5%B0%84%E7%BB%84%E5%90%88%EF%BC%88%E5%AE%9E%E9%AA%8C%EF%BC%89/" itemprop="url">映射组合（实验）</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="映射组合（实验）"><a href="#映射组合（实验）" class="headerlink" title="映射组合（实验）"></a>映射组合（实验）</h1><h2 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.CLASS)</span><br><span class="line">@Mapping(target &#x3D; &quot;id&quot;, ignore &#x3D; true)</span><br><span class="line">@Mapping(target &#x3D; &quot;creationDate&quot;, expression &#x3D; &quot;java(new java.util.Date())&quot;)</span><br><span class="line">@Mapping(target &#x3D; &quot;name&quot;, source &#x3D; &quot;groupName&quot;)</span><br><span class="line">public @interface ToEntity &#123; &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface StorageMapper &#123;</span><br><span class="line"></span><br><span class="line">    StorageMapper INSTANCE &#x3D; Mappers.getMapper( StorageMapper.class );</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;weightLimit&quot;, source &#x3D; &quot;maxWeight&quot;)</span><br><span class="line">    ShelveEntity map(ShelveDto source);</span><br><span class="line"></span><br><span class="line">    @ToEntity</span><br><span class="line">    @Mapping( target &#x3D; &quot;label&quot;, source &#x3D; &quot;designation&quot;)</span><br><span class="line">    BoxEntity map(BoxDto source);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>此功能仍处于试验阶段。错误信息还不成熟：显示问题发生的方法，以及@Mapping注解中的相关值。<br>但是，构图方面是不可见的。消息“好像”@Mapping会直接出现在相关方法上。<br>因此，用户应谨慎使用此功能，尤其是在不确定某个属性是否始终存在时。</p>
-<blockquote>
-<p>字段必须都存在才能使用</p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-9-%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/29/tool-mappingStruct-9-%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E6%BA%90%E5%8F%82%E6%95%B0%E7%9A%84%E6%98%A0%E5%B0%84%E6%96%B9%E6%B3%95/" itemprop="url">具有多个源参数的映射方法</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-29T00:00:00+08:00">2022-06-29</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/mappingStruct/" itemprop="url" rel="index"><span itemprop="name">mappingStruct</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="具有多个源参数的映射方法"><a href="#具有多个源参数的映射方法" class="headerlink" title="具有多个源参数的映射方法"></a>具有多个源参数的映射方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Mapper</span><br><span class="line">public interface AddressMapper &#123;</span><br><span class="line"></span><br><span class="line">    @Mapping(target &#x3D; &quot;description&quot;, source &#x3D; &quot;person.description&quot;)</span><br><span class="line">    @Mapping(target &#x3D; &quot;houseNumber&quot;, source &#x3D; &quot;address.houseNo&quot;)</span><br><span class="line">    DeliveryAddressDto personAndAddressToDeliveryAddressDto(Person person, Address address);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/29/tool-mappingStruct-8-%E5%90%91%E6%98%A0%E5%B0%84%E5%99%A8%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2338,7 +2237,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">403</span>
+                    <span class="site-state-item-count">407</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2729,7 +2628,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">415k</span>
+    <span title="站点总字数">416k</span>
   
 
   
@@ -2738,7 +2637,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:55</span>
+    <span title="站点总阅读时长">6:56</span>
   
 </div>
 

@@ -373,6 +373,697 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-Kafka%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E5%A4%A7%E5%85%A8/" itemprop="url">分布式-分布式消息队列-kafka-笔记-Kafka本地测试大全</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="启动kafka（需要先启动zookeeper）"><a href="#启动kafka（需要先启动zookeeper）" class="headerlink" title="启动kafka（需要先启动zookeeper）"></a>启动kafka（需要先启动zookeeper）</h1><p>.\bin\windows\kafka-server-start.bat .\config\server.properties</p>
+<hr>
+<p>title: “随机查询数据”<br>date: 2022-03-18<br>comments: true<br>share: true<br>toc: true<br>categories:</p>
+<ul>
+<li>分布式</li>
+<li>MQ</li>
+<li>kafka</li>
+<li>notes<br>tags:</li>
+<li>kafka</li>
+</ul>
+<hr>
+<h1 id="创建主题，同一个主题创建一次即可。"><a href="#创建主题，同一个主题创建一次即可。" class="headerlink" title="创建主题，同一个主题创建一次即可。"></a>创建主题，同一个主题创建一次即可。</h1><p>.\bin\windows\kafka-topics.bat –create –zookeeper localhost:2181 –replication-factor 1 –partitions 1 –topic test1<br>或<br>.\bin\windows\kafka-topics.bat –create –bootstrap-server localhost:9092 –replication-factor 1 –partitions 1 –topic test1</p>
+<h1 id="启动生产者和消费者"><a href="#启动生产者和消费者" class="headerlink" title="启动生产者和消费者"></a>启动生产者和消费者</h1><p>.\bin\windows\kafka-console-producer.bat –broker-list localhost:9092 –topic test1</p>
+<p>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning</p>
+<h1 id="列出所有topic"><a href="#列出所有topic" class="headerlink" title="列出所有topic"></a>列出所有topic</h1><p>.\bin\windows\kafka-topics.bat –list –bootstrap-server localhost:9092</p>
+<h1 id="查看指定topic"><a href="#查看指定topic" class="headerlink" title="查看指定topic"></a>查看指定topic</h1><p>.\bin\windows\kafka-topics.bat –describe –bootstrap-server localhost:9092 –topic test1</p>
+<h1 id="增加topic的partition"><a href="#增加topic的partition" class="headerlink" title="增加topic的partition"></a>增加topic的partition</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –alter –topic test1 –partitions 5</p>
+<h1 id="查看-topic-指定分区-offset-的最大值或最小值"><a href="#查看-topic-指定分区-offset-的最大值或最小值" class="headerlink" title=".查看 topic 指定分区 offset 的最大值或最小值"></a>.查看 topic 指定分区 offset 的最大值或最小值</h1><p>.\bin\windows\kafka-run-class.bat kafka.tools.GetOffsetShell –topic test1 –time -1 –broker-list 127.0.0.1:9092 –partitions 0 </p>
+<h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
+<blockquote>
+<p> windows环境下删除topic需要关注brokder情况</p>
+</blockquote>
+<h1 id="消费消息"><a href="#消费消息" class="headerlink" title="消费消息"></a>消费消息</h1><p>1.从头开始<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –from-beginning<br>2.从尾部开始<br>从尾部开始取数据，必需要指定分区：<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</p>
+<ol>
+<li>指定分区<br>.\bin\windows\kafka-console-consumer.bat –bootstrap-server localhost:9092 –topic test1 –offset latest –partition 0</li>
+</ol>
+<h1 id="消费者Group"><a href="#消费者Group" class="headerlink" title="消费者Group"></a>消费者Group</h1><ol>
+<li>指定Group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –topic test1 -group test_group –from-beginning</li>
+<li>消费者Group列表<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –list</li>
+<li>查看Group详情[用来判断是否有延迟数据]<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –describe<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Consumer group &#39;test_group&#39; has no active members.</span><br><span class="line"></span><br><span class="line">TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID</span><br><span class="line">test            0          5               5               0               -               -               -</span><br><span class="line"></span><br><span class="line"># CURRENT-OFFSET: 当前消费者群组最近提交的 offset，也就是消费者分区里读取的当前位置</span><br><span class="line"># LOG-END-OFFSET: 当前最高水位偏移量，也就是最近一个读取消息的偏移量，同时也是最近一个提交到集群的偏移量</span><br><span class="line"># LAG：消费者的 CURRENT-OFFSET 与 broker 的 LOG-END-OFFSET 之间的差距</span><br></pre></td></tr></table></figure></li>
+<li>删除group<br>.\bin\windows\kafka-consumer-groups.bat –bootstrap-server localhost:9092 –group test_group –delete</li>
+</ol>
+<h1 id="平衡Leader"><a href="#平衡Leader" class="headerlink" title="平衡Leader"></a>平衡Leader</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kafka-preferred-replica-election.sh --bootstrap-server localhost:9092</span><br><span class="line">或</span><br><span class="line">kafka-leader-election.sh --bootstrap-server localhost:9092 --topic test --partition&#x3D;2 --election-type preferred</span><br><span class="line">--partition:指定需要重新分配leader的partition编号</span><br></pre></td></tr></table></figure>
+<h1 id="自带压测工具"><a href="#自带压测工具" class="headerlink" title="自带压测工具"></a>自带压测工具</h1><p>kafka-producer-perf-test.sh –topic test –num-records 100 –record-size 1 –throughput 100 –producer-props bootstrap.servers=localhost:9092 </p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E7%AC%94%E8%AE%B0-windows%E4%B8%8B%E5%88%A0%E9%99%A4topic/" itemprop="url">分布式-分布式消息队列-kafka-笔记-windows下删除topic</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="删除topic"><a href="#删除topic" class="headerlink" title="删除topic"></a>删除topic</h1><p>.\bin\windows\kafka-topics.bat –bootstrap-server localhost:9092 –topic test2 –delete </p>
+<h1 id="列出所有topic"><a href="#列出所有topic" class="headerlink" title="列出所有topic"></a>列出所有topic</h1><p>.\bin\windows\kafka-topics.bat –list –bootstrap-server localhost:9092</p>
+<h1 id="删除Topic之后需要如下操作才能正常使用"><a href="#删除Topic之后需要如下操作才能正常使用" class="headerlink" title="删除Topic之后需要如下操作才能正常使用"></a>删除Topic之后需要如下操作才能正常使用</h1><ol>
+<li>删除test2对应的kafka日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\kafka-logs\test2-0</span><br></pre></td></tr></table></figure></li>
+<li>删除 ZK 日志<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\tmp\zookeeper\version-2\log.2a（或其他）</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/" itemprop="url">分布式-分布式消息队列-kafka-异常-Kafka启动日志分析</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">6.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="记录新的控制器，从现在开始将使用代理"><a href="#记录新的控制器，从现在开始将使用代理" class="headerlink" title="记录新的控制器，从现在开始将使用代理"></a>记录新的控制器，从现在开始将使用代理</h1><p>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=forwarding]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)<br>[2022-04-05 00:19:01,198] INFO [BrokerToControllerChannelManager broker=0 name=alterIsr]: Recorded new controller, from now on will use broker LAPTOP-BKST47D9:9092 (id: 0 rack: null) (kafka.server.BrokerToControllerRequestThread)</p>
+<h1 id="For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition"><a href="#For-requests-intended-only-for-the-leader-this-error-indicates-that-the-broker-is-not-the-current-leader-For-requests-intended-for-any-replica-this-error-indicates-that-the-broker-is-not-a-replica-of-the-topic-partition" class="headerlink" title="For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition"></a>For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;0</span><br><span class="line">&gt;[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 4 on topic-partition test2-0, retrying (2 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,822] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,937] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 6 on topic-partition test2-0, retrying (1 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:21,938] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Got error produce response with correlation id 8 on topic-partition test2-0, retrying (0 attempts left). Error: NOT_LEADER_OR_FOLLOWER (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,041] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br><span class="line">[2022-04-05 00:55:22,145] ERROR Error when sending message to topic test2 with key: null, value: 1 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.</span><br><span class="line">[2022-04-05 00:55:22,145] WARN [Producer clientId&#x3D;console-producer] Received invalid metadata error in produce request on partition test2-0 due to org.apache.kafka.common.errors.NotLeaderOrFollowerException: For requests intended only for the leader, this error indicates that the broker is not the current leader. For requests intended for any replica, this error indicates that the broker is not a replica of the topic partition.. Going to request metadata update now (org.apache.kafka.clients.producer.internals.Sender)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原因是在集群环境下建立topic的时候，没有建立分区和副本，所以报了这个错。重新修改topic信息，然后就可以了。</p>
+</blockquote>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-kafka%E5%90%AF%E5%8A%A8doesn-t-match-stored-clusterId-Some-vSZ9JoaaSYmqv4MNleLXfg-in-meta-properties/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-kafka%E5%90%AF%E5%8A%A8doesn-t-match-stored-clusterId-Some-vSZ9JoaaSYmqv4MNleLXfg-in-meta-properties/" itemprop="url">分布式-分布式消息队列-kafka-异常-kafka启动doesn-t-match-stored-clusterId-Some-vSZ9JoaaSYmqv4MNleLXfg-in-meta-properties</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="doesn’t-match-stored-clusterId-Some-vSZ9JoaaSYmqv4MNleLXfg-in-meta-properties"><a href="#doesn’t-match-stored-clusterId-Some-vSZ9JoaaSYmqv4MNleLXfg-in-meta-properties" class="headerlink" title="doesn’t match stored clusterId Some(vSZ9JoaaSYmqv4MNleLXfg) in meta.properties"></a>doesn’t match stored clusterId Some(vSZ9JoaaSYmqv4MNleLXfg) in meta.properties</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">INFO Cluster ID &#x3D; QihSqRV1TiiUuqq8IxcoMw (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-04 22:00:21,646] ERROR Fatal error during KafkaServer startup. Prepare to shutdown (kafka.server.KafkaServer)</span><br><span class="line">kafka.common.InconsistentClusterIdException: The Cluster ID QihSqRV1TiiUuqq8IxcoMw doesn&#39;t match stored clusterId Some(vSZ9JoaaSYmqv4MNleLXfg) in meta.properties. The broker is trying to join the wrong cluster. Configured zookeeper.connect may be wrong.</span><br><span class="line">        at kafka.server.KafkaServer.startup(KafkaServer.scala:228)</span><br><span class="line">        at kafka.Kafka$.main(Kafka.scala:109)</span><br><span class="line">        at kafka.Kafka.main(Kafka.scala)</span><br><span class="line">[2022-04-04 22:00:21,678] INFO shutting down (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-04 22:00:21,678] INFO [feature-zk-node-event-process-thread]: Shutting down (kafka.server.FinalizedFeatureChangeListener$ChangeNotificationProcessorThread)</span><br><span class="line">[2022-04-04 22:00:21,678] INFO [feature-zk-node-event-process-thread]: Stopped (kafka.server.FinalizedFeatureChangeListener$ChangeNotificationProcessorThread)</span><br><span class="line">[2022-04-04 22:00:21,678] INFO [feature-zk-node-event-process-thread]: Shutdown completed (kafka.server.FinalizedFeatureChangeListener$ChangeNotificationProcessorThread)</span><br><span class="line">[2022-04-04 22:00:21,678] INFO [ZooKeeperClient Kafka server] Closing. (kafka.zookeeper.ZooKeeperClient)</span><br><span class="line">[2022-04-04 22:00:21,846] INFO Session: 0x10016d131540000 closed (org.apache.zookeeper.ZooKeeper)</span><br><span class="line">[2022-04-04 22:00:21,846] INFO EventThread shut down for session: 0x10016d131540000 (org.apache.zookeeper.ClientCnxn)</span><br><span class="line">[2022-04-04 22:00:21,846] INFO [ZooKeeperClient Kafka server] Closed. (kafka.zookeeper.ZooKeeperClient)</span><br><span class="line">[2022-04-04 22:00:21,861] INFO App info kafka.server for 0 unregistered (org.apache.kafka.common.utils.AppInfoParser)</span><br><span class="line">[2022-04-04 22:00:21,861] INFO shut down completed (kafka.server.KafkaServer)</span><br><span class="line">[2022-04-04 22:00:21,861] ERROR Exiting Kafka. (kafka.Kafka$)</span><br><span class="line">[2022-04-04 22:00:21,892] INFO shutting down (kafka.server.KafkaServer)</span><br></pre></td></tr></table></figure>
+<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><ol>
+<li>找到 config/server.properties 中的log.dir<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">############################# Log Basics #############################</span><br><span class="line"></span><br><span class="line"># A comma separated list of directories under which to store log files</span><br><span class="line">log.dirs&#x3D;D:&#x2F;tmp&#x2F;kafka-logs</span><br></pre></td></tr></table></figure></li>
+<li>找到 log.dirs 下的meta.properties<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line">#Sun Jun 14 19:58:03 CST 2020</span><br><span class="line">cluster.id&#x3D;vSZ9JoaaSYmqv4MNleLXfg</span><br><span class="line">version&#x3D;0</span><br><span class="line">broker.id&#x3D;0</span><br></pre></td></tr></table></figure></li>
+<li>将错误提示里的id = vSZ9JoaaSYmqv4MNleLXfg ，修改在文件里<blockquote>
+<p>匹配后发现cluster.id与错误日志中的id一致</p>
+<h2 id="处理2"><a href="#处理2" class="headerlink" title="处理2"></a>处理2</h2></blockquote>
+</li>
+<li>直接删除log.dirs=D:/tmp/kafka-logs/meta.properties文件，重启即可<blockquote>
+<p>只要该目录存在，再重启kafka时会自动生成该文件</p>
+</blockquote>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-kafka-%E5%BC%82%E5%B8%B8-Kafka%E5%90%AF%E5%8A%A8-node-already-exists-and-owner-72083030559031298-does-not-match-current-session-72083315371278336/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1346,784 +2037,6 @@
 
       
     
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" itemprop="url">python-notes-course-1-4-字符串的编码问题</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="字符串编码（中文）"><a href="#字符串编码（中文）" class="headerlink" title="字符串编码（中文）"></a>字符串编码（中文）</h1><p>当Python 解释器读取源代码时，为了让它按 UTF-8 编码读取，我们通常在文件开头写上这两行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>第一行注释是为了告诉 Linux/OS X 系统，这是一个 Python 可执行程序，Windows 系统会忽略这个注释；</li>
-<li>第二行注释是为了告诉 Python 解释器，按照 UTF-8 编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。<blockquote>
-<p>申明了 UTF-8 编码并不意味着你的 .py 文件就是 UTF-8 编码的，必须并且要确保文本编辑器正在使用 UTF-8 without BOM 编码</p>
-</blockquote>
-</li>
-</ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-5-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-5-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" itemprop="url">python-notes-course-1-5-基本数据类型转换</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h1><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>int(x[,base ])</td>
-<td>将x转换为一个整数</td>
-</tr>
-<tr>
-<td>float(x )</td>
-<td>将x转换到一个浮点数</td>
-</tr>
-<tr>
-<td>complex(real [,imag ])</td>
-<td>创建一个复数</td>
-</tr>
-<tr>
-<td>str(x )</td>
-<td>将对象 x 转换为字符串</td>
-</tr>
-<tr>
-<td>repr(x )</td>
-<td>将对象 x 转换为表达式字符串</td>
-</tr>
-<tr>
-<td>eval(str )</td>
-<td>用来计算在字符串中的有效 Python 表达式,并返回一个对象</td>
-</tr>
-<tr>
-<td>tuple(s )</td>
-<td>将序列 s 转换为一个元组</td>
-</tr>
-<tr>
-<td>list(s )</td>
-<td>将序列 s 转换为一个列表</td>
-</tr>
-<tr>
-<td>chr(x )</td>
-<td>将一个整数转换为一个字符</td>
-</tr>
-<tr>
-<td>unichr(x )</td>
-<td>将一个整数转换为 Unicode 字符</td>
-</tr>
-<tr>
-<td>ord(x )</td>
-<td>将一个字符转换为它的整数值</td>
-</tr>
-<tr>
-<td>hex(x )</td>
-<td>将一个整数转换为一个十六进制字符串</td>
-</tr>
-<tr>
-<td>oct(x )</td>
-<td>将一个整数转换为一个八进制字符串</td>
-</tr>
-</tbody>
-</table>
-<h1 id="整数形式的字符串可以转换成功int"><a href="#整数形式的字符串可以转换成功int" class="headerlink" title="整数形式的字符串可以转换成功int"></a>整数形式的字符串可以转换成功int</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(int(&#39;128&#39;))</span><br></pre></td></tr></table></figure>
-<h1 id="小数形式的字符串不能转换成int"><a href="#小数形式的字符串不能转换成int" class="headerlink" title="小数形式的字符串不能转换成int"></a>小数形式的字符串不能转换成int</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(int(&#39;88.99&#39;))</span><br><span class="line"># 转换失败，报错</span><br></pre></td></tr></table></figure>
-<h1 id="浮点数可以转换成int"><a href="#浮点数可以转换成int" class="headerlink" title="浮点数可以转换成int"></a>浮点数可以转换成int</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(int(88.99))</span><br><span class="line"># 输出结果 88，取整处理</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-6-%E5%A4%9A%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC/" itemprop="url">python-notes-course-1-6-多变量赋值</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">900</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="多变量赋值"><a href="#多变量赋值" class="headerlink" title="多变量赋值"></a>多变量赋值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, c &#x3D; 1, 2, &quot;liangdianshui&quot;</span><br></pre></td></tr></table></figure>
-<p>以上实例，两个整型对象 1 和 2 的分配给变量 a 和 b，字符串对象 “liangdianshui” 分配给变量 c。</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/08/03/python-notes-course-1-7-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/08/03/python-notes-course-1-7-list/" itemprop="url">python-notes-course-1-7-list</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T14:13:03+08:00">2022-08-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">5.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="创建list"><a href="#创建list" class="headerlink" title="创建list"></a>创建list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list1&#x3D;[&#39;两点水&#39;,&#39;twowter&#39;,&#39;liangdianshui&#39;,123]</span><br></pre></td></tr></table></figure>
-<h1 id="如何访问list中的值"><a href="#如何访问list中的值" class="headerlink" title="如何访问list中的值"></a>如何访问list中的值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">name &#x3D; [&#39;一点水&#39;, &#39;两点水&#39;, &#39;三点水&#39;, &#39;四点水&#39;, &#39;五点水&#39;]</span><br><span class="line"></span><br><span class="line"># 通过索引来访问列表</span><br><span class="line">print(name[2])</span><br><span class="line"># 通过方括号的形式来截取列表中的数据</span><br><span class="line">print(name[0:2])</span><br><span class="line"># 左闭右开，只会打印： 一点水  两点水</span><br><span class="line"></span><br><span class="line"># 打印整个list</span><br><span class="line">print(name[:])</span><br><span class="line"></span><br><span class="line"># 左闭右开，从左边初始位置到右边的2，打印一点水  两点水</span><br><span class="line">print(name[:2])</span><br><span class="line"></span><br><span class="line"># 从左边2索引开始，一直打印到最后，三点水  四点水 五点水</span><br><span class="line">print(name[2:])</span><br></pre></td></tr></table></figure>
-<h1 id="如何更新list"><a href="#如何更新list" class="headerlink" title="如何更新list"></a>如何更新list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 通过索引对列表的数据项进行修改或更新</span><br><span class="line">name[1]&#x3D;&#39;2点水&#39;</span><br><span class="line">print(name)</span><br><span class="line"></span><br><span class="line"># 使用 append() 方法来添加列表项</span><br><span class="line">name.append(&#39;六点水&#39;)</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
-<h1 id="如何删除元素"><a href="#如何删除元素" class="headerlink" title="如何删除元素"></a>如何删除元素</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 使用 del 语句来删除列表的的元素</span><br><span class="line">del name[3]</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
-<h1 id="list常用运算符"><a href="#list常用运算符" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><h2 id="求长度"><a href="#求长度" class="headerlink" title="求长度"></a>求长度</h2><p>len(list)                              3</p>
-<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>[1, 2, 3] + [4, 5, 6] = [1, 2, 3, 4, 5, 6]      </p>
-<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><p>[‘Hi!’] * 4                            [‘Hi!’, ‘Hi!’, ‘Hi!’, ‘Hi!’]    </p>
-<h2 id="元素是否存在列表中"><a href="#元素是否存在列表中" class="headerlink" title="元素是否存在列表中"></a>元素是否存在列表中</h2><p>3 in [1, 2, 3]                        true or false</p>
-<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>for x in [1, 2, 3]: print x,        1 2 3</p>
-<h1 id="list常用运算符-1"><a href="#list常用运算符-1" class="headerlink" title="list常用运算符"></a>list常用运算符</h1><table>
-<thead>
-<tr>
-<th>函数&amp;方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>len(list)</td>
-<td>列表元素个数</td>
-</tr>
-<tr>
-<td>max(list)</td>
-<td>返回列表元素最大值</td>
-</tr>
-<tr>
-<td>min(list)</td>
-<td>返回列表元素最小值</td>
-</tr>
-<tr>
-<td>list(seq)</td>
-<td>将元组转换为列表</td>
-</tr>
-<tr>
-<td>list.append(obj)</td>
-<td>在列表末尾添加新的对象</td>
-</tr>
-<tr>
-<td>list.count(obj)</td>
-<td>统计某个元素在列表中出现的次数</td>
-</tr>
-<tr>
-<td>list.extend(seq)</td>
-<td>在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）</td>
-</tr>
-<tr>
-<td>list.index(obj)</td>
-<td>从列表中找出某个值第一个匹配项的索引位置</td>
-</tr>
-<tr>
-<td>list.insert(index, obj)</td>
-<td>将对象插入列表</td>
-</tr>
-<tr>
-<td>list.pop(obj=list[-1])</td>
-<td>移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</td>
-</tr>
-<tr>
-<td>list.remove(obj)</td>
-<td>移除列表中的一个元素（参数是列表中元素），并且不返回任何值</td>
-</tr>
-<tr>
-<td>list.reverse()</td>
-<td>反向列表中元素</td>
-</tr>
-<tr>
-<td>list.sort([func])</td>
-<td>对原列表进行排序</td>
-</tr>
-</tbody>
-</table>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -2175,7 +2088,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">403</span>
+                    <span class="site-state-item-count">407</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2566,7 +2479,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">415k</span>
+    <span title="站点总字数">416k</span>
   
 
   
@@ -2575,7 +2488,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:55</span>
+    <span title="站点总阅读时长">6:56</span>
   
 </div>
 
