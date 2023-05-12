@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-11-01T07:45:12.829Z</updated>
+  <updated>2023-05-04T07:11:40.328Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,19 +17,334 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>git reset代码回滚</title>
+    <link href="http://yoursite.com/2023/05/04/git-%E7%AC%94%E8%AE%B0-git-reset%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/"/>
+    <id>http://yoursite.com/2023/05/04/git-笔记-git-reset代码回滚/</id>
+    <published>2023-05-03T16:00:00.000Z</published>
+    <updated>2023-05-04T07:11:40.328Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="本地仓库分支切换到需要回退到代码分支，如：-master"><a href="#本地仓库分支切换到需要回退到代码分支，如：-master" class="headerlink" title="本地仓库分支切换到需要回退到代码分支，如： master"></a>本地仓库分支切换到需要回退到代码分支，如： master</h1><p>git checkout master</p><h1 id="查找分析要回退到版本及hash码"><a href="#查找分析要回退到版本及hash码" class="headerlink" title="查找分析要回退到版本及hash码"></a>查找分析要回退到版本及hash码</h1><p><a href="https://www.zhihu.com/question/284554416/answer/438352639" target="_blank" rel="noopener">怎么才能看懂 git log的线？</a></p><ol><li>查看当前分支到log线<br>git log –oneline –graph –decorate</li><li>查看两个分支间的关系线<br>git log –oneline –graph –decorate master dev</li><li>查看指定分支hash码(b4ad2d0)的父节点等信息<br>git log -1 –pretty=raw b4ad2d0</li></ol><h1 id="版本文件回退"><a href="#版本文件回退" class="headerlink" title="版本文件回退"></a>版本文件回退</h1><ol><li>在ideal中，git日志控制台中，选中需要回退到的版本记录位置，<br>右键：将当前分支重置到此处…<br>然后弹窗选择：硬 （状态回退到此处，且文件也变更回退到此处），本地有文件未提交的会丢失<br>然后点击确定，本地仓库文件即已经回退</li><li><p>hash码回退<br>右键项目-&gt;git-&gt;重置HEAD（reset head）-&gt; 将提交的位置输入要回退到的版本的hash码<br>此处reset_type:选择 Hard (硬，与上面理由一样）<br>验证可以查看具体回退的内容，确定（reset）即可</p></li><li><p>命令回退<br>git reset –hard b25b0411b9d00e7aafd7b164b499be293a1bb942<br>git reset –soft（软） HEAD^</p></li><li><p>git 利用tag回退版本及合并两个远程分支<br><a href="https://blog.csdn.net/mafei6827/article/details/80341067" target="_blank" rel="noopener">git 利用tag回退版本及合并两个远程分支</a><br><a href="https://zhuanlan.zhihu.com/p/568937594" target="_blank" rel="noopener">git回退到tag</a><br><a href="https://blog.csdn.net/rjzcsdn/article/details/123741084" target="_blank" rel="noopener">git tag使用</a></p></li></ol><h1 id="如何推送"><a href="#如何推送" class="headerlink" title="如何推送"></a>如何推送</h1><p>git push -f<br>你可以简单地用–force（或-f）（*）解决这个问题：<br>git push –force<br>您可能需要再次设置上游：<br>git push –force –set-upstream origin <branch><br>例如： git push –force –set-upstream origin master</p><p><a href="https://qa.1r1g.com/sf/ask/141158041/" target="_blank" rel="noopener">git reset后无法推送–soft HEAD ^</a></p><h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ol><li>git push –set-upstream origin master<br>如果有分支保护，不能–force</li><li>git push –force –set-upstream origin master<br>必须取消分支保护</li><li>需要 –set-upstream 才能推到远程，否则一直推不上去，需要将远程代码合并merge下来（远程还是未合并的代码，又会重复覆盖本地），一直循环<br>git push –force –set-upstream origin master</li></ol><h1 id="其他参考文献"><a href="#其他参考文献" class="headerlink" title="其他参考文献"></a>其他参考文献</h1><p><a href="https://blog.csdn.net/qq_39512532/article/details/110260369" target="_blank" rel="noopener">Git变基</a><br><a href="https://www.kernel.org/pub/software/scm/git/docs/user-manual.html#problems-With-rewriting-history" target="_blank" rel="noopener">请注意，如果其他人已经撤回了您的工作，这将产生后果，因为会有不同的提交进行相同的更改（可能）。请参阅</a><br>[git stash 暂存]（）</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;本地仓库分支切换到需要回退到代码分支，如：-master&quot;&gt;&lt;a href=&quot;#本地仓库分支切换到需要回退到代码分支，如：-master&quot; class=&quot;heade
+      
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/git/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何将spring管理的bean注入到静态方法</title>
+    <link href="http://yoursite.com/2023/04/23/spring-bean-1-%E5%A6%82%E4%BD%95%E5%B0%86spring%E7%AE%A1%E7%90%86%E7%9A%84bean%E6%B3%A8%E5%85%A5%E5%88%B0%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD/"/>
+    <id>http://yoursite.com/2023/04/23/spring-bean-1-如何将spring管理的bean注入到静态方法中/</id>
+    <published>2023-04-22T16:00:00.000Z</published>
+    <updated>2023-04-23T06:38:05.961Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><pre><code>如何将spring管理的bean注入到静态方法: https://blog.csdn.net/constant_rain/article/details/108601374</code></pre><hr><h1 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h1><p>static:  该方法或者变量就成为了类方法或变量，随着类的加载而加载，会被当前类下的所有对象所共有</p><p>@Resource: springbean工厂中匹配一个对象，对象级别</p><h1 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h1><p>类的所有静态属性加载 -&gt; springbean匹配</p><h1 id="普通的静态方法注入springbean对象为空原因"><a href="#普通的静态方法注入springbean对象为空原因" class="headerlink" title="普通的静态方法注入springbean对象为空原因"></a>普通的静态方法注入springbean对象为空原因</h1><p>静态属性会在程序启动第一次启动时完成加载，且之后不会再有变动<br>之后才开始springbean注入，所以为空</p><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStaticUtil</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  TestSpringBean testSpringBean;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TestStaticUtil testStaticUtil;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil = <span class="keyword">this</span>;</span><br><span class="line">        testStaticUtil.testSpringBean = <span class="keyword">this</span>.testSpringBean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSpring</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil.testSpringBean.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;如何将spring管理的bean注入到静态方法: https://blog.csdn.net/constant_rain/article/detai
+      
+    
+    </summary>
+    
+      <category term="spring" scheme="http://yoursite.com/categories/spring/"/>
+    
+      <category term="bean" scheme="http://yoursite.com/categories/spring/bean/"/>
+    
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>@FunctionalInterface接口</title>
+    <link href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface接口/</id>
+    <published>2023-04-22T16:00:00.000Z</published>
+    <updated>2023-04-24T01:41:45.462Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><pre><code>Java8新特性探索之函数式接口: https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;mid=2651023894&amp;idx=2&amp;sn=d8eccac647e66e871c8a1befddf9a9d5&amp;chksm=84e75a5db390d34beda058d32c2d2967c20eb1d2fffd0a7453b845f436f66c324b32949d200a&amp;scene=27</code></pre><hr><h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol><li>x -&gt; x.toString()，如何知道 x 是什么类型？</li><li>Lambda 表达式包含类型推导（编译器会自动推导出类型信息，避免了程序员显式地声明），编译器必须能够以某种方式推导出 x 的类型以生成正确的代码</li><li>同样方法引用也存在此问题，假设你要传递 System.out :: println 到你正在编写的方法 ，你怎么知道传递给方法的参数的类型？<blockquote><p>为了解决上述问题，java8引入了函数式接口</p></blockquote></li></ol><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol><li>函数式接口定义<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : Daiyin.Zhang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> ：$Id: java.lang.String.java v 1.0.0 2023/03/07 $&#123;TIME&#125; Daiyin.Zhang Exp $</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> : 公共子序列服务</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2023/03/07 new Date()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommonSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IdServiceException id服务异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">get</span><span class="params">(String key)</span> <span class="keyword">throws</span> IdServiceException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>函数式接口使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonSequenceServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IdGenService idGenService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 得到id</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> CommonSequenceService&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> CommonSequenceService <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (key) -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> == key || <span class="string">""</span>.equals(key)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"key is not found"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> idGenService.getId(key);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>接口服务使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OutSequenceServiceImpl</span> <span class="keyword">implements</span> <span class="title">OutSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CommonSequenceServiceImpl commonSequenceServiceImpl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销项通用序列号</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getOutCommonNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> commonSequenceServiceImpl.getId().get(SeqCodeConstant.INV_OUT_COMMON_NO_KEY);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IdServiceException e) &#123;</span><br><span class="line">            log.error(<span class="string">"get out common no excp : &#123;&#125;"</span>, e.getMessage(), e);</span><br><span class="line">            <span class="keyword">return</span> SerialNoUtil.getSeqInvoiceNo();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;Java8新特性探索之函数式接口: https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;amp;mi
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+      <category term="java8" scheme="http://yoursite.com/categories/java/java8/"/>
+    
+    
+      <category term="java8" scheme="http://yoursite.com/tags/java8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>@FunctionalInterface接口</title>
+    <link href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%88%AB/"/>
+    <id>http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-2-函数式接口类别/</id>
+    <published>2023-04-22T16:00:00.000Z</published>
+    <updated>2023-04-24T01:48:37.834Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><hr><h1 id="函数式接口分类"><a href="#函数式接口分类" class="headerlink" title="函数式接口分类"></a>函数式接口分类</h1><p>Supplier供给型函数：Supplier的表现形式为不接受参数、只返回数据。<br>Consumer消费型函数：Consumer接收一个参数，没有返回值。<br>Runnable无参无返回型函数：Runnable的表现形式为即没有参数也没有返回值。<br>Function有参有返回型函数：Function函数的表现形式为接收一个参数，并返回一个值。</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;hr&gt;
+&lt;h1 id=&quot;函数式接口分类&quot;&gt;&lt;a href=&quot;#函数式接口分类&quot; class=&quot;headerlink&quot; title=&quot;函数式接口分类&quot;&gt;&lt;/a&gt;函数式接口
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+      <category term="java8" scheme="http://yoursite.com/categories/java/java8/"/>
+    
+    
+      <category term="java8" scheme="http://yoursite.com/tags/java8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL数据库Binlog解析工具--binlog2sql</title>
+    <link href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/"/>
+    <id>http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL数据库Binlog解析工具-binlog2sql/</id>
+    <published>2023-01-03T16:00:00.000Z</published>
+    <updated>2023-01-04T12:04:13.948Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/chinasoft/p/16441022.html" target="_blank" rel="noopener">MySQL数据库Binlog解析工具–binlog2sql</a></p><h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p><a href="https://gitee.com/wwbjqcom/binlogAL" target="_blank" rel="noopener">binlogAL(binlog analysis)</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/chinasoft/p/16441022.html&quot; target=&quot;_blank&quot; rel=&quot;noopen
+      
+    
+    </summary>
+    
+      <category term="database" scheme="http://yoursite.com/categories/database/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/database/mysql/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/database/mysql/notes/"/>
+    
+    
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="binlog" scheme="http://yoursite.com/tags/binlog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysqlbinlog-日志管理工具</title>
+    <link href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"/>
+    <id>http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-日志管理工具/</id>
+    <published>2023-01-03T16:00:00.000Z</published>
+    <updated>2023-01-04T11:48:34.870Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>mysqlbinlog [options] log_file1 log_file2…</p><h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><p>–base64-output=name：决定binlog输出格式选项，<br>auto–自动显示binlog语句所有格式；<br>never–禁止显示binlog语句；<br>decode-rows–禁止显示binlog语句</p><p>–database=db_name, -d db_name：只显示指定数据库的日志</p><p>–verbose,-v：从行事件中重建伪 sql 语句</p><p>–verbose –verbose, -vv：从行事件中重建伪 sql 语句，添加对数据类型的注释</p><p>–start-datetime=datetime –stop-datetime=datetime：指定日期间隔的日志</p><p>–start-position=N –stop-position=N：指定事件位置间隔的日志</p><p>–skip-gtids[=(true|false)] ：不显示GTID</p><h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><ol><li>创建新日志，对mysql和数据库做DML<br>flush logs</li><li>不加参数显示binlog<br>mysqlbinlog mysql-bin.000017</li><li>加参数显示的binlog日志的SQL执行记录<br>mysqlbinlog mysql-bin.000017 -d test –base64-output=decode-rows –skip-gtids -vv | grep -B 1 -i ‘insert into’</li></ol><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;语法&quot;&gt;&lt;a href=&quot;#语法&quot; class=&quot;headerlink&quot; title=&quot;语法&quot;&gt;&lt;/a&gt;语法&lt;/h1&gt;&lt;p&gt;mysqlbinlog [options
+      
+    
+    </summary>
+    
+      <category term="database" scheme="http://yoursite.com/categories/database/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/categories/database/mysql/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/database/mysql/notes/"/>
+    
+    
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+      <category term="binlog" scheme="http://yoursite.com/tags/binlog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查找版本及路径</title>
+    <link href="http://yoursite.com/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/"/>
+    <id>http://yoursite.com/2022/11/24/python-notes-20220916-1-查看版本及路径/</id>
+    <published>2022-11-23T16:00:00.000Z</published>
+    <updated>2022-11-24T13:39:59.048Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>➜  ~ python3<br>Python 3.8.9 (default, Apr 13 2022, 08:48:06)<br>[Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin<br>Type “help”, “copyright”, “credits” or “license” for more information.</p><blockquote><blockquote><blockquote><p>exit()<br>➜  ~ which python<br>python not found<br>➜  ~ which python3<br>/usr/bin/python3</p></blockquote></blockquote></blockquote><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ which python2</span><br><span class="line">/usr/local/bin/python2</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ which python3</span><br><span class="line">/usr/bin/python3</span><br><span class="line">➜  ~</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;➜  ~ python3&lt;br&gt;Python 3.8.9 (default, Apr 13 2022, 08:48:06)&lt;br&gt;[Clang 13.1.6 (clang-1
+      
+    
+    </summary>
+    
+      <category term="py" scheme="http://yoursite.com/categories/py/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/py/notes/"/>
+    
+    
+      <category term="py" scheme="http://yoursite.com/tags/py/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mac pro14已经安装了python3.9.6再安装2.7.18</title>
+    <link href="http://yoursite.com/2022/11/24/python-notes-mac-pro14%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85%E4%BA%86python3-9-6%E5%86%8D%E5%AE%89%E8%A3%852-7-18/"/>
+    <id>http://yoursite.com/2022/11/24/python-notes-mac-pro14已经安装了python3-9-6再安装2-7-18/</id>
+    <published>2022-11-23T16:00:00.000Z</published>
+    <updated>2022-11-24T13:27:56.671Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>MacBook M2安装python2：<a href="https://www.jianshu.com/p/859fea5437b9" target="_blank" rel="noopener">https://www.jianshu.com/p/859fea5437b9</a></strong></li></ul><hr><h1 id="直接官网下载安装"><a href="#直接官网下载安装" class="headerlink" title="直接官网下载安装"></a>直接官网下载安装</h1><p>直接在官方下载网站（如上下载网址：<a href="https://www.python.org/downloads/release/python-2718/）找到，" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-2718/）找到，</a><br>然后运行安装即可。这个比Homebrew一键安装还要方便快捷。</p><h1 id="安装完成后验证"><a href="#安装完成后验证" class="headerlink" title="安装完成后验证"></a>安装完成后验证</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pip3 --version</span><br><span class="line">pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ pip --version</span><br><span class="line">pip 19.2.3 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/pip (python 2.7)</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ python3</span><br><span class="line">Python 3.9.6 (default, Sep 26 2022, 11:37:49)</span><br><span class="line">[Clang 14.0.0 (clang-1400.0.29.202)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ python</span><br><span class="line">Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 19 2020, 20:48:48)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MacBook M2安装python2：&lt;a href=&quot;https://www.jianshu.com/p/859fea5437b9&quot;
+      
+    
+    </summary>
+    
+      <category term="py" scheme="http://yoursite.com/categories/py/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/py/notes/"/>
+    
+    
+      <category term="py" scheme="http://yoursite.com/tags/py/"/>
+    
+  </entry>
+  
+  <entry>
     <title>业务架构图例</title>
     <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
     <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-业务架构图例/</id>
     <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T07:45:12.829Z</updated>
+    <updated>2022-11-01T09:41:21.573Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="业务架构图-："><a href="#业务架构图-：" class="headerlink" title="业务架构图 ："></a>业务架构图 ：</h1><p>描述系统对用户提供了什么业务功能。用户视角或业务视角</p><h1 id="【画图技巧】"><a href="#【画图技巧】" class="headerlink" title="【画图技巧】"></a>【画图技巧】</h1><ol><li>通过不同颜色来标识业务状态：比如说哪些业务发展状态好，哪些问题比较多，哪些比较稳定，哪些竞争比较激烈等。</li><li>业务分组管理：将类似的业务放在一个分组里面展现，用虚线框或者相同背景将其标识出来。</li><li>区块对齐：为了美观，可以改变不同区块的长短大小进行对齐，让整体看起来更美观。</li></ol><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02"><a href="#02" class="headerlink" title="02"></a>02</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="业务架构图-："><a href="#业务架构图-：" class="headerlink" title="业务架构图 ："></a>业务架构图 ：</h1><p>描述系统对用户提供了什么业务功能。用户视角或业务视角</p><h1 id="【画图技巧】"><a href="#【画图技巧】" class="headerlink" title="【画图技巧】"></a>【画图技巧】</h1><ol><li>通过不同颜色来标识业务状态：比如说哪些业务发展状态好，哪些问题比较多，哪些比较稳定，哪些竞争比较激烈等。</li><li>业务分组管理：将类似的业务放在一个分组里面展现，用虚线框或者相同背景将其标识出来。</li><li>区块对齐：为了美观，可以改变不同区块的长短大小进行对齐，让整体看起来更美观。</li></ol><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02-cic"><a href="#02-cic" class="headerlink" title="02 cic"></a>02 cic</h2><p><img src="temp-02.png" alt=""></p><h1 id="业务架构解释2"><a href="#业务架构解释2" class="headerlink" title="业务架构解释2"></a>业务架构解释2</h1><h2 id="业务架构是什么"><a href="#业务架构是什么" class="headerlink" title="业务架构是什么"></a>业务架构是什么</h2><p>描述企业（产品）业务上如何创造价值、传递价值、获取价值</p><h2 id="包括什么"><a href="#包括什么" class="headerlink" title="包括什么"></a>包括什么</h2><p>客户群体、渠道通道、关键业务能力、业务管理模式、所需能力和数据支撑…..</p><h2 id="如何产出"><a href="#如何产出" class="headerlink" title="如何产出"></a>如何产出</h2><p>通过回答5W2H结构化的思考每个业务目标和打法，以便后续把能力拆解到对系统的要求</p><h2 id="设计过程"><a href="#设计过程" class="headerlink" title="设计过程"></a>设计过程</h2><p><img src="temp-03.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
     
     <summary type="html">
     
       
       
         &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;业务架构图-：&quot;&gt;&lt;a href=&quot;#业务架构图-：&quot; class=&quot;headerlink&quot; title=&quot;业务架构图 ：&quot;&gt;&lt;/a&gt;业务架构图 ：&lt;/h1&gt;&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
+    
+    
+      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>立项</title>
+    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E7%AB%8B%E9%A1%B9/"/>
+    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-立项/</id>
+    <published>2022-10-31T16:00:00.000Z</published>
+    <updated>2022-11-01T08:18:09.950Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="什么是项目"><a href="#什么是项目" class="headerlink" title="什么是项目"></a>什么是项目</h1><p>为创造独特的产品、服务和成果而进行的临时性工作</p><h1 id="哪些“工作”需要立项"><a href="#哪些“工作”需要立项" class="headerlink" title="哪些“工作”需要立项"></a>哪些“工作”需要立项</h1><p>符合项目定义的一切个人或团体工作，因此除了常见的<br>新建项目、滚动项目，这些工作也需要立项：<br>对系统功能模块较大规模的改造工作，如：对接中台、重构<br>非业务直接相关，为提升管理效能而进行的工作，如：新工单平台、新项目管理工具等</p><h1 id="为什么要立项"><a href="#为什么要立项" class="headerlink" title="为什么要立项"></a>为什么要立项</h1><p>通过立项流程，从公司组织层面确定：<br>➢ 是否做这个项目（业务目标、业务价值、可行性、投<br>入产出比…）<br>➢ 谁来做这个项目（IT负责方、业务参与方、供应商团<br>队&lt;如有&gt;…）<br>➢ 从哪里出多少钱做这个项目（预算/人力资源来源、<br>费用金额…）<br>➢ 怎么做这个项目（自研、采购：单一来源 / 招投标）</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;什么是项目&quot;&gt;&lt;a href=&quot;#什么是项目&quot; class=&quot;headerlink&quot; title=&quot;什么是项目&quot;&gt;&lt;/a&gt;什么是项目&lt;/h1&gt;&lt;p&gt;为创造独特的产品
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
+    
+    
+      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>战略屋</title>
+    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E6%88%98%E7%95%A5%E5%B1%8B/"/>
+    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-战略屋/</id>
+    <published>2022-10-31T16:00:00.000Z</published>
+    <updated>2022-11-01T09:34:29.886Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="战略屋"><a href="#战略屋" class="headerlink" title="战略屋"></a>战略屋</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02"><a href="#02" class="headerlink" title="02"></a>02</h2><p><img src="temp-02.png" alt=""></p><h2 id="03-目标评审示例"><a href="#03-目标评审示例" class="headerlink" title="03 目标评审示例"></a>03 目标评审示例</h2><p><img src="temp-03.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;战略屋&quot;&gt;&lt;a href=&quot;#战略屋&quot; class=&quot;headerlink&quot; title=&quot;战略屋&quot;&gt;&lt;/a&gt;战略屋&lt;/h1&gt;&lt;h2 id=&quot;01&quot;&gt;&lt;a href
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
+    
+    
+      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>应用架构图例</title>
+    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
+    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-应用架构图例/</id>
+    <published>2022-10-31T16:00:00.000Z</published>
+    <updated>2022-11-02T09:37:51.696Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="应用架构图例"><a href="#应用架构图例" class="headerlink" title="应用架构图例"></a>应用架构图例</h1><p>##【定义】描述后端系统由哪些应用组成，一个应用就是一个可部署发布运行的程序，它是项目开发过程中，开发测试运维团队协作的基础。<br>以应用为基础<br>描述系统的组成和框架，包括前端展示、业务处理逻辑、后台数据的主要模块和功能点</p><h2 id="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"><a href="#【使用场景】项目开发、测试。运维部署发布。子域架构设计。" class="headerlink" title="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"></a>【使用场景】项目开发、测试。运维部署发布。子域架构设计。</h2><p>##【画图技巧】通过不同颜色来标识不同角色。通过连接线来表示关系。复杂系统分域来画。</p><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-如果系统比较简单，那么基本上应用架构和系统架构是等价的"><a href="#01-如果系统比较简单，那么基本上应用架构和系统架构是等价的" class="headerlink" title="01 如果系统比较简单，那么基本上应用架构和系统架构是等价的"></a>01 如果系统比较简单，那么基本上应用架构和系统架构是等价的</h2><p><img src="temp-01.png" alt=""></p><h2 id="02-cic"><a href="#02-cic" class="headerlink" title="02 cic"></a>02 cic</h2><p><img src="temp-02.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;应用架构图例&quot;&gt;&lt;a href=&quot;#应用架构图例&quot; class=&quot;headerlink&quot; title=&quot;应用架构图例&quot;&gt;&lt;/a&gt;应用架构图例&lt;/h1&gt;&lt;p&gt;##【定
       
     
     </summary>
@@ -71,19 +386,19 @@
   </entry>
   
   <entry>
-    <title>应用架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-应用架构图例/</id>
+    <title>部署架构图例</title>
+    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
+    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-部署架构图例/</id>
     <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T07:59:30.576Z</updated>
+    <updated>2022-11-01T08:02:45.047Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="应用架构图例"><a href="#应用架构图例" class="headerlink" title="应用架构图例"></a>应用架构图例</h1><p>##【定义】描述后端系统由哪些应用组成，一个应用就是一个可部署发布运行的程序，它是项目开发过程中，开发测试运维团队协作的基础。<br>以应用为基础</p><h2 id="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"><a href="#【使用场景】项目开发、测试。运维部署发布。子域架构设计。" class="headerlink" title="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"></a>【使用场景】项目开发、测试。运维部署发布。子域架构设计。</h2><p>##【画图技巧】通过不同颜色来标识不同角色。通过连接线来表示关系。复杂系统分域来画。</p><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-如果系统比较简单，那么基本上应用架构和系统架构是等价的"><a href="#01-如果系统比较简单，那么基本上应用架构和系统架构是等价的" class="headerlink" title="01 如果系统比较简单，那么基本上应用架构和系统架构是等价的"></a>01 如果系统比较简单，那么基本上应用架构和系统架构是等价的</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="部署架构图"><a href="#部署架构图" class="headerlink" title="部署架构图"></a>部署架构图</h1><p>##【定义】描述后端系统具体是如何部署的，主要包含机房信息、网络信息和硬件信息等。</p><p>##【使用场景】总体架构设计。运维规划和优化。</p><h2 id="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"><a href="#【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。" class="headerlink" title="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"></a>【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。</h2><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-简单支付系统部署架构图"><a href="#01-简单支付系统部署架构图" class="headerlink" title="01 简单支付系统部署架构图"></a>01 简单支付系统部署架构图</h2><p><img src="temp-01.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;应用架构图例&quot;&gt;&lt;a href=&quot;#应用架构图例&quot; class=&quot;headerlink&quot; title=&quot;应用架构图例&quot;&gt;&lt;/a&gt;应用架构图例&lt;/h1&gt;&lt;p&gt;##【定
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;部署架构图&quot;&gt;&lt;a href=&quot;#部署架构图&quot; class=&quot;headerlink&quot; title=&quot;部署架构图&quot;&gt;&lt;/a&gt;部署架构图&lt;/h1&gt;&lt;p&gt;##【定义】描述
       
     
     </summary>
@@ -126,33 +441,6 @@
   </entry>
   
   <entry>
-    <title>部署架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-部署架构图例/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T08:02:45.047Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="部署架构图"><a href="#部署架构图" class="headerlink" title="部署架构图"></a>部署架构图</h1><p>##【定义】描述后端系统具体是如何部署的，主要包含机房信息、网络信息和硬件信息等。</p><p>##【使用场景】总体架构设计。运维规划和优化。</p><h2 id="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"><a href="#【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。" class="headerlink" title="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"></a>【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。</h2><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-简单支付系统部署架构图"><a href="#01-简单支付系统部署架构图" class="headerlink" title="01 简单支付系统部署架构图"></a>01 简单支付系统部署架构图</h2><p><img src="temp-01.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;部署架构图&quot;&gt;&lt;a href=&quot;#部署架构图&quot; class=&quot;headerlink&quot; title=&quot;部署架构图&quot;&gt;&lt;/a&gt;部署架构图&lt;/h1&gt;&lt;p&gt;##【定义】描述
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
     <title>mac常用应用</title>
     <link href="http://yoursite.com/2022/10/31/mac-20221031-mac%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/"/>
     <id>http://yoursite.com/2022/10/31/mac-20221031-mac常用应用/</id>
@@ -178,19 +466,19 @@
   </entry>
   
   <entry>
-    <title>架构基础</title>
-    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/"/>
-    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-架构基础/</id>
+    <title>软件架构概念</title>
+    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A6%82%E5%BF%B5/"/>
+    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-软件架构概念/</id>
     <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2022-11-01T08:06:05.921Z</updated>
+    <updated>2022-11-01T06:26:02.650Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="架构高并发和高可用"><a href="#架构高并发和高可用" class="headerlink" title="架构高并发和高可用"></a>架构高并发和高可用</h1><ol><li>高并发实现的三板斧：缓存，限流和降级</li><li>架构之高并发：限流</li><li>架构之高并发：降级和熔断<br> 在高并发环境下，服务之间的依赖关系导致调用失败，解决的方式通常是: 限流-&gt;熔断-&gt;隔离-&gt;降级, 其目的是防止雪崩效应。</li><li>架构之高可用：负载均衡</li><li>架构之高可用：容灾备份,故障转移</li></ol><h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><p>软件架构的核心价值，即是控制系统的复杂性，将核心业务逻辑和技术细节的分离与解耦</p><h2 id="复杂性的来源可能是"><a href="#复杂性的来源可能是" class="headerlink" title="复杂性的来源可能是"></a>复杂性的来源可能是</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>软件架构概念: <a href="https://www.jianshu.com/p/7b82fb03ca34" target="_blank" rel="noopener">https://www.jianshu.com/p/7b82fb03ca34</a></p><h2 id="组成派："><a href="#组成派：" class="headerlink" title="组成派："></a>组成派：</h2><p>架构 = 组件 + 交互。</p><h2 id="决策派"><a href="#决策派" class="headerlink" title="决策派"></a>决策派</h2><p>架构属于设计，但设计不一定属于架构。架构设计的决策，将对整体质量、并行开发、适应变化等方面有着重大影响，例如：</p><ul><li>模块如何划分</li><li>每个模块的职责如何</li><li>每个模块的接口如何定义</li><li>模块间采用何种交互机制</li><li>开发技术如何选型</li><li>如何满足约束和质量属性的需求</li><li>如何适应可能发生的变化</li></ul><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;架构高并发和高可用&quot;&gt;&lt;a href=&quot;#架构高并发和高可用&quot; class=&quot;headerlink&quot; title=&quot;架构高并发和高可用&quot;&gt;&lt;/a&gt;架构高并发和高可用
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;软件架构概念: &lt;a href=&quot;https://www.jianshu.com/p/7b82fb03ca34&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;
       
     
     </summary>
@@ -205,19 +493,19 @@
   </entry>
   
   <entry>
-    <title>软件架构概念</title>
-    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A6%82%E5%BF%B5/"/>
-    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-软件架构概念/</id>
+    <title>架构基础</title>
+    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-架构基础/</id>
     <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2022-11-01T06:26:02.650Z</updated>
+    <updated>2022-11-01T08:06:05.921Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>软件架构概念: <a href="https://www.jianshu.com/p/7b82fb03ca34" target="_blank" rel="noopener">https://www.jianshu.com/p/7b82fb03ca34</a></p><h2 id="组成派："><a href="#组成派：" class="headerlink" title="组成派："></a>组成派：</h2><p>架构 = 组件 + 交互。</p><h2 id="决策派"><a href="#决策派" class="headerlink" title="决策派"></a>决策派</h2><p>架构属于设计，但设计不一定属于架构。架构设计的决策，将对整体质量、并行开发、适应变化等方面有着重大影响，例如：</p><ul><li>模块如何划分</li><li>每个模块的职责如何</li><li>每个模块的接口如何定义</li><li>模块间采用何种交互机制</li><li>开发技术如何选型</li><li>如何满足约束和质量属性的需求</li><li>如何适应可能发生的变化</li></ul><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="架构高并发和高可用"><a href="#架构高并发和高可用" class="headerlink" title="架构高并发和高可用"></a>架构高并发和高可用</h1><ol><li>高并发实现的三板斧：缓存，限流和降级</li><li>架构之高并发：限流</li><li>架构之高并发：降级和熔断<br> 在高并发环境下，服务之间的依赖关系导致调用失败，解决的方式通常是: 限流-&gt;熔断-&gt;隔离-&gt;降级, 其目的是防止雪崩效应。</li><li>架构之高可用：负载均衡</li><li>架构之高可用：容灾备份,故障转移</li></ol><h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><p>软件架构的核心价值，即是控制系统的复杂性，将核心业务逻辑和技术细节的分离与解耦</p><h2 id="复杂性的来源可能是"><a href="#复杂性的来源可能是" class="headerlink" title="复杂性的来源可能是"></a>复杂性的来源可能是</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;软件架构概念: &lt;a href=&quot;https://www.jianshu.com/p/7b82fb03ca34&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;架构高并发和高可用&quot;&gt;&lt;a href=&quot;#架构高并发和高可用&quot; class=&quot;headerlink&quot; title=&quot;架构高并发和高可用&quot;&gt;&lt;/a&gt;架构高并发和高可用
       
     
     </summary>
@@ -279,271 +567,6 @@
     
     
       <category term="MQ" scheme="http://yoursite.com/tags/MQ/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ideal-pojie-20221024-ideal-mybatis-log破解</title>
-    <link href="http://yoursite.com/2022/10/24/ideal-pojie-20221024-ideal-mybatis-log%E7%A0%B4%E8%A7%A3/"/>
-    <id>http://yoursite.com/2022/10/24/ideal-pojie-20221024-ideal-mybatis-log破解/</id>
-    <published>2022-10-24T03:26:52.712Z</published>
-    <updated>2022-10-24T03:27:13.400Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="破解版下载地址"><a href="#破解版下载地址" class="headerlink" title="破解版下载地址"></a>破解版下载地址</h1><p><a href="https://www.yuque.com/docs/share/23400c69-25aa-4eff-a68c-3d153a0d77c7" target="_blank" rel="noopener">https://www.yuque.com/docs/share/23400c69-25aa-4eff-a68c-3d153a0d77c7</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;破解版下载地址&quot;&gt;&lt;a href=&quot;#破解版下载地址&quot; class=&quot;headerlink&quot; title=&quot;破解版下载地址&quot;&gt;&lt;/a&gt;破解版下载地址&lt;/h1&gt;&lt;p&gt;
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ideal-pojie-20221024-ideal破解激活码</title>
-    <link href="http://yoursite.com/2022/10/24/ideal-pojie-20221024-ideal%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E7%A0%81/"/>
-    <id>http://yoursite.com/2022/10/24/ideal-pojie-20221024-ideal破解激活码/</id>
-    <published>2022-10-24T03:26:11.637Z</published>
-    <updated>2022-10-26T01:37:15.292Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="激活码"><a href="#激活码" class="headerlink" title="激活码"></a>激活码</h1><p><a href="https://www.yht7.com/news/196641" target="_blank" rel="noopener">https://www.yht7.com/news/196641</a><br><a href="https://www.jb51.net/article/195895.htm" target="_blank" rel="noopener">https://www.jb51.net/article/195895.htm</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0YQJ1128OW-eyJsaWNlbnNlSWQiOiIwWVFKMTEyOE9XIiwibGljZW5zZWVOYW1lIjoi5rC45LmF5r+A5rS7IHd3d8K3YWppaHVvwrdjb20iLCJhc3NpZ25lZU5hbWUiOiIiLCJhc3NpZ25lZUVtYWlsIjoiIiwibGljZW5zZVJlc3RyaWN0aW9uIjoiIiwiY2hlY2tDb25jdXJyZW50VXNlIjpmYWxzZSwicHJvZHVjdHMiOlt7ImNvZGUiOiJEUE4iLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTQyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJHTyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTRiIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQQyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkNMIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUkQiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTMCIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJSU1YiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiREMiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTVSIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiRFAiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUERCIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBXUyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQU0kiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUENXTVAiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFBTIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBHTyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQUEMiLCJwYWlkVXBUbyI6IjIwMjEtMTEtMjIiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFJCIiwicGFpZFVwVG8iOiIyMDIxLTExLTIyIiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBTVyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJSUyIsInBhaWRVcFRvIjoiMjAyMS0xMS0yMiIsImV4dGVuZGVkIjp0cnVlfV0sIm1ldGFkYXRhIjoiMDEyMDIxMTAyM1BQQU0wMDAwMDUiLCJoYXNoIjoiMjcyMTgxMzYvMDotODQ1ODE1MzI3IiwiZ3JhY2VQZXJpb2REYXlzIjo3LCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-B9SYIVADU9lhe91Qlf+sisSJJNOQxe6DLdQNbSZoe2JD9tIgIxbRvW0jYa&#x2F;95sCoR75dlG9RFqFi+koq09nSuD4YxJ8FjEiS2wQ8UoMOLKyqlitdb+46CRCX&#x2F;f9c9z&#x2F;oqPwe4gWvKDts+Si5Y8Il+G79wWqcqkv1BrFwoQ5xBv1Xyt7N0peoIy4LfDNKrr2bReaxrDoiejq6pQDObl5CXMQX&#x2F;kSD53zO2rJJ7BgbvqEVnsE6IWnhNwSe7qQIfyhLUhUEVr&#x2F;EQIzm3MIx98xolrxG6ehf3HPQxctyHdv7Wmjmp36tQzPCkl9d0&#x2F;N1HHN53U0D8SsT5QSM1ixIIjFzqA&#x3D;&#x3D;-MIIETDCCAjSgAwIBAgIBDTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTIwMTAxOTA5MDU1M1oXDTIyMTAyMTA5MDU1M1owHzEdMBsGA1UEAwwUcHJvZDJ5LWZyb20tMjAyMDEwMTkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDCP4uk4SlVdA5nuA3DQC+NsEnZS9npFnO0zrmMWcz1++q2UWJNuGTh0rwi+3fUJIArfvVh7gNtIp93rxjtrQAuf4&#x2F;Fa6sySp4c32MeFACfC0q+oUoWebhOIaYTYUxm4LAZ355vzt8YeDPmvWKxA81udqEk4gU9NNAOz1Um5&#x2F;8LyR8SGsSc4EDBRSjcMWMwMkYSauGqGcEUK8WhfplsyF61lKSOFA6VmfUmeDK15rUWWLbOMKgn2cxFA98A+s74T9Oo96CU7rp&#x2F;umDXvhnyhAXSukw&#x2F;qCGOVhwKR8B6aeDtoBWQgjnvMtPgOUPRTPkPGbwPwwDkvAHYiuKJ7Bd2wH7rAgMBAAGjgZkwgZYwCQYDVR0TBAIwADAdBgNVHQ4EFgQUJNoRIpb1hUHAk0foMSNM9MCEAv8wSAYDVR0jBEEwP4AUo562SGdCEjZBvW3gubSgUouX8bOhHKQaMBgxFjAUBgNVBAMMDUpldFByb2ZpbGUgQ0GCCQDSbLGDsoN54TATBgNVHSUEDDAKBggrBgEFBQcDATALBgNVHQ8EBAMCBaAwDQYJKoZIhvcNAQELBQADggIBAB2J1ysRudbkqmkUFK8xqhiZaYPd30TlmCmSAaGJ0eBpvkVeqA2jGYhAQRqFiAlFC63JKvWvRZO1iRuWCEfUMkdqQ9VQPXziE&#x2F;BlsOIgrL6RlJfuFcEZ8TK3syIfIGQZNCxYhLLUuet2HE6LJYPQ5c0jH4kDooRpcVZ4rBxNwddpctUO2te9UU5&#x2F;FjhioZQsPvd92qOTsV+8Cyl2fvNhNKD1Uu9ff5AkVIQn4JU23ozdB&#x2F;R5oUlebwaTE6WZNBs+TA&#x2F;qPj+5&#x2F;wi9NH71WRB0hqUoLI2AKKyiPw++FtN4Su1vsdDlrAzDj9ILjpjJKA1ImuVcG329&#x2F;WTYIKysZ1CWK3zATg9BeCUPAV1pQy8ToXOq+RSYen6winZ2OO93eyHv2Iw5kbn1dqfBw1BuTE29V2FJKicJSu8iEOpfoafwJISXmz1wnnWL3V&#x2F;0NxTulfWsXugOoLfv0ZIBP1xH9kmf22jjQ2JiHhQZP7ZDsreRrOeIQ&#x2F;c4yR8IQvMLfC0WKQqrHu5ZzXTH4NO3CwGWSlTY74kE91zXB5mwWAx1jig+UXYc2w4RkVhy0&#x2F;&#x2F;lOmVya&#x2F;PEepuuTTI4+UJwC7qbVlh5zfhj8oTNUXgN0AOc+Q0&#x2F;WFPl1aw5VV&#x2F;VrO8FCoB15lFVlpKaQ1Yh+DVU8ke+rt9Th0BCHXe0uZOEmH0nOnH&#x2F;0onD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">F5TRIB85C7-eyJsaWNlbnNlSWQiOiJGNVRSSUI4NUM3IiwibGljZW5zZWVOYW1lIjoiU2hhbmRvbmcgVW5pdmVyc2l0eSIsImFzc2lnbmVlTmFtZSI6ImFvIGxpIiwiYXNzaWduZWVFbWFpbCI6IjI4Njc4MTYyNjhAcXEuY29tIiwibGljZW5zZVJlc3RyaWN0aW9uIjoiRm9yIGVkdWNhdGlvbmFsIHVzZSBvbmx5IiwiY2hlY2tDb25jdXJyZW50VXNlIjpmYWxzZSwicHJvZHVjdHMiOlt7ImNvZGUiOiJEUE4iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTQyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJHTyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTRiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJEUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiV1MiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJNIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJBQyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUlNWIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IkRDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJSU1UiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkRQIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBEQiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQV1MiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFNJIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBQUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQQ1dNUCIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQR08iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFBDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBSQiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQU1ciLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUlMiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX1dLCJtZXRhZGF0YSI6IjAxMjAyMjA3MTVMUEFBMDA2MDA4IiwiaGFzaCI6IjMzMjc1MzQ1LzE2OTgzMDkyOjE3NTA1Njk2NTMiLCJncmFjZVBlcmlvZERheXMiOjcsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0&#x3D;-EOufLPiykodPlQXl6v9pAd7geesvSLDca88HhDihCP5LSabX33BwTVfkSQaLUah0qyH84Shzp2NZv+LZK2dTXwwF1XCYq&#x2F;9Lmt3iwlFovsrifhrfTGQCEXrlyzigZdwl+cpKysVKS9DdVKQIl64L0xQkX1ZrjOhofWUMFrgNwqie1xNn9iSSnbh&#x2F;NiZ0&#x2F;b7kdfMukFX995RFNkPMCvqwrGpNLFHnPoiEGqIKCh+2o8YQaO7AxPHckOLZLAF+l5dIkiM7tFdICOBT&#x2F;GCEEPXG2CsVoufNvGmkdSUPr6j6+EuMAv+0iBscxQrkjfqH3wED6jXR9Pjl&#x2F;+6OGaT6T4YhJg&#x3D;&#x3D;-MIIETDCCAjSgAwIBAgIBDTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTIwMTAxOTA5MDU1M1oXDTIyMTAyMTA5MDU1M1owHzEdMBsGA1UEAwwUcHJvZDJ5LWZyb20tMjAyMDEwMTkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDCP4uk4SlVdA5nuA3DQC+NsEnZS9npFnO0zrmMWcz1++q2UWJNuGTh0rwi+3fUJIArfvVh7gNtIp93rxjtrQAuf4&#x2F;Fa6sySp4c32MeFACfC0q+oUoWebhOIaYTYUxm4LAZ355vzt8YeDPmvWKxA81udqEk4gU9NNAOz1Um5&#x2F;8LyR8SGsSc4EDBRSjcMWMwMkYSauGqGcEUK8WhfplsyF61lKSOFA6VmfUmeDK15rUWWLbOMKgn2cxFA98A+s74T9Oo96CU7rp&#x2F;umDXvhnyhAXSukw&#x2F;qCGOVhwKR8B6aeDtoBWQgjnvMtPgOUPRTPkPGbwPwwDkvAHYiuKJ7Bd2wH7rAgMBAAGjgZkwgZYwCQYDVR0TBAIwADAdBgNVHQ4EFgQUJNoRIpb1hUHAk0foMSNM9MCEAv8wSAYDVR0jBEEwP4AUo562SGdCEjZBvW3gubSgUouX8bOhHKQaMBgxFjAUBgNVBAMMDUpldFByb2ZpbGUgQ0GCCQDSbLGDsoN54TATBgNVHSUEDDAKBggrBgEFBQcDATALBgNVHQ8EBAMCBaAwDQYJKoZIhvcNAQELBQADggIBAB2J1ysRudbkqmkUFK8xqhiZaYPd30TlmCmSAaGJ0eBpvkVeqA2jGYhAQRqFiAlFC63JKvWvRZO1iRuWCEfUMkdqQ9VQPXziE&#x2F;BlsOIgrL6RlJfuFcEZ8TK3syIfIGQZNCxYhLLUuet2HE6LJYPQ5c0jH4kDooRpcVZ4rBxNwddpctUO2te9UU5&#x2F;FjhioZQsPvd92qOTsV+8Cyl2fvNhNKD1Uu9ff5AkVIQn4JU23ozdB&#x2F;R5oUlebwaTE6WZNBs+TA&#x2F;qPj+5&#x2F;wi9NH71WRB0hqUoLI2AKKyiPw++FtN4Su1vsdDlrAzDj9ILjpjJKA1ImuVcG329&#x2F;WTYIKysZ1CWK3zATg9BeCUPAV1pQy8ToXOq+RSYen6winZ2OO93eyHv2Iw5kbn1dqfBw1BuTE29V2FJKicJSu8iEOpfoafwJISXmz1wnnWL3V&#x2F;0NxTulfWsXugOoLfv0ZIBP1xH9kmf22jjQ2JiHhQZP7ZDsreRrOeIQ&#x2F;c4yR8IQvMLfC0WKQqrHu5ZzXTH4NO3CwGWSlTY74kE91zXB5mwWAx1jig+UXYc2w4RkVhy0&#x2F;&#x2F;lOmVya&#x2F;PEepuuTTI4+UJwC7qbVlh5zfhj8oTNUXgN0AOc+Q0&#x2F;WFPl1aw5VV&#x2F;VrO8FCoB15lFVlpKaQ1Yh+DVU8ke+rt9Th0BCHXe0uZOEmH0nOnH&#x2F;0onD</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">F5TRIB85C7-eyJsaWNlbnNlSWQiOiJGNVRSSUI4NUM3IiwibGljZW5zZWVOYW1lIjoiU2hhbmRvbmcgVW5pdmVyc2l0eSIsImFzc2lnbmVlTmFtZSI6ImFvIGxpIiwiYXNzaWduZWVFbWFpbCI6IjI4Njc4MTYyNjhAcXEuY29tIiwibGljZW5zZVJlc3RyaWN0aW9uIjoiRm9yIGVkdWNhdGlvbmFsIHVzZSBvbmx5IiwiY2hlY2tDb25jdXJyZW50VXNlIjpmYWxzZSwicHJvZHVjdHMiOlt7ImNvZGUiOiJEUE4iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJQUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTQyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJHTyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiRE0iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJTRiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJEUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiV1MiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IlJNIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJBQyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjpmYWxzZX0seyJjb2RlIjoiUlNWIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IkRDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOmZhbHNlfSx7ImNvZGUiOiJSU1UiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6ZmFsc2V9LHsiY29kZSI6IkRQIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBEQiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQV1MiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFNJIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBQUyIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQQ1dNUCIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQR08iLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUFBDIiwicGFpZFVwVG8iOiIyMDIzLTA0LTE4IiwiZXh0ZW5kZWQiOnRydWV9LHsiY29kZSI6IlBSQiIsInBhaWRVcFRvIjoiMjAyMy0wNC0xOCIsImV4dGVuZGVkIjp0cnVlfSx7ImNvZGUiOiJQU1ciLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX0seyJjb2RlIjoiUlMiLCJwYWlkVXBUbyI6IjIwMjMtMDQtMTgiLCJleHRlbmRlZCI6dHJ1ZX1dLCJtZXRhZGF0YSI6IjAxMjAyMjA3MTVMUEFBMDA2MDA4IiwiaGFzaCI6IjMzMjc1MzQ1LzE2OTgzMDkyOjE3NTA1Njk2NTMiLCJncmFjZVBlcmlvZERheXMiOjcsImF1dG9Qcm9sb25nYXRlZCI6ZmFsc2UsImlzQXV0b1Byb2xvbmdhdGVkIjpmYWxzZX0&#x3D;-EOufLPiykodPlQXl6v9pAd7geesvSLDca88HhDihCP5LSabX33BwTVfkSQaLUah0qyH84Shzp2NZv+LZK2dTXwwF1XCYq&#x2F;9Lmt3iwlFovsrifhrfTGQCEXrlyzigZdwl+cpKysVKS9DdVKQIl64L0xQkX1ZrjOhofWUMFrgNwqie1xNn9iSSnbh&#x2F;NiZ0&#x2F;b7kdfMukFX995RFNkPMCvqwrGpNLFHnPoiEGqIKCh+2o8YQaO7AxPHckOLZLAF+l5dIkiM7tFdICOBT&#x2F;GCEEPXG2CsVoufNvGmkdSUPr6j6+EuMAv+0iBscxQrkjfqH3wED6jXR9Pjl&#x2F;+6OGaT6T4YhJg&#x3D;&#x3D;-MIIETDCCAjSgAwIBAgIBDTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTIwMTAxOTA5MDU1M1oXDTIyMTAyMTA5MDU1M1owHzEdMBsGA1UEAwwUcHJvZDJ5LWZyb20tMjAyMDEwMTkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDCP4uk4SlVdA5nuA3DQC+NsEnZS9npFnO0zrmMWcz1++q2UWJNuGTh0rwi+3fUJIArfvVh7gNtIp93rxjtrQAuf4&#x2F;Fa6sySp4c32MeFACfC0q+oUoWebhOIaYTYUxm4LAZ355vzt8YeDPmvWKxA81udqEk4gU9NNAOz1Um5&#x2F;8LyR8SGsSc4EDBRSjcMWMwMkYSauGqGcEUK8WhfplsyF61lKSOFA6VmfUmeDK15rUWWLbOMKgn2cxFA98A+s74T9Oo96CU7rp&#x2F;umDXvhnyhAXSukw&#x2F;qCGOVhwKR8B6aeDtoBWQgjnvMtPgOUPRTPkPGbwPwwDkvAHYiuKJ7Bd2wH7rAgMBAAGjgZkwgZYwCQYDVR0TBAIwADAdBgNVHQ4EFgQUJNoRIpb1hUHAk0foMSNM9MCEAv8wSAYDVR0jBEEwP4AUo562SGdCEjZBvW3gubSgUouX8bOhHKQaMBgxFjAUBgNVBAMMDUpldFByb2ZpbGUgQ0GCCQDSbLGDsoN54TATBgNVHSUEDDAKBggrBgEFBQcDATALBgNVHQ8EBAMCBaAwDQYJKoZIhvcNAQELBQADggIBAB2J1ysRudbkqmkUFK8xqhiZaYPd30TlmCmSAaGJ0eBpvkVeqA2jGYhAQRqFiAlFC63JKvWvRZO1iRuWCEfUMkdqQ9VQPXziE&#x2F;BlsOIgrL6RlJfuFcEZ8TK3syIfIGQZNCxYhLLUuet2HE6LJYPQ5c0jH4kDooRpcVZ4rBxNwddpctUO2te9UU5&#x2F;FjhioZQsPvd92qOTsV+8Cyl2fvNhNKD1Uu9ff5AkVIQn4JU23ozdB&#x2F;R5oUlebwaTE6WZNBs+TA&#x2F;qPj+5&#x2F;wi9NH71WRB0hqUoLI2AKKyiPw++FtN4Su1vsdDlrAzDj9ILjpjJKA1ImuVcG329&#x2F;WTYIKysZ1CWK3zATg9BeCUPAV1pQy8ToXOq+RSYen6winZ2OO93eyHv2Iw5kbn1dqfBw1BuTE29V2FJKicJSu8iEOpfoafwJISXmz1wnnWL3V&#x2F;0NxTulfWsXugOoLfv0ZIBP1xH9kmf22jjQ2JiHhQZP7ZDsreRrOeIQ&#x2F;c4yR8IQvMLfC0WKQqrHu5ZzXTH4NO3CwGWSlTY74kE91zXB5mwWAx1jig+UXYc2w4RkVhy0&#x2F;&#x2F;lOmVya&#x2F;PEepuuTTI4+UJwC7qbVlh5zfhj8oTNUXgN0AOc+Q0&#x2F;WFPl1aw5VV&#x2F;VrO8FCoB15lFVlpKaQ1Yh+DVU8ke+rt9Th0BCHXe0uZOEmH0nOnH&#x2F;0onD</span><br></pre></td></tr></table></figure></p><h1 id="其他破解方式"><a href="#其他破解方式" class="headerlink" title="其他破解方式"></a>其他破解方式</h1><p><a href="https://www.yuque.com/docs/share/2769545b-0eec-44f7-a035-4de147736f6a" target="_blank" rel="noopener">https://www.yuque.com/docs/share/2769545b-0eec-44f7-a035-4de147736f6a</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;激活码&quot;&gt;&lt;a href=&quot;#激活码&quot; class=&quot;headerlink&quot; title=&quot;激活码&quot;&gt;&lt;/a&gt;激活码&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https:/
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>navicat函数批量插入一百万数据</title>
-    <link href="http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat%E5%87%BD%E6%95%B0%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%B8%80%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE/"/>
-    <id>http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat函数批量插入一百万数据/</id>
-    <published>2022-10-19T16:00:00.000Z</published>
-    <updated>2022-10-20T06:25:13.890Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><p>-<strong>+Navicat 批量插入数据/编写储存过程/函数: <a href="https://www.cnblogs.com/danhuai/p/16504051.html" target="_blank" rel="noopener">https://www.cnblogs.com/danhuai/p/16504051.html</a></strong></p><hr><h1 id="新建函数"><a href="#新建函数" class="headerlink" title="新建函数"></a>新建函数</h1><ul><li>sql security {definer|invoker};指明谁有权限来执行；<br>definer表示只有定义者才能执行；<br>invoker表示拥有权的调用者才可以执行，默认情况下，系统指定为definer；</li></ul><h1 id="编写函数"><a href="#编写函数" class="headerlink" title="编写函数"></a>编写函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CREATE DEFINER&#x3D;&#96;root&#96;@&#96;%&#96; FUNCTION &#96;批量插入查询中间表&#96;(params1 int) RETURNS int</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    SQL SECURITY INVOKER</span><br><span class="line">BEGIN</span><br><span class="line">  #Routine body goes here...</span><br><span class="line"></span><br><span class="line"># step1 创建一个循环变量i（默认值为 1）</span><br><span class="line">DECLARE i INT DEFAULT(1);</span><br><span class="line"># step2 循环params1 次</span><br><span class="line">WHILE i &lt; params1 DO</span><br><span class="line"># step3 循环插入数据</span><br><span class="line">INSERT INTO &#96;t_inv_out_vat_query_middle&#96; (&#96;id&#96;, &#96;apply_flow_no&#96;, &#96;seq_inv_no&#96;, &#96;apply_type_cd&#96;, &#96;apply_status_cd&#96;, &#96;apply_dt&#96;, &#96;org_code&#96;, &#96;org_name&#96;, &#96;buyer_taxpayer_no&#96;, &#96;buyer_taxpayer_name&#96;, &#96;buyer_taxpayer_type_cd&#96;, &#96;seller_taxpayer_name&#96;, &#96;inv_type_code&#96;, &#96;inv_code&#96;, &#96;inv_no&#96;, &#96;print_status_cd&#96;, &#96;apply_user&#96;, &#96;deal_status_cd&#96;, &#96;vat_biz_status_cd&#96;, &#96;inv_dt&#96;, &#96;gmt_create&#96;, &#96;creator&#96;, &#96;gmt_modified&#96;, &#96;modifier&#96;, &#96;is_valid&#96;) VALUES (i, concat(&#39;applyFlowNo&#39;, i), concat(&#39;seqInvNo&#39;, i), 1, 3, now(), &#39;213701050000&#39;, NULL, &#39;123456789012345678&#39;, &#39;营业执照&#39;, &#39;1&#39;, NULL, &#39;007&#39;, concat(&#39;invCode&#39;,i), concat(&#39;invNo&#39;,i), 1, &#39;3798010067&#39;, 1, 4, now(), now(), &#39;3798010067&#39;, now(), &#39;3798010067&#39;, 1);</span><br><span class="line">SET i &#x3D; i + 1;</span><br><span class="line">END WHILE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RETURN 0;</span><br><span class="line">END</span><br></pre></td></tr></table></figure><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>点击左上角运行，输入 params1 = 10000000<br>执行数量较大时需要一定时间</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;p&gt;-&lt;strong&gt;+Navicat 批量插入数据/编写储存过程/函数: &lt;a href=&quot;https://www.cnblogs.com/danhuai/p/165
-      
-    
-    </summary>
-    
-      <category term="database" scheme="http://yoursite.com/categories/database/"/>
-    
-      <category term="mysql" scheme="http://yoursite.com/categories/database/mysql/"/>
-    
-      <category term="navicat" scheme="http://yoursite.com/categories/database/mysql/navicat/"/>
-    
-    
-      <category term="database" scheme="http://yoursite.com/tags/database/"/>
-    
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mac运行ios应用程序（游戏等）</title>
-    <link href="http://yoursite.com/2022/10/19/mac-20221019-mac%E8%BF%90%E8%A1%8Cios%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%B8%B8%E6%88%8F%E7%AD%89%EF%BC%89/"/>
-    <id>http://yoursite.com/2022/10/19/mac-20221019-mac运行ios应用程序（游戏等）/</id>
-    <published>2022-10-18T16:00:00.000Z</published>
-    <updated>2022-10-20T01:29:25.700Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="多种方式"><a href="#多种方式" class="headerlink" title="多种方式"></a>多种方式</h1><h2 id="1-通过安装parallels-desktop来安装windows的雷电模拟器来安装ios应用软件"><a href="#1-通过安装parallels-desktop来安装windows的雷电模拟器来安装ios应用软件" class="headerlink" title="1. 通过安装parallels desktop来安装windows的雷电模拟器来安装ios应用软件"></a>1. 通过安装parallels desktop来安装windows的雷电模拟器来安装ios应用软件</h2><h2 id="2-通过安装playcover来安装应用软件-无法安装-iMazing-ipa"><a href="#2-通过安装playcover来安装应用软件-无法安装-iMazing-ipa" class="headerlink" title="2. 通过安装playcover来安装应用软件(无法安装 iMazing ipa)"></a>2. 通过安装playcover来安装应用软件(无法安装 iMazing ipa)</h2><p><a href="https://www.macv.com/mac/3579.html" target="_blank" rel="noopener">playCover下载安装</a></p><h2 id="3-通过Apple-Configurator来安装ios应用程序（生成-iMazing-ipa）"><a href="#3-通过Apple-Configurator来安装ios应用程序（生成-iMazing-ipa）" class="headerlink" title="3. 通过Apple Configurator来安装ios应用程序（生成 iMazing ipa）"></a>3. 通过Apple Configurator来安装ios应用程序（生成 iMazing ipa）</h2><p><a href="https://reincubate.com/zh/support/how-to/download-run-ios-app-mac/" target="_blank" rel="noopener">如何在Mac上下载和运行iOS应用</a></p><ul><li>将iOS设备连接到M1 Mac。</li><li>运行Apple Configurator 2，选择您的手机，然后在菜单栏中单击Add → Apps 。</li><li>如果未将Apple Configurator登录到您的Apple ID，则需要单击“登录”并提供您的凭据</li><li>在点击“添加”之前，搜索您要下载的应用。这必须是已经安装了iPhone的应用程序。<br>如果要选择手机上当前未使用的应用程序，请在iOS设备上访问App Store并在有问题的应用程序上点击“安装”，然后重新启动此过程。</li><li>在下载应用程序时，将显示一个进度对话框。完成后，将弹出警告，提示该应用程序已在手机上安装。在屏幕上留下警告消息。</li><li>切换到Finder并按⌘ Cmd + ⇧ Shift + G打开“转到文件夹”对话框，然后粘贴该内容，然后按⏎ Enter ：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;Library&#x2F;Group Containers&#x2F;K36BKF7T3D.group.com.apple.configurator&#x2F;Library&#x2F;Caches&#x2F;Assets&#x2F;TemporaryItems&#x2F;MobileApps</span><br></pre></td></tr></table></figure></li><li>在新窗口中打开文件夹，直到获得IPA文件。双击将其安装在Mac上，它将出现在“ Applications文件夹中。</li><li>在您批准将其在系统上运行之前，iOS应用程序将无法运行。在Mac上打开终端，然后粘贴此命令，但不要按Enter键：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xattr -rd com.apple.quarantine</span><br></pre></td></tr></table></figure></li><li>按空格键在该文本后添加一个空格，然后将您的应用程序从“ Applications文件夹拖到“终端”窗口中。这会将应用程序的路径添加到您粘贴的行的末尾。</li><li>按⏎ Enter键并输入密码，然后再次按⏎ Enter 。<br>就是这样–您现在就可以像其他任何应用Applications一样从“ Applications运行您的应用程序。<h2 id="4-通iMazing获取ios-ipa文件安装（生成-iMazing-ipa）"><a href="#4-通iMazing获取ios-ipa文件安装（生成-iMazing-ipa）" class="headerlink" title="4.通iMazing获取ios ipa文件安装（生成 iMazing ipa）"></a>4.通iMazing获取ios ipa文件安装（生成 iMazing ipa）</h2><a href="https://www.digit77.com/macapps/imazing/" target="_blank" rel="noopener">iMazing下载</a><br><a href="https://blog.51cto.com/u_15118280/4570105" target="_blank" rel="noopener">M1 MacBook上如何安装iOS/iPad OS软件</a><br><a href="https://zhuanlan.zhihu.com/p/366961186?ivk_sa=1024320u" target="_blank" rel="noopener"></a></li></ul><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;多种方式&quot;&gt;&lt;a href=&quot;#多种方式&quot; class=&quot;headerlink&quot; title=&quot;多种方式&quot;&gt;&lt;/a&gt;多种方式&lt;/h1&gt;&lt;h2 id=&quot;1-通过安装p
-      
-    
-    </summary>
-    
-      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
-    
-    
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>聚合设计原则</title>
-    <link href="http://yoursite.com/2022/10/18/depth-design-DDD-20221018-%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"/>
-    <id>http://yoursite.com/2022/10/18/depth-design-DDD-20221018-聚合设计原则/</id>
-    <published>2022-10-17T16:00:00.000Z</published>
-    <updated>2022-10-18T09:01:39.183Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2 id="1-设计聚合的原则之一"><a href="#1-设计聚合的原则之一" class="headerlink" title="(1)设计聚合的原则之一"></a>(1)设计聚合的原则之一</h2><p>在边界之外使用最终一致性。<br>聚合内数据强一致性，聚合之间数据最终一致性。<br>在一次事务中，最多只能更改一个聚合的状态。<br>如何一个业务操作涉及多个聚合状态的更改，可以采用领域事件的方式，实现聚合之间的解耦；</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;1-设计聚合的原则之一&quot;&gt;&lt;a href=&quot;#1-设计聚合的原则之一&quot; class=&quot;headerlink&quot; title=&quot;(1)设计聚合的原则之一&quot;&gt;&lt;/a&gt;(1
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
-    
-      <category term="DDD" scheme="http://yoursite.com/categories/depth/design/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://yoursite.com/tags/DDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构风格和架构特征</title>
-    <link href="http://yoursite.com/2022/10/17/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/"/>
-    <id>http://yoursite.com/2022/10/17/depth-architecture-1-架构风格和架构特征/</id>
-    <published>2022-10-16T16:00:00.000Z</published>
-    <updated>2022-11-01T06:02:26.765Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;script type=&quot;text&amp;#x2F;javascript&quot; src=&quot;https://unpkg.com/kity@2.0.4/dist/kity.min.js&quot;&gt;&lt;/
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git删除本地仓库</title>
-    <link href="http://yoursite.com/2022/10/17/git-%E7%AC%94%E8%AE%B0-git%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/"/>
-    <id>http://yoursite.com/2022/10/17/git-笔记-git删除本地仓库/</id>
-    <published>2022-10-16T16:00:00.000Z</published>
-    <updated>2022-10-17T02:27:33.263Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="找出隐藏-git目录"><a href="#找出隐藏-git目录" class="headerlink" title="找出隐藏.git目录"></a>找出隐藏.git目录</h1><p>ls -a  找到隐藏目录 .git</p><h1 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h1><p>rm -rf .git</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;找出隐藏-git目录&quot;&gt;&lt;a href=&quot;#找出隐藏-git目录&quot; class=&quot;headerlink&quot; title=&quot;找出隐藏.git目录&quot;&gt;&lt;/a&gt;找出隐藏.g
-      
-    
-    </summary>
-    
-      <category term="git" scheme="http://yoursite.com/categories/git/"/>
-    
-      <category term="笔记" scheme="http://yoursite.com/categories/git/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis预热</title>
-    <link href="http://yoursite.com/2022/10/17/redis-%E9%A2%84%E7%83%AD-1-redis%E9%A2%84%E7%83%AD%E6%96%B9%E6%A1%88/"/>
-    <id>http://yoursite.com/2022/10/17/redis-预热-1-redis预热方案/</id>
-    <published>2022-10-16T16:00:00.000Z</published>
-    <updated>2022-10-17T03:06:56.233Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="redis预热"><a href="#redis预热" class="headerlink" title="redis预热"></a>redis预热</h1><p>缓存预热<br>1、定义</p><p>缓存预热就是系统上线后，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！</p><p>2、解决方案</p><p>1）直接写个缓存刷新页面，上线时手工操作下。<br>2）数据量不大，可以在项目启动的时候自动进行加载。<br>3）定时刷新缓存。</p><h2 id="config预热方案"><a href="#config预热方案" class="headerlink" title="config预热方案"></a>config预热方案</h2><ol><li>启动时批量预热，设置过期时间</li><li>增删改查修改缓存</li><li>定时刷新缓存</li></ol><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;redis预热&quot;&gt;&lt;a href=&quot;#redis预热&quot; class=&quot;headerlink&quot; title=&quot;redis预热&quot;&gt;&lt;/a&gt;redis预热&lt;/h1&gt;&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
-    
-    
-      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>领域事件</title>
-    <link href="http://yoursite.com/2022/10/17/depth-design-DDD-20221017-%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%EF%BC%88Domain-Event%EF%BC%89/"/>
-    <id>http://yoursite.com/2022/10/17/depth-design-DDD-20221017-领域事件（Domain-Event）/</id>
-    <published>2022-10-16T16:00:00.000Z</published>
-    <updated>2022-10-18T09:01:39.165Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>DDD术语-领域事件（Domain Event）：<a href="http://t.zoukankan.com/junzi2099-p-13682154.html" target="_blank" rel="noopener">http://t.zoukankan.com/junzi2099-p-13682154.html</a></strong></li></ul><hr><h1 id="领域事件"><a href="#领域事件" class="headerlink" title="领域事件"></a>领域事件</h1><p>一个领域事件将导致进一步的业务操作，在实现业务解耦的同时，还有助于形成完整的业务闭环。</p><p>领域事件可以是业务流程的一个步骤；<br>也可能是定时批处理过程中发生的事件；<br>或者一个事件发生后触发的后续动作，比如密码连续输错三次，触发锁定账户的动作。</p><h2 id="那如何识别领域事件呢？"><a href="#那如何识别领域事件呢？" class="headerlink" title="那如何识别领域事件呢？"></a>那如何识别领域事件呢？</h2><p>很简单，和刚才讲的定义是强关联的。在做用户旅程或者场景分析时，我们要捕捉业务、需求人员或领域专家口中的关键词：“如果发生……，则……”“当做完……的时候，请通知……”“发生……时，则……”等。在这些场景中，如果发生某种事件后，会触发进一步的操作，那么这个事件很可能就是领域事件。</p><h2 id="那领域事件为什么要用最终一致性，而不是传统-SOA-的直接调用的方式呢？"><a href="#那领域事件为什么要用最终一致性，而不是传统-SOA-的直接调用的方式呢？" class="headerlink" title="那领域事件为什么要用最终一致性，而不是传统 SOA 的直接调用的方式呢？"></a>那领域事件为什么要用最终一致性，而不是传统 SOA 的直接调用的方式呢？</h2><p>聚合的一个设计原则：在边界之外使用最终一致性。<br>一次事务最多只能更改一个聚合的状态。<br>如果一次业务操作涉及多个聚合状态的更改，应采用领域事件的最终一致性。</p><h2 id="领域事件的作用"><a href="#领域事件的作用" class="headerlink" title="领域事件的作用"></a>领域事件的作用</h2><p>领域事件驱动设计可以切断领域模型之间的强依赖关系，<br>事件发布完成后，发布方不必关心后续订阅方事件处理是否成功，这样可以实现领域模型的解耦，维护领域模型的独立性和数据的一致性。<br>在领域模型映射到微服务系统架构时，领域事件可以解耦微服务，微服务之间的数据不必要求强一致性，而是基于事件的最终一致性。</p><p>########################################</p><h1 id="什么是领域事件"><a href="#什么是领域事件" class="headerlink" title="什么是领域事件"></a>什么是领域事件</h1><p>在事件风暴过程中，会识别出命令、业务操作、实体等，此外还有事件。比如当业务人员的描述中出现类似“当完成…后，则…”，“当发生…时，则…”等模式时，往往可将其用领域事件来实现。<br>领域事件表示在领域中发生的事件，它会导致进一步的业务操作。如电商中，支付完成后触发的事件，会导致生成订单、扣减库存等操作。</p><h2 id="为什么需要领域事件"><a href="#为什么需要领域事件" class="headerlink" title="为什么需要领域事件"></a>为什么需要领域事件</h2><p>领域事件的最终目的是为了实现聚合之间的解耦。事件模式是一种通用的解耦方法，相比依赖间的直接调用，通过事件方式形成的间接依赖，在扩展、重构时更加灵活。</p><h2 id="设计聚合的原则之一"><a href="#设计聚合的原则之一" class="headerlink" title="设计聚合的原则之一"></a>设计聚合的原则之一</h2><p>在边界之外使用最终一致性。聚合内数据强一致性，聚合之间数据最终一致性。<br>在一次事务中，最多只能更改一个聚合的状态。<br>如何一个业务操作涉及多个聚合状态的更改，可以采用领域事件的方式，实现聚合之间的解耦；</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;DDD术语-领域事件（Domain Event）：&lt;a href=&quot;http://t.zoukankan.com/junzi2099-p
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
-    
-      <category term="DDD" scheme="http://yoursite.com/categories/depth/design/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://yoursite.com/tags/DDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>win11激活</title>
-    <link href="http://yoursite.com/2022/10/09/mac-20221009-win11%E6%BF%80%E6%B4%BB/"/>
-    <id>http://yoursite.com/2022/10/09/mac-20221009-win11激活/</id>
-    <published>2022-10-08T16:00:00.000Z</published>
-    <updated>2022-10-09T06:09:35.442Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="激活密钥（淘宝）"><a href="#激活密钥（淘宝）" class="headerlink" title="激活密钥（淘宝）"></a>激活密钥（淘宝）</h1><p>==</p><p>亲爱的！<br>您的订单1694835086382340499，已经帮您送达<br>卡号：47DDN-D8TH9-FB338-J326V-B7V3B</p><p>激活步骤：点击【开始—–设置—–更新—-激活】—点更改产品密钥（输入卡号激活 ）<br>如果提示<strong>**</strong>EE2或<strong>**</strong>EE7请确保网络正常，然后输入激活 ，多试一下。</p><p>如果提示<strong>**</strong>050或<strong>**</strong>210，请用 9RPN2-RFY7J-VT9BV-4FDDB-6VJXG 升级系统。在升级过程中出现任何提示，请一定重启一下电脑（一定重启）。重启后再看下版本是否升级成专业版，是否激活成功。未激活请用前面卡号激活。</p><p>其他问题 请联系人工客服！==</p><p>亲爱的！<br>您的订单1694835086382340499，已经帮您送达<br>卡号：47DDN-D8TH9-FB338-J326V-B7V3B</p><p>激活步骤：点击【开始—–设置—–更新—-激活】—点更改产品密钥（输入卡号激活 ）<br>如果提示<strong>**</strong>EE2或<strong>**</strong>EE7请确保网络正常，然后输入激活 ，多试一下。</p><p>如果提示<strong>**</strong>050或<strong>**</strong>210，请用 9RPN2-RFY7J-VT9BV-4FDDB-6VJXG 升级系统。在升级过程中出现任何提示，请一定重启一下电脑（一定重启）。重启后再看下版本是否升级成专业版，是否激活成功。未激活请用前面卡号激活。</p><p>其他问题 请联系人工客服！</p><pre><code>win10激活步骤如下：</code></pre><p>1.按键盘Win徽标键+X键 ,再按A 选命令提示符（管理员）【或者鼠标指向桌面左下角，点右键，再按A ]<br>2.输入 slmgr /upk 回车 （注意:slmgr 后面要打空格）<br>3.输入 slmgr /cpky 回车<br>4.输入 slmgr  /ipk  47DDN-D8TH9-FB338-J326V-B7V3B 回车（注意:/ipk 后面要打空格哟。提示成功注入就接着往下操作）<br>5.输入 slui 4 回车（中间有空格），国家选择最后中国，下一步，将此面安装ID从1-9的9组数字手动打给我，每组用空格分开，不要发截图来），等候我发你确认ID.你现地输入即可</p><p>6.输入 slmgr /xpr 回车 检验计算机是否为永久激活</p><h1 id="安装ID"><a href="#安装ID" class="headerlink" title="安装ID"></a>安装ID</h1><p>0055701 3486275 3950982 7500116 8575486 0919452 2330016 4799044 5165524</p><p>确认之后，输入以下激活码：<br>279613-931345-279282-396940-070540-499773-418135-299311</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;激活密钥（淘宝）&quot;&gt;&lt;a href=&quot;#激活密钥（淘宝）&quot; class=&quot;headerlink&quot; title=&quot;激活密钥（淘宝）&quot;&gt;&lt;/a&gt;激活密钥（淘宝）&lt;/h1
-      
-    
-    </summary>
-    
-      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
-    
-      <category term="win11" scheme="http://yoursite.com/categories/mac/win11/"/>
-    
-    
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
     
   </entry>
   

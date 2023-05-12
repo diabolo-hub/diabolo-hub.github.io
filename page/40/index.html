@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/git-%E7%AC%94%E8%AE%B0-git%E5%88%86%E6%94%AF%E8%B7%9F%E8%B8%AA%E5%85%B3%E7%B3%BB%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/07/git-%E5%BC%82%E5%B8%B8-%E8%A7%A3%E5%86%B3%E5%B0%86%E5%B7%B2%E6%9C%89git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%B7%B2%E6%9C%89%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BA%A4%E7%9A%84%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/05/git-%E7%AC%94%E8%AE%B0-git%E5%88%86%E6%94%AF%E8%B7%9F%E8%B8%AA%E5%85%B3%E7%B3%BB%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%BE%E7%BD%AE%E6%96%B9%E5%BC%8F/" itemprop="url">git分支跟踪关系的三种设置方式</a></h1>
+                <a class="post-title-link" href="/2018/12/07/git-%E5%BC%82%E5%B8%B8-%E8%A7%A3%E5%86%B3%E5%B0%86%E5%B7%B2%E6%9C%89git%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%A4%8D%E5%88%B6%E5%88%B0%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%B7%B2%E6%9C%89%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%EF%BC%8C%E5%B9%B6%E6%8F%90%E4%BA%A4%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">解决将已有git远程仓库的项目复制到另外一个已有远程连接的本地仓库，并提交的方法</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T00:00:00+08:00">2018-07-05</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T00:00:00+08:00">2018-12-07</time>
             
 
             
@@ -436,7 +436,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a></span>
 
                 
                 
@@ -464,7 +464,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">850</span>
+                <span title="字数统计">1.5k</span>
               
 
               
@@ -500,11 +500,23 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="git分支跟踪关系的三种设置方式"><a href="#git分支跟踪关系的三种设置方式" class="headerlink" title="git分支跟踪关系的三种设置方式"></a>git分支跟踪关系的三种设置方式</h1><ol>
-<li>git checkout –tracked origin/branchName</li>
-<li>git push –set-upstream origin branchName</li>
-<li>git branch –set-upstream-to=origin/branchName</li>
-<li>git branch –set-upstream-to=origin/master</li>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>项目A，已有远程仓库，可正常pull、push<br>项目B，已有远程仓库，可正常pull、push  </p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><ol>
+<li>将项目B复制到项目A项目中，并git add . ， git commit   <h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2>在项目A中，项目B无法在项目中提交，整个git add 和 git commit过程无法发现项目B</li>
+</ol>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
+<li>在项目A中的项目B文件夹下，右键git bash here，通过命令窗口，我们使用git remote -v</li>
+</ol>
+<ul>
+<li>发现此项目B文件夹下的远程仓库链接存在，且为项目B原本的远程仓库</li>
+</ul>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><ol>
+<li>删除项目A中项目B文件夹对应的远程仓库（项目B文件夹里执行）<br>git remote remove origin</li>
+<li>删除项目A中项目B文件夹里的git版本控制信息（项目B文件夹里执行）<br>find . -name “.git” | xargs rm -rf<blockquote>
+<p>此时git add . 会提示： fatal: in unpopulated submodule ‘B’</p>
+</blockquote>
+</li>
+<li>清除项目A中项目B文件夹的git缓存信息（此处需要在项目A文件夹中执行，这样才能找到项目B文件夹）<br>git rm -rf –cached hexo-theme-matery</li>
 </ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
@@ -562,7 +574,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/git-%E7%AC%94%E8%AE%B0-git%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/git-%E7%AC%94%E8%AE%B0-git%E4%B8%89%E7%A7%8D%E5%9B%9E%E6%BB%9A%E6%96%B9%E5%BC%8F-soft%EF%BC%8Chard%EF%BC%8Cmixed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -581,7 +593,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/04/git-%E7%AC%94%E8%AE%B0-git%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/" itemprop="url">git分支相关操作</a></h1>
+                <a class="post-title-link" href="/2018/10/26/git-%E7%AC%94%E8%AE%B0-git%E4%B8%89%E7%A7%8D%E5%9B%9E%E6%BB%9A%E6%96%B9%E5%BC%8F-soft%EF%BC%8Chard%EF%BC%8Cmixed/" itemprop="url">git三种回滚方式--soft、hard、mixed</a></h1>
         
 
         <div class="post-meta">
@@ -597,7 +609,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-04T00:00:00+08:00">2018-07-04</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T00:00:00+08:00">2018-10-26</time>
             
 
             
@@ -653,7 +665,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.8k</span>
+                <span title="字数统计">739</span>
               
 
               
@@ -667,7 +679,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -689,16 +701,393 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="git-branch-vv"><a href="#git-branch-vv" class="headerlink" title="git branch -vv"></a>git branch -vv</h1><p>（两个v），就能够看到本地分支跟踪的远程分支。</p>
-<h1 id="git-branch-a"><a href="#git-branch-a" class="headerlink" title="git branch -a"></a>git branch -a</h1><p>查看远程分支与当前所在分支</p>
-<h1 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h1><p>查看本地所在分支</p>
-<h1 id="git-checkout-xxx"><a href="#git-checkout-xxx" class="headerlink" title="git checkout xxx"></a>git checkout xxx</h1><p>切换分支到xxx</p>
-<h1 id="git-branch-r"><a href="#git-branch-r" class="headerlink" title="git branch -r"></a>git branch -r</h1><p>查看远程所有分支</p>
-<h1 id="git-branch-M-分支名"><a href="#git-branch-M-分支名" class="headerlink" title="git branch -M 分支名"></a>git branch -M 分支名</h1><p>重命名分支（本地和远程）</p>
-<h1 id="git-branch-D-分支名"><a href="#git-branch-D-分支名" class="headerlink" title="git branch -D 分支名"></a>git branch -D 分支名</h1><p>删除分支</p>
-<h1 id="拉取远程分支并创建本地分支"><a href="#拉取远程分支并创建本地分支" class="headerlink" title="拉取远程分支并创建本地分支"></a>拉取远程分支并创建本地分支</h1><ol>
-<li>方式一<br>git checkout -b 本地分支名x   origin/远程分支名x<br>说明：使用该方式会在本地新建分支x，并自动切换到该本地分支x。<br>采用此种方法建立的本地分支会和远程分支建立映射关系。</li>
-<li>方式二<br>git fetch origin 远程分支名x:本地分支名x<br>说明：该方式会在本地新建分支x，但是不会自动切换到该本地分支x，需要手动checkout。<br>采用此种方法建立的本地分支不会和远程分支建立映射关系。</li>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li><strong>git三种回滚方式–soft，hard，mixed：<a href="https://blog.csdn.net/chao821/article/details/81033003" target="_blank" rel="noopener">https://blog.csdn.net/chao821/article/details/81033003</a></strong></li>
+</ul>
+<hr>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/git-%E7%AC%94%E8%AE%B0-git-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E3%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E3%80%81%E6%8A%8A%E5%88%86%E6%94%AF%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8Brepository%E3%80%81%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/26/git-%E7%AC%94%E8%AE%B0-git-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E3%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E3%80%81%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF%E3%80%81%E6%8A%8A%E5%88%86%E6%94%AF%E6%8E%A8%E5%88%B0%E8%BF%9C%E7%A8%8Brepository%E3%80%81%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/" itemprop="url">git查看远程分支、本地分支、创建分支、推送分支</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T00:00:00+08:00">2018-10-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看远程分支"><a href="#查看远程分支" class="headerlink" title="查看远程分支"></a>查看远程分支</h1><p>git branch -a</p>
+<h1 id="查看本地分支"><a href="#查看本地分支" class="headerlink" title="查看本地分支"></a>查看本地分支</h1><p>git branch</p>
+<h1 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h1><p>git branch test </p>
+<h1 id="把分支推到远程分支"><a href="#把分支推到远程分支" class="headerlink" title="把分支推到远程分支"></a>把分支推到远程分支</h1><p>git push origin test</p>
+<h1 id="切换分支到test"><a href="#切换分支到test" class="headerlink" title="切换分支到test"></a>切换分支到test</h1><p>git checkout test </p>
+<h1 id="删除本地分支test"><a href="#删除本地分支test" class="headerlink" title="删除本地分支test"></a>删除本地分支test</h1><p>git branch -d 本地分支名</p>
+<h1 id="删除远程版本"><a href="#删除远程版本" class="headerlink" title="删除远程版本"></a>删除远程版本</h1><p>git push origin :远程分支名</p>
+<h1 id="将分支为branchname合并到当前分值"><a href="#将分支为branchname合并到当前分值" class="headerlink" title="将分支为branchname合并到当前分值"></a>将分支为branchname合并到当前分值</h1><p> git merge branchname</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/23/git-%E7%AC%94%E8%AE%B0-%E8%BF%9B%E5%85%A5vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8E%E6%80%8E%E4%B9%88%E9%80%80%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/23/git-%E7%AC%94%E8%AE%B0-%E8%BF%9B%E5%85%A5vim%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8E%E6%80%8E%E4%B9%88%E9%80%80%E5%87%BA/" itemprop="url">退出git vim编辑器</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-23T00:00:00+08:00">2018-08-23</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">672</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><ol>
+<li><p>一直按住esc ，再连续按大写的z两次就退出来了。</p>
+<blockquote>
+<p>用wq的时候，要先esc，然后按住shift键，出现下面这个界面时才可以输入命令：</p>
+</blockquote>
+</li>
+<li><p>直接按q，不保存改动 退出</p>
+</li>
 </ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
@@ -756,7 +1145,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/git-%E7%AC%94%E8%AE%B0-git%E5%85%A8%E5%B1%80%E5%92%8C%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE-user%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/git-%E7%AC%94%E8%AE%B0-merge%E5%92%8Crebase%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -775,7 +1164,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/03/git-%E7%AC%94%E8%AE%B0-git%E5%85%A8%E5%B1%80%E5%92%8C%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE-user%E9%85%8D%E7%BD%AE/" itemprop="url">git全局和项目设置用户名、密码</a></h1>
+                <a class="post-title-link" href="/2018/08/19/git-%E7%AC%94%E8%AE%B0-merge%E5%92%8Crebase%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">merge和rebase的区别</a></h1>
         
 
         <div class="post-meta">
@@ -791,7 +1180,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T00:00:00+08:00">2018-07-03</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T00:00:00+08:00">2018-08-19</time>
             
 
             
@@ -847,7 +1236,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.4k</span>
+                <span title="字数统计">949</span>
               
 
               
@@ -883,8 +1272,12 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;myname&quot;</span><br><span class="line">git config --global user.email  &quot;test@gmail.com&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name &quot;myname&quot;</span><br><span class="line">git config user.email  &quot;test@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><ol>
+<li>（一股脑）使用merge命令合并分支，解决完冲突，执行git add .和git commit -m’fix conflict’。这个时候会产生一个commit。</li>
+<li>（交互式）使用rebase命令合并分支，解决完冲突，执行git add .和git rebase –continue，不会产生额外的commit。这样的好处是，‘干净’，分支上不会有无意义的解决分支的commit；坏处，如果合并的分支中存在多个commit，需要重复处理多次冲突。</li>
+<li>git pull和git pull –rebase区别：git pull做了两个操作分别是‘获取’和合并。所以加了rebase就是以rebase的方式进行合并分支，默认为merge。</li>
+</ol>
+<p>git pull = git fetch + git merge<br>git pull –rebase = git fetch + git rebase</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -941,7 +1334,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/01/git-%E7%AC%94%E8%AE%B0-git%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/git-%E7%AC%94%E8%AE%B0-idea%E5%8E%BB%E6%8E%89add%E5%92%8C%E5%9B%9E%E9%80%80%E5%88%B0%E7%AC%ACN%E6%AC%A1%E6%8F%90%E4%BA%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -960,7 +1353,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/01/git-%E7%AC%94%E8%AE%B0-git%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B/" itemprop="url">git信息查看</a></h1>
+                <a class="post-title-link" href="/2018/08/17/git-%E7%AC%94%E8%AE%B0-idea%E5%8E%BB%E6%8E%89add%E5%92%8C%E5%9B%9E%E9%80%80%E5%88%B0%E7%AC%ACN%E6%AC%A1%E6%8F%90%E4%BA%A4/" itemprop="url">idea去掉add和回退到第N次提交</a></h1>
         
 
         <div class="post-meta">
@@ -976,7 +1369,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-01T00:00:00+08:00">2018-07-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T00:00:00+08:00">2018-08-17</time>
             
 
             
@@ -1068,10 +1461,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="从当前分支切换到‘dev’分支："><a href="#从当前分支切换到‘dev’分支：" class="headerlink" title="从当前分支切换到‘dev’分支："></a>从当前分支切换到‘dev’分支：</h1><p>git checkout dev </p>
-<h1 id="建立并切换新分支："><a href="#建立并切换新分支：" class="headerlink" title="建立并切换新分支："></a>建立并切换新分支：</h1><p>git checkout -b ‘dev’ </p>
-<h1 id="查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）"><a href="#查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）" class="headerlink" title="查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）:"></a>查看当前详细分支信息（可看到当前分支与对应的远程追踪分支）:</h1><p>git branch -vv </p>
-<h1 id="查看当前远程仓库信息"><a href="#查看当前远程仓库信息" class="headerlink" title="查看当前远程仓库信息"></a>查看当前远程仓库信息</h1><p>git remote -vv</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h1><p>git reset head</p>
+<h1 id="回退到最后一次提交之前状态"><a href="#回退到最后一次提交之前状态" class="headerlink" title="回退到最后一次提交之前状态"></a>回退到最后一次提交之前状态</h1><p>git reset HEAD~1</p>
+<h1 id="回退到第3次提交之前的状态"><a href="#回退到第3次提交之前的状态" class="headerlink" title="回退到第3次提交之前的状态"></a>回退到第3次提交之前的状态</h1><p>git reset HEAD~3</p>
+<h1 id="撤销-强制提交记录"><a href="#撤销-强制提交记录" class="headerlink" title="撤销+强制提交记录"></a>撤销+强制提交记录</h1><p>git log先查你提交的记录<br>git reset –hard xxxxxx回滚到那个记录<br>如果你也想修改远程仓库里的记录的话<br>git push origin master -f强制push</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1128,7 +1521,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/git-config-git-config%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/11/git-%E7%AC%94%E8%AE%B0-git%E8%8E%B7%E5%8F%96commit-id/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1147,7 +1540,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/16/git-config-git-config%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B/" itemprop="url">git cherry-pick与rebase</a></h1>
+                <a class="post-title-link" href="/2018/08/11/git-%E7%AC%94%E8%AE%B0-git%E8%8E%B7%E5%8F%96commit-id/" itemprop="url">获取完整的commit id</a></h1>
         
 
         <div class="post-meta">
@@ -1163,205 +1556,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-16T00:00:00+08:00">2018-06-16</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/config/" itemprop="url" rel="index"><span itemprop="name">config</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">7.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">7 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="git-config-–list"><a href="#git-config-–list" class="headerlink" title="git config –list"></a>git config –list</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">core.symlinks&#x3D;false</span><br><span class="line">core.autocrlf&#x3D;true</span><br><span class="line">core.fscache&#x3D;true</span><br><span class="line">color.diff&#x3D;auto</span><br><span class="line">color.status&#x3D;auto</span><br><span class="line">color.branch&#x3D;auto</span><br><span class="line">color.interactive&#x3D;true</span><br><span class="line">help.format&#x3D;html</span><br><span class="line">rebase.autosquash&#x3D;true</span><br><span class="line">http.sslcainfo&#x3D;D:&#x2F;developmentUsedSoftAddress&#x2F;Git&#x2F;mingw64&#x2F;ssl&#x2F;certs&#x2F;ca-bundle.crt</span><br><span class="line">http.sslbackend&#x3D;openssl</span><br><span class="line">diff.astextplain.textconv&#x3D;astextplain</span><br><span class="line">filter.lfs.clean&#x3D;git-lfs clean -- %f</span><br><span class="line">filter.lfs.smudge&#x3D;git-lfs smudge -- %f</span><br><span class="line">filter.lfs.process&#x3D;git-lfs filter-process</span><br><span class="line">filter.lfs.required&#x3D;true</span><br><span class="line">user.name&#x3D;zhangdy</span><br><span class="line">user.email&#x3D;zhangdaiyin.cool@163.com</span><br><span class="line">credential.helper&#x3D;store</span><br><span class="line">core.repositoryformatversion&#x3D;0</span><br><span class="line">core.filemode&#x3D;false</span><br><span class="line">core.bare&#x3D;false</span><br><span class="line">core.logallrefupdates&#x3D;true</span><br><span class="line">core.symlinks&#x3D;false</span><br><span class="line">core.ignorecase&#x3D;true</span><br><span class="line">remote.origin.url&#x3D;https:&#x2F;&#x2F;code.sofa4finance.aliyuncs.com&#x2F;nybqjywz&#x2F;tax-platform&#x2F;invoice-center.git</span><br><span class="line">remote.origin.fetch&#x3D;+refs&#x2F;heads&#x2F;*:refs&#x2F;remotes&#x2F;origin&#x2F;*</span><br><span class="line">branch.master.remote&#x3D;origin</span><br><span class="line">branch.master.merge&#x3D;refs&#x2F;heads&#x2F;master</span><br><span class="line">branch.feature-dev.remote&#x3D;origin</span><br><span class="line">branch.feature-dev.merge&#x3D;refs&#x2F;heads&#x2F;feature-dev</span><br><span class="line">user.name&#x3D;zhangdaiyin</span><br><span class="line">user.email&#x3D;zhangdaiyin@1414587873548331.onaliyun.com</span><br></pre></td></tr></table></figure>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>从以上配置上可以看得出来，全局的user配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user.name&#x3D;zhangdy</span><br><span class="line">user.email&#x3D;zhangdaiyin.cool@163.com</span><br></pre></td></tr></table></figure><br>局部项目的配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">branch.feature-dev.merge&#x3D;refs&#x2F;heads&#x2F;feature-dev</span><br><span class="line">user.name&#x3D;zhangdaiyin</span><br><span class="line">user.email&#x3D;zhangdaiyin@1414587873548331.onaliyun.com</span><br></pre></td></tr></table></figure></p>
-<hr>
-<ul>
-<li><strong>GIT-查看config配置信息：<a href="https://www.cnblogs.com/merray/p/6006411.html" target="_blank" rel="noopener">https://www.cnblogs.com/merray/p/6006411.html</a></strong></li>
-</ul>
-<hr>
-<h1 id="config-配置指令"><a href="#config-配置指令" class="headerlink" title="config 配置指令"></a>config 配置指令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config</span><br></pre></td></tr></table></figure>
-<p>config 配置有system级别 global（用户级别） 和local（当前仓库）三个 设置先从system-》global-》local  底层配置会覆盖顶层配置 分别使用–system/global/local 可以定位到配置文件</p>
-<h1 id="查看系统config"><a href="#查看系统config" class="headerlink" title="查看系统config"></a>查看系统config</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --system --list</span><br></pre></td></tr></table></figure>
-<h1 id="查看当前用户（global）配置"><a href="#查看当前用户（global）配置" class="headerlink" title="查看当前用户（global）配置"></a>查看当前用户（global）配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global  --list</span><br></pre></td></tr></table></figure>
-<h1 id="查看当前仓库配置信息"><a href="#查看当前仓库配置信息" class="headerlink" title="查看当前仓库配置信息"></a>查看当前仓库配置信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --local  --list</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>由此可见–global中存储了提交用户的email和用户名 如果需要手动设置则可以使用如下指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;myname&quot;</span><br><span class="line">git config --global user.email  &quot;test@gmail.com&quot;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/git-%E7%AC%94%E8%AE%B0-git%E4%B8%AD%E4%BB%8E%E8%BF%9C%E7%A8%8B%E7%9A%84%E5%88%86%E6%94%AF%E8%8E%B7%E5%8F%96%E6%9C%80%E6%96%B0%E7%9A%84%E7%89%88%E6%9C%AC%E5%88%B0%E6%9C%AC%E5%9C%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/02/git-%E7%AC%94%E8%AE%B0-git%E4%B8%AD%E4%BB%8E%E8%BF%9C%E7%A8%8B%E7%9A%84%E5%88%86%E6%94%AF%E8%8E%B7%E5%8F%96%E6%9C%80%E6%96%B0%E7%9A%84%E7%89%88%E6%9C%AC%E5%88%B0%E6%9C%AC%E5%9C%B0/" itemprop="url">git从远程的分支获取最新的版本到本地</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-02T00:00:00+08:00">2018-06-02</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-11T00:00:00+08:00">2018-08-11</time>
             
 
             
@@ -1417,7 +1612,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.2k</span>
+                <span title="字数统计">1k</span>
               
 
               
@@ -1453,10 +1648,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="先下载"><a href="#先下载" class="headerlink" title="先下载"></a>先下载</h1><p>git clone URL</p>
-<h1 id="切换分支branchName"><a href="#切换分支branchName" class="headerlink" title="切换分支branchName"></a>切换分支branchName</h1><p>git checkout branchName</p>
-<h1 id="从远程的origin仓库的master分支下载代码到本地的orgin-branchName"><a href="#从远程的origin仓库的master分支下载代码到本地的orgin-branchName" class="headerlink" title="从远程的origin仓库的master分支下载代码到本地的orgin branchName"></a>从远程的origin仓库的master分支下载代码到本地的orgin branchName</h1><p>git fetch orgin jarSample</p>
-<h1 id="强制更新，以远程覆盖本地"><a href="#强制更新，以远程覆盖本地" class="headerlink" title="强制更新，以远程覆盖本地"></a>强制更新，以远程覆盖本地</h1><p>git checkout –force</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="获取完整commit-id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）"><a href="#获取完整commit-id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）" class="headerlink" title="获取完整commit id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）"></a>获取完整commit id（如：bb4f92a7d4cbafb67d259edea5a1fa2dd6b4cc7a）</h1><p>git rev-parse HEAD</p>
+<h1 id="获取short-commit-id（如：bb4f92a）"><a href="#获取short-commit-id（如：bb4f92a）" class="headerlink" title="获取short commit id（如：bb4f92a）"></a>获取short commit id（如：bb4f92a）</h1><p>git rev-parse –short HEAD</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1513,7 +1706,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/git-%E7%AC%94%E8%AE%B0-git-add-%E5%92%8Cgit-add-u%E5%92%8Cgit-add-A%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/git-%E7%AC%94%E8%AE%B0-git%E6%B8%85%E9%99%A4%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%EF%BC%8C%E8%AE%B0%E4%BD%8F%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1532,7 +1725,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/26/git-%E7%AC%94%E8%AE%B0-git-add-%E5%92%8Cgit-add-u%E5%92%8Cgit-add-A%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">git add . 和 git add -u 和 git add -A 的区别</a></h1>
+                <a class="post-title-link" href="/2018/08/09/git-%E7%AC%94%E8%AE%B0-git%E6%B8%85%E9%99%A4%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%EF%BC%8C%E8%AE%B0%E4%BD%8F%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/" itemprop="url">清除用户名密码、记住用户名密码</a></h1>
         
 
         <div class="post-meta">
@@ -1548,7 +1741,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T00:00:00+08:00">2018-05-26</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T00:00:00+08:00">2018-08-09</time>
             
 
             
@@ -1604,7 +1797,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">849</span>
+                <span title="字数统计">820</span>
               
 
               
@@ -1640,7 +1833,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>git add . ：他会监控工作区的状态树，使用它会把工作时的所有变化提交到暂存区，包括文件内容修改(modified)以及新文件(new)，但不包括被删除的文件。<br>git add -u ：他仅监控已经被add的文件（即tracked file），他会将被修改的文件提交到暂存区。add -u 不会提交新文件（untracked file）。（git add –update的缩写）<br>git add -A ：是上面两个功能的合集（git add –all的缩写）<br>git add -f App.class ：如果你确实想添加该文件，可以用-f强制添加到Git：（Use -f if you really want to add them.）</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="清除用户名密码-缓存"><a href="#清除用户名密码-缓存" class="headerlink" title="清除用户名密码 缓存"></a>清除用户名密码 缓存</h1><p>git credential-manager uninstall</p>
+<h1 id="设置记住用户名密码"><a href="#设置记住用户名密码" class="headerlink" title="设置记住用户名密码"></a>设置记住用户名密码</h1><p>git config –global credential.helper store (输入这个命令后,以后只要在输入一次用户名密码)</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1697,7 +1891,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/git-%E5%BC%82%E5%B8%B8-Git-commit-push%E7%9A%84%E6%97%B6%E5%80%99%E5%87%BA%E7%8E%B0%E4%BA%86%E4%B8%A4%E4%B8%AA%E5%88%86%E6%94%AF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/git-%E7%AC%94%E8%AE%B0-git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E7%9A%84%E5%88%9B%E5%BB%BA%E8%80%85%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1716,7 +1910,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/git-%E5%BC%82%E5%B8%B8-Git-commit-push%E7%9A%84%E6%97%B6%E5%80%99%E5%87%BA%E7%8E%B0%E4%BA%86%E4%B8%A4%E4%B8%AA%E5%88%86%E6%94%AF/" itemprop="url">git commit push的时候出现了两个分支</a></h1>
+                <a class="post-title-link" href="/2018/08/07/git-%E7%AC%94%E8%AE%B0-git%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E7%9A%84%E5%88%9B%E5%BB%BA%E8%80%85%E4%BB%A5%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4/" itemprop="url">列出某个分支的数据（按作者或时间排序）</a></h1>
         
 
         <div class="post-meta">
@@ -1732,7 +1926,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T00:00:00+08:00">2018-05-13</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T00:00:00+08:00">2018-08-07</time>
             
 
             
@@ -1760,7 +1954,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1788,7 +1982,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.3k</span>
+                <span title="字数统计">832</span>
               
 
               
@@ -1824,18 +2018,9 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Git-commit-push的时候出现了两个分支"><a href="#Git-commit-push的时候出现了两个分支" class="headerlink" title="Git commit push的时候出现了两个分支"></a>Git commit push的时候出现了两个分支</h1><p>git commit之后push，在push的界面发现有两个不同路径的push，如：</p>
-<ol>
-<li>push : local分支 -&gt; origin/远程分支</li>
-<li>push : master -&gt; origin/master<br>其实我的本意是将local分支推送到远程分支，不清楚为什么会出现此种情况</li>
-</ol>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><ol>
-<li>目前使用的 暴力重推，因为reset不顶用，是直接本地重建仓库</li>
-</ol>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>-blog/abc/xxx<br>-blog/edf/yyy<br>blog为项目根目录文件夹<br>产生以上情况的原因之一可能是：<br>当blog对应着一个本地分支branchA，且关联了远程分支branchA，<br>如果edf是我们从远程（gitee、gitlab、github等）下载下来的代码，那么在我们删除edf文件夹下的.github文件夹之后，<br>再提交代码推送时，会出现以上情况</p>
-<blockquote>
-<p>说的很模糊，可以不用纠结产生场景，出现了重置仓库即可（有更合适的方案更好）</p>
-</blockquote>
+            <script src="/assets/js/APlayer.min.js"> </script><p>列出远程Git分支按作者排序的committerdate：</p>
+<p>git for-each-ref –format=’%(committerdate) %09 %(authorname) %09 %(refname)’ | sort -k5n -k2M -k3n -k4n<br>然后比如你想查看某个分支branch_A, 那么就再后面加上|grep branch_A</p>
+<p>git for-each-ref –format=’%(committerdate) %09 %(authorname) %09 %(refname)’ | sort -k5n -k2M -k3n -k4n|grep branch_A</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1892,7 +2077,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/git-%E5%BC%82%E5%B8%B8-20221027-Unable-to-negotiate-with-10-207-64-88-port-22-no-matching-host-key-type-found-Their-offer-ssh-rsa/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/git-%E7%AC%94%E8%AE%B0-git%E6%92%A4%E9%94%80commit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1911,7 +2096,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/git-%E5%BC%82%E5%B8%B8-20221027-Unable-to-negotiate-with-10-207-64-88-port-22-no-matching-host-key-type-found-Their-offer-ssh-rsa/" itemprop="url">Unable to negotiate with 10.207.64.88 port 22: no matching host key type found. Their offer: ssh-rsa</a></h1>
+                <a class="post-title-link" href="/2018/07/09/git-%E7%AC%94%E8%AE%B0-git%E6%92%A4%E9%94%80commit/" itemprop="url">git撤销</a></h1>
         
 
         <div class="post-meta">
@@ -1927,7 +2112,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T00:00:00+08:00">2018-05-13</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-09T00:00:00+08:00">2018-07-09</time>
             
 
             
@@ -1955,7 +2140,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1983,200 +2168,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>git pull无法拉取代码，提示权限不足</p>
-<h1 id="异常信息"><a href="#异常信息" class="headerlink" title="异常信息"></a>异常信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  inv-0630 git:(feature-20220906) ✗ git pull</span><br><span class="line">Unable to negotiate with 10.207.64.99 port 22: no matching host key type found. Their offer: ssh-rsa</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
-<h1 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h1><ol>
-<li>找到 id_rsa.pub 所在文件夹<br>/Users/diabolo/.ssh/<br>或 查看本地是否存在SSH密钥<br>命令：ls -al ~/.ssh<br>1.1 若没有 id_rsa.pub 的话，则生产密钥<br>命令：ssh-keygen -t rsa -C “自己的Email地址”<br>注意：执行完成后会有一些列提示输入密码的指令，直接回车即可</li>
-<li>创建文件 config，没有后缀的文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">HostkeyAlgorithms +ssh-rsa</span><br><span class="line">PubkeyAcceptedKeyTypes +ssh-rsa</span><br></pre></td></tr></table></figure></li>
-<li>再执行 git pull 可以正常拉代码</li>
-</ol>
-<blockquote>
-<p>mac 显示/隐藏文件夹： command + shift + .</p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/git-config-git%E6%93%8D%E4%BD%9Cssh%E5%92%8Chttps%E5%88%87%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/14/git-config-git%E6%93%8D%E4%BD%9Cssh%E5%92%8Chttps%E5%88%87%E6%8D%A2/" itemprop="url">git操作ssh和https切换</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-14T00:00:00+08:00">2018-02-14</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/config/" itemprop="url" rel="index"><span itemprop="name">config</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">808</span>
+                <span title="字数统计">674</span>
               
 
               
@@ -2212,12 +2204,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><ol>
-<li><p>从ssh切换至https<br> git remote set-url origin(远程仓库名称) <a href="https://email/username/ProjectName.git" target="_blank" rel="noopener">https://email/username/ProjectName.git</a></p>
-</li>
-<li><p>从https切换至ssh<br> git remote set-url origin git@email:username/ProjectName.git</p>
-</li>
-</ol>
+            <script src="/assets/js/APlayer.min.js"> </script><p>$ git commit -m ‘initial commit’     提交</p>
+<p>$ git add forgotten_file     添加</p>
+<p>$ git commit –amend    撤销</p>
+<p>通过git commit –amend 命令可以查看到刚刚的log信息为</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2262,7 +2252,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/39/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/41/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/39/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/page/41/">41</a><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/41/">下一页</a>
   </nav>
 
 
@@ -2309,7 +2299,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">407</span>
+                    <span class="site-state-item-count">418</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2488,7 +2478,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">83</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">85</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2577,7 +2571,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2688,7 +2686,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2700,7 +2698,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">416k</span>
+    <span title="站点总字数">423k</span>
   
 
   
@@ -2709,7 +2707,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:56</span>
+    <span title="站点总阅读时长">7:03</span>
   
 </div>
 

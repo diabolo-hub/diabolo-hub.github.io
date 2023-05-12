@@ -373,6 +373,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/05/04/git-%E7%AC%94%E8%AE%B0-git-reset%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/05/04/git-%E7%AC%94%E8%AE%B0-git-reset%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A/" itemprop="url">git reset代码回滚</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+            <i class="fa fa-thumb-tack"></i>
+            <font color=7D26CD>置顶</font>
+            <span class="post-meta-divider">|</span>
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-05-04T00:00:00+08:00">2023-05-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="本地仓库分支切换到需要回退到代码分支，如：-master"><a href="#本地仓库分支切换到需要回退到代码分支，如：-master" class="headerlink" title="本地仓库分支切换到需要回退到代码分支，如： master"></a>本地仓库分支切换到需要回退到代码分支，如： master</h1><p>git checkout master</p>
+<h1 id="查找分析要回退到版本及hash码"><a href="#查找分析要回退到版本及hash码" class="headerlink" title="查找分析要回退到版本及hash码"></a>查找分析要回退到版本及hash码</h1><p><a href="https://www.zhihu.com/question/284554416/answer/438352639" target="_blank" rel="noopener">怎么才能看懂 git log的线？</a></p>
+<ol>
+<li>查看当前分支到log线<br>git log –oneline –graph –decorate</li>
+<li>查看两个分支间的关系线<br>git log –oneline –graph –decorate master dev</li>
+<li>查看指定分支hash码(b4ad2d0)的父节点等信息<br>git log -1 –pretty=raw b4ad2d0</li>
+</ol>
+<h1 id="版本文件回退"><a href="#版本文件回退" class="headerlink" title="版本文件回退"></a>版本文件回退</h1><ol>
+<li>在ideal中，git日志控制台中，选中需要回退到的版本记录位置，<br>右键：将当前分支重置到此处…<br>然后弹窗选择：硬 （状态回退到此处，且文件也变更回退到此处），本地有文件未提交的会丢失<br>然后点击确定，本地仓库文件即已经回退</li>
+<li><p>hash码回退<br>右键项目-&gt;git-&gt;重置HEAD（reset head）-&gt; 将提交的位置输入要回退到的版本的hash码<br>此处reset_type:选择 Hard (硬，与上面理由一样）<br>验证可以查看具体回退的内容，确定（reset）即可</p>
+</li>
+<li><p>命令回退<br>git reset –hard b25b0411b9d00e7aafd7b164b499be293a1bb942<br>git reset –soft（软） HEAD^</p>
+</li>
+<li><p>git 利用tag回退版本及合并两个远程分支<br><a href="https://blog.csdn.net/mafei6827/article/details/80341067" target="_blank" rel="noopener">git 利用tag回退版本及合并两个远程分支</a><br><a href="https://zhuanlan.zhihu.com/p/568937594" target="_blank" rel="noopener">git回退到tag</a><br><a href="https://blog.csdn.net/rjzcsdn/article/details/123741084" target="_blank" rel="noopener">git tag使用</a></p>
+</li>
+</ol>
+<h1 id="如何推送"><a href="#如何推送" class="headerlink" title="如何推送"></a>如何推送</h1><p>git push -f<br>你可以简单地用–force（或-f）（*）解决这个问题：<br>git push –force<br>您可能需要再次设置上游：<br>git push –force –set-upstream origin <branch><br>例如： git push –force –set-upstream origin master</p>
+<p><a href="https://qa.1r1g.com/sf/ask/141158041/" target="_blank" rel="noopener">git reset后无法推送–soft HEAD ^</a></p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ol>
+<li>git push –set-upstream origin master<br>如果有分支保护，不能–force</li>
+<li>git push –force –set-upstream origin master<br>必须取消分支保护</li>
+<li>需要 –set-upstream 才能推到远程，否则一直推不上去，需要将远程代码合并merge下来（远程还是未合并的代码，又会重复覆盖本地），一直循环<br>git push –force –set-upstream origin master</li>
+</ol>
+<h1 id="其他参考文献"><a href="#其他参考文献" class="headerlink" title="其他参考文献"></a>其他参考文献</h1><p><a href="https://blog.csdn.net/qq_39512532/article/details/110260369" target="_blank" rel="noopener">Git变基</a><br><a href="https://www.kernel.org/pub/software/scm/git/docs/user-manual.html#problems-With-rewriting-history" target="_blank" rel="noopener">请注意，如果其他人已经撤回了您的工作，这将产生后果，因为会有不同的提交进行相同的更改（可能）。请参阅</a><br>[git stash 暂存]（）</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/05/09/depth-kubernetes-%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3-k8s-pod%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE%E5%92%8Cdockerfile%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -973,7 +1184,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/spring-bean-1-%E5%A6%82%E4%BD%95%E5%B0%86spring%E7%AE%A1%E7%90%86%E7%9A%84bean%E6%B3%A8%E5%85%A5%E5%88%B0%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -992,7 +1203,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/11/01/depth-architecture-20221101-%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/" itemprop="url">业务架构图例</a></h1>
+                <a class="post-title-link" href="/2023/04/23/spring-bean-1-%E5%A6%82%E4%BD%95%E5%B0%86spring%E7%AE%A1%E7%90%86%E7%9A%84bean%E6%B3%A8%E5%85%A5%E5%88%B0%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD/" itemprop="url">如何将spring管理的bean注入到静态方法</a></h1>
         
 
         <div class="post-meta">
@@ -1008,7 +1219,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
             
 
             
@@ -1029,14 +1240,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/bean/" itemprop="url" rel="index"><span itemprop="name">bean</span></a></span>
 
                 
                 
@@ -1064,7 +1275,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">3.3k</span>
               
 
               
@@ -1078,7 +1289,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">3 mins.</span>
               
             </div>
           
@@ -1100,197 +1311,14 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="业务架构图-："><a href="#业务架构图-：" class="headerlink" title="业务架构图 ："></a>业务架构图 ：</h1><p>描述系统对用户提供了什么业务功能。用户视角或业务视角</p>
-<h1 id="【画图技巧】"><a href="#【画图技巧】" class="headerlink" title="【画图技巧】"></a>【画图技巧】</h1><ol>
-<li>通过不同颜色来标识业务状态：比如说哪些业务发展状态好，哪些问题比较多，哪些比较稳定，哪些竞争比较激烈等。</li>
-<li>业务分组管理：将类似的业务放在一个分组里面展现，用虚线框或者相同背景将其标识出来。</li>
-<li>区块对齐：为了美观，可以改变不同区块的长短大小进行对齐，让整体看起来更美观。</li>
-</ol>
-<h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p>
-<h2 id="02"><a href="#02" class="headerlink" title="02"></a>02</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E6%9E%B6%E6%9E%84%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/01/depth-architecture-20221101-%E6%9E%B6%E6%9E%84%E6%B1%87%E6%80%BB/" itemprop="url">架构图例汇总</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">636</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="各个架构图区别"><a href="#各个架构图区别" class="headerlink" title="各个架构图区别"></a>各个架构图区别</h1><p><img src="temp-01.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>如何将spring管理的bean注入到静态方法: https://blog.csdn.net/constant_rain/article/details/108601374
+</code></pre><hr>
+<h1 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h1><p>static:  该方法或者变量就成为了类方法或变量，随着类的加载而加载，会被当前类下的所有对象所共有</p>
+<p>@Resource: springbean工厂中匹配一个对象，对象级别</p>
+<h1 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h1><p>类的所有静态属性加载 -&gt; springbean匹配</p>
+<h1 id="普通的静态方法注入springbean对象为空原因"><a href="#普通的静态方法注入springbean对象为空原因" class="headerlink" title="普通的静态方法注入springbean对象为空原因"></a>普通的静态方法注入springbean对象为空原因</h1><p>静态属性会在程序启动第一次启动时完成加载，且之后不会再有变动<br>之后才开始springbean注入，所以为空</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStaticUtil</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  TestSpringBean testSpringBean;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TestStaticUtil testStaticUtil;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil = <span class="keyword">this</span>;</span><br><span class="line">        testStaticUtil.testSpringBean = <span class="keyword">this</span>.testSpringBean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSpring</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil.testSpringBean.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1347,7 +1375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface%E6%8E%A5%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1366,7 +1394,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/11/01/depth-architecture-20221101-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/" itemprop="url">应用架构图例</a></h1>
+                <a class="post-title-link" href="/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface%E6%8E%A5%E5%8F%A3/" itemprop="url">@FunctionalInterface接口</a></h1>
         
 
         <div class="post-meta">
@@ -1382,7 +1410,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
             
 
             
@@ -1403,14 +1431,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java8/" itemprop="url" rel="index"><span itemprop="name">java8</span></a></span>
 
                 
                 
@@ -1438,7 +1466,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">9.3k</span>
               
 
               
@@ -1452,7 +1480,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">9 mins.</span>
               
             </div>
           
@@ -1474,9 +1502,24 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="应用架构图例"><a href="#应用架构图例" class="headerlink" title="应用架构图例"></a>应用架构图例</h1><p>##【定义】描述后端系统由哪些应用组成，一个应用就是一个可部署发布运行的程序，它是项目开发过程中，开发测试运维团队协作的基础。<br>以应用为基础</p>
-<h2 id="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"><a href="#【使用场景】项目开发、测试。运维部署发布。子域架构设计。" class="headerlink" title="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"></a>【使用场景】项目开发、测试。运维部署发布。子域架构设计。</h2><p>##【画图技巧】通过不同颜色来标识不同角色。通过连接线来表示关系。复杂系统分域来画。</p>
-<h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-如果系统比较简单，那么基本上应用架构和系统架构是等价的"><a href="#01-如果系统比较简单，那么基本上应用架构和系统架构是等价的" class="headerlink" title="01 如果系统比较简单，那么基本上应用架构和系统架构是等价的"></a>01 如果系统比较简单，那么基本上应用架构和系统架构是等价的</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>Java8新特性探索之函数式接口: https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;mid=2651023894&amp;idx=2&amp;sn=d8eccac647e66e871c8a1befddf9a9d5&amp;chksm=84e75a5db390d34beda058d32c2d2967c20eb1d2fffd0a7453b845f436f66c324b32949d200a&amp;scene=27
+</code></pre><hr>
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
+<li>x -&gt; x.toString()，如何知道 x 是什么类型？</li>
+<li>Lambda 表达式包含类型推导（编译器会自动推导出类型信息，避免了程序员显式地声明），编译器必须能够以某种方式推导出 x 的类型以生成正确的代码</li>
+<li>同样方法引用也存在此问题，假设你要传递 System.out :: println 到你正在编写的方法 ，你怎么知道传递给方法的参数的类型？<blockquote>
+<p>为了解决上述问题，java8引入了函数式接口</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol>
+<li>函数式接口定义<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : Daiyin.Zhang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> ：$Id: java.lang.String.java v 1.0.0 2023/03/07 $&#123;TIME&#125; Daiyin.Zhang Exp $</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> : 公共子序列服务</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2023/03/07 new Date()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommonSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IdServiceException id服务异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">get</span><span class="params">(String key)</span> <span class="keyword">throws</span> IdServiceException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>函数式接口使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonSequenceServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IdGenService idGenService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 得到id</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> CommonSequenceService&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> CommonSequenceService <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (key) -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> == key || <span class="string">""</span>.equals(key)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"key is not found"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> idGenService.getId(key);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>接口服务使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OutSequenceServiceImpl</span> <span class="keyword">implements</span> <span class="title">OutSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CommonSequenceServiceImpl commonSequenceServiceImpl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销项通用序列号</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getOutCommonNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> commonSequenceServiceImpl.getId().get(SeqCodeConstant.INV_OUT_COMMON_NO_KEY);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IdServiceException e) &#123;</span><br><span class="line">            log.error(<span class="string">"get out common no excp : &#123;&#125;"</span>, e.getMessage(), e);</span><br><span class="line">            <span class="keyword">return</span> SerialNoUtil.getSeqInvoiceNo();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -1532,7 +1575,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1551,7 +1594,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/11/01/depth-architecture-20221101-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/" itemprop="url">系统架构图例</a></h1>
+                <a class="post-title-link" href="/2023/04/23/java-java8-FunctionalInterface-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%88%AB/" itemprop="url">@FunctionalInterface接口</a></h1>
         
 
         <div class="post-meta">
@@ -1567,7 +1610,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
             
 
             
@@ -1588,14 +1631,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java8/" itemprop="url" rel="index"><span itemprop="name">java8</span></a></span>
 
                 
                 
@@ -1623,7 +1666,588 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.5k</span>
+                <span title="字数统计">793</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<hr>
+<h1 id="函数式接口分类"><a href="#函数式接口分类" class="headerlink" title="函数式接口分类"></a>函数式接口分类</h1><p>Supplier供给型函数：Supplier的表现形式为不接受参数、只返回数据。<br>Consumer消费型函数：Consumer接收一个参数，没有返回值。<br>Runnable无参无返回型函数：Runnable的表现形式为即没有参数也没有返回值。<br>Function有参有返回型函数：Function函数的表现形式为接收一个参数，并返回一个值。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/" itemprop="url">MySQL数据库Binlog解析工具--binlog2sql</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-04T00:00:00+08:00">2023-01-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">832</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/chinasoft/p/16441022.html" target="_blank" rel="noopener">MySQL数据库Binlog解析工具–binlog2sql</a></p>
+<h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p><a href="https://gitee.com/wwbjqcom/binlogAL" target="_blank" rel="noopener">binlogAL(binlog analysis)</a></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" itemprop="url">mysqlbinlog-日志管理工具</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-04T00:00:00+08:00">2023-01-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>mysqlbinlog [options] log_file1 log_file2…</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><p>–base64-output=name：决定binlog输出格式选项，<br>auto–自动显示binlog语句所有格式；<br>never–禁止显示binlog语句；<br>decode-rows–禁止显示binlog语句</p>
+<p>–database=db_name, -d db_name：只显示指定数据库的日志</p>
+<p>–verbose,-v：从行事件中重建伪 sql 语句</p>
+<p>–verbose –verbose, -vv：从行事件中重建伪 sql 语句，添加对数据类型的注释</p>
+<p>–start-datetime=datetime –stop-datetime=datetime：指定日期间隔的日志</p>
+<p>–start-position=N –stop-position=N：指定事件位置间隔的日志</p>
+<p>–skip-gtids[=(true|false)] ：不显示GTID</p>
+<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><ol>
+<li>创建新日志，对mysql和数据库做DML<br>flush logs</li>
+<li>不加参数显示binlog<br>mysqlbinlog mysql-bin.000017</li>
+<li>加参数显示的binlog日志的SQL执行记录<br>mysqlbinlog mysql-bin.000017 -d test –base64-output=decode-rows –skip-gtids -vv | grep -B 1 -i ‘insert into’</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/" itemprop="url">查找版本及路径</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-24T00:00:00+08:00">2022-11-24</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.6k</span>
               
 
               
@@ -1659,569 +2283,16 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<p>-<strong>程序员画图参考——流程图、时序图、算法原理图和系统架构图:<a href="https://www.jianshu.com/p/9cf73222d9a2" target="_blank" rel="noopener">https://www.jianshu.com/p/9cf73222d9a2</a></strong><br>-<strong>如何画出优秀的软件系统架构图：<a href="https://www.jianshu.com/p/ca0174d9ceb1" target="_blank" rel="noopener">https://www.jianshu.com/p/ca0174d9ceb1</a></strong></p>
-<hr>
-<h1 id="系统架构图"><a href="#系统架构图" class="headerlink" title="系统架构图"></a>系统架构图</h1><p>通过不同颜色来标识不同角色。通过连接线来表示关系。逻辑分组。<br>以角色为基础</p>
-<h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p>
-<h2 id="02-简单案例：MongoDB-Sharding-的系统架构图"><a href="#02-简单案例：MongoDB-Sharding-的系统架构图" class="headerlink" title="02 简单案例：MongoDB Sharding 的系统架构图"></a>02 简单案例：MongoDB Sharding 的系统架构图</h2><p><img src="temp-02.png" alt=""></p>
-<h2 id="03-复杂案例：系统架构图-Role"><a href="#03-复杂案例：系统架构图-Role" class="headerlink" title="03 复杂案例：系统架构图-Role"></a>03 复杂案例：系统架构图-Role</h2><p><img src="temp-03.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>➜  ~ python3<br>Python 3.8.9 (default, Apr 13 2022, 08:48:06)<br>[Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin<br>Type “help”, “copyright”, “credits” or “license” for more information.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>exit()<br>➜  ~ which python<br>python not found<br>➜  ~ which python3<br>/usr/bin/python3</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ which python2</span><br><span class="line">/usr/local/bin/python2</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ which python3</span><br><span class="line">/usr/bin/python3</span><br><span class="line">➜  ~</span><br></pre></td></tr></table></figure>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/11/01/depth-architecture-20221101-%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/" itemprop="url">部署架构图例</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="部署架构图"><a href="#部署架构图" class="headerlink" title="部署架构图"></a>部署架构图</h1><p>##【定义】描述后端系统具体是如何部署的，主要包含机房信息、网络信息和硬件信息等。</p>
-<p>##【使用场景】总体架构设计。运维规划和优化。</p>
-<h2 id="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"><a href="#【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。" class="headerlink" title="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"></a>【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。</h2><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-简单支付系统部署架构图"><a href="#01-简单支付系统部署架构图" class="headerlink" title="01 简单支付系统部署架构图"></a>01 简单支付系统部署架构图</h2><p><img src="temp-01.png" alt=""></p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/31/mac-20221031-mac%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/10/31/mac-20221031-mac%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/" itemprop="url">mac常用应用</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-31T00:00:00+08:00">2022-10-31</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h1><p>runCat<br>battery buddy<br>腾讯柠檬        类似360，千万不能下载<br>manget<br>keka     解压缩软件<br>downie    在线视频下载工具<br>Fliqlo<br>Parsec    延时摄影视频制作应用<br>LanDrop<br>Parallels Desktop<br>YesPlayMusic<br>落雪音乐<br>AnyGo     在iPhone / iPad上轻松模拟GPS位置<br>AnyDrop  文本文件处理动作集成软件  类似shortCut bar<br>Permute  视频音频转换工具<br>Alfred<br>Backgrouond Music<br>Final Cut Pro        Mac OS视频剪辑软件<br>Speedtest     网络速度测试应用</p>
-<p>fcpx    FcpxFullAccess出品的插件合集，包含大量个文字标题、视频特效、视频转场、3D LUTS调色预设等</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/10/28/depth-architecture-20221028-%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/" itemprop="url">架构基础</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-28T00:00:00+08:00">2022-10-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="架构高并发和高可用"><a href="#架构高并发和高可用" class="headerlink" title="架构高并发和高可用"></a>架构高并发和高可用</h1><ol>
-<li>高并发实现的三板斧：缓存，限流和降级</li>
-<li>架构之高并发：限流</li>
-<li>架构之高并发：降级和熔断<br> 在高并发环境下，服务之间的依赖关系导致调用失败，解决的方式通常是: 限流-&gt;熔断-&gt;隔离-&gt;降级, 其目的是防止雪崩效应。</li>
-<li>架构之高可用：负载均衡</li>
-<li>架构之高可用：容灾备份,故障转移</li>
-</ol>
-<h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><p>软件架构的核心价值，即是控制系统的复杂性，将核心业务逻辑和技术细节的分离与解耦</p>
-<h2 id="复杂性的来源可能是"><a href="#复杂性的来源可能是" class="headerlink" title="复杂性的来源可能是"></a>复杂性的来源可能是</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
       
@@ -2265,7 +2336,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
 
 
@@ -2312,7 +2383,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">407</span>
+                    <span class="site-state-item-count">418</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2491,7 +2562,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">83</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">85</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2580,7 +2655,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2691,7 +2770,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2022</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2703,7 +2782,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">416k</span>
+    <span title="站点总字数">423k</span>
   
 
   
@@ -2712,7 +2791,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">6:56</span>
+    <span title="站点总阅读时长">7:03</span>
   
 </div>
 
