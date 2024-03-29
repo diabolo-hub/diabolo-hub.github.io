@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl-2-3-xshell%E8%BF%9E%E6%8E%A5wsl2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-4-wsl%E5%90%AF%E5%8A%A8%E6%9A%82%E5%81%9Cubuntu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,620 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl-2-3-xshell%E8%BF%9E%E6%8E%A5wsl2/" itemprop="url">xshell连接wsl2</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl2/" itemprop="url" rel="index"><span itemprop="name">wsl2</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">9.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">10 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/weixin_34789114/article/details/114443658" target="_blank" rel="noopener">记录一次使用ssh成功连接wsl2的Ubuntu</a><br><a href="http://blog.chinaunix.net/uid-26168435-id-5732463.html" target="_blank" rel="noopener">启动sshd时，报“Could not load host key: /etc/ssh/ssh_host_rsa_key”错</a></p>
-<blockquote>
-<p>首先可使用 sudo service ssh status 查看ssh是否启用</p>
-</blockquote>
-<h1 id="检查使用版本"><a href="#检查使用版本" class="headerlink" title="检查使用版本"></a>检查使用版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Fa&gt; wsl -l -v</span><br><span class="line">  NAME            STATE           VERSION</span><br><span class="line">* Ubuntu-20.04    Running         2</span><br></pre></td></tr></table></figure>
-<h1 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h1><ol>
-<li>修改sshd_config配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br></pre></td></tr></table></figure>
-修改内容如下：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Port &#x3D; 22 # 去掉#，代表启用端口号22</span><br><span class="line">ListenAddress 0.0.0.0 # 去掉#，代表监听所有地址</span><br><span class="line">PasswordAuthentication yes，# 将no改成yes，用于使用账号密码的登录</span><br><span class="line"></span><br><span class="line">PermitRootLogin prohibit-password # 去掉#，并将值改成yes，则支持root用户密码登录了（我是直接去掉#）</span><br><span class="line"># vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config 修改 permitrootlogin yes，另外一种说法（我是直接去掉#）</span><br></pre></td></tr></table></figure></li>
-<li>重启ssh服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="配置ssh过程中的问题"><a href="#配置ssh过程中的问题" class="headerlink" title="配置ssh过程中的问题"></a>配置ssh过程中的问题</h1><ol>
-<li>sshd: no hostkeys available – exiting<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PS: 如果重启ssh服务出现</span><br><span class="line">sshd: no hostkeys available -- exiting</span><br><span class="line">则执行如下操作:</span><br><span class="line">1. ssh-keygen -A</span><br><span class="line">2. &#x2F;etc&#x2F;init.d&#x2F;ssh start</span><br></pre></td></tr></table></figure></li>
-<li>Could not load host key: /etc/ssh/ssh_host_rsa_key<ul>
-<li>检查是否所有配置齐全<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@aefe8007a17d ~]# ll &#x2F;etc&#x2F;ssh&#x2F;</span><br><span class="line">total 252</span><br><span class="line">-rw-r--r-- 1 root root 242153 Mar 21 22:18 moduli</span><br><span class="line">-rw-r--r-- 1 root root 2208 Mar 21 22:18 ssh_config</span><br><span class="line">-rw------- 1 root root 4361 Mar 21 22:18 sshd_config</span><br></pre></td></tr></table></figure></li>
-<li>重新生成主机密钥文件：</li>
-</ul>
-</li>
-<li><p>生成rsa_key (-t表示生成的密钥所使用的加密类型；-f项后接要生成的密钥文件名)；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@aefe8007a17d ~]# ssh-keygen -t rsa -f &#x2F;etc&#x2F;ssh&#x2F;ssh_host_rsa_key</span><br><span class="line">Generating public&#x2F;private rsa key pair.</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in &#x2F;etc&#x2F;ssh&#x2F;ssh_host_rsa_key.</span><br><span class="line">Your public key has been saved in &#x2F;etc&#x2F;ssh&#x2F;ssh_host_rsa_key.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">5e:2d:19:51:b1:e3:e0:60:65:53:e4:14:f8:d8:38:af root@aefe8007a17d</span><br><span class="line">The key&#39;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">| &#x3D;&#x3D;Bo |</span><br><span class="line">| o.&#x3D; . |</span><br><span class="line">| o o&#x3D;+ |</span><br><span class="line">| . o+*o. |</span><br><span class="line">| S &#x3D;oo |</span><br><span class="line">| . . .. |</span><br><span class="line">| . . |</span><br><span class="line">| E |</span><br><span class="line">| |</span><br><span class="line">+-----------------+</span><br><span class="line">[root@aefe8007a17d ~]# ssh-keygen -t ecdsa -f &#x2F;etc&#x2F;ssh&#x2F;ssh_host_ecdsa_key</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成ecdsa_key；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@aefe8007a17d ~]# ssh-keygen -t ecdsa -f &#x2F;etc&#x2F;ssh&#x2F;ssh_host_ecdsa_key</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成ed25519_key。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@aefe8007a17d ~]# ssh-keygen -t ed25519 -f &#x2F;etc&#x2F;ssh&#x2F;ssh_host_ed25519_key</span><br></pre></td></tr></table></figure>
-<p>再次检查密钥文件是否存在且合规，可以看到已生成相应主机密钥文件(实际上主机密钥文件为私钥，.pub文件为公钥)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@aefe8007a17d ~]# ll &#x2F;etc&#x2F;ssh&#x2F;</span><br><span class="line">total 276</span><br><span class="line">-rw-r--r-- 1 root root 242153 Mar 21 22:18 moduli</span><br><span class="line">-rw-r--r-- 1 root root 2208 Mar 21 22:18 ssh_config</span><br><span class="line">-rw------- 1 root root 227 May 22 16:48 ssh_host_ecdsa_key</span><br><span class="line">-rw-r--r-- 1 root root 179 May 22 16:48 ssh_host_ecdsa_key.pub</span><br><span class="line">-rw------- 1 root root 411 May 22 16:48 ssh_host_ed25519_key</span><br><span class="line">-rw-r--r-- 1 root root 99 May 22 16:48 ssh_host_ed25519_key.pub</span><br><span class="line">-rw------- 1 root root 1679 May 22 16:48 ssh_host_rsa_key</span><br><span class="line">-rw-r--r-- 1 root root 399 May 22 16:48 ssh_host_rsa_key.pub</span><br><span class="line">-rw------- 1 root root 4361 Mar 21 22:18 sshd_config</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>此时客户端可ssh连接上sshd服务器端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ssh 172.17.0.2</span><br><span class="line">The authenticity of host &#39;172.17.0.2 (172.17.0.2)&#39; can&#39;t be established.</span><br><span class="line">ECDSA key fingerprint is 37:2a:69:46:c4:bd:92:b2:43:b4:cc:42:41:8e:12:2e.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)?</span><br></pre></td></tr></table></figure></p>
-<h1 id="情况2"><a href="#情况2" class="headerlink" title="情况2"></a>情况2</h1><ol>
-<li>配置正常</li>
-<li>ssh重启正常</li>
-<li>执行如下：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ssh-keygen -A</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;ssh start</span><br></pre></td></tr></table></figure></li>
-<li>重新通过finalShell连接成功</li>
-</ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl-2-4-chown%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl-2-4-chown%E5%91%BD%E4%BB%A4/" itemprop="url">chown命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl2/" itemprop="url" rel="index"><span itemprop="name">wsl2</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/qiyebao/p/4320440.html" target="_blank" rel="noopener">chown参考</a></p>
-<h1 id="改变指定目录以及其子目录下的所有文件的拥有者和群组"><a href="#改变指定目录以及其子目录下的所有文件的拥有者和群组" class="headerlink" title="改变指定目录以及其子目录下的所有文件的拥有者和群组"></a>改变指定目录以及其子目录下的所有文件的拥有者和群组</h1><p>chown -R -v root:mail test6</p>
-<h1 id="改变文件群组"><a href="#改变文件群组" class="headerlink" title="改变文件群组"></a>改变文件群组</h1><p>chown :mail log2012.log</p>
-<h1 id="改变文件拥有者和群组"><a href="#改变文件拥有者和群组" class="headerlink" title="改变文件拥有者和群组"></a>改变文件拥有者和群组</h1><p>chown root: log2012.log</p>
-<h1 id="改变拥有者和群组"><a href="#改变拥有者和群组" class="headerlink" title="改变拥有者和群组"></a>改变拥有者和群组</h1><p>chown mail:mail log2012.log</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl-2-6-%E6%9F%A5%E8%AF%A2java%E8%BF%9B%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl-2-6-%E6%9F%A5%E8%AF%A2java%E8%BF%9B%E7%A8%8B/" itemprop="url">查询java进程</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl2/" itemprop="url" rel="index"><span itemprop="name">wsl2</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">537</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>ps -ef | grep java</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-1-win10%E5%92%8Cwsl%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-1-win10%E5%92%8Cwsl%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF/" itemprop="url">win10和wsl的文件互访</a></h1>
+                <a class="post-title-link" href="/2021/04/12/tool-wsl-4-wsl%E5%90%AF%E5%8A%A8%E6%9A%82%E5%81%9Cubuntu/" itemprop="url">wsl启动暂停ubuntu</a></h1>
         
 
         <div class="post-meta">
@@ -1084,7 +471,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">810</span>
+                <span title="字数统计">853</span>
               
 
               
@@ -1120,17 +507,8 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/InitRain/p/12361617.html" target="_blank" rel="noopener">Windows10 与 WSL（Ubuntu）的文件互访</a></p>
-<p>从WSL访问win10的文件</p>
-<blockquote>
-<p>cd /mnt</p>
-</blockquote>
-<p>从win10访问WSL的文件</p>
-<p>打开Ubuntu</p>
-<blockquote>
-<p>explorer.exe .</p>
-</blockquote>
-<p>（后面的点不要漏掉）</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="以管理员身份运行cmd"><a href="#以管理员身份运行cmd" class="headerlink" title="以管理员身份运行cmd"></a>以管理员身份运行cmd</h1><h2 id="启动ubuntu"><a href="#启动ubuntu" class="headerlink" title="启动ubuntu"></a>启动ubuntu</h2><p>net start LxssManager</p>
+<h2 id="暂停ubuntu"><a href="#暂停ubuntu" class="headerlink" title="暂停ubuntu"></a>暂停ubuntu</h2><p>net stop LxssManager</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1187,7 +565,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl-2-7-%E5%9C%A8window%E4%B8%8A%E6%89%BE%E5%88%B0wsl2%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-5-wsl%E7%9A%84ubuntu%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%85%B6%E4%BB%96%E7%A3%81%E7%9B%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1206,7 +584,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl-2-7-%E5%9C%A8window%E4%B8%8A%E6%89%BE%E5%88%B0wsl2%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9B%AE%E5%BD%95/" itemprop="url">在window上找到wsl2的文件夹目录</a></h1>
+                <a class="post-title-link" href="/2021/04/12/tool-wsl-5-wsl%E7%9A%84ubuntu%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%85%B6%E4%BB%96%E7%A3%81%E7%9B%98/" itemprop="url">wsl的ubuntu移动到其他磁盘</a></h1>
         
 
         <div class="post-meta">
@@ -1257,7 +635,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl2/" itemprop="url" rel="index"><span itemprop="name">wsl2</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
 
                 
                 
@@ -1285,198 +663,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">671</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="在window上找到wsl2的文件夹目录"><a href="#在window上找到wsl2的文件夹目录" class="headerlink" title="在window上找到wsl2的文件夹目录"></a>在window上找到wsl2的文件夹目录</h1><p>在文件窗口运行 \wsl$</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-excp-System-has-not-been-booted-with-systemd-as-init-system-PID-1-Can%E2%80%98t-operate-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-excp-System-has-not-been-booted-with-systemd-as-init-system-PID-1-Can%E2%80%98t-operate-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" itemprop="url">System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/excp/" itemprop="url" rel="index"><span itemprop="name">excp</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.7k</span>
+                <span title="字数统计">2.2k</span>
               
 
               
@@ -1512,11 +699,13 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/qq_43685040/article/details/112056242" target="_blank" rel="noopener">System has not been booted with systemd as init system (PID 1). Can‘t operate.问题解决方法</a></p>
-<p>#<br><img src="systemctl和system参考图.png" alt=""></p>
-<h1 id="用window10下WSL使用Ubuntu来用Docker"><a href="#用window10下WSL使用Ubuntu来用Docker" class="headerlink" title="用window10下WSL使用Ubuntu来用Docker"></a>用window10下WSL使用Ubuntu来用Docker</h1><p>当我使用命令sudo systemctl start docker的时候报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System has not been booted with systemd as init system (PID 1). Can&#39;t operate.</span><br></pre></td></tr></table></figure></p>
-<h1 id="查了原因："><a href="#查了原因：" class="headerlink" title="查了原因："></a>查了原因：</h1><p>如果是一般的Linux操作系统，可能是因为Linux中没有使用systemd，想用systemd命令来管理Linux上的服务，因此会报错，很可能是使用的是经典的SysV init（sysvinit）系统。<br>但我这个是window10下WSL的Ubuntu，就会使SysV init而不是systemd。</p>
-<h1 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h1><p>更换命令，用SysV init的命令代替systemd的<br><img src="Sysv init和Systemctl命令图.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/x356982611/article/details/108641601?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-4.baidujs&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-4.baidujs" target="_blank" rel="noopener">wsl的ubuntu移动到其他磁盘</a></p>
+<h1 id="导出系统-wsl-–export"><a href="#导出系统-wsl-–export" class="headerlink" title="导出系统 wsl –export  "></a>导出系统 wsl –export <DistroName> <PathToTarArchive></h1><p>wsl –export Ubuntu-18.04  E:\workspace-all\workspace-wsl\ubuntu18.04.tar</p>
+<h1 id="删除系统-wsl-–unregister"><a href="#删除系统-wsl-–unregister" class="headerlink" title="删除系统 wsl –unregister "></a>删除系统 wsl –unregister <DistroName></h1><p>wsl –unregister Ubuntu-18.04</p>
+<h1 id="导入系统-指定新的位置-wsl-–import"><a href="#导入系统-指定新的位置-wsl-–import" class="headerlink" title="导入系统 指定新的位置 wsl –import   "></a>导入系统 指定新的位置 wsl –import <DistroName> <PathToDistroNewDirectory> <PathToTarArchive></h1><p>wsl –import Ubuntu-18.04 E:\workspace-all\workspace-wsl\Ubuntu-WSL2 E:\workspace-all\workspace-wsl\ubuntu18.04.tar<br>wsl -l -v</p>
+<h1 id="设置默认用户（设置之后，启动启动running）"><a href="#设置默认用户（设置之后，启动启动running）" class="headerlink" title="设置默认用户（设置之后，启动启动running）"></a>设置默认用户（设置之后，启动启动running）</h1><p>ubuntu1804.exe config –default-user zhangdaiyin</p>
+<h1 id="以管理员身份运行cmd"><a href="#以管理员身份运行cmd" class="headerlink" title="以管理员身份运行cmd"></a>以管理员身份运行cmd</h1><h2 id="启动ubuntu"><a href="#启动ubuntu" class="headerlink" title="启动ubuntu"></a>启动ubuntu</h2><p>net start LxssManager</p>
+<h2 id="暂停ubuntu"><a href="#暂停ubuntu" class="headerlink" title="暂停ubuntu"></a>暂停ubuntu</h2><p>net stop LxssManager</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1573,7 +762,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl-2-5-wsl2%E4%B8%AD%E5%90%AF%E5%8A%A8springboot%E7%A8%8B%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-3-wsl%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1592,7 +781,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl-2-5-wsl2%E4%B8%AD%E5%90%AF%E5%8A%A8springboot%E7%A8%8B%E5%BA%8F/" itemprop="url">wsl2中启动springboot程序</a></h1>
+                <a class="post-title-link" href="/2021/04/12/tool-wsl-3-wsl%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" itemprop="url">wsl操作记录</a></h1>
         
 
         <div class="post-meta">
@@ -1643,7 +832,1063 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl2/" itemprop="url" rel="index"><span itemprop="name">wsl2</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看wsl版本"><a href="#查看wsl版本" class="headerlink" title="查看wsl版本"></a>查看wsl版本</h1><p>wsl -l -v</p>
+<h1 id="cmd命令窗口打开Ubuntu"><a href="#cmd命令窗口打开Ubuntu" class="headerlink" title="cmd命令窗口打开Ubuntu"></a>cmd命令窗口打开Ubuntu</h1><p>bash</p>
+<h1 id="重启、停止、启动windows子系统"><a href="#重启、停止、启动windows子系统" class="headerlink" title="重启、停止、启动windows子系统"></a>重启、停止、启动windows子系统</h1><p>services.msc<br>服务选项： LxssManager 服务</p>
+<h1 id="Ubuntu本地路径"><a href="#Ubuntu本地路径" class="headerlink" title="Ubuntu本地路径"></a>Ubuntu本地路径</h1><p><a href="https://zhuanlan.zhihu.com/p/110890854" target="_blank" rel="noopener">Ubuntu本地路径参考文档</a><br>C:\Users\zhangdaiyin\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs</p>
+<p>#<br><a href="https://blog.csdn.net/weixin_44546992/article/details/110630417" target="_blank" rel="noopener">IDEA连接wsl内docker的spark集群（scala版）</a></p>
+<h1 id="安装wsl，需要先安装以下两个"><a href="#安装wsl，需要先安装以下两个" class="headerlink" title="安装wsl，需要先安装以下两个"></a>安装wsl，需要先安装以下两个</h1><ol>
+<li>适用于Linux的Windows子系统</li>
+<li>虚拟机平台</li>
+</ol>
+<h1 id="列出当前系统上已经安装的-Linux-子系统名称"><a href="#列出当前系统上已经安装的-Linux-子系统名称" class="headerlink" title="列出当前系统上已经安装的 Linux 子系统名称"></a>列出当前系统上已经安装的 Linux 子系统名称</h1><p>wsl -l</p>
+<h1 id="设置一个-Linux-发行版的-WSL-版本"><a href="#设置一个-Linux-发行版的-WSL-版本" class="headerlink" title="设置一个 Linux 发行版的 WSL 版本"></a>设置一个 Linux 发行版的 WSL 版本</h1><p>wsl –set-version <Distro> 2<br>例： wsl –set-version Ubuntu&gt; 2<br>说明：使用 wsl –set-version <Distro> 2 命令可以设置一个 Linux 发行版的 WSL 版本。命令中 <Distro> 替换为你安装的 Linux 发型版本的名称，也就是前面通过 wsl -l 查询到的名称。</p>
+<h2 id="当然，使用以下命令可以在以后安装-Linux-的时候默认启用-WSL2："><a href="#当然，使用以下命令可以在以后安装-Linux-的时候默认启用-WSL2：" class="headerlink" title="当然，使用以下命令可以在以后安装 Linux 的时候默认启用 WSL2："></a>当然，使用以下命令可以在以后安装 Linux 的时候默认启用 WSL2：</h2><p>wsl –set-default-version 2</p>
+<h1 id="WSL1中安装Docker"><a href="#WSL1中安装Docker" class="headerlink" title="WSL1中安装Docker"></a>WSL1中安装Docker</h1><p><a href="https://www.cnblogs.com/talentzemin/p/12544273.html" target="_blank" rel="noopener">WSL1中安装Docker</a></p>
+<h1 id="关闭wsl"><a href="#关闭wsl" class="headerlink" title="关闭wsl"></a>关闭wsl</h1><p>wsl –shutdown &lt;分发版名称&gt;</p>
+<h1 id="在window上找到wsl2的文件夹目录"><a href="#在window上找到wsl2的文件夹目录" class="headerlink" title="在window上找到wsl2的文件夹目录"></a>在window上找到wsl2的文件夹目录</h1><p>在文件窗口运行 \wsl$</p>
+<p>/etc/wsl.conf</p>
+<p>/mnt/e/G-工作文档/doc-cic/G-公共技术/arthas</p>
+<p>linux复制不是copy，而是cp</p>
+<p>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/arthas-tunnel-server-3.5.2-fatjar.jar /home/arthas/arthas-tunnel-server.jar<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/entrypoint.sh /home/arthas/entrypoint.sh<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/Arthas-Dockerfile /home/arthas/Dockerfile</p>
+<p>打包镜像：sudo docker build -f Dockerfile -t shwz_app_image . (也可以su root 进入root 用户，这样就可以不使用sudo 命令)</p>
+<p>sudo docker build -f Dockerfile -t arthas_image_2 . </p>
+<h1 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h1><p>cat /etc/passwd</p>
+<h1 id="查看组"><a href="#查看组" class="headerlink" title="查看组"></a>查看组</h1><p>cat /etc/group</p>
+<p>sudo groups 查看当前用户下的所有组<br>whoami        查看当前登录用户名</p>
+<h1 id="删除容器和镜像"><a href="#删除容器和镜像" class="headerlink" title="删除容器和镜像"></a>删除容器和镜像</h1><p>docker rmi 镜像ID<br>docker rm 容器id</p>
+<h1 id="查看java进程"><a href="#查看java进程" class="headerlink" title="查看java进程"></a>查看java进程</h1><p>ps -ef | grep java</p>
+<h1 id="wsl2中启动springboot程序"><a href="#wsl2中启动springboot程序" class="headerlink" title="wsl2中启动springboot程序"></a>wsl2中启动springboot程序</h1><ol>
+<li>安装jdk8<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openjdk-8-jre-headless</span><br></pre></td></tr></table></figure></li>
+<li>下载(wget)或拷贝(cp)springboot.jar</li>
+<li>后台指定编码和端口运行<br>java -Dfile.encoding=utf-8 -jar xxx.jar –server.port=8080 &amp;</li>
+</ol>
+<h1 id="删除none"><a href="#删除none" class="headerlink" title="删除none"></a>删除none</h1><p>sudo docker rmi $(docker iamges -f dangling=true -q)<br>或<br>docker image prune</p>
+<h1 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h1><p>sudo docker run -p 8080:8080 arthas_image_2</p>
+<p>/home/admin/arthas-tunnel-server.jar</p>
+<p>netstat -ntpl (TCP类型的端口)</p>
+<p>whereis iptables #查看系统是否安装防火墙</p>
+<p>which iptable  # 显示路径</p>
+<p><a href="https://blog.csdn.net/weixin_39509073/article/details/113250690" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39509073/article/details/113250690</a></p>
+<h1 id="TCP类型的端口"><a href="#TCP类型的端口" class="headerlink" title="(TCP类型的端口)"></a>(TCP类型的端口)</h1><p>netstat -ntpl</p>
+<h1 id="Ubuntu-下查看哪些端口是开放的，分别是什么进程在监听"><a href="#Ubuntu-下查看哪些端口是开放的，分别是什么进程在监听" class="headerlink" title="Ubuntu 下查看哪些端口是开放的，分别是什么进程在监听"></a>Ubuntu 下查看哪些端口是开放的，分别是什么进程在监听</h1><p>sudo netstat -tlpn</p>
+<h1 id="运行镜像-1"><a href="#运行镜像-1" class="headerlink" title="运行镜像"></a>运行镜像</h1><p>sudo docker run -p 8080:8080 -p 7777:7777 arthas_image_2</p>
+<h1 id="镜像分类描述"><a href="#镜像分类描述" class="headerlink" title="镜像分类描述"></a>镜像分类描述</h1><p>arthas_image   此镜像日志打印在控制台<br>arthas_image_2 此镜像日志打印在log.file中</p>
+<p>java -Dfile.encoding=utf-8 -jar arthas-tunnel-server-3.5.2-fatjar.jar –server.port=8080 &gt; log.file 2&gt;&amp;1 &amp;</p>
+<p>sudo docker exec -it 639a7daf2a9b /bin/sh</p>
+<p>docker attach 容器ID</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/12/tool-wsl-6-wsl2-%E8%AE%BE%E7%BD%AE%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/" itemprop="url">wsl2 设置端口映射</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>wsl2 设置端口映射: https://blog.csdn.net/keyiis_sh/article/details/113819244?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-113819244-blog-104491807.pc_relevant_paycolumn_v3&amp;utm_relevant_index=9
+</code></pre><hr>
+<h1 id="wsl2-设置端口映射"><a href="#wsl2-设置端口映射" class="headerlink" title="wsl2 设置端口映射"></a>wsl2 设置端口映射</h1><ol>
+<li>管理员启动cmd，获取虚拟机内ubuntu的ip地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -- ifconfig eth0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;wsl -- ifconfig eth0</span><br><span class="line">eth0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.23.229.221  netmask 255.255.240.0  broadcast 172.23.239.255</span><br><span class="line">        inet6 fe80::215:5dff:fe00:4d72  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:15:5d:00:4d:72  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 8553  bytes 873694 (873.6 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 1433  bytes 121685 (121.6 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure></li>
+<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
+<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\WINDOWS\system32&gt;netsh interface portproxy show all</span><br><span class="line"></span><br><span class="line">侦听 ipv4:                 连接到 ipv4:</span><br><span class="line"></span><br><span class="line">地址            端口        地址            端口</span><br><span class="line">--------------- ----------  --------------- ----------</span><br><span class="line">0.0.0.0         8081        172.23.229.221  8081</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若还是不行，关闭你本机的防火墙</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-excp-1-no-source-files-were-specified/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/12/depth-docker-excp-1-no-source-files-were-specified/" itemprop="url">no source files were specified</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/excp/" itemprop="url" rel="index"><span itemprop="name">excp</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
+<li>Configurations配置<br>Dockerfile: xxx/Dockerfile<br>Context folder: </li>
+<li>Dockerfile<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8</span><br><span class="line">ADD &#x2F;*.jar app.jar</span><br><span class="line">EXPOSE 8080</span><br><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;&#x2F;app.jar&quot;]</span><br></pre></td></tr></table></figure></li>
+<li>执行 run/debug 报错如下</li>
+</ol>
+<h1 id="no-source-files-were-specified"><a href="#no-source-files-were-specified" class="headerlink" title="no source files were specified"></a>no source files were specified</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Digest: sha256:c1ff613e8ba25833d2e1940da0940c3824f03f802c449f3d1815a66b7f8c0e9d</span><br><span class="line">Status: Downloaded newer image for java:8</span><br><span class="line"> ---&gt; d23bdf5b1b1b</span><br><span class="line">Step 2&#x2F;4 : ADD &#x2F;*.jar app.jar</span><br><span class="line">Error response from daemon: ADD failed: no source files were specified</span><br><span class="line">Failed to deploy &#39;app-image:1.0 Dockerfile: Dockerfile&#39;: Can&#39;t retrieve image ID from build stream</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>添加源文件失败。</p>
+</blockquote>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ol>
+<li>未对项目进行打包 package，未生产出 target/…/项目名称-版本号.jar<br>在 idea Run/Debug Configurations里配置Dockerfile 路径的时候，Context folder路径指定为空，<br>然后在Dockerfile中 ADD /<em>.jar app.jar，结合来看是查找根目录下的 </em>.jar，当然找不到，因为 *.jar 在target目录下</li>
+<li>所以修改如下：<br>configurations的Context folder配置为空不变，表示根目录，<br>Dockerfile里的 ADD /<em>.jar 调整为 ADD /target/</em>.jar<br>即可执行成功</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-excp-2-Hardware-assisted-virtualization-and-data-execution-protection-must-be-enabled-in-the-BIOS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/12/depth-docker-excp-2-Hardware-assisted-virtualization-and-data-execution-protection-must-be-enabled-in-the-BIOS/" itemprop="url">Hardware assisted virtualization and data execution protection must be enabled in the BIOS</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/excp/" itemprop="url" rel="index"><span itemprop="name">excp</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Hardware-assisted-virtualization-and-data-execution-protection-must-be-enabled-in-the-BIOS"><a href="#Hardware-assisted-virtualization-and-data-execution-protection-must-be-enabled-in-the-BIOS" class="headerlink" title="Hardware assisted virtualization and data execution protection must be enabled in the BIOS"></a>Hardware assisted virtualization and data execution protection must be enabled in the BIOS</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hardware assisted virtualization and data execution protection must be enabled in the BIOS. </span><br><span class="line">See https:&#x2F;&#x2F;docs.docker.com&#x2F;desktop&#x2F;windows&#x2F;troubleshoot&#x2F;#virtualization</span><br></pre></td></tr></table></figure>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>安装了Docker的同时也安装了电脑版的安卓模拟器</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>Hyper-V异常导致<br>安卓模拟器 一些手游模拟器，会自动关闭HyperV的功能，导致Docker一直报错</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="启用-安卓模拟器，关闭-docker虚拟化"><a href="#启用-安卓模拟器，关闭-docker虚拟化" class="headerlink" title="启用 安卓模拟器，关闭 docker虚拟化"></a>启用 安卓模拟器，关闭 docker虚拟化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit &#x2F;set hypervisorlaunchtype off</span><br></pre></td></tr></table></figure>
+<h2 id="关闭-安卓模拟器，启用-docker虚拟化"><a href="#关闭-安卓模拟器，启用-docker虚拟化" class="headerlink" title="关闭 安卓模拟器，启用 docker虚拟化"></a>关闭 安卓模拟器，启用 docker虚拟化</h2><p>重启 Hyper-V 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit &#x2F;set hypervisorlaunchtype auto</span><br></pre></td></tr></table></figure></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-notes-1-%E8%AE%BF%E9%97%AEwsl%E4%B8%ADdocker%E5%AE%B9%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/12/depth-docker-notes-1-%E8%AE%BF%E9%97%AEwsl%E4%B8%ADdocker%E5%AE%B9%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8/" itemprop="url">访问wsl中docker容器的应用</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="访问wsl中docker容器的应用"><a href="#访问wsl中docker容器的应用" class="headerlink" title="访问wsl中docker容器的应用"></a>访问wsl中docker容器的应用</h1><ol>
+<li>正常查看linux网址，ip addr, eth0那个网址就是wsl的网址.</li>
+</ol>
+<p><a href="./source/_posts/工作工具/wsl/6-wsl2%20设置端口映射.md">6-wsl2 设置端口映射</a></p>
+<ol>
+<li>使用docker for windows 不做任何设置的启动容器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED        STATUS          PORTS      NAMES</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago   Up 21 minutes   8081&#x2F;tcp   suspicious_lovelace</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时无法被本机通过wsl的地址和端口访问  </p>
+</blockquote>
+</li>
+<li>通过docker run命令启动<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ sudo docker run -p 8081:8081 app-image:1.0</span><br><span class="line"></span><br><span class="line">zhangdaiyin@LAPTOP-BKST47D9:~$ docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED         STATUS                       PORTS                    NAMES</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   4 minutes ago   Up 4 minutes                 0.0.0.0:8081-&gt;8081&#x2F;tcp   flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago    Exited (143) 6 minutes ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过命令的方式启动可以正常被访问</p>
+</blockquote>
+</li>
+<li><p>通过对比发现，通过命令启动的时候，在PORTS中多了 0.0.0.0<br>分析原因是在通过docker for window启动时没有设置本机端口映射:<br><img src="1-访问wsl中docker容器的应用/docker for window启动端口映射.png" alt=""><br>设置后启动结果如下（test）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\zhangdaiyin&gt;docker ps -a</span><br><span class="line">CONTAINER ID   IMAGE           COMMAND                CREATED          STATUS                        PORTS                    NAMES</span><br><span class="line">e54bb915b322   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   20 seconds ago   Up 18 seconds                 0.0.0.0:8081-&gt;8081&#x2F;tcp   test</span><br><span class="line">53e1da743cbe   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   28 minutes ago   Exited (129) 9 minutes ago                             flamboyant_napier</span><br><span class="line">1a0f932f54a9   app-image:1.0   &quot;java -jar &#x2F;app.jar&quot;   46 hours ago     Exited (143) 11 seconds ago                            suspicious_lovelace</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问</p>
+</li>
+</ol>
+<ul>
+<li>通过 ifconfig eth0 的inet访问</li>
+<li>通过 127.0.0.1 或 localhost 访问</li>
+</ul>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>需要开启映射</p>
+<ol>
+<li>将ip地址的对应的端口映射到宿主win10对应的端口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># netsh interface portproxy add v4tov4 listenport&#x3D;[win10端口] listenaddress&#x3D;0.0.0.0 connectport&#x3D;[虚拟机的端口] connectaddress&#x3D;[虚拟机的ip]</span><br><span class="line">netsh interface portproxy add v4tov4 listenport&#x3D;8081 listenaddress&#x3D;0.0.0.0 connectport&#x3D;8081 connectaddress&#x3D;172.23.229.221</span><br></pre></td></tr></table></figure></li>
+<li>检测是否设置成功<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-notes-2-Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/12/depth-docker-notes-2-Docker%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8/" itemprop="url">Docker删除镜像和容器</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1707,11 +1952,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="wsl2中启动springboot程序"><a href="#wsl2中启动springboot程序" class="headerlink" title="wsl2中启动springboot程序"></a>wsl2中启动springboot程序</h1><ol>
-<li>安装jdk8<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openjdk-8-jre-headless</span><br></pre></td></tr></table></figure></li>
-<li>下载(wget)或拷贝(cp)springboot.jar</li>
-<li>后台指定编码和端口运行<br>java -Dfile.encoding=utf-8 -jar xxx.jar –server.port=8080 &amp;</li>
-</ol>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Docker删除镜像和容器"><a href="#Docker删除镜像和容器" class="headerlink" title="Docker删除镜像和容器"></a>Docker删除镜像和容器</h1><p>一、删除容器<br>首先需要停止所有的容器（只停止单个时把后面的变量改为image id即可）<br>docker stop $(docker ps -a -q)<br>删除所有的容器（只删除单个时把后面的变量改为image id即可）<br>docker rm $(docker ps -a -q)<br>二、删除镜像<br>查看host中的镜像<br>docker images<br>删除指定id的镜像<br>docker rmi <image id><br>想要删除untagged images，也就是那些id为的image的话可以用<br>docker rmi $(docker images | grep “^” | awk “{print $3}”)<br>删除全部的images<br>docker rmi $(docker images -q)</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1768,7 +2009,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-2-%E4%BD%BF%E7%94%A8cp%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0wsl/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-notes-3-%E6%9F%A5%E7%9C%8Bdocker%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%92%8C%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1787,7 +2028,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/04/12/tool-wsl-wsl%E5%92%8Cwin%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%92%E8%AE%BF-2-%E4%BD%BF%E7%94%A8cp%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0wsl/" itemprop="url">使用cp文件复制到wsl</a></h1>
+                <a class="post-title-link" href="/2021/04/12/depth-docker-notes-3-%E6%9F%A5%E7%9C%8Bdocker%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%E5%92%8C%E9%87%8A%E6%94%BE%E5%86%85%E5%AD%98/" itemprop="url">查看docker使用情况和释放内存</a></h1>
         
 
         <div class="post-meta">
@@ -1824,21 +2065,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/wsl/wsl/" itemprop="url" rel="index"><span itemprop="name">wsl</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -1866,7 +2107,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.1k</span>
+                <span title="字数统计">576</span>
               
 
               
@@ -1902,9 +2143,7 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>linux复制不是copy，而是cp</p>
-<p>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/arthas-tunnel-server-3.5.2-fatjar.jar /home/arthas/arthas-tunnel-server.jar<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/entrypoint.sh /home/arthas/entrypoint.sh<br>sudo cp /mnt/e/G-工作文档/doc-cic/G-公共技术/arthas/Arthas-Dockerfile /home/arthas/Dockerfile</p>
-<h1 id="复制invoice-war"><a href="#复制invoice-war" class="headerlink" title="复制invoice war"></a>复制invoice war</h1><p>sudo cp /mnt/e/G-工作文档/doc-cic/F-new-发票中心/第三方税控平台文档/1.32生产环境/前置应用_V1.32程序包/程序包/einvoicejr.war /home/war/einvoicejr.war</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>可以使用docker system df查看磁盘使用情况，可以使用docker system prune释放空间。</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1961,7 +2200,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/13/redis-interview-Redis-%E6%97%A0%E5%BA%95%E6%B4%9E-%E5%90%AB%E4%B9%89%E3%80%81%E5%8E%9F%E5%9B%A0%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/12/depth-docker-notes-4-Docker-%E5%AE%B9%E5%99%A8%E6%97%B6%E9%97%B4%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1980,7 +2219,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/03/13/redis-interview-Redis-%E6%97%A0%E5%BA%95%E6%B4%9E-%E5%90%AB%E4%B9%89%E3%80%81%E5%8E%9F%E5%9B%A0%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" itemprop="url">Redis--无底洞--含义、原因、解决方案</a></h1>
+                <a class="post-title-link" href="/2021/04/12/depth-docker-notes-4-Docker-%E5%AE%B9%E5%99%A8%E6%97%B6%E9%97%B4%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%97%B6%E9%97%B4%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">Docker 容器时间与本地时间不一致的问题</a></h1>
         
 
         <div class="post-meta">
@@ -1996,7 +2235,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-13T15:21:30+08:00">2021-03-13</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-12T00:00:00+08:00">2021-04-12</time>
             
 
             
@@ -2017,14 +2256,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -2052,7 +2298,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">649</span>
+                <span title="字数统计">2k</span>
               
 
               
@@ -2066,7 +2312,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -2088,192 +2334,21 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/feiying0canglang/article/details/122836824" target="_blank" rel="noopener">Redis–无底洞–含义/原因/解决方案</a></p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/05/hexo-%E5%BC%82%E5%B8%B8-hexo%E7%AC%94%E8%AE%B0-next6%E9%94%99%E8%AF%AF%E4%B8%8A%E4%B8%80%E9%A1%B5%E4%B8%8B%E4%B8%80%E9%A1%B5%E9%94%99%E8%AF%AF%E6%98%BE%E7%A4%BA%E4%BB%A3%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/05/hexo-%E5%BC%82%E5%B8%B8-hexo%E7%AC%94%E8%AE%B0-next6%E9%94%99%E8%AF%AF%E4%B8%8A%E4%B8%80%E9%A1%B5%E4%B8%8B%E4%B8%80%E9%A1%B5%E9%94%99%E8%AF%AF%E6%98%BE%E7%A4%BA%E4%BB%A3%E7%A0%81/" itemprop="url">next6上一页下一页错误显示代码</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-05T00:00:00+08:00">2021-03-05</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/weixin_45748734/article/details/106042522" target="_blank" rel="noopener">关于Hexo,Next主题的‘下一页’、‘上一页’按钮错误显示为html代码 <i class="fa fa-angle-right"></i>的解决方法</a></p>
-<h1 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h1><p>themes/next6/layout/_partials/pagination.swig<br>由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.prev or page.next %&#125;</span><br><span class="line">  &lt;nav class&#x3D;&quot;pagination&quot;&gt;</span><br><span class="line">    &#123;&#123;</span><br><span class="line">      paginator(&#123;</span><br><span class="line">        prev_text: &#39;&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;&#39;,</span><br><span class="line">        next_text: &#39;&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;&#39;,</span><br><span class="line">        mid_size: 1</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><br>改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.prev or page.next %&#125;</span><br><span class="line">  &lt;nav class&#x3D;&quot;pagination&quot;&gt;</span><br><span class="line">    &#123;&#123;</span><br><span class="line">      paginator(&#123;</span><br><span class="line">        prev_text: &#39;上一页&#39;,</span><br><span class="line">        next_text: &#39;下一页&#39;,</span><br><span class="line">        mid_size: 1</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="Docker-容器时间与本地时间不一致的问题"><a href="#Docker-容器时间与本地时间不一致的问题" class="headerlink" title="Docker 容器时间与本地时间不一致的问题"></a>Docker 容器时间与本地时间不一致的问题</h1><p>1.进入容器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -t -i c360cc412528 &#x2F;bin&#x2F;bash    &#x2F;&#x2F; c360cc412528 为容器id</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p>在 /usr/share/zoneinfo 目录下找上海时区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd  &#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制上海时区到 /etc 重命名 localtime 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -i Shanghai &#x2F;etc&#x2F;localtime</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如得到提示 cp: overwrite ‘/etc/localtime’? ，则输入 yes 后按下回车键即可。</p>
+<ol>
+<li>完成，输入 Date 命令查看系统时间，得到如下结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@52127e6f4c47:&#x2F;usr&#x2F;share&#x2F;zoneinfo&#x2F;Asia# date</span><br><span class="line">Mon Aug 26 12:27:34 CST 2019</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们看到时间已经从 UTC 转为了 CST 时区，时间也已经显示正常，搞定。</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2318,7 +2393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/36/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/38/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/36/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/38/">下一页</a>
   </nav>
 
 
@@ -2365,7 +2440,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">418</span>
+                    <span class="site-state-item-count">433</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2548,7 +2623,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">85</span>
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2641,7 +2718,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2752,7 +2831,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2764,7 +2843,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">423k</span>
+    <span title="站点总字数">441k</span>
   
 
   
@@ -2773,7 +2852,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">7:03</span>
+    <span title="站点总阅读时长">7:21</span>
   
 </div>
 

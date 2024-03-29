@@ -139,15 +139,15 @@
   <meta name="keywords" content="git," />
 
 
-<meta name="description" content="git cherry-pick与rebase：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;723ed1326964">
+<meta name="description" content="git cherry-pick与rebase：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;723ed1326964   cherry-pick命令常用于以下场景： 合并单个提交：当我们只想应用某个分支上的一个提交到当前分支时，可以使用cherry-pick命令，而不需要合并整个分支。 修复bug：当我们在一个分支上修复了一个bug，并希望将这个修复应用到其他分支上时，可以使用cher">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git cherry-pick与rebase">
 <meta property="og:url" content="http://yoursite.com/2019/11/07/git-%E7%AC%94%E8%AE%B0-git-cherry-pick%E4%B8%8Erebase/index.html">
 <meta property="og:site_name" content="diabolo随笔">
-<meta property="og:description" content="git cherry-pick与rebase：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;723ed1326964">
+<meta property="og:description" content="git cherry-pick与rebase：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;723ed1326964   cherry-pick命令常用于以下场景： 合并单个提交：当我们只想应用某个分支上的一个提交到当前分支时，可以使用cherry-pick命令，而不需要合并整个分支。 修复bug：当我们在一个分支上修复了一个bug，并希望将这个修复应用到其他分支上时，可以使用cher">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-10T14:48:15.839Z">
+<meta property="article:modified_time" content="2024-02-21T09:07:51.433Z">
 <meta property="article:author" content="diabolo">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
@@ -468,7 +468,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">704</span>
+                <span title="字数统计">1.8k</span>
               
 
               
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -507,6 +507,20 @@
 <li><strong>git cherry-pick与rebase：<a href="https://www.jianshu.com/p/723ed1326964" target="_blank" rel="noopener">https://www.jianshu.com/p/723ed1326964</a></strong></li>
 </ul>
 <hr>
+<h1 id="cherry-pick命令常用于以下场景："><a href="#cherry-pick命令常用于以下场景：" class="headerlink" title="cherry-pick命令常用于以下场景："></a>cherry-pick命令常用于以下场景：</h1><ol>
+<li>合并单个提交：当我们只想应用某个分支上的一个提交到当前分支时，可以使用cherry-pick命令，而不需要合并整个分支。</li>
+<li>修复bug：当我们在一个分支上修复了一个bug，并希望将这个修复应用到其他分支上时，可以使用cherry-pick命令。</li>
+<li>提取特定功能：当我们在一个分支上开发了一个新功能，并希望将该功能应用到其他分支上时，可以使用cherry-pick命令。<h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2></li>
+<li>在master分支</li>
+<li>有一个abc123提交需要合并到master当前分支<br>git cherry-pick abc123<h2 id="cherry-pick注意事项"><a href="#cherry-pick注意事项" class="headerlink" title="cherry-pick注意事项"></a>cherry-pick注意事项</h2></li>
+<li>cherry-pick会创建一个新的提交，因此可能会引入冲突。如果发生冲突，需要手动解决冲突后再继续应用提交。</li>
+<li>cherry-pick只能应用一个提交，如果要应用多个提交，可以使用git rebase -i命令进行交互式变基。</li>
+<li>cherry-pick不会自动合并提交的作者和提交日期，而是使用当前分支的作者和日期。如果需要保留原有的作者和日期信息，可以使用–no-commit选项，并手动修改提交信息后再提交。</li>
+</ol>
+<h1 id="如果有批量的需要提交到当前分支"><a href="#如果有批量的需要提交到当前分支" class="headerlink" title="如果有批量的需要提交到当前分支"></a>如果有批量的需要提交到当前分支</h1><ol>
+<li>git rebase -i合并提交<br>git rebase -i    a2a438f2652   4d3b38f3e</li>
+<li>git cherry-pick提交合并后的单个提交到当前分支</li>
+</ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
@@ -640,8 +654,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -660,7 +683,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">418</span>
+                    <span class="site-state-item-count">433</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -843,7 +866,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">85</span>
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -936,7 +961,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1034,6 +1061,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cherry-pick命令常用于以下场景："><span class="nav-number">1.</span> <span class="nav-text">cherry-pick命令常用于以下场景：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例"><span class="nav-number">1.1.</span> <span class="nav-text">例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cherry-pick注意事项"><span class="nav-number">1.2.</span> <span class="nav-text">cherry-pick注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果有批量的需要提交到当前分支"><span class="nav-number">2.</span> <span class="nav-text">如果有批量的需要提交到当前分支</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -1047,7 +1090,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1059,7 +1102,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">423k</span>
+    <span title="站点总字数">441k</span>
   
 
   
@@ -1068,7 +1111,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">7:03</span>
+    <span title="站点总阅读时长">7:21</span>
   
 </div>
 

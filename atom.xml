@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2023-05-04T07:11:40.328Z</updated>
+  <updated>2024-03-28T15:01:31.485Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,389 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>无状态的存储实现随时切库的写入服务</title>
+    <link href="http://yoursite.com/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%97%B6%E5%88%87%E5%BA%93%E7%9A%84%E5%86%99%E5%85%A5%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://yoursite.com/2024/03/28/depth-design-架构设计-20240328-无状态的存储实现随时切库的写入服务/</id>
+    <published>2024-03-27T16:00:00.000Z</published>
+    <updated>2024-03-28T15:01:31.485Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>分库分表：</p><ol><li>解决容量问题，没有解决服务的高可用问题</li><li>增加了系统故障的概率</li><li>系统稳定性变得更低了</li></ol><h1 id="写入业务的目标是成功写入"><a href="#写入业务的目标是成功写入" class="headerlink" title="写入业务的目标是成功写入"></a>写入业务的目标是成功写入</h1><h1 id="只要有可用存储即可写入"><a href="#只要有可用存储即可写入" class="headerlink" title="只要有可用存储即可写入"></a>只要有可用存储即可写入</h1><p>那么什么是系统可随时写入呢？就是当出现任何故障，如网络中断、CPU 飙升、磁盘满等问题时，你的系统依然可以随时写入数据。</p><h1 id="如何保证随时可写入"><a href="#如何保证随时可写入" class="headerlink" title="如何保证随时可写入"></a>如何保证随时可写入</h1><p>当分库分表里一个分库出现故障后，就随机寻找一个可用的数据库进行写入的方式即是一种保障系统高可用的架构方案</p><blockquote><p>分库分表： 写入规则则发生了一些变化。它不再按固定路由进行写入，而是根据当前实时可用的数据库列表进行随机（如顺序轮流）写入<br>注： 因为此架构可以实现随时切换问题数据库、随时低成本扩容数据库，故又称它为无状态存储架构设计。</p><h2 id="如何维护可用列表"><a href="#如何维护可用列表" class="headerlink" title="如何维护可用列表"></a>如何维护可用列表</h2></blockquote><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>将随机写入，改为按权重写入，新加入的机器权重更高</p><h1 id="写入后如何处理"><a href="#写入后如何处理" class="headerlink" title="写入后如何处理"></a>写入后如何处理</h1><p>通过数据库写入的随机化，实现了写服务的高可用方案。但不得不说，虽然解决了写入的高可用，但想要达成一个完整的架构方案，<br>此设计还有几个重要的技术点需要解决。</p><ol><li>如果某一个分库故障后便将其从可用列表中移除，应该如何处理其中已写入的数据呢？</li><li>因为数据是随机写入，应该如何查询写入的数据呢？<h2 id="解决架构方案"><a href="#解决架构方案" class="headerlink" title="解决架构方案"></a>解决架构方案</h2></li><li>第一部分是前面讲述的数据随机写入模块，它保证了在故障时数据依然可以写入。</li><li>第二部分则是数据同步模块，它将数据从随机写入的数据库集群实时地同步至分库分表集群里。后续的所有流程，都和原有的保持一致了。</li></ol><h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><blockquote><p>如果写入的时候某个库（分库1）发生故障被下线，那么就不是按照原来的固定路由写入了，这时候会写入到分库2，那当分库1恢复后，如果要修改数据，怎么确定这条数据在哪个库？</p></blockquote><h6 id="nbsp-nbsp-nbsp-讲师回复："><a href="#nbsp-nbsp-nbsp-讲师回复：" class="headerlink" title="&nbsp;&nbsp;&nbsp; 讲师回复："></a>&nbsp;&nbsp;&nbsp; 讲师回复：</h6><blockquote><p>&nbsp;&nbsp;&nbsp; 写入之后的修改，都还是走原有的分库分表的架构，这个不会变化。只有写入为了保证高可用，才会使用无状态的存储集群</p></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;回顾&quot;&gt;&lt;a href=&quot;#回顾&quot; class=&quot;headerlink&quot; title=&quot;回顾&quot;&gt;&lt;/a&gt;回顾&lt;/h1&gt;&lt;p&gt;分库分表：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;解
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分库分表支持海量数据</title>
+    <link href="http://yoursite.com/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/"/>
+    <id>http://yoursite.com/2024/03/28/depth-design-架构设计-20240328-分库分表支持海量数据/</id>
+    <published>2024-03-27T16:00:00.000Z</published>
+    <updated>2024-03-28T03:25:33.891Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="分表"><a href="#分表" class="headerlink" title="分表"></a>分表</h1><ol><li>单量多而每一单的数据量教少，适合分表</li><li>每行写入（需要构建索引）和查询非常慢，所以建议分表</li><li>总体的容量占用是可控的</li><li>分表后，大表变成小表，索引的消耗会表小，小表的查询性能也更好</li><li>如果此种场景下采用分库，每张表占用的磁盘空间很少，资源浪费</li></ol><h1 id="优先分表，再分库"><a href="#优先分表，再分库" class="headerlink" title="优先分表，再分库"></a>优先分表，再分库</h1><ol><li>分表后仍然可以使用 join 等完成一些关联操作，相比分库简单</li><li>分表后数据仍存在一个数据库里，无需引入一些分库中间件，维护和开发成本较低</li><li>因为在一个库中，更好的解决事务问题</li></ol><h1 id="如何实现分库"><a href="#如何实现分库" class="headerlink" title="如何实现分库"></a>如何实现分库</h1><p>首先分库维度的选择： 决定了部分查询是否能直接使用数据库，以及是否存在数据倾斜的问题</p><h2 id="选择分库维度"><a href="#选择分库维度" class="headerlink" title="选择分库维度"></a>选择分库维度</h2><ol><li>业务场景划分和最细粒度随机分<h3 id="业务场景划分"><a href="#业务场景划分" class="headerlink" title="业务场景划分"></a>业务场景划分</h3></li><li>按订单归属，同一个用户的订单都在某一个分库里</li><li>按订单归属分库，在按售卖商家或店铺订单查询时，该分库无法满足需求</li><li>买家查询订单的优先级高于卖家的订单查询<blockquote><p> 确定分库字段时应该以直接满足最重要的业务场景为准</p><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>某一个用户购买的订单多，会产生数据倾斜问题， 某一个库数据异常多</p><h2 id="最细粒度随机分"><a href="#最细粒度随机分" class="headerlink" title="最细粒度随机分"></a>最细粒度随机分</h2><p>例： 订单号按Hash随机均匀地分散到某一个分库里</p><h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3></blockquote></li><li>除了粒度查询外，其他维度查询不支持， 需要通过异构等方式解决，但异构有延迟、对业务有损</li><li>防重逻辑在数据库层面已经无法支持。<br>订单号只能支付一次，支付系统按支付号分库，不同的支付单会分散在不同的分库里，通过订单号的唯一索引进行支付防重就不可实施</li></ol><h1 id="全局唯一标示"><a href="#全局唯一标示" class="headerlink" title="全局唯一标示"></a>全局唯一标示</h1><p>分布式唯一序列号</p><ol><li>使用算法随机生成<br>机器IP、时间戳、随机数等进行组合，生成一个唯一编号。例：Twitter的雪花算法，长度约19位<br>如需缩减长度，可以采用类似Base64等算法，对原始ID进行压缩转换为String类型</li><li>通过单表实现号段生产</li></ol><h1 id="分库分表中间件选择"><a href="#分库分表中间件选择" class="headerlink" title="分库分表中间件选择"></a>分库分表中间件选择</h1><p>开源支持： MyCat等</p><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="代理式"><a href="#代理式" class="headerlink" title="代理式"></a>代理式</h3><p>代理式分库中间件对于业务应用无任何侵入，业务应用和未分库时一样使用数据库，分库的选择及分库的维度对业务层完全隐藏，接入和使用成本极低</p><h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><ol><li>代理式在业务应用和数据库间增加了一层，导致了性能下降。</li><li>代理式需要解析业务应用的 SQL，并根据 SQL 中的分库字段进行路由。它需要解析和适配所有 SQL 语法，增加了代理模块复杂度和出错的可能性。</li><li>代理层是单独进程，需要部署占用资源，带来一定的成本。<h3 id="内嵌式"><a href="#内嵌式" class="headerlink" title="内嵌式"></a>内嵌式</h3>内嵌式分库中间件是将分库中间件内置在业务应用中，它只负责分库的选择，并不会解析用户的 SQL。在使用时，业务应用需将分库字段传递给内嵌中间件去计算具体对应的分库。它相比代理式性能更好<h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4></li><li>有一定侵入性，业务应用与原始单库模式相比，需要进行一定的改造去适配内嵌式的 API。</li><li>分库在故障转移、数据迁移等运维工作时，需要业务应用感知。不过现在的一些内嵌式代理，已经具备非常良好的配置功能，在分库运维时，业务应用需要配合的内容较少。</li></ol><h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><ol><li>是否一定需要进行分表或者分库呢？<br>不一定，根据业务量评估，超过千万级再考虑<br>同时业务上做处理： 无效数据、软删除数据、不会再使用的数据统一归档</li><li>使用业务字段分库后，如何处理数据倾斜？<br>分库后分表、分库后再分库</li><li><p>如何满足富查询</p></li><li><p>如何解决跨多库的修改导致的分布式事务？</p></li></ol><h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><p>问：</p><blockquote><p>分库分表: 1. 富查询 2. 数据倾斜 3. 分布式事务<br>问：<br>如果一个业务每天产生的数据有2000w条订单，这些数据随时可能被端上用户用来查询，那每天的数据很快就能把一个mysql实例打满。这种数据从节约成本角度讲，只支持最近一段时间的实时查询，历史数据通过归档到hbase上面是一种方案。但历史数据的查询就不实时了，有的银行采取这种方式，很影响用户体验。没见过互联网公司这种toC的产品有这种不支持实时查询的场景？如果遇到怎么解决历史数据的实时性呢？是不计成本不断横向扩容mysql+redis或者自研更高效的存储方案吗？<br>答：<br>&nbsp;&nbsp;&nbsp; 架构是成本的权衡，互联网支持是因为它的体量大，营收能够支持。<br>首先，上规模的互联网公司，都有自己自研的存储，做技术上的优化。<br>除此之外，分享一下我最近一次经历里，我们要把一份业务数据全部存储在缓存里，发现要几十TB的容量才能支持，显然成本上是cover不住的。<br>我们是对用户的查询进行了分析，发现90%的用户查询都集中在某一个时间区间里。我们就把这个区间里的数据放在缓存里了，其余仍存在数据库或其它文件系统里。可以看到，这就是一个架构权衡，最大程度满足业务诉求。</p></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;分表&quot;&gt;&lt;a href=&quot;#分表&quot; class=&quot;headerlink&quot; title=&quot;分表&quot;&gt;&lt;/a&gt;分表&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;单量多而每一单的数据量教少，
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>应对热点数据的查询</title>
+    <link href="http://yoursite.com/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%BA%94%E5%AF%B9%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://yoursite.com/2024/03/27/depth-design-架构设计-20240327-应对热点数据的查询/</id>
+    <published>2024-03-26T16:00:00.000Z</published>
+    <updated>2024-03-27T11:45:20.197Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="为什么扛不住相同用户百万的流量"><a href="#为什么扛不住相同用户百万的流量" class="headerlink" title="为什么扛不住相同用户百万的流量"></a>为什么扛不住相同用户百万的流量</h1><ol><li>百万的QPS属于不同用户时，因缓存是集群化的，所有到达业务后台的请求会根据一定路由规则（如Hash），分散到请求缓存集群中的某一个节点（或多个）</li><li>当百万QPS属于同一用户时，即时缓存集群化，同一个用户的请求都会被路由到集群中的某一个节点<blockquote><p>例 热点查询</p></blockquote></li></ol><h1 id="主从复制进行垂直扩容"><a href="#主从复制进行垂直扩容" class="headerlink" title="主从复制进行垂直扩容"></a>主从复制进行垂直扩容</h1><ol><li>虽然单机的机器配置和程序的性能是有上限的，但我们可以利用节点间的主从复制功能来进行节点间的扩容</li><li>随着从节点的增加，单分片的并发性能会不断翻倍</li><li>主从复制除了有应对热点的功能，另外一个主要作用是为了高可用</li><li>为了高可用模块在故障转移时的逻辑能够简单清晰并做到统一，会将集群的从节点数量设置为相同数量。(带来了较大的资源浪费，当然也可以不强制所有分片节点必须相同)<blockquote><p>总的来说，主从复制能够解决一定流量的热点查询且实施起来较简单。但不具备扩展性，在应对更大流量的热点时会有些吃力。</p></blockquote></li></ol><h1 id="利用应用内的前置缓存"><a href="#利用应用内的前置缓存" class="headerlink" title="利用应用内的前置缓存"></a>利用应用内的前置缓存</h1><p>热点数据一般是查询次数多，需要存储的数据少，因为数据都是相同的。<br>我们可以将热点数据前置缓存在应用程序内，本地缓存。且负载均衡会将请求分发到各个应用中去。</p><h2 id="应用内缓存需要设置上限"><a href="#应用内缓存需要设置上限" class="headerlink" title="应用内缓存需要设置上限"></a>应用内缓存需要设置上限</h2><ol><li>应设置内存缓存容量上限</li><li>设置容量满时的逐出策略</li><li>逐出策略可以是 LRU，将最少使用的缓存在容量满时清理掉，因为热点缓存需要存储的是访问次数多的数据</li><li>缓存需要设置过期实际，因为热点数据可能转化为非热点数据<h2 id="根据业务对待延迟的问题"><a href="#根据业务对待延迟的问题" class="headerlink" title="根据业务对待延迟的问题"></a>根据业务对待延迟的问题</h2></li><li>定期刷新，主动刷新</li><li>如果业务可以容忍一定时间的延迟，定期刷新</li><li>如果要实时感知变化，主动刷新：binlog监听刷新<blockquote><p>尽量不要将感知binlog程序放置在对应的应用程序内，因为应用代码也运行在此机器上，通过MQ感知变更会消耗非常多的CPU和内存资源<br>内外前置缓存里数据少，很多变更消息都会因不在前置缓存中而被忽略掉<br>建议：将前置缓存的数据异构一份出来用作判断，但也导致了延迟（程序时间、网络时间）</p><h2 id="把控好瞬间的逃逸流量"><a href="#把控好瞬间的逃逸流量" class="headerlink" title="把控好瞬间的逃逸流量"></a>把控好瞬间的逃逸流量</h2></blockquote></li><li>应用初始化时，前置缓存（本地缓存）是空的，热点查询出现，所有的热点请求会瞬间打爆应用</li><li>等待前置缓存落地，设置一个时间<h2 id="如何发现热点缓存并前置"><a href="#如何发现热点缓存并前置" class="headerlink" title="如何发现热点缓存并前置"></a>如何发现热点缓存并前置</h2><h3 id="被动发现"><a href="#被动发现" class="headerlink" title="被动发现"></a>被动发现</h3>借助前置缓存有容量上限实现<br>所有的请求默认从前置缓存中获取，淘汰策略LRU，如果是热点数据，访问次数一定很高，会一直存在前置缓存中<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4>所有的请求都优先从前置缓存获取，没查到数据时加载数据库数据到本地的前置缓存里，此方式会把非热点数据存储到前置缓存里，导致热点数据产生延迟<h3 id="主动发现"><a href="#主动发现" class="headerlink" title="主动发现"></a>主动发现</h3>借助一些外部计数工具来发现热点<br>在一个集中的位置对于请求进行计数，并根据配置的阈值判断某请求是否会命中数据，对于判定为热点数据，则存入前置缓存中<h2 id="降级兜底不可少"><a href="#降级兜底不可少" class="headerlink" title="降级兜底不可少"></a>降级兜底不可少</h2>若部署的容器数量所能支撑的QPS小于当次的热点查询<br>单机限流阈值设置为压测值的一半或者更低，因为CPU不能达到100%<h2 id="其他前置策略"><a href="#其他前置策略" class="headerlink" title="其他前置策略"></a>其他前置策略</h2></li><li>接入层（如Nginx）进行前置缓存</li><li>CDN前置缓存以及开启浏览器缓存</li></ol><h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><blockquote><p>有两个疑问，第一：如何做到只有一个逃逸流量从应用发出。第二，如何判定是逃逸流量，它和正式流量怎么区分呢<br>&nbsp;&nbsp;&nbsp; caffeine这个java实现的缓存，可以做到只有一个逃逸流量从应用发出。当本地缓存过期了，才会有逃逸流量。它的作用是更新本地缓存的数据。</p></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;为什么扛不住相同用户百万的流量&quot;&gt;&lt;a href=&quot;#为什么扛不住相同用户百万的流量&quot; class=&quot;headerlink&quot; title=&quot;为什么扛不住相同用户百万
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于流量回放实现读服务的自动化测试回归</title>
+    <link href="http://yoursite.com/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%9F%BA%E4%BA%8E%E6%B5%81%E9%87%8F%E5%9B%9E%E6%94%BE%E5%AE%9E%E7%8E%B0%E8%AF%BB%E6%9C%8D%E5%8A%A1%E8%AF%BB%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%9B%9E%E5%BD%92/"/>
+    <id>http://yoursite.com/2024/03/27/depth-design-架构设计-20240327-基于流量回放实现读服务读自动化测试回归/</id>
+    <published>2024-03-26T16:00:00.000Z</published>
+    <updated>2024-03-27T12:08:39.133Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>#</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;#&lt;/p&gt;
+&lt;script type=&quot;text&amp;#x2F;javascript&quot; src=&quot;https://unpkg.com/kity@2.0.4/dist/kity.m
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>异构数据的同步一致性</title>
+    <link href="http://yoursite.com/2024/03/26/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240326-%E5%BC%82%E6%9E%84%E6%95%B0%E6%8D%AE%E7%9A%84%E5%90%8C%E6%AD%A5%E4%B8%80%E8%87%B4%E6%80%A7/"/>
+    <id>http://yoursite.com/2024/03/26/depth-design-架构设计-20240326-异构数据的同步一致性/</id>
+    <published>2024-03-25T16:00:00.000Z</published>
+    <updated>2024-03-27T02:15:40.508Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="binlog一致性"><a href="#binlog一致性" class="headerlink" title="binlog一致性"></a>binlog一致性</h1><p>最终一致性和低延迟</p><h1 id="基于-Binlog-的全量缓存架构问题分析"><a href="#基于-Binlog-的全量缓存架构问题分析" class="headerlink" title="基于 Binlog 的全量缓存架构问题分析"></a>基于 Binlog 的全量缓存架构问题分析</h1><h2 id="Binlog-延迟低是指纯-MySQL-的主从同步"><a href="#Binlog-延迟低是指纯-MySQL-的主从同步" class="headerlink" title="Binlog 延迟低是指纯 MySQL 的主从同步"></a>Binlog 延迟低是指纯 MySQL 的主从同步</h2><ol><li>监听binlog的架构方式和mysql自己的binlog主从同步不一样，多了协议转换，适配等，具有一定的性能损耗</li><li>监听binlog的架构方式链路多两个模块，监听binlog和格式解析</li><li>实际场景中是同步 从库的binlog，延迟加大</li><li>binlog是串行的，同步吞吐量太低，进一步加大同步的延迟</li></ol><h2 id="如何保证数据不丢失或错误？如果保证没有bug？"><a href="#如何保证数据不丢失或错误？如果保证没有bug？" class="headerlink" title="如何保证数据不丢失或错误？如果保证没有bug？"></a>如何保证数据不丢失或错误？如果保证没有bug？</h2><h2 id="如何设计缓存数据格式？"><a href="#如何设计缓存数据格式？" class="headerlink" title="如何设计缓存数据格式？"></a>如何设计缓存数据格式？</h2><p>如何通过数据格式提高性能？</p><h2 id="binlog如何高效消费"><a href="#binlog如何高效消费" class="headerlink" title="binlog如何高效消费"></a>binlog如何高效消费</h2><h3 id="全串行的方式进行消费"><a href="#全串行的方式进行消费" class="headerlink" title="全串行的方式进行消费"></a>全串行的方式进行消费</h3><p>在消费时，对此binlog文件使用ACK机制进行串行消费，消费一条，确认一条</p><blockquote><p>串行消费效率低，延迟大<br>单线程无法水平扩展，架构有缺陷</p><h3 id="采用并行的方式消费"><a href="#采用并行的方式消费" class="headerlink" title="采用并行的方式消费"></a>采用并行的方式消费</h3><p>单库单表是串行消费，我们可以对不同库、不同表的同时实现并行消费（按库并行消费）</p><h4 id="并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）"><a href="#并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）" class="headerlink" title="并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）"></a>并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）</h4><ol><li>分布式锁粒度： 保证同一条数据，或一个条数据同一个纬度（或字段）下的消费是串行的</li><li>利用mq的顺序消费，同一条数据或同一个纬度（字段）放在mq同一个串行通道（topic tag）</li></ol></blockquote><h1 id="缓存数据结构设计及写入"><a href="#缓存数据结构设计及写入" class="headerlink" title="缓存数据结构设计及写入"></a>缓存数据结构设计及写入</h1><p>案例： 在数据库中有订单基本信息表和商品表，而在缓存中，我们一般将订单基本信息表和商品表存储为一个value值，方便用户查询订单详情的需求，减少和redis的交互次数。<br>这种在数据库中多张表存储，而在缓存中只用 K-V 结构进行冗余存储的数据结构，需要我们在数据同步的时候进行并发控制，防止因为多张表的变更导致并发写入，从而产生数据错乱</p><h2 id="多表间共享分布式锁协调"><a href="#多表间共享分布式锁协调" class="headerlink" title="多表间共享分布式锁协调"></a>多表间共享分布式锁协调</h2><p>例如订单基本信息表和商品表都有一个共同的 订单编号 ，我们使用订单编号作为分布式锁</p><h2 id="通过反查的方式进行全量覆盖"><a href="#通过反查的方式进行全量覆盖" class="headerlink" title="通过反查的方式进行全量覆盖"></a>通过反查的方式进行全量覆盖</h2><p>在修改订单基本信息时，反查数据库获取商品信息，组装后存入redis；<br>在修改商品信息时，反差数据库获取订单基本信息，组装后存入redis。</p><blockquote><p>带来一定的性能消耗和机器资源浪费<br>量大的时候可能会把数据库打爆（建议查从库）</p><h2 id="采用redis的hash结构进行局部更新"><a href="#采用redis的hash结构进行局部更新" class="headerlink" title="采用redis的hash结构进行局部更新"></a>采用redis的hash结构进行局部更新</h2></blockquote><h1 id="数据对比发现错误"><a href="#数据对比发现错误" class="headerlink" title="数据对比发现错误"></a>数据对比发现错误</h1><p>数据对比、差异发现、差异告警、自动修复</p><h1 id="最终兜底"><a href="#最终兜底" class="headerlink" title="最终兜底"></a>最终兜底</h1><p>Binlog 保证最终一致性但可能存在延迟，主动写入保障无延迟但存在丢数据</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;binlog一致性&quot;&gt;&lt;a href=&quot;#binlog一致性&quot; class=&quot;headerlink&quot; title=&quot;binlog一致性&quot;&gt;&lt;/a&gt;binlog一致性
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>全缓存-毫秒级的读服务</title>
+    <link href="http://yoursite.com/2024/03/25/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240325-%E5%85%A8%E7%BC%93%E5%AD%98-%E6%AF%AB%E7%A7%92%E7%BA%A7%E7%9A%84%E8%AF%BB%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://yoursite.com/2024/03/25/depth-design-架构设计-20240325-全缓存-毫秒级的读服务/</id>
+    <published>2024-03-24T16:00:00.000Z</published>
+    <updated>2024-03-26T14:21:52.213Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="简单-读服务-未完全解决的问题"><a href="#简单-读服务-未完全解决的问题" class="headerlink" title="简单-读服务-未完全解决的问题"></a>简单-读服务-未完全解决的问题</h1><ol><li>为了保证缓存更新实时性而带来的分布式事务的问题</li><li>懒加载导致的毛刺问题</li></ol><h1 id="全量缓存的基本架构"><a href="#全量缓存的基本架构" class="headerlink" title="全量缓存的基本架构"></a>全量缓存的基本架构</h1><p>全量缓存是指将数据库中的所有数据都存储在缓存中，同时在缓存中不设置过期时间的一种实现方式<br><img src="img/全量缓存的基本架构_01.png" alt="avatar"></p><blockquote><p>全量数据在缓存中，不会再降级到数据库里查询，完全依赖缓存，因此 ，从缓存降级到数据库查询的毛刺问题就解决了</p></blockquote><h2 id="基于Binlog的全量缓存架构"><a href="#基于Binlog的全量缓存架构" class="headerlink" title="基于Binlog的全量缓存架构"></a>基于Binlog的全量缓存架构</h2><ol><li>降低了延迟<br>缓存基本上是准实时的，数据库的主从同步保持在毫秒级别，数据库的数据变更可以实时地反映到缓存里。</li><li>解决了分布式事务的问题<br>Binlog 的主从复制是基于 ACK 机制，如果同步缓存失败了，被消费的 Binlog 不会被确认，下一次会重复消费，数据最终会写入缓存中。这就解决了因无法满足分布式事务而导致的丢数据问题，保障了数据的最终一致性。</li><li>提升了代码的简洁性和可维护性<br>不用在代码的增删改中添加缓存更新代码，直接监听binlog的变更<h3 id="使用binlog的全量缓存存在的问题"><a href="#使用binlog的全量缓存存在的问题" class="headerlink" title="使用binlog的全量缓存存在的问题"></a>使用binlog的全量缓存存在的问题</h3></li><li>提升了系统的整体复杂度</li><li>缓存的容量会成倍上升，相应的资源成本也大幅上升</li><li>有选择的存储缓存，可考虑压缩再存储缓存（Gzip、Snappy等），压缩费CPU，需压测<h3 id="节省缓存的字节数"><a href="#节省缓存的字节数" class="headerlink" title="节省缓存的字节数"></a>节省缓存的字节数</h3></li><li>在JSON中添加 @Field<br>例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Class DemoClass &#123;</span><br><span class="line">    <span class="meta">@Field</span>(<span class="string">"1"</span>)</span><br><span class="line">    <span class="keyword">private</span> field1;</span><br><span class="line">    <span class="meta">@Field</span>(<span class="string">"2"</span>)</span><br><span class="line">    <span class="keyword">private</span> field2;</span><br><span class="line">&#125;</span><br><span class="line">采用了此方式序列化后的数据如下所示：</span><br><span class="line">&#123;<span class="string">"1"</span>: field1Value, <span class="string">"2"</span>: field2Value&#125;</span><br><span class="line">而没有采用此标识的数据如下：</span><br><span class="line">&#123;<span class="string">"field1"</span>: field1Value, <span class="string">"field2"</span>: field2Value&#125;</span><br></pre></td></tr></table></figure></li><li>redis的hash结构也可以使用跟上述JSON标识一样的模式</li><li>使用全量缓存承接读服务所有的请求时，会出现无法感知缓存丢失的问题<br>例： redis数据丢失<h3 id="多机房实时热备"><a href="#多机房实时热备" class="headerlink" title="多机房实时热备"></a>多机房实时热备</h3></li><li>提升性能</li><li>增加了可用性</li><li>资源成本上升<h3 id="异步并行化"><a href="#异步并行化" class="headerlink" title="异步并行化"></a>异步并行化</h3>将串行的请求，采用异步并行的方式同时请求，总耗时与单词耗时相等</li><li>增加了线程的消耗，带来cpu的消耗</li><li>编程复杂度和维护难度</li><li>场景单一：各自独立，且无先后关系的场景里</li></ol><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><h4 id="监听binlog-处理数据失败-无法再次感知数据变更"><a href="#监听binlog-处理数据失败-无法再次感知数据变更" class="headerlink" title="监听binlog,处理数据失败,无法再次感知数据变更"></a>监听binlog,处理数据失败,无法再次感知数据变更</h4><blockquote><p>监听到数据，丢进mq消息队列</p><h4 id="监听binlog-处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗"><a href="#监听binlog-处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗" class="headerlink" title="监听binlog,处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗"></a>监听binlog,处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗</h4><p>必须保证监听binlog服务正常，集群部署<br>注： 在上线后，可以开发数据校准模块，定时的校准缓存和数据库中的数据</p><h4 id="提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？"><a href="#提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？" class="headerlink" title="提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？"></a>提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？</h4><p> 会有延迟。</p><ol><li>正常在几秒左右，极端会有几分钟。如果业务上可以容忍，则可以不降级查库。</li><li>如果业务上不允许，对于对延迟要求非常高的场景，也可以在写入数据库后，主动的将数据写入缓存。不过这个主动写入不用花太多精力保证强成功，最终数据强成功可以通过binlog进行兜底。这个主动写入的目的是保证实时性。<h4 id="一定要使用binlog吗"><a href="#一定要使用binlog吗" class="headerlink" title="一定要使用binlog吗"></a>一定要使用binlog吗</h4>不一定，也可以直接在业务使用的地方调用mq，mq消费者异步处理。<br>但是此种方式无法监听手工DMS脚本的处理</li></ol></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;简单-读服务-未完全解决的问题&quot;&gt;&lt;a href=&quot;#简单-读服务-未完全解决的问题&quot; class=&quot;headerlink&quot; title=&quot;简单-读服务-未完全解决
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拆分合并</title>
+    <link href="http://yoursite.com/2024/03/25/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240325-%E6%8B%86%E5%88%86%E5%90%88%E5%B9%B6/"/>
+    <id>http://yoursite.com/2024/03/25/depth-design-架构设计-20240325-拆分合并/</id>
+    <published>2024-03-24T16:00:00.000Z</published>
+    <updated>2024-03-25T06:06:38.086Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="如何利用“拆分”降低架构复杂度"><a href="#如何利用“拆分”降低架构复杂度" class="headerlink" title="如何利用“拆分”降低架构复杂度"></a>如何利用“拆分”降低架构复杂度</h1><ol><li>先从 业务角度 或 业务流程 角度做 垂直拆分<br>如： 拆分成： 用户模块、订单模块、支付模块</li><li>技术垂直拆分<br>如： 用户模块 拆分为： 用户读模块、用户写模块</li><li>技术水平拆分<br>将水平上的公共的对连接数据库或者其他存储，拆分为 数据访问模块</li></ol><h1 id="系统拆分的主要原因"><a href="#系统拆分的主要原因" class="headerlink" title="系统拆分的主要原因"></a>系统拆分的主要原因</h1><ol><li>当需求不断叠加导致并行开发和上线时，通过拆分可以减少相互影响。</li><li>当维护一个覆盖范围比较广的业务系统，从而导致研发人员业务专业度不够高时，通过拆分可以适当聚焦，提升专业度。</li><li>当一个系统范围较广同时线上 Bug 不断时，就需要适当拆分，逐个击破。</li></ol><h1 id="拆分准则"><a href="#拆分准则" class="headerlink" title="拆分准则"></a>拆分准则</h1><ol><li>拆分是按维度逐层进行，从顶层逐步向下。在顶层按业务及业务流程进行垂直拆分，而不是按技术或其他。</li><li>在此之后，对于拆分得到的具体模块，可以按读写分离、在线离线分离、快慢分离、场景分离等方式做进一步的水平拆分。</li><li>在模块内部的垂直拆分完成之后，可以按易变与稳定、共性与非共性进行水平拆分。需要注意的是，第二步的垂直拆分和最后的水平拆分是交替进行的，并无非常清晰的边界和先手顺序。</li></ol><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;如何利用“拆分”降低架构复杂度&quot;&gt;&lt;a href=&quot;#如何利用“拆分”降低架构复杂度&quot; class=&quot;headerlink&quot; title=&quot;如何利用“拆分”降低架构
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简洁-高性能</title>
+    <link href="http://yoursite.com/2024/03/25/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240325-%E7%AE%80%E6%B4%81-%E9%AB%98%E6%80%A7%E8%83%BD/"/>
+    <id>http://yoursite.com/2024/03/25/depth-design-架构设计-20240325-简洁-高性能/</id>
+    <published>2024-03-24T16:00:00.000Z</published>
+    <updated>2024-03-25T07:02:11.621Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="架构尽量不要分层-分层：-拆分出模块层，使用rpc调用"><a href="#架构尽量不要分层-分层：-拆分出模块层，使用rpc调用" class="headerlink" title="架构尽量不要分层(分层： 拆分出模块层，使用rpc调用)"></a>架构尽量不要分层(分层： 拆分出模块层，使用rpc调用)</h1><p>在没有特别充足的理由时，可以不用将一个进程拆分成两个通过RPC通信的独立进程。因为这会增加网络通信、以及维护成本等。</p><h2 id="案例-技术拆分，性能下降，处理方式"><a href="#案例-技术拆分，性能下降，处理方式" class="headerlink" title="(案例)技术拆分，性能下降，处理方式"></a>(案例)技术拆分，性能下降，处理方式</h2><p>做技术拆分，水平拆分出了 数据访问模块，读服务性能的平均值下降，原因如下：</p><ol><li>采用分层架构之后，网络传输相比不分层的架构多了一倍</li><li>读服务的业务逻辑都比较简单，性能主要消耗在网络传输上。<br>因此，请求查询的数据越少，性能越好。假设为 10ms；数据多时，性能则较差，假设为 50ms。<br>当叠加上分层架构，性能就会翻倍下降。比如数据少时，从 10ms 变成 20ms；数据多时，从 50ms 变成 100ms。<br>分层后，数据的多与少带来的性能差距达到了 80ms，这也是产生毛刺差的原因。<blockquote><p>为了提高查询的性能减少毛刺同时降低部署机器的数量，可以将水平拆分的数据访问层代码工程保留独立，但在实际编译时，直接编译到读服务里。<br><p data-nodeid="237355"><img src="https://s0.lgstatic.com/i/image2/M01/05/4E/CgpVE1_-wtiAaRpBAADdmuBNJ3g815.png" alt="后台架构03-02.png" data-nodeid="237449"></p></p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>架构尽量不要分层  : 读服务要尽可能和数据靠近，减少网络传输<br>例：<b>数据前置(更新不及时)</b> ： 浏览器本地缓存数据，CDN把数据推送到和你最近的机房，缩短传输距离</p></blockquote></li></ol><h1 id="代码尽可能简单"><a href="#代码尽可能简单" class="headerlink" title="代码尽可能简单"></a>代码尽可能简单</h1><h2 id="（案例）读服务，查询数据过程中的模型转换，为了提高映射效率借助一些框架自动转换"><a href="#（案例）读服务，查询数据过程中的模型转换，为了提高映射效率借助一些框架自动转换" class="headerlink" title="（案例）读服务，查询数据过程中的模型转换，为了提高映射效率借助一些框架自动转换"></a>（案例）读服务，查询数据过程中的模型转换，为了提高映射效率借助一些框架自动转换</h2><p>读服务，尽可能地减少引入框架。如果一定要引入，必须经过严格的压测<br>例：  Java 中的 Bean.copyProperties，它采用了反射的机制进行字段 copy，在数据量较大时，性能较低</p><h2 id="（案例）将请求的入参及从存储中获取的数据，直接JSON打印"><a href="#（案例）将请求的入参及从存储中获取的数据，直接JSON打印" class="headerlink" title="（案例）将请求的入参及从存储中获取的数据，直接JSON打印"></a>（案例）将请求的入参及从存储中获取的数据，直接JSON打印</h2><p>不建议该粗暴方式，不建议全量序列化，需要精细化按需打印</p><h2 id="（案例）按需存储"><a href="#（案例）按需存储" class="headerlink" title="（案例）按需存储"></a>（案例）按需存储</h2><ol><li>mysql 不要 select *</li><li>redis 使用redis 的 hash 结构存储数据，因为hash可以让你在查询时制定需要返回哪些字段。<br>其他存储结构，如ElasticSearch等亦然</li></ol><h1 id="存储的选型和架构"><a href="#存储的选型和架构" class="headerlink" title="存储的选型和架构"></a>存储的选型和架构</h1><p>读服务最主要依赖的中间件是存储，因此存储的性能很大程度上决定了读服务的性能。<br>对于读服务，一般需要使用redis。</p><p><p data-nodeid="237611" class=""><img src="https://s0.lgstatic.com/i/image2/M01/05/4F/CgpVE1_-zOeAFrAkAAE8o488Rnw822.png" alt="Lark20210113-183227.png" data-nodeid="237615"></p></p><blockquote><p>但不能满足：高可用及完全高性能的要求</p><h2 id="redis缓存风险"><a href="#redis缓存风险" class="headerlink" title="redis缓存风险"></a>redis缓存风险</h2><ol><li>缓存击穿</li><li>缓存穿透</li><li>缓存雪崩</li><li>懒加载无法感知实时变更</li><li>懒加载无法摆脱毛刺的困扰<br>使用懒加载的缓存过期方案，还有一个无法避免的问题，就是性能毛刺。当缓存过期时，读服务的请求都会穿透到数据库中，对于穿透请求的性能和使用缓存的性能差距非常大，时常是毫秒和秒级别的差异。</li></ol></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;架构尽量不要分层-分层：-拆分出模块层，使用rpc调用&quot;&gt;&lt;a href=&quot;#架构尽量不要分层-分层：-拆分出模块层，使用rpc调用&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="design" scheme="http://yoursite.com/categories/depth/design/"/>
+    
+      <category term="架构设计" scheme="http://yoursite.com/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker镜像重命名</title>
+    <link href="http://yoursite.com/2024/01/31/depth-docker-notes-20240131-docker%E9%95%9C%E5%83%8F%E9%87%8D%E5%91%BD%E5%90%8D/"/>
+    <id>http://yoursite.com/2024/01/31/depth-docker-notes-20240131-docker镜像重命名/</id>
+    <published>2024-01-30T16:00:00.000Z</published>
+    <updated>2024-01-31T06:27:16.574Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="拉取原始镜像"><a href="#拉取原始镜像" class="headerlink" title="拉取原始镜像"></a>拉取原始镜像</h1><p>$ docker pull &lt;原始镜像&gt;</p><h1 id="查看已经拉取到本地的镜像列表"><a href="#查看已经拉取到本地的镜像列表" class="headerlink" title="查看已经拉取到本地的镜像列表"></a>查看已经拉取到本地的镜像列表</h1><p>$ docker images</p><h1 id="为镜像添加新标签（也就是重命名）-此结果会创建一个新的镜像，原镜像仍然保留"><a href="#为镜像添加新标签（也就是重命名）-此结果会创建一个新的镜像，原镜像仍然保留" class="headerlink" title="为镜像添加新标签（也就是重命名） 此结果会创建一个新的镜像，原镜像仍然保留"></a>为镜像添加新标签（也就是重命名） 此结果会创建一个新的镜像，原镜像仍然保留</h1><p>$ docker tag &lt;原始镜像&gt;:&lt;版本号&gt; &lt;新镜像名称&gt;:&lt;版本号&gt;</p><h1 id="再次查看镜像列表确认重命名成功"><a href="#再次查看镜像列表确认重命名成功" class="headerlink" title="再次查看镜像列表确认重命名成功"></a>再次查看镜像列表确认重命名成功</h1><p>$ docker images</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;拉取原始镜像&quot;&gt;&lt;a href=&quot;#拉取原始镜像&quot; class=&quot;headerlink&quot; title=&quot;拉取原始镜像&quot;&gt;&lt;/a&gt;拉取原始镜像&lt;/h1&gt;&lt;p&gt;$ do
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="docker" scheme="http://yoursite.com/categories/depth/docker/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/depth/docker/notes/"/>
+    
+    
+      <category term="docker" scheme="http://yoursite.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git remote set-url调整地址</title>
+    <link href="http://yoursite.com/2024/01/08/git-%E7%AC%94%E8%AE%B0-git-remote-set-url%E8%B0%83%E6%95%B4%E5%9C%B0%E5%9D%80/"/>
+    <id>http://yoursite.com/2024/01/08/git-笔记-git-remote-set-url调整地址/</id>
+    <published>2024-01-07T16:00:00.000Z</published>
+    <updated>2024-01-08T06:44:07.109Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="git-remote-set-url调整地址"><a href="#git-remote-set-url调整地址" class="headerlink" title="git remote set-url调整地址"></a>git remote set-url调整地址</h1><ol><li>git remote set-url –add origin <a href="http://xxx.xx/xx.git" target="_blank" rel="noopener">http://xxx.xx/xx.git</a></li><li>git remote -v</li><li>git remote set-url –delete origin git@gitee.com:xx/xx.git</li></ol><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;git-remote-set-url调整地址&quot;&gt;&lt;a href=&quot;#git-remote-set-url调整地址&quot; class=&quot;headerlink&quot; title
+      
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/categories/git/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>database-mybatis-notes-MYSQL-多字段联合查询in</title>
+    <link href="http://yoursite.com/2023/07/21/database-mybatis-notes-MYSQL-%E5%A4%9A%E5%AD%97%E6%AE%B5%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2in/"/>
+    <id>http://yoursite.com/2023/07/21/database-mybatis-notes-MYSQL-多字段联合查询in/</id>
+    <published>2023-07-21T06:13:05.356Z</published>
+    <updated>2023-07-21T06:14:38.681Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>MYSQL 多字段联合查询IN笔记: <a href="https://www.cnblogs.com/zqsb/p/16907391.html" target="_blank" rel="noopener">https://www.cnblogs.com/zqsb/p/16907391.html</a></p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CREATE TABLE `t_child` (</span><br><span class="line">  `id` bigint(21) unsigned NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `center_id` char(1) COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '中心ID',</span><br><span class="line">  `birth_year` year(4) DEFAULT NULL COMMENT '出生年',</span><br><span class="line">  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '' COMMENT '姓名',</span><br><span class="line">  `date_added` datetime DEFAULT CURRENT_TIMESTAMP,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  KEY `idx_center_id` (`center_id`),</span><br><span class="line">  KEY `idx_birth_year` (`birth_year`)</span><br><span class="line">) ENGINE=MyISAM AUTO_INCREMENT=11001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci</span><br><span class="line"></span><br><span class="line">### 查询中心A 2016年的人数 ，中心B 2017年出生人数 ，中心C 2018年出生人数</span><br><span class="line"></span><br><span class="line">-- 方法1  UNION ALL</span><br><span class="line"></span><br><span class="line">SELECT * FROM t_child WHERE center_id = 'A' AND birth_year = 2016 UNION ALL</span><br><span class="line"></span><br><span class="line">SELECT * FROM t_child WHERE center_id = 'B' AND birth_year = 2017 UNION ALL</span><br><span class="line"></span><br><span class="line">SELECT * FROM t_child WHERE center_id = 'C' AND birth_year = 2018;</span><br><span class="line"></span><br><span class="line">-- 方法2  WHERE 条件 or</span><br><span class="line">SELECT * FROM  t_child WHERE (center_id='A' AND birth_year = 2016)</span><br><span class="line">OR (center_id = 'B' AND birth_year  = 2017)</span><br><span class="line">OR (center_id = 'C' AND birth_year = 2018) ORDER BY center_id ASC ;</span><br><span class="line"></span><br><span class="line">-- 方法3  两个字段联合 in查询</span><br><span class="line"></span><br><span class="line">SELECT * FROM t_child WHERE</span><br><span class="line">(center_id,birth_year )</span><br><span class="line">IN ( ('A',2016), ('B',2017), ('C',2018) )</span><br><span class="line"></span><br><span class="line">-- 方法4</span><br><span class="line">SELECT * FROM t_child WHERE  center_id IN('A','B','C') AND birth_year IN(2016,2017,2018)</span><br><span class="line"></span><br><span class="line">其中前三种的结果集是完全一样的，运行时间 方法2 》 方法 1 》方法3 》 方法4</span><br><span class="line"></span><br><span class="line">方法3与方法4 运行时间比较短</span><br><span class="line"></span><br><span class="line">但是方法4：结果数据最多，不是最终需要的结果集数据</span><br></pre></td></tr></table></figure><h1 id="加联合索引"><a href="#加联合索引" class="headerlink" title="加联合索引"></a>加联合索引</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLEt_child  ADD  KEY &#96;idx_center_id_birth_year&#96; (&#96;center_id&#96;,&#96;birth_year&#96;)</span><br><span class="line"></span><br><span class="line">联合索引加了之后： 方法1，方法2 ，方法3  执行时间都差不多 使用了联合索引，方法4执行时间也很快，使用了idx_birth_year索引</span><br></pre></td></tr></table></figure><p>实际的业务中：</p><p>索引怎么建立： 单个索引还是联合索引，<br>多字段联合in 还是 单个字段in<br>。。。。</p><p>使用多字段联合IN查询，还是使用联合索引比较的好。</p><p>表建立的是联合索引，还是用多字段联合IN查询</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;MYSQL 多字段联合查询IN笔记: &lt;a href=&quot;https://www.cnblogs.com/zqsb/p/16907391.html&quot; target=&quot;_blan
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>database-mybatis-notes-mybatis-xml-map</title>
+    <link href="http://yoursite.com/2023/07/21/database-mybatis-notes-mybatis-xml-map/"/>
+    <id>http://yoursite.com/2023/07/21/database-mybatis-notes-mybatis-xml-map/</id>
+    <published>2023-07-21T06:09:07.012Z</published>
+    <updated>2023-07-21T06:11:31.612Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="xml执行key和value"><a href="#xml执行key和value" class="headerlink" title="xml执行key和value"></a>xml执行key和value</h1><p>mapper为： selectBySeqInvNoAndInvDetailNos(Map<String, String> seqInvNoMap, int isValid)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id&#x3D;&quot;selectBySeqInvNoAndInvDetailNos&quot; resultMap&#x3D;&quot;BaseResultMap&quot; &gt;</span><br><span class="line">select</span><br><span class="line">&lt;include refid&#x3D;&quot;Base_Column_List&quot; &#x2F;&gt;</span><br><span class="line">from t_inv_out_biz_trace_source</span><br><span class="line">where 1 &#x3D; 1</span><br><span class="line">&lt;if test&#x3D;&quot;isValid !&#x3D; null&quot;&gt;</span><br><span class="line">  and is_valid &#x3D; #&#123;isValid&#125;</span><br><span class="line">&lt;&#x2F;if&gt;</span><br><span class="line">&lt;if test&#x3D;&quot;seqInvNoMap !&#x3D; null&quot;&gt;</span><br><span class="line">  and (seq_inv_no , inv_detail_no) in</span><br><span class="line">  &lt;foreach collection&#x3D;&quot;bizDetailNos&quot; index&#x3D;&quot;key&quot; item&#x3D;&quot;value&quot; separator&#x3D;&quot;,&quot; open&#x3D;&quot;(&quot; close&#x3D;&quot;)&quot;&gt;</span><br><span class="line">    (#&#123;key,jdbcType&#x3D;VARCHAR&#125;, #&#123;value,jdbcType&#x3D;VARCHAR&#125; )</span><br><span class="line">  &lt;&#x2F;foreach&gt;</span><br><span class="line">&lt;&#x2F;if&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br></pre></td></tr></table></figure></p><h1 id="xml执行key或value"><a href="#xml执行key或value" class="headerlink" title="xml执行key或value"></a>xml执行key或value</h1><p>mapper未： ArrayList<Map<String, Integer>&gt; usersPlatforms  或 updateXxxx(JsonData jsonData);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">update id&#x3D;&quot;updateXxxx&quot; parameterType&#x3D;&quot;JsonData&quot;&gt;</span><br><span class="line">    UPDATE xxx SET &#96;xx&#96; &#x3D; 10</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;foreach collection&#x3D;&quot;usersPlatforms&quot; item&#x3D;&quot;userPlatform&quot; open&#x3D;&quot;&quot; close&#x3D;&quot;&quot; separator&#x3D;&quot;OR&quot;&gt;</span><br><span class="line">            &lt;foreach collection&#x3D;&quot;userPlatform.keys&quot; item&#x3D;&quot;key&quot; open&#x3D;&quot; user_id &#x3D; &quot; close&#x3D;&quot;&quot; separator&#x3D;&quot;&quot;&gt;</span><br><span class="line">                #&#123;key&#125;</span><br><span class="line">            &lt;&#x2F;foreach&gt;</span><br><span class="line">            &lt;foreach collection&#x3D;&quot;userPlatform.values&quot; item&#x3D;&quot;value&quot; open&#x3D;&quot; AND platform &#x3D; &quot; close&#x3D;&quot;&quot; separator&#x3D;&quot;&quot;&gt;</span><br><span class="line">                #&#123;value&#125;</span><br><span class="line">            &lt;&#x2F;foreach&gt;</span><br><span class="line">        &lt;&#x2F;foreach&gt;</span><br><span class="line">    &lt;&#x2F;where&gt;</span><br><span class="line">&lt;&#x2F;update&gt;</span><br></pre></td></tr></table></figure></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;xml执行key和value&quot;&gt;&lt;a href=&quot;#xml执行key和value&quot; class=&quot;headerlink&quot; title=&quot;xml执行key和value
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>xx-近期待处理</title>
+    <link href="http://yoursite.com/2023/07/05/xx-%E8%BF%91%E6%9C%9F%E5%BE%85%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2023/07/05/xx-近期待处理/</id>
+    <published>2023-07-05T06:07:12.022Z</published>
+    <updated>2023-07-05T06:12:12.232Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><ol><li>楼盘<br><a href="https://docs.qq.com/sheet/DTGduU2xBYkNUQXJr?tab=BB08J2&amp;_t=1675751772529" target="_blank" rel="noopener">https://docs.qq.com/sheet/DTGduU2xBYkNUQXJr?tab=BB08J2&amp;_t=1675751772529</a><br>2。 function函数接口<br><a href="https://www.likecs.com/show-308303870.html" target="_blank" rel="noopener">https://www.likecs.com/show-308303870.html</a></li><li>java8新特性 function函数接口<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;mid=2651023894&amp;idx=2&amp;sn=d8eccac647e66e871c8a1befddf9a9d5&amp;chksm=84e75a5db390d34beda058d32c2d2967c20eb1d2fffd0a7453b845f436f66c324b32949d200a&amp;scene=27" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;mid=2651023894&amp;idx=2&amp;sn=d8eccac647e66e871c8a1befddf9a9d5&amp;chksm=84e75a5db390d34beda058d32c2d2967c20eb1d2fffd0a7453b845f436f66c324b32949d200a&amp;scene=27</a></li><li>SPI和springboot starter的区别<br><a href="https://blog.csdn.net/qq_33591903/article/details/119843446" target="_blank" rel="noopener">https://blog.csdn.net/qq_33591903/article/details/119843446</a></li></ol><p>业务架构和应用架构的区别：<br><a href="https://zhuanlan.zhihu.com/p/393065368" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/393065368</a></p><p>子税务局的数字账户全电发票是不是就是金税四期上线了：<br><a href="https://www.excel8.com/ask/question_2194196.html" target="_blank" rel="noopener">https://www.excel8.com/ask/question_2194196.html</a></p><p>全电发票试点<br><a href="https://mp.weixin.qq.com/s?__biz=MzAwOTkyNTM1MA==&amp;mid=2247498119&amp;idx=1&amp;sn=86cf85da7f8b899be83f5d84d599cf4c&amp;chksm=9b5a9e0eac2d1718bc9ed6050ed6c3d8075b296865daaaf6fd76e0d8f2a308cce7b9cd860703&amp;scene=27" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzAwOTkyNTM1MA==&amp;mid=2247498119&amp;idx=1&amp;sn=86cf85da7f8b899be83f5d84d599cf4c&amp;chksm=9b5a9e0eac2d1718bc9ed6050ed6c3d8075b296865daaaf6fd76e0d8f2a308cce7b9cd860703&amp;scene=27</a></p><p>架构图：<br><a href="https://blog.csdn.net/zwb568/article/details/124653994" target="_blank" rel="noopener">https://blog.csdn.net/zwb568/article/details/124653994</a><br><a href="https://www.doc88.com/p-17161507128547.html" target="_blank" rel="noopener">https://www.doc88.com/p-17161507128547.html</a><br><a href="https://blog.csdn.net/a934079371/article/details/114826692" target="_blank" rel="noopener">https://blog.csdn.net/a934079371/article/details/114826692</a></p><p>PG 和 MySQL 到底哪个更好用？：<br><a href="https://mp.weixin.qq.com/s?__biz=MzI0MTY5ODg3OQ==&amp;mid=2247484369&amp;idx=1&amp;sn=91d816451529fdfc1a99460db889b5a0&amp;chksm=e906d281de715b974cd8e6fcd378dbb10746a71f0130586021209b9e358ba537de43e7a8fc08&amp;scene=27" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzI0MTY5ODg3OQ==&amp;mid=2247484369&amp;idx=1&amp;sn=91d816451529fdfc1a99460db889b5a0&amp;chksm=e906d281de715b974cd8e6fcd378dbb10746a71f0130586021209b9e358ba537de43e7a8fc08&amp;scene=27</a></p><p>mysql双一模式<br><a href="http://xinblog.ltd/?p=1693" target="_blank" rel="noopener">http://xinblog.ltd/?p=1693</a></p><p>金四和数电：<br><a href="https://baijiahao.baidu.com/s?id=1766507585750146082&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1766507585750146082&amp;wfr=spider&amp;for=pc</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;ol&gt;
+&lt;li&gt;楼盘&lt;br&gt;&lt;a href=&quot;https://docs.qq.com/sheet/DTGduU2xBYkNUQXJr?tab=BB08J2&amp;amp;_t=1675
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>技术架构</title>
+    <link href="http://yoursite.com/2023/05/17/depth-architecture-20230517-%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/"/>
+    <id>http://yoursite.com/2023/05/17/depth-architecture-20230517-技术架构/</id>
+    <published>2023-05-16T16:00:00.000Z</published>
+    <updated>2023-05-17T07:11:17.230Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/a934079371/article/details/114826692" target="_blank" rel="noopener">架构图例</a><br><a href="https://www.doc88.com/p-17161507128547.html" target="_blank" rel="noopener">30个企业业务架构图</a><br><a href="https://blog.csdn.net/zwb568/article/details/124653994" target="_blank" rel="noopener">业务架构图</a><br><a href="https://zhuanlan.zhihu.com/p/393065368" target="_blank" rel="noopener">业务架构和应用架构的区别</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/a934079371/article/details/114826692&quot; target=&quot;_blank&quot; re
+      
+    
+    </summary>
+    
+      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
+    
+      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
+    
+    
+      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
+    
+  </entry>
   
   <entry>
     <title>git reset代码回滚</title>
@@ -129,39 +512,6 @@
   </entry>
   
   <entry>
-    <title>MySQL数据库Binlog解析工具--binlog2sql</title>
-    <link href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/"/>
-    <id>http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL数据库Binlog解析工具-binlog2sql/</id>
-    <published>2023-01-03T16:00:00.000Z</published>
-    <updated>2023-01-04T12:04:13.948Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/chinasoft/p/16441022.html" target="_blank" rel="noopener">MySQL数据库Binlog解析工具–binlog2sql</a></p><h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p><a href="https://gitee.com/wwbjqcom/binlogAL" target="_blank" rel="noopener">binlogAL(binlog analysis)</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/chinasoft/p/16441022.html&quot; target=&quot;_blank&quot; rel=&quot;noopen
-      
-    
-    </summary>
-    
-      <category term="database" scheme="http://yoursite.com/categories/database/"/>
-    
-      <category term="mysql" scheme="http://yoursite.com/categories/database/mysql/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/database/mysql/notes/"/>
-    
-    
-      <category term="database" scheme="http://yoursite.com/tags/database/"/>
-    
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
-    
-      <category term="binlog" scheme="http://yoursite.com/tags/binlog/"/>
-    
-  </entry>
-  
-  <entry>
     <title>mysqlbinlog-日志管理工具</title>
     <link href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"/>
     <id>http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-日志管理工具/</id>
@@ -195,378 +545,35 @@
   </entry>
   
   <entry>
-    <title>查找版本及路径</title>
-    <link href="http://yoursite.com/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/"/>
-    <id>http://yoursite.com/2022/11/24/python-notes-20220916-1-查看版本及路径/</id>
-    <published>2022-11-23T16:00:00.000Z</published>
-    <updated>2022-11-24T13:39:59.048Z</updated>
+    <title>MySQL数据库Binlog解析工具--binlog2sql</title>
+    <link href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/"/>
+    <id>http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL数据库Binlog解析工具-binlog2sql/</id>
+    <published>2023-01-03T16:00:00.000Z</published>
+    <updated>2023-01-04T12:04:13.948Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>➜  ~ python3<br>Python 3.8.9 (default, Apr 13 2022, 08:48:06)<br>[Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin<br>Type “help”, “copyright”, “credits” or “license” for more information.</p><blockquote><blockquote><blockquote><p>exit()<br>➜  ~ which python<br>python not found<br>➜  ~ which python3<br>/usr/bin/python3</p></blockquote></blockquote></blockquote><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ which python2</span><br><span class="line">/usr/local/bin/python2</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ which python3</span><br><span class="line">/usr/bin/python3</span><br><span class="line">➜  ~</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;➜  ~ python3&lt;br&gt;Python 3.8.9 (default, Apr 13 2022, 08:48:06)&lt;br&gt;[Clang 13.1.6 (clang-1
-      
-    
-    </summary>
-    
-      <category term="py" scheme="http://yoursite.com/categories/py/"/>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/py/notes/"/>
-    
-    
-      <category term="py" scheme="http://yoursite.com/tags/py/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mac pro14已经安装了python3.9.6再安装2.7.18</title>
-    <link href="http://yoursite.com/2022/11/24/python-notes-mac-pro14%E5%B7%B2%E7%BB%8F%E5%AE%89%E8%A3%85%E4%BA%86python3-9-6%E5%86%8D%E5%AE%89%E8%A3%852-7-18/"/>
-    <id>http://yoursite.com/2022/11/24/python-notes-mac-pro14已经安装了python3-9-6再安装2-7-18/</id>
-    <published>2022-11-23T16:00:00.000Z</published>
-    <updated>2022-11-24T13:27:56.671Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><ul><li><strong>MacBook M2安装python2：<a href="https://www.jianshu.com/p/859fea5437b9" target="_blank" rel="noopener">https://www.jianshu.com/p/859fea5437b9</a></strong></li></ul><hr><h1 id="直接官网下载安装"><a href="#直接官网下载安装" class="headerlink" title="直接官网下载安装"></a>直接官网下载安装</h1><p>直接在官方下载网站（如上下载网址：<a href="https://www.python.org/downloads/release/python-2718/）找到，" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-2718/）找到，</a><br>然后运行安装即可。这个比Homebrew一键安装还要方便快捷。</p><h1 id="安装完成后验证"><a href="#安装完成后验证" class="headerlink" title="安装完成后验证"></a>安装完成后验证</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pip3 --version</span><br><span class="line">pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ pip --version</span><br><span class="line">pip 19.2.3 from /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/pip (python 2.7)</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ python3</span><br><span class="line">Python 3.9.6 (default, Sep 26 2022, 11:37:49)</span><br><span class="line">[Clang 14.0.0 (clang-1400.0.29.202)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ python</span><br><span class="line">Python 2.7.18 (v2.7.18:8d21aa21f2, Apr 19 2020, 20:48:48)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">exit</span>()</span></span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/chinasoft/p/16441022.html" target="_blank" rel="noopener">MySQL数据库Binlog解析工具–binlog2sql</a></p><h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p><a href="https://gitee.com/wwbjqcom/binlogAL" target="_blank" rel="noopener">binlogAL(binlog analysis)</a></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
     
     <summary type="html">
     
       
       
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;MacBook M2安装python2：&lt;a href=&quot;https://www.jianshu.com/p/859fea5437b9&quot;
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/chinasoft/p/16441022.html&quot; target=&quot;_blank&quot; rel=&quot;noopen
       
     
     </summary>
     
-      <category term="py" scheme="http://yoursite.com/categories/py/"/>
+      <category term="database" scheme="http://yoursite.com/categories/database/"/>
     
-      <category term="notes" scheme="http://yoursite.com/categories/py/notes/"/>
+      <category term="mysql" scheme="http://yoursite.com/categories/database/mysql/"/>
     
+      <category term="notes" scheme="http://yoursite.com/categories/database/mysql/notes/"/>
     
-      <category term="py" scheme="http://yoursite.com/tags/py/"/>
     
-  </entry>
-  
-  <entry>
-    <title>业务架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E4%B8%9A%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-业务架构图例/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T09:41:21.573Z</updated>
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="业务架构图-："><a href="#业务架构图-：" class="headerlink" title="业务架构图 ："></a>业务架构图 ：</h1><p>描述系统对用户提供了什么业务功能。用户视角或业务视角</p><h1 id="【画图技巧】"><a href="#【画图技巧】" class="headerlink" title="【画图技巧】"></a>【画图技巧】</h1><ol><li>通过不同颜色来标识业务状态：比如说哪些业务发展状态好，哪些问题比较多，哪些比较稳定，哪些竞争比较激烈等。</li><li>业务分组管理：将类似的业务放在一个分组里面展现，用虚线框或者相同背景将其标识出来。</li><li>区块对齐：为了美观，可以改变不同区块的长短大小进行对齐，让整体看起来更美观。</li></ol><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02-cic"><a href="#02-cic" class="headerlink" title="02 cic"></a>02 cic</h2><p><img src="temp-02.png" alt=""></p><h1 id="业务架构解释2"><a href="#业务架构解释2" class="headerlink" title="业务架构解释2"></a>业务架构解释2</h1><h2 id="业务架构是什么"><a href="#业务架构是什么" class="headerlink" title="业务架构是什么"></a>业务架构是什么</h2><p>描述企业（产品）业务上如何创造价值、传递价值、获取价值</p><h2 id="包括什么"><a href="#包括什么" class="headerlink" title="包括什么"></a>包括什么</h2><p>客户群体、渠道通道、关键业务能力、业务管理模式、所需能力和数据支撑…..</p><h2 id="如何产出"><a href="#如何产出" class="headerlink" title="如何产出"></a>如何产出</h2><p>通过回答5W2H结构化的思考每个业务目标和打法，以便后续把能力拆解到对系统的要求</p><h2 id="设计过程"><a href="#设计过程" class="headerlink" title="设计过程"></a>设计过程</h2><p><img src="temp-03.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;业务架构图-：&quot;&gt;&lt;a href=&quot;#业务架构图-：&quot; class=&quot;headerlink&quot; title=&quot;业务架构图 ：&quot;&gt;&lt;/a&gt;业务架构图 ：&lt;/h1&gt;&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>立项</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E7%AB%8B%E9%A1%B9/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-立项/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T08:18:09.950Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="什么是项目"><a href="#什么是项目" class="headerlink" title="什么是项目"></a>什么是项目</h1><p>为创造独特的产品、服务和成果而进行的临时性工作</p><h1 id="哪些“工作”需要立项"><a href="#哪些“工作”需要立项" class="headerlink" title="哪些“工作”需要立项"></a>哪些“工作”需要立项</h1><p>符合项目定义的一切个人或团体工作，因此除了常见的<br>新建项目、滚动项目，这些工作也需要立项：<br>对系统功能模块较大规模的改造工作，如：对接中台、重构<br>非业务直接相关，为提升管理效能而进行的工作，如：新工单平台、新项目管理工具等</p><h1 id="为什么要立项"><a href="#为什么要立项" class="headerlink" title="为什么要立项"></a>为什么要立项</h1><p>通过立项流程，从公司组织层面确定：<br>➢ 是否做这个项目（业务目标、业务价值、可行性、投<br>入产出比…）<br>➢ 谁来做这个项目（IT负责方、业务参与方、供应商团<br>队&lt;如有&gt;…）<br>➢ 从哪里出多少钱做这个项目（预算/人力资源来源、<br>费用金额…）<br>➢ 怎么做这个项目（自研、采购：单一来源 / 招投标）</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;什么是项目&quot;&gt;&lt;a href=&quot;#什么是项目&quot; class=&quot;headerlink&quot; title=&quot;什么是项目&quot;&gt;&lt;/a&gt;什么是项目&lt;/h1&gt;&lt;p&gt;为创造独特的产品
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>战略屋</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E6%88%98%E7%95%A5%E5%B1%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-战略屋/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T09:34:29.886Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="战略屋"><a href="#战略屋" class="headerlink" title="战略屋"></a>战略屋</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02"><a href="#02" class="headerlink" title="02"></a>02</h2><p><img src="temp-02.png" alt=""></p><h2 id="03-目标评审示例"><a href="#03-目标评审示例" class="headerlink" title="03 目标评审示例"></a>03 目标评审示例</h2><p><img src="temp-03.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;战略屋&quot;&gt;&lt;a href=&quot;#战略屋&quot; class=&quot;headerlink&quot; title=&quot;战略屋&quot;&gt;&lt;/a&gt;战略屋&lt;/h1&gt;&lt;h2 id=&quot;01&quot;&gt;&lt;a href
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>应用架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-应用架构图例/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-02T09:37:51.696Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="应用架构图例"><a href="#应用架构图例" class="headerlink" title="应用架构图例"></a>应用架构图例</h1><p>##【定义】描述后端系统由哪些应用组成，一个应用就是一个可部署发布运行的程序，它是项目开发过程中，开发测试运维团队协作的基础。<br>以应用为基础<br>描述系统的组成和框架，包括前端展示、业务处理逻辑、后台数据的主要模块和功能点</p><h2 id="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"><a href="#【使用场景】项目开发、测试。运维部署发布。子域架构设计。" class="headerlink" title="【使用场景】项目开发、测试。运维部署发布。子域架构设计。"></a>【使用场景】项目开发、测试。运维部署发布。子域架构设计。</h2><p>##【画图技巧】通过不同颜色来标识不同角色。通过连接线来表示关系。复杂系统分域来画。</p><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-如果系统比较简单，那么基本上应用架构和系统架构是等价的"><a href="#01-如果系统比较简单，那么基本上应用架构和系统架构是等价的" class="headerlink" title="01 如果系统比较简单，那么基本上应用架构和系统架构是等价的"></a>01 如果系统比较简单，那么基本上应用架构和系统架构是等价的</h2><p><img src="temp-01.png" alt=""></p><h2 id="02-cic"><a href="#02-cic" class="headerlink" title="02 cic"></a>02 cic</h2><p><img src="temp-02.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;应用架构图例&quot;&gt;&lt;a href=&quot;#应用架构图例&quot; class=&quot;headerlink&quot; title=&quot;应用架构图例&quot;&gt;&lt;/a&gt;应用架构图例&lt;/h1&gt;&lt;p&gt;##【定
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构图例汇总</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E6%9E%B6%E6%9E%84%E6%B1%87%E6%80%BB/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-架构汇总/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T08:06:05.911Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="各个架构图区别"><a href="#各个架构图区别" class="headerlink" title="各个架构图区别"></a>各个架构图区别</h1><p><img src="temp-01.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;各个架构图区别&quot;&gt;&lt;a href=&quot;#各个架构图区别&quot; class=&quot;headerlink&quot; title=&quot;各个架构图区别&quot;&gt;&lt;/a&gt;各个架构图区别&lt;/h1&gt;&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>部署架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-部署架构图例/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T08:02:45.047Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="部署架构图"><a href="#部署架构图" class="headerlink" title="部署架构图"></a>部署架构图</h1><p>##【定义】描述后端系统具体是如何部署的，主要包含机房信息、网络信息和硬件信息等。</p><p>##【使用场景】总体架构设计。运维规划和优化。</p><h2 id="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"><a href="#【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。" class="headerlink" title="【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。"></a>【画图技巧】用图标代替区块，这样看起来更加美观和容易理解。</h2><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01-简单支付系统部署架构图"><a href="#01-简单支付系统部署架构图" class="headerlink" title="01 简单支付系统部署架构图"></a>01 简单支付系统部署架构图</h2><p><img src="temp-01.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;部署架构图&quot;&gt;&lt;a href=&quot;#部署架构图&quot; class=&quot;headerlink&quot; title=&quot;部署架构图&quot;&gt;&lt;/a&gt;部署架构图&lt;/h1&gt;&lt;p&gt;##【定义】描述
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>系统架构图例</title>
-    <link href="http://yoursite.com/2022/11/01/depth-architecture-20221101-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE%E4%BE%8B/"/>
-    <id>http://yoursite.com/2022/11/01/depth-architecture-20221101-系统架构图例/</id>
-    <published>2022-10-31T16:00:00.000Z</published>
-    <updated>2022-11-01T07:59:30.598Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><hr><p>-<strong>程序员画图参考——流程图、时序图、算法原理图和系统架构图:<a href="https://www.jianshu.com/p/9cf73222d9a2" target="_blank" rel="noopener">https://www.jianshu.com/p/9cf73222d9a2</a></strong><br>-<strong>如何画出优秀的软件系统架构图：<a href="https://www.jianshu.com/p/ca0174d9ceb1" target="_blank" rel="noopener">https://www.jianshu.com/p/ca0174d9ceb1</a></strong></p><hr><h1 id="系统架构图"><a href="#系统架构图" class="headerlink" title="系统架构图"></a>系统架构图</h1><p>通过不同颜色来标识不同角色。通过连接线来表示关系。逻辑分组。<br>以角色为基础</p><h1 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h1><h2 id="01"><a href="#01" class="headerlink" title="01"></a>01</h2><p><img src="temp-01.png" alt=""></p><h2 id="02-简单案例：MongoDB-Sharding-的系统架构图"><a href="#02-简单案例：MongoDB-Sharding-的系统架构图" class="headerlink" title="02 简单案例：MongoDB Sharding 的系统架构图"></a>02 简单案例：MongoDB Sharding 的系统架构图</h2><p><img src="temp-02.png" alt=""></p><h2 id="03-复杂案例：系统架构图-Role"><a href="#03-复杂案例：系统架构图-Role" class="headerlink" title="03 复杂案例：系统架构图-Role"></a>03 复杂案例：系统架构图-Role</h2><p><img src="temp-03.png" alt=""></p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;hr&gt;
-&lt;p&gt;-&lt;strong&gt;程序员画图参考——流程图、时序图、算法原理图和系统架构图:&lt;a href=&quot;https://www.jianshu.com/p/9cf73222d
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mac常用应用</title>
-    <link href="http://yoursite.com/2022/10/31/mac-20221031-mac%E5%B8%B8%E7%94%A8%E5%BA%94%E7%94%A8/"/>
-    <id>http://yoursite.com/2022/10/31/mac-20221031-mac常用应用/</id>
-    <published>2022-10-30T16:00:00.000Z</published>
-    <updated>2022-10-31T06:59:23.734Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h1><p>runCat<br>battery buddy<br>腾讯柠檬        类似360，千万不能下载<br>manget<br>keka     解压缩软件<br>downie    在线视频下载工具<br>Fliqlo<br>Parsec    延时摄影视频制作应用<br>LanDrop<br>Parallels Desktop<br>YesPlayMusic<br>落雪音乐<br>AnyGo     在iPhone / iPad上轻松模拟GPS位置<br>AnyDrop  文本文件处理动作集成软件  类似shortCut bar<br>Permute  视频音频转换工具<br>Alfred<br>Backgrouond Music<br>Final Cut Pro        Mac OS视频剪辑软件<br>Speedtest     网络速度测试应用</p><p>fcpx    FcpxFullAccess出品的插件合集，包含大量个文字标题、视频特效、视频转场、3D LUTS调色预设等</p><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;mac&quot;&gt;&lt;a href=&quot;#mac&quot; class=&quot;headerlink&quot; title=&quot;mac&quot;&gt;&lt;/a&gt;mac&lt;/h1&gt;&lt;p&gt;runCat&lt;br&gt;batter
-      
-    
-    </summary>
-    
-      <category term="mac" scheme="http://yoursite.com/categories/mac/"/>
-    
-    
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>软件架构概念</title>
-    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E6%A6%82%E5%BF%B5/"/>
-    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-软件架构概念/</id>
-    <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2022-11-01T06:26:02.650Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>软件架构概念: <a href="https://www.jianshu.com/p/7b82fb03ca34" target="_blank" rel="noopener">https://www.jianshu.com/p/7b82fb03ca34</a></p><h2 id="组成派："><a href="#组成派：" class="headerlink" title="组成派："></a>组成派：</h2><p>架构 = 组件 + 交互。</p><h2 id="决策派"><a href="#决策派" class="headerlink" title="决策派"></a>决策派</h2><p>架构属于设计，但设计不一定属于架构。架构设计的决策，将对整体质量、并行开发、适应变化等方面有着重大影响，例如：</p><ul><li>模块如何划分</li><li>每个模块的职责如何</li><li>每个模块的接口如何定义</li><li>模块间采用何种交互机制</li><li>开发技术如何选型</li><li>如何满足约束和质量属性的需求</li><li>如何适应可能发生的变化</li></ul><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;软件架构概念: &lt;a href=&quot;https://www.jianshu.com/p/7b82fb03ca34&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构基础</title>
-    <link href="http://yoursite.com/2022/10/28/depth-architecture-20221028-%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80/"/>
-    <id>http://yoursite.com/2022/10/28/depth-architecture-20221028-架构基础/</id>
-    <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2022-11-01T08:06:05.921Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="架构高并发和高可用"><a href="#架构高并发和高可用" class="headerlink" title="架构高并发和高可用"></a>架构高并发和高可用</h1><ol><li>高并发实现的三板斧：缓存，限流和降级</li><li>架构之高并发：限流</li><li>架构之高并发：降级和熔断<br> 在高并发环境下，服务之间的依赖关系导致调用失败，解决的方式通常是: 限流-&gt;熔断-&gt;隔离-&gt;降级, 其目的是防止雪崩效应。</li><li>架构之高可用：负载均衡</li><li>架构之高可用：容灾备份,故障转移</li></ol><h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><p>软件架构的核心价值，即是控制系统的复杂性，将核心业务逻辑和技术细节的分离与解耦</p><h2 id="复杂性的来源可能是"><a href="#复杂性的来源可能是" class="headerlink" title="复杂性的来源可能是"></a>复杂性的来源可能是</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;架构高并发和高可用&quot;&gt;&lt;a href=&quot;#架构高并发和高可用&quot; class=&quot;headerlink&quot; title=&quot;架构高并发和高可用&quot;&gt;&lt;/a&gt;架构高并发和高可用
-      
-    
-    </summary>
-    
-      <category term="depth" scheme="http://yoursite.com/categories/depth/"/>
-    
-      <category term="architecture" scheme="http://yoursite.com/categories/depth/architecture/"/>
-    
-    
-      <category term="architecture" scheme="http://yoursite.com/tags/architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mac-20221027-Axure-RP9授权</title>
-    <link href="http://yoursite.com/2022/10/27/mac-20221027-Axure-RP9%E6%8E%88%E6%9D%83/"/>
-    <id>http://yoursite.com/2022/10/27/mac-20221027-Axure-RP9授权/</id>
-    <published>2022-10-27T08:54:15.932Z</published>
-    <updated>2022-10-27T08:55:27.898Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="Axure-RP-9-授权激活"><a href="#Axure-RP-9-授权激活" class="headerlink" title="Axure RP 9 授权激活"></a>Axure RP 9 授权激活</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">注册码：</span><br><span class="line">———— 复制下面的部分 ———</span><br><span class="line">注意！断网下破解注册！！断网！断网！断网！</span><br><span class="line"></span><br><span class="line">专业版被授权人：mac</span><br><span class="line">授权密钥：qYWkTRypXCKiewAx2c49VBnuJnLAGoKMXg8VRHo1g0BwlALMVsZZ8&#x2F;yi&#x2F;7cgau4&#x2F;</span><br><span class="line"></span><br><span class="line">团队版被授权人：mac team</span><br><span class="line">授权密钥：J1usC9kP8aeVW7oulGHnP8INinN2LisMVJXofnJu5G+EEwKa3DiLasZNU&#x2F;3rDSyf</span><br><span class="line"></span><br><span class="line">企业版被授权人：mace</span><br><span class="line">授权密钥：+HKfNew1rRHhqnVf670oDWQxmPX87wSllN2nxMi9NnoGc3qzt4wcxwIS7g7mXB6D</span><br><span class="line"></span><br><span class="line">——— —复制上面的部分 ———</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Licensee:</span><br><span class="line">macwk.com</span><br><span class="line"></span><br><span class="line">Key:</span><br><span class="line">Cpvm3Fe&#x2F;TOnZY2agskB3AxZe8a16QrW+NL2CUY9v9F+jyaOkv2suqshcVC81ZFha</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;Axure-RP-9-授权激活&quot;&gt;&lt;a href=&quot;#Axure-RP-9-授权激活&quot; class=&quot;headerlink&quot; title=&quot;Axure RP 9 授
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>RocketMQ汇总01</title>
-    <link href="http://yoursite.com/2022/10/27/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-Rocket-20221027-RocketMQ%E6%B1%87%E6%80%BB01/"/>
-    <id>http://yoursite.com/2022/10/27/分布式-分布式消息队列-Rocket-20221027-RocketMQ汇总01/</id>
-    <published>2022-10-26T16:00:00.000Z</published>
-    <updated>2022-10-28T03:22:33.724Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote class="pullquote mindmap mindmap-md"><ul><li>知识图谱<ul><li>Scala</li><li>Python</li><li>java<ul><li>jvm</li></ul></li><li>消息队列<ul><li>kafka</li><li>pulsar</li></ul></li></ul></li></ul></blockquote><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;blockquote class=&quot;pullquote mindmap mindmap-md&quot;&gt;&lt;ul&gt;
-&lt;li&gt;知识图谱&lt;ul&gt;
-&lt;li&gt;Scala&lt;/li&gt;
-&lt;li&gt;Pyth
-      
-    
-    </summary>
-    
-      <category term="消息队列" scheme="http://yoursite.com/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
-    
-      <category term="rocket" scheme="http://yoursite.com/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/rocket/"/>
-    
-    
-      <category term="MQ" scheme="http://yoursite.com/tags/MQ/"/>
+      <category term="binlog" scheme="http://yoursite.com/tags/binlog/"/>
     
   </entry>
   

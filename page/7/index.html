@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-copy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/23/depth-docker-config-20220923-docker-copy/" itemprop="url">docker copy</a></h1>
+                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/" itemprop="url">使用docker启动redis容器失败的原因</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-23T00:00:00+08:00">2022-09-23</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
             
 
             
@@ -443,7 +443,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
 
                 
                 
@@ -471,7 +471,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">4k</span>
+                <span title="字数统计">1.6k</span>
               
 
               
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 mins.</span>
+                <span title="阅读时长">2 mins.</span>
               
             </div>
           
@@ -508,36 +508,12 @@
         
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
-<pre><code>COPY 指令详解: https://blog.csdn.net/qq_33801641/article/details/121122340
-</code></pre><hr>
-<h1 id="docker-copy"><a href="#docker-copy" class="headerlink" title="docker copy"></a>docker copy</h1><ul>
-<li>作用：复制内容到镜像</li>
-<li>格式： COPY <src> <dest></li>
-<li>详解：复制本地主机的 <src>下内容到镜像中的 <dest>，目标路径不存在时，会自动创建。</li>
-<li><src>：可以是 Dockerfile 所在目录的一个相对路径(文件或目录)</li>
-<li><dest>：可以是镜像内绝对路径，或者相对于工作目录(WORKDIR)的相对路径</li>
-<li>路径：支持正则表达式， COPY test* /tmp</li>
+<ul>
+<li><strong>使用docker启动redis容器失败的原因：<a href="https://blog.csdn.net/m0_67402774/article/details/126553643" target="_blank" rel="noopener">https://blog.csdn.net/m0_67402774/article/details/126553643</a></strong></li>
 </ul>
-<h1 id="两种格式"><a href="#两种格式" class="headerlink" title="两种格式"></a>两种格式</h1><p>COPY [–chown=<user>:<group>] <src>… <dest><br>COPY [–chown=<user>:<group>] [“<src>“,… “<dest>“]<br>–chown<br>仅适用于 linux 上的 dockerfile，在 window 上没有用户、组的概念</p>
-<h1 id="COPY-作用"><a href="#COPY-作用" class="headerlink" title="COPY 作用"></a>COPY 作用</h1><p>COPY 指令从 <src> 复制新文件、目录或远程文件 URL，并将它们添加到路径 <dest><br>可以指定多个 <src> 资源，但如果它们是文件或目录，则它们的路径被解析为相对于构建上下文的源<br>每个 <src> 可能包含通配符，匹配将使用 Go 的 filepath.Match 规则完成</p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol>
-<li><ul>
-<li>通配符<br>把所有 hom 开头的文件复制到镜像文件系统的 /mydir/ 目录下</li>
-</ul>
-</li>
-</ol>
-<p>COPY hom* /mydir/</p>
-<ol>
-<li>? 通配符<br>? 匹配 0 或 1 个字符，比如会把 home.txt 文件复制到 /mydir/ 目录下</li>
-</ol>
-<p>COPY hom?.txt /mydir/</p>
-<ol>
-<li>工作目录<br><dest> 是绝对路径，或相对于 WORKDIR 的路径，源将在目标容器内复制到该路径中</li>
-</ol>
-<p>使用相对路径的栗子<br>COPY test.txt relativeDir/</p>
-<p>等价于</p>
-<p>COPY test.txt <WORKDIR>/relativeDir/</p>
-<h1 id="标志-–from"><a href="#标志-–from" class="headerlink" title="标志 –from="></a>标志 –from=<name></h1><p>将从 from 指定的构建阶段中寻找源文件 <src><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 第一构建阶段:将仅用于生成 requirements.txt 文件</span><br><span class="line">FROM tiangolo&#x2F;uvicorn-gunicorn:python3.9 as requirements-stage</span><br><span class="line"></span><br><span class="line"># 将当前工作目录设置为 &#x2F;tmp</span><br><span class="line">WORKDIR &#x2F;tmp</span><br><span class="line"></span><br><span class="line"># 生成 requirements.txt</span><br><span class="line">RUN touch requirements.txt</span><br><span class="line"></span><br><span class="line"># 第二构建阶段，在这往后的任何内容都将保留在最终容器映像中</span><br><span class="line">FROM python:3.9</span><br><span class="line"></span><br><span class="line"># 将当前工作目录设置为 &#x2F;code</span><br><span class="line">WORKDIR &#x2F;code</span><br><span class="line"></span><br><span class="line"># 从第一个阶段复制 requirements.txt;这个文件只存在于前一个 Docker 阶段，这就是使用 --from-requirements-stage 复制它的原因</span><br><span class="line">COPY --from&#x3D;requirements-stage &#x2F;tmp&#x2F;requirements.txt &#x2F;code&#x2F;requirements.txt</span><br><span class="line"></span><br><span class="line"># 运行命令</span><br><span class="line">RUN pip install --no-cache-dir --upgrade -r &#x2F;code&#x2F;requirements.txt</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="使用docker启动redis容器失败的原因"><a href="#使用docker启动redis容器失败的原因" class="headerlink" title="使用docker启动redis容器失败的原因"></a>使用docker启动redis容器失败的原因</h1><h2 id="启动执行命令"><a href="#启动执行命令" class="headerlink" title="启动执行命令"></a>启动执行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v &#x2F;root&#x2F;guli&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf -d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>发现一启动，就停止。<br>后来，去网上查了以后发现，是因为redis.conf文件中的daemonize为yes，意思是redis服务在后台运行，与docker中的-d参数冲突了。<br>只要把daemonize的参数值改为no就可以了，再次执行以上命令，容器启动成功。</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -594,7 +570,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/23/depth-docker-config-20220923-docker-volume/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -613,7 +589,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/23/depth-docker-config-20220923-docker-volume/" itemprop="url">docker volume</a></h1>
+                <a class="post-title-link" href="/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/" itemprop="url">docker run其他参数</a></h1>
         
 
         <div class="post-meta">
@@ -629,7 +605,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-23T00:00:00+08:00">2022-09-23</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
             
 
             
@@ -692,7 +668,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.6k</span>
+                <span title="字数统计">2.8k</span>
               
 
               
@@ -728,20 +704,19 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h1><ol>
-<li><p>创建数据卷<br>docker volume create [OPTIONS] [VOLUME]<br>例: docker volume create hello</p>
-<blockquote>
-<p>mac电脑默认挂在路径： /var/lib/docker/volumes</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-run其他参数"><a href="#docker-run其他参数" class="headerlink" title="docker run其他参数"></a>docker run其他参数</h1><h2 id="–privileged-true"><a href="#–privileged-true" class="headerlink" title="–privileged=true"></a>–privileged=true</h2><p>–privileged=true表示让启动的容器用户具备真正root权限</p>
+<h2 id="–restart-always参数能够使我们在重启docker时，自动启动相关容器。"><a href="#–restart-always参数能够使我们在重启docker时，自动启动相关容器。" class="headerlink" title="–restart=always参数能够使我们在重启docker时，自动启动相关容器。"></a>–restart=always参数能够使我们在重启docker时，自动启动相关容器。</h2><p>Docker容器的重启策略如下：</p>
+<ul>
+<li>no，默认策略，在容器退出时不重启容器</li>
+<li>on-failure，在容器非正常退出时（退出状态非0），才会重启容器</li>
+<li>on-failure:3，在容器非正常退出时重启容器，最多重启3次</li>
+<li>always，在容器退出时总是重启容器</li>
+<li>unless-stopped，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器<blockquote>
+<p>如果创建的时候没有创建这个参数，则可以通过此命令添加： docker container update –restart=always 容器名字<br>还可以通过修改容器的配置文件来修尽管这个参数，首先停止容器，不然无法修改配置文件<br>配置默认文件路径为：/var/lib/docker/containers/容器ID<br>在该目录下找到一个文件 hostconfig.json ，找到该文件中关键字 RestartPolicy<br>修改前配置：“RestartPolicy”:{“Name”:“no”,“MaximumRetryCount”:0}<br>修改后配置：“RestartPolicy”:{“Name”:“always”,“MaximumRetryCount”:0}<br>最后启动容器。</p>
 </blockquote>
 </li>
-<li><p>查看数据卷的挂载信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2# docker volume inspect myhexo-vol</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;CreatedAt&quot;: &quot;2022-09-23T03:00:47Z&quot;,</span><br><span class="line">        &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">        &quot;Labels&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Mountpoint&quot;: &quot;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes&#x2F;myhexo-vol&#x2F;_data&quot;,</span><br><span class="line">        &quot;Name&quot;: &quot;myhexo-vol&quot;,</span><br><span class="line">        &quot;Options&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Scope&quot;: &quot;local&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h1 id="查看全部数据卷"><a href="#查看全部数据卷" class="headerlink" title="查看全部数据卷"></a>查看全部数据卷</h1><p>docker volume ls</p>
-</li>
-</ol>
-<h1 id="删除数据卷"><a href="#删除数据卷" class="headerlink" title="删除数据卷"></a>删除数据卷</h1><p>docker volume rm 数据卷名称/id</p>
-<h1 id="删除所有无用数据卷"><a href="#删除所有无用数据卷" class="headerlink" title="删除所有无用数据卷"></a>删除所有无用数据卷</h1><p>docker volume prune</p>
-<h1 id="设置容器数据路径只读"><a href="#设置容器数据路径只读" class="headerlink" title="设置容器数据路径只读"></a>设置容器数据路径只读</h1><p>在容器路径后面追加 :ro<br>docker run -v 宿主路径:容器路径:ro</p>
+</ul>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker run -p 6001:6001 -d -it --name myhexo1 -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;:&#x2F;usr&#x2F;blog&#x2F;diabolo-hub&#x2F; myhexo:1.0</span><br><span class="line"></span><br><span class="line">docker run -d --name redis -p 6379:6379 redis:latest redis-server --appendonly yes --requirepass &quot;你的密码&quot;</span><br><span class="line"></span><br><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always --privileged&#x3D;true  -v  &#x2F;var&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;var&#x2F;redis&#x2F;data:&#x2F;data   --name myredis redis:6.0.8 redis-server  &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -798,7 +773,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/23/depth-docker-notes-20220923-CMD%E4%B8%8EENTRYPOINT%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E7%96%91%E9%97%AE-20220927-%E7%96%91%E9%97%AE%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -817,7 +792,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/23/depth-docker-notes-20220923-CMD%E4%B8%8EENTRYPOINT%E5%8C%BA%E5%88%AB/" itemprop="url">CMD与ENTRYPOINT区别</a></h1>
+                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E7%96%91%E9%97%AE-20220927-%E7%96%91%E9%97%AE%E7%82%B9/" itemprop="url">depth-docker-compose-疑问-20220927-疑问点</a></h1>
         
 
         <div class="post-meta">
@@ -833,7 +808,167 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-23T00:00:00+08:00">2022-09-23</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T14:52:11+08:00">2022-09-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">687</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p>一是，docker-compose和docker-engine可以分开装在不同的节点上么，就像docker-cli和docker-engine，若可以是不是需要一些配置；</p>
+<p>二是，docker-compose.yml里面的service可不可以按照先后顺序启动，不如第一个service启动完成后，第二个service才启动</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/" itemprop="url">docker-compose命令</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
             
 
             
@@ -861,14 +996,14 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
 
                 
                 
@@ -896,7 +1031,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.5k</span>
+                <span title="字数统计">2k</span>
               
 
               
@@ -934,34 +1069,21 @@
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
 <ul>
-<li><strong>entrypoint和cmd的区别是:  <a href="https://www.php.cn/docker/456654.html" target="_blank" rel="noopener">https://www.php.cn/docker/456654.html</a></strong></li>
-<li><strong>Dockerfile 里指定执行命令用RUN 、ENTRYPOING和用CMD有何不同？: <a href="https://blog.csdn.net/agonie201218/article/details/121976911" target="_blank" rel="noopener">https://blog.csdn.net/agonie201218/article/details/121976911</a></strong></li>
+<li><strong>Docker Compose介绍及使用入门: <a href="https://www.jianshu.com/p/ee2fea4136f0" target="_blank" rel="noopener">https://www.jianshu.com/p/ee2fea4136f0</a></strong></li>
+<li><strong>docker-compose简介及使用: <a href="https://www.cnblogs.com/xiaoyuxixi/p/12738325.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoyuxixi/p/12738325.html</a></strong></li>
 </ul>
 <hr>
-<h1 id="CMD与ENTRYPOINT区别"><a href="#CMD与ENTRYPOINT区别" class="headerlink" title="CMD与ENTRYPOINT区别"></a>CMD与ENTRYPOINT区别</h1><ol>
-<li>CMD用法：</li>
-</ol>
-<ul>
-<li>CMD [“executable”,“param1”,“param2”] ：exec形式（首选）</li>
-<li>CMD [“param1”,“param2”] ：作为ENTRYPOINT的默认参数</li>
-<li>CMD command param1 param2 ：Shell形式</li>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li>docker-compose up，构建镜像并启动容器；</li>
+<li>docker-compose down，停止容器，删除容器，移除自定义网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose down</span><br><span class="line">Stopping myapp ... done</span><br><span class="line">Removing myapp ... done</span><br><span class="line">Removing network myapp_default</span><br></pre></td></tr></table></figure></li>
+<li>docker-compose ls，查看所有运行的容器</li>
+<li>docker-compose logs -f container_name，查看具体容器的日志，-f参数表示实时日志输出；</li>
+<li>docker-compose port container_name container_port，查看和容器端口绑定的主机端口；</li>
+<li>docker-compose stop container_name，停止指定的容器，如果不指定则停止所有的容器；</li>
+<li>docker-compose start container_name，启动指定的容器，如果不指定则停止所有的容器；</li>
+<li>docker-compose rm container_name，删除指定的已停止容器，如果不指定则删除所有已停止容器；</li>
+<li>docker-compose build，构建或者重新构建服务的镜像，但不会创建和启动容器</li>
 </ul>
-<ol>
-<li>ENTRYPOINT用法：</li>
-</ol>
-<ul>
-<li>ENTRYPOINT [“executable”, “param1”, “param2”]</li>
-<li>ENTRYPOINT command param1 param2</li>
-<li>多个CMD命令只有最后一个生效，前面的会被覆盖</li>
-</ul>
-<ol>
-<li>小结<br>CMD和ENTRYPOINT指令都可以用来定义运行容器时所使用的默认命令<br>Dockerfile至少指定一个CMD或ENTRYPOINT<br>CMD可以用作ENTRYPOINT默认参数，或者用作容器的默认命令<br>docker run指定时，将会覆盖CMD<br>如果是可执行文件，希望运行时传参，应该使用ENTRYPOINT</li>
-</ol>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
-<li>Dockerfile中只能指定一个ENTRYPOINT，如果指定了很多，只有最后一个有效。</li>
-<li>执行docker run命令时，也可以添加–entrypoint参数，会把指定的参数继续传递给ENTRYPOINT<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;echo&quot;,&quot;foo&quot;]</span><br><span class="line">然后执行：</span><br><span class="line">docker run --entrypoint&#x3D;echo CONTAINER_NAME bar #注意没有echo</span><br><span class="line">那么，就相当于执行了echo bar，最终结果就是</span><br></pre></td></tr></table></figure></li>
-<li>docker run命令如果指定了参数会把CMD里的参数覆盖：<br>（这里说明一下，如：docker run -it ubuntu /bin/bash 命令的参数是指/bin/bash 而非 -it ,-it只是docker 的参数，而不是容器的参数，以下所说参数均如此。）</li>
-</ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1018,7 +1140,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/23/depth-docker-notes-20220923-docker%E4%BF%A1%E6%81%AF%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1037,7 +1159,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/23/depth-docker-notes-20220923-docker%E4%BF%A1%E6%81%AF%E5%91%BD%E4%BB%A4/" itemprop="url">docker信息命令</a></h1>
+                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/" itemprop="url">compose.yml案例2</a></h1>
         
 
         <div class="post-meta">
@@ -1053,7 +1175,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-23T00:00:00+08:00">2022-09-23</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
             
 
             
@@ -1081,14 +1203,14 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">yml案例</span></a></span>
 
                 
                 
@@ -1116,7 +1238,381 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">760</span>
+                <span title="字数统计">7.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用的yml版本</span><br><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  # 服务名称，可以自定义</span><br><span class="line">  myapp:</span><br><span class="line">    # 容器名称，可以自定义</span><br><span class="line">    container_name: myapp</span><br><span class="line">    # 指定Dockerfile所在的目录</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p>然后执行docker-compose up即可，主要完成以下的两步操作：</p>
+<ul>
+<li>镜像构建docker build；</li>
+<li>启动yml中的所有容器docker run；<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose up</span><br><span class="line"># 创建了默认类型的自定义网络，即bridge类型网络，而非使用默认的docker0桥接网络，拥有自己的独立网段，可以通过docker network ls及docker network inspect查看具体的网络信息</span><br><span class="line">Creating network &quot;myapp_default&quot; with the default driver</span><br><span class="line">Building myapp</span><br><span class="line">[+] Building 0.5s (7&#x2F;7) FINISHED</span><br><span class="line"> &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 153B                                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load .dockerignore                                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                      0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;openjdk:8                                                                         0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load build context                                                                                                    0.2s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 17.62MB                                                                                                 0.1s</span><br><span class="line"> &#x3D;&gt; CACHED [1&#x2F;2] FROM docker.io&#x2F;library&#x2F;openjdk:8                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; [2&#x2F;2] ADD  target&#x2F;myapp-0.0.1-SNAPSHOT.jar &#x2F;demo.jar                                                                             0.1s</span><br><span class="line"> &#x3D;&gt; exporting to image                                                                                                               0.1s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                              0.1s</span><br><span class="line"> # 将镜像写入本地的镜像仓库，并以项目名称_服务名称命名镜像</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; writing image sha256:c387978706931f09fa16a737704f2c1047e8f632de192a25b0dc42dc151ac4c7                                         0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;myapp_myapp                                                                                       0.0s</span><br><span class="line"></span><br><span class="line">Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them</span><br><span class="line">WARNING: Image for service myapp was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.</span><br><span class="line">Creating myapp ... done</span><br><span class="line">Attaching to myapp</span><br><span class="line">myapp    |</span><br><span class="line">myapp    |   .   ____          _            __ _ _</span><br><span class="line">myapp    |  &#x2F;\\ &#x2F; ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">myapp    | ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \&#x2F; _&#96; | \ \ \ \</span><br><span class="line">myapp    |  \\&#x2F;  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">myapp    |   &#39;  |____| .__|_| |_|_| |_\__, | &#x2F; &#x2F; &#x2F; &#x2F;</span><br><span class="line">myapp    |  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|_|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|___&#x2F;&#x3D;&#x2F;_&#x2F;_&#x2F;_&#x2F;</span><br><span class="line">myapp    |  :: Spring Boot ::                (v2.6.0)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-docker-compose%E6%A1%88%E4%BE%8B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-docker-compose%E6%A1%88%E4%BE%8B1/" itemprop="url">docker-compose.yml案例</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">yml案例</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-compose-源码实例"><a href="#docker-compose-源码实例" class="headerlink" title="docker-compose 源码实例"></a>docker-compose 源码实例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#docker-Compse的版本</span><br><span class="line">version: &#39;3&#39;</span><br><span class="line"></span><br><span class="line">#建立2个service 一个wordpress 一个 mysql</span><br><span class="line">services:</span><br><span class="line">  wordpress:</span><br><span class="line">    image: wordpress</span><br><span class="line">    #端口映射80 映射到8080端口</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:80</span><br><span class="line">    #环境变量2个</span><br><span class="line">    environment:</span><br><span class="line">      WORDPRESS_DB_HOST: mysql</span><br><span class="line">      WORDPRESS_DB_PASSWORD: root</span><br><span class="line">    networks:</span><br><span class="line">      - my-bridge</span><br><span class="line"></span><br><span class="line">  mysql:</span><br><span class="line">    image: mysql</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: root</span><br><span class="line">      MYSQL_DATABASE: wordpress</span><br><span class="line">    volumes:</span><br><span class="line">      - mysql-data:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">    networks:</span><br><span class="line">      - my-bridge</span><br><span class="line">#建立一个volumes</span><br><span class="line">volumes:</span><br><span class="line">  mysql-data:</span><br><span class="line">#建立一个networks</span><br><span class="line">networks:</span><br><span class="line">  my-bridge:</span><br><span class="line">    driver: bridge</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/mac-20220926-mac%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/26/mac-20220926-mac%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B/" itemprop="url">mac用户查看</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">1.2k</span>
               
 
               
@@ -1152,8 +1648,10 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="查看docker系统信息"><a href="#查看docker系统信息" class="headerlink" title="查看docker系统信息"></a>查看docker系统信息</h1><p>docker system df</p>
-<h1 id="查看docker信息"><a href="#查看docker信息" class="headerlink" title="查看docker信息"></a>查看docker信息</h1><p>docker info</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="当前用户的用户名"><a href="#当前用户的用户名" class="headerlink" title="当前用户的用户名"></a>当前用户的用户名</h1><p>whoami</p>
+<h1 id="切换到root超级用户-—-需要输入密码"><a href="#切换到root超级用户-—-需要输入密码" class="headerlink" title="切换到root超级用户 —- 需要输入密码"></a>切换到root超级用户 —- 需要输入密码</h1><p>sudo -i</p>
+<h1 id="su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格"><a href="#su-要切换到的用户名-切换到某一个普通用户-注意-横杠两边都有一个空格" class="headerlink" title="su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格"></a>su - 要切换到的用户名 // 切换到某一个普通用户 注意:横杠两边都有一个空格</h1><p>su - diabolo，切换到 diabolo</p>
+<h1 id="查看当前目录下所有文件的读写属性"><a href="#查看当前目录下所有文件的读写属性" class="headerlink" title="查看当前目录下所有文件的读写属性"></a>查看当前目录下所有文件的读写属性</h1><p>ls -l</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1210,7 +1708,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/20/depth-docker-excp-20220920-docker%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%90%8E%E7%AB%8B%E5%8D%B3%E9%80%80%E5%87%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/mac-20220926-su%E3%80%81sudo%E3%80%81sudo-su%E3%80%81sudo-i%E4%BD%BF%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1229,7 +1727,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/20/depth-docker-excp-20220920-docker%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E5%90%8E%E7%AB%8B%E5%8D%B3%E9%80%80%E5%87%BA/" itemprop="url">depth-docker-excp-20220920-docker容器启动后立即退出</a></h1>
+                <a class="post-title-link" href="/2022/09/26/mac-20220926-su%E3%80%81sudo%E3%80%81sudo-su%E3%80%81sudo-i%E4%BD%BF%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB/" itemprop="url">su、sudo、sudo su、sudo -i使用和区别</a></h1>
         
 
         <div class="post-meta">
@@ -1245,7 +1743,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-20T10:04:37+08:00">2022-09-20</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
             
 
             
@@ -1254,6 +1752,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1276,7 +1792,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">2.1k</span>
+                <span title="字数统计">1.6k</span>
               
 
               
@@ -1312,18 +1828,24 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://blog.csdn.net/m0_67393342/article/details/124171304" target="_blank" rel="noopener">docker启动容器之后马上又自动关闭解决办法</a></p>
-<h1 id="docker容器启动后立即退出"><a href="#docker容器启动后立即退出" class="headerlink" title="docker容器启动后立即退出"></a>docker容器启动后立即退出</h1><h2 id="退出原因"><a href="#退出原因" class="headerlink" title="退出原因"></a>退出原因</h2><ol>
-<li>docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出</li>
-<li>容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出</li>
-<li>这个是 docker 的机制问题</li>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<ul>
+<li>**su、sudo、sudo su、sudo -i使用和区别: <a href="https://zhuanlan.zhihu.com/p/250665300" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/250665300</a></li>
+</ul>
+<hr>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h2><ol>
+<li>sudo 需要输入当前用户的密码</li>
+<li>su 需要输入 root 用户的密码<h2 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h2></li>
+<li>sudo 只允许使用提升的权限运行单个命令</li>
+<li>su 启动一个新的shell，同时允许使用 root 权限运行尽可能多的命令，直到明确退出</li>
 </ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>网上有很多介绍，就是起一个死循环进程，让他不停的循环下去，前台永远有进程执行，那么容器就不会退出了,以centos为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d centos &#x2F;bin&#x2F;sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>缺点： 命令太冗长了，还占用一个终端</p>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit centos &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
-<p>添加-it 参数交互运行<br>添加-d 参数后台运行<br>这样就能启动一个一直停留在后台运行的Centos了。<br>docker ps 容器运行起来了<br>进入容器的方法：<br>使用exec，不要使用attach命令<br>attach命令就是使用现有终端，如果你要退出容器操作，那么bash结束，容器也就退出了<br>shell&gt;docker exec -it /bin/bash //新建一个bash</p>
-</blockquote>
+<h2 id="su-介绍"><a href="#su-介绍" class="headerlink" title="su 介绍"></a>su 介绍</h2><p>su 用以切换不同的用户的身份</p>
+<ol>
+<li>su - diabolo, su - root<br>默认只是切换身份，并没有切换环境变量，环境变量依然是普通用户的。<br>切换用户身份时，用户的环境变量也切换成新用户的环境变量,所以”-“不能省略,不然有些操作无法执行。<br>su root 输入root密码后切换之root用户但是pwd目录不变<br>su - root 输入root密码后切换之root用户但是pwd目录/root</li>
+</ol>
+<h2 id="sudo-介绍"><a href="#sudo-介绍" class="headerlink" title="sudo 介绍"></a>sudo 介绍</h2><p>sudo 一般加的是命令sudo -i root与sudo - root、sudo -i ,sudo - ，sudo root效果相同</p>
+<p>sudo -i 直接运行sudo命令加-i参数 要求执行该命令的用户必须在sudoers中才可以</p>
+<p>sudo su 运行sudo命令给su命令提权，运行su命令。要求执行该命令的用户必须在sudoers中才可以</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1380,7 +1902,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/20/hexo-%E6%8F%92%E4%BB%B6-20220920-hexo%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/mac-20220926-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1399,7 +1921,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/20/hexo-%E6%8F%92%E4%BB%B6-20220920-hexo%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/" itemprop="url">hexo后台运行</a></h1>
+                <a class="post-title-link" href="/2022/09/26/mac-20220926-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E5%B1%9E%E7%94%A8%E6%88%B7/" itemprop="url">修改文件所属用户</a></h1>
         
 
         <div class="post-meta">
@@ -1415,7 +1937,185 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-20T00:00:00+08:00">2022-09-20</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="由于-db-json-属于-root，一直执行失败，提示没权限"><a href="#由于-db-json-属于-root，一直执行失败，提示没权限" class="headerlink" title="由于 db.json 属于 root，一直执行失败，提示没权限"></a>由于 db.json 属于 root，一直执行失败，提示没权限</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">zhangdaiyindeMacBook-Pro:diabolo-hub-source-code root# ls -l</span><br><span class="line">total 10632</span><br><span class="line">drwxr-xr-x   16 diabolo  staff      512 Sep 26 14:24 .git</span><br><span class="line">-rw-r--r--    1 diabolo  staff       66 Jul 10 22:48 .gitattributes</span><br><span class="line">-rw-r--r--    1 diabolo  staff       74 Jul 10 22:48 .gitignore</span><br><span class="line">drwxr-xr-x   10 diabolo  staff      320 Sep 26 14:20 .idea</span><br><span class="line">-rw-r--r--    1 diabolo  staff      934 Sep 23 17:29 Dockerfile-bak</span><br><span class="line">-rw-r--r--    1 diabolo  staff     1628 Sep 26 14:09 Dockerfile-hexo</span><br><span class="line">-rw-r--r--    1 diabolo  staff     2145 Sep 26 11:41 Dockerfile-pm2</span><br><span class="line">-rw-r--r--    1 diabolo  staff      640 Jul 10 22:48 README.md</span><br><span class="line">-rw-r--r--    1 diabolo  staff     3288 Aug  3 14:13 _config.yml</span><br><span class="line">-rw-r--r--    1 root     staff  4013230 Sep 26 11:38 db.json</span><br><span class="line">-rw-r--r--    1 diabolo  staff      184 Sep 26 10:42 entrypoint.sh</span><br><span class="line">-rw-r--r--    1 diabolo  staff      262 Sep 20 15:24 hexo_run.js</span><br><span class="line">drwxr-xr-x  374 diabolo  staff    11968 Sep 16 14:29 node_modules</span><br><span class="line">-rw-r--r--    1 diabolo  staff   458034 Sep 16 14:29 package-lock.json</span><br><span class="line">-rw-r--r--    1 diabolo  staff      969 Sep 16 14:29 package.json</span><br><span class="line">drwxr-xr-x   28 root     staff      896 Sep 26 11:21 public</span><br><span class="line">drwxr-xr-x    5 diabolo  staff      160 Jul 10 22:48 scaffolds</span><br><span class="line">drwxr-xr-x   10 diabolo  staff      320 Aug  3 14:13 source</span><br><span class="line">drwxr-xr-x    5 diabolo  staff      160 Jul 10 22:48 themes</span><br><span class="line">drwxr-xr-x    4 diabolo  staff      128 Aug  3 14:13 uploadPhotos</span><br><span class="line">-rw-r--r--    1 diabolo  staff     1430 Sep  5 14:47 ????????????????????????docker-hexo.md</span><br></pre></td></tr></table></figure>
+<h1 id="将-db-json-文件和-public-文件夹修改为-diabolo-用户所有"><a href="#将-db-json-文件和-public-文件夹修改为-diabolo-用户所有" class="headerlink" title="将 db.json 文件和 public 文件夹修改为 diabolo 用户所有"></a>将 db.json 文件和 public 文件夹修改为 diabolo 用户所有</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown diabolo:staff db.json</span><br><span class="line">sudo chown diabolo:staff public</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/26/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%83%A8%E7%BD%B2%E5%88%B0github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/09/26/hexo-%E7%AC%94%E8%AE%B0-hexo%E7%AC%94%E8%AE%B0-%E9%83%A8%E7%BD%B2%E5%88%B0github/" itemprop="url">部署到github</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T00:00:00+08:00">2022-09-26</time>
             
 
             
@@ -1443,7 +2143,7 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/plugin/" itemprop="url" rel="index"><span itemprop="name">plugin</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hexo/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
 
                 
                 
@@ -1471,7 +2171,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.5k</span>
+                <span title="字数统计">4.2k</span>
               
 
               
@@ -1507,727 +2207,16 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>hexo 长期后台运行：<a href="http://t.zoukankan.com/young233-p-14628456.html" target="_blank" rel="noopener">http://t.zoukankan.com/young233-p-14628456.html</a></strong></li>
-<li><strong>pm2官网文档：<a href="https://pm2.keymetrics.io/" target="_blank" rel="noopener">https://pm2.keymetrics.io/</a></strong></li>
-</ul>
-<hr>
-<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><ol>
-<li>首先，我们需要安装它。<br>npm install -g pm2</li>
-<li>进到博客的根目录，新建一个文件：hexo_run.js<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//run</span></span><br><span class="line"><span class="keyword">const</span> &#123; exec &#125; = <span class="built_in">require</span>(<span class="string">'child_process'</span>)</span><br><span class="line"><span class="comment">/* 其实就是等于执行hexo server -p 6001，如果不指定端口，则默认端口: 4000 */</span></span><br><span class="line">exec(<span class="string">'hexo server -p 6001'</span>,(error, stdout, stderr) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(error)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'exec error: $&#123;error&#125;'</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'stdout: $&#123;stdout&#125;'</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'stderr: $&#123;stderr&#125;'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-<li>在博客根目录启动这个进程<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start hexo_run.js</span><br></pre></td></tr></table></figure>
-</li>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="deploy配置"><a href="#deploy配置" class="headerlink" title="deploy配置"></a>deploy配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:diabolo-hub&#x2F;xxx.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  token: &#39;ghp_b...&#39;</span><br><span class="line">  message:</span><br><span class="line">  name: diabolo-hub</span><br><span class="line">  email: zhangdaiyin.cool@163.com</span><br></pre></td></tr></table></figure>
+<h1 id="token配置"><a href="#token配置" class="headerlink" title="token配置"></a>token配置</h1><p><a href="https://blog.csdn.net/qq_43659183/article/details/126041835" target="_blank" rel="noopener">使用personal token将hexo本地文件推到GitHub</a></p>
+<ol>
+<li>个人设置中心</li>
+<li>左侧底部的开发者中心</li>
+<li>创建一个 personal token，权限勾选第一个 repo 即可，点击底部创建token</li>
 </ol>
-<h1 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 启动js</span><br><span class="line">pm2 start hexo_run.js</span><br><span class="line"># 停止js</span><br><span class="line">pm2 stop hexo_run.js</span><br><span class="line"># 运行起来后可以使用pm2 show + 进程pid查看后台hexo进行</span><br><span class="line">pm2 show pid</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/20/depth-docker-notes-20220920-docker-run/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/20/depth-docker-notes-20220920-docker-run/" itemprop="url">docker run</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-20T00:00:00+08:00">2022-09-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><p>docker exec -it myhexo2 /bin/sh</p>
-<h1 id="单纯启动应用"><a href="#单纯启动应用" class="headerlink" title="单纯启动应用"></a>单纯启动应用</h1><p>docker run -p 6001:6001 -d -it –name myhexo myhexo:1.0</p>
-<h1 id="保持镜像永不退出运行"><a href="#保持镜像永不退出运行" class="headerlink" title="保持镜像永不退出运行"></a>保持镜像永不退出运行</h1><p>docker run -p 6001:6001 -d –name myhexo myhexo:1.0 /bin/sh -c “while true; do echo hello world; sleep 1; done”</p>
-<h1 id="启动并进入容器"><a href="#启动并进入容器" class="headerlink" title="启动并进入容器"></a>启动并进入容器</h1><p>docker run -p 6001:6001 -d -it –name myhexo myhexo:1.0 /bin/bash</p>
-<h1 id="docker-run-的时候执行-其他命令"><a href="#docker-run-的时候执行-其他命令" class="headerlink" title="docker run 的时候执行 其他命令"></a>docker run 的时候执行 其他命令</h1><p>docker run CONTAINER_NAME echo foo<br>等于运行的时候执行 echo foo</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/19/depth-docker-notes-20220919-docker-scan%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/19/depth-docker-notes-20220919-docker-scan%E9%95%9C%E5%83%8F%E6%89%AB%E6%8F%8F/" itemprop="url">depth-docker-notes-20220919-docker-scan镜像扫描</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-19T14:14:00+08:00">2022-09-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-scan"><a href="#docker-scan" class="headerlink" title="docker scan"></a>docker scan</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh-3.2# docker scan --json myhexo</span><br><span class="line">failed to read docker scan configuration file. Please restart Docker Desktop: open &#x2F;var&#x2F;root&#x2F;.docker&#x2F;scan&#x2F;config.json: no such file or directory</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/19/depth-docker-notes-dockerfile-20220919-%E6%9E%84%E5%BB%BAcentos%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/19/depth-docker-notes-dockerfile-20220919-%E6%9E%84%E5%BB%BAcentos%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8/" itemprop="url">depth-docker-notes-dockerfile-20220919-构建centos镜像使用</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-19T10:22:10+08:00">2022-09-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="构建centos镜像使用"><a href="#构建centos镜像使用" class="headerlink" title="构建centos镜像使用"></a>构建centos镜像使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">#指定作者</span><br><span class="line">MAINTAINER  zhangbao&lt;zhangbaohpu@163.com&gt;</span><br><span class="line"></span><br><span class="line">#ENV kv格式，这里指定工作目录，及默认进入容器的目录</span><br><span class="line">ENV MYPATH &#x2F;usr&#x2F;local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">#将原有的yum配置备份下</span><br><span class="line">RUN tar cvf &#x2F;etc&#x2F;yum.repos.d.tar &#x2F;etc&#x2F;yum.repos.d</span><br><span class="line"></span><br><span class="line">#修改yum源配置，</span><br><span class="line">RUN curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-vault-8.5.2111.repo</span><br><span class="line"></span><br><span class="line">#删除掉多于的repo文件</span><br><span class="line">RUN rm -rf &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Linux-*</span><br><span class="line"></span><br><span class="line">#使yum配置更新</span><br><span class="line">RUN yum clean all</span><br><span class="line">RUN yum makecache</span><br><span class="line"></span><br><span class="line">#下载需要的工具类</span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">CMD echo &quot;--end--&quot;</span><br><span class="line">CMD &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/19/depth-docker-config-20220919-dockerfile%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/19/depth-docker-config-20220919-dockerfile%E6%8C%87%E4%BB%A4/" itemprop="url">dockerfile指令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-19T00:00:00+08:00">2022-09-19</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="dockerfile指令"><a href="#dockerfile指令" class="headerlink" title="dockerfile指令"></a>dockerfile指令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FROM            指定基础镜像</span><br><span class="line">MAINTAINER      指定作者</span><br><span class="line">RUN             执行参数中定义的命令，构建镜像时需要的命令</span><br><span class="line">EXPOSE          向容器外部公开的端口号</span><br><span class="line">WORKDIR         设置容器内默认工作目录</span><br><span class="line">USER            指定用户</span><br><span class="line">ENTROYPOINT     指定一个容器启动时运行的命令</span><br><span class="line">ENV             设置环境变量</span><br><span class="line">ADD|COPY        复制文件到镜像中</span><br><span class="line">VOLUME          容器数据卷，向镜像创建的容器添加卷</span><br><span class="line">CMD             容器启动时要运行的命令，可以有多个，但只有最后一个生效</span><br></pre></td></tr></table></figure>
-<h1 id="或"><a href="#或" class="headerlink" title="或"></a>或</h1><p>FROM image_name:tag 定义了使用哪个基础镜像启动构建流程<br>MAINTAINER user_name 声明了镜像的创建者<br>ENV key value 设置环境变量（可以写多条）<br>RUN command 是Dockerfile的核心部分（可以写多条）<br>ADD source_dir/file 将宿主机的文件复制到容器内，如果是一个压缩文件，将会在复制后自动解压<br>COPY source_dir/file 和ADD类似，区别在于如果是一个压缩文件，复制后不解压<br>WORKDIR path_dir 设置工作目录</p>
-<h1 id="dockerfile的构建过程就是build的执行过程"><a href="#dockerfile的构建过程就是build的执行过程" class="headerlink" title="dockerfile的构建过程就是build的执行过程"></a>dockerfile的构建过程就是build的执行过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.把当前目录和子目录当做上下文传递给docker服务，命令最后的点表示当前上下文。</span><br><span class="line">2.从当前目录（不包括子目录）找到Dockerfile文件，如果不指定文件，必须是此文件名。</span><br><span class="line">3.检查docker语法。</span><br><span class="line">4.从基础镜像运行一个容器。</span><br><span class="line">5.执行指令，修改容器，如上面操作添加数据卷，修改首页。</span><br><span class="line">6.对修改后的容器提交一个新的镜像层，也可叫做中间层镜像。</span><br><span class="line">7.针对中间层生成的镜像，运行新的容器。</span><br><span class="line">8.重复执行修改容器、提交镜像、运行容器指令，直到所有指令执行完成。</span><br></pre></td></tr></table></figure>
+<h1 id="提示权限不足时，需要重新生成token并验证"><a href="#提示权限不足时，需要重新生成token并验证" class="headerlink" title="提示权限不足时，需要重新生成token并验证"></a>提示权限不足时，需要重新生成token并验证</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">➜  diabolo-hub-source-code git:(first_code) ✗ hexo deploy</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line">ssh_dispatch_run_fatal: Connection to 20.205.243.166 port 22: Operation timed out</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#39;s wrong. Maybe you can find the solution here: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br><span class="line">Error</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (&#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;node_modules&#x2F;hexo-util&#x2F;lib&#x2F;spawn.js:37:17)</span><br><span class="line">    at ChildProcess.emit (node:events:513:28)</span><br><span class="line">    at maybeClose (node:internal&#x2F;child_process:1093:16)</span><br><span class="line">    at Process.ChildProcess._handle.onexit (node:internal&#x2F;child_process:302:5)</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注：每条指令都会生成新的镜像，也就是生成中间层镜像，这样执行速度其实会很慢，可以不使用缓存。在构建命令中加上–no-cache=true 即可。可根据实际场景选择是否需要缓存。</p>
+<p>若token无误，还是提示权限不足，可能是发布目录中存在文件 或 文件夹 的操作权限不足，如 root 读写权限，普通用户构建发布</p>
 </blockquote>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
@@ -2273,7 +2262,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
   </nav>
 
 
@@ -2320,7 +2309,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">418</span>
+                    <span class="site-state-item-count">433</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2503,7 +2492,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">85</span>
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2596,7 +2587,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2707,7 +2700,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2719,7 +2712,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">423k</span>
+    <span title="站点总字数">441k</span>
   
 
   
@@ -2728,7 +2721,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">7:03</span>
+    <span title="站点总阅读时长">7:21</span>
   
 </div>
 

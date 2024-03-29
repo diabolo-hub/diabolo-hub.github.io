@@ -1184,7 +1184,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/spring-bean-1-%E5%A6%82%E4%BD%95%E5%B0%86spring%E7%AE%A1%E7%90%86%E7%9A%84bean%E6%B3%A8%E5%85%A5%E5%88%B0%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%97%B6%E5%88%87%E5%BA%93%E7%9A%84%E5%86%99%E5%85%A5%E6%9C%8D%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1203,7 +1203,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2023/04/23/spring-bean-1-%E5%A6%82%E4%BD%95%E5%B0%86spring%E7%AE%A1%E7%90%86%E7%9A%84bean%E6%B3%A8%E5%85%A5%E5%88%B0%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD/" itemprop="url">如何将spring管理的bean注入到静态方法</a></h1>
+                <a class="post-title-link" href="/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%97%B6%E5%88%87%E5%BA%93%E7%9A%84%E5%86%99%E5%85%A5%E6%9C%8D%E5%8A%A1/" itemprop="url">无状态的存储实现随时切库的写入服务</a></h1>
         
 
         <div class="post-meta">
@@ -1219,7 +1219,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-28T00:00:00+08:00">2024-03-28</time>
             
 
             
@@ -1240,14 +1240,478 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/bean/" itemprop="url" rel="index"><span itemprop="name">bean</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">2.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>分库分表：</p>
+<ol>
+<li>解决容量问题，没有解决服务的高可用问题</li>
+<li>增加了系统故障的概率</li>
+<li>系统稳定性变得更低了</li>
+</ol>
+<h1 id="写入业务的目标是成功写入"><a href="#写入业务的目标是成功写入" class="headerlink" title="写入业务的目标是成功写入"></a>写入业务的目标是成功写入</h1><h1 id="只要有可用存储即可写入"><a href="#只要有可用存储即可写入" class="headerlink" title="只要有可用存储即可写入"></a>只要有可用存储即可写入</h1><p>那么什么是系统可随时写入呢？就是当出现任何故障，如网络中断、CPU 飙升、磁盘满等问题时，你的系统依然可以随时写入数据。</p>
+<h1 id="如何保证随时可写入"><a href="#如何保证随时可写入" class="headerlink" title="如何保证随时可写入"></a>如何保证随时可写入</h1><p>当分库分表里一个分库出现故障后，就随机寻找一个可用的数据库进行写入的方式即是一种保障系统高可用的架构方案</p>
+<blockquote>
+<p>分库分表： 写入规则则发生了一些变化。它不再按固定路由进行写入，而是根据当前实时可用的数据库列表进行随机（如顺序轮流）写入<br>注： 因为此架构可以实现随时切换问题数据库、随时低成本扩容数据库，故又称它为无状态存储架构设计。</p>
+<h2 id="如何维护可用列表"><a href="#如何维护可用列表" class="headerlink" title="如何维护可用列表"></a>如何维护可用列表</h2></blockquote>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>将随机写入，改为按权重写入，新加入的机器权重更高</p>
+<h1 id="写入后如何处理"><a href="#写入后如何处理" class="headerlink" title="写入后如何处理"></a>写入后如何处理</h1><p>通过数据库写入的随机化，实现了写服务的高可用方案。但不得不说，虽然解决了写入的高可用，但想要达成一个完整的架构方案，<br>此设计还有几个重要的技术点需要解决。</p>
+<ol>
+<li>如果某一个分库故障后便将其从可用列表中移除，应该如何处理其中已写入的数据呢？</li>
+<li>因为数据是随机写入，应该如何查询写入的数据呢？<h2 id="解决架构方案"><a href="#解决架构方案" class="headerlink" title="解决架构方案"></a>解决架构方案</h2></li>
+<li>第一部分是前面讲述的数据随机写入模块，它保证了在故障时数据依然可以写入。</li>
+<li>第二部分则是数据同步模块，它将数据从随机写入的数据库集群实时地同步至分库分表集群里。后续的所有流程，都和原有的保持一致了。</li>
+</ol>
+<h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><blockquote>
+<p>如果写入的时候某个库（分库1）发生故障被下线，那么就不是按照原来的固定路由写入了，这时候会写入到分库2，那当分库1恢复后，如果要修改数据，怎么确定这条数据在哪个库？</p>
+</blockquote>
+<h6 id="nbsp-nbsp-nbsp-讲师回复："><a href="#nbsp-nbsp-nbsp-讲师回复：" class="headerlink" title="&nbsp;&nbsp;&nbsp; 讲师回复："></a>&nbsp;&nbsp;&nbsp; 讲师回复：</h6><blockquote>
+<p>&nbsp;&nbsp;&nbsp; 写入之后的修改，都还是走原有的分库分表的架构，这个不会变化。只有写入为了保证高可用，才会使用无状态的存储集群</p>
+</blockquote>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2024/03/28/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240328-%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E6%94%AF%E6%8C%81%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/" itemprop="url">分库分表支持海量数据</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-28T00:00:00+08:00">2024-03-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="分表"><a href="#分表" class="headerlink" title="分表"></a>分表</h1><ol>
+<li>单量多而每一单的数据量教少，适合分表</li>
+<li>每行写入（需要构建索引）和查询非常慢，所以建议分表</li>
+<li>总体的容量占用是可控的</li>
+<li>分表后，大表变成小表，索引的消耗会表小，小表的查询性能也更好</li>
+<li>如果此种场景下采用分库，每张表占用的磁盘空间很少，资源浪费</li>
+</ol>
+<h1 id="优先分表，再分库"><a href="#优先分表，再分库" class="headerlink" title="优先分表，再分库"></a>优先分表，再分库</h1><ol>
+<li>分表后仍然可以使用 join 等完成一些关联操作，相比分库简单</li>
+<li>分表后数据仍存在一个数据库里，无需引入一些分库中间件，维护和开发成本较低</li>
+<li>因为在一个库中，更好的解决事务问题</li>
+</ol>
+<h1 id="如何实现分库"><a href="#如何实现分库" class="headerlink" title="如何实现分库"></a>如何实现分库</h1><p>首先分库维度的选择： 决定了部分查询是否能直接使用数据库，以及是否存在数据倾斜的问题</p>
+<h2 id="选择分库维度"><a href="#选择分库维度" class="headerlink" title="选择分库维度"></a>选择分库维度</h2><ol>
+<li>业务场景划分和最细粒度随机分<h3 id="业务场景划分"><a href="#业务场景划分" class="headerlink" title="业务场景划分"></a>业务场景划分</h3></li>
+<li>按订单归属，同一个用户的订单都在某一个分库里</li>
+<li>按订单归属分库，在按售卖商家或店铺订单查询时，该分库无法满足需求</li>
+<li>买家查询订单的优先级高于卖家的订单查询<blockquote>
+<p> 确定分库字段时应该以直接满足最重要的业务场景为准</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>某一个用户购买的订单多，会产生数据倾斜问题， 某一个库数据异常多</p>
+<h2 id="最细粒度随机分"><a href="#最细粒度随机分" class="headerlink" title="最细粒度随机分"></a>最细粒度随机分</h2><p>例： 订单号按Hash随机均匀地分散到某一个分库里</p>
+<h3 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h3></blockquote>
+</li>
+<li>除了粒度查询外，其他维度查询不支持， 需要通过异构等方式解决，但异构有延迟、对业务有损</li>
+<li>防重逻辑在数据库层面已经无法支持。<br>订单号只能支付一次，支付系统按支付号分库，不同的支付单会分散在不同的分库里，通过订单号的唯一索引进行支付防重就不可实施</li>
+</ol>
+<h1 id="全局唯一标示"><a href="#全局唯一标示" class="headerlink" title="全局唯一标示"></a>全局唯一标示</h1><p>分布式唯一序列号</p>
+<ol>
+<li>使用算法随机生成<br>机器IP、时间戳、随机数等进行组合，生成一个唯一编号。例：Twitter的雪花算法，长度约19位<br>如需缩减长度，可以采用类似Base64等算法，对原始ID进行压缩转换为String类型</li>
+<li>通过单表实现号段生产</li>
+</ol>
+<h1 id="分库分表中间件选择"><a href="#分库分表中间件选择" class="headerlink" title="分库分表中间件选择"></a>分库分表中间件选择</h1><p>开源支持： MyCat等</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="代理式"><a href="#代理式" class="headerlink" title="代理式"></a>代理式</h3><p>代理式分库中间件对于业务应用无任何侵入，业务应用和未分库时一样使用数据库，分库的选择及分库的维度对业务层完全隐藏，接入和使用成本极低</p>
+<h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><ol>
+<li>代理式在业务应用和数据库间增加了一层，导致了性能下降。</li>
+<li>代理式需要解析业务应用的 SQL，并根据 SQL 中的分库字段进行路由。它需要解析和适配所有 SQL 语法，增加了代理模块复杂度和出错的可能性。</li>
+<li>代理层是单独进程，需要部署占用资源，带来一定的成本。<h3 id="内嵌式"><a href="#内嵌式" class="headerlink" title="内嵌式"></a>内嵌式</h3>内嵌式分库中间件是将分库中间件内置在业务应用中，它只负责分库的选择，并不会解析用户的 SQL。在使用时，业务应用需将分库字段传递给内嵌中间件去计算具体对应的分库。它相比代理式性能更好<h4 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h4></li>
+<li>有一定侵入性，业务应用与原始单库模式相比，需要进行一定的改造去适配内嵌式的 API。</li>
+<li>分库在故障转移、数据迁移等运维工作时，需要业务应用感知。不过现在的一些内嵌式代理，已经具备非常良好的配置功能，在分库运维时，业务应用需要配合的内容较少。</li>
+</ol>
+<h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><ol>
+<li>是否一定需要进行分表或者分库呢？<br>不一定，根据业务量评估，超过千万级再考虑<br>同时业务上做处理： 无效数据、软删除数据、不会再使用的数据统一归档</li>
+<li>使用业务字段分库后，如何处理数据倾斜？<br>分库后分表、分库后再分库</li>
+<li><p>如何满足富查询</p>
+</li>
+<li><p>如何解决跨多库的修改导致的分布式事务？</p>
+</li>
+</ol>
+<h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><p>问：</p>
+<blockquote>
+<p>分库分表: 1. 富查询 2. 数据倾斜 3. 分布式事务<br>问：<br>如果一个业务每天产生的数据有2000w条订单，这些数据随时可能被端上用户用来查询，那每天的数据很快就能把一个mysql实例打满。这种数据从节约成本角度讲，只支持最近一段时间的实时查询，历史数据通过归档到hbase上面是一种方案。但历史数据的查询就不实时了，有的银行采取这种方式，很影响用户体验。没见过互联网公司这种toC的产品有这种不支持实时查询的场景？如果遇到怎么解决历史数据的实时性呢？是不计成本不断横向扩容mysql+redis或者自研更高效的存储方案吗？<br>答：<br>&nbsp;&nbsp;&nbsp; 架构是成本的权衡，互联网支持是因为它的体量大，营收能够支持。<br>首先，上规模的互联网公司，都有自己自研的存储，做技术上的优化。<br>除此之外，分享一下我最近一次经历里，我们要把一份业务数据全部存储在缓存里，发现要几十TB的容量才能支持，显然成本上是cover不住的。<br>我们是对用户的查询进行了分析，发现90%的用户查询都集中在某一个时间区间里。我们就把这个区间里的数据放在缓存里了，其余仍存在数据库或其它文件系统里。可以看到，这就是一个架构权衡，最大程度满足业务诉求。</p>
+</blockquote>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%BA%94%E5%AF%B9%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%BA%94%E5%AF%B9%E7%83%AD%E7%82%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9F%A5%E8%AF%A2/" itemprop="url">应对热点数据的查询</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-27T00:00:00+08:00">2024-03-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
 
                 
                 
@@ -1311,795 +1775,42 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<pre><code>如何将spring管理的bean注入到静态方法: https://blog.csdn.net/constant_rain/article/details/108601374
-</code></pre><hr>
-<h1 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h1><p>static:  该方法或者变量就成为了类方法或变量，随着类的加载而加载，会被当前类下的所有对象所共有</p>
-<p>@Resource: springbean工厂中匹配一个对象，对象级别</p>
-<h1 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h1><p>类的所有静态属性加载 -&gt; springbean匹配</p>
-<h1 id="普通的静态方法注入springbean对象为空原因"><a href="#普通的静态方法注入springbean对象为空原因" class="headerlink" title="普通的静态方法注入springbean对象为空原因"></a>普通的静态方法注入springbean对象为空原因</h1><p>静态属性会在程序启动第一次启动时完成加载，且之后不会再有变动<br>之后才开始springbean注入，所以为空</p>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestStaticUtil</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span>  TestSpringBean testSpringBean;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TestStaticUtil testStaticUtil;</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil = <span class="keyword">this</span>;</span><br><span class="line">        testStaticUtil.testSpringBean = <span class="keyword">this</span>.testSpringBean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSpring</span><span class="params">()</span></span>&#123;</span><br><span class="line">        testStaticUtil.testSpringBean.hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface%E6%8E%A5%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/04/23/java-java8-FunctionalInterface-1-FunctionalInterface%E6%8E%A5%E5%8F%A3/" itemprop="url">@FunctionalInterface接口</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java8/" itemprop="url" rel="index"><span itemprop="name">java8</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">9.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<pre><code>Java8新特性探索之函数式接口: https://mp.weixin.qq.com/s?__biz=MzA3MzMzNzEyNA==&amp;mid=2651023894&amp;idx=2&amp;sn=d8eccac647e66e871c8a1befddf9a9d5&amp;chksm=84e75a5db390d34beda058d32c2d2967c20eb1d2fffd0a7453b845f436f66c324b32949d200a&amp;scene=27
-</code></pre><hr>
-<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
-<li>x -&gt; x.toString()，如何知道 x 是什么类型？</li>
-<li>Lambda 表达式包含类型推导（编译器会自动推导出类型信息，避免了程序员显式地声明），编译器必须能够以某种方式推导出 x 的类型以生成正确的代码</li>
-<li>同样方法引用也存在此问题，假设你要传递 System.out :: println 到你正在编写的方法 ，你怎么知道传递给方法的参数的类型？<blockquote>
-<p>为了解决上述问题，java8引入了函数式接口</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="为什么扛不住相同用户百万的流量"><a href="#为什么扛不住相同用户百万的流量" class="headerlink" title="为什么扛不住相同用户百万的流量"></a>为什么扛不住相同用户百万的流量</h1><ol>
+<li>百万的QPS属于不同用户时，因缓存是集群化的，所有到达业务后台的请求会根据一定路由规则（如Hash），分散到请求缓存集群中的某一个节点（或多个）</li>
+<li>当百万QPS属于同一用户时，即时缓存集群化，同一个用户的请求都会被路由到集群中的某一个节点<blockquote>
+<p>例 热点查询</p>
 </blockquote>
 </li>
 </ol>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol>
-<li>函数式接口定义<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> : Daiyin.Zhang</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> ：$Id: java.lang.String.java v 1.0.0 2023/03/07 $&#123;TIME&#125; Daiyin.Zhang Exp $</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc</span> : 公共子序列服务</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span>: 2023/03/07 new Date()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommonSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * get</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IdServiceException id服务异常</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">get</span><span class="params">(String key)</span> <span class="keyword">throws</span> IdServiceException</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>函数式接口使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommonSequenceServiceImpl</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IdGenService idGenService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 得到id</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> CommonSequenceService&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> CommonSequenceService <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (key) -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">null</span> == key || <span class="string">""</span>.equals(key)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"key is not found"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> idGenService.getId(key);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>接口服务使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OutSequenceServiceImpl</span> <span class="keyword">implements</span> <span class="title">OutSequenceService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CommonSequenceServiceImpl commonSequenceServiceImpl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销项通用序列号</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@link</span> String&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getOutCommonNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> commonSequenceServiceImpl.getId().get(SeqCodeConstant.INV_OUT_COMMON_NO_KEY);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IdServiceException e) &#123;</span><br><span class="line">            log.error(<span class="string">"get out common no excp : &#123;&#125;"</span>, e.getMessage(), e);</span><br><span class="line">            <span class="keyword">return</span> SerialNoUtil.getSeqInvoiceNo();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="主从复制进行垂直扩容"><a href="#主从复制进行垂直扩容" class="headerlink" title="主从复制进行垂直扩容"></a>主从复制进行垂直扩容</h1><ol>
+<li>虽然单机的机器配置和程序的性能是有上限的，但我们可以利用节点间的主从复制功能来进行节点间的扩容</li>
+<li>随着从节点的增加，单分片的并发性能会不断翻倍</li>
+<li>主从复制除了有应对热点的功能，另外一个主要作用是为了高可用</li>
+<li>为了高可用模块在故障转移时的逻辑能够简单清晰并做到统一，会将集群的从节点数量设置为相同数量。(带来了较大的资源浪费，当然也可以不强制所有分片节点必须相同)<blockquote>
+<p>总的来说，主从复制能够解决一定流量的热点查询且实施起来较简单。但不具备扩展性，在应对更大流量的热点时会有些吃力。</p>
+</blockquote>
 </li>
 </ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/04/23/java-java8-FunctionalInterface-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/04/23/java-java8-FunctionalInterface-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%88%AB/" itemprop="url">@FunctionalInterface接口</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+08:00">2023-04-23</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/java8/" itemprop="url" rel="index"><span itemprop="name">java8</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">793</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<hr>
-<h1 id="函数式接口分类"><a href="#函数式接口分类" class="headerlink" title="函数式接口分类"></a>函数式接口分类</h1><p>Supplier供给型函数：Supplier的表现形式为不接受参数、只返回数据。<br>Consumer消费型函数：Consumer接收一个参数，没有返回值。<br>Runnable无参无返回型函数：Runnable的表现形式为即没有参数也没有返回值。<br>Function有参有返回型函数：Function函数的表现形式为接收一个参数，并返回一个值。</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/04/database-mysql-notes-binlog-20220104-MySQL%E6%95%B0%E6%8D%AE%E5%BA%93Binlog%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7-binlog2sql/" itemprop="url">MySQL数据库Binlog解析工具--binlog2sql</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-04T00:00:00+08:00">2023-01-04</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">832</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p><a href="https://www.cnblogs.com/chinasoft/p/16441022.html" target="_blank" rel="noopener">MySQL数据库Binlog解析工具–binlog2sql</a></p>
-<h1 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h1><p><a href="https://gitee.com/wwbjqcom/binlogAL" target="_blank" rel="noopener">binlogAL(binlog analysis)</a></p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/01/04/database-mysql-notes-binlog-20220104-mysqlbinlog-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" itemprop="url">mysqlbinlog-日志管理工具</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-01-04T00:00:00+08:00">2023-01-04</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>mysqlbinlog [options] log_file1 log_file2…</p>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><p>–base64-output=name：决定binlog输出格式选项，<br>auto–自动显示binlog语句所有格式；<br>never–禁止显示binlog语句；<br>decode-rows–禁止显示binlog语句</p>
-<p>–database=db_name, -d db_name：只显示指定数据库的日志</p>
-<p>–verbose,-v：从行事件中重建伪 sql 语句</p>
-<p>–verbose –verbose, -vv：从行事件中重建伪 sql 语句，添加对数据类型的注释</p>
-<p>–start-datetime=datetime –stop-datetime=datetime：指定日期间隔的日志</p>
-<p>–start-position=N –stop-position=N：指定事件位置间隔的日志</p>
-<p>–skip-gtids[=(true|false)] ：不显示GTID</p>
-<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><ol>
-<li>创建新日志，对mysql和数据库做DML<br>flush logs</li>
-<li>不加参数显示binlog<br>mysqlbinlog mysql-bin.000017</li>
-<li>加参数显示的binlog日志的SQL执行记录<br>mysqlbinlog mysql-bin.000017 -d test –base64-output=decode-rows –skip-gtids -vv | grep -B 1 -i ‘insert into’</li>
+<h1 id="利用应用内的前置缓存"><a href="#利用应用内的前置缓存" class="headerlink" title="利用应用内的前置缓存"></a>利用应用内的前置缓存</h1><p>热点数据一般是查询次数多，需要存储的数据少，因为数据都是相同的。<br>我们可以将热点数据前置缓存在应用程序内，本地缓存。且负载均衡会将请求分发到各个应用中去。</p>
+<h2 id="应用内缓存需要设置上限"><a href="#应用内缓存需要设置上限" class="headerlink" title="应用内缓存需要设置上限"></a>应用内缓存需要设置上限</h2><ol>
+<li>应设置内存缓存容量上限</li>
+<li>设置容量满时的逐出策略</li>
+<li>逐出策略可以是 LRU，将最少使用的缓存在容量满时清理掉，因为热点缓存需要存储的是访问次数多的数据</li>
+<li>缓存需要设置过期实际，因为热点数据可能转化为非热点数据<h2 id="根据业务对待延迟的问题"><a href="#根据业务对待延迟的问题" class="headerlink" title="根据业务对待延迟的问题"></a>根据业务对待延迟的问题</h2></li>
+<li>定期刷新，主动刷新</li>
+<li>如果业务可以容忍一定时间的延迟，定期刷新</li>
+<li>如果要实时感知变化，主动刷新：binlog监听刷新<blockquote>
+<p>尽量不要将感知binlog程序放置在对应的应用程序内，因为应用代码也运行在此机器上，通过MQ感知变更会消耗非常多的CPU和内存资源<br>内外前置缓存里数据少，很多变更消息都会因不在前置缓存中而被忽略掉<br>建议：将前置缓存的数据异构一份出来用作判断，但也导致了延迟（程序时间、网络时间）</p>
+<h2 id="把控好瞬间的逃逸流量"><a href="#把控好瞬间的逃逸流量" class="headerlink" title="把控好瞬间的逃逸流量"></a>把控好瞬间的逃逸流量</h2></blockquote>
+</li>
+<li>应用初始化时，前置缓存（本地缓存）是空的，热点查询出现，所有的热点请求会瞬间打爆应用</li>
+<li>等待前置缓存落地，设置一个时间<h2 id="如何发现热点缓存并前置"><a href="#如何发现热点缓存并前置" class="headerlink" title="如何发现热点缓存并前置"></a>如何发现热点缓存并前置</h2><h3 id="被动发现"><a href="#被动发现" class="headerlink" title="被动发现"></a>被动发现</h3>借助前置缓存有容量上限实现<br>所有的请求默认从前置缓存中获取，淘汰策略LRU，如果是热点数据，访问次数一定很高，会一直存在前置缓存中<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4>所有的请求都优先从前置缓存获取，没查到数据时加载数据库数据到本地的前置缓存里，此方式会把非热点数据存储到前置缓存里，导致热点数据产生延迟<h3 id="主动发现"><a href="#主动发现" class="headerlink" title="主动发现"></a>主动发现</h3>借助一些外部计数工具来发现热点<br>在一个集中的位置对于请求进行计数，并根据配置的阈值判断某请求是否会命中数据，对于判定为热点数据，则存入前置缓存中<h2 id="降级兜底不可少"><a href="#降级兜底不可少" class="headerlink" title="降级兜底不可少"></a>降级兜底不可少</h2>若部署的容器数量所能支撑的QPS小于当次的热点查询<br>单机限流阈值设置为压测值的一半或者更低，因为CPU不能达到100%<h2 id="其他前置策略"><a href="#其他前置策略" class="headerlink" title="其他前置策略"></a>其他前置策略</h2></li>
+<li>接入层（如Nginx）进行前置缓存</li>
+<li>CDN前置缓存以及开启浏览器缓存</li>
 </ol>
+<h1 id="问"><a href="#问" class="headerlink" title="问"></a>问</h1><blockquote>
+<p>有两个疑问，第一：如何做到只有一个逃逸流量从应用发出。第二，如何判定是逃逸流量，它和正式流量怎么区分呢<br>&nbsp;&nbsp;&nbsp; caffeine这个java实现的缓存，可以做到只有一个逃逸流量从应用发出。当本地缓存过期了，才会有逃逸流量。它的作用是更新本地缓存的数据。</p>
+</blockquote>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2156,7 +1867,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%9F%BA%E4%BA%8E%E6%B5%81%E9%87%8F%E5%9B%9E%E6%94%BE%E5%AE%9E%E7%8E%B0%E8%AF%BB%E6%9C%8D%E5%8A%A1%E8%AF%BB%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%9B%9E%E5%BD%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -2175,7 +1886,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/11/24/python-notes-20220916-1-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC%E5%8F%8A%E8%B7%AF%E5%BE%84/" itemprop="url">查找版本及路径</a></h1>
+                <a class="post-title-link" href="/2024/03/27/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240327-%E5%9F%BA%E4%BA%8E%E6%B5%81%E9%87%8F%E5%9B%9E%E6%94%BE%E5%AE%9E%E7%8E%B0%E8%AF%BB%E6%9C%8D%E5%8A%A1%E8%AF%BB%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%9B%9E%E5%BD%92/" itemprop="url">基于流量回放实现读服务的自动化测试回归</a></h1>
         
 
         <div class="post-meta">
@@ -2191,7 +1902,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-11-24T00:00:00+08:00">2022-11-24</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-27T00:00:00+08:00">2024-03-27</time>
             
 
             
@@ -2212,14 +1923,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/" itemprop="url" rel="index"><span itemprop="name">py</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/py/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
 
                 
                 
@@ -2247,7 +1965,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">1.6k</span>
+                <span title="字数统计">520</span>
               
 
               
@@ -2261,7 +1979,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 mins.</span>
+                <span title="阅读时长">1 mins.</span>
               
             </div>
           
@@ -2283,15 +2001,446 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><p>➜  ~ python3<br>Python 3.8.9 (default, Apr 13 2022, 08:48:06)<br>[Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin<br>Type “help”, “copyright”, “credits” or “license” for more information.</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>#</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/26/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240326-%E5%BC%82%E6%9E%84%E6%95%B0%E6%8D%AE%E7%9A%84%E5%90%8C%E6%AD%A5%E4%B8%80%E8%87%B4%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2024/03/26/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240326-%E5%BC%82%E6%9E%84%E6%95%B0%E6%8D%AE%E7%9A%84%E5%90%8C%E6%AD%A5%E4%B8%80%E8%87%B4%E6%80%A7/" itemprop="url">异构数据的同步一致性</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-26T00:00:00+08:00">2024-03-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="binlog一致性"><a href="#binlog一致性" class="headerlink" title="binlog一致性"></a>binlog一致性</h1><p>最终一致性和低延迟</p>
+<h1 id="基于-Binlog-的全量缓存架构问题分析"><a href="#基于-Binlog-的全量缓存架构问题分析" class="headerlink" title="基于 Binlog 的全量缓存架构问题分析"></a>基于 Binlog 的全量缓存架构问题分析</h1><h2 id="Binlog-延迟低是指纯-MySQL-的主从同步"><a href="#Binlog-延迟低是指纯-MySQL-的主从同步" class="headerlink" title="Binlog 延迟低是指纯 MySQL 的主从同步"></a>Binlog 延迟低是指纯 MySQL 的主从同步</h2><ol>
+<li>监听binlog的架构方式和mysql自己的binlog主从同步不一样，多了协议转换，适配等，具有一定的性能损耗</li>
+<li>监听binlog的架构方式链路多两个模块，监听binlog和格式解析</li>
+<li>实际场景中是同步 从库的binlog，延迟加大</li>
+<li>binlog是串行的，同步吞吐量太低，进一步加大同步的延迟</li>
+</ol>
+<h2 id="如何保证数据不丢失或错误？如果保证没有bug？"><a href="#如何保证数据不丢失或错误？如果保证没有bug？" class="headerlink" title="如何保证数据不丢失或错误？如果保证没有bug？"></a>如何保证数据不丢失或错误？如果保证没有bug？</h2><h2 id="如何设计缓存数据格式？"><a href="#如何设计缓存数据格式？" class="headerlink" title="如何设计缓存数据格式？"></a>如何设计缓存数据格式？</h2><p>如何通过数据格式提高性能？</p>
+<h2 id="binlog如何高效消费"><a href="#binlog如何高效消费" class="headerlink" title="binlog如何高效消费"></a>binlog如何高效消费</h2><h3 id="全串行的方式进行消费"><a href="#全串行的方式进行消费" class="headerlink" title="全串行的方式进行消费"></a>全串行的方式进行消费</h3><p>在消费时，对此binlog文件使用ACK机制进行串行消费，消费一条，确认一条</p>
 <blockquote>
+<p>串行消费效率低，延迟大<br>单线程无法水平扩展，架构有缺陷</p>
+<h3 id="采用并行的方式消费"><a href="#采用并行的方式消费" class="headerlink" title="采用并行的方式消费"></a>采用并行的方式消费</h3><p>单库单表是串行消费，我们可以对不同库、不同表的同时实现并行消费（按库并行消费）</p>
+<h4 id="并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）"><a href="#并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）" class="headerlink" title="并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）"></a>并行消费，数据顺序紊乱（例同一条微博多次修改，需要串行消费）</h4><ol>
+<li>分布式锁粒度： 保证同一条数据，或一个条数据同一个纬度（或字段）下的消费是串行的</li>
+<li>利用mq的顺序消费，同一条数据或同一个纬度（字段）放在mq同一个串行通道（topic tag）</li>
+</ol>
+</blockquote>
+<h1 id="缓存数据结构设计及写入"><a href="#缓存数据结构设计及写入" class="headerlink" title="缓存数据结构设计及写入"></a>缓存数据结构设计及写入</h1><p>案例： 在数据库中有订单基本信息表和商品表，而在缓存中，我们一般将订单基本信息表和商品表存储为一个value值，方便用户查询订单详情的需求，减少和redis的交互次数。<br>这种在数据库中多张表存储，而在缓存中只用 K-V 结构进行冗余存储的数据结构，需要我们在数据同步的时候进行并发控制，防止因为多张表的变更导致并发写入，从而产生数据错乱</p>
+<h2 id="多表间共享分布式锁协调"><a href="#多表间共享分布式锁协调" class="headerlink" title="多表间共享分布式锁协调"></a>多表间共享分布式锁协调</h2><p>例如订单基本信息表和商品表都有一个共同的 订单编号 ，我们使用订单编号作为分布式锁</p>
+<h2 id="通过反查的方式进行全量覆盖"><a href="#通过反查的方式进行全量覆盖" class="headerlink" title="通过反查的方式进行全量覆盖"></a>通过反查的方式进行全量覆盖</h2><p>在修改订单基本信息时，反查数据库获取商品信息，组装后存入redis；<br>在修改商品信息时，反差数据库获取订单基本信息，组装后存入redis。</p>
 <blockquote>
+<p>带来一定的性能消耗和机器资源浪费<br>量大的时候可能会把数据库打爆（建议查从库）</p>
+<h2 id="采用redis的hash结构进行局部更新"><a href="#采用redis的hash结构进行局部更新" class="headerlink" title="采用redis的hash结构进行局部更新"></a>采用redis的hash结构进行局部更新</h2></blockquote>
+<h1 id="数据对比发现错误"><a href="#数据对比发现错误" class="headerlink" title="数据对比发现错误"></a>数据对比发现错误</h1><p>数据对比、差异发现、差异告警、自动修复</p>
+<h1 id="最终兜底"><a href="#最终兜底" class="headerlink" title="最终兜底"></a>最终兜底</h1><p>Binlog 保证最终一致性但可能存在延迟，主动写入保障无延迟但存在丢数据</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/03/25/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240325-%E5%85%A8%E7%BC%93%E5%AD%98-%E6%AF%AB%E7%A7%92%E7%BA%A7%E7%9A%84%E8%AF%BB%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2024/03/25/depth-design-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1-20240325-%E5%85%A8%E7%BC%93%E5%AD%98-%E6%AF%AB%E7%A7%92%E7%BA%A7%E7%9A%84%E8%AF%BB%E6%9C%8D%E5%8A%A1/" itemprop="url">全缓存-毫秒级的读服务</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-03-25T00:00:00+08:00">2024-03-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">4.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="简单-读服务-未完全解决的问题"><a href="#简单-读服务-未完全解决的问题" class="headerlink" title="简单-读服务-未完全解决的问题"></a>简单-读服务-未完全解决的问题</h1><ol>
+<li>为了保证缓存更新实时性而带来的分布式事务的问题</li>
+<li>懒加载导致的毛刺问题</li>
+</ol>
+<h1 id="全量缓存的基本架构"><a href="#全量缓存的基本架构" class="headerlink" title="全量缓存的基本架构"></a>全量缓存的基本架构</h1><p>全量缓存是指将数据库中的所有数据都存储在缓存中，同时在缓存中不设置过期时间的一种实现方式<br><img src="img/全量缓存的基本架构_01.png" alt="avatar"></p>
 <blockquote>
-<p>exit()<br>➜  ~ which python<br>python not found<br>➜  ~ which python3<br>/usr/bin/python3</p>
+<p>全量数据在缓存中，不会再降级到数据库里查询，完全依赖缓存，因此 ，从缓存降级到数据库查询的毛刺问题就解决了</p>
 </blockquote>
+<h2 id="基于Binlog的全量缓存架构"><a href="#基于Binlog的全量缓存架构" class="headerlink" title="基于Binlog的全量缓存架构"></a>基于Binlog的全量缓存架构</h2><ol>
+<li>降低了延迟<br>缓存基本上是准实时的，数据库的主从同步保持在毫秒级别，数据库的数据变更可以实时地反映到缓存里。</li>
+<li>解决了分布式事务的问题<br>Binlog 的主从复制是基于 ACK 机制，如果同步缓存失败了，被消费的 Binlog 不会被确认，下一次会重复消费，数据最终会写入缓存中。这就解决了因无法满足分布式事务而导致的丢数据问题，保障了数据的最终一致性。</li>
+<li>提升了代码的简洁性和可维护性<br>不用在代码的增删改中添加缓存更新代码，直接监听binlog的变更<h3 id="使用binlog的全量缓存存在的问题"><a href="#使用binlog的全量缓存存在的问题" class="headerlink" title="使用binlog的全量缓存存在的问题"></a>使用binlog的全量缓存存在的问题</h3></li>
+<li>提升了系统的整体复杂度</li>
+<li>缓存的容量会成倍上升，相应的资源成本也大幅上升</li>
+<li>有选择的存储缓存，可考虑压缩再存储缓存（Gzip、Snappy等），压缩费CPU，需压测<h3 id="节省缓存的字节数"><a href="#节省缓存的字节数" class="headerlink" title="节省缓存的字节数"></a>节省缓存的字节数</h3></li>
+<li>在JSON中添加 @Field<br>例：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Class DemoClass &#123;</span><br><span class="line">    <span class="meta">@Field</span>(<span class="string">"1"</span>)</span><br><span class="line">    <span class="keyword">private</span> field1;</span><br><span class="line">    <span class="meta">@Field</span>(<span class="string">"2"</span>)</span><br><span class="line">    <span class="keyword">private</span> field2;</span><br><span class="line">&#125;</span><br><span class="line">采用了此方式序列化后的数据如下所示：</span><br><span class="line">&#123;<span class="string">"1"</span>: field1Value, <span class="string">"2"</span>: field2Value&#125;</span><br><span class="line">而没有采用此标识的数据如下：</span><br><span class="line">&#123;<span class="string">"field1"</span>: field1Value, <span class="string">"field2"</span>: field2Value&#125;</span><br></pre></td></tr></table></figure></li>
+<li>redis的hash结构也可以使用跟上述JSON标识一样的模式</li>
+<li>使用全量缓存承接读服务所有的请求时，会出现无法感知缓存丢失的问题<br>例： redis数据丢失<h3 id="多机房实时热备"><a href="#多机房实时热备" class="headerlink" title="多机房实时热备"></a>多机房实时热备</h3></li>
+<li>提升性能</li>
+<li>增加了可用性</li>
+<li>资源成本上升<h3 id="异步并行化"><a href="#异步并行化" class="headerlink" title="异步并行化"></a>异步并行化</h3>将串行的请求，采用异步并行的方式同时请求，总耗时与单词耗时相等</li>
+<li>增加了线程的消耗，带来cpu的消耗</li>
+<li>编程复杂度和维护难度</li>
+<li>场景单一：各自独立，且无先后关系的场景里</li>
+</ol>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><h4 id="监听binlog-处理数据失败-无法再次感知数据变更"><a href="#监听binlog-处理数据失败-无法再次感知数据变更" class="headerlink" title="监听binlog,处理数据失败,无法再次感知数据变更"></a>监听binlog,处理数据失败,无法再次感知数据变更</h4><blockquote>
+<p>监听到数据，丢进mq消息队列</p>
+<h4 id="监听binlog-处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗"><a href="#监听binlog-处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗" class="headerlink" title="监听binlog,处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗"></a>监听binlog,处理添加缓存，若在系统宕机的时候操作了数据库产生的binlog还能监听吗</h4><p>必须保证监听binlog服务正常，集群部署<br>注： 在上线后，可以开发数据校准模块，定时的校准缓存和数据库中的数据</p>
+<h4 id="提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？"><a href="#提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？" class="headerlink" title="提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？"></a>提升了代码的简洁性和可维护性中binlog数据同步到缓存中不会有延迟吗？延迟时间内的数据缓存中没有不用读取数据库吗？</h4><p> 会有延迟。</p>
+<ol>
+<li>正常在几秒左右，极端会有几分钟。如果业务上可以容忍，则可以不降级查库。</li>
+<li>如果业务上不允许，对于对延迟要求非常高的场景，也可以在写入数据库后，主动的将数据写入缓存。不过这个主动写入不用花太多精力保证强成功，最终数据强成功可以通过binlog进行兜底。这个主动写入的目的是保证实时性。<h4 id="一定要使用binlog吗"><a href="#一定要使用binlog吗" class="headerlink" title="一定要使用binlog吗"></a>一定要使用binlog吗</h4>不一定，也可以直接在业务使用的地方调用mq，mq消费者异步处理。<br>但是此种方式无法监听手工DMS脚本的处理</li>
+</ol>
 </blockquote>
-</blockquote>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ which python2</span><br><span class="line">/usr/local/bin/python2</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~</span><br><span class="line">➜  ~ which python3</span><br><span class="line">/usr/bin/python3</span><br><span class="line">➜  ~</span><br></pre></td></tr></table></figure>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2336,7 +2485,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
 
 
@@ -2383,7 +2532,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">418</span>
+                    <span class="site-state-item-count">433</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2566,7 +2715,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">85</span>
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2659,7 +2810,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2770,7 +2923,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2782,7 +2935,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">423k</span>
+    <span title="站点总字数">441k</span>
   
 
   
@@ -2791,7 +2944,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">7:03</span>
+    <span title="站点总阅读时长">7:21</span>
   
 </div>
 

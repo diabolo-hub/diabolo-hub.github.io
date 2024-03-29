@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-%E6%9C%AC%E5%9C%B0registry%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/20/database-mysql-navicat-20221020-navicat%E5%87%BD%E6%95%B0%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%B8%80%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/29/depth-docker-docker-registry-20220929-%E6%9C%AC%E5%9C%B0registry%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA/" itemprop="url">本地registry仓库搭建</a></h1>
+                <a class="post-title-link" href="/2022/10/20/database-mysql-navicat-20221020-navicat%E5%87%BD%E6%95%B0%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%B8%80%E7%99%BE%E4%B8%87%E6%95%B0%E6%8D%AE/" itemprop="url">navicat函数批量插入一百万数据</a></h1>
         
 
         <div class="post-meta">
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-29T00:00:00+08:00">2022-09-29</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-20T00:00:00+08:00">2022-10-20</time>
             
 
             
@@ -429,21 +429,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">database</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-registry/" itemprop="url" rel="index"><span itemprop="name">docker registry</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/database/mysql/navicat/" itemprop="url" rel="index"><span itemprop="name">navicat</span></a></span>
 
                 
                 
@@ -471,7 +471,192 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">3.1k</span>
+                <span title="字数统计">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<p>-<strong>+Navicat 批量插入数据/编写储存过程/函数: <a href="https://www.cnblogs.com/danhuai/p/16504051.html" target="_blank" rel="noopener">https://www.cnblogs.com/danhuai/p/16504051.html</a></strong><br>-<strong>+Navicat 批量插入数据/编写储存过程/函数: <a href="https://blog.csdn.net/weixin_49003031/article/details/124884578" target="_blank" rel="noopener">https://blog.csdn.net/weixin_49003031/article/details/124884578</a></strong></p>
+<hr>
+<h1 id="新建函数"><a href="#新建函数" class="headerlink" title="新建函数"></a>新建函数</h1><ul>
+<li>sql security {definer|invoker};指明谁有权限来执行；<br>definer表示只有定义者才能执行；<br>invoker表示拥有权的调用者才可以执行，默认情况下，系统指定为definer；</li>
+</ul>
+<h1 id="编写函数"><a href="#编写函数" class="headerlink" title="编写函数"></a>编写函数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CREATE DEFINER&#x3D;&#96;root&#96;@&#96;%&#96; FUNCTION &#96;批量插入查询中间表&#96;(params1 int) RETURNS int</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    SQL SECURITY INVOKER</span><br><span class="line">BEGIN</span><br><span class="line">  #Routine body goes here...</span><br><span class="line"></span><br><span class="line">	# step1 创建一个循环变量i（默认值为 1）</span><br><span class="line">	DECLARE i INT DEFAULT(1);</span><br><span class="line">	# step2 循环params1 次</span><br><span class="line">	WHILE i &lt; params1 DO</span><br><span class="line">			# step3 循环插入数据</span><br><span class="line">			INSERT INTO &#96;t_inv_out_vat_query_middle&#96; (&#96;id&#96;, &#96;apply_flow_no&#96;, &#96;seq_inv_no&#96;, &#96;apply_type_cd&#96;, &#96;apply_status_cd&#96;, &#96;apply_dt&#96;, &#96;org_code&#96;, &#96;org_name&#96;, &#96;buyer_taxpayer_no&#96;, &#96;buyer_taxpayer_name&#96;, &#96;buyer_taxpayer_type_cd&#96;, &#96;seller_taxpayer_name&#96;, &#96;inv_type_code&#96;, &#96;inv_code&#96;, &#96;inv_no&#96;, &#96;print_status_cd&#96;, &#96;apply_user&#96;, &#96;deal_status_cd&#96;, &#96;vat_biz_status_cd&#96;, &#96;inv_dt&#96;, &#96;gmt_create&#96;, &#96;creator&#96;, &#96;gmt_modified&#96;, &#96;modifier&#96;, &#96;is_valid&#96;) VALUES (i, concat(&#39;applyFlowNo&#39;, i), concat(&#39;seqInvNo&#39;, i), 1, 3, now(), &#39;213701050000&#39;, NULL, &#39;123456789012345678&#39;, &#39;营业执照&#39;, &#39;1&#39;, NULL, &#39;007&#39;, concat(&#39;invCode&#39;,i), concat(&#39;invNo&#39;,i), 1, &#39;3798010067&#39;, 1, 4, now(), now(), &#39;3798010067&#39;, now(), &#39;3798010067&#39;, 1);</span><br><span class="line">			SET i &#x3D; i + 1;</span><br><span class="line">END WHILE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">RETURN 0;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>点击左上角运行，输入 params1 = 10000000<br>执行数量较大时需要一定时间</p>
+<h1 id="存储过程案例"><a href="#存储过程案例" class="headerlink" title="存储过程案例"></a>存储过程案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE &#96;invoice_center_datb&#96;.&#96;进项批量插入&#96;</span><br><span class="line">(</span><br><span class="line"> IN &#96;num&#96; int(11)</span><br><span class="line">) BEGIN</span><br><span class="line">  DECLARE i INT DEFAULT(1);</span><br><span class="line">	DECLARE S Varchar(64);</span><br><span class="line">	DECLARE H VARCHAR(20);</span><br><span class="line">	DECLARE X varchar(20);</span><br><span class="line"></span><br><span class="line">	WHILE i &lt; num DO</span><br><span class="line"></span><br><span class="line">			set S &#x3D; CONCAT(&quot;G&quot;, i);</span><br><span class="line">			set H &#x3D; CONCAT(&quot;H&quot;, i);</span><br><span class="line">			set X &#x3D; CONCAT(&quot;X&quot;, i);</span><br><span class="line"></span><br><span class="line">			INSERT INTO t_inv_input_vat_main (&#96;vat_inv_no&#96;, &#96;inv_no&#96;, &#96;inv_code&#96;, &#96;inv_grouping_no&#96;, &#96;inv_title&#96;, &#96;inv_status_cd&#96;, &#96;is_turn_out&#96;, &#96;binding_operator&#96;, &#96;accounting_dt&#96;, &#96;is_accounting&#96;, &#96;inv_dt&#96;, &#96;inv_net_amount&#96;, &#96;inv_tax_amount&#96;, &#96;inv_without_tax_amount&#96;, &#96;inv_amount&#96;, &#96;currency_cd&#96;, &#96;tax_rate&#96;, &#96;inv_check_code&#96;, &#96;accounting_period&#96;, &#96;transfer_dt&#96;, &#96;transfer_amount&#96;, &#96;transfer_tax_amount&#96;, &#96;is_certification&#96;, &#96;certification_batch_no&#96;, &#96;certification_dt&#96;, &#96;certification_period&#96;, &#96;is_negative&#96;, &#96;negative_reason&#96;, &#96;is_binding&#96;, &#96;binding_dt&#96;, &#96;audi_status_cd&#96;, &#96;valid_tax_amount&#96;, &#96;org_code&#96;, &#96;org_name&#96;, &#96;inv_RB_type_cd&#96;, &#96;inv_type_cd&#96;, &#96;is_register&#96;, &#96;inv_check_status_cd&#96;, &#96;transfer_type_cd&#96;, &#96;seller_taxpayer_no&#96;, &#96;seller_taxpayer_name&#96;, &#96;seller_taxpayer_addr&#96;, &#96;seller_taxpayer_tel&#96;, &#96;seller_taxpayer_open_bank_no&#96;, &#96;seller_taxpayer_open_bank_name&#96;, &#96;buyer_taxpayer_no&#96;, &#96;buyer_taxpayer_name&#96;, &#96;buyer_taxpayer_addr&#96;, &#96;buyer_taxpayer_tel&#96;, &#96;buyer_taxpayer_open_bank_no&#96;, &#96;buyer_taxpayer_open_bank_name&#96;, &#96;cust_type_cd&#96;, &#96;cust_name&#96;, &#96;org_inv_no&#96;, &#96;org_inv_code&#96;, &#96;sys_from&#96;, &#96;tenant_code&#96;, &#96;exist_image&#96;, &#96;img_data&#96;, &#96;recent_accounting_no&#96;, &#96;unaccount_amount&#96;, &#96;is_agency_rebate&#96;, &#96;certification_type&#96;, &#96;certification_way&#96;, &#96;inv_dedu_result&#96;, &#96;result_code&#96;, &#96;check_status&#96;, &#96;deductible_period&#96;, &#96;purchaser_bank&#96;, &#96;administrative_division_name&#96;, &#96;machine_code&#96;, &#96;receiving_clerk&#96;, &#96;oil_mark&#96;, &#96;inv_tax_sign&#96;, &#96;administrative_division_no&#96;, &#96;toll_sign&#96;, &#96;total_price&#96;, &#96;auction_phone&#96;, &#96;used_car_bank&#96;, &#96;used_car_tax_no&#96;, &#96;total_price_cn&#96;, &#96;used_car_name&#96;, &#96;auction_name&#96;, &#96;auction_address&#96;, &#96;car_number&#96;, &#96;vehicle_no&#96;, &#96;registration_number&#96;, &#96;auction_tax_no&#96;, &#96;used_car_phone&#96;, &#96;used_car_address&#96;, &#96;origin_place&#96;, &#96;brand_model&#96;, &#96;payment_voucher_no&#96;, &#96;sales_bank_no&#96;, &#96;tax_authority_no&#96;, &#96;tonnage&#96;, &#96;vehicle_type&#96;, &#96;engine_no&#96;, &#96;passengers_limited&#96;, &#96;import_certificate_no&#96;, &#96;certificateNo&#96;, &#96;sales_address&#96;, &#96;taxAuthorityName&#96;, &#96;inspection_list_no&#96;, &#96;purchaser_address&#96;, &#96;auctionbank&#96;, &#96;vehicle_place_name&#96;, &#96;special_ticket_mark&#96;, &#96;versionInfo&#96;, &#96;officicalfile_url&#96;, &#96;officicalfile&#96;, &#96;inp_extend_info&#96;, &#96;remark&#96;, &#96;creator&#96;, &#96;gmt_create&#96;, &#96;modifier&#96;, &#96;gmt_modified&#96;, &#96;is_valid&#96;, &#96;certification_VN&#96;)</span><br><span class="line">			VALUES (X, H, &#39;1234567890&#39;, S, NULL, 0, 1, &#39;周小萍&#39;, &#39;2022-06-15 19:19:02&#39;, 1, &#39;2022-06-15 00:00:00&#39;, NULL, 8.34000000, 100.00000000, 108.34000000, NULL, 0.000000000000, &#39;04771196792451936544&#39;, &#39;2022-04&#39;, NULL, NULL, 0.38000000, 1, NULL, &#39;2022-05-31 15:08:57&#39;, NULL, NULL, NULL, 1, &#39;2022-04-21 19:19:04&#39;, NULL, 16.98000000, &#39;213701000000&#39;, &#39;中华联合财产保险股份有限公司济南中心支公司&#39;, NULL, &#39;026&#39;, 1, 0, 0, &#39;913701006648769450&#39;, &#39;浙江永顺保险代理有限公司&#39;, NULL, NULL, &#39;&#39;, NULL, &#39;91370100792646730W&#39;, &#39;中华联合财产保险股份有限公司济南中心支公司&#39;, &#39;济南市天桥区小清河北路8888号滨河商务中心A座&#39;, &#39;0531-55598361&#39;, &#39;15116401040013402&#39;, &#39;中国农业银行股份有限公司济南东门支行&#39;, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &#39;鲁A7V909&#39;, &#39;System&#39;, now(), &#39;周小萍&#39;, now(), 1, &#39;import2022-05-31 14:51:58&#39;);</span><br><span class="line"></span><br><span class="line">			INSERT INTO &#96;t_inv_input_biz_mapping&#96; (&#96;biz_mapping_no&#96;, &#96;biz_no&#96;, &#96;biz_sub_no&#96;, &#96;biz_type_cd&#96;, &#96;inv_grouping_no&#96;, &#96;plan_cd&#96;, &#96;prod_cd&#96;, &#96;cost_currency&#96;, &#96;plus_or_minus_type_cd&#96;, &#96;binding_status_cd&#96;, &#96;tenant_code&#96;, &#96;amount&#96;, &#96;tax_amount&#96;, &#96;tax_rate&#96;, &#96;payee&#96;, &#96;log_in_org_code&#96;, &#96;log_in_org_name&#96;, &#96;remark&#96;, &#96;gmt_create&#96;, &#96;creator&#96;, &#96;modifier&#96;, &#96;gmt_modified&#96;, &#96;is_valid&#96;, &#96;ext_info&#96;)</span><br><span class="line">			VALUES</span><br><span class="line">			(i, &#39;R220328000000010000998733&#39;, &#39;C2201002370105000000000592&#39;, 2, S, NULL, &#39;D01002&#39;, &#39;CNY&#39;, NULL, 2, NULL, 333.00000000, NULL, NULL, &#39;阳光保险经纪（上海）有限公司&#39;, &#39;213700000000&#39;, &#39;中华联合财产保险股份有限公司济南市天桥区支公司&#39;, NULL, now(), NULL, &#39;贾超&#39;, now(), 1, &#39;S220329000000000000000001&#39;);</span><br><span class="line"></span><br><span class="line">			INSERT INTO &#96;t_inv_op_log&#96; (&#96;op_no&#96;, &#96;inv_code&#96;, &#96;inv_no&#96;, &#96;op_dt&#96;, &#96;org_code&#96;, &#96;org_name&#96;, &#96;log_source&#96;, &#96;op_field&#96;, &#96;old_op_field&#96;, &#96;new_op_field&#96;, &#96;remark&#96;, &#96;creator&#96;, &#96;gmt_create&#96;, &#96;modifier&#96;, &#96;gmt_modified&#96;, &#96;is_valid&#96;, &#96;inv_type_cd&#96;, &#96;vat_inv_no&#96;)</span><br><span class="line">			VALUES</span><br><span class="line">			(i, &#39;1100211130&#39;, H, &#39;2022-03-23 15:43:37&#39;, &#39;213701000000&#39;, &#39;中华联合财产保险股份有限公司济南中心支公司&#39;, 1, 5, 0, 1, NULL, &#39;中华联合财产保险股份有限公司山东分公司-213701050000&#39;, now(), &#39;中华联合财产保险股份有限公司山东分公司-213701050000&#39;, now(), 1, &#39;004&#39;, X);</span><br><span class="line"></span><br><span class="line">			set i &#x3D; i + 1;</span><br><span class="line"></span><br><span class="line">	END WHILE;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/19/mac-20221019-mac%E8%BF%90%E8%A1%8Cios%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%B8%B8%E6%88%8F%E7%AD%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/19/mac-20221019-mac%E8%BF%90%E8%A1%8Cios%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%88%E6%B8%B8%E6%88%8F%E7%AD%89%EF%BC%89/" itemprop="url">mac运行ios应用程序（游戏等）</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-19T00:00:00+08:00">2022-10-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.4k</span>
               
 
               
@@ -507,20 +692,763 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="多种方式"><a href="#多种方式" class="headerlink" title="多种方式"></a>多种方式</h1><h2 id="1-通过安装parallels-desktop来安装windows的雷电模拟器来安装ios应用软件"><a href="#1-通过安装parallels-desktop来安装windows的雷电模拟器来安装ios应用软件" class="headerlink" title="1. 通过安装parallels desktop来安装windows的雷电模拟器来安装ios应用软件"></a>1. 通过安装parallels desktop来安装windows的雷电模拟器来安装ios应用软件</h2><h2 id="2-通过安装playcover来安装应用软件-无法安装-iMazing-ipa"><a href="#2-通过安装playcover来安装应用软件-无法安装-iMazing-ipa" class="headerlink" title="2. 通过安装playcover来安装应用软件(无法安装 iMazing ipa)"></a>2. 通过安装playcover来安装应用软件(无法安装 iMazing ipa)</h2><p><a href="https://www.macv.com/mac/3579.html" target="_blank" rel="noopener">playCover下载安装</a></p>
+<h2 id="3-通过Apple-Configurator来安装ios应用程序（生成-iMazing-ipa）"><a href="#3-通过Apple-Configurator来安装ios应用程序（生成-iMazing-ipa）" class="headerlink" title="3. 通过Apple Configurator来安装ios应用程序（生成 iMazing ipa）"></a>3. 通过Apple Configurator来安装ios应用程序（生成 iMazing ipa）</h2><p><a href="https://reincubate.com/zh/support/how-to/download-run-ios-app-mac/" target="_blank" rel="noopener">如何在Mac上下载和运行iOS应用</a></p>
 <ul>
-<li><strong>Docker registry: <a href="https://docs.docker.com/registry/" target="_blank" rel="noopener">https://docs.docker.com/registry/</a></strong></li>
+<li>将iOS设备连接到M1 Mac。</li>
+<li>运行Apple Configurator 2，选择您的手机，然后在菜单栏中单击Add → Apps 。</li>
+<li>如果未将Apple Configurator登录到您的Apple ID，则需要单击“登录”并提供您的凭据</li>
+<li>在点击“添加”之前，搜索您要下载的应用。这必须是已经安装了iPhone的应用程序。<br>如果要选择手机上当前未使用的应用程序，请在iOS设备上访问App Store并在有问题的应用程序上点击“安装”，然后重新启动此过程。</li>
+<li>在下载应用程序时，将显示一个进度对话框。完成后，将弹出警告，提示该应用程序已在手机上安装。在屏幕上留下警告消息。</li>
+<li>切换到Finder并按⌘ Cmd + ⇧ Shift + G打开“转到文件夹”对话框，然后粘贴该内容，然后按⏎ Enter ：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;Library&#x2F;Group Containers&#x2F;K36BKF7T3D.group.com.apple.configurator&#x2F;Library&#x2F;Caches&#x2F;Assets&#x2F;TemporaryItems&#x2F;MobileApps</span><br></pre></td></tr></table></figure></li>
+<li>在新窗口中打开文件夹，直到获得IPA文件。双击将其安装在Mac上，它将出现在“ Applications文件夹中。</li>
+<li>在您批准将其在系统上运行之前，iOS应用程序将无法运行。在Mac上打开终端，然后粘贴此命令，但不要按Enter键：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xattr -rd com.apple.quarantine</span><br></pre></td></tr></table></figure></li>
+<li>按空格键在该文本后添加一个空格，然后将您的应用程序从“ Applications文件夹拖到“终端”窗口中。这会将应用程序的路径添加到您粘贴的行的末尾。</li>
+<li>按⏎ Enter键并输入密码，然后再次按⏎ Enter 。<br>就是这样–您现在就可以像其他任何应用Applications一样从“ Applications运行您的应用程序。<h2 id="4-通iMazing获取ios-ipa文件安装（生成-iMazing-ipa）"><a href="#4-通iMazing获取ios-ipa文件安装（生成-iMazing-ipa）" class="headerlink" title="4.通iMazing获取ios ipa文件安装（生成 iMazing ipa）"></a>4.通iMazing获取ios ipa文件安装（生成 iMazing ipa）</h2><a href="https://www.digit77.com/macapps/imazing/" target="_blank" rel="noopener">iMazing下载</a><br><a href="https://blog.51cto.com/u_15118280/4570105" target="_blank" rel="noopener">M1 MacBook上如何安装iOS/iPad OS软件</a><br><a href="https://zhuanlan.zhihu.com/p/366961186?ivk_sa=1024320u" target="_blank" rel="noopener"></a></li>
 </ul>
-<hr>
-<h1 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br><span class="line">docker run -itd -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-registry:&#x2F;var&#x2F;lib&#x2F;registry -p 5001:5000 --restart&#x3D;always --name myregistry registry:latest</span><br><span class="line"># registry容器内默认监听端口 5000</span><br><span class="line"># 或者通过修改环境变量，修改容器内监听端口来发布</span><br><span class="line">docker run -itd -e REGISTRY_HTTP_ADDR&#x3D;0.0.0.0:5001 -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-registry:&#x2F;var&#x2F;lib&#x2F;registry -p 5001:5001 --restart&#x3D;always --name myregistry registry:latest</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>打开容器仓库地址: <a href="http://127.0.0.1:5001/v2/_catalog" target="_blank" rel="noopener">http://127.0.0.1:5001/v2/_catalog</a><br>列出my-hexo镜像有哪些tag: <a href="http://127.0.0.1:5001/v2/my-hexo/tags/list" target="_blank" rel="noopener">http://127.0.0.1:5001/v2/my-hexo/tags/list</a></p>
-</blockquote>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>-itd：在容器中打开一个伪终端进行交互操作，并在后台运行；<br>-v：把宿主机的/data/registry目录绑定 到 容器/var/lib/registry目录(这个目录是registry容器中存放镜像文件的目录)，来实现数据的持久化；<br>-p：映射端口；访问宿主机的5000端口就访问到registry容器的服务了；<br>–restart=always：这是重启的策略，假如这个容器异常退出会自动重启容器；<br>–name registry：创建容器命名为registry，你可以随便命名；<br>registry:latest：这个是刚才pull下来的镜像；</p>
-<h1 id="停止registry"><a href="#停止registry" class="headerlink" title="停止registry"></a>停止registry</h1><ol>
-<li>要停止注册表，请使用docker container stop与任何其他容器相同的命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop registry</span><br></pre></td></tr></table></figure></li>
-<li>要移除容器，请使用docker container rm.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop registry &amp;&amp; docker container rm -v registry</span><br></pre></td></tr></table></figure>
-</li>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/18/depth-design-DDD-20221018-%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/18/depth-design-DDD-20221018-%E8%81%9A%E5%90%88%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/" itemprop="url">聚合设计原则</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-18T00:00:00+08:00">2022-10-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">734</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h2 id="1-设计聚合的原则之一"><a href="#1-设计聚合的原则之一" class="headerlink" title="(1)设计聚合的原则之一"></a>(1)设计聚合的原则之一</h2><p>在边界之外使用最终一致性。<br>聚合内数据强一致性，聚合之间数据最终一致性。<br>在一次事务中，最多只能更改一个聚合的状态。<br>如何一个业务操作涉及多个聚合状态的更改，可以采用领域事件的方式，实现聚合之间的解耦；</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/17/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/17/depth-architecture-1-%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%E5%92%8C%E6%9E%B6%E6%9E%84%E7%89%B9%E5%BE%81/" itemprop="url">架构风格和架构特征</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-17T00:00:00+08:00">2022-10-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">511</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/17/git-%E7%AC%94%E8%AE%B0-git%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/17/git-%E7%AC%94%E8%AE%B0-git%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93/" itemprop="url">git删除本地仓库</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-17T00:00:00+08:00">2022-10-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">734</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="找出隐藏-git目录"><a href="#找出隐藏-git目录" class="headerlink" title="找出隐藏.git目录"></a>找出隐藏.git目录</h1><p>ls -a  找到隐藏目录 .git</p>
+<h1 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h1><p>rm -rf .git</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/17/redis-%E9%A2%84%E7%83%AD-1-redis%E9%A2%84%E7%83%AD%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/17/redis-%E9%A2%84%E7%83%AD-1-redis%E9%A2%84%E7%83%AD%E6%96%B9%E6%A1%88/" itemprop="url">redis预热</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-17T00:00:00+08:00">2022-10-17</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">959</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="redis预热"><a href="#redis预热" class="headerlink" title="redis预热"></a>redis预热</h1><p>缓存预热<br>1、定义</p>
+<p>缓存预热就是系统上线后，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据！</p>
+<p>2、解决方案</p>
+<p>1）直接写个缓存刷新页面，上线时手工操作下。<br>2）数据量不大，可以在项目启动的时候自动进行加载。<br>3）定时刷新缓存。</p>
+<h2 id="config预热方案"><a href="#config预热方案" class="headerlink" title="config预热方案"></a>config预热方案</h2><ol>
+<li>启动时批量预热，设置过期时间</li>
+<li>增删改查修改缓存</li>
+<li>定时刷新缓存</li>
 </ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
@@ -578,7 +1506,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/29/depth-docker-docker-registry-20220929-%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8registry/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/17/depth-design-DDD-20221017-%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%EF%BC%88Domain-Event%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -597,7 +1525,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/29/depth-docker-docker-registry-20220929-%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8registry/" itemprop="url">通过配置文件启动registry</a></h1>
+                <a class="post-title-link" href="/2022/10/17/depth-design-DDD-20221017-%E9%A2%86%E5%9F%9F%E4%BA%8B%E4%BB%B6%EF%BC%88Domain-Event%EF%BC%89/" itemprop="url">领域事件</a></h1>
         
 
         <div class="post-meta">
@@ -613,7 +1541,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-29T00:00:00+08:00">2022-09-29</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-17T00:00:00+08:00">2022-10-17</time>
             
 
             
@@ -641,14 +1569,14 @@
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/" itemprop="url" rel="index"><span itemprop="name">design</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-registry/" itemprop="url" rel="index"><span itemprop="name">docker registry</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/design/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a></span>
 
                 
                 
@@ -676,398 +1604,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">23k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">23 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>docker registry 配置注册表: <a href="https://docs.docker.com/registry/configuration/" target="_blank" rel="noopener">https://docs.docker.com/registry/configuration/</a></strong></li>
-</ul>
-<hr>
-<h1 id="指定配置文件"><a href="#指定配置文件" class="headerlink" title="指定配置文件"></a>指定配置文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart&#x3D;always --name registry \</span><br><span class="line">             -v &#96;pwd&#96;&#x2F;config.yml:&#x2F;etc&#x2F;docker&#x2F;registry&#x2F;config.yml \</span><br><span class="line">             registry:latest</span><br></pre></td></tr></table></figure>
-<h2 id="配置文件案例"><a href="#配置文件案例" class="headerlink" title="配置文件案例"></a>配置文件案例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br></pre></td><td class="code"><pre><span class="line">version: 0.1</span><br><span class="line">log:</span><br><span class="line">  accesslog:</span><br><span class="line">    disabled: true</span><br><span class="line">  level: debug</span><br><span class="line">  formatter: text</span><br><span class="line">  fields:</span><br><span class="line">    service: registry</span><br><span class="line">    environment: staging</span><br><span class="line">  hooks:</span><br><span class="line">    - type: mail</span><br><span class="line">      disabled: true</span><br><span class="line">      levels:</span><br><span class="line">        - panic</span><br><span class="line">      options:</span><br><span class="line">        smtp:</span><br><span class="line">          addr: mail.example.com:25</span><br><span class="line">          username: mailuser</span><br><span class="line">          password: password</span><br><span class="line">          insecure: true</span><br><span class="line">        from: sender@example.com</span><br><span class="line">        to:</span><br><span class="line">          - errors@example.com</span><br><span class="line">loglevel: debug # deprecated: use &quot;log&quot;</span><br><span class="line">storage:</span><br><span class="line">  filesystem:</span><br><span class="line">    rootdirectory: &#x2F;var&#x2F;lib&#x2F;registry</span><br><span class="line">    maxthreads: 100</span><br><span class="line">  azure:</span><br><span class="line">    accountname: accountname</span><br><span class="line">    accountkey: base64encodedaccountkey</span><br><span class="line">    container: containername</span><br><span class="line">  gcs:</span><br><span class="line">    bucket: bucketname</span><br><span class="line">    keyfile: &#x2F;path&#x2F;to&#x2F;keyfile</span><br><span class="line">    credentials:</span><br><span class="line">      type: service_account</span><br><span class="line">      project_id: project_id_string</span><br><span class="line">      private_key_id: private_key_id_string</span><br><span class="line">      private_key: private_key_string</span><br><span class="line">      client_email: client@example.com</span><br><span class="line">      client_id: client_id_string</span><br><span class="line">      auth_uri: http:&#x2F;&#x2F;example.com&#x2F;auth_uri</span><br><span class="line">      token_uri: http:&#x2F;&#x2F;example.com&#x2F;token_uri</span><br><span class="line">      auth_provider_x509_cert_url: http:&#x2F;&#x2F;example.com&#x2F;provider_cert_url</span><br><span class="line">      client_x509_cert_url: http:&#x2F;&#x2F;example.com&#x2F;client_cert_url</span><br><span class="line">    rootdirectory: &#x2F;gcs&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">    chunksize: 5242880</span><br><span class="line">  s3:</span><br><span class="line">    accesskey: awsaccesskey</span><br><span class="line">    secretkey: awssecretkey</span><br><span class="line">    region: us-west-1</span><br><span class="line">    regionendpoint: http:&#x2F;&#x2F;myobjects.local</span><br><span class="line">    bucket: bucketname</span><br><span class="line">    encrypt: true</span><br><span class="line">    keyid: mykeyid</span><br><span class="line">    secure: true</span><br><span class="line">    v4auth: true</span><br><span class="line">    chunksize: 5242880</span><br><span class="line">    multipartcopychunksize: 33554432</span><br><span class="line">    multipartcopymaxconcurrency: 100</span><br><span class="line">    multipartcopythresholdsize: 33554432</span><br><span class="line">    rootdirectory: &#x2F;s3&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">  swift:</span><br><span class="line">    username: username</span><br><span class="line">    password: password</span><br><span class="line">    authurl: https:&#x2F;&#x2F;storage.myprovider.com&#x2F;auth&#x2F;v1.0 or https:&#x2F;&#x2F;storage.myprovider.com&#x2F;v2.0 or https:&#x2F;&#x2F;storage.myprovider.com&#x2F;v3&#x2F;auth</span><br><span class="line">    tenant: tenantname</span><br><span class="line">    tenantid: tenantid</span><br><span class="line">    domain: domain name for Openstack Identity v3 API</span><br><span class="line">    domainid: domain id for Openstack Identity v3 API</span><br><span class="line">    insecureskipverify: true</span><br><span class="line">    region: fr</span><br><span class="line">    container: containername</span><br><span class="line">    rootdirectory: &#x2F;swift&#x2F;object&#x2F;name&#x2F;prefix</span><br><span class="line">  oss:</span><br><span class="line">    accesskeyid: accesskeyid</span><br><span class="line">    accesskeysecret: accesskeysecret</span><br><span class="line">    region: OSS region name</span><br><span class="line">    endpoint: optional endpoints</span><br><span class="line">    internal: optional internal endpoint</span><br><span class="line">    bucket: OSS bucket</span><br><span class="line">    encrypt: optional data encryption setting</span><br><span class="line">    secure: optional ssl setting</span><br><span class="line">    chunksize: optional size valye</span><br><span class="line">    rootdirectory: optional root directory</span><br><span class="line">  inmemory:  # This driver takes no parameters</span><br><span class="line">  delete:</span><br><span class="line">    enabled: false</span><br><span class="line">  redirect:</span><br><span class="line">    disable: false</span><br><span class="line">  cache:</span><br><span class="line">    blobdescriptor: redis</span><br><span class="line">  maintenance:</span><br><span class="line">    uploadpurging:</span><br><span class="line">      enabled: true</span><br><span class="line">      age: 168h</span><br><span class="line">      interval: 24h</span><br><span class="line">      dryrun: false</span><br><span class="line">    readonly:</span><br><span class="line">      enabled: false</span><br><span class="line">auth:</span><br><span class="line">  silly:</span><br><span class="line">    realm: silly-realm</span><br><span class="line">    service: silly-service</span><br><span class="line">  token:</span><br><span class="line">    autoredirect: true</span><br><span class="line">    realm: token-realm</span><br><span class="line">    service: token-service</span><br><span class="line">    issuer: registry-token-issuer</span><br><span class="line">    rootcertbundle: &#x2F;root&#x2F;certs&#x2F;bundle</span><br><span class="line">  htpasswd:</span><br><span class="line">    realm: basic-realm</span><br><span class="line">    path: &#x2F;path&#x2F;to&#x2F;htpasswd</span><br><span class="line">middleware:</span><br><span class="line">  registry:</span><br><span class="line">    - name: ARegistryMiddleware</span><br><span class="line">      options:</span><br><span class="line">        foo: bar</span><br><span class="line">  repository:</span><br><span class="line">    - name: ARepositoryMiddleware</span><br><span class="line">      options:</span><br><span class="line">        foo: bar</span><br><span class="line">  storage:</span><br><span class="line">    - name: cloudfront</span><br><span class="line">      options:</span><br><span class="line">        baseurl: https:&#x2F;&#x2F;my.cloudfronted.domain.com&#x2F;</span><br><span class="line">        privatekey: &#x2F;path&#x2F;to&#x2F;pem</span><br><span class="line">        keypairid: cloudfrontkeypairid</span><br><span class="line">        duration: 3000s</span><br><span class="line">        ipfilteredby: awsregion</span><br><span class="line">        awsregion: us-east-1, use-east-2</span><br><span class="line">        updatefrenquency: 12h</span><br><span class="line">        iprangesurl: https:&#x2F;&#x2F;ip-ranges.amazonaws.com&#x2F;ip-ranges.json</span><br><span class="line">  storage:</span><br><span class="line">    - name: redirect</span><br><span class="line">      options:</span><br><span class="line">        baseurl: https:&#x2F;&#x2F;example.com&#x2F;</span><br><span class="line">reporting:</span><br><span class="line">  bugsnag:</span><br><span class="line">    apikey: bugsnagapikey</span><br><span class="line">    releasestage: bugsnagreleasestage</span><br><span class="line">    endpoint: bugsnagendpoint</span><br><span class="line">  newrelic:</span><br><span class="line">    licensekey: newreliclicensekey</span><br><span class="line">    name: newrelicname</span><br><span class="line">    verbose: true</span><br><span class="line">http:</span><br><span class="line">  addr: localhost:5000</span><br><span class="line">  prefix: &#x2F;my&#x2F;nested&#x2F;registry&#x2F;</span><br><span class="line">  host: https:&#x2F;&#x2F;myregistryaddress.org:5000</span><br><span class="line">  secret: asecretforlocaldevelopment</span><br><span class="line">  relativeurls: false</span><br><span class="line">  draintimeout: 60s</span><br><span class="line">  tls:</span><br><span class="line">    certificate: &#x2F;path&#x2F;to&#x2F;x509&#x2F;public</span><br><span class="line">    key: &#x2F;path&#x2F;to&#x2F;x509&#x2F;private</span><br><span class="line">    clientcas:</span><br><span class="line">      - &#x2F;path&#x2F;to&#x2F;ca.pem</span><br><span class="line">      - &#x2F;path&#x2F;to&#x2F;another&#x2F;ca.pem</span><br><span class="line">    letsencrypt:</span><br><span class="line">      cachefile: &#x2F;path&#x2F;to&#x2F;cache-file</span><br><span class="line">      email: emailused@letsencrypt.com</span><br><span class="line">      hosts: [myregistryaddress.org]</span><br><span class="line">  debug:</span><br><span class="line">    addr: localhost:5001</span><br><span class="line">    prometheus:</span><br><span class="line">      enabled: true</span><br><span class="line">      path: &#x2F;metrics</span><br><span class="line">  headers:</span><br><span class="line">    X-Content-Type-Options: [nosniff]</span><br><span class="line">  http2:</span><br><span class="line">    disabled: false</span><br><span class="line">notifications:</span><br><span class="line">  events:</span><br><span class="line">    includereferences: true</span><br><span class="line">  endpoints:</span><br><span class="line">    - name: alistener</span><br><span class="line">      disabled: false</span><br><span class="line">      url: https:&#x2F;&#x2F;my.listener.com&#x2F;event</span><br><span class="line">      headers: &lt;http.Header&gt;</span><br><span class="line">      timeout: 1s</span><br><span class="line">      threshold: 10</span><br><span class="line">      backoff: 1s</span><br><span class="line">      ignoredmediatypes:</span><br><span class="line">        - application&#x2F;octet-stream</span><br><span class="line">      ignore:</span><br><span class="line">        mediatypes:</span><br><span class="line">           - application&#x2F;octet-stream</span><br><span class="line">        actions:</span><br><span class="line">           - pull</span><br><span class="line">redis:</span><br><span class="line">  addr: localhost:6379</span><br><span class="line">  password: asecret</span><br><span class="line">  db: 0</span><br><span class="line">  dialtimeout: 10ms</span><br><span class="line">  readtimeout: 10ms</span><br><span class="line">  writetimeout: 10ms</span><br><span class="line">  pool:</span><br><span class="line">    maxidle: 16</span><br><span class="line">    maxactive: 64</span><br><span class="line">    idletimeout: 300s</span><br><span class="line">health:</span><br><span class="line">  storagedriver:</span><br><span class="line">    enabled: true</span><br><span class="line">    interval: 10s</span><br><span class="line">    threshold: 3</span><br><span class="line">  file:</span><br><span class="line">    - file: &#x2F;path&#x2F;to&#x2F;checked&#x2F;file</span><br><span class="line">      interval: 10s</span><br><span class="line">  http:</span><br><span class="line">    - uri: http:&#x2F;&#x2F;server.to.check&#x2F;must&#x2F;return&#x2F;200</span><br><span class="line">      headers:</span><br><span class="line">        Authorization: [Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;]</span><br><span class="line">      statuscode: 200</span><br><span class="line">      timeout: 3s</span><br><span class="line">      interval: 10s</span><br><span class="line">      threshold: 3</span><br><span class="line">  tcp:</span><br><span class="line">    - addr: redis-server.domain.com:6379</span><br><span class="line">      timeout: 3s</span><br><span class="line">      interval: 10s</span><br><span class="line">      threshold: 3</span><br><span class="line">proxy:</span><br><span class="line">  remoteurl: https:&#x2F;&#x2F;registry-1.docker.io</span><br><span class="line">  username: [username]</span><br><span class="line">  password: [password]</span><br><span class="line">compatibility:</span><br><span class="line">  schema1:</span><br><span class="line">    signingkeyfile: &#x2F;etc&#x2F;registry&#x2F;key.json</span><br><span class="line">    enabled: true</span><br><span class="line">validation:</span><br><span class="line">  manifests:</span><br><span class="line">    urls:</span><br><span class="line">      allow:</span><br><span class="line">        - ^https?:&#x2F;&#x2F;([^&#x2F;]+\.)*example\.com&#x2F;</span><br><span class="line">      deny:</span><br><span class="line">        - ^https?:&#x2F;&#x2F;www\.example\.com&#x2F;</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E7%89%88%E6%9C%AC%E6%9F%A5%E7%9C%8B/" itemprop="url">docker redis中版本号查看</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">688</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="执行命令如下"><a href="#执行命令如下" class="headerlink" title="执行命令如下"></a>执行命令如下</h1><p>docker exec -it myredis redis-server -v</p>
-<blockquote>
-<p>myredis为容器名称</p>
-</blockquote>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E8%A7%A3%E5%86%B3%E5%88%9B%E5%BB%BAredis%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-%E8%A7%A3%E5%86%B3%E5%88%9B%E5%BB%BAredis%E5%AE%B9%E5%99%A8%E6%B2%A1%E6%9C%89conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">解决创建redis容器没有conf配置文件</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.8k</span>
+                <span title="字数统计">2.4k</span>
               
 
               
@@ -1105,22 +1642,18 @@
           
             <script src="/assets/js/APlayer.min.js"> </script><hr>
 <ul>
-<li><strong>解决创建redis容器没有conf配置文件: <a href="https://longsheng.org/post/18174.html" target="_blank" rel="noopener">https://longsheng.org/post/18174.html</a></strong></li>
+<li><strong>DDD术语-领域事件（Domain Event）：<a href="http://t.zoukankan.com/junzi2099-p-13682154.html" target="_blank" rel="noopener">http://t.zoukankan.com/junzi2099-p-13682154.html</a></strong></li>
 </ul>
 <hr>
-<h1 id="解决创建redis容器没有conf配置文件"><a href="#解决创建redis容器没有conf配置文件" class="headerlink" title="解决创建redis容器没有conf配置文件"></a>解决创建redis容器没有conf配置文件</h1><ol>
-<li>如果通过以下命令创建redis容器，docker redis中会出现 redis.conf 文件夹<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always -v  &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-docker&#x2F;docker-redis&#x2F;6379&#x2F;data:&#x2F;data   --name myredis redis:latest redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure></li>
-<li>解决</li>
-</ol>
-<ul>
-<li>首先应该在宿主机路径下创建 redis.conf 文件</li>
-<li>然后再通过命令创建容器</li>
-<li>否则容器会将 redis.conf 以文件夹的形式关联创建</li>
-</ul>
-<h1 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h1><ul>
-<li>-v /usr/local/redis/redis.conf:/etc/redis.conf：映射配置文件</li>
-<li>-v /root/usr/local/redis/data:/data：映射数据目录</li>
-</ul>
+<h1 id="领域事件"><a href="#领域事件" class="headerlink" title="领域事件"></a>领域事件</h1><p>一个领域事件将导致进一步的业务操作，在实现业务解耦的同时，还有助于形成完整的业务闭环。</p>
+<p>领域事件可以是业务流程的一个步骤；<br>也可能是定时批处理过程中发生的事件；<br>或者一个事件发生后触发的后续动作，比如密码连续输错三次，触发锁定账户的动作。</p>
+<h2 id="那如何识别领域事件呢？"><a href="#那如何识别领域事件呢？" class="headerlink" title="那如何识别领域事件呢？"></a>那如何识别领域事件呢？</h2><p>很简单，和刚才讲的定义是强关联的。在做用户旅程或者场景分析时，我们要捕捉业务、需求人员或领域专家口中的关键词：“如果发生……，则……”“当做完……的时候，请通知……”“发生……时，则……”等。在这些场景中，如果发生某种事件后，会触发进一步的操作，那么这个事件很可能就是领域事件。</p>
+<h2 id="那领域事件为什么要用最终一致性，而不是传统-SOA-的直接调用的方式呢？"><a href="#那领域事件为什么要用最终一致性，而不是传统-SOA-的直接调用的方式呢？" class="headerlink" title="那领域事件为什么要用最终一致性，而不是传统 SOA 的直接调用的方式呢？"></a>那领域事件为什么要用最终一致性，而不是传统 SOA 的直接调用的方式呢？</h2><p>聚合的一个设计原则：在边界之外使用最终一致性。<br>一次事务最多只能更改一个聚合的状态。<br>如果一次业务操作涉及多个聚合状态的更改，应采用领域事件的最终一致性。</p>
+<h2 id="领域事件的作用"><a href="#领域事件的作用" class="headerlink" title="领域事件的作用"></a>领域事件的作用</h2><p>领域事件驱动设计可以切断领域模型之间的强依赖关系，<br>事件发布完成后，发布方不必关心后续订阅方事件处理是否成功，这样可以实现领域模型的解耦，维护领域模型的独立性和数据的一致性。<br>在领域模型映射到微服务系统架构时，领域事件可以解耦微服务，微服务之间的数据不必要求强一致性，而是基于事件的最终一致性。</p>
+<p>########################################</p>
+<h1 id="什么是领域事件"><a href="#什么是领域事件" class="headerlink" title="什么是领域事件"></a>什么是领域事件</h1><p>在事件风暴过程中，会识别出命令、业务操作、实体等，此外还有事件。比如当业务人员的描述中出现类似“当完成…后，则…”，“当发生…时，则…”等模式时，往往可将其用领域事件来实现。<br>领域事件表示在领域中发生的事件，它会导致进一步的业务操作。如电商中，支付完成后触发的事件，会导致生成订单、扣减库存等操作。</p>
+<h2 id="为什么需要领域事件"><a href="#为什么需要领域事件" class="headerlink" title="为什么需要领域事件"></a>为什么需要领域事件</h2><p>领域事件的最终目的是为了实现聚合之间的解耦。事件模式是一种通用的解耦方法，相比依赖间的直接调用，通过事件方式形成的间接依赖，在扩展、重构时更加灵活。</p>
+<h2 id="设计聚合的原则之一"><a href="#设计聚合的原则之一" class="headerlink" title="设计聚合的原则之一"></a>设计聚合的原则之一</h2><p>在边界之外使用最终一致性。聚合内数据强一致性，聚合之间数据最终一致性。<br>在一次事务中，最多只能更改一个聚合的状态。<br>如何一个业务操作涉及多个聚合状态的更改，可以采用领域事件的方式，实现聚合之间的解耦；</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -1177,7 +1710,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/09/mac-20221009-win11%E6%BF%80%E6%B4%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -1196,7 +1729,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-docker-redis%E5%AE%B9%E5%99%A8%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/" itemprop="url">docker redis容器创建方式</a></h1>
+                <a class="post-title-link" href="/2022/10/09/mac-20221009-win11%E6%BF%80%E6%B4%BB/" itemprop="url">win11激活</a></h1>
         
 
         <div class="post-meta">
@@ -1212,7 +1745,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-09T00:00:00+08:00">2022-10-09</time>
             
 
             
@@ -1233,775 +1766,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/" itemprop="url" rel="index"><span itemprop="name">mac</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-redis容器创建方式"><a href="#docker-redis容器创建方式" class="headerlink" title="docker redis容器创建方式"></a>docker redis容器创建方式</h1><ol>
-<li>通过命令创建<br>docker run -d –name redis -p 6379:6379 redis:latest redis-server –appendonly yes –requirepass “你的密码”</li>
-<li>通过数据卷挂载创建<br>docker run -d -p 6379:6379 –restart=always -v  /Users/diabolo/work/workspace/wk-docker/docker-redis/6379/redis.conf:/etc/redis/redis.conf  -v /Users/diabolo/work/workspace/wk-docker/docker-redis/6379/data:/data   –name myredis redis:latest redis-server /etc/redis/redis.conf</li>
-</ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/28/depth-docker-docker-redis-20220928-%E4%BD%BF%E7%94%A8docker%E5%90%AF%E5%8A%A8redis%E5%AE%B9%E5%99%A8%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0/" itemprop="url">使用docker启动redis容器失败的原因</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/docker-redis/" itemprop="url" rel="index"><span itemprop="name">docker redis</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">1.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>使用docker启动redis容器失败的原因：<a href="https://blog.csdn.net/m0_67402774/article/details/126553643" target="_blank" rel="noopener">https://blog.csdn.net/m0_67402774/article/details/126553643</a></strong></li>
-</ul>
-<hr>
-<h1 id="使用docker启动redis容器失败的原因"><a href="#使用docker启动redis容器失败的原因" class="headerlink" title="使用docker启动redis容器失败的原因"></a>使用docker启动redis容器失败的原因</h1><h2 id="启动执行命令"><a href="#启动执行命令" class="headerlink" title="启动执行命令"></a>启动执行命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 --name redis -v &#x2F;root&#x2F;guli&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf -d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>发现一启动，就停止。<br>后来，去网上查了以后发现，是因为redis.conf文件中的daemonize为yes，意思是redis服务在后台运行，与docker中的-d参数冲突了。<br>只要把daemonize的参数值改为no就可以了，再次执行以上命令，容器启动成功。</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/28/depth-docker-notes-20220928-docker-run%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0/" itemprop="url">docker run其他参数</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-28T00:00:00+08:00">2022-09-28</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">2.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="docker-run其他参数"><a href="#docker-run其他参数" class="headerlink" title="docker run其他参数"></a>docker run其他参数</h1><h2 id="–privileged-true"><a href="#–privileged-true" class="headerlink" title="–privileged=true"></a>–privileged=true</h2><p>–privileged=true表示让启动的容器用户具备真正root权限</p>
-<h2 id="–restart-always参数能够使我们在重启docker时，自动启动相关容器。"><a href="#–restart-always参数能够使我们在重启docker时，自动启动相关容器。" class="headerlink" title="–restart=always参数能够使我们在重启docker时，自动启动相关容器。"></a>–restart=always参数能够使我们在重启docker时，自动启动相关容器。</h2><p>Docker容器的重启策略如下：</p>
-<ul>
-<li>no，默认策略，在容器退出时不重启容器</li>
-<li>on-failure，在容器非正常退出时（退出状态非0），才会重启容器</li>
-<li>on-failure:3，在容器非正常退出时重启容器，最多重启3次</li>
-<li>always，在容器退出时总是重启容器</li>
-<li>unless-stopped，在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器<blockquote>
-<p>如果创建的时候没有创建这个参数，则可以通过此命令添加： docker container update –restart=always 容器名字<br>还可以通过修改容器的配置文件来修尽管这个参数，首先停止容器，不然无法修改配置文件<br>配置默认文件路径为：/var/lib/docker/containers/容器ID<br>在该目录下找到一个文件 hostconfig.json ，找到该文件中关键字 RestartPolicy<br>修改前配置：“RestartPolicy”:{“Name”:“no”,“MaximumRetryCount”:0}<br>修改后配置：“RestartPolicy”:{“Name”:“always”,“MaximumRetryCount”:0}<br>最后启动容器。</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker run -p 6001:6001 -d -it --name myhexo1 -v &#x2F;Users&#x2F;diabolo&#x2F;work&#x2F;workspace&#x2F;wk-github&#x2F;wk-github-zdy&#x2F;diabolo-hub-source-code&#x2F;:&#x2F;usr&#x2F;blog&#x2F;diabolo-hub&#x2F; myhexo:1.0</span><br><span class="line"></span><br><span class="line">docker run -d --name redis -p 6379:6379 redis:latest redis-server --appendonly yes --requirepass &quot;你的密码&quot;</span><br><span class="line"></span><br><span class="line">docker run -d -p 6379:6379 --restart&#x3D;always --privileged&#x3D;true  -v  &#x2F;var&#x2F;redis&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf  -v &#x2F;var&#x2F;redis&#x2F;data:&#x2F;data   --name myredis redis:6.0.8 redis-server  &#x2F;etc&#x2F;redis&#x2F;redis.conf</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E7%96%91%E9%97%AE-20220927-%E7%96%91%E9%97%AE%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E7%96%91%E9%97%AE-20220927-%E7%96%91%E9%97%AE%E7%82%B9/" itemprop="url">depth-docker-compose-疑问-20220927-疑问点</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T14:52:11+08:00">2022-09-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">687</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 mins.</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><p>一是，docker-compose和docker-engine可以分开装在不同的节点上么，就像docker-cli和docker-engine，若可以是不是需要一些配置；</p>
-<p>二是，docker-compose.yml里面的service可不可以按照先后顺序启动，不如第一个service启动完成后，第二个service才启动</p>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-        
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="diabolo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/author-2.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="diabolo随笔">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-notes-20220927-docker-compose%E5%91%BD%E4%BB%A4/" itemprop="url">docker-compose命令</a></h1>
-        
-
-        <div class="post-meta">
-
-          <!-- 置顶标签 -->
-          
-
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mac/win11/" itemprop="url" rel="index"><span itemprop="name">win11</span></a></span>
 
                 
                 
@@ -2065,23 +1837,20 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><hr>
-<ul>
-<li><strong>Docker Compose介绍及使用入门: <a href="https://www.jianshu.com/p/ee2fea4136f0" target="_blank" rel="noopener">https://www.jianshu.com/p/ee2fea4136f0</a></strong></li>
-<li><strong>docker-compose简介及使用: <a href="https://www.cnblogs.com/xiaoyuxixi/p/12738325.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiaoyuxixi/p/12738325.html</a></strong></li>
-</ul>
-<hr>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
-<li>docker-compose up，构建镜像并启动容器；</li>
-<li>docker-compose down，停止容器，删除容器，移除自定义网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose down</span><br><span class="line">Stopping myapp ... done</span><br><span class="line">Removing myapp ... done</span><br><span class="line">Removing network myapp_default</span><br></pre></td></tr></table></figure></li>
-<li>docker-compose ls，查看所有运行的容器</li>
-<li>docker-compose logs -f container_name，查看具体容器的日志，-f参数表示实时日志输出；</li>
-<li>docker-compose port container_name container_port，查看和容器端口绑定的主机端口；</li>
-<li>docker-compose stop container_name，停止指定的容器，如果不指定则停止所有的容器；</li>
-<li>docker-compose start container_name，启动指定的容器，如果不指定则停止所有的容器；</li>
-<li>docker-compose rm container_name，删除指定的已停止容器，如果不指定则删除所有已停止容器；</li>
-<li>docker-compose build，构建或者重新构建服务的镜像，但不会创建和启动容器</li>
-</ul>
+            <script src="/assets/js/APlayer.min.js"> </script><h1 id="激活密钥（淘宝）"><a href="#激活密钥（淘宝）" class="headerlink" title="激活密钥（淘宝）"></a>激活密钥（淘宝）</h1><p>==</p>
+<p>亲爱的！<br>您的订单1694835086382340499，已经帮您送达<br>卡号：47DDN-D8TH9-FB338-J326V-B7V3B</p>
+<p>激活步骤：点击【开始—–设置—–更新—-激活】—点更改产品密钥（输入卡号激活 ）<br>如果提示<strong>**</strong>EE2或<strong>**</strong>EE7请确保网络正常，然后输入激活 ，多试一下。</p>
+<p>如果提示<strong>**</strong>050或<strong>**</strong>210，请用 9RPN2-RFY7J-VT9BV-4FDDB-6VJXG 升级系统。在升级过程中出现任何提示，请一定重启一下电脑（一定重启）。重启后再看下版本是否升级成专业版，是否激活成功。未激活请用前面卡号激活。</p>
+<p>其他问题 请联系人工客服！==</p>
+<p>亲爱的！<br>您的订单1694835086382340499，已经帮您送达<br>卡号：47DDN-D8TH9-FB338-J326V-B7V3B</p>
+<p>激活步骤：点击【开始—–设置—–更新—-激活】—点更改产品密钥（输入卡号激活 ）<br>如果提示<strong>**</strong>EE2或<strong>**</strong>EE7请确保网络正常，然后输入激活 ，多试一下。</p>
+<p>如果提示<strong>**</strong>050或<strong>**</strong>210，请用 9RPN2-RFY7J-VT9BV-4FDDB-6VJXG 升级系统。在升级过程中出现任何提示，请一定重启一下电脑（一定重启）。重启后再看下版本是否升级成专业版，是否激活成功。未激活请用前面卡号激活。</p>
+<p>其他问题 请联系人工客服！</p>
+<pre><code>win10激活步骤如下：
+</code></pre><p>1.按键盘Win徽标键+X键 ,再按A 选命令提示符（管理员）【或者鼠标指向桌面左下角，点右键，再按A ]<br>2.输入 slmgr /upk 回车 （注意:slmgr 后面要打空格）<br>3.输入 slmgr /cpky 回车<br>4.输入 slmgr  /ipk  47DDN-D8TH9-FB338-J326V-B7V3B 回车（注意:/ipk 后面要打空格哟。提示成功注入就接着往下操作）<br>5.输入 slui 4 回车（中间有空格），国家选择最后中国，下一步，将此面安装ID从1-9的9组数字手动打给我，每组用空格分开，不要发截图来），等候我发你确认ID.你现地输入即可</p>
+<p>6.输入 slmgr /xpr 回车 检验计算机是否为永久激活</p>
+<h1 id="安装ID"><a href="#安装ID" class="headerlink" title="安装ID"></a>安装ID</h1><p>0055701 3486275 3950982 7500116 8575486 0919452 2330016 4799044 5165524</p>
+<p>确认之后，输入以下激活码：<br>279613-931345-279282-396940-070540-499773-418135-299311</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2138,7 +1907,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/09/spring-%E6%B3%A8%E8%A7%A3-1-Lookup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="diabolo">
@@ -2157,7 +1926,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/27/depth-docker-compose-%E6%A1%88%E4%BE%8B-20220927-compose-yml%E6%A1%88%E4%BE%8B2/" itemprop="url">compose.yml案例2</a></h1>
+                <a class="post-title-link" href="/2022/10/09/spring-%E6%B3%A8%E8%A7%A3-1-Lookup/" itemprop="url">@Lookup</a></h1>
         
 
         <div class="post-meta">
@@ -2173,7 +1942,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-27T00:00:00+08:00">2022-09-27</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-09T00:00:00+08:00">2022-10-09</time>
             
 
             
@@ -2194,21 +1963,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/" itemprop="url" rel="index"><span itemprop="name">depth</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a></span>
 
                 
                 
                   ， 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/" itemprop="url" rel="index"><span itemprop="name">docker-compose</span></a></span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/depth/docker-compose/yml%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">yml案例</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/spring/%E6%B3%A8%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">注解</span></a></span>
 
                 
                 
@@ -2236,7 +1998,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">7.2k</span>
+                <span title="字数统计">14k</span>
               
 
               
@@ -2250,7 +2012,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 mins.</span>
+                <span title="阅读时长">14 mins.</span>
               
             </div>
           
@@ -2272,13 +2034,197 @@
       
         
           
-            <script src="/assets/js/APlayer.min.js"> </script><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 使用的yml版本</span><br><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  # 服务名称，可以自定义</span><br><span class="line">  myapp:</span><br><span class="line">    # 容器名称，可以自定义</span><br><span class="line">    container_name: myapp</span><br><span class="line">    # 指定Dockerfile所在的目录</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h1><p>然后执行docker-compose up即可，主要完成以下的两步操作：</p>
-<ul>
-<li>镜像构建docker build；</li>
-<li>启动yml中的所有容器docker run；<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">E:\myapp&gt;docker-compose up</span><br><span class="line"># 创建了默认类型的自定义网络，即bridge类型网络，而非使用默认的docker0桥接网络，拥有自己的独立网段，可以通过docker network ls及docker network inspect查看具体的网络信息</span><br><span class="line">Creating network &quot;myapp_default&quot; with the default driver</span><br><span class="line">Building myapp</span><br><span class="line">[+] Building 0.5s (7&#x2F;7) FINISHED</span><br><span class="line"> &#x3D;&gt; [internal] load build definition from Dockerfile                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring dockerfile: 153B                                                                                                 0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load .dockerignore                                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 2B                                                                                                      0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load metadata for docker.io&#x2F;library&#x2F;openjdk:8                                                                         0.0s</span><br><span class="line"> &#x3D;&gt; [internal] load build context                                                                                                    0.2s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; transferring context: 17.62MB                                                                                                 0.1s</span><br><span class="line"> &#x3D;&gt; CACHED [1&#x2F;2] FROM docker.io&#x2F;library&#x2F;openjdk:8                                                                                    0.0s</span><br><span class="line"> &#x3D;&gt; [2&#x2F;2] ADD  target&#x2F;myapp-0.0.1-SNAPSHOT.jar &#x2F;demo.jar                                                                             0.1s</span><br><span class="line"> &#x3D;&gt; exporting to image                                                                                                               0.1s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; exporting layers                                                                                                              0.1s</span><br><span class="line"> # 将镜像写入本地的镜像仓库，并以项目名称_服务名称命名镜像</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; writing image sha256:c387978706931f09fa16a737704f2c1047e8f632de192a25b0dc42dc151ac4c7                                         0.0s</span><br><span class="line"> &#x3D;&gt; &#x3D;&gt; naming to docker.io&#x2F;library&#x2F;myapp_myapp                                                                                       0.0s</span><br><span class="line"></span><br><span class="line">Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them</span><br><span class="line">WARNING: Image for service myapp was built because it did not already exist. To rebuild this image you must use &#96;docker-compose build&#96; or &#96;docker-compose up --build&#96;.</span><br><span class="line">Creating myapp ... done</span><br><span class="line">Attaching to myapp</span><br><span class="line">myapp    |</span><br><span class="line">myapp    |   .   ____          _            __ _ _</span><br><span class="line">myapp    |  &#x2F;\\ &#x2F; ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \</span><br><span class="line">myapp    | ( ( )\___ | &#39;_ | &#39;_| | &#39;_ \&#x2F; _&#96; | \ \ \ \</span><br><span class="line">myapp    |  \\&#x2F;  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">myapp    |   &#39;  |____| .__|_| |_|_| |_\__, | &#x2F; &#x2F; &#x2F; &#x2F;</span><br><span class="line">myapp    |  &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|_|&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;|___&#x2F;&#x3D;&#x2F;_&#x2F;_&#x2F;_&#x2F;</span><br><span class="line">myapp    |  :: Spring Boot ::                (v2.6.0)</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+            <script src="/assets/js/APlayer.min.js"> </script><hr>
+<pre><code>@Lookup注解用法: https://blog.csdn.net/qq_25863845/article/details/123475147
+</code></pre><hr>
+<h1 id="Lookup概述"><a href="#Lookup概述" class="headerlink" title="@Lookup概述"></a>@Lookup概述</h1><p>@Lookup用于单例组件引用prototype组件。<br>单例组件使用@Autowired方式注入prototype组件时，被引入prototype组件也会变成单例的。<br>@Lookup可以保证被引入的组件保持prototype模式。</p>
+<h2 id="多例bean注入后变成单例bean的情况"><a href="#多例bean注入后变成单例bean的情况" class="headerlink" title="多例bean注入后变成单例bean的情况"></a>多例bean注入后变成单例bean的情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package com.hl.config;</span><br><span class="line"> </span><br><span class="line">import com.hl.bean.Car;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.ComponentScan;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"> </span><br><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;com.hl&quot;)</span><br><span class="line">public class MainConfig &#123;</span><br><span class="line"> </span><br><span class="line">    &#x2F;*@Bean</span><br><span class="line">    public Car getCar()&#123;</span><br><span class="line">        Car car &#x3D; new Car();</span><br><span class="line">        car.setName(&quot;红旗&quot;);</span><br><span class="line">        return car;</span><br><span class="line">    &#125;*&#x2F;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">package com.hl.bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><br><span class="line">@Component</span><br><span class="line">public class Seat &#123;</span><br><span class="line">    private String name;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">package com.hl.bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line">@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Seat seat;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public Seat getSeat() &#123;</span><br><span class="line">        return seat;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setSeat(Seat seat) &#123;</span><br><span class="line">        this.seat &#x3D; seat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.hl;</span><br><span class="line"> </span><br><span class="line">import com.hl.bean.Car;</span><br><span class="line">import com.hl.bean.Seat;</span><br><span class="line">import com.hl.config.MainConfig;</span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"> </span><br><span class="line">public class Test &#123;</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        ApplicationContext context &#x3D; new AnnotationConfigApplicationContext(MainConfig.class);</span><br><span class="line">        Car car &#x3D; (Car) context.getBean(&quot;car&quot;);</span><br><span class="line">        Seat seat &#x3D; car.getSeat();</span><br><span class="line">        Car car1 &#x3D; (Car) context.getBean(&quot;car&quot;);</span><br><span class="line">        Seat seat1 &#x3D; car1.getSeat();</span><br><span class="line">        System.out.println(seat &#x3D;&#x3D; seat1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>执行结果： 两个bean，seat 和 seat1 一致相等<br>从容器中获取的两个Car的Seat是相同的。因为Car是单例的，只会在容器启动时创建一次Car，Seat也只会在装配一次，每次从容器中获取都是同一个Car，所以Seat也是相同的。</p>
+</blockquote>
+<h2 id="使用-Lookup注解注入prototype组件"><a href="#使用-Lookup注解注入prototype组件" class="headerlink" title="使用@Lookup注解注入prototype组件"></a>使用@Lookup注解注入prototype组件</h2><p>注释Autowired，在getSeat（）方法上添加@Lookup<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.hl.bean;</span><br><span class="line"> </span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Lookup;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"> </span><br><span class="line">@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    &#x2F;&#x2F;@Autowired</span><br><span class="line">    private Seat seat;</span><br><span class="line"> </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Lookup</span><br><span class="line">    public Seat getSeat() &#123;</span><br><span class="line">        return seat;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public void setSeat(Seat seat) &#123;</span><br><span class="line">        this.seat &#x3D; seat;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>此时执行的结果：两个bean，seat 和 seat1 不一致，为两个bean<br>使用@Lookup，每次获取Seat都从容器中获取，因为Seat是prototity类型，所以每次都创建新的Seat对象。 </p>
+</blockquote>
+<h2 id="注意：使用-Bean的方式将Car注入容器，-Lookup会失效"><a href="#注意：使用-Bean的方式将Car注入容器，-Lookup会失效" class="headerlink" title="注意：使用@Bean的方式将Car注入容器，@Lookup会失效"></a>注意：使用@Bean的方式将Car注入容器，@Lookup会失效</h2><ol>
+<li>注释掉Car上的@Component<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;@Component</span><br><span class="line">public class Car &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    &#x2F;&#x2F;@Autowired</span><br><span class="line">    private Seat seat;</span><br></pre></td></tr></table></figure></li>
+<li>在配置类使用@Bean注解注入Car<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ComponentScan(&quot;com.hl&quot;)</span><br><span class="line">public class MainConfig &#123;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public Car getCar()&#123;</span><br><span class="line">        Car car &#x3D; new Car();</span><br><span class="line">        car.setName(&quot;红旗&quot;);</span><br><span class="line">        return car;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+</ol>
+<blockquote>
+<p>这样的话结果会变为true，两个seat 和 seat1 又变成了同一个对象</p>
+</blockquote>
+<h1 id="网友评论"><a href="#网友评论" class="headerlink" title="网友评论"></a>网友评论</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">因为@Lookup注解的生效机制是bean在构建对象时生效的，发现有方法加了@Lookup就创建一个cglib代理放入到spring容器中，</span><br><span class="line">但是你通过@Bean方式注入car的时候，是自己手动new的对象放入到容器中，所以spring容器中也就不是一个cglib代理，</span><br><span class="line">自然也就没有LookupOverrideMethodInterceptor可供intercept</span><br></pre></td></tr></table></figure>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+        
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/10/08/database-mongodb-docker%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C-20221008-mongo-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="diabolo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/author-2.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="diabolo随笔">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/10/08/database-mongodb-docker%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C-20221008-mongo-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E7%BB%83%E4%B9%A0/" itemprop="url">database-mongodb-docker安装及命令操作-20221008-mongo-增删改查练习</a></h1>
+        
+
+        <div class="post-meta">
+
+          <!-- 置顶标签 -->
+          
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-08T09:31:01+08:00">2022-10-08</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><p>// ———- 新增<br>// insert 它允许您在集合中插入一个或多个文档；错误或成功均返回文档<br>db.t_02.insert({“name”: “zdy”});<br>// insert批量插入<br>db.t_02.insert([{“name”: “diabolo1”},{“name”: “diabolo2”},{“name”: “diabolo3”}]);<br>// insertMany 它允许您在集合中插入一组文档；错误的话返回异常<br>db.t_02.insertMany([{“name”: “diabolo8”}]);<br>db.t_02.insertMany([{“name”: “diabolo4”},{“name”: “diabolo5”},{“name”: “diabolo6”}]);<br>// insertOne 它允许您在集合中准确插入1个文档；错误的话返回异常<br>db.t_02.insertOne({“name”: “diabolo7”});</p>
+<p>// ——— 删除<br>// 新建集合进行测试<br>db.createCollection(“t_03”);<br>// 新增数据进行测试<br>db.t_03.insertOne({“name”: “diabolo7”});</p>
+<p>// 清空集合中所有数据<br>db.t_03.remove({});</p>
+<p>// ———- 修改<br>// update，将 name = diabolo7 的行中，name 的值修改为 diabolo1<br>db.t_03.update({“name”:”diabolo7”},{$set:{“name”:”diabolo1”}});<br>// update，将 name = diabolo1 的行中，age 的值 修改为 30<br>db.t_03.update({“name”:”diabolo1”},{$set:{“age”:”30”}});</p>
+<p>// ———- 查询<br>// find() 查询所有<br>db.t_01.find();<br>db.t_02.find();<br>db.t_03.find();<br>db.t_04.find();</p>
+<p>// ———- 操作符<br>// 新建集合进行测试<br>db.createCollection(“t_04”);<br>// 新增数据进行测试<br>// 测试数据-1<br>db.t_04.insertOne({“name”: “diabolo1”});<br>db.t_04.insertOne({“age”: “30”});<br>db.t_04.insertOne({“name”: “diabolo1”, “age”: “30”, “sex”: ‘男’});<br>db.t_04.insertOne({name: ‘diabolo1’, age: ‘31’});<br>db.t_04.insertOne({name: ‘diabolo2’, age: ‘30’});<br>db.t_04.insertOne({“name”: “diabolo1”, “age”: “30”, “sex”: ‘女’});<br>// 测试数据-2<br>db.t_04.insertOne({“name”: “zdy1”, “sex”: “女”});<br>db.t_04.insertOne({“age”: “40”, “sex”: “男”});<br>// 测试数据-3<br>db.t_04.insertOne({“name”: “空竹”});<br>db.t_04.insertOne({“age”: “50”});</p>
+<p>//与操作符 $and<br>// 测试数据-1的结果：筛选出同时符合 条件的行，并展示出符合条件行的所有 列<br>db.t_04.find({$and:[{“name”:”diabolo1”,”age”:”30”}]});<br>// 测试数据-2： 当查询条件的所有行都满足条件时，才会展示结果<br>db.t_04.find({$and:[{“name”:”zdy1”,”age”:”40”}]});<br>// 测试数据-3:  只有当所有条件都满足时，才符合结果，且所在行的条件列不能为空<br>db.t_04.find({$and:[{“name”:”空竹”,”age”:”50”}]});</p>
+<p>//或操作符 $or，只需要满足一个条件即可<br>db.t_04.find({$or:[{“name”:”空竹”},{“age”:”50”}]});</p>
+<p>//大于操作符 $gt，满足大于该条件值即可<br>db.t_04.find({“age”:{$gt:”30”}});<br>// 当条件是中文时，无法正常查询出结果<br>db.t_04.find({“name”:{$gt:”空竹”}});</p>
+<p>//小于操作符 $lt，满足小于该条件值即可<br>db.t_04.find({“age”:{$lt:”31”}});</p>
+<p>//大于等于操作符 $gte<br>db.t_04.find({“age”:{$gte:”31”}});<br>//小于等于操作符 $lte<br>db.t_04.find({“age”:{$lte:”31”}});<br>//不等于操作符 $ne<br>db.t_04.find({“age”:{$ne:”31”}});<br>//包含操作符 $in<br>db.t_04.find({“age”:{$in:[“30”,”31”]}});<br>//不包含操作符 $nin<br>db.t_04.find({“age”:{$nin:[“30”,”31”]}});</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
           
         
@@ -2323,7 +2269,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
   </nav>
 
 
@@ -2370,7 +2316,7 @@
                 
                   <a href="/archives/%7C%7C%20archive">
                 
-                    <span class="site-state-item-count">418</span>
+                    <span class="site-state-item-count">433</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2553,7 +2499,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">85</span>
+                      
+                    
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2646,7 +2594,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2757,7 +2707,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2769,7 +2719,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">423k</span>
+    <span title="站点总字数">441k</span>
   
 
   
@@ -2778,7 +2728,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">7:03</span>
+    <span title="站点总阅读时长">7:21</span>
   
 </div>
 
